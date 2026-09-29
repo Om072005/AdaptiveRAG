@@ -127,7 +127,7 @@ test('run it yourself: copy buttons, and the team from site content', async ({ p
   await context.grantPermissions(['clipboard-read', 'clipboard-write'])
   await page.goto('/')
   const run = page.locator('#run')
-  await expect(run.locator('pre')).toHaveCount(7)
+  await expect(run.locator('pre')).toHaveCount(8)
   await run.getByRole('button', { name: 'Copy' }).first().click()
   await expect(run.getByRole('button', { name: 'Copied' })).toHaveCount(1)
   expect(await page.evaluate(() => navigator.clipboard.readText())).toContain('git clone')

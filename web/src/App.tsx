@@ -72,7 +72,7 @@ export default function App() {
         <Section
           id="run"
           title="Run it yourself."
-          lede="The whole system runs on a laptop with free accounts for Neon, Groq and Google AI Studio."
+          lede="The whole system runs on one machine with Ollama for the models, a free Neon database and a free Google AI Studio key for the judge."
         >
           <RunIt />
         </Section>

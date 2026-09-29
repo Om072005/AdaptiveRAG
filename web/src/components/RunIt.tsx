@@ -4,7 +4,11 @@ import { CodeBlock } from './CodeBlock'
 const STEPS: { text: string; code: string }[] = [
   { text: 'Clone the repository and install the Python side with uv.', code: 'git clone https://github.com/Om072005/AdaptiveRAG.git\ncd AdaptiveRAG\nuv sync' },
   {
-    text: 'Copy the environment file and fill in your own Neon branch and your own Groq and Gemini keys (all free tiers).',
+    text: 'Pull the local models with Ollama: the embedder, the small model and the large one.',
+    code: 'ollama pull nomic-embed-text\nollama pull gpt-oss:20b\nollama pull qwen3.6:35b-a3b',
+  },
+  {
+    text: 'Copy the environment file and fill in your own Neon branch and your own Gemini key for the judge (both free tiers).',
     code: 'cp .env.example .env',
   },
   { text: 'Create the tables on your database.', code: 'uv run python -m adaptiverag.stores.migrate' },
