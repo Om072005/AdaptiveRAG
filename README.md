@@ -402,30 +402,48 @@ Dates are planning estimates, not commitments.
 
 ```
 .
-├── ingest/           # parsing, chunking, embedding, triple extraction
-├── stores/           # vector + graph store adapters
-├── router/           # query classifier, fallback logic, hybrid merge
-├── generate/          # model selection, prompt assembly, citation binding
-├── eval/             # gold set, judges, metric computation
-├── telemetry/        # trace records, cost + latency aggregation
-├── bench/            # HNSW vs flat, chunking experiments
-└── docs/             # this README, interview prep notes, decision log
+├── adaptiverag/          # the Python package
+│   ├── ingest/           # loader, normalize, three chunkers, embeddings, triple extraction, validation, entity resolution
+│   ├── stores/           # Postgres access: corpus, pgvector search, graph linking and traversal, traces, cache; our HNSW and flat index
+│   ├── router/           # query classifiers (rules, logistic regression, few shot model), decision table, fallback, hybrid merge
+│   ├── generate/         # prompt with numbered context, citation binding, answer confidence, small or large model selector
+│   ├── eval/             # gold set, metrics, judge, eval runs, reports, tuning, review queue, spot checks, page exports
+│   ├── telemetry/        # per query trace and the cost and latency aggregates
+│   ├── llm.py            # the only module that calls a model: cache, list price, retries, per query call cap
+│   ├── pipeline.py       # question in, cited answer and saved trace out
+│   └── server.py         # local API for the page (query and judge)
+├── bench/                # HNSW vs flat vs pgvector, chunking experiment, economics report
+├── config/               # model ids and list prices, router thresholds, ingestion settings
+├── data/                 # corpus manifests, gold set, classifier training set, extraction batch plan
+├── db/migrations/        # the schema, applied in order
+├── docs/                 # decision log, evaluation protocol, failure log, results/ (every run we quote)
+├── tests/                # unit and contract tests
+└── web/                  # the static page: architecture, workflows, replays of recorded runs, results
 ```
-
-*(Layout is aspirational until the corresponding phases land.)*
 
 ---
 
 ## Getting started
 
-> Not yet runnable end-to-end. Setup instructions will be filled in once Phase 0 is complete.
+Needs Python 3.12 with [uv](https://docs.astral.sh/uv/), Node 22, a free [Neon](https://neon.tech) Postgres database,
+free [Groq](https://console.groq.com) and [Google AI Studio](https://aistudio.google.com) keys, and
+[Ollama](https://ollama.com) for embeddings (`ollama pull nomic-embed-text`; it runs on a laptop GPU or CPU).
 
 ```bash
-# placeholder — do not rely on this yet
-git clone <repo>
-cd <repo>
-# env setup, index build, and run instructions TBD
+git clone https://github.com/Om072005/AdaptiveRAG.git && cd AdaptiveRAG
+uv sync
+cp .env.example .env                                   # your Neon strings and your Groq and Gemini keys
+uv run python -m adaptiverag.stores.migrate            # create the tables
+uv run python -m adaptiverag.ingest run --corpus mini  # 30 questions, their paragraphs, chunks and embeddings
+uv run python -m adaptiverag ask "Who was born first, Yanka Dyagileva or Alexander Bashlachev?"
+bash scripts/check.sh                                  # lint, types, unit tests, the page check
 ```
+
+The graph (`python -m adaptiverag.ingest graph --corpus mini`) and an eval run
+(`python -m adaptiverag.eval.run --split dev --mode vector --variant mine`) use the same keys. The local page with a
+live question box: `uv run python -m adaptiverag serve`, then `cd web && VITE_LIVE_API_URL=http://localhost:8000 npm run dev`.
+
+Every model call is cached in Postgres, so a rerun costs nothing and reports the original cost and latency.
 
 ---
 
