@@ -33,10 +33,10 @@ reasoning_effort = "low"
 
 [roles.extract]
 provider = "gemini"
-model = "gemini-2.5-flash-lite"   # fallback if retired: gemini-3.5-flash-lite 0.30 / 2.50
-price_in_per_m = 0.10
-price_out_per_m = 0.40
-reasoning_effort = "none"
+model = "gemini-3.5-flash-lite"   # 2.5-flash-lite returns 404 for new users (checked 2026-09-29)
+price_in_per_m = 0.30
+price_out_per_m = 2.50
+reasoning_effort = "minimal"      # 3.x models cannot turn thinking off; "none" is rejected
 
 [roles.judge]
 provider = "gemini"

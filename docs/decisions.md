@@ -12,7 +12,7 @@ tiers, so a number does not depend on whose key ran the query.
 |---|---|---|---|---|
 | small, classify | Groq | `openai/gpt-oss-20b` | 0.075 / 0.30 | yes |
 | large | Groq | `openai/gpt-oss-120b` | 0.15 / 0.60 | yes |
-| extract | Gemini | `gemini-2.5-flash-lite` | 0.10 / 0.40 | yes |
+| extract | Gemini | `gemini-3.5-flash-lite` | 0.30 / 2.50 | yes |
 | judge | Gemini | `gemini-3.8-flash` | 0.75 / 3.75, introductory until 2026-12-31, then 1.50 / 7.50 | yes |
 | embed | Gemini | `gemini-embedding-001` | 0.15 input | yes |
 
@@ -23,12 +23,18 @@ Notes from the provider docs:
 
 - Groq lists `llama-3.1-8b-instant` and `llama-3.3-70b-versatile` as Enterprise only, which is why the
   generators are the two GPT-OSS models. Both accept `reasoning_effort` low, medium or high.
+- `gemini-2.5-flash-lite` is still listed by `/models` but every call returns 404 "no longer available to new
+  users", so extraction uses the fallback the plan named, `gemini-3.5-flash-lite`. Thinking cannot be turned off
+  on 3.x models, so extraction runs at `reasoning_effort = "minimal"`.
+- Gemini's OpenAI compatible usage block leaves thinking tokens out of `completion_tokens` but counts them in
+  `total_tokens` (a low effort call reported 2 completion and 68 total tokens for an 18 token prompt). The
+  gateway therefore bills output as `total_tokens - prompt_tokens` when that is larger.
 - `gemini-embedding-001` is marked legacy but stable. Its successor `gemini-embedding-2` costs 0.20 and its
   vectors are not comparable with 001, so we stay on 001 for the whole project. At 768 dimensions 001 needs
   L2 normalization on our side.
 - On the OpenAI compatible Gemini endpoint, `reasoning_effort = "none"` turns thinking off for 2.5 models;
-  3.x Flash accepts low. The docs do not say whether embeddings accept a `dimensions` parameter there, so the
-  gateway checks it on D2 and falls back to the native endpoint if needed.
+  3.x Flash accepts low. Embeddings accept `dimensions = 768` there (checked
+  2026-09-29), return no usage block, and are not unit length, so the gateway normalizes them.
 
 ### Free tier limits
 
