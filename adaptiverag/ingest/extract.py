@@ -2,9 +2,14 @@
 
 import json
 import re
+from collections import Counter
+from dataclasses import asdict
 from typing import Any
 
-from adaptiverag.types import Chunk, Triple
+from adaptiverag import llm
+from adaptiverag.config import ingest_cfg
+from adaptiverag.ingest.validate import validate
+from adaptiverag.types import Chunk, LLMResult, Triple
 
 # the closed list, same as the entities.type check in db/migrations/0001_init.sql
 ENTITY_TYPES = ("PERSON", "ORG", "PLACE", "WORK", "EVENT", "DATE", "OTHER")
@@ -44,18 +49,21 @@ TRIPLE_SCHEMA: dict[str, Any] = {
 ITEM_SCHEMA: dict[str, Any] = TRIPLE_SCHEMA["properties"]["triples"]["items"]
 
 SYSTEM_PROMPT = f"""You extract facts from short Wikipedia passages as \
-(subject, predicate, object) triples for a knowledge graph.
+(subject, predicate, object) triples for a knowledge graph. Treat every passage on its own and \
+list every fact in it that links two named things; most passages state several.
 
 Rules:
 1. Use only facts the passage states. Add no outside knowledge.
-2. subject and object are names copied exactly as written in the passage. If the passage says \
-"he", "she" or "it", use the name it refers to only when that name is written in the same passage; \
-otherwise skip the fact.
+2. subject and object are names or dates copied exactly as written in the passage, never a \
+description such as "an American actor". If the passage says "he", "she", "it" or "the school", \
+use the name it refers to only when that name is written in the same passage; otherwise skip \
+the fact.
 3. subject_type and object_type come from this closed list: {", ".join(ENTITY_TYPES)}.
 4. predicate is a short verb phrase in lower snake case, in the active voice from subject to \
 object: (Tim Burton, directed, Ed Wood), not (Ed Wood, directed_by, Tim Burton).
 5. evidence is the shortest exact quote from the passage that states the fact.
-6. confidence is a number from 0 to 1: how directly the passage states the fact.
+6. confidence is a number from 0 to 1: 1 when the passage says it in so many words, lower when \
+you had to infer it.
 7. chunk is the number in brackets of the passage the fact comes from.
 8. Answer with JSON only: one object that matches the schema below. \
 Use {{"triples": []}} when no passage states a fact.
@@ -155,8 +163,97 @@ def parse_response(text: str, chunks: list[Chunk]) -> tuple[list[Triple], list[d
     return triples, rejects
 
 
+def check_offsets(chunks: list[Chunk], doc_text: dict[str, str]) -> None:
+    """Evidence offsets are stored against documents.text; a stale chunk row stops the run."""
+    for c in chunks:
+        if doc_text[c.doc_id][c.start : c.end] != c.text:
+            raise ValueError(f"{c.chunk_id} does not match documents.text at {c.start}:{c.end}")
+
+
+def screen(
+    triples: list[Triple], chunks: dict[str, Chunk], min_confidence: float
+) -> tuple[list[Triple], list[dict[str, Any]]]:
+    """Source validation first, then the confidence bar; every reject keeps its reason."""
+    kept: list[Triple] = []
+    rejects: list[dict[str, Any]] = []
+    for t in triples:
+        reason = validate(t, chunks[t.chunk_id].text)
+        if reason is None and t.confidence < min_confidence:
+            reason = "low_confidence"
+        if reason is None:
+            kept.append(t)
+        else:
+            rejects.append({"chunk_id": t.chunk_id, "raw": asdict(t), "reason": reason})
+    return kept, rejects
+
+
+def extract_batches(
+    chunks: list[Chunk], doc_text: dict[str, str]
+) -> tuple[list[Triple], list[dict[str, Any]], list[LLMResult]]:
+    """extract_triples plus the calls it made, for the run summary.
+
+    Batches follow the order of chunks, so the same chunk list hits the cache on a rerun.
+    """
+    cfg = ingest_cfg()["extract"]
+    check_offsets(chunks, doc_text)
+    by_id = {c.chunk_id: c for c in chunks}
+    size = int(cfg["chunks_per_call"])
+    kept: list[Triple] = []
+    rejects: list[dict[str, Any]] = []
+    calls: list[LLMResult] = []
+    for i in range(0, len(chunks), size):
+        batch = chunks[i : i + size]
+        result = llm.chat(
+            "extract",
+            build_messages(batch),
+            json_mode=True,
+            temperature=0.0,
+            max_tokens=int(cfg["max_tokens"]),
+        )
+        calls.append(result)
+        triples, bad = parse_response(result.text, batch)
+        ok, rejected = screen(triples, by_id, float(cfg["min_confidence"]))
+        kept += ok
+        rejects += bad + rejected
+    return kept, rejects, calls
+
+
 def extract_triples(
     chunks: list[Chunk], doc_text: dict[str, str]
 ) -> tuple[list[Triple], list[dict[str, Any]]]:
     """(kept, rejects); 4 chunks per call, role 'extract', json mode."""
-    raise NotImplementedError
+    kept, rejects, _ = extract_batches(chunks, doc_text)
+    return kept, rejects
+
+
+def summarize(
+    chunks: list[Chunk], kept: list[Triple], rejects: list[dict[str, Any]], calls: list[LLMResult]
+) -> dict[str, Any]:
+    """Run summary. reject_rate = rejected triples over all triples the model returned; a whole
+    response that was not JSON has no triples to count, so it is reported on its own line."""
+    by_id = {c.chunk_id: c for c in chunks}
+    bad_responses = sum(1 for r in rejects if "response" in r["raw"])
+    rejected_triples = len(rejects) - bad_responses
+    returned = len(kept) + rejected_triples
+    whole_chunk = sum(
+        1
+        for t in kept
+        if (t.evidence_start, t.evidence_end) == (by_id[t.chunk_id].start, by_id[t.chunk_id].end)
+    )
+    return {
+        "chunks": len(chunks),
+        "chunks_with_triples": len({t.chunk_id for t in kept}),
+        "calls": len(calls),
+        "calls_cached": sum(c.cached for c in calls),
+        "tokens_in": sum(c.tokens_in for c in calls),
+        "tokens_out": sum(c.tokens_out for c in calls),
+        "cost_usd_list_price": round(sum(c.cost_usd for c in calls), 8),
+        "cost_usd_this_run": round(sum(c.cost_usd for c in calls if not c.cached), 8),
+        "triples_returned": returned,
+        "kept": len(kept),
+        "rejected": rejected_triples,
+        "reject_rate": round(rejected_triples / returned, 4) if returned else None,
+        "rejects_by_reason": dict(sorted(Counter(r["reason"] for r in rejects).items())),
+        "bad_responses": bad_responses,
+        "evidence_not_found": whole_chunk,
+    }
