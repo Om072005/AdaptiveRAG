@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -20,7 +21,7 @@ def test_dry_run_prints_counts_and_writes_nothing(
     reject = {"chunk_id": CHUNK.chunk_id, "raw": {}, "reason": "low_confidence"}
     monkeypatch.setattr(graph_cli, "corpus_doc_ids", lambda corpus: ["d1"])
     monkeypatch.setattr(graph_cli.store, "corpus_chunks", lambda ids, s: ([CHUNK], {"d1": ""}))
-    monkeypatch.setattr(graph_cli, "extract_batches", lambda c, d: ([TRIPLE], [reject], []))
+    monkeypatch.setattr(graph_cli, "extract_batches", lambda c, d, b: ([TRIPLE], [reject], []))
     monkeypatch.setattr(graph_cli, "resolve", lambda kept: ([{}, {}], [{}, {}, {}], [{}]))
     for name in ["save_rejects", "write_graph"]:
         monkeypatch.setattr(graph_cli.store, name, refuse)
@@ -74,3 +75,39 @@ def test_gold_documents_are_every_context_paragraph_or_the_generated_one() -> No
     items = [{"id": "hp_q1"}, {"id": "hp_q2"}, {"id": "sh_abcdef0123456789_2"}]
     expected = {doc_id(SOURCE, t) for t in ["Ed Wood", "Tim Burton", "Burbank"]}
     assert graph_cli.gold_doc_ids(items, raw) == sorted(expected | {"abcdef0123456789"})
+
+
+def test_a_scope_change_keeps_planned_batches_and_appends_new_chunks() -> None:
+    plan = [["a:0", "a:1", "b:0", "c:0"], ["d:0", "e:0", "f:0", "g:0"], ["h:0", "i:0"]]
+    known = {cid for b in plan for cid in b} | {"x:0", "y:0"}
+    # b left the scope and x and y joined it
+    scope = ["a:0", "a:1", "c:0", "d:0", "e:0", "f:0", "g:0", "x:0", "y:0"]
+    batches, new_plan = graph_cli.plan_batches(plan, scope, known, 4)
+    assert batches == [plan[0], plan[1], ["x:0", "y:0"]]
+    assert new_plan == [*plan, ["x:0", "y:0"]]
+    # a planned batch whose chunk is gone is dropped and its scope chunks batched anew
+    batches, new_plan = graph_cli.plan_batches(plan, scope, known - {"b:0"}, 4)
+    assert batches == [plan[1], ["a:0", "a:1", "c:0", "x:0"], ["y:0"]]
+    assert new_plan == [plan[1], plan[2], ["a:0", "a:1", "c:0", "x:0"], ["y:0"]]
+    # the same plan and scope always give the same batches, so helpers hit the same cache
+    assert graph_cli.plan_batches(plan, scope, known, 4) == graph_cli.plan_batches(
+        plan, scope, known, 4
+    )
+
+
+def test_the_plan_file_keeps_other_strategies(tmp_path: Path) -> None:
+    path = tmp_path / "plan.jsonl"
+    assert graph_cli.read_plan("sentence", path) == []
+    graph_cli.write_plan("fixed", [["a:fixed:0"]], path)
+    graph_cli.write_plan("sentence", [["a:sentence:0", "a:sentence:1"]], path)
+    graph_cli.write_plan("sentence", [["b:sentence:0"]], path)
+    assert graph_cli.read_plan("sentence", path) == [["b:sentence:0"]]
+    assert graph_cli.read_plan("fixed", path) == [["a:fixed:0"]]
+
+
+def test_only_rejects_of_the_scope_are_counted() -> None:
+    wanted = {"a:0"}
+    assert graph_cli.in_scope({"chunk_id": "a:0", "raw": {}}, wanted)
+    assert not graph_cli.in_scope({"chunk_id": "b:0", "raw": {}}, wanted)
+    assert graph_cli.in_scope({"chunk_id": None, "raw": {"chunk_ids": ["b:0", "a:0"]}}, wanted)
+    assert not graph_cli.in_scope({"chunk_id": None, "raw": {"chunk_ids": ["b:0"]}}, wanted)

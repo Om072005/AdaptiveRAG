@@ -142,9 +142,11 @@ def parse_response(text: str, chunks: list[Chunk]) -> tuple[list[Triple], list[d
         chunk = passage(item, chunks)
         problem = schema_problem(item, chunks)
         if problem or chunk is None:
-            chunk_id = chunk.chunk_id if chunk else None
-            bad = {"item": item, "problem": problem}
-            rejects.append({"chunk_id": chunk_id, "raw": bad, "reason": "bad_json"})
+            bad: dict[str, Any] = {"item": item, "problem": problem}
+            if chunk is None:
+                # tied to its batch like a whole bad response, so a rerun replaces it
+                bad["chunk_ids"] = [c.chunk_id for c in chunks]
+            rejects.append({"chunk_id": chunk and chunk.chunk_id, "raw": bad, "reason": "bad_json"})
             continue
         start, end = evidence_span(item["evidence"], chunk)
         triples.append(
@@ -188,21 +190,24 @@ def screen(
 
 
 def extract_batches(
-    chunks: list[Chunk], doc_text: dict[str, str]
+    chunks: list[Chunk], doc_text: dict[str, str], batches: list[list[Chunk]] | None = None
 ) -> tuple[list[Triple], list[dict[str, Any]], list[LLMResult]]:
     """extract_triples plus the calls it made, for the run summary.
 
-    Batches follow the order of chunks, so the same chunk list hits the cache on a rerun.
+    One call per batch. By default the batches follow the order of chunks, so the same chunk list
+    hits the cache on a rerun; a caller that keeps a batch plan passes its batches instead.
     """
     cfg = ingest_cfg()["extract"]
-    check_offsets(chunks, doc_text)
-    by_id = {c.chunk_id: c for c in chunks}
     size = int(cfg["chunks_per_call"])
+    if batches is None:
+        batches = [chunks[i : i + size] for i in range(0, len(chunks), size)]
+    sent = [c for batch in batches for c in batch]
+    check_offsets(sent, doc_text)
+    by_id = {c.chunk_id: c for c in sent}
     kept: list[Triple] = []
     rejects: list[dict[str, Any]] = []
     calls: list[LLMResult] = []
-    for i in range(0, len(chunks), size):
-        batch = chunks[i : i + size]
+    for batch in batches:
         result = llm.chat(
             "extract",
             build_messages(batch),

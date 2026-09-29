@@ -137,6 +137,9 @@ def test_parse_rejects_each_bad_item_and_keeps_the_rest() -> None:
         "d1:sentence:0"
     ] * 3
     assert rejects[4]["raw"]["problem"] == "subject_type is not in the entity type list"
+    # an item with no passage is tied to its batch, so a rerun can replace it
+    assert rejects[0]["raw"]["chunk_ids"] == [c.chunk_id for c in CHUNKS]
+    assert "chunk_ids" not in rejects[1]["raw"]
 
 
 def test_empty_list_is_a_valid_answer() -> None:

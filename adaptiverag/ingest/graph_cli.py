@@ -67,10 +67,62 @@ def read_jsonl_dicts(path: Path) -> list[dict[str, Any]]:
     ]
 
 
+PLAN_PATH = ROOT / "data" / "graph" / "extract_batches.jsonl"
+
+
+def read_plan(strategy: str, path: Path = PLAN_PATH) -> list[list[str]]:
+    """The extraction batches sent so far for a chunk strategy, one per line, oldest first."""
+    if not path.exists():
+        return []
+    rows = read_jsonl_dicts(path)
+    return [list(r["chunk_ids"]) for r in rows if r["strategy"] == strategy]
+
+
+def write_plan(strategy: str, plan: list[list[str]], path: Path = PLAN_PATH) -> None:
+    others = (
+        [r for r in read_jsonl_dicts(path) if r["strategy"] != strategy] if path.exists() else []
+    )
+    rows = others + [{"strategy": strategy, "chunk_ids": b} for b in plan]
+    path.parent.mkdir(parents=True, exist_ok=True)
+    text = "".join(json.dumps(r) + "\n" for r in rows)
+    path.write_text(text, encoding="utf-8", newline="\n")
+
+
+def plan_batches(
+    plan: list[list[str]], scope: list[str], known: set[str], size: int
+) -> tuple[list[list[str]], list[list[str]]]:
+    """(batches to send for the scope, the plan with new batches appended).
+
+    A planned batch keeps its exact chunks, so its request stays cached when the scope changes;
+    its chunks outside the scope are extracted from the cache and dropped. Scope chunks that no
+    planned batch holds go into new batches at the end, in scope order. A planned batch that
+    holds a chunk which no longer exists (known is every chunk that does) can never be sent the
+    same way again, so it leaves the plan and its scope chunks are batched anew.
+    """
+    wanted = set(scope)
+    plan = [b for b in plan if not wanted & set(b) or known.issuperset(b)]
+    held = {cid for b in plan for cid in b}
+    fresh = [cid for cid in scope if cid not in held]
+    plan = plan + [fresh[i : i + size] for i in range(0, len(fresh), size)]
+    return [b for b in plan if wanted & set(b)], plan
+
+
+def in_scope(reject: dict[str, Any], wanted: set[str]) -> bool:
+    """A reject of a scope chunk, or of a whole batch that held one."""
+    if reject["chunk_id"] is not None:
+        return reject["chunk_id"] in wanted
+    return bool(wanted & set(reject["raw"].get("chunk_ids", [])))
+
+
 def extract_corpus(
-    corpus: str, limit: int | None
+    corpus: str, limit: int | None, save_plan: bool = False
 ) -> tuple[list[Chunk], list[Triple], list[dict[str, Any]], list[LLMResult]]:
-    """Serving chunks of the corpus and their triples; stored extraction calls are cache hits."""
+    """Serving chunks of the corpus and their triples; stored extraction calls are cache hits.
+
+    Batches come from the plan in data/graph, so a change of scope (an edited gold question)
+    re-sends only the chunks it adds. save_plan records new batches; a build does, while embed
+    slices and merge sampling compute the same batches without writing the file.
+    """
     strategy = router_cfg()["serving"]["chunk_strategy"]
     doc_ids = corpus_doc_ids(corpus)
     chunks, doc_text = store.corpus_chunks(doc_ids, strategy)
@@ -79,12 +131,29 @@ def extract_corpus(
         chunks = chunks[:limit]
     print(f"database: {endpoint()}")
     print(f"{corpus}: {len(chunks)} {strategy} chunks, {missing} documents without chunks")
+
+    plan = read_plan(strategy)
+    scope = [c.chunk_id for c in chunks]
+    wanted = set(scope)
+    # planned batches can hold chunks of documents outside the scope; load those too
+    outside = {cid.split(":")[0] for b in plan if wanted & set(b) for cid in b} - set(doc_ids)
+    extra, extra_text = store.corpus_chunks(sorted(outside), strategy) if outside else ([], {})
+    by_id = {c.chunk_id: c for c in [*chunks, *extra]}
+    size = int(ingest_cfg()["extract"]["chunks_per_call"])
+    batches, plan = plan_batches(plan, scope, set(by_id), size)
+    if save_plan:
+        write_plan(strategy, plan)
+    riders = sum(cid not in wanted for b in batches for cid in b)
+    print(f"extraction batches: {len(batches)}, with {riders} chunks outside the scope")
     try:
-        kept, rejects, calls = extract_batches(chunks, doc_text)
+        kept, rejects, calls = extract_batches(
+            chunks, doc_text | extra_text, [[by_id[cid] for cid in b] for b in batches]
+        )
     except RateLimited as e:
         # finished batches are in the cache, so a rerun later picks up where this stopped
         raise SystemExit(f"rate limited, rerun later to resume: {e}") from e
-    return chunks, kept, rejects, calls
+    kept = [t for t in kept if t.chunk_id in wanted]
+    return chunks, kept, [r for r in rejects if in_scope(r, wanted)], calls
 
 
 def embed_main(argv: list[str]) -> None:
@@ -96,15 +165,14 @@ def embed_main(argv: list[str]) -> None:
     _, kept, _, calls = extract_corpus(args.corpus, None)
     texts = graph_texts(kept)
     mine = [t for t in texts if in_slice(t, k, n)]
+    what = f"graph embed slice {k}/{n}"
     print(f"extraction calls from the cache: {sum(c.cached for c in calls)} of {len(calls)}")
-    print(f"graph embed slice {k}/{n}: {len(mine)} of {len(texts)} texts")
+    print(f"{what}: {len(mine)} of {len(texts)} texts")
     try:
         llm.embed(mine)
     except RateLimited as e:
-        raise SystemExit(
-            f"graph embed slice {k}/{n} stopped by the quota ({e}); rerun later"
-        ) from e
-    print(f"graph embed slice {k}/{n}: all {len(mine)} texts embedded or already cached")
+        raise SystemExit(f"{what} stopped by the quota ({e}); rerun later") from e
+    print(f"{what}: all {len(mine)} texts embedded or already cached")
 
 
 LABELS_PATH = ROOT / "data" / "graph" / "merge_labels.jsonl"
@@ -206,14 +274,13 @@ def main(argv: list[str] | None = None) -> None:
         return merges_main(argv[1:])
     parser = argparse.ArgumentParser(prog="python -m adaptiverag.ingest graph")
     parser.add_argument("--corpus", choices=CORPORA, required=True)
-    # keep it a multiple of chunks_per_call so the batches match a full run and stay cached
     parser.add_argument("--limit", type=int, help="first N chunks only, for development")
     parser.add_argument(
         "--dry-run", action="store_true", help="print the rows it would write, write nothing"
     )
     args = parser.parse_args(argv)
 
-    chunks, kept, rejects, calls = extract_corpus(args.corpus, args.limit)
+    chunks, kept, rejects, calls = extract_corpus(args.corpus, args.limit, not args.dry_run)
     summary = summarize(chunks, kept, rejects, calls)
     if not args.dry_run:
         ids = [c.chunk_id for c in chunks]

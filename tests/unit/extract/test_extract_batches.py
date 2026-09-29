@@ -66,6 +66,16 @@ def test_four_chunks_per_call_in_order(monkeypatch: pytest.MonkeyPatch) -> None:
     assert second == f"Passages:\n\n[1] {TEXTS[4]}"
 
 
+def test_given_batches_are_sent_as_they_are(monkeypatch: pytest.MonkeyPatch) -> None:
+    fake = FakeGateway(['{"triples": []}'] * 2)
+    monkeypatch.setattr(extract.llm, "chat", fake)
+    chunks, docs = corpus()
+    extract_batches(chunks[:1], docs, [[chunks[4], chunks[0]], [chunks[2]]])
+    first, second = (c["messages"][1]["content"] for c in fake.seen)
+    assert first == f"Passages:\n\n[1] {TEXTS[4]}\n\n[2] {TEXTS[0]}"
+    assert second == f"Passages:\n\n[1] {TEXTS[2]}"
+
+
 def test_triples_are_screened_with_a_reason_each(monkeypatch: pytest.MonkeyPatch) -> None:
     answers = [
         json.dumps(
