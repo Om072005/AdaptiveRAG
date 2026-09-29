@@ -1,0 +1,14 @@
+# The recorded questions the page replays (contract 6b). 12 to 16 dev questions, at least 4 per type,
+# at least 2 that went wrong, each with one plain sentence on why it is on the page. The lead approves.
+# Replay runs: eval.run --split dev --questions docs/results/replays.toml --mode <m> --variant replay
+# --judge --pin, once per mode on the frozen commit; put their run ids below.
+
+[runs]
+auto = ""
+vector = ""
+graph = ""
+hybrid = ""
+
+# [[question]]
+# id = "hp_..."
+# why = "..."

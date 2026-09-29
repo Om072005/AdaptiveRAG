@@ -3,6 +3,7 @@
 import argparse
 import json
 import math
+import sys
 from pathlib import Path
 from statistics import mean
 from typing import Any
@@ -241,6 +242,15 @@ def report(c: psycopg.Connection[Any], run_id: str, vs_id: str | None, out_dir: 
 
 
 def main(argv: list[str] | None = None) -> None:
+    argv = sys.argv[1:] if argv is None else argv
+    if argv[:1] == ["bake"]:
+        from adaptiverag.eval import bake
+
+        return bake.main()
+    if argv[:1] == ["replays"]:
+        from adaptiverag.eval import replays
+
+        return replays.main()
     p = argparse.ArgumentParser(prog="python -m adaptiverag.eval.report")
     p.add_argument("run_id")
     p.add_argument("--vs", metavar="RUN_ID")

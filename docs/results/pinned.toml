@@ -1,0 +1,13 @@
+# The only runs the README and the page may quote (contract section 8). The lead approves every
+# change. Eval runs are run ids of --pin runs on Neon main; `eval.report bake` computes their tables.
+# The other tables name a result file in this folder (without .json) that has "run_id" and "rows".
+
+routes = []            # one run per mode: vector, graph, hybrid, auto
+by_type = []           # the same runs, broken down by question type
+quality_per_cost = []  # every variant compared on quality per unit cost
+selector = []          # always-small, always-large, selector
+confusion = ""         # the auto run whose classifier predictions are shown
+classifier = ""        # M3 classifier comparison
+hnsw = ""              # M2 bench-hnsw result file
+chunking = ""          # M2 bench-chunking result file
+graph = ""             # M3 graph quality result file
