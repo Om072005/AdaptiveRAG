@@ -85,3 +85,8 @@ def test_summarize_means_overall_and_by_type() -> None:
         "sp_precision": 0.1,
     }
     assert run.summarize([]) == {"n_done": 0}
+
+
+def test_new_run_needs_split_mode_and_variant() -> None:
+    with pytest.raises(SystemExit):
+        run.main(["--split", "dev", "--mode", "auto"])

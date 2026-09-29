@@ -167,20 +167,75 @@ def select_items(split: str, limit: int | None) -> list[GoldItem]:
     return items[:limit] if limit else items
 
 
+def result_rows(c: psycopg.Connection[Any], run_id: str) -> list[dict[str, Any]]:
+    cur = c.execute(
+        "select question_id, gold_type, em, f1, recall_at_k, mrr, sp_precision, cost_usd"
+        " from eval_results where run_id = %s order by question_id",
+        (run_id,),
+    )
+    names = [d.name for d in cur.description or []]
+    return [dict(zip(names, r, strict=True)) for r in cur.fetchall()]
+
+
+def start_run(c: psycopg.Connection[Any], args: argparse.Namespace) -> tuple[str, list[GoldItem]]:
+    """Insert a new eval_runs row; the options needed to resume go into its summary."""
+    check_args(args.split, args.variant, args.size, settings().allow_test)
+    items = select_items(args.split, args.limit)
+    sha, dirty = git_state()
+    run_id = make_run_id(datetime.now(), args.split, args.mode, args.variant)
+    options = {"size": args.size, "limit": args.limit}
+    c.execute(
+        "insert into eval_runs (run_id, split, mode, variant, git_sha, git_dirty, config_hash, n,"
+        " summary) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+        (
+            run_id,
+            args.split,
+            args.mode,
+            args.variant,
+            sha,
+            dirty,
+            config_hash(),
+            len(items),
+            Jsonb({"options": options}),
+        ),
+    )
+    c.commit()
+    return run_id, items
+
+
+def resume_run(c: psycopg.Connection[Any], args: argparse.Namespace) -> tuple[str, list[GoldItem]]:
+    """Reload a stopped run's options and return the questions it has not stored yet."""
+    row = c.execute(
+        "select split, mode, variant, config_hash, summary from eval_runs where run_id = %s",
+        (args.resume,),
+    ).fetchone()
+    if row is None:
+        raise SystemExit(f"no run {args.resume}")
+    split, mode, variant, cfg_hash, summary = row
+    if cfg_hash != config_hash():
+        raise SystemExit(f"config changed since {args.resume} started; start a new run instead")
+    options = summary["options"]
+    check_args(split, variant, options["size"], settings().allow_test)
+    args.split, args.mode, args.variant, args.size = split, mode, variant, options["size"]
+    done = {r["question_id"] for r in result_rows(c, args.resume)}
+    return args.resume, [i for i in select_items(split, options["limit"]) if i.id not in done]
+
+
 def main(argv: list[str] | None = None, answer: AnswerFn | None = None) -> None:
     p = argparse.ArgumentParser(prog="python -m adaptiverag.eval.run")
-    p.add_argument("--split", choices=["mini", "dev", "test"], required=True)
-    p.add_argument("--mode", choices=MODES, required=True)
-    p.add_argument("--variant", required=True)
+    p.add_argument("--split", choices=["mini", "dev", "test"])
+    p.add_argument("--mode", choices=MODES)
+    p.add_argument("--variant")
     p.add_argument("--limit", type=int)
     p.add_argument("--size", choices=["small", "large"])
     p.add_argument("--judge", action="store_true")
     p.add_argument("--questions")
-    p.add_argument("--resume")
+    p.add_argument("--resume", metavar="RUN_ID")
     p.add_argument("--pin", action="store_true")
     args = p.parse_args(argv)
-    check_args(args.split, args.variant, args.size, settings().allow_test)
-    for flag in ("judge", "questions", "resume", "pin"):
+    if not args.resume and not (args.split and args.mode and args.variant):
+        p.error("--split, --mode and --variant are required unless --resume is given")
+    for flag in ("judge", "questions", "pin"):
         if getattr(args, flag):
             raise SystemExit(f"--{flag} is not built yet")
     if answer is None:
@@ -188,26 +243,21 @@ def main(argv: list[str] | None = None, answer: AnswerFn | None = None) -> None:
 
         answer = answer_query
 
-    items = select_items(args.split, args.limit)
-    sha, dirty = git_state()
-    run_id = make_run_id(datetime.now(), args.split, args.mode, args.variant)
     with db.conn() as c:
         c.execute("select 1")  # wake a suspended Neon compute before anything is timed
-        c.execute(
-            "insert into eval_runs (run_id, split, mode, variant, git_sha, git_dirty,"
-            " config_hash, n) values (%s, %s, %s, %s, %s, %s, %s, %s)",
-            (run_id, args.split, args.mode, args.variant, sha, dirty, config_hash(), len(items)),
-        )
-        c.commit()
+        run_id, items = resume_run(c, args) if args.resume else start_run(c, args)
         try:
-            rows = execute(c, items, run_id, args.mode, args.size, answer)
+            execute(c, items, run_id, args.mode, args.size, answer)
         except RateLimited:
             print(f"rate limited, progress saved: resume with --resume {run_id}", file=sys.stderr)
             raise SystemExit(2) from None
-        summary = summarize(rows)
-        c.execute("update eval_runs set summary = %s where run_id = %s", (Jsonb(summary), run_id))
+        summary = summarize(result_rows(c, run_id))
+        c.execute(
+            "update eval_runs set summary = summary || %s where run_id = %s",
+            (Jsonb(summary), run_id),
+        )
         c.commit()
-    print(f"{run_id}: {len(rows)} questions, f1 {summary.get('f1', 0):.3f}")
+    print(f"{run_id}: {summary['n_done']} questions stored, f1 {summary.get('f1', 0):.3f}")
 
 
 if __name__ == "__main__":
