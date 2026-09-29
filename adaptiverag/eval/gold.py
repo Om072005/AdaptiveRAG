@@ -1,4 +1,4 @@
-"""python -m adaptiverag.eval.gold build|generate|split|verify --from N --to M --reviewer <name>"""
+"""python -m adaptiverag.eval.gold build|generate|split|status|verify (see main for flags)"""
 
 import argparse
 import json
@@ -191,13 +191,31 @@ def main(argv: list[str] | None = None) -> None:
     )
     sp.add_argument("--gold-dir", type=Path, default=GOLD_DIR)
     sp.add_argument("--seed", type=int, default=7)
+    v = sub.add_parser("verify", help="walk items N..M (dev then test, 1 based) and verify each")
+    v.add_argument("--from", dest="first", type=int, required=True)
+    v.add_argument("--to", dest="last", type=int, required=True)
+    v.add_argument("--reviewer", required=True)
+    v.add_argument("--gold-dir", type=Path, default=GOLD_DIR)
+    st = sub.add_parser("status", help="which items are not verified yet")
+    st.add_argument("--gold-dir", type=Path, default=GOLD_DIR)
     args = p.parse_args(argv)
+    if args.cmd in ("verify", "status"):
+        from adaptiverag.eval import verify
+
     if args.cmd == "build":
         cmd_build(args.raw, args.manifest, args.out)
     elif args.cmd == "generate":
         cmd_generate(args.n, args.temperature, args.out)
     elif args.cmd == "split":
         cmd_split(args.candidates, args.gold_dir, args.seed)
+    elif args.cmd == "verify":
+        counts = verify.run(args.gold_dir, args.first, args.last, args.reviewer.strip().lower())
+        print(f"verified {counts['y']}, flagged {counts['n']}, skipped {counts['s']}")
+    elif args.cmd == "status":
+        s = verify.status(args.gold_dir)
+        print(f"{s['total']} items, {len(s['unverified'])} not verified: {s['unverified']}")
+        for n, found in s["problems"].items():
+            print(f"  #{n}: {', '.join(found)}")
 
 
 if __name__ == "__main__":
