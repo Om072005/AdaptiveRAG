@@ -93,7 +93,15 @@
         "f1": 0.5,
         "recall_at_k": 0.5
       },
-      "judgement": null
+      "judgement": {
+        "faithfulness": 1.0,
+        "relevance": 0.5,
+        "completeness": 1.0,
+        "rationale": "Sample rationale: the answer is stated in the cited passage.",
+        "cost_usd": 0.0003,
+        "flagged": true,
+        "queued": true
+      }
     }
   }
 }

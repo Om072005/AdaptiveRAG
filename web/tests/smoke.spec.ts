@@ -111,3 +111,13 @@ test('the replay only build has no question box', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByLabel('Ask your own question')).toHaveCount(0)
 })
+
+test('recorded judge scores and the review queue note', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /Sample single hop question/ }).click()
+  await page.getByRole('button', { name: '5 Answer' }).click()
+  const judge = page.getByRole('region', { name: 'Judge scores' })
+  await expect(judge.getByRole('img', { name: 'Relevance 0.50 of 1' })).toBeVisible()
+  await expect(judge).toContainText('Below the threshold, so it waits in the review queue.')
+  await expect(judge.getByRole('button', { name: 'Judge this answer' })).toHaveCount(0)
+})

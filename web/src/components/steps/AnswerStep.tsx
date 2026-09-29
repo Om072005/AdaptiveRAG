@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { score } from '../../copy/format'
-import { NOT_ENOUGH, type RecordedRun, explanationParts } from '../../data/replay'
+import { LIVE_ID, NOT_ENOUGH, type RecordedRun, explanationParts } from '../../data/replay'
 import type { Replay } from '../../types'
+import { JudgeScores } from '../JudgeScores'
 
 export function AnswerStep({ run, replay }: { run: RecordedRun; replay: Replay }) {
   const [active, setActive] = useState<number | null>(null)
@@ -65,6 +66,10 @@ export function AnswerStep({ run, replay }: { run: RecordedRun; replay: Replay }
           </div>
         </dl>
       )}
+      <JudgeScores
+        judgement={run.judgement}
+        liveTraceId={replay.question_id === LIVE_ID ? run.response.trace_id : undefined}
+      />
     </div>
   )
 }
