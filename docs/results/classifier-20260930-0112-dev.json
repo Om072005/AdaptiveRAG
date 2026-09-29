@@ -1,0 +1,115 @@
+{
+ "run_id": "20260930-0112-dev",
+ "name": "classifier",
+ "created_at": "2026-09-30T01:12:51+05:30",
+ "git_sha": "b71e368c08c7cae165af2341208efbf7c783f5ad",
+ "git_dirty": false,
+ "config_hash": "a431d54de69a",
+ "params": {
+  "split": "dev",
+  "questions": 100,
+  "scores": {
+   "rules": {
+    "macro_f1": 0.8014215380348103,
+    "f1_by_label": {
+     "single_hop": 0.7631578947368421,
+     "multi_hop": 0.6956521739130435,
+     "comparison": 0.9454545454545454
+    },
+    "matrix": [
+     [
+      29,
+      4,
+      0
+     ],
+     [
+      14,
+      24,
+      0
+     ],
+     [
+      0,
+      3,
+      26
+     ]
+    ],
+    "cost_per_query_usd": 0.0,
+    "p50_ms": 0.0
+   },
+   "logreg": {
+    "macro_f1": 0.8772689299005089,
+    "f1_by_label": {
+     "single_hop": 0.8311688311688312,
+     "multi_hop": 0.8181818181818182,
+     "comparison": 0.9824561403508771
+    },
+    "matrix": [
+     [
+      32,
+      1,
+      0
+     ],
+     [
+      11,
+      27,
+      0
+     ],
+     [
+      1,
+      0,
+      28
+     ]
+    ],
+    "cost_per_query_usd": 0.0,
+    "p50_ms": 0.0
+   },
+   "llm": {
+    "macro_f1": 0.8099220572338852,
+    "f1_by_label": {
+     "single_hop": 0.7619047619047619,
+     "multi_hop": 0.7419354838709677,
+     "comparison": 0.9259259259259259
+    },
+    "matrix": [
+     [
+      32,
+      1,
+      0
+     ],
+     [
+      15,
+      23,
+      0
+     ],
+     [
+      4,
+      0,
+      25
+     ]
+    ],
+    "cost_per_query_usd": 5.73727e-05,
+    "p50_ms": 459.0
+   }
+  }
+ },
+ "rows": [
+  {
+   "method": "rules",
+   "macro_f1": 0.8014215380348103,
+   "cost_per_query_usd": 0.0,
+   "p50_ms": 0.0
+  },
+  {
+   "method": "logreg",
+   "macro_f1": 0.8772689299005089,
+   "cost_per_query_usd": 0.0,
+   "p50_ms": 0.0
+  },
+  {
+   "method": "llm",
+   "macro_f1": 0.8099220572338852,
+   "cost_per_query_usd": 5.73727e-05,
+   "p50_ms": 459.0
+  }
+ ]
+}
