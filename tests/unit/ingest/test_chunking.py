@@ -1,7 +1,7 @@
 import pytest
 
 from adaptiverag.config import ingest_cfg
-from adaptiverag.ingest.chunking import WORD, chunk_fixed
+from adaptiverag.ingest.chunking import WORD, chunk_fixed, chunk_sentence, split_sentences
 from adaptiverag.ingest.normalize import doc_id, join_sentences
 from adaptiverag.types import Chunk, Document
 
@@ -76,3 +76,45 @@ def test_configured_size_on_a_long_document() -> None:
 def test_bad_sizes_raise(n_words: int, overlap: int) -> None:
     with pytest.raises(ValueError):
         chunk_fixed(numbered(10), n_words, overlap)
+
+
+def test_sentence_chunks_never_split_a_sentence() -> None:
+    doc = make_doc(["One two three.", "Four five six seven.", "Eight nine.", "Ten eleven twelve."])
+    boundaries = {p for s, e in split_sentences(doc.text) for p in (s, e)}
+    for c in chunk_sentence(doc, 7):
+        assert c.start in boundaries and c.end in boundaries
+        assert c.text == doc.text[c.start : c.end]
+
+
+def test_sentence_chunks_respect_max_words() -> None:
+    doc = make_doc(["One two three.", "Four five six seven.", "Eight nine.", "Ten eleven twelve."])
+    chunks = chunk_sentence(doc, 7)
+    assert [c.text for c in chunks] == [
+        "One two three. Four five six seven.",
+        "Eight nine. Ten eleven twelve.",
+    ]
+    assert all(c.n_words <= 7 for c in chunks)
+
+
+def test_a_sentence_longer_than_max_words_stays_whole() -> None:
+    doc = make_doc(["Short one.", "This sentence has far too many words for it.", "End."])
+    assert [c.text for c in chunk_sentence(doc, 4)] == [
+        "Short one.",
+        "This sentence has far too many words for it.",
+        "End.",
+    ]
+
+
+def test_sentence_chunks_cover_every_sentence_in_order() -> None:
+    doc = make_doc([f"Line {i} has five words." for i in range(40)])
+    chunks = chunk_sentence(doc, 12)
+    assert len(chunks) == 20 and all(c.n_words == 10 for c in chunks)
+    assert " ".join(c.text for c in chunks) == doc.text
+    assert [c.ord for c in chunks] == list(range(len(chunks)))
+    assert all(c.chunk_id == f"{doc.doc_id}:sentence:{c.ord}" for c in chunks)
+
+
+def test_sentence_chunker_edge_cases() -> None:
+    assert chunk_sentence(make_doc([]), 10) == []
+    with pytest.raises(ValueError):
+        chunk_sentence(numbered(10), 0)

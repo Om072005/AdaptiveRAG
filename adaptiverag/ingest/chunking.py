@@ -64,7 +64,21 @@ def chunk_fixed(doc: Document, n_words: int, overlap: int) -> list[Chunk]:
 
 
 def chunk_sentence(doc: Document, max_words: int) -> list[Chunk]:
-    raise NotImplementedError
+    """Whole sentences packed in order up to max_words; a longer sentence is a chunk on its own."""
+    if max_words <= 0:
+        raise ValueError(f"need max_words > 0, got {max_words}")
+    chunks: list[Chunk] = []
+    start = end = words = 0
+    for s, e in split_sentences(doc.text):
+        n = len(WORD.findall(doc.text[s:e]))
+        if words and words + n > max_words:
+            chunks.append(make_chunk(doc, "sentence", len(chunks), start, end))
+            words = 0
+        start = s if words == 0 else start
+        end, words = e, words + n
+    if words:
+        chunks.append(make_chunk(doc, "sentence", len(chunks), start, end))
+    return chunks
 
 
 def chunk_semantic(doc: Document, sentence_vecs: np.ndarray, percentile: float) -> list[Chunk]:
