@@ -1,0 +1,20 @@
+# Chunking (M2), extraction and entity resolution (M3) settings.
+
+[chunk.fixed]
+n_words = 64
+overlap = 16
+
+[chunk.sentence]
+max_words = 96
+
+[chunk.semantic]
+percentile = 90
+
+[extract]
+chunks_per_call = 4
+min_confidence = 0.5
+
+[resolve]
+name_sim = 0.92
+embed_sim = 0.88
+person_needs_shared_neighbor = true

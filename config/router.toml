@@ -1,0 +1,42 @@
+# Router, retrieval and generation thresholds. Starting points, tuned on the dev split only.
+# Every change to a threshold cites the run id that justified it in the commit body.
+
+[serving]
+chunk_strategy = "sentence"   # M2 sets it from the P1 experiment
+
+[classifier]                  # M3
+method = "logreg"
+min_confidence = 0.60
+
+[vector]                      # M2
+k = 8
+min_top_score = 0.55
+
+[graph]                       # M3
+depth = 2
+fanout = 25
+max_paths = 8
+min_seed_score = 0.45
+min_path_score = 0.20
+
+[hybrid]                      # M2
+rrf_k = 60
+mmr_lambda = 0.7
+k = 8
+llm_rerank = false
+
+[answer]                      # M1, tuned by M4
+min_confidence = 0.55
+w_citation = 0.5
+w_retrieval = 0.5
+
+[select]                      # M1
+large_if_routes = ["graph", "hybrid"]
+large_if_labels = ["multi_hop", "comparison"]
+large_if_context_tokens = 2500
+
+[policy]                      # M3
+low_budget_usd = 0.05
+
+[judge]                       # M4
+flag_below = 0.6

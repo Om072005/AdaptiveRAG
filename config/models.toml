@@ -1,0 +1,56 @@
+# Model ids and paid tier list prices in USD per million tokens, used for every cost number
+# even while we run on free tiers. Checked against the provider docs (URLs in the commit body).
+# Any "PIN_ME" left in this file makes config.models() raise.
+
+[providers.groq]
+base_url = "https://api.groq.com/openai/v1"
+key_env = "GROQ_API_KEY"
+
+[providers.gemini]
+base_url = "https://generativelanguage.googleapis.com/v1beta/openai/"
+key_env = "GEMINI_API_KEY"
+
+[roles.small]
+provider = "groq"
+model = "openai/gpt-oss-20b"
+price_in_per_m = 0.075
+price_out_per_m = 0.30
+reasoning_effort = "low"
+
+[roles.large]
+provider = "groq"
+model = "openai/gpt-oss-120b"
+price_in_per_m = 0.15
+price_out_per_m = 0.60
+reasoning_effort = "medium"
+
+[roles.classify]
+provider = "groq"
+model = "openai/gpt-oss-20b"
+price_in_per_m = 0.075
+price_out_per_m = 0.30
+reasoning_effort = "low"
+
+[roles.extract]
+provider = "gemini"
+model = "gemini-2.5-flash-lite"   # fallback if retired: gemini-3.5-flash-lite 0.30 / 2.50
+price_in_per_m = 0.10
+price_out_per_m = 0.40
+reasoning_effort = "none"
+
+[roles.judge]
+provider = "gemini"
+model = "gemini-3.8-flash"        # introductory price through 2026-12-31
+price_in_per_m = 0.75
+price_out_per_m = 3.75
+reasoning_effort = "low"
+
+[roles.embed]
+provider = "gemini"
+model = "gemini-embedding-001"    # request 768 dims, then L2 normalize
+price_in_per_m = 0.15
+price_out_per_m = 0.0
+dims = 768
+
+[limits]
+max_llm_calls_per_query = 4
