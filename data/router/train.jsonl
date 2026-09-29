@@ -1,0 +1,987 @@
+{"id": "hp_5a711d665542994082a3e5a2", "question": "Which battle lasted longer, the Battle of Guam, or the Battle of Saipan?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7136035542994082a3e672", "question": "Is George Duran or Richard Dekmejian older?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7139765542994082a3e69c", "question": "Who became a composer first, Jacques Offenbach or George Gershwin?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a716cfa5542994082a3e828", "question": "Which astronaut was born first; Jean-Loup Chrétien or Lodewijk van den Berg?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a726dba5542997f827839c6", "question": "Which of the Georgia Institute of Technology or the University of Rochester has the most satellite campuses?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7294875542991f9a20c507", "question": "Which of these mathematicians was born at an earlier date, Georg Cantor or Grigory Margulis?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a72bc425542994cef4bc3e9", "question": "Who is older, Françoise Dürr or Manuel Orantes?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a72cee45542991f9a20c5a2", "question": "Both Never Cry Wolf and Big Hero 6 films were released by what label?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a72dc595542991f9a20c5c7", "question": "Which of these men who have been to space is older, Ivan Bella or Jean-Jacques Favier?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7329765542994cef4bc486", "question": "Len Wiseman and Ken Kwapis, are Americans, that have which occupation?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a733eb65542994cef4bc4f1", "question": "Which private university was founded first, Northeastern University or Lawrence Technological University?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a734bd45542994cef4bc510", "question": "Which profession did Zane Grey and Chaim Potok share?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a73a8a755429978a71e906e", "question": "Who has more grand slam titles, Vera Zvonareva or Lisa Raymond?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a73ad8355429978a71e907b", "question": "Which film is older, Snow Dogs or Prom?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a73c42d55429905862fe0b7", "question": "University of Wisconsin–Madison and University of Notre Dame, are both which type of universities?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a74b79e55429929fddd84ce", "question": "Which dog is larger, the Cirneco dell'Etna or the Siberian Husky?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a74c06b5542996c70cfadd2", "question": "Who had a higher singles ranking, Paul Haarhuis or Katarina Srebotnik?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a74d48255429916b0164222", "question": "Which was located further from Yellowknife, Northwest Territories, Discovery Mine or Outpost Island Mine?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a75270855429916b0164275", "question": "Which national park has the longer name in Spanish, Picos de Europa National Park or Caldera de Taburiente National Park?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a753dc955429916b01642b1", "question": "What nationality are both Gerald Green and Allen Drury?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7570475542992db9473667", "question": "Which tennis player was born first Garbiñe Muguruza or Zheng Jie?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a75bdc75542992db94736b3", "question": "Was Michael Foale or Ulf Merbold the first non_US citizen to reach orbit in a US spacecraft?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a761eae55429976ec32bd1b", "question": "Which is a sequel to more films, Garfield's Pet Force or Hero of the Rails?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a764e3f5542992d0ec06099", "question": "Chimpanzee and Johnny Tremain, are both media of what type?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a76d67f55429966f1a36c00", "question": "Which college has campuses in more countries, Northwestern University or University of California, San Francisco?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a76fe0155429966f1a36c09", "question": "Who is older, Rika Hiraki or Danie Visser?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a77112e55429937353601c1", "question": "Which is higher Manaslu or Saraghrar?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7720365542993569682cd8", "question": "Which university was established in 1636: Harvard University or Massachusetts Institute of Technology?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a774c3955429972597f14ee", "question": "Which documentary was created first, Murderball or Year at Danger?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a77543e55429966f1a36d0d", "question": "Which is farther south, 45 Broad Street or 520 Park Avenue?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7757b055429966f1a36d13", "question": "Who was born earlier, Ricardo Iorio or Sarah Nixey?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7767dc5542993569682d81", "question": "Was the Battle of Leyte Gulf or the Gothic Line considered a naval battle?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a776a895542993569682d99", "question": "Who was born first, Jamshīd al-Kāshī or Shah Waliullah Dehlawi", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a77a7845542995d8318124b", "question": "Jim Reid and Justin Pierre, have which occupation in common?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a77a9035542995d83181256", "question": "Who was born first, Burton Cummings or Russell Mael?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a77c1e155429967ab105267", "question": "Was Kang Seung-yoon or Frank Sinatra born first?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a78c57e55429970f5fffd7a", "question": "Which film maker was born first, Alfred Santell or Aleksei Balabanov.", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a79050155429970f5fffe22", "question": "Who lived longer, Gustave Charpentier or Léo Delibes?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a790b30554299148911f9cf", "question": "Who was born first Rémi Lange or Max Reinhardt?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a79199655429974737f7988", "question": "Did the magazine Chatelaine or the magazine W start publishing earlier?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7982c2554299078472781d", "question": "Who lived longer, Nebraska poet James Emanuel or sci-fi author Philip K. Dick?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a79cee45542994bb94570cc", "question": "Which movie came out first, 51 Birch Street or Man on Wire?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a79fe435542994f819ef11a", "question": "Who is younger, Patricio Guzmán Lozanes or Gil Kenan?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7a44c65542994f819ef1a4", "question": "Who is younger, Emily Whitehurst or Anette Olzon?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7a8ad75542995eb53be861", "question": "Which magazine came out first, Architectural Digest or Human Rights Quarterly?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7a944b55429941d65f26c6", "question": "Which musician, Mikael Åkerfeldt or Dave Pirner, is best known as the lead vocalist and frontman for the alternative rock band Soul Asylum?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7abe6655429927d897bf00", "question": "Between Padmarajan and Buster Keaton, who had more diverse job experiences?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7b51f95542992d025e67fb", "question": "What band's musically \"dirty\" sound was a forerunner for the later grunge bands to come out of Seattle, The U-Men or Hayden?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7b608e5542992d025e6837", "question": "What type of media does When the Levees Broke and Mala Mala have in common?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7b864c5542995eb53be948", "question": "Who was born first, Daphne du Maurier or Pietro di Donato?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7b99f85542995eb53be966", "question": "Who was born first, C. S. Forester or Lionel Trilling?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7c77f45542990527d554b8", "question": "Who was born first out of Tian Zhuangzhuang and Anthony Mann?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7cb2ee55429935c91b52b2", "question": "Who is an Argentine film producer, editor and director, Jean Yarbrough or Pablo Trapero?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7ce72855429909bec7686f", "question": "Which actor, Jeff Celentano or Will Finn, wrote and directed \"Home on the Range\"?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7cf15755429909bec768b3", "question": "Which was founded first Us Weekly or Strictly Slots?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7dbf6a5542997cc2c47493", "question": "Which documentary was released first, Feiyu Show or That's Dancing!?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7e5af45542991319bc9472", "question": "Jennifer Capriati and Scott Draper, have which shared occupation?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7e9c4f5542994959419a2b", "question": "Are Chernobyl Heart and Meet the Patels both documentaries about the same subject?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7f25305542993067513660", "question": "Did Françoise Dürr play tennis professionally before Marin Čilić started to play professionally?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7f5fe45542995d8a8dde4f", "question": "Julien Benneteau and Pete Sampras, have which mutual occupation?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a7fb2875542994857a767bf", "question": "Are Kevin Woo and Epic Mazur both male?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a80070c5542992e7d278de5", "question": "What is a documentary film by Sandy Cioffi about Nigeria's oil-rich Niger Delta, Trembling Before G-d or Sweet Crude ?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8008ed5542992e7d278de9", "question": "Which singer has been part of more bands, Richard Ashcroft or James Bourne?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a80103e5542992097ad2fd2", "question": "Did Rainer Werner Fassbinder cite Armando Iannucci, other than Werner Schroeter, as an influence on German cinema?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a801a34554299485f59856a", "question": "Are the rock bands Travis and Shiny Toy Guns from the same country?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8052105542995d8a8ddf66", "question": "Which magazine, Trump or Self, was a glossy magazine of satire and humor, mostly in the forms of comics features and short stories?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a807c4d554299485f59860f", "question": "What type of entities are Jiangmen and Pingdu?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8082b85542992bc0c4a742", "question": "Which American band was formed in Oklahoma, Black Stone Cherry or The All-American Rejects?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8094a35542995d8a8ddfa4", "question": "Who, Claudie Haigneré and Mark Shuttleworth, is the founder and CEO of Canonical Ltd., the company behind the development of the Linux-based Ubuntu operating system?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8097905542996402f6a57f", "question": "Which was founded earlier, The Week or New Scientist?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a809e585542992bc0c4a784", "question": "Are André Gide and Ryūnosuke Akutagawa of the same nationality?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a80c1375542992bc0c4a816", "question": "Who gained prominence for a series of novels known as the \"Empire Trilogy\", James Hanley or J. G. Farrell ?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8106cb55429938b6142296", "question": "Which documentary was released first, Million Dollar Arm or Wings of Life?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8194e055429903bc27b978", "question": "Which has more members, Imogen Heap or Squirrel Nut Zippers?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a82305455429926c1cdae4b", "question": "Are both David Giler and Brian G. Hutton film actors?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a82f19055429966c78a6aa5", "question": "Were Pete Burns and Justine Frischmann of the same nationality?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a830d4e5542995ce29dcd1c", "question": "Are Marilyn Manson and Juha-Pekka Leppäluoto from the same country?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a83493555429966c78a6b71", "question": "Duluth International Airport and Dothan Regional Airport, are used by which entity of people?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a838978554299123d8c215a", "question": "Are both Maurice Blanchot and Georges Simenon writers?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a83d33f5542996488c2e4ef", "question": "Are 252 East 57th Street and Metropolitan Tower both skyscrapers?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a844b4155429933447460c4", "question": "Do both Sega and Altair 8800 fall into the category of electronics?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8455405542990548d0b284", "question": "Was the ruling for both Hernandez v. Texas and Berman v. Parker unanimous?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a847ded554299334474613e", "question": "Are Ion Țiriac and Julian Knowle both Romanian tennis players?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a848f1a5542997b5ce3feb7", "question": "Does Wikstroemia or Witch-hazel have more species?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a84ad9a5542991dd0999d77", "question": "Are Strickland v. Washington and Shelley v. Kraemer both United States Supreme Court cases?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a84b36e5542994c784dda12", "question": "Whose home country is closer to France, Renáta Tomanová or Kathy Jordan?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a84c9685542992a431d1a9d", "question": "Were The Country Bears and Song of the South both musical films?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a85294a5542997b5ce3ffa9", "question": "Which band has more members, Fine Young Cannibals or Kent?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a85a3af5542991dd0999e73", "question": "Was Flubber or The Sorcerer's Apprentice released first?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a85c79a5542992a431d1ba0", "question": "Are Cesky Terrier and Black Mouth Cur both dogs?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a864a355542994775f60734", "question": "Did Nelson DeMille and Robert Holdstock write the same type of novels?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a87240f5542991e771816e7", "question": "Are both Paul Westerberg and Paul McCartney singers?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a875b005542993e715abf0e", "question": "Did Noah and The Virgins have the same number of members and their start?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8773175542993e715abf4b", "question": "Golden dream and Whisky Mac, are what type drink?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a877ac25542993e715abf64", "question": "Are Sean Weathers and Yannis Smaragdis of the same nationality?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a87b2f15542994775f607ed", "question": "Laurie Colwin and Kurt Vonnegut were both what?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a87e6d45542993e715abffe", "question": "Are both David Cook and Steve Burns singers?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a88722455429938390d3f6a", "question": "Which is longer, Central Arizona Project or Augusta Canal?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8892e755429938390d3f7a", "question": "which musical opera or drama, Singspiel or Fedora, is a most notable work from Giordano?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a88bcf155429938390d3fb5", "question": "Majorca Ratter and The Broholmer are both breeds of what kind of animal?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a88f44155429938390d3ffd", "question": "Do the genuses Cucurbita and Parrotiopsis belong to the same family?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a893139554299669944a4f5", "question": "What is an American home magazine published 12 times a year by Meredith Corporation, Vice Versa or Family Circle ?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a897205554299669944a525", "question": "Which genus of plants has more members, Haberlea or Cucumis?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a897586554299515336130c", "question": "Which documentary is French, Iraq in Fragments or Beyond Hatred?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a89a8595542993b751ca974", "question": "Which of the following released an album entitled \"Lowcountry\": Envy on the Coast or Limblifter?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a89bf4b554299669944a593", "question": "Do Glenn Hughes and Chantal Claret both perform in bands?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a89e08055429946c8d6e9f3", "question": "Are 8 Spruce Street and One Madison both on the same street?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8a23e05542996c9b8d5e0d", "question": "Which is taller, Trump Tower or Americas Tower?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8a32305542996c9b8d5e40", "question": "Bryan Singer and Morgan Freeman, have which mutual occupations?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8a33745542992d82986ef7", "question": "Do both Pooh's Heffalump Movie and Pirates of the Caribbean contain Walt Disney elements?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8a34ea5542996c9b8d5e4d", "question": "Sam Mendes and Don Coscarelli, have which mutual occupation?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8a74ee55429930ff3c0de0", "question": "Which tennis player, Betty Stöve or Jonathan Erlich, is best remembered for reaching the ladies' singles final at Wimbledon in 1977?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8a795e55429930ff3c0de8", "question": "Between the Buddleja and Cleyera genus plants, which is comprised to the most number of species?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8b51fd55429949d91db544", "question": "What type of category does Pimelea and Disocactus have in common?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8b648155429949d91db590", "question": "What kind of alcoholic drink does Stinger and Lynchburg Lemonade have in common?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8b75f85542997f31a41d37", "question": "Was MODE or Cosmopolitan launched first?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8c57a6554299653c1aa041", "question": "Of the two board games, Coppit or Focus, which was a game for 2 to 6 players and is based partly on luck?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8c6088554299653c1aa053", "question": "Giuliani Time and A Life in the Death of Joe Meek are both films set in what genre of film making?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8c74b75542995e66a475fa", "question": "What nationality are both Ingmar Bergman and Geir Hansteen Jörgensen?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8caa265542996e8ac88b0f", "question": "What has one runway and is owned by the Greenbrier County Airport Authority , Central Wisconsin Airport or Greenbrier Valley Airport ?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8d4d9355429941ae14df9a", "question": "Are Olve Eikemo and Nic Offer both musicians ?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8dd4405542995a26add3f8", "question": "Are Crash! The bankrupt game and Twin Tin Bots botj card games?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8dd57b5542995a26add403", "question": "Which band has released more albums, Seven Mary Three or Django Django?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8e097b554299068b959e34", "question": "Which major American city is the site of both Sibley Memorial Hospital and the George Washington University Hospital?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8e35975542990e94052a8d", "question": "Were Tomáš Šmíd and Fabrice Santoro both professional tennis players?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8e5d805542995085b37413", "question": "Sabueso Español and English Foxhound are both what?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8ec4e15542995a26add50a", "question": "Who won more Pulitzer Prizes, Eudora Welty or Rubén Darío?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8f19fd554299458435d574", "question": "Which band formed first, Goldfinger or Something Corporate?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8f1c7a55429924144829c5", "question": "Were The Rape of Europa and Down from the Mountain both released as films?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8f95525542997ba9cb32db", "question": "Are Maurice Tourneur and Norman Tokar both directors?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a8fc57a55429918e830d2d4", "question": "Do both Rick Ray and Sally Field work as an actor/actress?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a90518255429933b8a204e1", "question": "In regards to Mervyn Peake and Robert Erskine Childers, whose works included the influential novel \"The Riddle of the Sands.\"", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab23a82554299722f9b4cca", "question": "Who has more citizenship, Ferenc Molnár or Orhan Pamuk?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab25ffd5542993be8fa98ef", "question": "Is Crown Castle International Corp. or The Mosaic Company based further north?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab29eee554299194fa93474", "question": "Who is considered a post hard-hardcore band, Fightstar or The Coral Sea?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab2cf7b554299545a2cfa9b", "question": "Have Marat Safin and Jimmy Arias both been tennis players?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab2f81355429976abd1bbdf", "question": "Cigar Aficionado and Weatherwise, are a type of which form of publication/.", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab30d0655429976abd1bc3c", "question": "Robert Zemeckis and Martin Ritt, are of which nationality?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab3486855429969a97a812b", "question": "Which film director Stuart Rosenberg or Vilgot Sjöman also worked in television?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab35cfe5542992ade7c6ddf", "question": "Jennifer Lynch and Douglas Sirk, have which mutual occupation?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab3af325542992ade7c6e2a", "question": "Who has had success in multiple forms of entertainment Han Seung-yeon or Ross Lynch?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab3bb275542992ade7c6e62", "question": "Are Park Bom and Eddie Vedder both singers ?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab3de0755429969a97a81dd", "question": "Portrait of Gina and The Voyage that Shook the World are films, which was funded by ABC TV", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab3f5bd5542992339550016", "question": "Which was founded first, WRITERS' Journal or Comics Buyer's Guide?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab3fd5255429976abd1bd15", "question": "Which city is larger, Pingxiang or Shijiazhuang?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab419455542996a3a969f33", "question": "Both Gaobeidian and Longhai City are located within what country?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab445b25542991751b4d71d", "question": "In between Norman Thaddeus Vane and Brandon Thaxton, who wrote the film \"Mrs. Brown, You've Got a Lovely Daughter\"?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab504a35542996a3a969ffb", "question": "How are Cerastium and Cypress similar?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab5077d5542990594ba9cde", "question": "Were Miguel Delibes and Aldous Huxley from the same continent?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab565af554299494045ef9d", "question": "Which documentary was released first, Cave of Forgotten Dreams or Call Me Lucky?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab5ae5d554299637185c5d8", "question": "Which game, Löwenherz or Sentinels of the Multiverse, was created first?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab60de2554299488d4d9a91", "question": "Both Moana and Pooh's Heffalump Movie were released by what company?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab60f40554299110f2199d3", "question": "Between Peter Cattaneo and Seth Grahame-Smith, who has had a more diverse career?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab633f5554299710c8d1e7a", "question": "What name can be given to Jersey Budd, a singer-songwriter from Leicester and Leigh Kakaty the founder of American rock band Pop Evil?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab660fe5542995eadeeffae", "question": "Which film has more directors, Koyaanisqatsi or The Last Lions?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab667be55429954757d328a", "question": "Is Embothrium a member of the same genus as Cosmos?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab66b135542995eadeeffc2", "question": "Which singer-songwriter is known as Mr. Biggs, Joe Elliott or Ronald Isley?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab69442554299110f219a1f", "question": "Did Diet Mountain Dew and Pepsi have different names before they were called Diet Mountain Dew and Pepsi ?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab6e05f55429954757d339f", "question": "Which magazine was published first Prevention or Girlfriends ?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab7419d554299110f219ae2", "question": "Arctostaphylos and Thalia, are both plants?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab757ab5542995dae37e90b", "question": "What do Sergei Bondarchuk and James Cruze have in common?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab776b55542995dae37e92b", "question": "Are Peter Furler and Amy Lee both songwriters ?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab7d55f5542995dae37e9af", "question": "Where are both Meixian District and Huazhou, Guangdong located?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab8054f5542991d32223807", "question": "Which airport mainly serves flights to several airline hubs in the western U.S., Los Angeles International Airport or Fresno Yosemite International Airport?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab8071f5542990e739ec7ed", "question": "Of the two directors, István Szabó and Kenny Ortega, who is known for directing opera?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab816ca5542991d3222383e", "question": "Are Trent Reznor and Glenn Hughes both record producers?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab854d755429934fafe6d65", "question": "Where are both Xinmin, Liaoning and Ningxiang?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab872ec55429934fafe6dc1", "question": "Guiping and Linxia City are both what?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab9174055429919ba4e23a7", "question": "Conoclinium and Catalpa, have which mutual two attributes?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab927df554299131ca4228c", "question": "Do Stephen Pearcy and Eric Clapton have the same nationality?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab95cd9554299753720f808", "question": "Are Huayin and Ji'an, Jilin both in China?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab95ef155429970cfb8ea94", "question": "What type of publication is Hennes in Sweden and Heat in the UK?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab995ad554299743d22eb83", "question": "Are Francoa and Echium both plants?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab9caba55429939ce03dc1a", "question": "Which band has more members, Mando Diao or Sloan?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ab9f90e55429901930fa759", "question": "Die Soldaten and Nixon in China, are which type of performance?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5aba3bbd554299232ef4a28d", "question": "While  Gymnocladus is a small genus of leguminous trees, what genus is Chrysogonum?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5aba61f955429955dce3edf8", "question": "Do Derek Jarman and Joseph Ruben have the same nationality?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5abcec1155429959677d6b48", "question": "Which singer-songwriter, Pearl Lowe or Pharrell Williams, is also a textiles designer?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5abcf2ce554299700f9d7938", "question": "Are Amanda Wilkinson and Lee Gi-kwang both singers?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5abcff6a5542993a06baf9ed", "question": "At some point, did Inked and Sporting News have print magazines?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5abdaa8f55429965af743dae", "question": "What decade did Axl Rose and Masatoshi Ono vie for musical popularity?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5abe430155429976d4830ac4", "question": "Which women's magazine is published in the Soviet Union and Russia, Rabotnitsa or All You?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5abe97f25542994516f453d0", "question": "Is The American Ruling Class and Stevie a film?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5abeacf55542990832d3a0a5", "question": "What brand of culture do American actor Joe Manganiello and Armenian songwriter Shavo Odadjian belong?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5abed8e55542994516f45455", "question": "Which of the following received the American Book Award for the novel The Tunnel: Pauline Kael or William H. Gass?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5abedc545542993fe9a41d60", "question": "Which author was known by more names, A. A. Milne or Boris Vian?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5abffcf45542997d64295994", "question": "Is Air Traffic or Halestorm an American band?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac01a285542992a796dec87", "question": "Are Yibin and Cangzhou both located in the Sichuan province?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac0fa46554299012d1db66f", "question": "Which documentary was released first, About Baghdad or Voices of Iraq?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac112b6554299012d1db68e", "question": "Arisarum and Erysimum are both genuses of what?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac13b905542991316484a8c", "question": "Which canal ran longer, Sandy and Beaver Canal or Beaver and Erie Canal?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac1b3185542994d76dccebc", "question": "Are André Téchiné and Tim Burton both film directors?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac1c1455542996366519908", "question": "Are Burretiokentia and Bletilla both endemic to New Caledonia?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac263995542992f1f2b38a2", "question": "Are Gaoyao District and Malipo County in the same country?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac265b45542992f1f2b38ac", "question": "What is a genus of more species, Cestrum or Bauhinia?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac26c0d55429921a00aaf66", "question": "What sport did Michael Venus and Yevgeny Kafelnikov both participate in?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac2873d5542992f1f2b38ea", "question": "Are the magazines, Nat Mags and Plaza Kvinna published in the same country?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac28ed25542992f1f2b3902", "question": "Which media and animation company do \"Cars\" and \"The Little Mermaid\" have in common?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac31d80554299741d48a20e", "question": "Are Bertrand Blier and Chris Carter both American directors?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac37a5e554299741d48a265", "question": "Who has written more novels, Zora Neale Hurston or Katherine Kurtz?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac3bec8554299204fd21e2a", "question": "Were Marjo and Glenn Gregory in the same profession?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac436975542997ea680ca31", "question": "What occupation has been held by both Vanelle and Max W. Kimmich?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac48ad85542997ea680ca7f", "question": "Are Stanley Tucci and David Giler of the same nationality?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac51e735542994611c8b3b9", "question": "Which one has the most species, Titanopsis or Spathiphyllum?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac547595542994611c8b489", "question": "Yan Zi and Tom Okker, have which mutual occupation?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ac554ab5542993e66e82311", "question": "The Trials of Henry Kissinger and The Judge and the General, is which type of film?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adbc808554299438c868cab", "question": "Which genus, Cymbopogon or Amherstia, has a larger native habitat?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adbcc5555429947ff173832", "question": "Which flowering plant is related to edible vegetables, Petunias or Rudbeckia?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adc3a9f5542994650320cb6", "question": "Are Halma and Nine Men's Morris both strategy board games?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adc42be554299438c868d9c", "question": "What is Cucurbita and how is it different from Catopsis?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adcbed45542994734353787", "question": "Does Marie Claire and Latina magazine cover topics about fashion?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adcc7145542994ed6169bfd", "question": "Where are both Wuxi and Huadu District both located?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5add4c785542990dbb2f7e1a", "question": "Are David Paton and Eric Adams both singers?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5add57e85542990dbb2f7e43", "question": "Which is a type of flowering plant, Dieffenbachia or Encephalartos?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5addac245542997545bbbda1", "question": "Which genus contains more species: Fallopia, or Nicandra?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adddbc25542992200553b65", "question": "Mary and Max and Fantastic Mr. Fox are what kind of movie?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adddf885542995b365fab7d", "question": "Which game has been nominated for a prize at Cannes, Concept or Roulette?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5addf2195542997dc79070da", "question": "Did Clyde Geronimi and Maurice Tourneur live during any of the same years?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ade00db5542997dc7907119", "question": "What country are both Yiyang and Chongzuo located in?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ade4ced5542992fa25da73a", "question": "Was Sherwood Stewart or Ilie Năstase ranked higher?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ade852a5542992fa25da7a7", "question": "Is the University of Massachusetts Amherst and the University of Cádiz located on the same continent?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adeaa2d55429939a52fe938", "question": "John Bush and Miho Hatori, are American?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adebae0554299728e26c78c", "question": "Are Cia Berg and Boz Burrell of the same nationality?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adf307b5542995ec70e8f8a", "question": "Which film director was also a cinematographer, Edwin Greenwood or Nicolas Roeg?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adf37985542993344016c3f", "question": "Are The Zorlu Center and Bayezid II Mosque in different cities?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adf3a195542995534e8c76e", "question": "Are Lucia di Lammermoor and The Bartered Bride both comic operas?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adf66a95542995ec70e8fef", "question": "Which city was formerly of Shazhou County, Gao'an or Zhangjiagang?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adf9207554299025d62a2c4", "question": "Who has written for more films, Colin Campbell or John Gilbert?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5adff1cb55429906c02daa95", "question": "Which court case came first, United States v. Jones or Marsh v. Chambers?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae007ed55429925eb1afbec", "question": "Are both magazines, Cookie and Damernas Värld, still being published today?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae037ea55429942ec259c4b", "question": "Who has more scope of profession, Géza von Cziffra or Henry Selick?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae068805542993d6555eb51", "question": "Which movie came out first Go Further or Pumping Iron ?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae06d3d55429945ae959350", "question": "What industry are both Donald Sawyer and Roger Corman apart of", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae0807155429945ae95938a", "question": "Dallas Love Field and William P. Hobby Airport are both located in which state?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae0a7d75542993d6555ebf5", "question": "Are Sarcocapnos and Fuchsia both flowering plants?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae0e150554299422ee9953e", "question": "Have Gareth Evans and Tobe Hooper both worked on Academy Award nominated films?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae1162f55429901ffe4ad6d", "question": "To which taxonomic category do both Wittrockia and Aristotelia belong?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae143135542997b2ef7d195", "question": "Cape May Canal and Bald Eagle and Spring Creek Navigation, are related to water?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae146e255429920d5234378", "question": "Are Hottonia and Delphinium both genera of plants?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae15e0a55429901ffe4ae8a", "question": "Siegfried and Idomeneo are both what type of performances?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae1b103554299234fd042c9", "question": "Are both Robin McKinley and Anita Diamant American authors?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae1c157554299234fd042eb", "question": "Are both Bertrand Tavernier and Agnès Varda French directors?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae1efdc554299492dc91bb3", "question": "Charles Hutchison and William K. Howard were simultaneously active in the film industry between what years?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae1f75d5542997f29b3c1c8", "question": "Who has more scope of profession, Annie Haslam or Dicky Barrett?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae202655542997f29b3c1fb", "question": "Who has more scope of profession, Aldous Huxley or Raymond Carver?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae21845554299495565da01", "question": "Codorus Navigation and Holyoke Canal System, are based in the United States?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae22d925542996483e64928", "question": "Chien-gris and Molossus of Epirus, are a breed of what?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae2419b554299492dc91bef", "question": "what does Nic Offer and Johnny Bonnel have in common?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae24686554299492dc91c07", "question": "James Frawley and Bobcat Goldthwait both shared what profession?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae259f25542996483e64981", "question": "Richard Wallace and Gianni Amelio, have which occupation in common?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae2816d5542996483e649d0", "question": "Walt Disney and Manson, are of which genre?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae2822d554299495565da92", "question": "Which film was released first, Race to Witch Mountain or A Kid in King Arthur's Court?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae2bd305542992decbdcd8d", "question": "In between Memorial University of Newfoundland and University of Pécs which one is the first university in Hungary ?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae2dfd855429928c423951c", "question": "Were Elem Klimov ad Michael Haneke both film directors?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae33aa45542992f92d82250", "question": "Are Paphiopedilum and Soleirolia both flowering plants?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae367695542992e3233c3e1", "question": "Are both Valley International Airport and Westerly State Airport airports?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae39f915542992e3233c43c", "question": "Of the two artists, Yannis Philippakis and Dorothee Pesch, whose country of origin is geographically closer to Austria?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae3a4845542992f92d82320", "question": "What is the name given to enrolled attendees of the Polytechnic University of the Philippines and Xinjiang University in China?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae4485b5542996836b02c66", "question": "Which case Illinois v. Gates or Shelley v. Kraemer took place first ?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae4595d5542996836b02c8b", "question": "What nationality is shared by Adam G. Sevani and Ken Davitian?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae4788555429970de88d97b", "question": "Who has performed in more bands, Paul Rodgers or Rob Beckley?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae48b425542996836b02cd0", "question": "Which mine covers 981 hectares,Beanland Mine or Camlaren Mine?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae494415542995ad6573db1", "question": "The Singapore Sling is gin-based, while the Rusty Nail contains Scotch whisky and what?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae4991c5542995dadf2436b", "question": "Tommy Lee Jones and Marshall Neilan, are of which nationality?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae4a0c65542995ad6573dca", "question": "Are Euridice and Les pêcheurs de perlesboth operas?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae4c86a55429960a22e01de", "question": "Which plant has the highest number of species in  Hottonia or Spiraea", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae4e40c55429908b63264ad", "question": "What job do both Herbert Selpin and Liliana Cavani have?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae4fc0855429913cc20455b", "question": "Are both White Town and Starsailor musical acts with the same number of performers?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae538ac5542990ba0bbb237", "question": "In between Michael Curtiz and Peter Segal who directed classic films from the silent era and numerous others during Hollywood's Golden Age?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5ae5397155429908b6326586", "question": "Are the films \"The Rescuers\" and \"Planes\" both animated?", "label": "comparison", "source": "hotpotqa-train"}
+{"id": "hp_5a712eee5542994082a3e63c", "question": "What seaside resort area is the Mechanics' Institute located in?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7138885542994082a3e694", "question": "The song \"2 Wicky\" was in what movie based on a book by Lois Duncan?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7142b45542994082a3e718", "question": "Why did the actor who played Leo on \"That 70's Show\" stop touring with \"The Marijuana-logues?\"", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7158095542994082a3e7ef", "question": "Which album by the Wu-Tang Clan member Ghostface Killah featured Jamel Irief?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a715f235542994082a3e7fe", "question": "What Australian actor may have influenced the making of Miley Cyrus' album, \"Younger Now\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7261b15542990c210a4114", "question": "Which Norway city has Angelo Evelyn resided in that had a population of 187, 353 people as of January 1, 2016?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7275ce5542994cef4bc2af", "question": "Which astronaut carried copies of Swedish singer Darin's single into space with him and is the first Swedish citizen in space?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a728e5e5542992359bc30f1", "question": "What boxer who was born in 1966 was Pam Pinnock in an abusive relationship with?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7291a25542992359bc3101", "question": "From the Scandinavian ancestry line who intermarried?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a72a55c5542991f9a20c550", "question": "What 1996 movie did Brenda Chapman's husband make a sequel to?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a732c0655429901807dafa3", "question": "Kerry Hilson wrote songs for which female group started in Los Angeles?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a733c2b5542994cef4bc4ea", "question": "Which member of the band Squeeze also wrote songs as \"Taxman\" and \"Here Comes the Sun?\"", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7354175542994cef4bc552", "question": "What is the Indian name for a charismatic guru who posesses paranormal powers like telepathy?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a736f5a5542991f29ee2e16", "question": "Which American superhero action-adventure television series developed by Ali Adler, Greg Berlanti, and Andrew Kreisberg stars American actress Calista Flockhart?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a73bf5055429905862fe0ae", "question": "Women of the Sun, is a 2008 South Korean television series starring which South Korean actress, originally born as Yang Sung-yoon?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a73d4655542992d56e7e3b2", "question": "Between what powers was the war that Deli-Marko fought in, fought between?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a73e01b554299623ed4ac80", "question": "Who is the president of the airline Hana Hou! is published for?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a73e2a755429905862fe0f0", "question": "Which 1995 CART Championship winner drove the BAR 004?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a73fdf65542993a88ae2edf", "question": "Which cast in The Great Gilly Hopkins was born March 19, 1947?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a74846955429929fddd8462", "question": "Who was born first, George Reed or Johnny Bright?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a74852655429974ef308c18", "question": "Who did the choreography for The New Irving Berlin Musical?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a74bcfd5542996c70cfadc5", "question": "Which performer from the Dance on Sunset music series had a recurring role on the TV show \"7th Heaven\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a74da595542993748c8970c", "question": "What unincorporated community is concentrated around the intersection of Tennessee State Route 62 and the highway that is the core of the annual World's Longest Yard Sale?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a74ef455542993748c8973d", "question": "What is the name of the 135th episode of the series created by Parker and Stone?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a74f3305542996c70cfae4d", "question": "Which modern day Libyan city has its origins in the times of Ancient Greece that helped form the Pentapolis of Cyrenaica along with the cities of Ptolemais, Tauchira, Apollonia and Euesperides?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a74fc365542993748c89779", "question": "What year was the series to which the episode \"Slicked-up Pup\" belongs created?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a74fe9b5542993748c89783", "question": "Adam Neumann, is an Israeli self made billionaire founder, of which American company?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a754d6955429916b01642ee", "question": "Ann Willing Bingham, was an American socialite from Philadelphia, she was the eldest daughter of Thomas Willing, president of the First Bank of the United States, and a correspondent of   the principal author of the Declaration of Independence, and later served as the third President of the United States?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a757c215542992d0ec05fa8", "question": "Parkes High School is located in a town with an urban population of 15,450 as of what date?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a75da685542994ccc91863c", "question": "Which vessel of the British Cunard Line was the subject of a Philip Plisson photo collection?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a75e577554299109176e5bd", "question": "Which singer whose stage name references a New York City subway station debuted her first album at number two on the Billboard 200 chart?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a75f11255429976ec32bcb0", "question": "Which style of house, located in The Old Town Historic District, is usually no more than 12 feet wide?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a762eb65542994ccc918705", "question": "What records released the album that has \"Big Time Sensuality\" as fourth single?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a764dbd5542992d0ec06097", "question": "Peter Stuursma is an American, and head football coach, at which private, Christian liberal arts college in Holland, Michigan?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a77116355429972597f1425", "question": "What was the name of the album Michael W. Smith recorded at the seventh-largest church in the United States?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7718db55429972597f1435", "question": "Who was one of the presenters on The Full Irish  and host of The Late Late Show?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a772b145542993735360201", "question": "What rock band had a song featured on a television program with Tony Ayres serving as an Executive Producer?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a774df355429972597f14f2", "question": "Which American lobbyist, lawyer and politician was once defeated by Bel Edwards?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7750f95542994aec3b728a", "question": "In which city is the headquarters of the restaurant operator of The Capital Grille located?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a77a6ea5542995d83181245", "question": "What is the name of the film that starred Mae Whitman and the actress who played Olivia Kendall on \"The Cosby Show?\"", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a78aa8f554299148911f905", "question": "Which work mad by Nicola Scott is a founding member of the Justice League, goddess, and Ambassador-at-Large of the Amazonian people?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a78d00f55429970f5fffd8e", "question": "In June, 2016 what was the population of Port Macquarie where the Ngamba traditionally lived?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a79113d554299148911f9de", "question": "\"With a Flair\" is a song written for which 1971 Walt Disney musical film based upon the books \"The Magic Bedknob; or, How to Become a Witch in Ten Easy Lessons\" and \"Bonfires and Broomsticks\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a79173e55429974737f797e", "question": "Who co-produced the movie Jonah Hill starred in in 2007 that wasn't \"Superbad\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a79190055429974737f7986", "question": "Which English philosopher did Henry Seymour believe authored plays under the pseudonym of William Shakespeare?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a792ab2554299029c4b5f15", "question": "What \"X-Men\" series film does Boyd Holbrook play in?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a79679455429970f5fffea7", "question": "What series created by Trey Parker and Matt Stone has an episode where a character murders another characters parents and feeds them to him?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a79fd1d554299029c4b5f97", "question": "Silent Night (German: \"Stille Nacht, heilige Nacht\" ) is a popular Christmas carol, composed in which year, by Franz Xaver Gruber, an Austrian primary school teacher, church organist and composer in the village of Arnsdorf?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7a0b0c5542996a35c170a6", "question": "Who is the husband of the actress that plays Carol Stills in the \"Sex Ed\" episode of \"The Office\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7a39105542996a35c1713e", "question": "Rugby union player Pat Sanderson has a brother who played for which team", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7a993e5542990198eaf15c", "question": "What street is the primary venue of The Adelaide Symphony Orchestra on?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7ac31c55429927d897bf09", "question": "Tutu Jones (born September 9, 1966) is an American electric blues and soul blues guitarist, singer and songwriter, she has cited  Freddie King (September 3, 1934 – December 28, 1976), as an influence on his playing style, he was an American blues guitarist and singer, he has been described as one of the \"   \" of electric blues guitar?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7b15085542992d025e674f", "question": "How many students are at the largest university in Switzerland at which Philip Kraft has lectured?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7b4caf5542995eb53be8fc", "question": "What adult animated television series was created by John Kricfalusi and had music tracks from APM Music?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7b6b9d5542997c3ec97160", "question": "Along with \"New Rules,\" which other single made top 10 in a self-titled debut album by Engliash singer Dua Lipa?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7b8e3d55429927d897bfec", "question": "Caleb Green's most notable anthem performance was at a memorial in Washington D.C that was dedicated in what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7b9b29554299042af8f78e", "question": "In what year was Get Yourself High nominated for a grammy?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7bc709554299294a54aaca", "question": "Lisa Brennen-Jobs is the daughter of what writer of the book \"The Bite in the Apple\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7bf9565542990527d55439", "question": "What type of design was the designer who, together with Robert Slimbach, designed the Myriad typeface best known for?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7c87d45542996dd594b94e", "question": "Which film did Rose Byrne star in that was directed by Nicholas Stoller and starred Russell Brand?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7c9ea055429907fabeefcc", "question": "What is the name of a medication used to within a chemotherapy regimen?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7cd67355429909bec76837", "question": "What former Detroit Pistons player hosted a talkshow on MTV in 1996?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7cebfa55429909bec7688b", "question": "Innovative Leisure is a record label that features an R&B musical duo based out of what city?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7d0808554299452d57bac3", "question": "The House of Dancing Water, a water-based extravagant production, is located at which mega-sized resort and casino in Macau, China?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7d1b445542995ed0d165ee", "question": "Yoo Ah-in (born Uhm Hong-sik on October 6, 1986) is a South Korean film and television actor, Yoo Ah-in is best known for his leading roles in the coming-of-age film Punch, a South Korean coming-of-age film directed by Lee Han, made in which year, about the budding mentor-mentee relationship forged between a rebellious high school student from a poor household (Yoo Ah-in) and his meddlesome homeroom teacher who moves in next door?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7dc11b5542990b8f503a75", "question": "A 1967 one-act play that is an absurdist drama about 5 people waiting in line for an event, was written by an American playwright, director, and actor, who was born in what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7dca085542990b8f503aa9", "question": "Mils currently shares a record label with the French electronic music project based out of what city?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7e0aa65542995f4f4023c0", "question": "In what year was the champion of the 2009 Formula BMW Pacific season born?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7e1a6c5542995ed0d16695", "question": "Kim Sang-kyung (born June 1, 1972) is a South Korean actor, he's  best known for his leading roles in which South Korean film, released in 2007?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7e231a55429965cec5ea91", "question": "What soap opera created by Alan Bateman stars George Mason?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7e71a45542991319bc94b8", "question": "Sunset Key is a 27 acre residential neighborhood and resort island, in which city, in Florida, that is 129 mi southwest of Miami by air, about 160 mi by car, and 106 mi north-northeast of Havana, Cuba?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7ef6645542994959419a93", "question": "When did the character who was originally a villain but later became an antihero first appeared in a comic book?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7f140b554299306751361a", "question": "Ron Assouline is a lecturer at an educational institution in Israel that was founded in what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7f2c035542994959419aaa", "question": "Who achieved national recognition when she won the third series of \"The X Factor\" in 2006, and released her second studio album \"Echo\" in 2009?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7f3a1255429930675136ba", "question": "Where was the name taken from of several units of the Polish Air Force throughout its history most famously the founder of the Kościuszko Squadron during the Polish–Soviet War and was a Soviet prisoner of war for a time?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7f408a5542992e7d278cc5", "question": "Neil Hudson won what premier motocross championship in 1981?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7f50d85542994857a766ea", "question": "What non-fiction books has the author who has written books about the loyalist paramilitary Michael Stone and Special Air Service founder who During the course of the Second World War he became one of the British Army's most highly decorated soldiers?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7f540a5542992097ad2f18", "question": "What is the name of the fashion designer  who is the daughter of Quincy Jones?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7f644a5542994857a76722", "question": "Who founded an American privately held regional fast food restaurant chain, based in San Antonio, Texas, that specializes in hamburgers, that has a location in an outdoor retail center which goes by the name Richardson Square?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7f69ca5542994857a76732", "question": "When was the company responsible for delivering messages, newspapers, and mail in the Butterfield Overland Mail route?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7f754d5542992e7d278d07", "question": "The music video to Daft Punk Is Playing at My House paid homage to a 1995 single by Daft Punk and what other record?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7fb61d55429969796c1b30", "question": "What was the first residency show of the pop singer that represented Sweden in the Eurovision Song Contest 2012?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a7ff2ae5542994857a76869", "question": "What day of the week did a Finnish children's TV show shown from 1961 to 1968 about brids also known as psittacines of the roughly 393 species in 92 genera that make up the order Psittaciformes?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8057e35542995d8a8ddf6d", "question": "O Mimi San is a 1914 American short silent drama film directed by Charles Miller, featuring Tsuru Aoki in the title role and Sessue Hayakawa, Kisaburo Kurihara, Chick Morrison and George Osborne, a British Conservative Party politician, who was Member of Parliament (MP) for Tatton beginning in what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a80dfb6554299260e20a199", "question": "What is a second-cycle academic degree awarded by universities or colleges upon completion of a course of study demonstrating mastery or a high-order overview of a specific field of study or area of professional practice, and is a degree offered by Many medical schools which is a tertiary educational institution?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a82411155429940e5e1a816", "question": "Removed from circulation in 1999, the fillér was the Hungartian subunit of what Austro-Hungarian currency?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a824b6455429940e5e1a836", "question": "What event occurred on April 28th, 1945, and was witnessed by George Emil Bria, an Italian-American journalist who worked for the Associated Press?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a82699555429954d2e2eb37", "question": "Which US state has the name derived from a Spanish word along with several nick names and has the 8436 ft mountain in its Glacier national park?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a82765455429954d2e2eb50", "question": "Vittorio \"Little Vic\" Amuso, is a New York mobster and boss of the Lucchese crime family, he is currently serving a life sentence at which medium-security United States federal prison for male inmates in Maryland?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a82ab7e55429966c78a6a76", "question": "Which director with the middle name Jerome helped work which movie with Roger Avary?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a831f2b55429966c78a6b42", "question": "Lucjan Żeligowski, was a Polish general, politician, military commander and veteran of World War I, the Polish-Soviet War and World War II, he's mostly remembered for his role in Żeligowski's Mutiny, a Polish military operation led by General Lucjan Żeligowski in October 1920, which resulted in the creation of which titled puppet state?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a83315555429954d2e2ec53", "question": "Singer Marilyn Manson's name is based on actress Marilyn Monroe and a man convicted of killing what actress?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8331bf55429954d2e2ec54", "question": "Andy Donato was the former art director for a tabloid newspaper known for what daily feature?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a83404a55429966c78a6b5c", "question": "The Bridger Trail, also known as the Bridger Road and Bridger Immigrant Road, was an overland route connecting the Oregon Trail to the gold fields of Montana, Gold was discovered in Virginia City, in 1863, Virginia City is a town in, and the county seat of which county in Montana, United States?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a834b4a5542996488c2e3fe", "question": "What year was the band who released Signs of Light formed?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a83c4a2554299334474608b", "question": "Alan Sidney Patrick Rickman was an English actor who gained wider notice for his film performance as a fictional character in a film series who becomes a double-agen on behalf of who?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a842f2a5542996488c2e4fa", "question": "Will Durant wrote a book in 1926 about what subject?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a847d3d554299334474613b", "question": "American Pie Presents: The Book of Love starred which American actor?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a848f4d5542997b5ce3feb9", "question": "Which year did Alvin Cheng organize the rally with his schoolmates in support of the hong kong umbrella movement?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a851f205542994c784ddb03", "question": "On season eighteen of a show that premiered on March 17, 2014 Brooke Burke-Charvet was replaced as co-host by an American sportscaster who is a sideline reporter for who?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8565e85542997b5ce3fff5", "question": "What was this major international multi-sport event, with the opening ceremonies taking place on 27 July, and in which the South African field hockey player Bernadette Coston competed for the outh Africa women's national field hockey team?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8578b25542992a431d1b1e", "question": "Which American Screenwriter utilized Saturn Films for the production of The Family Man?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a85cf725542991dd0999ead", "question": "When was the gurudwara situated in a second grade municipality in the Ramanathapuram district in the South Indian state of Tamil Nadu built?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a85df2e5542994775f60670", "question": "Windeyer County is located between the border with South Australia and a river measuring how long from its source to its confluence with the Murray River?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8610e15542996432c5718c", "question": "Sundays at Tiffany's was co-written by which American author and philanthopist?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8621aa554299211dda2a77", "question": "what year was the singer of Pattern of My life born ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a862558554299211dda2a89", "question": "The character Sora Jung played in \"Mayumi\" was arrested in what country?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a863af15542991e771815cc", "question": "Which american comedian starred in Seize the Day and has a son named Ben?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a86550955429960ec39b662", "question": "Staughton Craig Lynd, is an American conscientious objector, Quaker, peace activist and civil rights activist, tax resister, historian, professor, author and lawyer, his involvement in social justice causes has brought him into contact with some of the nation's most influential activists, including which American Jesuit priest, anti-war activist, and poet?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8838e75542994846c1ce3c", "question": "What author wrote the book series on which an HBO fantasy television series Joseph Jason Namakaeha Momoa starred on was based?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a88460b5542994846c1ce82", "question": "What is the nationality of the writer of The Secrets of Sir Richard Kenworthy?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a884d7a5542997e5c09a5c0", "question": "What year was the husband of Columba Bush born?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a889a1c5542993e715ac057", "question": "13 was the first studio album for Black Sabbath with Ozzy Osbourne since an album which was their eighth studio album, which was released when?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a88bcc655429946c8d6e8a2", "question": "What car, available in Japan from Toyota's \"Netz Store\" line of dealerships, shares many similarities with the The Great Wall Voleex C10?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a88cad75542993b751ca851", "question": "Frank Bungarten is a classical guitarist from Germany, in 1981, he got noticed in the international guitar scene, when Andrés Segovia Torres, 1st Marquis of Salobreña, a virtuoso Spanish classical guitarist from Linares, Spain, honored him with the first prize at which event?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a88d9f655429938390d3fd6", "question": "Hélio Gracie A patriarch of the Gracie family, he was the father of a UFC Hall of Famer considered by UFC fans to be the most influential figure in the history of what?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a88e0c655429938390d3ff0", "question": "What compilation box set by Pink Floyd comes with a 60-page artwork booklet designed by an English graphic designer and music video director born 28 February 1944?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a88e57755429946c8d6e8cf", "question": "Vincent Cirelli worked on what film centered on the development of the 1964 film \"Mary Poppins\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a890a9b5542995153361275", "question": "(née Bessie; March 29, 1880, From what school did a legendary female pianist and pedagogue, with the former last name of Bessie, born March 29, 1880 in Kiev, Ukraine, Russian Empire graduate?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a890c1a5542993b751ca8f7", "question": "In which year was this company that jointly made Serene with Samsung Electronics founded?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a891078554299515336128e", "question": "Who directed the 1997 animated film Roz Ryan participated in?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a892af4554299669944a4dd", "question": "2.9 miles away from a peak 28 mi northwest of the Las Vegas Strip, is  the highest mountain in both the Spring Mountains and Clark County, making it what?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a89865d55429946c8d6e934", "question": "Who directed a 2011 British horror film starring an actress who trained at Royal Academy of Dramatic Art?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a899e5d554299669944a54a", "question": "Route 66 State Park is located on the former site of a town 2 mi east of what city?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a89a90755429946c8d6e98b", "question": "Where is the family the writer of The Beastly Bombing  made a documentary about from?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a89c99955429946c8d6e9bc", "question": "Able Seaman Colin Grazier, GC was posthumously awarded what, for \"bravery and steadfast devotion to duty\", he displayed on 30 October 1942 in action in the eastern Mediterranean when capturing codebooks vital for the breaking of the German naval \"Shark\" Enigma cipher from the sinking, the Enigma machines were a series of electro-mechanical rotor cipher machines developed and used in the early- to mid-20th century to protect commercial, diplomatic and military communication?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a89f6f455429970aeb701b9", "question": "Which animal comic book short story written, drawn, and lettered by Carl Barks featured an anthropomorphic white duck with a yellow-orange bill, legs, and feet?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8a0f635542992d82986e85", "question": "When was the attack occured which destroyed a builiding neary by the the Irish Hunger Memorial in Manhattan in New York City?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8a122d5542992e4fca84f0", "question": "Hera is the goddess of women and marriage in Greek mythology and what collection of beliefs, rituals, and mythology originating in ancient Greece in the form of both popular public religion and cult practices?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8a1b4d5542992e4fca850b", "question": "Brian Kibler worked on a Danish trading card game that expanded into what type of game in America", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8a2dd65542996c9b8d5e30", "question": "When was the writer of \"I Wonder as I Wander\" born?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8a425b55429970aeb7027b", "question": "Hamza Bencherif plays as a defender or a midfielder for a division of the National League in England which is currently called Vanarama National League North for what reasons?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8a430b5542996c9b8d5e7d", "question": "The Twisted Tales of Felix the Cat is an animated series starring the character Felix the Cat, produced for television by Film Roman, an American animation studio owned by what production company?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8a46015542996c9b8d5e8a", "question": "What island has parts leased to Macau and a bridge to Macau?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8a5c79554299515336137c", "question": "How much consumption of non-fish foods would you get eating only packages with Med Marks on them?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8b039455429971feec45ff", "question": "Celebration was recorded by the singer who was a leading presence when what cable channel premiered?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8b496155429971feec4699", "question": "Who, also known as Jose Roberto da Silva is known to have Juan Figer as his agent?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8b4f4d5542995d1e6f1363", "question": "Songs I Wrote with Amy is an extended play, independently released on which date, by Edward Christopher Sheeran, an English singer-songwriter, guitarist, and record producer?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8b52d055429950cd6afca4", "question": "What type of school employs an educator who authored \"Gambling and the Law\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8b592e5542995d1e6f137a", "question": "What year was the host of Jeselnik Offensive born?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8beb345542996e8ac88a1a", "question": "who is the independent game developer from Alpharetta, Georgia?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8c2e79554299240d9c20c1", "question": "Boothill Foot Tappers were a British folk/skiffle/bluegrass band, The Pogues were a punk band of what nationality?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8c3c375542995e66a47570", "question": "In 2010 actor Michael Cera portrayed Scott Pilgrim, who lives where?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8c444e5542997f31a41e0f", "question": "Today's Pulse shares staff and resources with it's sister publication, that is a daily newspaper formed in 2013 from a merger between the Hamilton JournalNews and what other newspaper?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8c4ef15542995e66a475ac", "question": "Where is this late post-classic Mexica sculpture, which Antonio de León y Gama wrote an essay about at the time the sculpture was discovered, housed?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8c5f9c5542996e8ac88a8a", "question": "In what country is the castle associated with the line of pottery called Wemyss Ware located?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8cb4e0554299653c1aa0ef", "question": "To which country was the historical figure used for the basis of the novel Strandloper transported to?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8cd97e554299585d9e3742", "question": "What age was the American social entrepeneur who was one of eight who got killed in 2015 when an Amtrak train travelling from Washington, D.C. to New York City derailed?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8d3f6a5542994ba4e3dc35", "question": "This song, which got heavy rotation on MTV was written by Sebastian Bach, Rachel Bolan and a rock guitarist in what kind of band?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8d44a05542994ba4e3dc4a", "question": "The Great Comet of 1819 was analyzed by an astrologist born in which village ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8d7dc255429941ae14dfd6", "question": "What star of The Children's Hour  was inducted into the International Best Dressed List Hall of Fame?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8db49b5542994ba4e3dd14", "question": "Jim Bambra has contributed to which single-player role-playing gamebooks?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8dbc27554299441c6ba074", "question": "Joachim Chreptowicz was an activist of what educational authority in the Polish-Lithuanian commonwealth?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8dc29f55429941ae14e059", "question": "The peer-reviewed academic journal Economic Georgraphy is published on behalf of a University located where?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8dd31d5542995a26add3ef", "question": "Ridley Park, Pennsylvania is home of a Boeing division that produces a helicopter model developed by what company?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8dfea95542995a26add453", "question": "Where were the band featured in the performance film Rendezvous with Ragnarok formed ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8e5ebb5542995a26add4d5", "question": "When was the railroad opened which is north to the Bates Pond?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8ec4a15542995a26add509", "question": "What state was the driver of Brutus from?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8ed90a55429917b4a5bdd5", "question": "What year was the debut single of the singer of \"3am (Pull Up)\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8edf5e5542995a26add53b", "question": "The Witches of Eastwick was a film based on a book by the author who won what prize more than once?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8f12dc5542997ba9cb31c1", "question": "Benjamin Russell Hanby was an American composer who composed what Christmas song that was recorded by Gene Autry in 1953?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8f188755429918e830d188", "question": "who sang the song produced by the songwriter who developed the wall of sound?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8f33c955429918e830d1cd", "question": "Which county has the largest portion of this forest in which Glassy Mountain is located?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8f3f645542992414482a06", "question": "What journalist was both the daughter of a Las Vegas mob figure, as well as suspected victim of real estate heir Robert Durst?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8f57225542992414482a64", "question": "What is the current NCAA division of the teams represented by the former Iowa State College of Agricultural and Mechanic Arts?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a8f5945554299458435d5d1", "question": "Marion railway station is located in a suburb of Adelaide founded as a rural village in what year ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a904a685542995651fb510a", "question": "Revengers Tragedy is a film that stars what English Actress?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a9067ee55429933b8a2051f", "question": "The front man for the band The Ballas Hough Band was born in what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a90a35755429933b8a20584", "question": "The 2016 Missouri Tigers Football team was led by a first year American football coach who was born on November 26th in what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5a90c6fe5542995651fb51e8", "question": "What contest Did Peter Nalitch known for \"Lost and Forgotten\" place 11th in?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab1c2f85542997061209559", "question": "Who is the president and founder of Zindagi Trust that also hosts the show Chal Parha?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab1dfed554299449642c7f0", "question": "The largest airline in India (by passengers carried and fleet size) is a member of what industry body?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab1e061554299449642c7f1", "question": "The TV campaign for the brand No7 uses a tune by a singer born in what city?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab1f693554299449642c82c", "question": "What year was the company that T.A. Peterman founded founded?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab27d5d554299449642c8c1", "question": "What stretches north from the Great Lakes to the Arctic Ocean and includes the Frontenac Provincial Park as an extension of it?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab293b6554299545a2cf99c", "question": "Who directed the film that  starried Mara Wilson and Trevor Coppola?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab2a056554299194fa93481", "question": "What branch of armed forces, was the subject of \"Battle Hymn of Lt. Calley\" a member of?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab2a41a5542992953946787", "question": "Who were the parents of the singer, who covered the song \"So Sad About Us\" and has a half-brother named David Cassidy?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab2b9a5554299340b52554e", "question": "during the 2011 Major League Baseball draft the Pittsburgh Pirates selected what pitcher that attended the University of California?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab2bc7c554299166977407e", "question": "Which child of Nissan Motorsport owner drove in the Australian Supercars Championship from 2017?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab2c2e5554299545a2cfa61", "question": "Mouse Trouble is the 17th short of what animated series of short films that began in 1940?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab2d5de55429916697740fd", "question": "What type of criminals, named after a term from the Revolutionary War, were involved in the Clay County Savings Association Building robbery?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab2f97555429929539468e2", "question": "In 1996 Westbrook College merged with a univeristy that has a campus in what Morocco city", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab2fd2655429976abd1bbf9", "question": "José Carreras debuted at age 11 as Trujamán in \"El retablo de Maese Pedro\", which was composed by the man whose image appeared on 100-pesetas Spanish banknote from what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab31001554299233954fef4", "question": "What party was the person who broke Barbara Anne Castle's record as the longest-serving female MP in the House of Commons?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab3257555429976abd1bc6f", "question": "Bwin.Party Digital Entertainment,  was an online gambling company, formed by the March 2011 merger of PartyGaming plc and bwin Interactive Entertainment AG, it was best known for its online poker room, and a series of international poker tournaments and associated television series broadcasting the final table of each tournament?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab336c0554299166977419f", "question": "From when was the father of Ernst Gunther pretender to the throne of Schleswig-Holstein?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab3b1ba5542992ade7c6e43", "question": "In which year did Snow Patrol release their first single?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab3c892554299233954ffa6", "question": "Carpenter Street was written by Rick Berman and another executive producer who has been nominated for how many Emmy Awards?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab3f0d655429976abd1bcfc", "question": "What Italian former professional footballer and manager scored the winning shot in the 1999-2000 FA Cup?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab3fb025542992ade7c6f12", "question": "Noel Clarke is known for playing Wyman in what British comedy-drama television show about seven British migrant construction workers", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab42c165542991751b4d6c9", "question": "Which American composer and singer-songwriter who is one of the most successful female songwriters of the latter half of the 20th century in the USA is Jodie Marie's 2012 debut album \"Mountain Echo\" is said to resemble?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab4383155429942dd415ee9", "question": "To which fiction race does the character played by Lee Pace in Guardians of the Galaxy\" belong ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab444be5542991751b4d717", "question": "Which character did this American actor and country music singer who released \"A Memory Like You\" play in \"The Dukes of Hazzard?\"", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab448e55542991751b4d72a", "question": "In which commercial mixtape  by Gucci Manethe, Keith Cozar had a guest appearance?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab4945f5542991779162cf0", "question": "Moon Warriors was directed by an actor from what country?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab4f9b05542990594ba9cbd", "question": "Which Irish rebel and patriot is the Irish folk band \"The Wolfe Tones,\" known for their album Sing Out for Ireland, named after?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab50ecb5542996a3a96a009", "question": "Who does the double-agent of Hogwarts's headmaster love?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab520275542991779162d84", "question": "Which Kentucky town is larger, Gray or Corbin?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab52e2f55429942dd416012", "question": "\"I Gotcha Now\" is a song featuring strings similar to a song released on what date?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab539b05542997d4ad1f0d8", "question": "The Driftless Area is a 2015 Canadian-American neo-noir drama-comedy film directed by Zachary Sluser, Aubrey Christina Plaza had a supporting role, an American comedian and actress, born on which date?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab552495542997d4ad1f0fb", "question": "Rattan Mohan Sharma (born 14 June 1971) is an Indian classical vocalist, he performs folk music including Bhajan, it refers to any song with religious theme or spiritual ideas, in a regional what?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab5539a554299488d4d9932", "question": "Mapplethorpe is an upcoming film starring  an English actor best known for his role in what science fiction series?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab59733554299488d4d99f2", "question": "What is the birthdate of this English professional footballer, who played with Chris Jones during his spell with the Yorkshire outfit?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab5ec9c554299494045f0b8", "question": "On what railway does the train service formerly called the \"Adelaide Express\" run?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab600b2554299710c8d1e4f", "question": "which store is one of the most expensive in the Centro Andino Mall?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab60b83554299488d4d9a8f", "question": "Who is a statutory censorship and classification body and caused trouble for the Hindi drama film 'Oops!'?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab6226455429953192ad268", "question": "How many men were killed by Schutzstaffel death squads in Lygumai?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab67cd055429954757d32ff", "question": "Who directed the film where the character Sally Hardesty appears in archival footage?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab6c3ec55429954757d3367", "question": "Magnano in Riviera is a \"comune\" and one of how many regions of Italy?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab6d67755429954757d3390", "question": "What profession does Version and Mark Ronson have in common?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab6eaa8554299710c8d1fb6", "question": "What is the title of this South Korean disaster film written and directed by Kim Sung-su that Park Min-ha appeared?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab70176554299110f219a92", "question": "Azfar Hussain (Bengali: আজফার হোসেন ) is a Bangladeshi theorist, critic, academic, bilingual writer, poet, translator, and activist, Bengali, is also known by its endonym Bangla, it's the national, and official language of which country?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab7276b55429928e1fe3816", "question": "Lindsey Islands is named for the professor of forest ecology at what university?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab731b45542992aa3b8c7c7", "question": "Tom Amstutz is a native of a city founded on the west bank of what river?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab7507f5542993667793fbc", "question": "Who portrayed this American former drug trafficker whose potent form of heroin became reference to Jay-Z's \"Blue Magic?\"", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab7f8d2554299366779407a", "question": "In addition to her role in ATL, what role did Lauren London play in the BET Comedy-drama \"The Game\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab81e245542990e739ec82b", "question": "Ulrich of Eppenstein served as an abbot for an Abbey located in which city in Switzerland ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab82c7e55429934fafe6d05", "question": "Walter Lang directed a 1939 American drama film loosely based on a novel from what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab82dc955429934fafe6d08", "question": "The pansexual pride flag is used to increase visibility and recognition for people who may refer to theselves as what?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab83c5c55429934fafe6d23", "question": "What is the Argentine Brewery founded in 1888 that the Quilmes Rock music festival is named after?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab85d5055429919ba4e22ca", "question": "Off Camera is an American interview-based television series, magazine and podcast created and hosted by photographer/director Sam Jones, interviewees featured on \"Off Camera\" have included which American stand-up comedian, actress, producer, and writer?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab869fd5542990e739ec8f1", "question": "What county is Wildebeest located in?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab880d75542990e739ec918", "question": "Lily of the Valley featured on Queens third album released by who?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab8f5e555429916710eb0d2", "question": "Who was considered an iconic Pakistani cricketer?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab901df55429934fafe6e43", "question": "How Are You Bread stars a singer who is the leader of which boy group?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab926ab554299753720f758", "question": "What Indian American business executive headed the Android One initiative?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab929d1554299131ca42295", "question": "At the Opera House is a 1958 live album by Ella Fitzgerald, the first half of the 1990 CD edition includes a performance, whilst the second half highlights the concert recorded on October 7, 1957 at which andmark large-event venue in Los Angeles, California?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab961c955429970cfb8eaa4", "question": "Which Spanish footballer playing as right wing for Sevilla FC has endorsed the Nike Mercurial Vapor ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab97e985542996be2020524", "question": "What Minnesota county is Husky Stadium located in?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ab9e99d55429955dce3ed9a", "question": "The 1st Earl of Nottingham commanded the English fleet against a fleet that contained how many ships?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5aba186855429901930fa776", "question": "Richard Conte appeared in which 1960 heist film, famously filled with Rat Pack stars?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5aba27d155429955dce3edd1", "question": "The Boudin Bakery Tour is hosted by a bakery based in which city ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5aba46c255429939ce03dc75", "question": "The song released on 6 February 2014 by the singer who is the daughter of actor Keith Allen was featured on what episode of \"Quantico\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5aba90935542994dbf019947", "question": "Whose was the spouse of the the father of the Egyptian chancellor to the pharoah Djoser?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abada065542996cc5e49eab", "question": "The British stand-up comedian and actor, nominated for Best Newcomer at the 2013 Edinburgh Comedy Awards presented on the British television show, It's Not Rocket Science since it aired on tv beginning on what date?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abb3ba5554299642a094a72", "question": "What Taylor Swift album featured the song whose video premiered at the 2015 MTV Video Music Awards pre-show?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abba0d55542993f40c73b62", "question": "What role is the actor who starred with Glynn Turman in J.D.'s Revenge best known for?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abbdd75554299642a094b74", "question": "in the United States Senate election in New York in 1976 James Buckley was defeated by this American politician, sociologist, and diplomat who was a member of what political party", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abbeb59554299114383a09a", "question": "What is Gloria's boyfriend's real name on the show The Simpsons?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abc1a3a5542996583600423", "question": "Prince of the South 2 is the third studio album by a rapper born in which year ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abc2d84554299114383a0f3", "question": "Joyce DiDonato (\"née\" Flaherty; born February 13, 1969) is an American operatic lyric-coloratura mezzo-soprano", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abc52255542996583600440", "question": "What is the popular martial arts technique associated with Wing Chun Kung Fu with the abbreviation JKD?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abca3065542993a06baf93a", "question": "In which American animated educational interactive children's television program,  created and executive produced by Chris Gifford and Valerie Walsh, did Harrison Chad have a role?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abcf564554299700f9d794b", "question": "Ronan the Accuser is an officer of what fictional Marvel Comics alien race?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abd63a85542993062266c6c", "question": "The village and civil parish Keisley is a hamlet in is mostly had a population of what in 2011?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abd84ac55429924427fd03c", "question": "When was a silent film produced that included an actor born April 1, 1885?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abd906f5542996e802b47d8", "question": "Clan Henderson has a historical seat at what 16th-century tower house?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abe249155429976d4830a7e", "question": "Ida Roland was born in a municipality  that lies on the shores of which lake ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abe81c85542993f32c2a134", "question": "What movie was based of of the Aurora, Texas, UFO incident that reportedly occurred on April 17, 1897?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abea9db5542990832d3a081", "question": "Who now owns the resort that reflects Mandalay Resort Group's former name?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abee63b5542993fe9a41d89", "question": "1st National Television Awards were hosted by the journalist from what country?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abf277a5542994516f4549c", "question": "In which year was this crime novel written by Italian American author Mario Puzo published where Don Anthony \"Black Tony\" Stracci first appeared?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abfb5fa5542990832d3a1d2", "question": "Climb Dance features a Finnish rally driver who was a Member of the European Parliament from 1999 until when?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5abfc0715542997ec76fd44b", "question": "What is the major service/product output of this city in the Indian state of Kerala where the headquarters of Kerala Fire And Rescue Services are located?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac00c8a5542997d642959b3", "question": "The 2011 Euroleague Final Four games were held in an arena designed by whom?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac02619554299012d1db5be", "question": "In which capacity did this person, who established the Bogd Khan puppet government, serve in the Russian Civil War?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac02bda5542997d642959da", "question": "Abar Bochhor Tirish Pore was organized in part in memory of an Indian Bengali singer, songwriter, bassist, and composer, who co-founded what progressive rock band?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac032ba5542996f0d89cb58", "question": "The 2015 CONSUR Women's Sevens Championships is an Olympic qualification tournament for Rugby sevens at the 2016 Summer Olympics which will be held during which time span, Santa Fe de la Vera Cruz (usually called just Santa Fe) is the capital city of the province of Santa Fe, Argentina?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac078e7554299294b218ffa", "question": "Where does the team play that Brad Fox played for that is a part of the WAFL?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac082bb554299294b21900b", "question": "What city does Lilli Cooper and Fiorello H. LaGuardia High School have in common?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac118555542992a796deddb", "question": "Shilpa Architects has designs that can be seen at what largest artists' commune in India?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac122d1554299012d1db6a4", "question": "Who was the mother of the emperor that issued the Robot Patent?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac1343155429964131be18d", "question": "How? is a song from the album that was released after which first solo Lennon release?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac159125542994ab5c67ced", "question": "In the 2001 census what was the population of township in which Fernyhalgh Wood is located ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac18e765542991316484b36", "question": "Which common Chinese surname is the surname of the Tibetan princess known as Gyasa?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac1aa5855429964131be264", "question": "Fallout 4: Far Harbor is an expansion pack for the 2015 video game \"Fallout 4\" published by an American video game publisher founded in what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac255c45542996366519982", "question": "What is the name of the advice column that a singer of Worlds Collide wrote", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac2695e5542992f1f2b38b9", "question": "What was the birth name of the character that Silver Fox was a former love interest of?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac276f855429963665199c8", "question": "What song from April 28, 2017 that was number 3 on the \"Billboard\" Hot 100 is Alessia Cara featured in?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac2846d55429963665199f4", "question": "Duke Micah and Michael Conlan did what for a career?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac2b12b55429921a00ab038", "question": "The character John Clifford from \"When a Stranger Calls Back\" made how many appearances in movies, television shows and plays?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac2c28f5542990b17b15486", "question": "The Mercedes-Benz R107 and C107 are the second longest single series ever produced after a class of vehicle manufactured by who?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac2c8fe554299657fa29056", "question": "\"Queen of Soul: The Atlantic Recordings\" is an 86-track, four-disc box set detailing the Atlantic career of a singer born in this year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac31b91554299741d48a1f7", "question": "Life Sciences in Space Research publishes papers that were previously covered in what Elsevier-published peer-reviewed journal?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac3a3b45542993915413862", "question": "In what city's borough would one find the neighborhood in which the \"electric park\" which inspired many others is  located in?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac3c1ca5542993915413947", "question": "The Secret Theatre's subsequent productions during it's first season include which comedy by Aristophanes?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac3c6d0554299204fd21e52", "question": "When did Dale Dye work on the miniseries for HBO called The Pacific?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac3cdf4554299204fd21e70", "question": "What was the cybernym of the creator of The High Fructose Adventures of Annoying Orange?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac3efe155429919431738cf", "question": "Which British-American actress appeared or starred in Lay the Favorite, The Camomile Lawn, and Mrs. Warren's Profession?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac474ed55429919431739a3", "question": "Which all-sport award did the coach, of the 2010 U.S. Open at Pebble Beach winner, win in 2010?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac499945542996feb3fe904", "question": "When was the nephew of George Alexander born?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac4b6c4554299076e296dda", "question": "Zora Fair was a native to South Carolina who nearly exposed the military campaign conducted through Georgia from when to when?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac4e13c55429919431739ed", "question": "Mahatma Gandhi led India to independence through nonviolent civil disobedience which was sometimes referred to as what?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac4f23655429924173fb500", "question": "when was the American actor who starred in Four Brothers born", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac512e35542994611c8b365", "question": "Fang Bang had a European release in which the thirteenth track is a cover by this English rock band formed in june what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac51cec5542994611c8b3aa", "question": "The sixth season of the \"Tyler Perry's House of Payne\" began airing on November 4, 2009, it starred Cassandra \"Cassi\" Davis, an American actress and singer, best known for her role as who, on \"Tyler Perry's House of Payne\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ac529dd55429924173fb620", "question": "Along with her song \"Will You Still Love Me tomorrow\" which made 76 on the Hot 100, Roberta Flack has also performed many duets, including \"Where Is The Love\" with which singer?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adbda8655429947ff17384a", "question": "When was the governor who appointed Lana Gordon first elected governor?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adbf0cc554299438c868cdd", "question": "Even though Big Stone Gap takes place in Virginia, where is Adriana Trigiani based?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adbfcc45542996e68525297", "question": "Who directed the fictionalized account of the Tsavo Man-Eaters who were responsible for the deaths of a number of construction workers on the Kenya-Uganda Railway?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adc0b3a5542996e685252b8", "question": "What live-action television series was produced for Adult Swim and had Kristen Joy Schaal as an actor?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adc1bcd5542994650320c7a", "question": "When did the magazine that Wallace Hester illustrate for end publication?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adc96bc554299438c868e06", "question": "Margaret Mary Ray stalked an American physician and retired NASA astronaut who is a public speaker and consultant to Disney's IMagineering group, and who else?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adc9c6c554299438c868e11", "question": "When was the school, from which Parker Gispert graduated in 2001, founded ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adcad845542994d58a2f699", "question": "One of the Countries of the United Kingdom consist of Northern Ireland.  Who Does Northern Ireland co-operate with in some areas?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adce5395542992c1e3a247a", "question": "What is the name of the belief among native Americans influenced by Vine Deloria Jr. that rejects the flood myth with Noah and the Ark?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adcedac5542992c1e3a24ba", "question": "What record was taken from Makes Me Wonder by an American Idol winner 2002?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adcf3bd5542994ed6169c39", "question": "California State Route 242 ends in which largest city of Contra Costa county?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adcffc655429947343537fa", "question": "What is the name of the affluent area in Cheshire that includes the villages of Bowdon, Wilmslow and Alderley Edge?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5add01355542992c1e3a250a", "question": "Cukurs C.6bis was designed by the aviator who was a member of what group accused of murdering Latvian Jews?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5add0e865542992ae4cec43d", "question": "What is the birthdate of this American professional basketball player who lat played for Miami Heat and followed Jim Brewer at Proviso East?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5add32965542992ae4cec4ea", "question": "What film produced by BBC Films was adapted from the 2003 novel of the same name by Zoë Heller?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5add34985542992c1e3a2563", "question": "A Russian actor appeared in a film about a group of Westerners trying to flee Hungary released in what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5add593c5542995b365fab18", "question": "Abuzar Aydamirov wrote lyrics in 1992 to what Russian national anthwm?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adda55c5542997545bbbd9a", "question": "In what city and state was the band behind \"She Hangs Brightly\" formed?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5addef3d5542997dc79070c6", "question": "what role other then did Jana Kramer play other then her role as Alex Dupre on One Tree Hill", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ade167c5542997c77aded38", "question": "What country is the University of Groningen where the famous neuroscientist Andre Aleman is a professor?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ade26a35542997c77aded75", "question": "What two dimensions are mentioned when looking into the theory of the American social psychologist, author, and lecturer born in 1972?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ade3b0c5542997c77adedb6", "question": "What is the filming location of the chris cooper's debut flim which was directed by John Sayles?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ade65dc554299728e26c712", "question": "Who was the Indian music composer and singer who won an award in 2003 that worked extensively with Bhaskarabhatla Ravi Kumar?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ade66675542992fa25da76e", "question": "What national park contains Geology that shapes the Pacific Northwest region of the United Stated and Canada?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ade80c155429975fa854ee2", "question": "Who is the father of AFL medium-sized forward Tory Dickson?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ade8e2e55429939a52fe8f5", "question": "What professional football club Ronnie Simpson was involved in was founded in 1887?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ade8e835542992fa25da7c5", "question": "What is the name of the magazine that Funk & Wagnalls published thateventually merged with two similar weekly magazines, \"Public Opinion\" and \"Current Opinion\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adec5bb5542995ec70e8f0d", "question": "Sid Avery, was an American photographer and director who was best known for capturing the private moments of legendary Hollywood celebrities like which American actor, film director and political activist, and helped to popularize the Stanislavski system of acting, studying with Stella Adler in the 1940s?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5aded13155429975fa854faa", "question": "Robert Corrigan's birthplace is considered one of six historic cities in what area?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adf3b3a5542992d7e9f92f6", "question": "Jack Hoffman was introduced to the current running back for which team while the player was at the University of Nebraska?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adf4ec05542995534e8c782", "question": "The book The Mechanism of Mind, is by which Maltese physician, psychologist, author, inventor and consultant psychologist, and originated the term lateral thinking?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adf55665542995534e8c793", "question": "What album had Chris Isaak song with the lyrics \"I wanna fall in love\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adfb2915542995ec70e9076", "question": "Dorrington, Lincolnshire is situated 1.2 both south from Digby and north of the village that contains approximately how many dwellings?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adfbd6e554299603e41839c", "question": "What actor starred in Big John, Little John and helped provide music for the \"Sharknado,\" film?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adfe7fb55429942ec259b7d", "question": "Who directed the film that Meher Vij aced in in 2015?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adfeec6554299025d62a38f", "question": "When was the Australian rules footballer born who is the father of John Vickery?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5adff2ba55429925eb1afb70", "question": "In what year was Jonas Hummels's older brother born?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae00807554299025d62a3b0", "question": "In what year did the group who made up the Nashville String Band with Chet Atkins win a Grammy award?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae01aab55429925eb1afc13", "question": "When was the American bassist and founding member of Return to Forever born who was a bassist in The Mothership Returns?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae01f2b554299603e4183ec", "question": "Which government targeted Jewish individuals?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae022a4554299025d62a427", "question": "Partizan Midi-Minuit produced a comedy film that was the directorial debut of who?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae0600d5542993d6555eb16", "question": "Gary Groth is editor in chief of an American magazine of news and criticism pertaining to comic books, comic strips and graphic novels, as well as co-founder of what?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae0a2b855429945ae9593da", "question": "Roshon Fegan and Camp Rock are associated with what major entertainment company?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae0c0345542993d6555ec3b", "question": "The Sawaq language, sometimes also called \"Ingelshi\", is a northern Songhay language spoken by the \"Issawaghan\" (or \"Ingalkoyyu\"), a community surrounding Ingal in Niger, a closely related variety called Emghedeshie was spoken at which is the largest city in central Niger, with a population of 118,244 (2012 census), it lies in the Sahara and is the capital of Aïr?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae0d3985542990adbacf66b", "question": "What activity are both  Roman White and Kelsea Ballerini known for?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae10677554299422ee995d0", "question": "What was the pen name for a series of Islamic creationist books that were sent to thousands of  American scientists, members of Congress and science museums in 2007?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae120bb55429901ffe4adb0", "question": "What is the genre of music played by both Lymbyc Systm and Crystal Castles?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae13ffd55429901ffe4ae25", "question": "What popular kayaking spot is located in the capital and second largest city of the U.S. state of South Carolina?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae147465542990adbacf737", "question": "Who directed the film in which Monica Keena made her film debut?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae1eff45542994d89d5b2d4", "question": "Where is the home of the appointed Chief Justice during the case that involved Maryland attempting to impede operation of a branch of the Second Bank of the United States?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae207d35542997283cd2339", "question": "Alexander Payne and Jim Taylor co-wrote a film with music by who?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae20ea75542997283cd2390", "question": "The Oakland Raiders relocation to Las Vegas was a successful effort by the owner of the Oakland Raiders, the team is scheduled to begin play as the Las Vegas Raiders for the 2020 National Football League (NFL) season, playing home games at the Las Vegas Stadium, the working name for a domed stadium under construction in which city in Nevada?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae212d4554299495565d9e0", "question": "The first major project for the Roller Coaster Corporation of America was renamed, and is now called what?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae262ac5542994d89d5b403", "question": "The city where Benton County State Bank Building is in had a population of what as of the 2010 United States Census?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae263bb554299495565da5a", "question": "Who was the father of the racer who died in an accident similar to Markus Hottinger?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae2655b554299495565da5e", "question": "Who is the winner of the MacArther Genius Grant whose writing appears in the anthology \"Camouflage: Best of contemporary writing from Nigeria\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae28f0e5542996483e649ed", "question": "What is the birthdate of this monarch of three kingdoms of England, Scottland, and Ireland, who attempted to escape from Carisbrooke Castle?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae2bf90554299495565db23", "question": "Where was the office at which CKAC was located situated?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae2bf94554299492dc91c58", "question": "What was the gender of the 1970s murder victims that Clyde Snow identified?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae2d86e55429928c42394f7", "question": "When was the author of \"The Dream of Rome\" born?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae318d455429928c42395e7", "question": "Which brother of the management consultant, who first outlined Quality by Design, won and Academy Award?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae31f4b5542992decbdcde1", "question": "Curse of the Faceless Man starred the actor who was of what nationality?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae32a5b5542994393b9e63b", "question": "Sean Masterson was an improvisational performer on which Drew Carey's show?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae360155542991a06ce99a7", "question": "The estranged husband of Francesca von Habsburg was born in what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae36c005542994393b9e6be", "question": "Lake Oliver was created by a dam completed in 1959 by a electric utility that began operations in what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae397f05542992f92d82314", "question": "In which country will you find the Sekyere Afram Plains District, one of 27 districts in the Ashanti Region whose capital is a small town known for the Tweneboa Kodua Secondary School?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae3c8a45542994393b9e763", "question": "Ruthless Records wasa name used by Chicago and Minneapolis punk bands from 1981 to 1990 including Big Black, an American punk rock band from Evanston, Illinois, active from 1981 to 1987, and founded by singer and guitarist Steve Albini, the band's initial lineup also included guitarist Santiago Durango and bassist Jeff Pezzati, both of which band?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae4017f5542995dadf242c7", "question": "Peak FM is owned and operated by a broadcasting company based in what city?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae4062a5542996836b02c1a", "question": "What is the nationality of the man who described the 1961-62 Ipswich Town football team as \"...one of the First Division's most attrative sides...\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae48a1755429913cc204493", "question": "How does Government Executive relate to Atlantic Media?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae49ab755429970de88d9d0", "question": "Canberra Outlet Centre is a type of which manufacturer-branded store that sells stock directly to customers?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae49cca5542995dadf24375", "question": "Carole Lieberman, is a medical doctor, psychiatrist, author, Forensic Expert Witness, and legal analyst providing expert witness testimony for high-profile cases that have included the divorce of which Belgian actor, martial artist, screenwriter, film producer, and director best known for his martial arts action films?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae4c7e35542996836b02d26", "question": "The film Nandha whose music was scored by Indian singer-songwriter Yuvan Sahnkar Raja, was released in what year?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae4ebbc5542993aec5ec0f0", "question": "Ellis Island, the gateway for over 12 million immigrants to the United States as the nation's busiest immigrant inspection station and where social worker Ludmila Foxlee was employed from 1920 to 1937, was made part of which National Monument in 1965?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae4ef4855429960a22e0211", "question": "Which of the actors starred in The Next Karate Kid died on November 24, 2005?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae52a2655429908b6326530", "question": "What debut album created by a musical artist who has performed with Aref Durvesh was nominated for a Mercury Prize?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae539aa5542992663a4f184", "question": "What Irish team sport does Odhrán Mac Niallais play?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae56bcf55429960a22e02f8", "question": "4Kings had players competing in  first-person shooter video game published by who?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae591325542993aec5ec1c2", "question": "Which Walt Disney World Resort is themed around classic music genres?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae5971b55429960a22e0302", "question": "Who manages the birdwatching site found south of the dam originally known as the Boulder Dam?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae5bd4555429960a22e0326", "question": "Which character from the BBC drama \"Robin Hood\" did this famous English actor who also starred in \"Closer to the Moon\", play?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae5c26e5542992663a4f218", "question": "Blue Crush is a 2002 sports film that tells the story of three friends who have one passion: living the ultimate dream of surfing on a beach located on which island ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae5ccdd55429929b080799e", "question": "The 2002 Rose Bowl, played on January 3, 2002, was a college football bowl game, which former American football wide receiver who played the majority of his career with the Houston Texans, were named the Rose Bowl Players of the Game?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae5ce9f55429929b08079a8", "question": "What medication, used as chemotherapy and to suppress the immune system, is used as treatment for Autoimmune encephalitis?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae5df8b5542996de7b71a3f", "question": "Robert John Bardo was convicted for the murder of which American model and actress?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae5eea455429929b0807a1f", "question": "Disney Dreams!, was a nighttime spectacular at Disneyland Park in Disneyland Paris, in Marne-la-Vallée, in which country?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae600585542996de7b71adc", "question": "What casino on the Las Vegas Strip hosted Frank Marino playing his drag character Joan Rivers?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae609c2554299546bf83029", "question": "Timber! was written by a singer who had a group with his brothers, Robin and who?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae609e45542996de7b71b0a", "question": "What does the film dramatizes for which Yoshiro Muraki was nominated three times for the Academy Award for Best Art Direction for his work?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae61bf25542995703ce8b06", "question": "Which 1999 movie, directed by Joe Johnston, is based onthe memoirs of a veitnam veteran and formaer NASA engineer?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae6462c5542995703ce8b4c", "question": "The Pink Opaque is a 1986 compilation album by a band active between which years ?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae66c3c5542992ae0d16342", "question": "In what year was the actor whose partner during the last years of his life was Oja Kodar born?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae676205542991bbc9760dd", "question": "Which Australian trail which passes through the northern suburbs of Melbourne connects to the Melbourne Zoo?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae688de55429908198fa5f4", "question": "What is the seed money lender of Catalist's net worth as of May 2017?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae68ff65542996d980e7c01", "question": "For which state was the 44th Vice President of the United States a state senator?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae6901355429908198fa61c", "question": "Steve Weston, was a Canadian television and theatre actor, he was also an accomplished stage actor and once played the role of who, in a Toronto production of \"Cat on a Hot Tin Roof\"?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae691f155429908198fa62f", "question": "George Ridgwell directed a number of adaptations of stores about which fictional private detective?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae698985542996d980e7c33", "question": "Across the Bridge of Hope was an album in support of the car bombing that took place in what Northern Irish city?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae6e60c5542991bbc976199", "question": "Which two prep schools are located in the birthplace of the one known for the order given to soldiers to conserve their limited stocks of ammunition?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae737db5542992ae0d163d6", "question": "Nick Faure achieved fame by racing which car first produced by Porsche in 1948?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae752ba5542995703ce8be8", "question": "What type of game are both Total Overdoes and Chili Con Carnage?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae767595542997b22f6a730", "question": "What is the purpose of the society founded in a city also familiarly known as Thessalonica or Salonica?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae786755542994a481bbd54", "question": "Who did the the Tribe of Asher descend from?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae787c75542994a481bbd67", "question": "The Web was a 1947 film that starred the actor who was known for starring in what genre of films?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae79e1f55429952e35ea99d", "question": "Whos interviews inspired the 2015 film London Road and was responsible for the murders of five women?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae7bc2e5542993210983f1e", "question": "Mount Moor African-American Cemetery, is located in what mall, in West Nyack, New York, is the second-largest shopping mall in New York?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae7bfcd5542993210983f32", "question": "Who voices the character on \"Kinect Disneyland Adventures\" in which Paige O'Hara voiced the main character in the 1991 animated film?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae7d9875542993210983f91", "question": "The Marca Hispanica, also known as the March of Barcelona, was a military buffer zone beyond the former province of Septimania, created by Charlemagne in 795 as a defensive barrier between the Umayyad Moors, it  refers primarily to the Muslim inhabitants of the Maghreb, the Iberian Peninsula, Sicily, and Malta during which time period?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae7e716554299540e5a5687", "question": "United States Forces – Iraq (USF-I) was an American military sub-unified command, part of U.S. Central Command, General Lloyd Austin served as Commanding General, he was the which number commander of United States Central Command (CENTCOM)?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae80d64554299540e5a570c", "question": "What position does the winner of the 2012 South American Footballer of the Year play on the Brazilian national team?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae81d095542997ec2727716", "question": "Synthestration is the art of arranging music in a technical standard in which a single link can carry up to sixteen what?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "hp_5ae8316c55429952e35eaa87", "question": "Wharton appeared as The Hippy in a comedy film written and directed by who?", "label": "multi_hop", "source": "hotpotqa-train"}
+{"id": "sh_003f76877654cf72_0", "question": "Which countries traditionally play Morabaraba?", "label": "single_hop", "source": "generated", "title": "Morabaraba"}
+{"id": "sh_008a689489bb93db_0", "question": "What is the eastern terminal of the IRT New Lots Line?", "label": "single_hop", "source": "generated", "title": "New Lots Avenue (IRT New Lots Line)"}
+{"id": "sh_0095378941720b50_0", "question": "When was Hunter B. Shirley born?", "label": "single_hop", "source": "generated", "title": "Hunter B. Shirley"}
+{"id": "sh_0135cf0851cf6336_0", "question": "What was John McDade Howell's position at East Carolina University?", "label": "single_hop", "source": "generated", "title": "John McDade Howell"}
+{"id": "sh_013f75e9ed5860d2_0", "question": "Who directed the 2010 American animated feature \"Tangled\"?", "label": "single_hop", "source": "generated", "title": "Tangled (franchise)"}
+{"id": "sh_020a944c1b30b730_0", "question": "When was the 31st Cairo International Film Festival held?", "label": "single_hop", "source": "generated", "title": "31st Cairo International Film Festival"}
+{"id": "sh_03abe04abfec816d_1", "question": "When did the actual implementation of the Taoudénit Region begin?", "label": "single_hop", "source": "generated", "title": "Taoudénit Region"}
+{"id": "sh_0438c7a7f3138231_0", "question": "What year was Jean Martinelli born?", "label": "single_hop", "source": "generated", "title": "Jean Martinelli"}
+{"id": "sh_0480131a72ca741a_5", "question": "Which battle did Jan Romer command the Cavalry Division during in the Polish-Soviet War?", "label": "single_hop", "source": "generated", "title": "Jan Romer"}
+{"id": "sh_06b1b556fc73f600_1", "question": "What does the term \"High pressure\" usually refer to in terms of magnitude relative to atmospheric pressure?", "label": "single_hop", "source": "generated", "title": "High pressure"}
+{"id": "sh_06b985c3eca2c004_0", "question": "What is the Nickelodeon UK Kids' Choice Awards?", "label": "single_hop", "source": "generated", "title": "Nickelodeon UK Kids' Choice Awards"}
+{"id": "sh_06ffeb380f35584a_0", "question": "What is Norman?", "label": "single_hop", "source": "generated", "title": "Norman (name)"}
+{"id": "sh_087e33006ccd319e_0", "question": "When was André Téchiné born?", "label": "single_hop", "source": "generated", "title": "André Téchiné"}
+{"id": "sh_08a4a96af8dbfca9_0", "question": "When was HIAG founded?", "label": "single_hop", "source": "generated", "title": "HIAG"}
+{"id": "sh_09e069d0f1668ef4_0", "question": "When was Elmer Bernstein born?", "label": "single_hop", "source": "generated", "title": "Elmer Bernstein"}
+{"id": "sh_0acc587bd3708d47_1", "question": "When was Get Him to the Greek released?", "label": "single_hop", "source": "generated", "title": "Get Him to the Greek"}
+{"id": "sh_0ad5174ea8d3e394_0", "question": "What was Consolidated Film Industries?", "label": "single_hop", "source": "generated", "title": "Consolidated Film Industries"}
+{"id": "sh_0b426ceabd631c8c_0", "question": "Who directed the 1968 Hindi romantic thriller film Duniya?", "label": "single_hop", "source": "generated", "title": "Duniya (1968 film)"}
+{"id": "sh_0bd44c6ef13f3216_0", "question": "What year was Shijiazhuang Tiedao University founded?", "label": "single_hop", "source": "generated", "title": "Shijiazhuang Tiedao University"}
+{"id": "sh_0c1ffe1c781b47cb_0", "question": "When did X/1106 C1, also known as the Great Comet of 1106, appear?", "label": "single_hop", "source": "generated", "title": "X/1106 C1"}
+{"id": "sh_0c5f43c61ef32175_0", "question": "When was Ann Mitchell born?", "label": "single_hop", "source": "generated", "title": "Ann Mitchell"}
+{"id": "sh_0c99f2ffa40c9361_3", "question": "Between which years did Taiichi Ohno and Eiji Toyoda develop the Toyota Production System?", "label": "single_hop", "source": "generated", "title": "Toyota Production System"}
+{"id": "sh_0d3fd23a29a54e89_0", "question": "When was Guillermo C. \"Bill\" Gramática born?", "label": "single_hop", "source": "generated", "title": "Bill Gramática"}
+{"id": "sh_0db9e0744cd087db_2", "question": "Which award did Taies Farzan win for her performance in the film \"Hitler's Grave\"?", "label": "single_hop", "source": "generated", "title": "Taies Farzan"}
+{"id": "sh_0de0cf8315cc1387_2", "question": "What overall record did the 1979 Oklahoma Sooners football team post?", "label": "single_hop", "source": "generated", "title": "1979 Oklahoma Sooners football team"}
+{"id": "sh_0e2b746555b731bf_0", "question": "When was John Eaves born?", "label": "single_hop", "source": "generated", "title": "John Eaves"}
+{"id": "sh_105cfb9bc196b004_1", "question": "How many occurrences of Nolina interrata are known in central San Diego County, California?", "label": "single_hop", "source": "generated", "title": "Nolina interrata"}
+{"id": "sh_11bfc12c576946ac_0", "question": "When was Ernst Ingmar Bergman born?", "label": "single_hop", "source": "generated", "title": "Ingmar Bergman"}
+{"id": "sh_12e718bb8f775c06_0", "question": "What does Breed type (dog) refer to in the parlance of dog fanciers?", "label": "single_hop", "source": "generated", "title": "Breed type (dog)"}
+{"id": "sh_13ac9a5cc708f06e_1", "question": "When was the Olatunji Concert: The Last Live Recording recorded?", "label": "single_hop", "source": "generated", "title": "The Olatunji Concert: The Last Live Recording"}
+{"id": "sh_13bdc62458403edc_1", "question": "When was Perfect (Darin song) released as the first single from Darin's third studio album \"Break the News\" in Sweden?", "label": "single_hop", "source": "generated", "title": "Perfect (Darin song)"}
+{"id": "sh_14367a0d647e25f2_1", "question": "When was Valentine Browne, 1st Earl of Kenmare created First Baron Castlerosse and First Viscount Kenmare?", "label": "single_hop", "source": "generated", "title": "Valentine Browne, 1st Earl of Kenmare"}
+{"id": "sh_155014c859791149_1", "question": "When did the Reid Government last?", "label": "single_hop", "source": "generated", "title": "Reid Government"}
+{"id": "sh_1559b7dbcec9956e_0", "question": "On what date was the Perth by-election of 1878 fought?", "label": "single_hop", "source": "generated", "title": "Perth by-election, 1878"}
+{"id": "sh_158f9db52669213e_4", "question": "What is the capacity of McLane Stadium?", "label": "single_hop", "source": "generated", "title": "McLane Stadium"}
+{"id": "sh_1692d13f3b31febf_0", "question": "When was United Nations of Sound (album) released?", "label": "single_hop", "source": "generated", "title": "United Nations of Sound (album)"}
+{"id": "sh_18b40d17b663c977_2", "question": "What is the length of the Luzha River?", "label": "single_hop", "source": "generated", "title": "Luzha River"}
+{"id": "sh_18b57e7a806a9e20_6", "question": "What is the area of Lake Enol?", "label": "single_hop", "source": "generated", "title": "Lake Enol"}
+{"id": "sh_1a9eb0ae935a8179_1", "question": "When did the Geordie Shore series 14 begin airing?", "label": "single_hop", "source": "generated", "title": "Geordie Shore (series 14)"}
+{"id": "sh_1bb9fad96d31cf55_2", "question": "What was the population of Bridgeport, Michigan, according to the 2000 census?", "label": "single_hop", "source": "generated", "title": "Bridgeport, Michigan"}
+{"id": "sh_1cca584fe99e38c6_1", "question": "What position did Alexander Guagnini hold in Vitebsk?", "label": "single_hop", "source": "generated", "title": "Alexander Guagnini"}
+{"id": "sh_1d7ba3082b6f476d_4", "question": "When did Sam Clucas join Swansea City?", "label": "single_hop", "source": "generated", "title": "Sam Clucas"}
+{"id": "sh_1e6255fc1c0a729e_1", "question": "When was Cradle to the Grave released?", "label": "single_hop", "source": "generated", "title": "Cradle to the Grave (album)"}
+{"id": "sh_1ed2cad199504e85_4", "question": "What does the Kardashev scale describe?", "label": "single_hop", "source": "generated", "title": "The Kardashev Scale (album)"}
+{"id": "sh_20488ea3c4ce0fa2_2", "question": "Which award was Zhang Junzhao's film \"The Shining Arc\" nominated for?", "label": "single_hop", "source": "generated", "title": "Zhang Junzhao"}
+{"id": "sh_21370afc9dec9191_0", "question": "When was What Went Down released?", "label": "single_hop", "source": "generated", "title": "What Went Down"}
+{"id": "sh_21e0efe2e57861ae_1", "question": "How many airports does Norwegian Air Shuttle operate to as of December 2012?", "label": "single_hop", "source": "generated", "title": "Norwegian Air Shuttle destinations"}
+{"id": "sh_225ddc5fc9b1a860_0", "question": "When were British Army corporals David Howes and Derek Wood killed by the Provisional IRA?", "label": "single_hop", "source": "generated", "title": "Corporals killings"}
+{"id": "sh_2264a4d468c69459_4", "question": "Which league did Queens Park Rangers F.C. become a founding member of in 1920?", "label": "single_hop", "source": "generated", "title": "List of Queens Park Rangers F.C. players"}
+{"id": "sh_22f9112e002b3a28_2", "question": "From which century BC did Minoan pottery exported from Crete originate?", "label": "single_hop", "source": "generated", "title": "Minoan pottery"}
+{"id": "sh_230835ab7b55a3be_0", "question": "What is the birth date of Minoru Mochizuki?", "label": "single_hop", "source": "generated", "title": "Minoru Mochizuki"}
+{"id": "sh_23ad0dd658440e41_1", "question": "When did \"Bart the Daredevil\" originally air on the Fox network in the United States?", "label": "single_hop", "source": "generated", "title": "Bart the Daredevil"}
+{"id": "sh_243e54a89e69dc77_0", "question": "What year was the Robert Frost Farm in Derry, New Hampshire built?", "label": "single_hop", "source": "generated", "title": "Robert Frost Farm (Derry, New Hampshire)"}
+{"id": "sh_2457b463c47b10e2_0", "question": "How many homes were originally built in Packer Park?", "label": "single_hop", "source": "generated", "title": "Packer Park, Philadelphia"}
+{"id": "sh_2810d4eb67f54d96_0", "question": "What is Temple Square?", "label": "single_hop", "source": "generated", "title": "Temple Square (UTA station)"}
+{"id": "sh_2b14cc5a63bb9cf4_1", "question": "Which 2007 Sundance film featured Richard Carmen in a leading role?", "label": "single_hop", "source": "generated", "title": "Richard Carmen"}
+{"id": "sh_2b60c2f85a532ace_0", "question": "Who directed the 1984 Chinese film September?", "label": "single_hop", "source": "generated", "title": "September (1984 film)"}
+{"id": "sh_2d3ac2c3fe633d05_1", "question": "How many acres is the Robert Frost Farm property?", "label": "single_hop", "source": "generated", "title": "Robert Frost Farm (Ripton, Vermont)"}
+{"id": "sh_2def29f3822430c9_1", "question": "In what year was the Viscount Powerscourt title first created for Richard Wingfield?", "label": "single_hop", "source": "generated", "title": "Viscount Powerscourt"}
+{"id": "sh_2f2b87b9086802e3_0", "question": "When was Homework (Daft Punk album) released?", "label": "single_hop", "source": "generated", "title": "Homework (Daft Punk album)"}
+{"id": "sh_302c44d3e02a116d_0", "question": "When did the fifth season of Akademi Fantasia premiere?", "label": "single_hop", "source": "generated", "title": "Akademi Fantasia (season 5)"}
+{"id": "sh_312d35ce9434efd1_0", "question": "When did the 2002 Siebel Open take place?", "label": "single_hop", "source": "generated", "title": "2002 Siebel Open – Singles"}
+{"id": "sh_316cd963ebb72972_2", "question": "Which event did Thomas Brennan's Irish team win a gold medal in during 1966?", "label": "single_hop", "source": "generated", "title": "Thomas Brennan (equestrian)"}
+{"id": "sh_33a5624d38ed3f72_4", "question": "In which year did Werner Heisenberg receive the Nobel Prize in Physics?", "label": "single_hop", "source": "generated", "title": "Werner Heisenberg"}
+{"id": "sh_3468923a3052e2b1_5", "question": "When did WHAD become the market's only classical music station over the air?", "label": "single_hop", "source": "generated", "title": "WHAD"}
+{"id": "sh_34c83b963544183b_0", "question": "When was Friedrich Moritz Brauer born?", "label": "single_hop", "source": "generated", "title": "Friedrich Moritz Brauer"}
+{"id": "sh_34ed2b42fdc3efc3_0", "question": "When was Stephen Anthony James Duffy born?", "label": "single_hop", "source": "generated", "title": "Stephen Duffy"}
+{"id": "sh_35276c0e3347d484_1", "question": "What online poker room was Bwin.Party Digital Entertainment best known for?", "label": "single_hop", "source": "generated", "title": "Bwin.Party Digital Entertainment"}
+{"id": "sh_35c3ce3ec1c10ae5_0", "question": "When was Sad Clown Bad Summer 9 released?", "label": "single_hop", "source": "generated", "title": "Sad Clown Bad Summer 9"}
+{"id": "sh_35feb50f33a2a570_2", "question": "What did Cestrinus claim when he took a group of Epirotian volunteers?", "label": "single_hop", "source": "generated", "title": "Cestrinus"}
+{"id": "sh_3614167471d27e40_0", "question": "What is the Emerald Empress?", "label": "single_hop", "source": "generated", "title": "Emerald Empress"}
+{"id": "sh_3887c836b36607f0_1", "question": "Which aircraft designed by the Horten brothers was the world's first jet-powered flying wing?", "label": "single_hop", "source": "generated", "title": "Horten brothers"}
+{"id": "sh_396d8a4766c7830b_1", "question": "Who wrote and directed the 2016 Japanese animated drama film Your Name?", "label": "single_hop", "source": "generated", "title": "Your Name"}
+{"id": "sh_39751949530c5d9d_2", "question": "What distinction did Kent Brantly achieve after contracting Ebola?", "label": "single_hop", "source": "generated", "title": "Kent Brantly"}
+{"id": "sh_39a35a0ea5cb24be_4", "question": "During which years did \"Mystery!\" air mostly British crime series?", "label": "single_hop", "source": "generated", "title": "Mystery!"}
+{"id": "sh_3bb1189643b51b3a_1", "question": "When was the Wicked Game album released?", "label": "single_hop", "source": "generated", "title": "Wicked Game (Il Divo album)"}
+{"id": "sh_3cb1a6f8797b3c8b_0", "question": "When was Amy Chance born?", "label": "single_hop", "source": "generated", "title": "Amy Chance"}
+{"id": "sh_3cdd4e841a1e85c3_1", "question": "Where was LaSalle Bank Corporation headquartered?", "label": "single_hop", "source": "generated", "title": "LaSalle Bank"}
+{"id": "sh_3e93c08a186d2ab8_1", "question": "Since what year has the Boise State–Nevada football rivalry game been played every year, except for certain years?", "label": "single_hop", "source": "generated", "title": "Boise State–Nevada football rivalry"}
+{"id": "sh_3ee8a6306e76d0cf_0", "question": "In what year was World Wide Country Tours founded?", "label": "single_hop", "source": "generated", "title": "World Wide Country Tours"}
+{"id": "sh_3ef04fc605e097af_0", "question": "Who directed the 2013 American animated feature film Frozen?", "label": "single_hop", "source": "generated", "title": "Frozen (franchise)"}
+{"id": "sh_3f5f775c7d96e98a_1", "question": "What period does the Baltic culture in Pomerania cover according to Marija Gimbutas?", "label": "single_hop", "source": "generated", "title": "Baltic culture in Pomerania"}
+{"id": "sh_40a523ef6a86b1cd_0", "question": "When was Harrison Chad born?", "label": "single_hop", "source": "generated", "title": "Harrison Chad"}
+{"id": "sh_46c957cfdfdb4c02_1", "question": "Who founded EdChoice?", "label": "single_hop", "source": "generated", "title": "EdChoice"}
+{"id": "sh_47e93ba8e52135ae_0", "question": "What year was Monochrome released?", "label": "single_hop", "source": "generated", "title": "Monochrome (Helmet album)"}
+{"id": "sh_4816c422a3acea2e_0", "question": "What year was The Source released?", "label": "single_hop", "source": "generated", "title": "The Source (2002 film)"}
+{"id": "sh_483d2f16d4edf12a_0", "question": "When was Parker University renamed from Parker College of Chiropractic?", "label": "single_hop", "source": "generated", "title": "Parker University"}
+{"id": "sh_48a1041e3a60c34e_0", "question": "What is the birth date of Nico Erik Rosberg?", "label": "single_hop", "source": "generated", "title": "Nico Rosberg"}
+{"id": "sh_4a0017b63dec6022_5", "question": "When was Dua Lipa's self-titled debut studio album released?", "label": "single_hop", "source": "generated", "title": "Dua Lipa"}
+{"id": "sh_4c32cd6a37cc525c_0", "question": "What is a designer crossbreed?", "label": "single_hop", "source": "generated", "title": "Designer crossbreed"}
+{"id": "sh_4c745b4956e75d65_1", "question": "In what year was The Princess Diaries Volume V: Princess in Pink released by Harper Collins Publishers?", "label": "single_hop", "source": "generated", "title": "The Princess Diaries, Volume V: Princess in Pink"}
+{"id": "sh_4cb30e5e0d6a2a17_0", "question": "Which year did Quiana Grant appear in the Sports Illustrated Swimsuit Issue?", "label": "single_hop", "source": "generated", "title": "Quiana Grant"}
+{"id": "sh_4cd004675ec1ebf8_2", "question": "In which years did caffeinated alcoholic beverages face criticism for posing health risks to their drinkers?", "label": "single_hop", "source": "generated", "title": "Caffeinated alcoholic drink"}
+{"id": "sh_4d84dbd8581abd6b_1", "question": "When was Die Soldaten premiered?", "label": "single_hop", "source": "generated", "title": "Die Soldaten"}
+{"id": "sh_4da95868d338558a_0", "question": "What year was The Great Adventure released?", "label": "single_hop", "source": "generated", "title": "The Great Adventure (1921 film)"}
+{"id": "sh_4dfef9a163f03879_0", "question": "What is Kirby Morrow's full name?", "label": "single_hop", "source": "generated", "title": "Kirby Morrow"}
+{"id": "sh_4e34436d2ebc1fd9_0", "question": "When was Alex Grecian born?", "label": "single_hop", "source": "generated", "title": "Alex Grecian"}
+{"id": "sh_4eaaaee108415a52_0", "question": "When did season two of South Park begin airing?", "label": "single_hop", "source": "generated", "title": "South Park (season 2)"}
+{"id": "sh_4f8494da91a0cec6_0", "question": "When was Andrea \"Andy\" McGuire born?", "label": "single_hop", "source": "generated", "title": "Andy McGuire"}
+{"id": "sh_4f88d6dbc3159333_1", "question": "What was Birmingham City's placement in the Football League First Division during the 1999–2000 season?", "label": "single_hop", "source": "generated", "title": "1999–2000 Birmingham City F.C. season"}
+{"id": "sh_4ffc3822d211d1f3_0", "question": "What year was Larry the Cable Guy: Health Inspector released?", "label": "single_hop", "source": "generated", "title": "Larry the Cable Guy: Health Inspector"}
+{"id": "sh_511a866b226af3c9_0", "question": "What does the Korean ruling class refer to?", "label": "single_hop", "source": "generated", "title": "Korean ruling class"}
+{"id": "sh_5165f2aa1d159320_2", "question": "Who distills Whitley Neill Gin in small batches?", "label": "single_hop", "source": "generated", "title": "Whitley Neill Gin"}
+{"id": "sh_52d9561e2405bbac_0", "question": "When did season two of Numbers premiere?", "label": "single_hop", "source": "generated", "title": "Numbers (season 2)"}
+{"id": "sh_54b7b4c8c62b20c2_0", "question": "Where is Mitteldeutscher BC based?", "label": "single_hop", "source": "generated", "title": "Mitteldeutscher BC"}
+{"id": "sh_54b81efb6dd4c7aa_0", "question": "What year was Brian's Return published?", "label": "single_hop", "source": "generated", "title": "Brian's Return"}
+{"id": "sh_54e0607ad505ae3d_0", "question": "When was Thomas Richard Christy Jr. born?", "label": "single_hop", "source": "generated", "title": "Richard Christy"}
+{"id": "sh_55b597bea3a315f8_5", "question": "What is the current state of information security awareness in response to evolving threats?", "label": "single_hop", "source": "generated", "title": "Information security awareness"}
+{"id": "sh_56f0af1dc1f351e3_0", "question": "When was No. 613 (City of Manchester) Squadron formed?", "label": "single_hop", "source": "generated", "title": "No. 613 Squadron RAF"}
+{"id": "sh_590269cf17f6303d_1", "question": "When was the 2015 Euroleague Final Four held?", "label": "single_hop", "source": "generated", "title": "2015 Euroleague Final Four"}
+{"id": "sh_59d96a4a19cb6c75_0", "question": "Who is the author of Sin Pit?", "label": "single_hop", "source": "generated", "title": "Sin Pit"}
+{"id": "sh_5aa6fe0166d4c872_0", "question": "How many miles long was the North Branch Division of the Pennsylvania Canal?", "label": "single_hop", "source": "generated", "title": "Pennsylvania Canal (North Branch Division)"}
+{"id": "sh_5c2e2cbec43f2ce5_0", "question": "When was Ash Lieb born?", "label": "single_hop", "source": "generated", "title": "Ash Lieb"}
+{"id": "sh_5e1654bd76b946d5_1", "question": "Who wrote the lyrics of Starfighter Pilot?", "label": "single_hop", "source": "generated", "title": "Starfighter Pilot (song)"}
+{"id": "sh_5ec2b6c701197cfb_0", "question": "In what year was True Story released?", "label": "single_hop", "source": "generated", "title": "True Story (film)"}
+{"id": "sh_5efb901efd956001_1", "question": "When was the Vicariate Apostolic of the Hawaiian Islands created by the Holy See?", "label": "single_hop", "source": "generated", "title": "Apostolic Vicar of the Hawaiian Islands"}
+{"id": "sh_5f0316541fb356c2_0", "question": "When was Anna Åström born?", "label": "single_hop", "source": "generated", "title": "Anna Åström"}
+{"id": "sh_60312d6e08886a68_1", "question": "Who designed the Tarbell Cassette Interface?", "label": "single_hop", "source": "generated", "title": "Tarbell Cassette Interface"}
+{"id": "sh_6083b0aa9caed867_0", "question": "When was Frederick George Peter Ingle Finch born?", "label": "single_hop", "source": "generated", "title": "Peter Finch"}
+{"id": "sh_60f567023ac0e15f_0", "question": "What date was the 1993 Intercontinental Cup played?", "label": "single_hop", "source": "generated", "title": "1993 Intercontinental Cup"}
+{"id": "sh_6164d1e921936521_1", "question": "From which awards did Gloc-9 receive most of his awards?", "label": "single_hop", "source": "generated", "title": "List of awards and nominations received by Gloc-9"}
+{"id": "sh_62558316387253a5_1", "question": "Who directed Los Leones del ring contra la Cosa Nostra?", "label": "single_hop", "source": "generated", "title": "Los Leones del ring contra la Cosa Nostra"}
+{"id": "sh_636ee325eb49f661_1", "question": "When did Masterpiece (The Isley Brothers album) record?", "label": "single_hop", "source": "generated", "title": "Masterpiece (The Isley Brothers album)"}
+{"id": "sh_63796b265c9b57cc_1", "question": "Which medical degrees are included in a medical school?", "label": "single_hop", "source": "generated", "title": "Medical school"}
+{"id": "sh_6435407300b8198e_0", "question": "What is the Scottish Gaelic name for Whifflet?", "label": "single_hop", "source": "generated", "title": "Whifflet"}
+{"id": "sh_65a9b2dec331277e_1", "question": "Which Union general occupied Knoxville, Tennessee during the Knoxville Campaign?", "label": "single_hop", "source": "generated", "title": "Knoxville Campaign"}
+{"id": "sh_68b3608a127df996_5", "question": "Who murdered Deidamia II of Epirus in the sanctuary of Artemis?", "label": "single_hop", "source": "generated", "title": "Deidamia II of Epirus"}
+{"id": "sh_68dcd4e9394a91ab_2", "question": "In what year was \"Charlotte's Shorts\" performed at various theaters in Los Angeles?", "label": "single_hop", "source": "generated", "title": "Charlotte's Shorts"}
+{"id": "sh_6a13b6e1cded4c7a_0", "question": "What family does Chrysogonum belong to?", "label": "single_hop", "source": "generated", "title": "Chrysogonum"}
+{"id": "sh_6a1db4c1ea4b1204_1", "question": "When was Paradize released?", "label": "single_hop", "source": "generated", "title": "Paradize"}
+{"id": "sh_6abcc13601b62724_1", "question": "What is the title of the fourth game in the Romance of the Three Kingdoms series produced by Koei?", "label": "single_hop", "source": "generated", "title": "Romance of the Three Kingdoms IV: Wall of Fire"}
+{"id": "sh_6b168491bcde2912_0", "question": "Who directed The Five Heartbeats?", "label": "single_hop", "source": "generated", "title": "The Five Heartbeats"}
+{"id": "sh_6b1e333aff76da8d_0", "question": "When was Abdul Kadir born?", "label": "single_hop", "source": "generated", "title": "Abdul Kadir (cricketer)"}
+{"id": "sh_6b4bedf406dea528_1", "question": "In which year did Sally Cecilia Hawkins make her film debut in Mike Leigh's \"All or Nothing\"?", "label": "single_hop", "source": "generated", "title": "Sally Hawkins"}
+{"id": "sh_6c7f2e5459b43e94_0", "question": "When was Larry Semon born?", "label": "single_hop", "source": "generated", "title": "Larry Semon"}
+{"id": "sh_6d754cf734c3225d_0", "question": "When did season one of Satisfaction begin airing?", "label": "single_hop", "source": "generated", "title": "Satisfaction (season 1)"}
+{"id": "sh_6d897b455a3c88d2_0", "question": "Who founded Nine Inch Nails?", "label": "single_hop", "source": "generated", "title": "List of Nine Inch Nails band members"}
+{"id": "sh_6dc0327a30f4f8b4_0", "question": "When did Baron Rodolphe Hottinguer take over his family owned Swiss bank Hottinger & Cie?", "label": "single_hop", "source": "generated", "title": "Baron Rodolphe Hottinguer"}
+{"id": "sh_6f0a2239cd5f0175_0", "question": "What is Heckington?", "label": "single_hop", "source": "generated", "title": "Heckington"}
+{"id": "sh_6f89b4f733817d6d_1", "question": "When did the group behind Rabocheye Znamya emerge?", "label": "single_hop", "source": "generated", "title": "Rabocheye Znamya"}
+{"id": "sh_72073ea539f2836a_1", "question": "Who was the Prince of Wales Trophy named for?", "label": "single_hop", "source": "generated", "title": "Prince of Wales Trophy"}
+{"id": "sh_7209d2420df17308_0", "question": "Who are the members of Secret Rendezvous?", "label": "single_hop", "source": "generated", "title": "Secret Rendezvous (band)"}
+{"id": "sh_72a98a8c7fe2079b_1", "question": "Who hosts Tom Green's House Tonight?", "label": "single_hop", "source": "generated", "title": "Tom Green's House Tonight"}
+{"id": "sh_72fea5c92942afe4_0", "question": "Where is the Clark County Water Reclamation District located?", "label": "single_hop", "source": "generated", "title": "Clark County Water Reclamation District"}
+{"id": "sh_738b4a12759f502f_0", "question": "When was Belle's Magical World released by Walt Disney Home Video?", "label": "single_hop", "source": "generated", "title": "Belle's Magical World"}
+{"id": "sh_7598cb9c0db97698_0", "question": "Where were The Replacements formed?", "label": "single_hop", "source": "generated", "title": "The Replacements (band)"}
+{"id": "sh_76c995d837abe0fd_0", "question": "What season did the 2000 FIBA EuroLeague Final Four belong to?", "label": "single_hop", "source": "generated", "title": "2000 FIBA EuroLeague Final Four"}
+{"id": "sh_76d7da629092fc74_2", "question": "What textbook was required to be used as a reference book in the Dover Area School District's biology curriculum in October 2004?", "label": "single_hop", "source": "generated", "title": "Kitzmiller v. Dover Area School District"}
+{"id": "sh_7700b242997e3cdf_1", "question": "In what year was Dowling College established?", "label": "single_hop", "source": "generated", "title": "Dowling College"}
+{"id": "sh_7703da53cf71e42e_0", "question": "When did the 38th annual Toronto International Film Festival take place?", "label": "single_hop", "source": "generated", "title": "2013 Toronto International Film Festival"}
+{"id": "sh_7728ae3b27e6068a_3", "question": "How many inhabitants did the municipal unit Apollonia have in 2011?", "label": "single_hop", "source": "generated", "title": "Apollonia, Thessaloniki"}
+{"id": "sh_78159318f03d1df8_0", "question": "What year was the film Home released?", "label": "single_hop", "source": "generated", "title": "Home (2015 film)"}
+{"id": "sh_78ba40f122ffeb97_0", "question": "What year was Robert L. Smith born?", "label": "single_hop", "source": "generated", "title": "Robert L. Smith (recording engineer)"}
+{"id": "sh_791180c3d1a44d99_0", "question": "What year was The Finishers released?", "label": "single_hop", "source": "generated", "title": "The Finishers"}
+{"id": "sh_791ee524178f9329_0", "question": "What year was Henrik Palmgren's website Red Ice founded?", "label": "single_hop", "source": "generated", "title": "Henrik Palmgren"}
+{"id": "sh_79c616b1b42d9d49_1", "question": "When was the SS British Queen the largest passenger ship in the world?", "label": "single_hop", "source": "generated", "title": "SS British Queen"}
+{"id": "sh_7a5d3d3460234b8e_1", "question": "What is a Sheriff principal?", "label": "single_hop", "source": "generated", "title": "Sheriff principal"}
+{"id": "sh_7b6a335112bf336c_0", "question": "In what year was \"Just Like Anyone\" released?", "label": "single_hop", "source": "generated", "title": "Just Like Anyone (song)"}
+{"id": "sh_7caeb289f982a12e_0", "question": "What year was The Circle released?", "label": "single_hop", "source": "generated", "title": "The Circle (2017 film)"}
+{"id": "sh_7d11f5cfd9fd254d_4", "question": "In what year was Cardiff City Football Club elected to The Football League?", "label": "single_hop", "source": "generated", "title": "List of Cardiff City F.C. seasons"}
+{"id": "sh_7de5113d89435458_0", "question": "When was the National Television Awards initiated?", "label": "single_hop", "source": "generated", "title": "National Television Awards"}
+{"id": "sh_802dc8579cce5849_0", "question": "When was the NHL Centennial Classic held?", "label": "single_hop", "source": "generated", "title": "NHL Centennial Classic"}
+{"id": "sh_8465674cdbaf5b73_0", "question": "How many arcade games are included in Arcade's Greatest Hits: The Atari Collection 2?", "label": "single_hop", "source": "generated", "title": "Arcade's Greatest Hits: The Atari Collection 2"}
+{"id": "sh_847171d7b09a930f_0", "question": "What year was The Tempest released?", "label": "single_hop", "source": "generated", "title": "The Tempest (1979 film)"}
+{"id": "sh_85d07b534b5cc138_5", "question": "Who developed the Eat Smart, Move More, Weigh Less curriculum in 2007?", "label": "single_hop", "source": "generated", "title": "Eat Smart, Move More, Weigh Less"}
+{"id": "sh_871b0245a4efb015_0", "question": "When was Katharine Isabelle Murray born?", "label": "single_hop", "source": "generated", "title": "Katharine Isabelle"}
+{"id": "sh_871b40cfbf783924_0", "question": "When was Caterina Jarboro born?", "label": "single_hop", "source": "generated", "title": "Caterina Jarboro"}
+{"id": "sh_872a54da062ace73_1", "question": "When did the World War Veterans officially claim to have been organized?", "label": "single_hop", "source": "generated", "title": "World War Veterans"}
+{"id": "sh_87bab0d632a2c3db_1", "question": "When was Guardian Monthly launched?", "label": "single_hop", "source": "generated", "title": "Guardian Monthly"}
+{"id": "sh_89d80e04877bcfdf_0", "question": "When was Boomer Esiason born?", "label": "single_hop", "source": "generated", "title": "Boomer Esiason"}
+{"id": "sh_8a0f1d86958739fe_0", "question": "In what year was Peaks & Valleys released?", "label": "single_hop", "source": "generated", "title": "Peaks &amp; Valleys"}
+{"id": "sh_8a54a232a81c2eb0_1", "question": "When was Peter Schreyer named one of three presidents of Kia Motors?", "label": "single_hop", "source": "generated", "title": "Peter Schreyer"}
+{"id": "sh_8b4468f0d68732f3_0", "question": "When was Robert Stephens born?", "label": "single_hop", "source": "generated", "title": "Robert Stephens"}
+{"id": "sh_8c6acda73a57c820_0", "question": "When was Edwin Gagiano born?", "label": "single_hop", "source": "generated", "title": "Edwin Gagiano"}
+{"id": "sh_8ebc39e74cda7f23_0", "question": "When was Michael Tremain Sinterniklaas born?", "label": "single_hop", "source": "generated", "title": "Michael Sinterniklaas"}
+{"id": "sh_8f7f30d3fd375100_0", "question": "When was Paul Mark Oakenfold born?", "label": "single_hop", "source": "generated", "title": "Paul Oakenfold"}
+{"id": "sh_8f812c03ecd11a08_2", "question": "Who first produced the particular blend used in Passport Scotch?", "label": "single_hop", "source": "generated", "title": "Passport Scotch"}
+{"id": "sh_910191046534c9d8_1", "question": "When was Old Burying Ground established?", "label": "single_hop", "source": "generated", "title": "Old Burying Ground (Beaufort, North Carolina)"}
+{"id": "sh_910a8de594fdcc9f_4", "question": "What year did Måns Zelmerlöw win the Eurovision Song Contest?", "label": "single_hop", "source": "generated", "title": "Måns Zelmerlöw"}
+{"id": "sh_911799bbbd61ff50_1", "question": "When did the Alabama gubernatorial election, 1982 occur?", "label": "single_hop", "source": "generated", "title": "Alabama gubernatorial election, 1982"}
+{"id": "sh_91caf9867f7c3945_0", "question": "Who are the Hanson Brothers?", "label": "single_hop", "source": "generated", "title": "Hanson Brothers"}
+{"id": "sh_921d271084ba4265_4", "question": "When did Wynn Palace open?", "label": "single_hop", "source": "generated", "title": "Wynn Palace"}
+{"id": "sh_928cfb2db7e88679_0", "question": "What type of railway corridor is the Melbourne–Adelaide railway?", "label": "single_hop", "source": "generated", "title": "Melbourne–Adelaide railway"}
+{"id": "sh_92b7d67c94370d62_1", "question": "Who discovered Buddleja nivea?", "label": "single_hop", "source": "generated", "title": "Buddleja nivea"}
+{"id": "sh_92dd54eeddc21981_1", "question": "When did Evelyn Kaabule become the first Women's Representative for Luuka District?", "label": "single_hop", "source": "generated", "title": "Evelyn Kaabule"}
+{"id": "sh_973acbd49db13dd6_0", "question": "What year was Peter Hill born?", "label": "single_hop", "source": "generated", "title": "Peter Hill (entrepreneur)"}
+{"id": "sh_988e3f1b6fab6d22_1", "question": "What is the topological space 2 called in set theory?", "label": "single_hop", "source": "generated", "title": "Cantor space"}
+{"id": "sh_988f26a684a8a07f_0", "question": "What was the GRAU index of the VA spacecraft?", "label": "single_hop", "source": "generated", "title": "VA spacecraft"}
+{"id": "sh_997cace5ca385200_3", "question": "When was Unit 1 of the Ignalina Nuclear Power Plant closed?", "label": "single_hop", "source": "generated", "title": "Ignalina Nuclear Power Plant"}
+{"id": "sh_9a54c5e3ed74e7d7_3", "question": "What is the title of Nick Sakai's 2010 film that became a YouTube sensation?", "label": "single_hop", "source": "generated", "title": "Nick Sakai"}
+{"id": "sh_9aa19c3fd2491b7c_0", "question": "What number short film was A Plumbing We Will Go?", "label": "single_hop", "source": "generated", "title": "A Plumbing We Will Go"}
+{"id": "sh_9ac4cd7006f2b8b7_0", "question": "Where is Tom Gorrio based?", "label": "single_hop", "source": "generated", "title": "Tom Gorrio"}
+{"id": "sh_9b41b53adcbd0ee1_0", "question": "What is the alternate name for Legend of the Galactic Heroes?", "label": "single_hop", "source": "generated", "title": "Legend of the Galactic Heroes"}
+{"id": "sh_9bbe367e9e4bb277_2", "question": "When did Sirius reorganize its corporate structure to make Sirius XM Radio Inc. a direct, wholly owned subsidiary of Sirius XM Holdings, Inc.?", "label": "single_hop", "source": "generated", "title": "Sirius XM Holdings"}
+{"id": "sh_9cc0cf6651f85579_4", "question": "From what year until what date was Gary Tyler imprisoned?", "label": "single_hop", "source": "generated", "title": "Gary Tyler"}
+{"id": "sh_9e4366ce223d6942_0", "question": "When was Marco de Paula born?", "label": "single_hop", "source": "generated", "title": "Marco de Paula"}
+{"id": "sh_a0ac632a663cf80f_0", "question": "What year was the film Upstream Color released?", "label": "single_hop", "source": "generated", "title": "Upstream Color"}
+{"id": "sh_a276c280d0d00944_0", "question": "Who developed and executive produced the American post-apocalyptic horror television series \"The Walking Dead\"?", "label": "single_hop", "source": "generated", "title": "List of The Walking Dead (TV series) characters"}
+{"id": "sh_a3c5dd07a2fac08c_1", "question": "When did the fourth series of Rake start on ABC TV?", "label": "single_hop", "source": "generated", "title": "Rake (Australian TV series)"}
+{"id": "sh_a3ff64e65c456fcd_0", "question": "What type of game is Pueblo?", "label": "single_hop", "source": "generated", "title": "Pueblo (game)"}
+{"id": "sh_a4cb69ccb1d5cf35_0", "question": "What rank did Gottlob Christian Berger hold?", "label": "single_hop", "source": "generated", "title": "Gottlob Berger"}
+{"id": "sh_a6589d37fc46be1e_0", "question": "What is the length of the South Yuba River?", "label": "single_hop", "source": "generated", "title": "South Yuba River"}
+{"id": "sh_a6c17a1dbc872c52_2", "question": "When was permission granted to change the patron saint of the parish from St. Lawrence O’Toole to St. Ignatius of Loyola?", "label": "single_hop", "source": "generated", "title": "Church of St. Ignatius Loyola (New York City)"}
+{"id": "sh_a76a015ca86043db_0", "question": "Where did the 1st Toronto International Film Festival take place?", "label": "single_hop", "source": "generated", "title": "1976 Toronto International Film Festival"}
+{"id": "sh_a84aa45a47d1792d_1", "question": "When was \"Enter Sandman\" released as the first single from Metallica's eponymous fifth album?", "label": "single_hop", "source": "generated", "title": "Enter Sandman"}
+{"id": "sh_a95cee6717db82ab_2", "question": "In which year and city did the first MTV Europe Music Awards ceremony take place?", "label": "single_hop", "source": "generated", "title": "MTV Europe Music Award"}
+{"id": "sh_ab1bb982d00faacb_2", "question": "What are the five magic words that compose the spell in \"Substitutiary Locomotion\"?", "label": "single_hop", "source": "generated", "title": "Substitutiary Locomotion"}
+{"id": "sh_ac64e093f7d93351_0", "question": "When did Estadio Teodoro Lolo Fernández open?", "label": "single_hop", "source": "generated", "title": "Estadio Teodoro Lolo Fernández"}
+{"id": "sh_acda7f949ed4785d_0", "question": "What is Moray?", "label": "single_hop", "source": "generated", "title": "Moray"}
+{"id": "sh_ae695a15dc6a394d_2", "question": "What year was Plymouth Argyle Football Club formed?", "label": "single_hop", "source": "generated", "title": "List of Plymouth Argyle F.C. results by opponent"}
+{"id": "sh_aebbe8f6be0e1617_2", "question": "What role is Sally Ann Howes best known for?", "label": "single_hop", "source": "generated", "title": "Sally Ann Howes"}
+{"id": "sh_aebe69f31c4a711d_0", "question": "What is the primary responsibility of Marine Helicopter Squadron One (HMX-1)?", "label": "single_hop", "source": "generated", "title": "HMX-1"}
+{"id": "sh_b080174d7efe0066_4", "question": "Which years did Gerhard Windolf win the world championship in the high jump?", "label": "single_hop", "source": "generated", "title": "Gerhard Windolf"}
+{"id": "sh_b15d4a58e6e9a0b2_0", "question": "When was the 2002 Scottish Cup Final played?", "label": "single_hop", "source": "generated", "title": "2002 Scottish Cup Final"}
+{"id": "sh_b2000f3b4d64bc83_3", "question": "Which award did Jason Vieaux's album \"Play\" win in 2015?", "label": "single_hop", "source": "generated", "title": "Jason Vieaux"}
+{"id": "sh_b2c9990629029c98_0", "question": "In what year was Sam Britton elected to the Mississippi Public Service Commission?", "label": "single_hop", "source": "generated", "title": "Sam Britton"}
+{"id": "sh_b2e3d7325d1ecf03_1", "question": "Who is the mother of Kristina Corinthos-Davis?", "label": "single_hop", "source": "generated", "title": "Kristina Davis"}
+{"id": "sh_b33aa9dd8e4dbcd2_1", "question": "When was Memorial Hospital officially opened?", "label": "single_hop", "source": "generated", "title": "Memorial Hospital (Chattanooga)"}
+{"id": "sh_b3a88e91084d7342_8", "question": "In what year did Marsha V. Kazarosian become president of the Massachusetts Bar Association?", "label": "single_hop", "source": "generated", "title": "Marsha Kazarosian"}
+{"id": "sh_b3affdcba575cb28_2", "question": "In what year was Health First founded?", "label": "single_hop", "source": "generated", "title": "Health First"}
+{"id": "sh_b48bb3671e344635_0", "question": "What is Church of Anthrax?", "label": "single_hop", "source": "generated", "title": "Church of Anthrax"}
+{"id": "sh_b569f851ff19e5a0_0", "question": "When was Maxie Wander born?", "label": "single_hop", "source": "generated", "title": "Maxie Wander"}
+{"id": "sh_b6bc69132696d874_3", "question": "When did Trophy Wife premiere?", "label": "single_hop", "source": "generated", "title": "Trophy Wife (TV series)"}
+{"id": "sh_b74772abc8a6767f_1", "question": "What nickname was Nick Faure affectionately known by?", "label": "single_hop", "source": "generated", "title": "Nick Faure"}
+{"id": "sh_b82c97f20fc5fad6_0", "question": "When was The Spirit of Christmas officially titled as Michael W. Smith & Friends: The Spirit of Christmas released?", "label": "single_hop", "source": "generated", "title": "The Spirit of Christmas (Michael W. Smith album)"}
+{"id": "sh_b8b8bfabb9b4b8e9_1", "question": "Which documentary film did Sandy Cioffi direct and produce?", "label": "single_hop", "source": "generated", "title": "Sandy Cioffi"}
+{"id": "sh_b9bce67082d9db99_0", "question": "Which year was Five Enough released?", "label": "single_hop", "source": "generated", "title": "Five Enough"}
+{"id": "sh_bb5b08ed6927f665_0", "question": "When was Crystal Castles II released?", "label": "single_hop", "source": "generated", "title": "Crystal Castles II"}
+{"id": "sh_bb95fcc961a3fb52_0", "question": "How many miles did U.S. Route 66 in Arizona cover?", "label": "single_hop", "source": "generated", "title": "U.S. Route 66 in Arizona"}
+{"id": "sh_bbac7ff2d6e74e5e_1", "question": "What year was Isolated Warrior released?", "label": "single_hop", "source": "generated", "title": "Isolated Warrior"}
+{"id": "sh_bbaea53733638280_0", "question": "In what year was All of Them Witches released?", "label": "single_hop", "source": "generated", "title": "All of Them Witches"}
+{"id": "sh_bc8e7977fcb67c92_2", "question": "In what year was the State Policy Network founded?", "label": "single_hop", "source": "generated", "title": "State Policy Network"}
+{"id": "sh_bc8ff4185967a2bc_1", "question": "Who was Imhotep a chancellor to?", "label": "single_hop", "source": "generated", "title": "Imhotep"}
+{"id": "sh_bcc08cd3d7c93a1a_2", "question": "When did James G. Foggo III assume his current assignment?", "label": "single_hop", "source": "generated", "title": "James G. Foggo III"}
+{"id": "sh_bd937af1f53e7aed_2", "question": "Which round was Gary Ignasiak drafted in by the Detroit Tigers?", "label": "single_hop", "source": "generated", "title": "Gary Ignasiak"}
+{"id": "sh_bdf8c2d858a07bac_2", "question": "Which record does Shahid Afridi hold in ODI cricket?", "label": "single_hop", "source": "generated", "title": "Shahid Afridi"}
+{"id": "sh_be991dd0cc54017d_1", "question": "When did A Hunka Hunka Burns in Love first air on the Fox network?", "label": "single_hop", "source": "generated", "title": "A Hunka Hunka Burns in Love"}
+{"id": "sh_c0dbbab753f799e0_0", "question": "When did The Biggest Loser Australia: Families 2 premiere?", "label": "single_hop", "source": "generated", "title": "The Biggest Loser Australia (season 10)"}
+{"id": "sh_c1451f2262e4423a_0", "question": "When did The Walking Dead season 5 premiere?", "label": "single_hop", "source": "generated", "title": "The Walking Dead (season 5)"}
+{"id": "sh_c1a34d73b9b17b9e_3", "question": "Where is Indo Gulf Fertilisers located?", "label": "single_hop", "source": "generated", "title": "Indo Gulf Fertilisers"}
+{"id": "sh_c1a54e2bebc3fa80_1", "question": "In which regions is adult animation comparatively rare?", "label": "single_hop", "source": "generated", "title": "List of adult animated television series"}
+{"id": "sh_c1c8000a34b1a531_0", "question": "When was Leberecht Maass born?", "label": "single_hop", "source": "generated", "title": "Leberecht Maass"}
+{"id": "sh_c2ab32ee6b42a5e0_1", "question": "Who was the original choreographer of Les Sylphides?", "label": "single_hop", "source": "generated", "title": "Les Sylphides"}
+{"id": "sh_c335b529529b209e_0", "question": "When was Alfred Hutton born?", "label": "single_hop", "source": "generated", "title": "Alfred Hutton"}
+{"id": "sh_c4a27ed940e25cf2_0", "question": "When was Love Is released?", "label": "single_hop", "source": "generated", "title": "Love Is (Michi EP)"}
+{"id": "sh_c4c879c7a33d4301_1", "question": "What years did the third generation Trabant 601 model run production?", "label": "single_hop", "source": "generated", "title": "Trabant 601"}
+{"id": "sh_c5cb7576145b873a_5", "question": "When did Pebble Mine go on hold due to the loss of funding partners?", "label": "single_hop", "source": "generated", "title": "Pebble Mine"}
+{"id": "sh_c78a4b9ec04b3f10_0", "question": "Where was ginger wine first produced?", "label": "single_hop", "source": "generated", "title": "Ginger wine"}
+{"id": "sh_c7e1dc5b85fe4d07_0", "question": "What is \"Tea in the Sahara\"?", "label": "single_hop", "source": "generated", "title": "Tea in the Sahara"}
+{"id": "sh_c85759d9997855c5_0", "question": "Who discovered KNM ER 992?", "label": "single_hop", "source": "generated", "title": "KNM ER 992"}
+{"id": "sh_c89e9a45700f62c2_1", "question": "Who wrote Into the Gauntlet?", "label": "single_hop", "source": "generated", "title": "Into the Gauntlet"}
+{"id": "sh_c8acf0ab77df620a_1", "question": "How many bowl games has the Boise State Broncos college football team appeared in?", "label": "single_hop", "source": "generated", "title": "List of Boise State Broncos bowl games"}
+{"id": "sh_c94ddbd89a6fca22_0", "question": "When was Lil Zane born?", "label": "single_hop", "source": "generated", "title": "Lil Zane"}
+{"id": "sh_c9bee2ac8a743ec7_1", "question": "What is Ouyang Feng's signature martial arts technique?", "label": "single_hop", "source": "generated", "title": "Ouyang Feng"}
+{"id": "sh_ca7bd7191bb50313_0", "question": "What does an electronic musical instrument produce sound using?", "label": "single_hop", "source": "generated", "title": "Electronic musical instrument"}
+{"id": "sh_cab14ccc395a38e4_1", "question": "Who is the General Secretary of the Bangladesh Film Directors Association?", "label": "single_hop", "source": "generated", "title": "Bangladesh Film Directors Association"}
+{"id": "sh_cb96486d442e0885_1", "question": "What is the name of the reservoir included in Bald Eagle State Park?", "label": "single_hop", "source": "generated", "title": "Bald Eagle State Park"}
+{"id": "sh_cb97269b68593956_1", "question": "When was Marion Mitchell, Lady Davis born?", "label": "single_hop", "source": "generated", "title": "Marion Mitchell"}
+{"id": "sh_cc72834111a98051_1", "question": "When did the South Korean drama series Mrs. Cop begin airing?", "label": "single_hop", "source": "generated", "title": "Mrs. Cop"}
+{"id": "sh_cc97b63a0eef7183_0", "question": "What scandal is described in the paragraph?", "label": "single_hop", "source": "generated", "title": "2012 NIS public opinion manipulation scandal"}
+{"id": "sh_ccc3f97d3ad2f1d5_2", "question": "What was Macdonough Craven's rank in his class at the United States Naval Academy?", "label": "single_hop", "source": "generated", "title": "Macdonough Craven"}
+{"id": "sh_cde22762d92fb16f_0", "question": "Who was the third son of the Byzantine emperor Romanos I Lekapenos?", "label": "single_hop", "source": "generated", "title": "Constantine Lekapenos"}
+{"id": "sh_ce5c8a970d8e76a7_0", "question": "When did the Hohenstaufen Holy Roman Emperor Frederick II make the County of Aosta a duchy?", "label": "single_hop", "source": "generated", "title": "Duke of Aosta"}
+{"id": "sh_d14a13da778a5914_0", "question": "What type of institution was Stevenson College Edinburgh?", "label": "single_hop", "source": "generated", "title": "Stevenson College, Edinburgh"}
+{"id": "sh_d1e211bda6c231b8_3", "question": "When did the Rinaldo Zardini Palaeontology Museum open?", "label": "single_hop", "source": "generated", "title": "Rinaldo Zardini Palaeontology Museum"}
+{"id": "sh_d21fc5a0c37b19fc_1", "question": "What nickname did Sporting News acquire due to its dominance in covering baseball?", "label": "single_hop", "source": "generated", "title": "Sporting News"}
+{"id": "sh_d3a8e7a92498b95f_0", "question": "What year did the webcomic One-Punch Man begin publication?", "label": "single_hop", "source": "generated", "title": "One-Punch Man"}
+{"id": "sh_d405b46a92b12369_0", "question": "What is the length of the Darling River from its source to its confluence with the Murray River?", "label": "single_hop", "source": "generated", "title": "Darling River"}
+{"id": "sh_d42de42ed5ef0afd_1", "question": "Who directed Zee and Co.?", "label": "single_hop", "source": "generated", "title": "Zee and Co."}
+{"id": "sh_d6b26e8342a69b05_0", "question": "Which British rock band performed the song \"One of the Survivors\"?", "label": "single_hop", "source": "generated", "title": "One of the Survivors"}
+{"id": "sh_d6f27cabe124367a_1", "question": "What year did Jeffrey Robert Forshaw become a professor of particle physics at the University of Manchester?", "label": "single_hop", "source": "generated", "title": "Jeff Forshaw"}
+{"id": "sh_d777ac9618c96e2f_6", "question": "How many spectators attend the Pebble Beach Concours d'Elegance?", "label": "single_hop", "source": "generated", "title": "Pebble Beach Concours d'Elegance"}
+{"id": "sh_d845e460114b3d5e_1", "question": "Which tournament did James Benjamin Batley win in 1909?", "label": "single_hop", "source": "generated", "title": "James Batley"}
+{"id": "sh_d87568f8388cb94c_0", "question": "What is a hot point probe used to determine quickly?", "label": "single_hop", "source": "generated", "title": "Hot-point probe"}
+{"id": "sh_d8c8012238e84c25_0", "question": "During which period was the praenomen Agrippa most common?", "label": "single_hop", "source": "generated", "title": "Agrippa (praenomen)"}
+{"id": "sh_d8e989867f91a21f_0", "question": "What is the title of the song recorded by English singer-songwriter Charli XCX that was written for her mixtape \"Number 1 Angel\" (2017)?", "label": "single_hop", "source": "generated", "title": "3AM (Pull Up)"}
+{"id": "sh_d93cc0f9036c4ead_2", "question": "When did the 2002 NFL Draft take place?", "label": "single_hop", "source": "generated", "title": "2002 NFL Draft"}
+{"id": "sh_dad7b230b1216908_0", "question": "What type of hat is the Canterbury cap?", "label": "single_hop", "source": "generated", "title": "Canterbury cap"}
+{"id": "sh_db43909443eb411b_3", "question": "What is the age of Zeke, the skateboarder in Zeke's Pad?", "label": "single_hop", "source": "generated", "title": "Zeke's Pad"}
+{"id": "sh_db4821f89662d801_1", "question": "Who directed The Girl Next Door?", "label": "single_hop", "source": "generated", "title": "The Girl Next Door (2004 film)"}
+{"id": "sh_db66501a546f7d62_0", "question": "When was Steven Michael \"Steve\" Burns born?", "label": "single_hop", "source": "generated", "title": "Steve Burns"}
+{"id": "sh_db96ba511d032eaa_0", "question": "When was Mega Man comic series announced at New York Comic Con?", "label": "single_hop", "source": "generated", "title": "Mega Man (Archie Comics)"}
+{"id": "sh_dc2968eb62044d59_0", "question": "When was Träd, Gräs & Stenar formed?", "label": "single_hop", "source": "generated", "title": "Träd, Gräs &amp; Stenar"}
+{"id": "sh_dd3e7d4cd73b8f1f_1", "question": "When was German submarine U-717 commissioned?", "label": "single_hop", "source": "generated", "title": "German submarine U-717"}
+{"id": "sh_ddb4a28236874df6_1", "question": "Where does Minija begin hydrographically?", "label": "single_hop", "source": "generated", "title": "Minija"}
+{"id": "sh_ded43c23fdadb7c0_0", "question": "What is Paphiopedilum often called?", "label": "single_hop", "source": "generated", "title": "Paphiopedilum"}
+{"id": "sh_dff3ec01bdbd4421_2", "question": "What is the name of the character played by Bobby Tamale in the 2016 Ugandan film \"The Only Son\"?", "label": "single_hop", "source": "generated", "title": "Bobby Tamale"}
+{"id": "sh_e31aef87ae60ec32_3", "question": "How many locations does Central Market have?", "label": "single_hop", "source": "generated", "title": "Central Market (Texas)"}
+{"id": "sh_e4b20764f792f39b_0", "question": "How many indigenous populations are mixed into Cameroon’s culture?", "label": "single_hop", "source": "generated", "title": "Culture of Cameroon"}
+{"id": "sh_e4c2b1329dd64733_0", "question": "When was The Boothill Foot Tappers formed?", "label": "single_hop", "source": "generated", "title": "Boothill Foot Tappers"}
+{"id": "sh_e7e2e8baa944077c_0", "question": "When was Andreas Gabalier born?", "label": "single_hop", "source": "generated", "title": "Andreas Gabalier"}
+{"id": "sh_e8a6c73ce5a0c7e9_1", "question": "When was the last Maratha emperor deposed?", "label": "single_hop", "source": "generated", "title": "Maratha emperors"}
+{"id": "sh_e8fd0c18058c5b5a_0", "question": "Who is Joseph Rakowski?", "label": "single_hop", "source": "generated", "title": "Joseph Rakowski"}
+{"id": "sh_eb0e581b3dd6fe34_0", "question": "When was Yoshiro Muraki born?", "label": "single_hop", "source": "generated", "title": "Yoshirō Muraki"}
+{"id": "sh_ebcc0dd9c9f0f292_1", "question": "Who signed the Voting Rights Act of 1965 into law?", "label": "single_hop", "source": "generated", "title": "Voting Rights Act of 1965"}
+{"id": "sh_ec764e7895e9a3a4_3", "question": "Which competition did Zenon Kitowski win in 1982?", "label": "single_hop", "source": "generated", "title": "Zenon Kitowski"}
+{"id": "sh_ec7e3a21cb4f9d6c_0", "question": "When was M. Lincoln Schuster born?", "label": "single_hop", "source": "generated", "title": "M. Lincoln Schuster"}
+{"id": "sh_ed662f17e71e59b4_2", "question": "What year did the Argentine Air Force contract Cicaré to develop a light helicopter for training and also marketed for agricultural use?", "label": "single_hop", "source": "generated", "title": "Cicaré CK.1"}
+{"id": "sh_edd2b5bd194b5b63_3", "question": "In what year did Dario Antiseri retire from academia?", "label": "single_hop", "source": "generated", "title": "Dario Antiseri"}
+{"id": "sh_ede894501d9853a2_0", "question": "In what year was the Codorus Navigation Company formed?", "label": "single_hop", "source": "generated", "title": "Codorus Navigation"}
+{"id": "sh_ee7e026434be1186_0", "question": "What year was the British sitcom Very Big Very Soon released?", "label": "single_hop", "source": "generated", "title": "Very Big Very Soon"}
+{"id": "sh_f01f5869fd433baf_2", "question": "Who was the head coach of the 2006 Toledo Rockets football team?", "label": "single_hop", "source": "generated", "title": "2006 Toledo Rockets football team"}
+{"id": "sh_f06fe6d81366da9f_3", "question": "How many different peoples compose the Papuan people?", "label": "single_hop", "source": "generated", "title": "Papuan mythology"}
+{"id": "sh_f2d619e9c0287bc3_1", "question": "When was The Wolf magazine established?", "label": "single_hop", "source": "generated", "title": "The Wolf (magazine)"}
+{"id": "sh_f2fcd1478c926d53_1", "question": "When was the compilation of the Mémoires de Hector Berlioz into one book completed?", "label": "single_hop", "source": "generated", "title": "Mémoires (Berlioz)"}
+{"id": "sh_f43425ad8d41c07e_5", "question": "What article of the Nevada Constitution sets that Senators serve staggered four-year terms?", "label": "single_hop", "source": "generated", "title": "Nevada Senate"}
+{"id": "sh_f5bc0c69ab16e6ce_2", "question": "What is the elevation of Argonaut Peak?", "label": "single_hop", "source": "generated", "title": "Argonaut Peak"}
+{"id": "sh_f6443a1efa397c67_1", "question": "In what year was Chimamanda Ngozi Adichie awarded a MacArthur Genius Grant?", "label": "single_hop", "source": "generated", "title": "Chimamanda Ngozi Adichie"}
+{"id": "sh_f95806d9a79aae46_3", "question": "When was To Be Continued... certified gold in the United States?", "label": "single_hop", "source": "generated", "title": "To Be Continued... (box set)"}
+{"id": "sh_f9a022eaadcfbea0_3", "question": "What date did General E. Kirby Smith assign Benjamin Franklin Gordon to duty as a brigadier general?", "label": "single_hop", "source": "generated", "title": "Benjamin Franklin Gordon"}
+{"id": "sh_faee11d841a1b237_1", "question": "When did Krusty Gets Busted originally air on the Fox network in the United States?", "label": "single_hop", "source": "generated", "title": "Krusty Gets Busted"}
+{"id": "sh_fb02fb96353facf9_1", "question": "Who wrote The Musical of Musicals (The Musical!)?", "label": "single_hop", "source": "generated", "title": "The Musical of Musicals (The Musical!)"}
+{"id": "sh_fb7c1db668d704a8_0", "question": "What is Nsuta the capital of?", "label": "single_hop", "source": "generated", "title": "Nsuta"}
+{"id": "sh_fb9cb3c925a366c6_0", "question": "Who directed the 1985 Soviet war drama film \"Come and See\"?", "label": "single_hop", "source": "generated", "title": "Come and See"}
+{"id": "sh_fbc242c3b7c966d8_0", "question": "Which region is primarily referred to by the term \"Old World wine\"?", "label": "single_hop", "source": "generated", "title": "Old World wine"}
+{"id": "sh_fce836b73e5dd631_0", "question": "What year was the film Carmen Jones released?", "label": "single_hop", "source": "generated", "title": "Carmen Jones (film)"}
+{"id": "sh_fdc0214b8df3de54_0", "question": "Who starred in The Strawberry Blonde?", "label": "single_hop", "source": "generated", "title": "The Strawberry Blonde"}
