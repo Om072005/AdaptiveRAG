@@ -53,6 +53,50 @@ def chunk_vectors(chunk_ids: list[str]) -> dict[str, np.ndarray]:
     return {r[0]: r[1].to_numpy().astype(np.float32) for r in rows}
 
 
+# Benchmark only: with these off, the only plan left for the search is the partial HNSW index.
+INDEX_ONLY: tuple[LiteralString, ...] = (
+    "set local enable_seqscan = off",
+    "set local enable_bitmapscan = off",
+    "set local enable_sort = off",
+)
+
+
+def stored_vectors(strategy: Strategy, doc_ids: list[str]) -> tuple[list[str], np.ndarray]:
+    """Benchmark only: chunk ids and embeddings of one strategy, in chunk id order."""
+    rows = read(
+        "select chunk_id, embedding from chunks where strategy = %s and doc_id = any(%s) "
+        "and embedding is not null order by chunk_id",
+        (strategy, doc_ids),
+    )
+    return [r[0] for r in rows], np.array([r[1].to_numpy() for r in rows], dtype=np.float32)
+
+
+def index_search(
+    c: psycopg.Connection[Any], qvec: np.ndarray, k: int, strategy: Strategy, ef_search: int
+) -> list[str]:
+    """Benchmark only: top k chunk ids through the partial HNSW index at one ef_search.
+
+    c must be in autocommit mode, so the settings end with this one transaction.
+    """
+    query = sql.SQL(SEARCH).format(strategy=sql.Literal(strategy))
+    with c.transaction():
+        for statement in INDEX_ONLY:
+            c.execute(statement)
+        c.execute("select set_config('hnsw.ef_search', %s, true)", (str(ef_search),))
+        rows = c.execute(query, {"q": np.asarray(qvec, dtype=np.float32), "k": k}).fetchall()
+    return [r[0] for r in rows]
+
+
+def uses_index(c: psycopg.Connection[Any], qvec: np.ndarray, k: int, strategy: Strategy) -> bool:
+    """Benchmark only: whether the forced plan really scans chunks_hnsw_<strategy>."""
+    query = sql.SQL("explain ") + sql.SQL(SEARCH).format(strategy=sql.Literal(strategy))
+    with c.transaction():
+        for statement in INDEX_ONLY:
+            c.execute(statement)
+        plan = c.execute(query, {"q": np.asarray(qvec, dtype=np.float32), "k": k}).fetchall()
+    return any(f"chunks_hnsw_{strategy}" in r[0] for r in plan)
+
+
 def read(query: LiteralString | sql.Composed, params: Any) -> list[tuple[Any, ...]]:
     """Rows of one read on the shared connection, reconnecting once if Neon closed it idle."""
     for attempt in range(2):
