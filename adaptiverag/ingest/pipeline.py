@@ -3,6 +3,8 @@
 import argparse
 from typing import Any, cast, get_args
 
+from psycopg import Connection
+
 from adaptiverag.config import ingest_cfg
 from adaptiverag.ingest import loader
 from adaptiverag.ingest.chunking import chunk_fixed, chunk_semantic, chunk_sentence
@@ -15,6 +17,7 @@ from adaptiverag.types import Chunk, Document, Strategy
 # Embedded and committed together, so a stopped run keeps what it finished. Half of the Gemini
 # free tier minute (100 texts), so a retried batch fits once part of that minute has cleared.
 EMBED_BATCH = 50
+DOC_BATCH = 200  # documents chunked and committed together; semantic embeds their sentences
 
 
 def parse_strategies(text: str) -> list[Strategy]:
@@ -38,30 +41,42 @@ def chunk_docs(docs: list[Document], strategy: Strategy, cfg: dict[str, Any]) ->
     return [ch for d, v in zip(docs, vecs, strict=True) for ch in chunk_semantic(d, v, pct)]
 
 
+def store_chunks(
+    c: Connection[Any], docs: list[Document], strategy: Strategy, cfg: dict[str, Any]
+) -> None:
+    """Chunk the documents that have no chunks of this strategy yet, committing per batch."""
+    done = corpus.chunked_doc_ids(c, strategy, [d.doc_id for d in docs])
+    todo = [d for d in docs if d.doc_id not in done]
+    new = 0
+    for start in range(0, len(todo), DOC_BATCH):
+        new += corpus.insert_chunks(c, chunk_docs(todo[start : start + DOC_BATCH], strategy, cfg))
+        c.commit()
+        print(f"chunks {strategy}: {min(start + DOC_BATCH, len(todo))}/{len(todo)} documents")
+    print(f"chunks {strategy}: {new} new, {len(done)} documents were done before")
+
+
+def store_embeddings(c: Connection[Any], strategy: Strategy, doc_ids: list[str]) -> None:
+    """Embed the chunks of this strategy that have no embedding yet, committing per batch."""
+    missing = corpus.chunks_without_embedding(c, [strategy], doc_ids)
+    for start in range(0, len(missing), EMBED_BATCH):
+        batch = missing[start : start + EMBED_BATCH]
+        corpus.set_embeddings(c, [ch.chunk_id for ch in batch], embed_chunks(batch))
+        c.commit()
+        print(f"embeddings {strategy}: {start + len(batch)}/{len(missing)}")
+    print(f"embeddings {strategy}: {len(missing)} were missing, all stored")
+
+
 def run(name: str, strategies: list[Strategy]) -> None:
-    """Store documents, chunks and chunk embeddings, skipping whatever is already stored."""
+    """Store documents, then chunks and embeddings one strategy at a time, in the order given."""
     cfg = ingest_cfg()["chunk"]
     docs, _ = loader.corpus(name)
-    doc_ids = [d.doc_id for d in docs]
     with conn() as c:
         new = corpus.insert_documents(c, docs)
         c.commit()
         print(f"documents: {new} new, {len(docs) - new} already stored")
         for strategy in strategies:
-            done = corpus.chunked_doc_ids(c, strategy, doc_ids)
-            todo = [d for d in docs if d.doc_id not in done]
-            new = corpus.insert_chunks(c, chunk_docs(todo, strategy, cfg))
-            c.commit()
-            print(
-                f"chunks {strategy}: {new} new from {len(todo)} documents, {len(done)} done before"
-            )
-        missing = corpus.chunks_without_embedding(c, strategies, doc_ids)
-        for start in range(0, len(missing), EMBED_BATCH):
-            batch = missing[start : start + EMBED_BATCH]
-            corpus.set_embeddings(c, [ch.chunk_id for ch in batch], embed_chunks(batch))
-            c.commit()
-            print(f"embeddings: {start + len(batch)}/{len(missing)}")
-        print(f"embeddings: {len(missing)} were missing, all stored")
+            store_chunks(c, docs, strategy, cfg)
+            store_embeddings(c, strategy, [d.doc_id for d in docs])
 
 
 def main(argv: list[str] | None = None) -> None:
