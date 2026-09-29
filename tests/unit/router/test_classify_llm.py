@@ -2,6 +2,7 @@ from typing import Any
 
 import pytest
 
+from adaptiverag.config import router_cfg
 from adaptiverag.router import classify as classify_mod
 from adaptiverag.router.classify import LABELS, classify, llm_probs
 from adaptiverag.telemetry.trace import Trace
@@ -26,6 +27,7 @@ def test_the_model_classifier_records_its_call(monkeypatch: pytest.MonkeyPatch) 
             {
                 "role": role,
                 "json": kw["json_mode"],
+                "max_tokens": kw["max_tokens"],
                 "trace": kw["trace"],
                 "user": messages[-1]["content"],
             }
@@ -42,6 +44,7 @@ def test_the_model_classifier_records_its_call(monkeypatch: pytest.MonkeyPatch) 
         {
             "role": "classify",
             "json": True,
+            "max_tokens": router_cfg()["classifier"]["llm_max_tokens"],
             "trace": trace,
             "user": "Question: Which is older, A or B?",
         }

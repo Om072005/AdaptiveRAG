@@ -223,7 +223,9 @@ def classify_llm(question: str, trace: Trace) -> Classification:
         {"role": "system", "content": FEW_SHOT},
         {"role": "user", "content": f"Question: {question}"},
     ]
-    r = llm.chat("classify", messages, json_mode=True, trace=trace)
+    # gpt-oss reasons before it answers; 512 and 1024 tokens ran out on some dev questions
+    max_tokens = int(router_cfg()["classifier"]["llm_max_tokens"])
+    r = llm.chat("classify", messages, json_mode=True, trace=trace, max_tokens=max_tokens)
     probs = llm_probs(r.text)
     label = max(LABELS, key=lambda lb: probs[lb])
     return Classification(label, probs[label], probs, "llm", r.cost_usd, r.latency_ms)

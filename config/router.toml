@@ -10,6 +10,7 @@ min_confidence = 0.60
 learning_rate = 0.5           # logistic regression: full batch gradient descent from zero weights
 l2 = 0.001
 epochs = 400
+llm_max_tokens = 2048        # few shot llm classifier: reasoning counts against this
 
 [vector]                      # M2
 k = 8
