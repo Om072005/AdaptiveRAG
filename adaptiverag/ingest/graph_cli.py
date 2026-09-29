@@ -1,5 +1,6 @@
 """python -m adaptiverag.ingest graph --corpus mini|dev|gold|full [--limit N] [--dry-run]
 python -m adaptiverag.ingest graph embed --corpus mini|dev|gold|full [--slice K/N]
+    [--part names|relations]
 python -m adaptiverag.ingest graph merges --corpus dev [--n 100] | --label | --precision
 python -m adaptiverag.ingest relink [--dry-run]
 
@@ -160,12 +161,17 @@ def embed_main(argv: list[str]) -> None:
     parser = argparse.ArgumentParser(prog="python -m adaptiverag.ingest graph embed")
     parser.add_argument("--corpus", choices=CORPORA, required=True)
     parser.add_argument("--slice", type=parse_slice, default="1/1", help="K/N, for example 2/4")
+    # names first: merge sampling needs every name vector, not the relations
+    parser.add_argument("--part", choices=["all", "names", "relations"], default="all")
     args = parser.parse_args(argv)
     k, n = args.slice
     _, kept, _, calls = extract_corpus(args.corpus, None)
     texts = graph_texts(kept)
+    if args.part != "all":
+        names = set(name_texts(kept)[1])
+        texts = [t for t in texts if (t in names) == (args.part == "names")]
     mine = [t for t in texts if in_slice(t, k, n)]
-    what = f"graph embed slice {k}/{n}"
+    what = f"graph embed {args.part} slice {k}/{n}"
     print(f"extraction calls from the cache: {sum(c.cached for c in calls)} of {len(calls)}")
     print(f"{what}: {len(mine)} of {len(texts)} texts")
     try:

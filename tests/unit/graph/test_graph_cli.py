@@ -64,6 +64,21 @@ def test_embed_slices_split_the_texts_and_stop_cleanly_on_the_quota(
         graph_cli.main(["embed", "--corpus", "mini", "--slice", "1/3"])
 
 
+def test_names_can_be_embedded_before_the_relations(monkeypatch: pytest.MonkeyPatch) -> None:
+    names = [f"name {i}" for i in range(10)]
+    relations = [f"relation {i}" for i in range(10)]
+    monkeypatch.setattr(graph_cli, "extract_corpus", lambda corpus, limit: ([], [TRIPLE], [], []))
+    monkeypatch.setattr(graph_cli, "graph_texts", lambda kept: sorted(names + relations))
+    monkeypatch.setattr(graph_cli, "name_texts", lambda kept: ([], names))
+    sent: list[list[str]] = []
+    monkeypatch.setattr(graph_cli.llm, "embed", sent.append)
+    for k in (1, 2):
+        graph_cli.main(["embed", "--corpus", "mini", "--slice", f"{k}/2", "--part", "names"])
+    assert sorted(t for batch in sent for t in batch) == names
+    graph_cli.main(["embed", "--corpus", "mini", "--part", "relations"])
+    assert sent[-1] == relations
+
+
 def test_gold_documents_are_every_context_paragraph_or_the_generated_one() -> None:
     from adaptiverag.ingest.loader import SOURCE
     from adaptiverag.ingest.normalize import doc_id
