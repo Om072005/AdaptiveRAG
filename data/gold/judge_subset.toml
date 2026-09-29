@@ -1,0 +1,163 @@
+# The fixed 40 dev questions every judged run scores (eval.gold subset),
+# drawn per type in proportion to the dev split, seed 7.
+# Use: eval.run --questions data/gold/judge_subset.toml --judge
+
+[[question]]
+id = "hp_5a712fca5542994082a3e641"
+type = "comparison"
+
+[[question]]
+id = "hp_5a79332555429907847277e7"
+type = "comparison"
+
+[[question]]
+id = "hp_5a7b4fee554299042af8f748"
+type = "comparison"
+
+[[question]]
+id = "hp_5a7c8e7955429935c91b521a"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5a7f22005542993067513656"
+type = "comparison"
+
+[[question]]
+id = "hp_5a7ff71a5542992e7d278dd0"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5a815c2e5542995ce29dcbe8"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5a81937e5542995ce29dcc08"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5a82a91155429940e5e1a911"
+type = "comparison"
+
+[[question]]
+id = "hp_5a844fd35542990548d0b274"
+type = "comparison"
+
+[[question]]
+id = "hp_5a865bbf5542991e77181615"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5a87144155429960ec39b72b"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5a89e8035542992e4fca846d"
+type = "comparison"
+
+[[question]]
+id = "hp_5a8b036d55429971feec45fe"
+type = "comparison"
+
+[[question]]
+id = "hp_5a8ba3ff55429971feec4744"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5a8bae135542996e8ac889b6"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5a8d75f35542994ba4e3dc8b"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5ab7948b5542995dae37e969"
+type = "comparison"
+
+[[question]]
+id = "hp_5aba637a55429939ce03dcbb"
+type = "comparison"
+
+[[question]]
+id = "hp_5abf8e135542990832d3a14f"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5ac285335542996773102552"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5ac2ea1a5542990b17b154a1"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5ac41379554299204fd21ef1"
+type = "comparison"
+
+[[question]]
+id = "hp_5adcceda5542990d50227d31"
+type = "comparison"
+
+[[question]]
+id = "hp_5addda9b5542992200553b5b"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5ae0d52e554299603e418469"
+type = "multi_hop"
+
+[[question]]
+id = "hp_5ae326d85542991a06ce9938"
+type = "multi_hop"
+
+[[question]]
+id = "sh_00425d3e2cf1d3b0_0"
+type = "single_hop"
+
+[[question]]
+id = "sh_196e69ea7d62b25c_0"
+type = "single_hop"
+
+[[question]]
+id = "sh_1d77dd2f653f667f_0"
+type = "single_hop"
+
+[[question]]
+id = "sh_4272d4fe2120a996_1"
+type = "single_hop"
+
+[[question]]
+id = "sh_447b261bce864270_0"
+type = "single_hop"
+
+[[question]]
+id = "sh_79b37687e1865616_0"
+type = "single_hop"
+
+[[question]]
+id = "sh_90d65be4516dfa49_0"
+type = "single_hop"
+
+[[question]]
+id = "sh_9e3714c9e8a4197d_0"
+type = "single_hop"
+
+[[question]]
+id = "sh_ac7d4b6162598ed5_0"
+type = "single_hop"
+
+[[question]]
+id = "sh_b5724c378de7669f_0"
+type = "single_hop"
+
+[[question]]
+id = "sh_e081e1700d456c95_0"
+type = "single_hop"
+
+[[question]]
+id = "sh_eb13828a4eeee5da_2"
+type = "single_hop"
+
+[[question]]
+id = "sh_efc48f0ed897a49c_0"
+type = "single_hop"

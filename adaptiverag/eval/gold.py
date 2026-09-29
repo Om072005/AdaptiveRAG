@@ -192,6 +192,35 @@ def cmd_split(sources: list[Path], gold_dir: Path, seed: int) -> None:
     print(f"wrote {n_dev} dev and {len(items) - n_dev} test items to {gold_dir}")
 
 
+def judge_subset(items: list[GoldItem], n: int, seed: int = 7) -> list[GoldItem]:
+    """n items drawn per type in proportion to the split (largest remainder), in a seeded order.
+
+    The judge's free quota cannot score every answer of every variant, so each judged run scores
+    this same fixed subset; EM, F1 and recall still cover the whole split."""
+    counts = {t: sum(i.type == t for i in items) for t in sorted(QTYPES)}
+    exact = {t: n * c / len(items) for t, c in counts.items()}
+    take = {t: int(v) for t, v in exact.items()}
+    for t in sorted(exact, key=lambda t: (-(exact[t] - take[t]), t))[: n - sum(take.values())]:
+        take[t] += 1
+    picked = [i for t in sorted(QTYPES) for i in seeded_pool(items, t, seed)[: take[t]]]
+    return sorted(picked, key=lambda i: i.id)
+
+
+def cmd_subset(n: int, out: Path, seed: int) -> None:
+    picked = judge_subset(load_split("dev"), n, seed)
+    lines = [
+        f"# The fixed {n} dev questions every judged run scores (eval.gold subset),",
+        f"# drawn per type in proportion to the dev split, seed {seed}.",
+        "# Use: eval.run --questions data/gold/judge_subset.toml --judge",
+        "",
+    ]
+    for i in picked:
+        lines += ["[[question]]", f'id = "{i.id}"', f'type = "{i.type}"', ""]
+    out.write_text("\n".join(lines), encoding="utf-8", newline="\n")
+    counts = {t: sum(i.type == t for i in picked) for t in sorted(QTYPES)}
+    print(f"wrote {len(picked)} questions to {out} {counts}")
+
+
 def cmd_replace(n: int, reason: str, gold_dir: Path, sources: list[Path]) -> None:
     from adaptiverag.eval import verify
 
@@ -250,6 +279,10 @@ def main(argv: list[str] | None = None) -> None:
         nargs="+",
         default=[GOLD_DIR / "candidates.jsonl", GOLD_DIR / "single_hop.jsonl"],
     )
+    su = sub.add_parser("subset", help="the fixed dev questions every judged run scores")
+    su.add_argument("--n", type=int, default=40)
+    su.add_argument("--seed", type=int, default=7)
+    su.add_argument("--out", type=Path, default=GOLD_DIR / "judge_subset.toml")
     st = sub.add_parser("status", help="which items are not verified yet")
     st.add_argument("--gold-dir", type=Path, default=GOLD_DIR)
     args = p.parse_args(argv)
@@ -271,6 +304,8 @@ def main(argv: list[str] | None = None) -> None:
         print(f"verified {counts['y']}, flagged {counts['n']}, skipped {counts['s']}")
     elif args.cmd == "replace":
         cmd_replace(args.n, args.reason, args.gold_dir, args.candidates)
+    elif args.cmd == "subset":
+        cmd_subset(args.n, args.out, args.seed)
     elif args.cmd == "status":
         s = verify.status(args.gold_dir)
         print(f"{s['total']} items, {len(s['unverified'])} not verified: {s['unverified']}")

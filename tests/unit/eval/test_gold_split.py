@@ -117,3 +117,15 @@ def test_replace_refuses_out_of_range(tmp_path: Path) -> None:
                 str(src),
             ]
         )
+
+
+def test_judge_subset_is_proportional_seeded_and_order_free() -> None:
+    items = pool("multi_hop", 38) + pool("comparison", 29) + pool("single_hop", 33)
+    picked = gold.judge_subset(items, 40)
+    counts = {
+        t: sum(i.type == t for i in picked) for t in ("single_hop", "multi_hop", "comparison")
+    }
+    assert counts == {"single_hop": 13, "multi_hop": 15, "comparison": 12}
+    assert picked == gold.judge_subset(list(reversed(items)), 40)
+    assert [i.id for i in picked] == sorted(i.id for i in picked)
+    assert picked != gold.judge_subset(items, 40, seed=8)
