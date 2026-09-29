@@ -98,3 +98,36 @@ def test_config_has_every_key_the_policy_reads() -> None:
     real = router_cfg()
     for section, keys in CFG.items():
         assert set(keys) <= set(real[section])
+
+
+LOW = 0.049  # under policy.low_budget_usd = 0.05
+
+
+def test_row6_low_budget_turns_graph_into_vector() -> None:
+    assert decide_initial("auto", labelled("multi_hop"), [seed(0.9)], LOW, CFG) == (
+        "vector",
+        ["relational:multi_hop", "low_budget"],
+    )
+
+
+def test_row6_low_budget_turns_hybrid_into_vector() -> None:
+    assert decide_initial("auto", labelled("comparison", 0.3), [], LOW, CFG) == (
+        "vector",
+        ["ambiguous:comparison 0.30", "low_budget"],
+    )
+
+
+def test_row6_leaves_vector_and_forced_routes_alone() -> None:
+    assert decide_initial("auto", labelled("single_hop"), [], LOW, CFG) == (
+        "vector",
+        ["no_relational_structure"],
+    )
+    assert decide_initial("graph", labelled("multi_hop"), [seed(0.9)], LOW, CFG) == (
+        "graph",
+        ["forced:graph"],
+    )
+
+
+def test_row6_budget_at_the_bar_is_not_low() -> None:
+    route, _ = decide_initial("auto", labelled("multi_hop"), [seed(0.9)], 0.05, CFG)
+    assert route == "graph"

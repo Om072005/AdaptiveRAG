@@ -16,7 +16,17 @@ def decide_initial(
 ) -> tuple[Route, list[str]]:
     """First route and one reason per decision diamond passed. cfg is router.toml."""
     if mode != "auto":
-        return mode, [f"forced:{mode}"]  # row 1
+        return mode, [f"forced:{mode}"]  # row 1, a forced route ignores the budget too
+    route, reasons = by_question(c, seeds, cfg)
+    if route != "vector" and budget_left_usd < cfg["policy"]["low_budget_usd"]:
+        return "vector", [*reasons, "low_budget"]  # row 6
+    return route, reasons
+
+
+def by_question(
+    c: Classification | None, seeds: list[Seed], cfg: dict[str, Any]
+) -> tuple[Route, list[str]]:
+    """Rows 2 to 5: the route the question itself asks for."""
     if c is None:
         raise ValueError("auto mode needs a classification")
     if c.confidence < cfg["classifier"]["min_confidence"]:
