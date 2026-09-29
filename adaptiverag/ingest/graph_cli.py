@@ -1,18 +1,24 @@
-"""python -m adaptiverag.ingest graph --corpus mini|full [--dry-run] | relink
+"""python -m adaptiverag.ingest graph --corpus mini|full [--limit N] [--dry-run]
+python -m adaptiverag.ingest graph embed --corpus mini|full [--slice K/N]
 
-Extracts triples (cached), stores the rejects, resolves entities and replaces the graph.
+The build extracts triples (cached), stores the rejects, resolves entities and replaces the graph.
+The embed step fills the cache with the texts a build embeds, one slice at a time, so helpers can
+spread them over their own keys; a rerun skips what is cached.
 """
 
 import argparse
 import json
+import sys
 from typing import Any
 
 from adaptiverag import llm
 from adaptiverag.config import ROOT, router_cfg
 from adaptiverag.ingest.extract import extract_batches, summarize
-from adaptiverag.ingest.resolve import relation_texts, resolve
+from adaptiverag.ingest.pipeline import endpoint, in_slice, parse_slice
+from adaptiverag.ingest.resolve import graph_texts, relation_texts, resolve
 from adaptiverag.llm import RateLimited
 from adaptiverag.stores import graph as store
+from adaptiverag.types import Chunk, LLMResult, Triple
 
 
 def corpus_doc_ids(corpus: str) -> list[str]:
@@ -21,7 +27,50 @@ def corpus_doc_ids(corpus: str) -> list[str]:
     return list(json.loads(path.read_text(encoding="utf-8"))["doc_ids"])
 
 
+def extract_corpus(
+    corpus: str, limit: int | None
+) -> tuple[list[Chunk], list[Triple], list[dict[str, Any]], list[LLMResult]]:
+    """Serving chunks of the corpus and their triples; stored extraction calls are cache hits."""
+    strategy = router_cfg()["serving"]["chunk_strategy"]
+    doc_ids = corpus_doc_ids(corpus)
+    chunks, doc_text = store.corpus_chunks(doc_ids, strategy)
+    missing = len(set(doc_ids) - {c.doc_id for c in chunks})
+    if limit:
+        chunks = chunks[:limit]
+    print(f"database: {endpoint()}")
+    print(f"{corpus}: {len(chunks)} {strategy} chunks, {missing} documents without chunks")
+    try:
+        kept, rejects, calls = extract_batches(chunks, doc_text)
+    except RateLimited as e:
+        # finished batches are in the cache, so a rerun later picks up where this stopped
+        raise SystemExit(f"rate limited, rerun later to resume: {e}") from e
+    return chunks, kept, rejects, calls
+
+
+def embed_main(argv: list[str]) -> None:
+    parser = argparse.ArgumentParser(prog="python -m adaptiverag.ingest graph embed")
+    parser.add_argument("--corpus", choices=["mini", "full"], required=True)
+    parser.add_argument("--slice", type=parse_slice, default="1/1", help="K/N, for example 2/4")
+    args = parser.parse_args(argv)
+    k, n = args.slice
+    _, kept, _, calls = extract_corpus(args.corpus, None)
+    texts = graph_texts(kept)
+    mine = [t for t in texts if in_slice(t, k, n)]
+    print(f"extraction calls from the cache: {sum(c.cached for c in calls)} of {len(calls)}")
+    print(f"graph embed slice {k}/{n}: {len(mine)} of {len(texts)} texts")
+    try:
+        llm.embed(mine)
+    except RateLimited as e:
+        raise SystemExit(
+            f"graph embed slice {k}/{n} stopped by the quota ({e}); rerun later"
+        ) from e
+    print(f"graph embed slice {k}/{n}: all {len(mine)} texts embedded or already cached")
+
+
 def main(argv: list[str] | None = None) -> None:
+    argv = sys.argv[1:] if argv is None else argv
+    if argv[:1] == ["embed"]:
+        return embed_main(argv[1:])
     parser = argparse.ArgumentParser(prog="python -m adaptiverag.ingest graph")
     parser.add_argument("--corpus", choices=["mini", "full"], required=True)
     # keep it a multiple of chunks_per_call so the batches match a full run and stay cached
@@ -31,18 +80,7 @@ def main(argv: list[str] | None = None) -> None:
     )
     args = parser.parse_args(argv)
 
-    strategy = router_cfg()["serving"]["chunk_strategy"]
-    doc_ids = corpus_doc_ids(args.corpus)
-    chunks, doc_text = store.corpus_chunks(doc_ids, strategy)
-    missing = len(set(doc_ids) - {c.doc_id for c in chunks})
-    if args.limit:
-        chunks = chunks[: args.limit]
-    print(f"{args.corpus}: {len(chunks)} {strategy} chunks, {missing} documents without chunks")
-    try:
-        kept, rejects, calls = extract_batches(chunks, doc_text)
-    except RateLimited as e:
-        # finished batches are in the cache, so a rerun later picks up where this stopped
-        raise SystemExit(f"rate limited, rerun later to resume: {e}") from e
+    chunks, kept, rejects, calls = extract_corpus(args.corpus, args.limit)
     summary = summarize(chunks, kept, rejects, calls)
     if not args.dry_run:
         ids = [c.chunk_id for c in chunks]

@@ -194,3 +194,22 @@ def test_relation_texts_use_canonical_names() -> None:
         "Apple makes iPhone",
         "Tim Burton directed Ed Wood",
     ]
+
+
+def test_graph_texts_are_the_names_and_relation_texts_once_each() -> None:
+    from adaptiverag.ingest.resolve import graph_texts
+
+    triples = [
+        triple("Tim Burton", "PERSON", "directed", "Ed Wood", "WORK", "docA"),
+        triple("Tim Burton", "PERSON", "directed", "Ed Wood", "WORK", "docB"),
+        triple("Apple Inc.", "ORG", "based_in", "Cupertino", "PLACE", "docA"),
+        triple("Apple", "ORG", "based_in", "Cupertino", "PLACE", "docB"),
+    ]
+    assert graph_texts(triples) == [
+        "Apple Inc.",
+        "Apple Inc. based in Cupertino",
+        "Cupertino",
+        "Ed Wood",
+        "Tim Burton",
+        "Tim Burton directed Ed Wood",
+    ]

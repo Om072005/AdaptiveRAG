@@ -27,7 +27,8 @@ def test_dry_run_prints_counts_and_writes_nothing(
     monkeypatch.setattr(graph_cli.llm, "embed", refuse)
 
     graph_cli.main(["--corpus", "mini", "--dry-run"])
-    out = capsys.readouterr().out.split("\n", 1)[1]
+    raw = capsys.readouterr().out
+    out = raw[raw.index("{") :]  # after the database and corpus lines
     first, end = json.JSONDecoder().raw_decode(out)
     graph = json.loads(out[end:])["graph"]
     assert "stored_rejects_by_reason" not in first["extraction"]
@@ -38,3 +39,25 @@ def test_dry_run_prints_counts_and_writes_nothing(
         "extraction_rejects": 1,
     }
     assert graph["triples_folded_by_resolution"] == 0
+
+
+def test_embed_slices_split_the_texts_and_stop_cleanly_on_the_quota(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    texts = [f"text {i}" for i in range(40)]
+    monkeypatch.setattr(graph_cli, "extract_corpus", lambda corpus, limit: ([], [TRIPLE], [], []))
+    monkeypatch.setattr(graph_cli, "graph_texts", lambda kept: texts)
+    sent: list[list[str]] = []
+    monkeypatch.setattr(graph_cli.llm, "embed", sent.append)
+    for k in (1, 2, 3):
+        graph_cli.main(["embed", "--corpus", "mini", "--slice", f"{k}/3"])
+    assert sorted(t for batch in sent for t in batch) == sorted(texts)
+    assert sum(len(b) for b in sent) == len(texts)
+    assert "all" in capsys.readouterr().out
+
+    def quota(texts: list[str]) -> None:
+        raise graph_cli.RateLimited("daily quota used up")
+
+    monkeypatch.setattr(graph_cli.llm, "embed", quota)
+    with pytest.raises(SystemExit, match="rerun later"):
+        graph_cli.main(["embed", "--corpus", "mini", "--slice", "1/3"])

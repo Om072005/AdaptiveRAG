@@ -235,13 +235,27 @@ def resolve(
     triples: list[Triple],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     """(entities, aliases, relations) rows. Each distinct name is embedded once via llm.embed."""
+    names, texts = name_texts(triples)
+    matrix = llm.embed(texts)
+    return build_rows(triples, dict(zip(names, matrix, strict=True)), ingest_cfg()["resolve"])
+
+
+def name_texts(triples: list[Triple]) -> tuple[list[Name], list[str]]:
+    """Each distinct (type, normalized name) and the surface form embedded for it."""
     surfaces, _ = mentions(triples)
     by_name: dict[Name, Counter[str]] = defaultdict(Counter)
     for node, counts in surfaces.items():
         by_name[node[:2]].update(counts)
     names = sorted(by_name)
-    matrix = llm.embed([pick_name(by_name[n]) for n in names])
-    return build_rows(triples, dict(zip(names, matrix, strict=True)), ingest_cfg()["resolve"])
+    return names, [pick_name(by_name[n]) for n in names]
+
+
+def graph_texts(triples: list[Triple]) -> list[str]:
+    """Every text a graph build embeds: the names, then the relations as a build without
+    embeddings would resolve them. Merges by embedding later change a few relation texts."""
+    _, names = name_texts(triples)
+    entities, _, relations = build_rows(triples, {}, ingest_cfg()["resolve"])
+    return sorted(set(names) | set(relation_texts(entities, relations)))
 
 
 def relation_texts(entities: list[dict[str, Any]], relations: list[dict[str, Any]]) -> list[str]:
