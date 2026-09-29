@@ -122,3 +122,23 @@ test('recorded judge scores and the review queue note', async ({ page }) => {
   await expect(judge).toContainText('Below the threshold, so it waits in the review queue.')
   await expect(judge.getByRole('button', { name: 'Judge this answer' })).toHaveCount(0)
 })
+
+test('run it yourself: copy buttons, and the team from site content', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'])
+  await page.goto('/')
+  const run = page.locator('#run')
+  await expect(run.locator('pre')).toHaveCount(7)
+  await run.getByRole('button', { name: 'Copy' }).first().click()
+  await expect(run.getByRole('button', { name: 'Copied' })).toHaveCount(1)
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toContain('git clone')
+  const team = page.locator('#team')
+  await expect(team.getByText('Sample member')).toBeVisible()
+  await expect(team.getByRole('link', { name: 'Open an issue' })).toHaveAttribute('href', 'https://github.com/Om072005/AdaptiveRAG/issues')
+})
+
+test('workflows show all four README workflows', async ({ page }) => {
+  await page.goto('/')
+  for (const name of ['Ingestion', 'Router decision logic', 'Graph schema', 'Evaluation loop']) {
+    await expect(page.locator('#workflows').getByRole('heading', { name })).toBeVisible()
+  }
+})

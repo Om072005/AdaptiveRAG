@@ -5,9 +5,12 @@ import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { FailureModes } from './components/results/FailureModes'
 import { ResultsView } from './components/results/ResultsView'
+import { RunIt } from './components/RunIt'
 import { SampleBanner } from './components/SampleBanner'
 import { Section } from './components/Section'
-import { loadReplayIndex, loadResults } from './data/load'
+import { Team } from './components/Team'
+import { Workflows } from './components/Workflows'
+import { loadReplayIndex, loadResults, loadSite } from './data/load'
 import { useLoaded } from './data/useLoaded'
 
 const REPO_URL = 'https://github.com/Om072005/AdaptiveRAG'
@@ -15,7 +18,8 @@ const REPO_URL = 'https://github.com/Om072005/AdaptiveRAG'
 export default function App() {
   const replays = useLoaded(loadReplayIndex)
   const results = useLoaded(loadResults)
-  const sample = [replays, results].some((s) => s.status === 'ok' && s.sample)
+  const site = useLoaded(loadSite)
+  const sample = [replays, results, site].some((s) => s.status === 'ok' && s.sample)
 
   return (
     <>
@@ -45,7 +49,7 @@ export default function App() {
           title="How the pieces are built."
           lede="Ingestion, the router's full decision logic, the graph schema and the evaluation loop, drawn from the same data as the code."
         >
-          {null}
+          <Workflows />
         </Section>
         <Section
           id="results"
@@ -69,10 +73,13 @@ export default function App() {
           title="Run it yourself."
           lede="The whole system runs on a laptop with free accounts for Neon, Groq and Google AI Studio."
         >
-          {null}
+          <RunIt />
         </Section>
         <Section id="team" title="Who built it.">
-          {null}
+          {site.status === 'loading' && <div className="h-px w-64 bg-rule" aria-label="Loading" />}
+          {site.status === 'ok' && <Team site={site.data} />}
+          {site.status === 'missing' && <p className="text-small m-0 text-muted">The team list is published with the final page.</p>}
+          {site.status === 'error' && <DataMissing error={site.message} />}
         </Section>
       </main>
       <Footer repoUrl={REPO_URL} />
