@@ -43,7 +43,19 @@ pinned variant on D13; every run records git sha, dirty flag and config hash; th
 dimensions. The judge is a different family from the generator, as the README asks. One OpenAI compatible
 gateway means a provider swap is a config change.
 
-**D5 One query embedding, reused.** Computed once per question and used by vector search, the classifier,
+**D5 Embeddings: a local open model, one query embedding reused.** Changed on 2026-09-30 from Gemini's
+`gemini-embedding-001` to `nomic-embed-text` (v1.5, 768 dimensions) served by Ollama on the lead's GPU (an RTX
+2060 SUPER, 8 GB). Why: Gemini's free tier embeds 1,000 texts a day per key, and the corpus, the chunking
+experiment, the graph and the classifier needed about 15,000, several days of four keys; the team chose to stay on
+free tiers. Measured before switching: the full corpus (4,277 sentence chunks) embeds in 29 s, and on the 100 dev
+gold questions supporting title recall@8 is 0.945 (every supporting title in the top 8 for 89 of them), MRR 1.0.
+The model embeds questions and searched texts with different prefixes (`search_query: `, `search_document: `),
+set in `config/models.toml`; `llm.embed(kind=...)` picks one. Cost is recorded as 0 because it runs locally.
+A comparison with Gemini on the same chunks and questions is added below once measured. What we lose: anyone
+embedding a new question needs Ollama running; every corpus, gold, training and replay question is cached on Neon
+`main`, so eval runs do not.
+
+**D5b One query embedding, reused.** Computed once per question and used by vector search, the classifier,
 entity linking, traversal scoring and MMR.
 
 **D7 Three classifiers compared, logistic regression by default.** Rules on cue features, numpy logistic
