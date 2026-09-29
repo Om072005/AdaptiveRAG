@@ -20,10 +20,43 @@
         "em": 0.5,
         "f1": 0.5,
         "recall_at_k": 0.5,
-        "faithfulness": null,
+        "faithfulness": 0.7,
         "cost_per_query_usd": 0.0001,
-        "p50_ms": 100,
-        "p95_ms": 200
+        "p50_ms": 400,
+        "p95_ms": 900
+      },
+      {
+        "run_id": "20260101-0000-dev-vector-sample",
+        "mode": "graph",
+        "em": 0.5,
+        "f1": 0.6,
+        "recall_at_k": 0.5,
+        "faithfulness": null,
+        "cost_per_query_usd": 0.0003,
+        "p50_ms": 1200,
+        "p95_ms": 2400
+      },
+      {
+        "run_id": "20260101-0000-dev-vector-sample",
+        "mode": "hybrid",
+        "em": 0.5,
+        "f1": 0.55,
+        "recall_at_k": 0.5,
+        "faithfulness": 0.65,
+        "cost_per_query_usd": 0.0004,
+        "p50_ms": 1500,
+        "p95_ms": 3100
+      },
+      {
+        "run_id": "20260101-0000-dev-vector-sample",
+        "mode": "auto",
+        "em": 0.5,
+        "f1": 0.62,
+        "recall_at_k": 0.5,
+        "faithfulness": 0.72,
+        "cost_per_query_usd": 0.0002,
+        "p50_ms": 800,
+        "p95_ms": 1900
       }
     ],
     "by_type": [
@@ -38,11 +71,27 @@
     "quality_per_cost": [
       {
         "run_id": "20260101-0000-dev-vector-sample",
-        "variant": "sample",
-        "f1": 0.5,
-        "faithfulness": null,
+        "variant": "always-small",
+        "f1": 0.45,
+        "faithfulness": 0.5,
         "cost_per_query_usd": 0.0001,
         "eligible": false
+      },
+      {
+        "run_id": "20260101-0000-dev-vector-sample",
+        "variant": "always-large",
+        "f1": 0.6,
+        "faithfulness": 0.75,
+        "cost_per_query_usd": 0.0006,
+        "eligible": true
+      },
+      {
+        "run_id": "20260101-0000-dev-vector-sample",
+        "variant": "selector",
+        "f1": 0.58,
+        "faithfulness": 0.7,
+        "cost_per_query_usd": 0.0003,
+        "eligible": true
       }
     ],
     "selector": [
@@ -72,31 +121,49 @@
       ],
       "matrix": [
         [
-          1,
-          0,
-          0
-        ],
-        [
-          0,
+          5,
           1,
           0
         ],
         [
-          0,
-          0,
+          2,
+          6,
           1
+        ],
+        [
+          0,
+          1,
+          4
         ]
       ]
     },
     "hnsw": [
       {
         "run_id": "20260101-0000-dev-vector-sample",
-        "index": "sample",
+        "index": "flat",
+        "ef": null,
+        "recall_at_10": 1.0,
+        "p50_ms": 1.0,
+        "p95_ms": 1.4,
+        "build_s": 0.1
+      },
+      {
+        "run_id": "20260101-0000-dev-vector-sample",
+        "index": "hnsw",
         "ef": 64,
-        "recall_at_10": 0.5,
-        "p50_ms": 1,
-        "p95_ms": 2,
-        "build_s": 1
+        "recall_at_10": 0.6,
+        "p50_ms": 0.4,
+        "p95_ms": 0.6,
+        "build_s": 40
+      },
+      {
+        "run_id": "20260101-0000-dev-vector-sample",
+        "index": "hnsw",
+        "ef": 256,
+        "recall_at_10": 0.9,
+        "p50_ms": 0.8,
+        "p95_ms": 1.1,
+        "build_s": 40
       }
     ],
     "chunking": [

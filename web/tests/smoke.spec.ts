@@ -68,11 +68,11 @@ test('a not enough context answer is shown, in muted text', async ({ page }) => 
 test('classify and route steps read the recorded decision', async ({ page }) => {
   await page.goto('/')
   await page.getByRole('button', { name: /Sample single hop question/ }).click()
-  await expect(page.getByText('Question type')).toBeVisible()
+  await expect(page.locator('article').getByText('Question type', { exact: true })).toBeVisible()
   await expect(page.getByRole('img', { name: 'Confidence 0.50 of 1' })).toBeVisible()
   await page.getByRole('button', { name: 'Next step' }).click()
   await expect(page.getByText('This run asked for vector search, so the router did not choose.')).toBeVisible()
-  await expect(page.getByText('Route taken')).toBeVisible()
+  await expect(page.locator('article').getByText('Route taken')).toBeVisible()
 })
 
 test('retrieve step: graph edge shows the chunk it came from', async ({ page }) => {
@@ -101,10 +101,11 @@ test('every route shows each recorded mode and marks the best F1 in words', asyn
   await page.goto('/')
   await page.getByRole('button', { name: /Sample multi hop question/ }).click()
   await page.getByRole('tab', { name: 'Every route' }).click()
-  await expect(page.getByText('Router', { exact: true })).toBeVisible()
-  await expect(page.getByText('Vector only')).toBeVisible()
-  await expect(page.getByText('Hybrid only')).toBeVisible()
-  await expect(page.getByText('Best', { exact: true })).toHaveCount(1)
+  const panel = page.locator('article')
+  await expect(panel.getByText('Router', { exact: true })).toBeVisible()
+  await expect(panel.getByText('Vector only')).toBeVisible()
+  await expect(panel.getByText('Hybrid only')).toBeVisible()
+  await expect(panel.getByText('Best', { exact: true })).toHaveCount(1)
 })
 
 test('the replay only build has no question box', async ({ page }) => {

@@ -3,6 +3,8 @@ import { FollowQuestion } from './components/FollowQuestion'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { FailureModes } from './components/results/FailureModes'
+import { ResultsView } from './components/results/ResultsView'
 import { SampleBanner } from './components/SampleBanner'
 import { Section } from './components/Section'
 import { loadReplayIndex, loadResults } from './data/load'
@@ -50,7 +52,17 @@ export default function App() {
           title="What we measured."
           lede="Only pinned runs appear here, and every table names the run it came from. Where a result was worse than expected, it stays."
         >
-          {results.status !== 'ok' && results.status !== 'loading' && <DataMissing />}
+          {results.status === 'loading' && <div className="h-px w-64 bg-rule" aria-label="Loading" />}
+          {results.status === 'missing' && <DataMissing />}
+          {results.status === 'error' && <DataMissing error={results.message} />}
+          {results.status === 'ok' && <ResultsView results={results.data} />}
+        </Section>
+        <Section
+          id="failures"
+          title="What went wrong."
+          lede="Real incidents found in a run or in review, with the run that showed them."
+        >
+          <FailureModes failures={results.status === 'ok' ? results.data.tables.failures : null} />
         </Section>
         <Section
           id="run"
