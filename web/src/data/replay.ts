@@ -1,5 +1,5 @@
 // Pure helpers the replay components share.
-import type { Mode, Replay, ReplayIndex } from '../types.ts'
+import type { Mode, QueryResponse, Replay, ReplayIndex } from '../types.ts'
 
 export type ReplayItem = ReplayIndex['items'][number]
 export type RecordedRun = NonNullable<Replay['runs'][Mode]>
@@ -40,4 +40,23 @@ export function explanationParts(answerText: string): (string | number)[] {
     .split(/(\[\d+\])/)
     .filter((p) => p !== '')
     .map((p) => (/^\[\d+\]$/.test(p) ? Number(p.slice(1, -1)) : p))
+}
+
+export const LIVE_ID = 'live'
+
+/** A live API answer in the Replay shape, so the same panel shows it; it has no gold answer. */
+export function liveReplay(response: QueryResponse, mode: Mode): Replay {
+  return {
+    sample: false,
+    question_id: LIVE_ID,
+    question: response.question,
+    type: response.route.label ?? 'single_hop',
+    gold_answer: '',
+    supporting_titles: [],
+    why: '',
+    recorded_at: new Date().toISOString(),
+    git_sha: '',
+    config_hash: '',
+    runs: { [mode]: { run_id: response.trace_id, response, metrics: { em: 0, f1: 0, recall_at_k: 0 }, judgement: null } },
+  }
 }

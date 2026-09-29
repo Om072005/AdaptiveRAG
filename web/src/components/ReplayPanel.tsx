@@ -1,6 +1,6 @@
 import { type KeyboardEvent, type ReactNode, useState } from 'react'
 import { day } from '../copy/format'
-import { type RecordedRun, STAGES, mainRun } from '../data/replay'
+import { LIVE_ID, type RecordedRun, STAGES, mainRun } from '../data/replay'
 import type { Replay } from '../types'
 import { Button } from './Button'
 import { RunId } from './RunId'
@@ -33,12 +33,17 @@ export function ReplayPanel({ replay, renderStage, renderRoutes }: Props) {
       >
         {replay.question}
       </h3>
-      {main && (
+      {main && replay.question_id === LIVE_ID && (
+        <p className="text-caption m-0 mt-3">
+          Live answer, trace <RunId id={main.run.run_id} />
+        </p>
+      )}
+      {main && replay.question_id !== LIVE_ID && (
         <p className="text-caption m-0 mt-3">
           Recorded run <RunId id={main.run.run_id} /> on {day(replay.recorded_at)}
         </p>
       )}
-      <Tabs tabs={TABS} current={tab} onPick={setTab} />
+      {replay.question_id !== LIVE_ID && <Tabs tabs={TABS} current={tab} onPick={setTab} />}
       {tab === 'Step by step' && main && (
         <>
           <StageRail current={stage} onPick={go} />

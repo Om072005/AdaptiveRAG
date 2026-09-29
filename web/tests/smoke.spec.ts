@@ -96,3 +96,18 @@ test('model and cost steps: selector reason, waterfall and the throttle note', a
   await expect(page.getByText('$0.0002').first()).toBeVisible()
   await expect(page.getByText('500 ms spent waiting on a provider rate limit is not counted in the time above.')).toBeVisible()
 })
+
+test('every route shows each recorded mode and marks the best F1 in words', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /Sample multi hop question/ }).click()
+  await page.getByRole('tab', { name: 'Every route' }).click()
+  await expect(page.getByText('Router', { exact: true })).toBeVisible()
+  await expect(page.getByText('Vector only')).toBeVisible()
+  await expect(page.getByText('Hybrid only')).toBeVisible()
+  await expect(page.getByText('Best', { exact: true })).toHaveCount(1)
+})
+
+test('the replay only build has no question box', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.getByLabel('Ask your own question')).toHaveCount(0)
+})

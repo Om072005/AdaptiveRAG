@@ -49,20 +49,22 @@ export function AnswerStep({ run, replay }: { run: RecordedRun; replay: Replay }
         ))}
       </ol>
 
-      <dl className="m-0 mt-8 grid grid-cols-1 gap-x-8 border-t border-rule pt-6 sm:grid-cols-3">
-        <div className="mb-4">
-          <dt className="text-caption">Gold answer</dt>
-          <dd className="m-0 text-[15px] leading-6">{replay.gold_answer}</dd>
-        </div>
-        <div className="mb-4">
-          <dt className="text-caption">Exact match</dt>
-          <dd className="m-0 text-[15px] leading-6">{score(run.metrics.em)}</dd>
-        </div>
-        <div className="mb-4">
-          <dt className="text-caption">Token F1</dt>
-          <dd className="m-0 text-[15px] leading-6">{score(run.metrics.f1)}</dd>
-        </div>
-      </dl>
+      {replay.gold_answer !== '' && (
+        <dl className="m-0 mt-8 grid grid-cols-1 gap-x-8 border-t border-rule pt-6 sm:grid-cols-3">
+          <div className="mb-4">
+            <dt className="text-caption">Gold answer</dt>
+            <dd className="m-0 text-[15px] leading-6">{replay.gold_answer}</dd>
+          </div>
+          <div className="mb-4">
+            <dt className="text-caption">Exact match</dt>
+            <dd className="m-0 text-[15px] leading-6">{score(run.metrics.em)}</dd>
+          </div>
+          <div className="mb-4">
+            <dt className="text-caption">Token F1</dt>
+            <dd className="m-0 text-[15px] leading-6">{score(run.metrics.f1)}</dd>
+          </div>
+        </dl>
+      )}
     </div>
   )
 }

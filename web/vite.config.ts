@@ -13,11 +13,15 @@ function stripSamples(allow: boolean): Plugin {
       else if (name.endsWith('.sample.json')) rmSync(path)
     }
   }
+  let outDir = 'dist'
   return {
     name: 'strip-samples',
     apply: 'build',
+    configResolved(config) {
+      outDir = config.build.outDir
+    },
     closeBundle() {
-      if (!allow) remove('dist')
+      if (!allow) remove(outDir)
     },
   }
 }
