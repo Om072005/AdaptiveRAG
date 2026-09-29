@@ -2,6 +2,7 @@
 
 import json
 import random
+import time
 from pathlib import Path
 from typing import Any
 
@@ -13,6 +14,13 @@ from adaptiverag.types import Document
 
 SOURCE = "hotpotqa-dev"
 URL = "http://curtis.ml.cmu.edu/datasets/hotpot/hotpot_dev_distractor_v1.json"
+# The same 7,405 questions published as a Hugging Face dataset, used when the official host is down.
+MIRROR_URL = "https://datasets-server.huggingface.co/rows"
+MIRROR_PARAMS: dict[str, str | int] = {
+    "dataset": "hotpotqa/hotpot_qa",
+    "config": "distractor",
+    "split": "validation",
+}
 RAW_PATH = ROOT / "data" / "raw" / "hotpot_dev_distractor_v1.json"
 
 
@@ -24,7 +32,11 @@ def load_hotpot(n_questions: int, seed: int = 7) -> tuple[list[Document], list[d
 def read_raw(path: Path = RAW_PATH) -> list[dict[str, Any]]:
     """The dev distractor file, downloaded into data/raw/ the first time it is needed."""
     if not path.exists():
-        download(URL, path)
+        try:
+            download(URL, path)
+        except httpx.TransportError:
+            print(f"{URL} did not answer, writing the Hugging Face copy instead")
+            download_mirror(path)
     records: list[dict[str, Any]] = json.loads(path.read_text(encoding="utf-8"))
     return records
 
@@ -39,6 +51,51 @@ def download(url: str, path: Path) -> None:
             for block in response.iter_bytes():
                 f.write(block)
     part.replace(path)
+
+
+def download_mirror(path: Path, page: int = 100) -> None:
+    """Page through the Hugging Face copy in order and write it in the original file layout."""
+    records: list[dict[str, Any]] = []
+    total = None
+    with httpx.Client(timeout=60) as client:
+        while total is None or len(records) < total:
+            body = mirror_page(client, len(records), page)
+            # the seeded sample depends on file order, so every page must start where the last ended
+            if not body["rows"] or body["rows"][0]["row_idx"] != len(records):
+                raise ValueError(f"mirror page at offset {len(records)} is empty or out of order")
+            total = body["num_rows_total"]
+            records += [from_mirror_row(r["row"]) for r in body["rows"]]
+    path.parent.mkdir(parents=True, exist_ok=True)
+    part = path.with_name(path.name + ".part")
+    part.write_text(json.dumps(records, ensure_ascii=False), encoding="utf-8")
+    part.replace(path)
+
+
+def mirror_page(client: httpx.Client, offset: int, length: int) -> dict[str, Any]:
+    """One page of rows; waits out a 429 up to 5 times before giving up."""
+    params = MIRROR_PARAMS | {"offset": offset, "length": length}
+    for attempt in range(5):
+        response = client.get(MIRROR_URL, params=params)
+        if response.status_code != 429:
+            break
+        time.sleep(float(response.headers.get("retry-after", 10 * 2**attempt)))
+    response.raise_for_status()
+    body: dict[str, Any] = response.json()
+    return body
+
+
+def from_mirror_row(row: dict[str, Any]) -> dict[str, Any]:
+    """One Hugging Face row back in the original record layout."""
+    context, facts = row["context"], row["supporting_facts"]
+    return {
+        "_id": row["id"],
+        "answer": row["answer"],
+        "question": row["question"],
+        "supporting_facts": [list(f) for f in zip(facts["title"], facts["sent_id"], strict=True)],
+        "context": [list(p) for p in zip(context["title"], context["sentences"], strict=True)],
+        "type": row["type"],
+        "level": row["level"],
+    }
 
 
 def sample(records: list[dict[str, Any]], n: int, seed: int) -> list[dict[str, Any]]:

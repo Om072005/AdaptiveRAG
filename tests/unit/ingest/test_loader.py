@@ -90,3 +90,23 @@ def test_read_raw_uses_the_local_file_without_downloading(
 
     monkeypatch.setattr(loader, "download", no_download)
     assert [r["_id"] for r in loader.read_raw(path)] == [r["_id"] for r in records()]
+
+
+def test_mirror_row_converts_back_to_the_original_layout() -> None:
+    for original in records():
+        row = {
+            "id": original["_id"],
+            "question": original["question"],
+            "answer": original["answer"],
+            "type": original["type"],
+            "level": original["level"],
+            "supporting_facts": {
+                "title": [t for t, _ in original["supporting_facts"]],
+                "sent_id": [i for _, i in original["supporting_facts"]],
+            },
+            "context": {
+                "title": [t for t, _ in original["context"]],
+                "sentences": [s for _, s in original["context"]],
+            },
+        }
+        assert loader.from_mirror_row(row) == original
