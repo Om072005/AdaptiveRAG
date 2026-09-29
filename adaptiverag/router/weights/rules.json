@@ -1,0 +1,51 @@
+{
+ "source": "data/router/train.jsonl",
+ "questions": 987,
+ "buckets": {
+  "comparison 1": {
+   "single_hop": 5,
+   "multi_hop": 5,
+   "comparison": 57
+  },
+  "comparison 2": {
+   "single_hop": 0,
+   "multi_hop": 7,
+   "comparison": 111
+  },
+  "comparison 3": {
+   "single_hop": 0,
+   "multi_hop": 0,
+   "comparison": 53
+  },
+  "multi_hop 0": {
+   "single_hop": 1,
+   "multi_hop": 10,
+   "comparison": 29
+  },
+  "multi_hop 1": {
+   "single_hop": 53,
+   "multi_hop": 128,
+   "comparison": 11
+  },
+  "multi_hop 2": {
+   "single_hop": 9,
+   "multi_hop": 136,
+   "comparison": 4
+  },
+  "multi_hop 3": {
+   "single_hop": 1,
+   "multi_hop": 40,
+   "comparison": 0
+  },
+  "single_hop 0": {
+   "single_hop": 31,
+   "multi_hop": 46,
+   "comparison": 5
+  },
+  "single_hop 1": {
+   "single_hop": 217,
+   "multi_hop": 28,
+   "comparison": 0
+  }
+ }
+}

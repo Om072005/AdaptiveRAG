@@ -1,5 +1,6 @@
 """python -m adaptiverag.router.train set              builds data/router/train.jsonl
 python -m adaptiverag.router.train embed --slice K/N   embeds one slice of its questions
+python -m adaptiverag.router.train rules             writes adaptiverag/router/weights/rules.json
 python -m adaptiverag.router.train                   writes adaptiverag/router/weights/logreg.npz
 
 The set: bridge and comparison questions from seeded pages of the HotpotQA train split (Hugging Face
@@ -23,7 +24,15 @@ from adaptiverag.eval import single_hop
 from adaptiverag.ingest.loader import SOURCE, from_mirror_row
 from adaptiverag.ingest.normalize import doc_id, join_sentences
 from adaptiverag.ingest.pipeline import in_slice, parse_slice
-from adaptiverag.router.classify import WEIGHTS, logreg_inputs, softmax
+from adaptiverag.router.classify import (
+    RULES_CALIBRATION,
+    WEIGHTS,
+    features,
+    logreg_inputs,
+    rule_bucket,
+    rule_votes,
+    softmax,
+)
 from adaptiverag.types import Document, LLMResult
 
 TRAIN_PATH = ROOT / "data" / "router" / "train.jsonl"
@@ -205,16 +214,44 @@ def train_logreg() -> None:
     print(f"trained on {len(items)} questions, training accuracy {accuracy:.4f}; wrote {WEIGHTS}")
 
 
+def calibrate_rules(items: list[dict[str, str]]) -> dict[str, dict[str, int]]:
+    """For each bucket of the rules (winning label, lead in votes), how many training questions
+    carry each true label."""
+    buckets: dict[str, dict[str, int]] = {}
+    for q in items:
+        label, margin = rule_bucket(rule_votes(features(q["question"])))
+        row = buckets.setdefault(f"{label} {margin}", {lb: 0 for lb in CLASSES})
+        row[q["label"]] += 1
+    return dict(sorted(buckets.items()))
+
+
+def train_rules() -> None:
+    """Count the buckets on the whole training set (never on dev or test); needs no quota."""
+    items = read_set()
+    buckets = calibrate_rules(items)
+    out = {"source": "data/router/train.jsonl", "questions": len(items), "buckets": buckets}
+    RULES_CALIBRATION.parent.mkdir(parents=True, exist_ok=True)
+    RULES_CALIBRATION.write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
+    right = sum(row[key.split()[0]] for key, row in buckets.items())
+    print(
+        f"rules label {right} of {len(items)} training questions right; wrote {RULES_CALIBRATION}"
+    )
+    for key, row in buckets.items():
+        print(f"  {key}: {row}")
+
+
 def main(argv: list[str] | None = None) -> None:
     argv = sys.argv[1:] if argv is None else argv
     parser = argparse.ArgumentParser(prog="python -m adaptiverag.router.train")
-    parser.add_argument("command", nargs="?", choices=["set", "embed"])
+    parser.add_argument("command", nargs="?", choices=["set", "embed", "rules"])
     parser.add_argument("--slice", type=parse_slice, default="1/1", help="K/N, for embed")
     args = parser.parse_args(argv)
     if args.command == "set":
         build_set()
     elif args.command == "embed":
         embed_slice(*args.slice)
+    elif args.command == "rules":
+        train_rules()
     else:
         train_logreg()
 

@@ -1,6 +1,17 @@
+import json
+from pathlib import Path
+
 import pytest
 
-from adaptiverag.router.classify import FEATURES, classify, classify_rules, features
+from adaptiverag.config import router_cfg
+from adaptiverag.router.classify import (
+    FEATURES,
+    classify,
+    classify_rules,
+    features,
+    rule_bucket,
+)
+from adaptiverag.router.train import calibrate_rules
 from adaptiverag.telemetry.trace import Trace
 
 NAMES = [name for name, _ in FEATURES]
@@ -64,13 +75,42 @@ def test_scaled_counts_stay_in_zero_to_one() -> None:
 def test_rules_label_clear_questions(question: str, label: str) -> None:
     c = classify_rules(question)
     assert c.label == label and c.method == "rules" and c.cost_usd == 0.0
-    assert c.confidence == max(c.probs.values())
+    assert c.confidence == c.probs[label]
     assert sum(c.probs.values()) == pytest.approx(1.0)
 
 
 def test_a_question_without_cues_is_not_confident() -> None:
+    # the committed calibration: questions with no cue were mostly not single hop in training
     c = classify_rules("Tim Burton films released after the long strike ended in Burbank")
-    assert c.confidence == pytest.approx(1 / 3)
+    assert c.confidence < router_cfg()["classifier"]["min_confidence"]
+
+
+def test_the_bucket_is_the_winner_and_its_capped_lead() -> None:
+    assert rule_bucket({"single_hop": 0, "multi_hop": 0, "comparison": 0}) == ("single_hop", 0)
+    assert rule_bucket({"single_hop": 0, "multi_hop": 1, "comparison": 1}) == ("multi_hop", 0)
+    assert rule_bucket({"single_hop": 0, "multi_hop": 1, "comparison": 5}) == ("comparison", 3)
+
+
+def test_confidence_is_the_share_of_right_answers_in_the_bucket(tmp_path: Path) -> None:
+    one_cue = "Who produced Tim Burton's first film?"
+    three_cues = "Who was born first, Tim Burton or Johnny Depp, and did both share a studio?"
+    items = [
+        {"question": one_cue, "label": "multi_hop"},
+        {"question": one_cue, "label": "single_hop"},
+        {"question": three_cues, "label": "comparison"},
+        {"question": three_cues, "label": "comparison"},
+    ]
+    buckets = calibrate_rules(items)
+    assert buckets == {
+        "comparison 3": {"single_hop": 0, "multi_hop": 0, "comparison": 2},
+        "multi_hop 1": {"single_hop": 1, "multi_hop": 1, "comparison": 0},
+    }
+    path = tmp_path / "rules.json"
+    path.write_text(json.dumps({"buckets": buckets}), encoding="utf-8")
+    assert classify_rules(one_cue, path).confidence == pytest.approx(2 / 5)
+    assert classify_rules(three_cues, path).confidence == pytest.approx(3 / 5)
+    # a bucket the training set never filled
+    assert classify_rules("When was Zach Woods born?", path).confidence == pytest.approx(1 / 3)
 
 
 def test_classify_dispatches_on_method() -> None:

@@ -118,15 +118,34 @@ def rule_votes(f: np.ndarray) -> dict[QType, float]:
     return {"single_hop": single_hop, "multi_hop": multi_hop, "comparison": comparison}
 
 
-def classify_rules(question: str) -> Classification:
-    """Label with the most votes; probabilities are the vote shares with one added per label,
-    so a question with no clear cue gets a low confidence instead of a confident guess."""
+RULES_CALIBRATION = Path(__file__).parent / "weights" / "rules.json"
+MAX_MARGIN = 3  # leads of three votes or more share one bucket
+
+
+def rule_bucket(votes: dict[QType, float]) -> tuple[QType, int]:
+    """The label with the most votes and its lead over the runner up, capped at MAX_MARGIN.
+    Ties go to the order of LABELS, cheapest route first."""
+    ranked = sorted(LABELS, key=lambda lb: -votes[lb])
+    return ranked[0], min(round(votes[ranked[0]] - votes[ranked[1]]), MAX_MARGIN)
+
+
+@cache
+def load_rules_calibration(path: Path = RULES_CALIBRATION) -> dict[str, dict[str, int]]:
+    """True label counts per bucket, written by python -m adaptiverag.router.train rules."""
+    if not path.exists():
+        raise FileNotFoundError(f"{path} is missing: run python -m adaptiverag.router.train rules")
+    return dict(json.loads(path.read_text(encoding="utf-8"))["buckets"])
+
+
+def classify_rules(question: str, path: Path = RULES_CALIBRATION) -> Classification:
+    """Label with the most votes. The probabilities are the shares of each true label among the
+    training questions in the same bucket (winning label, lead in votes), with one added per
+    label, so a bucket the training set never filled stays at a third each."""
     started = time.perf_counter()
-    votes = rule_votes(features(question))
-    total = sum(votes.values()) + len(LABELS)
-    probs: dict[str, float] = {label: (votes[label] + 1) / total for label in LABELS}
-    # ties go to the order of LABELS, cheapest route first
-    label = max(LABELS, key=lambda lb: probs[lb])
+    label, margin = rule_bucket(rule_votes(features(question)))
+    counts = load_rules_calibration(path).get(f"{label} {margin}", {})
+    total = sum(counts.values()) + len(LABELS)
+    probs: dict[str, float] = {lb: (counts.get(lb, 0) + 1) / total for lb in LABELS}
     ms = int((time.perf_counter() - started) * 1000)
     return Classification(label, probs[label], probs, "rules", 0.0, ms)
 
