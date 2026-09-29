@@ -2,10 +2,12 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import type { DiagramData } from '../types.ts'
 import { ARCHITECTURE } from './architecture.ts'
+import { EVAL_LOOP } from './evalLoop.ts'
 import { INGESTION } from './ingestion.ts'
 import { ROUTER } from './router.ts'
+import { SCHEMA } from './schema.ts'
 
-const ALL: DiagramData[] = [ARCHITECTURE, INGESTION, ROUTER]
+const ALL: DiagramData[] = [ARCHITECTURE, INGESTION, ROUTER, SCHEMA, EVAL_LOOP]
 
 for (const d of ALL) {
   test(`${d.id}: ids are unique and every edge joins two nodes`, () => {
