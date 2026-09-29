@@ -49,3 +49,12 @@ def test_graph_and_hybrid_strength() -> None:
     assert retrieval_strength(retrieved(path_found=False, source="graph"), min_top) == 0.3
     hybrid = retrieved(top_score=min_top, path_found=False, source="hybrid")
     assert retrieval_strength(hybrid, min_top) == pytest.approx((1.0 + 0.3) / 2)
+
+
+def test_marker_after_the_full_stop_counts_for_that_sentence() -> None:
+    # seen in a real run: "... founded in 1942. [1]"
+    r = retrieved(top_score=0.9)
+    _, text, cites = bind_citations("Answer: 1942\nThe quartet was founded in 1942. [1]", r)
+    assert citation_coverage(text, cites) == 1.0
+    _, text, cites = bind_citations("Answer: x\nFirst claim. [1] Second claim. [2]", r)
+    assert citation_coverage(text, cites) == 1.0

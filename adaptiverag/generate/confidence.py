@@ -8,6 +8,8 @@ from adaptiverag.generate.prompts import NOT_ENOUGH
 from adaptiverag.types import Citation, Retrieved
 
 SENTENCE_END = re.compile(r"(?<=[.!?])\s+")
+# "claim. [1]" -> "claim [1]." so a marker written after the full stop stays with its sentence
+TRAILING_MARKERS = re.compile(r"([.!?])\s*((?:\[\d+(?:\s*,\s*\d+)*\]\s*)+)")
 NO_PATH_STRENGTH = 0.3
 
 
@@ -15,7 +17,8 @@ def citation_coverage(answer_text: str, citations: list[Citation]) -> float:
     """Share of explanation sentences carrying at least one valid [n] marker."""
     valid = {c.n for c in citations}
     explanation = answer_text.split(". ", 1)[1] if ". " in answer_text else ""
-    sentences = [s for s in SENTENCE_END.split(explanation) if s.strip()]
+    explanation = TRAILING_MARKERS.sub(lambda m: f" {m.group(2).strip()}{m.group(1)} ", explanation)
+    sentences = [s for s in SENTENCE_END.split(explanation.strip()) if s.strip()]
     if not sentences:
         return 0.0
     cited = sum(1 for s in sentences if valid & set(marker_numbers(s)))
