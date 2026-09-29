@@ -1,0 +1,130 @@
+{
+  "trace_id": "012b5c33-89e6-450f-8ab8-88e35a09cb53",
+  "question": "In what year was the Zorian Quartet founded?",
+  "answer": {
+    "short": "1942",
+    "text": "1942. The Zorian Quartet was founded in 1942. [1]",
+    "model": "openai/gpt-oss-20b",
+    "size": "small",
+    "select_reason": "small:route vector, label none, 758 tokens",
+    "confidence": 1.0,
+    "flagged": false,
+    "citations": [
+      {
+        "n": 1,
+        "title": "Zorian Quartet",
+        "snippet": "The Zorian Quartet was an English all-female string quartet ensemble. It was founded in 1942 by and named after violinist Olive Zorian. It gave the premiere performances of, and made the first recordings of, several compositions for string quartet by English composers, including Benjamin Britten and Michael Tippett. It also gave the premiere English performances of quartets by Ernest Bloch and Béla Bartók.",
+        "chunk_id": "051822c2d4e9a96a:sentence:0"
+      }
+    ]
+  },
+  "route": {
+    "requested": "vector",
+    "label": null,
+    "label_confidence": null,
+    "method": null,
+    "initial": "vector",
+    "final": "vector",
+    "fallbacks": [],
+    "reasons": [
+      "forced:vector"
+    ]
+  },
+  "retrieval": {
+    "hits": [
+      {
+        "rank": 1,
+        "title": "Zorian Quartet",
+        "snippet": "The Zorian Quartet was an English all-female string quartet ensemble. It was founded in 1942 by and named after violinist Olive Zorian. It gave the premiere performances of, and made the first recordings of, several compositions for string quartet by English composers, including Benjamin Britten and Michael Tippett. It also gave the premiere English performances of quartets by Ernest Bloch and Béla Bartók.",
+        "score": 0.7204891443252563,
+        "source": "vector",
+        "chunk_id": "051822c2d4e9a96a:sentence:0"
+      },
+      {
+        "rank": 2,
+        "title": "List of string quartets by Béla Bartók",
+        "snippet": "The Hungarian composer Béla Bartók wrote six string quartets, each for the usual forces of two violins, viola and cello.",
+        "score": 0.5688083685865003,
+        "source": "vector",
+        "chunk_id": "45c7f114e86448dc:sentence:0"
+      },
+      {
+        "rank": 3,
+        "title": "String Quartet No. 6 (Bartók)",
+        "snippet": "With the outbreak of World War II and his mother's illness, Bartók returned to Budapest, where the quartet was finished in November. After his mother's death, Bartók decided to leave with his family for the United States. Due to the difficulties of the war, communication between Bartók and Székely was difficult, and the quartet was not premiered until 20 January 1941, when the Kolisch Quartet, to whom the work is dedicated, gave its premiere at the Town Hall in New York City.",
+        "score": 0.5358673014719912,
+        "source": "vector",
+        "chunk_id": "52dd70cd1ef2e284:sentence:1"
+      },
+      {
+        "rank": 4,
+        "title": "String Quartet No. 6 (Bartók)",
+        "snippet": "The String Quartet No. 6, Sz. 114, BB 119, was the final string quartet that Béla Bartók wrote before his death. It was begun in August 1939 in Saanen, Switzerland, where Bartók was a guest of his patron, the conductor Paul Sacher. Shortly after he completed the Divertimento for String Orchestra on the 17th, he started on a commission for his friend, the violinist Zoltán Székely. Székely was acting as intermediary for the \"New Hungarian Quartet\", who had given the Budapest premiere of the String Quartet No. 5.",
+        "score": 0.5346258601323293,
+        "source": "vector",
+        "chunk_id": "52dd70cd1ef2e284:sentence:0"
+      },
+      {
+        "rank": 5,
+        "title": "List of string quartets by Béla Bartók",
+        "snippet": "1 and 28 both owe a great deal to Bartók's quartets (; ), György Ligeti, whose two string quartets both owe a great deal to Bartók’s quartets (; ), Bruno Maderna , George Perle, who credits the Bartók Fourth and Fifth Quartets as precedents for his use of arrays of chords related to one another by different types of symmetry , Walter Piston (; ), Kim Dzmitrïyevich Tsesakow , Wilfried Westerlinck , Stefan Wolpe, who explained in a public lecture how he had derived ideas from Bartók’s Fourth Quartet , and Xu Yongsan .",
+        "score": 0.5229678777418028,
+        "source": "vector",
+        "chunk_id": "45c7f114e86448dc:sentence:2"
+      },
+      {
+        "rank": 6,
+        "title": "Pennsylvania Governor's School for the Sciences",
+        "snippet": "The students leave the program with a strong bond; most attend an organized reunion the following year after the 4th week of the program.",
+        "score": 0.5103720122354032,
+        "source": "vector",
+        "chunk_id": "1ac98996f61d6ad0:sentence:3"
+      },
+      {
+        "rank": 7,
+        "title": "Dirty Three",
+        "snippet": "Dirty Three is an Australian instrumental rock band, consisting of Warren Ellis (violin and bass guitar), Mick Turner (electric and bass guitars) and Jim White (drums), which formed in 1992. Their 1996 album \"Horse Stories\" was voted by \"Rolling Stone\" as one of the top three albums of the year. Two of their albums have peaked into the top 50 on the ARIA Albums Chart, \"Ocean Songs\" (1998) and \"Toward the Low Sun\" (2012). During their career they have spent much of their time overseas when not performing together.",
+        "score": 0.5035600812304046,
+        "source": "vector",
+        "chunk_id": "5a238278318574f0:sentence:0"
+      },
+      {
+        "rank": 8,
+        "title": "Fireflight",
+        "snippet": "In 2012 they came out with their fifth full-length album \"Now\".",
+        "score": 0.5030620694160461,
+        "source": "vector",
+        "chunk_id": "a0e9c8443eb89cf8:sentence:1"
+      }
+    ],
+    "graph": {
+      "nodes": [],
+      "edges": []
+    },
+    "top_score": 0.7204891443252563,
+    "path_found": false
+  },
+  "trace": {
+    "spans": [
+      {
+        "name": "retrieve",
+        "ms": 1415
+      },
+      {
+        "name": "generate",
+        "ms": 558
+      }
+    ],
+    "tokens_in": 932,
+    "tokens_out": 48,
+    "cost": {
+      "classifier": 0.0,
+      "generation": 8.43e-05,
+      "total": 8.595e-05
+    },
+    "total_ms": 2913,
+    "throttle_wait_ms": 0,
+    "cached": false
+  },
+  "live": null
+}
