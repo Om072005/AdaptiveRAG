@@ -21,7 +21,7 @@ from adaptiverag.config import ROOT, ingest_cfg, router_cfg
 from adaptiverag.eval.metrics import mrr, recall_at_k, sp_precision
 from adaptiverag.eval.run import chunk_spans
 from adaptiverag.ingest import loader
-from adaptiverag.ingest.embed import embed_texts
+from adaptiverag.ingest.embed import embed_questions
 from adaptiverag.stores import corpus, vector
 from adaptiverag.stores.db import conn
 from adaptiverag.stores.flat import FlatIndex
@@ -171,7 +171,7 @@ def main() -> None:
     }
     kept = [q for q in questions if q["id"] not in test_ids][: args.limit]
     by_title = {d.title: d for d in docs}
-    qvecs = embed_texts([q["question"] for q in kept])
+    qvecs = embed_questions([q["question"] for q in kept])
     serving = cast(Strategy, router_cfg()["serving"]["chunk_strategy"])
     cfg = ingest_cfg()["chunk"]
     params_of = {

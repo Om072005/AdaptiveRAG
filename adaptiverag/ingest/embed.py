@@ -13,6 +13,13 @@ def embed_texts(texts: list[str]) -> np.ndarray:
     return llm.embed(texts)
 
 
+def embed_questions(questions: list[str]) -> np.ndarray:
+    """Questions as search queries (models with separate query and document prefixes need this)."""
+    if not questions:
+        return np.zeros((0, models()["embed"].dims or 768), dtype=np.float32)
+    return llm.embed(questions, kind="query")
+
+
 def embed_chunks(chunks: list[Chunk]) -> np.ndarray:
     """(n, dims) float32 unit vectors of the chunk texts, in chunk order, cached by the gateway."""
     return embed_texts([c.text for c in chunks])

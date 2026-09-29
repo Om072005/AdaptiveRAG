@@ -18,7 +18,7 @@ import numpy as np
 
 from adaptiverag.config import ROOT, settings
 from adaptiverag.ingest import loader
-from adaptiverag.ingest.embed import embed_texts
+from adaptiverag.ingest.embed import embed_questions
 from adaptiverag.stores import corpus, db, vector
 from adaptiverag.stores.flat import FlatIndex
 from adaptiverag.stores.hnsw import HNSW
@@ -190,7 +190,7 @@ def main() -> None:
             raise SystemExit(
                 f"only {len(ids)} of {total} {strategy} chunks are embedded; finish them first"
             )
-        queries = embed_texts(dev_questions())
+        queries = embed_questions(dev_questions())
         rows, truth = measure(data, queries, args.M, args.ef_construction, args.seed)
         rows += pgvector_rows(ids, queries, truth, strategy)
         params |= {
