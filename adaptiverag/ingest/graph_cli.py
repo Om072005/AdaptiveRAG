@@ -1,5 +1,6 @@
 """python -m adaptiverag.ingest graph --corpus mini|dev|gold|full [--limit N] [--dry-run]
 python -m adaptiverag.ingest graph embed --corpus mini|dev|gold|full [--slice K/N]
+python -m adaptiverag.ingest graph merges --corpus dev [--n 100] | --label | --precision
 python -m adaptiverag.ingest relink [--dry-run]
 
 The build extracts triples (cached), stores the rejects, resolves entities and replaces the graph.
@@ -9,17 +10,27 @@ spread them over their own keys; a rerun skips what is cached.
 
 import argparse
 import json
+import random
 import sys
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
 from adaptiverag import llm
-from adaptiverag.config import ROOT, router_cfg
+from adaptiverag.config import ROOT, ingest_cfg, router_cfg
 from adaptiverag.ingest.extract import extract_batches, summarize
 from adaptiverag.ingest.loader import SOURCE, read_raw
 from adaptiverag.ingest.normalize import doc_id
 from adaptiverag.ingest.pipeline import endpoint, in_slice, parse_slice
-from adaptiverag.ingest.resolve import graph_texts, relation_id, relation_texts, resolve
+from adaptiverag.ingest.resolve import (
+    graph_texts,
+    merge_decisions,
+    name_texts,
+    normalize_name,
+    relation_id,
+    relation_texts,
+    resolve,
+)
 from adaptiverag.llm import RateLimited
 from adaptiverag.stores import graph as store
 from adaptiverag.types import Chunk, LLMResult, Triple
@@ -96,10 +107,103 @@ def embed_main(argv: list[str]) -> None:
     print(f"graph embed slice {k}/{n}: all {len(mine)} texts embedded or already cached")
 
 
+LABELS_PATH = ROOT / "data" / "graph" / "merge_labels.jsonl"
+
+
+def sample_merges(decisions: list[dict[str, str]], n: int, seed: int = 7) -> list[dict[str, str]]:
+    """A seeded sample of n merge decisions (all of them when there are fewer), numbered from 1."""
+    pool = sorted(decisions, key=lambda d: (d["type"], d["a"], d["a_doc"], d["b"], d["b_doc"]))
+    random.Random(seed).shuffle(pool)
+    return [{"n": str(i), **d, "label": ""} for i, d in enumerate(pool[:n], 1)]
+
+
+def precision(items: list[dict[str, str]]) -> dict[str, Any]:
+    """Share of labelled merges that joined one real entity, overall and per rule kind."""
+    labelled = [i for i in items if i["label"] in ("same", "different")]
+
+    def share(rows: list[dict[str, str]]) -> dict[str, Any]:
+        same = sum(r["label"] == "same" for r in rows)
+        rate = same / len(rows) if rows else None
+        return {"labelled": len(rows), "same": same, "precision": rate}
+
+    kinds = {
+        "name": [i for i in labelled if i["rule"].startswith("name")],
+        "embedding": [i for i in labelled if i["rule"].startswith("embedding")],
+        "person": [i for i in labelled if i["type"] == "PERSON"],
+    }
+    return (
+        share(labelled)
+        | {"unlabelled": len(items) - len(labelled)}
+        | {k: share(v) for k, v in kinds.items()}
+    )
+
+
+def label(items: list[dict[str, str]], ask: Callable[[str], str], save: Callable[[], None]) -> None:
+    """Walk the unlabelled items: y same entity, n different, s skip, q quit. Saves every answer."""
+    for item in items:
+        if item["label"]:
+            continue
+        print(f"\n#{item['n']} {item['type']}, merged by {item['rule']}")
+        print(f"  A: {item['a']} ({item['a_title']}): {item['a_context']}")
+        print(f"  B: {item['b']} ({item['b_title']}): {item['b_context']}")
+        choice = ""
+        while choice not in ("y", "n", "s", "q"):
+            choice = ask("  same entity? [y/n/s/q] ").strip().lower()
+        if choice == "q":
+            return
+        if choice in ("y", "n"):
+            item["label"] = "same" if choice == "y" else "different"
+            save()
+
+
+def merges_main(argv: list[str]) -> None:
+    parser = argparse.ArgumentParser(prog="python -m adaptiverag.ingest graph merges")
+    parser.add_argument("--corpus", choices=CORPORA, default="dev")
+    parser.add_argument("--n", type=int, default=100)
+    parser.add_argument("--label", action="store_true", help="label the sampled decisions")
+    parser.add_argument("--precision", action="store_true", help="precision over the labels")
+    args = parser.parse_args(argv)
+
+    def save(items: list[dict[str, str]]) -> None:
+        LABELS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        lines = [json.dumps(i, ensure_ascii=False) + "\n" for i in items]
+        LABELS_PATH.write_text("".join(lines), encoding="utf-8")
+
+    if args.label or args.precision:
+        items = read_jsonl_dicts(LABELS_PATH)
+        if args.label:
+            label(items, input, lambda: save(items))
+        print(json.dumps(precision(items), indent=2))
+        return
+    chunks, kept, _, _ = extract_corpus(args.corpus, None)
+    names, texts = name_texts(kept)
+    try:
+        vecs = dict(zip(names, llm.embed(texts), strict=True))
+    except RateLimited as e:
+        raise SystemExit(f"name embeddings stopped by the quota ({e}); run embed slices") from e
+    text = {c.chunk_id: c.text for c in chunks}
+    context: dict[tuple[str, str, str], str] = {}
+    for t in kept:
+        doc = t.chunk_id.split(":", 1)[0]
+        for name, type_ in ((t.subject, t.subject_type), (t.object, t.object_type)):
+            context.setdefault((type_, normalize_name(name), doc), text[t.chunk_id])
+    sample = sample_merges(merge_decisions(kept, vecs, ingest_cfg()["resolve"]), args.n)
+    titles = store.doc_titles(sorted({s[k] for s in sample for k in ("a_doc", "b_doc")}))
+    for s in sample:
+        for side in ("a", "b"):
+            s[f"{side}_title"] = titles.get(s[f"{side}_doc"], "")
+            key = (s["type"], normalize_name(s[side]), s[f"{side}_doc"])
+            s[f"{side}_context"] = context.get(key, "")
+    save(sample)
+    print(f"wrote {len(sample)} merge decisions to {LABELS_PATH}; label them with --label")
+
+
 def main(argv: list[str] | None = None) -> None:
     argv = sys.argv[1:] if argv is None else argv
     if argv[:1] == ["embed"]:
         return embed_main(argv[1:])
+    if argv[:1] == ["merges"]:
+        return merges_main(argv[1:])
     parser = argparse.ArgumentParser(prog="python -m adaptiverag.ingest graph")
     parser.add_argument("--corpus", choices=CORPORA, required=True)
     # keep it a multiple of chunks_per_call so the batches match a full run and stay cached

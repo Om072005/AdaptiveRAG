@@ -106,6 +106,13 @@ def graph_counts() -> dict[str, int]:
     return dict(zip(names, row or (0,) * len(names), strict=True))
 
 
+def doc_titles(doc_ids: list[str]) -> dict[str, str]:
+    """Titles of these documents, by doc_id."""
+    with db.conn() as c:
+        rows = c.execute("select doc_id, title from documents where doc_id = any(%s)", (doc_ids,))
+        return {doc: title for doc, title in rows.fetchall()}
+
+
 # rel_id, subject, predicate, object, chunk_id, doc_id, evidence start, evidence end, confidence
 RelationRow = tuple[str, str, str, str, str, str, int, int, float]
 Span = tuple[str, int, int]  # chunk_id, start, end in documents.text

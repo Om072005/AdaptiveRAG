@@ -126,6 +126,33 @@ def cosine(vecs: dict[Name, np.ndarray], a: Name, b: Name) -> float:
     return float(vecs[a] @ vecs[b]) if a in vecs and b in vecs else 0.0
 
 
+def merge_reason(
+    a: Node,
+    b: Node,
+    neighbours: dict[Node, set[Name]],
+    vecs: dict[Name, np.ndarray],
+    cfg: dict[str, Any],
+) -> str | None:
+    """Why D9 merges two nodes ('name 0.95', 'embedding 0.91; same document'), or None.
+    Two PERSON nodes also need the same document or a shared neighbour."""
+    if a[0] != b[0]:
+        return None
+    sim, cos = trigram_sim(a[1], b[1]), cosine(vecs, a[:2], b[:2])
+    if sim >= cfg["name_sim"]:
+        reason = f"name {sim:.2f}"
+    elif cos >= cfg["embed_sim"]:
+        reason = f"embedding {cos:.2f}"
+    else:
+        return None
+    if a[0] == "PERSON" and cfg["person_needs_shared_neighbor"]:
+        if a[2] == b[2]:
+            return f"{reason}; same document"
+        if neighbours[a] & neighbours[b]:
+            return f"{reason}; shared neighbour"
+        return None
+    return reason
+
+
 def same_entity(
     a: Node,
     b: Node,
@@ -133,15 +160,8 @@ def same_entity(
     vecs: dict[Name, np.ndarray],
     cfg: dict[str, Any],
 ) -> bool:
-    """D9 merge rule. Two PERSON nodes also need the same document or a shared neighbour."""
-    if a[0] != b[0]:
-        return False
-    names_close = trigram_sim(a[1], b[1]) >= cfg["name_sim"]
-    if not names_close and cosine(vecs, a[:2], b[:2]) < cfg["embed_sim"]:
-        return False
-    if a[0] == "PERSON" and cfg["person_needs_shared_neighbor"]:
-        return a[2] == b[2] or bool(neighbours[a] & neighbours[b])
-    return True
+    """D9 merge rule."""
+    return merge_reason(a, b, neighbours, vecs, cfg) is not None
 
 
 def clusters(
@@ -149,8 +169,10 @@ def clusters(
     neighbours: dict[Node, set[Name]],
     vecs: dict[Name, np.ndarray],
     cfg: dict[str, Any],
+    merges: list[tuple[Node, Node, str]] | None = None,
 ) -> list[list[Node]]:
-    """Union find over pairs from the same (type, first token) block, in sorted order."""
+    """Union find over pairs from the same (type, first token) block, in sorted order. Each merge
+    made is appended to merges when a list is given, for the labelled precision sample."""
     parent = {n: n for n in nodes}
 
     def root(n: Node) -> Node:
@@ -164,9 +186,14 @@ def clusters(
     for block in blocks.values():
         for i, a in enumerate(block):
             for b in block[i + 1 :]:
-                if root(a) != root(b) and same_entity(a, b, neighbours, vecs, cfg):
+                if root(a) == root(b):
+                    continue
+                reason = merge_reason(a, b, neighbours, vecs, cfg)
+                if reason:
                     keep, drop = sorted((root(a), root(b)))
                     parent[drop] = keep
+                    if merges is not None:
+                        merges.append((a, b, reason))
     groups: dict[Node, list[Node]] = defaultdict(list)
     for n in sorted(nodes):
         groups[root(n)].append(n)
@@ -236,6 +263,27 @@ def build_rows(
             "extraction_confidence": t.confidence,
         }
     return entities, aliases, list(relations.values())
+
+
+def merge_decisions(
+    triples: list[Triple], vecs: dict[Name, np.ndarray], cfg: dict[str, Any]
+) -> list[dict[str, str]]:
+    """Every merge the resolver makes on these triples: both names as written, their type, their
+    documents and the rule that fired. A person labels a sample of them for precision."""
+    surfaces, neighbours = mentions(triples)
+    merges: list[tuple[Node, Node, str]] = []
+    clusters(list(surfaces), neighbours, vecs, cfg, merges)
+    return [
+        {
+            "type": a[0],
+            "a": pick_name(surfaces[a]),
+            "a_doc": a[2],
+            "b": pick_name(surfaces[b]),
+            "b_doc": b[2],
+            "rule": reason,
+        }
+        for a, b, reason in merges
+    ]
 
 
 def resolve(
