@@ -1,9 +1,101 @@
 # Decision log
 
-The full log (decisions D1 to D15 with alternatives and reasons) is written on D3. This file starts with the
-provider facts we checked on D1, because every cost and latency number later depends on them.
+Each decision: what we chose, what we did not, and why. The README table "Design decisions & tradeoffs" keeps
+its five rows; everything we decided while building goes here. New entries go at the bottom of their section.
 
-## Models, list prices and free tier limits (checked 2026-09-29)
+## Architecture and data
+
+**D1 One Postgres (Neon) for chunks, vectors, the graph, traces and evals.** Not Neo4j plus a vector database
+plus a trace store. The README graph schema is an entity relationship diagram, so it maps to tables, and a
+foreign key makes provenance impossible to skip: `relations.chunk_id` is `not null` and has no cascade.
+Traversal is depth two with a fan out cap, a few indexed queries we write ourselves. Quality per unit cost is
+one join between eval results and trace costs. Neon branches give every member a copy of shared data in
+seconds. We would move the graph to Neo4j if it passed about 100k edges or needed depth over three.
+
+**D2 pgvector HNSW serves; our own HNSW and a flat index are for the benchmark only.** A static page and a
+local API should not load a Python index on every start. The benchmark still measures our HNSW against flat
+and against pgvector, and the README says plainly that the library index serves.
+
+**D3 HotpotQA dev (distractor) as corpus and gold set.** It ships gold answers and sentence level supporting
+facts, so EM, F1 and supporting title recall do not depend on a model judge. Question types map onto the
+router labels. Known weakness: paragraphs are short Wikipedia intros, so chunking strategies differ less than
+on long documents, and the chunking table says so.
+
+**D6 No RAG framework.** `scripts/check.sh` fails on LangChain, LlamaIndex or Haystack imports, and on sklearn,
+scipy or torch, because retrieval, routing, merge and the classifier are written by us.
+
+**D12 Every model call is cached in Postgres.** Keyed by a hash of the exact request (model, messages or input,
+every parameter). Reruns are free and reproducible, and a hit returns the original tokens and latency, so a
+cached rerun never makes a route look cheaper or faster. Embeddings are cached per text, so a partly done
+ingest resumes without paying twice.
+
+**D13 The public page is static and replays recorded runs.** It never calls a model or the database, so a
+shared link cannot break or run up a bill. Vercel receives only `web/` (`.vercelignore`), the project framework
+is set to Other, and there are no functions. The full system runs locally for the team.
+
+**D14 Evaluation hygiene.** Tune on dev only; the test split is locked behind `ALLOW_TEST=1` and run once per
+pinned variant on D13; every run records git sha, dirty flag and config hash; the README quotes pinned runs only.
+
+## Models and routing
+
+**D4 Groq GPT-OSS generates, Gemini extracts, judges and embeds.** Small and classify: `gpt-oss-20b`; large:
+`gpt-oss-120b`; extract: Gemini Flash-Lite; judge: Gemini Flash; embed: `gemini-embedding-001` at 768
+dimensions. The judge is a different family from the generator, as the README asks. One OpenAI compatible
+gateway means a provider swap is a config change.
+
+**D5 One query embedding, reused.** Computed once per question and used by vector search, the classifier,
+entity linking, traversal scoring and MMR.
+
+**D7 Three classifiers compared, logistic regression by default.** Rules on cue features, numpy logistic
+regression on the query embedding plus cues, and a few shot LLM. The default reuses the embedding we already
+paid for, so it adds almost no cost, and its softmax gives a real classifier confidence.
+
+**D8 Hybrid is reciprocal rank fusion, then MMR.** No score calibration is needed between cosine and path
+scores; MMR stops near duplicate chunks filling the context. An LLM re-rank exists behind a flag, off by default.
+
+**D9 Entity resolution with a person guard.** Merge on normalized name or embedding similarity, but two PERSON
+entities also need a shared neighbour or the same source document. That guards the README's most expected
+failure: merging two people who share a name.
+
+**D10 Traversal is BFS, depth two, fan out 25.** Edge score is extraction confidence times relation similarity
+to the question; path score is the product. Bounded cost per query, and every edge keeps its chunk.
+
+**D11 Classifier confidence and answer confidence are separate columns.** Answer confidence is citation
+coverage plus retrieval strength, with weights in `config/router.toml`. A confidently classified question can
+still get a badly grounded answer; logging both lets us show when.
+
+**D15 Free tiers, one account per member.** Limits are per Groq organization and per Gemini project. Latency
+counts only the successful attempt; backoff after a 429 goes to `wait_ms` and `throttle_wait_ms`.
+
+## Decided while building (D1 to D3)
+
+- **`aliases` primary key is `(surface_form, canonical_id)`**, not `surface_form` alone as the README draws it,
+  so one surface form can point at two different people with the same name.
+- **`schema_migrations` is created with `if not exists`** because the migration runner creates it before
+  applying `0001`. Migration `0002` added `low_confidence` as an extraction reject reason.
+- **Extraction moved to `gemini-3.5-flash-lite`** (see the provider notes below). It costs 0.30 / 2.50 per
+  million tokens instead of 0.10 / 0.40, and thinking cannot be turned off.
+- **Output tokens include hidden reasoning.** Gemini reports thinking only in `total_tokens`, so the gateway
+  bills `max(completion_tokens, total_tokens - prompt_tokens)`.
+- **Daily quotas stop a run at once.** A 429 that names a per day quota raises `RateLimited` without retrying,
+  because waiting cannot clear it and refused retries still count. Per minute limits are waited out.
+- **The call cap (4 per query) is checked before the provider is called**, so the fifth call costs nothing.
+- **Empty retrieval answers "not enough context" without calling a model**, with answer confidence 0.
+- **A citation written after the full stop belongs to that sentence.** Found in the first real `ask`, where it
+  had halved citation coverage.
+- **`sp_precision` takes chunk relative spans.** The eval run converts document offsets with
+  `chunks.start_offset` and clips them to the chunk; the denominator counts overlapping chunks twice.
+- **One shared database connection for reads on the query path**, so retrieval latency does not include a new
+  TLS handshake to Neon on every query.
+- **`POST /api/query` returns the response stored on the trace**, so a live answer and its replay are the same.
+- **Split Gemini quotas instead of billing.** Enabling billing on the team's Gemini project failed on Google's
+  side (`OR_BACR2_59`), so embedding the full corpus is spread over the four members' own keys, one slice each,
+  into Neon `main`, and judged runs grow 20 questions per key per day with `--resume`.
+- **The page names members by GitHub username**, shows the lead's address as contact, and the repo is MIT.
+
+## Providers
+
+### Models, list prices and free tier limits (checked 2026-09-29)
 
 Costs are always computed from the paid tier list price in `config/models.toml`, even while we run on free
 tiers, so a number does not depend on whose key ran the query.
@@ -27,14 +119,13 @@ Notes from the provider docs:
   users", so extraction uses the fallback the plan named, `gemini-3.5-flash-lite`. Thinking cannot be turned off
   on 3.x models, so extraction runs at `reasoning_effort = "minimal"`.
 - Gemini's OpenAI compatible usage block leaves thinking tokens out of `completion_tokens` but counts them in
-  `total_tokens` (a low effort call reported 2 completion and 68 total tokens for an 18 token prompt). The
-  gateway therefore bills output as `total_tokens - prompt_tokens` when that is larger.
+  `total_tokens` (a low effort call reported 2 completion and 68 total tokens for an 18 token prompt).
 - `gemini-embedding-001` is marked legacy but stable. Its successor `gemini-embedding-2` costs 0.20 and its
   vectors are not comparable with 001, so we stay on 001 for the whole project. At 768 dimensions 001 needs
   L2 normalization on our side.
 - On the OpenAI compatible Gemini endpoint, `reasoning_effort = "none"` turns thinking off for 2.5 models;
-  3.x Flash accepts low. Embeddings accept `dimensions = 768` there (checked
-  2026-09-29), return no usage block, and are not unit length, so the gateway normalizes them.
+  3.x Flash accepts low. Embeddings accept `dimensions = 768` there (checked 2026-09-29), return no usage
+  block, and are not unit length, so the gateway normalizes them.
 
 ### Free tier limits
 
@@ -42,10 +133,14 @@ Notes from the provider docs:
 |---|---|---|---|---|---|
 | Groq (per organization) | `openai/gpt-oss-20b` | 30 | 1,000 | 8,000 | 200,000 |
 | Groq (per organization) | `openai/gpt-oss-120b` | 30 | 1,000 | 8,000 | 200,000 |
+| Gemini (per project) | `gemini-embedding-001` | 100 texts | 1,000 texts | 30,000 | |
+| Gemini (per project) | `gemini-3.8-flash` (judge) | 5 | 20 | 250,000 | |
+| Gemini (per project) | `gemini-3.5-flash-lite` (extract) | 15 | 500 | 250,000 | |
 
-Source: https://console.groq.com/docs/rate-limits. Gemini limits are set per project and AI Studio shows
-them per model only once a model has been called; they are added here after the first gateway calls on D2.
+Sources: https://console.groq.com/docs/rate-limits and the AI Studio rate limit page of our project
+(2026-09-29). Gemini counts every embedded text as a request, and its daily quotas reset at midnight Pacific.
 
 What this means for us: at about 3k tokens per question, 8k tokens per minute allows two or three large model
-questions a minute per organization. Eval runs will be throttled, which is why latency counts only the
-successful attempt and backoff goes to `throttle_wait_ms`.
+questions a minute per Groq organization, and one Gemini project embeds at most 1,000 texts a day. Eval runs
+will be throttled, which is why latency counts only the successful attempt and backoff goes to
+`throttle_wait_ms`.
