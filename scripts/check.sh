@@ -19,8 +19,10 @@ uv run mypy adaptiverag
 uv run pytest -q -m "not network"
 
 if [ -f web/package.json ]; then
-  # the page check runs oxlint, tsc and vite, so a fresh clone needs web dependencies first
-  [ -d web/node_modules ] || (cd web && npm ci --silent)
+  # the page check runs oxlint, tsc and vite: install on a fresh clone, reinstall when the lock changed
+  if [ ! -f web/node_modules/.package-lock.json ] || [ web/package-lock.json -nt web/node_modules/.package-lock.json ]; then
+    (cd web && npm ci --silent)
+  fi
   (cd web && npm run -s check)
 fi
 
