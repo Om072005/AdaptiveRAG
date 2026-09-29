@@ -52,7 +52,8 @@ class ProviderError(Exception):
 def client() -> httpx.Client:
     global _client
     if _client is None:
-        _client = httpx.Client(timeout=httpx.Timeout(120.0, connect=15.0))
+        # a local model may think for minutes on a long context, so reads wait up to 10 minutes
+        _client = httpx.Client(timeout=httpx.Timeout(600.0, connect=15.0))
     return _client
 
 
