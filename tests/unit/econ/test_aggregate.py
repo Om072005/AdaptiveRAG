@@ -3,7 +3,7 @@ from typing import Any
 
 import pytest
 
-from adaptiverag.telemetry.aggregate import group_stats, summarize
+from adaptiverag.telemetry.aggregate import group_stats, quality_per_cost, selector, summarize
 
 
 def result(
@@ -82,3 +82,53 @@ def test_runs_stay_apart() -> None:
         ("r1", pytest.approx(0.0006)),
         ("r2", pytest.approx(0.01)),
     ]
+
+
+def test_quality_per_cost_applies_the_faithfulness_floor() -> None:
+    runs = {
+        "cheap": {
+            "variant": "always-small",
+            "f1": 0.5,
+            "faithfulness": 0.55,
+            "cost_per_query_usd": 0.0001,
+        },
+        "good": {
+            "variant": "selector",
+            "f1": 0.6,
+            "faithfulness": 0.8,
+            "cost_per_query_usd": 0.0003,
+        },
+        "unjudged": {
+            "variant": "always-large",
+            "f1": 0.7,
+            "faithfulness": None,
+            "cost_per_query_usd": 0.001,
+        },
+    }
+    rows = {r["run_id"]: r for r in quality_per_cost(runs, 0.6)}
+    assert (
+        rows["cheap"]["eligible"] is False and rows["cheap"]["why_not"] == "faithfulness under 0.6"
+    )
+    assert rows["good"]["eligible"] is True and rows["good"]["why_not"] == ""
+    assert rows["unjudged"]["eligible"] is False and rows["unjudged"]["why_not"] == "not judged"
+
+
+def test_selector_large_share_counts_only_answered_rows() -> None:
+    rows = [
+        {
+            **result("s", "single_hop", "vector", "0.001", "0", 100, 1.0, None),
+            "model_selected": "big",
+        },
+        {
+            **result("s", "multi_hop", "graph", "0.002", "0", 200, 0.0, None),
+            "model_selected": "small",
+        },
+        {
+            **result("s", "multi_hop", "graph", "0.003", "0", 300, 0.5, None),
+            "model_selected": "big",
+        },
+        {**result("s", "multi_hop", "graph", None, "0", None, 0.5, None), "model_selected": None},
+    ]
+    (row,) = selector(rows, "big")
+    assert row["large_share"] == pytest.approx(2 / 3)
+    assert row["cost_per_query_usd"] == pytest.approx(0.002)
