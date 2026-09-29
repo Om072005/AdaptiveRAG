@@ -12,7 +12,9 @@ ChatFn = Callable[..., LLMResult]
 
 PROMPT = """You write one question for a question answering test set.
 Read the paragraph. Pick one numbered sentence and write a question only that sentence answers.
-The question must name its subject, so it makes sense without the paragraph.
+The question must name its subject in full, using the words of the title (never "the film",
+"the tournament" or "it"), so it makes sense without the paragraph.
+The question must have exactly one correct answer (never "one of the ...").
 The answer is the shortest span copied exactly from that sentence (a name, date, place or number).
 Reply with JSON only: {{"question": "...", "answer": "...", "sentence": <sentence number>}}
 
