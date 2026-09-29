@@ -24,7 +24,7 @@ def render(n: int, item: GoldItem, sentences: Sentences) -> str:
         f"  A: {item.answer}",
     ]
     for title, i in item.supporting_sentences:
-        text = sentences.get((title, i), "(sentence not found in the documents table)")
+        text = sentences.get((title, i), "(sentence not found in the corpus)")
         lines.append(f"  {title} #{i}: {text}")
     if item.notes:
         lines.append(f"  notes: {item.notes}")
@@ -43,15 +43,13 @@ def apply(item: GoldItem, choice: str, reviewer: str, note: str = "") -> None:
 
 
 def load_sentences(items: list[GoldItem]) -> Sentences:
-    """Supporting sentence text from the documents table on your Neon branch."""
-    from adaptiverag.stores import db
+    """Supporting sentence text from the local HotpotQA file, so no ingested corpus is needed."""
+    from adaptiverag.eval.gold import FULL_QUESTIONS
+    from adaptiverag.ingest.loader import load_hotpot
 
-    titles = sorted({t for i in items for t in i.supporting_titles})
-    with db.conn() as c:
-        rows = c.execute(
-            "select title, text, sentences from documents where title = any(%s)", (titles,)
-        ).fetchall()
-    return {(title, i): text[s:e] for title, text, spans in rows for i, (s, e) in enumerate(spans)}
+    titles = {t for i in items for t in i.supporting_titles}
+    docs = [d for d in load_hotpot(FULL_QUESTIONS)[0] if d.title in titles]
+    return {(d.title, i): d.text[s:e] for d in docs for i, (s, e) in enumerate(d.sentences)}
 
 
 def run(
