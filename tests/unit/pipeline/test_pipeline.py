@@ -5,43 +5,50 @@ import pytest
 from adaptiverag import llm, pipeline
 from adaptiverag.generate import answer as answer_mod
 from adaptiverag.telemetry.trace import Trace
-from adaptiverag.types import Hit, LLMResult, Retrieved
+from adaptiverag.types import (
+    Classification,
+    Hit,
+    LLMResult,
+    Mode,
+    Retrieved,
+    RouteDecision,
+)
 
 saved: list[dict[str, Any]] = []
+routed: list[tuple[str, str]] = []
+
+HITS = [
+    Hit(
+        "d1:sentence:0",
+        "d1",
+        "Istanbul",
+        "Istanbul is the largest city in Turkey.",
+        0.82,
+        "vector",
+        1,
+    ),
+    Hit("d2:sentence:0", "d2", "Ankara", "Ankara is the capital of Turkey.", 0.74, "vector", 2),
+]
 
 
-def fake_retrieved(question: str, k: int, trace: Trace, qvec: Any = None) -> Retrieved:
-    hits = [
-        Hit(
-            "d1:sentence:0",
-            "d1",
-            "Istanbul",
-            "Istanbul is the largest city in Turkey.",
-            0.82,
-            "vector",
-            1,
-        ),
-        Hit("d2:sentence:0", "d2", "Ankara", "Ankara is the capital of Turkey.", 0.74, "vector", 2),
-    ]
-    trace.set(retrieval_latency_ms=12, n_results=2, top_score=0.82)
-    return Retrieved(hits, [], [], 0.82, False, 12)
-
-
-def fake_embed(texts: list[str], *, trace: Trace | None = None) -> Any:
-    import numpy as np
-
-    embedded.append(texts)
-    return np.ones((len(texts), 768), dtype=np.float32)
-
-
-embedded: list[list[str]] = []
+def fake_route(question: str, mode: Mode, trace: Trace) -> tuple[RouteDecision, Retrieved]:
+    """Stands in for router.route_and_retrieve: forced modes go as asked, auto classifies."""
+    routed.append((question, mode))
+    with trace.span("retrieve"):
+        trace.set(retrieval_latency_ms=12, n_results=2, top_score=0.82)
+    if mode == "auto":
+        c = Classification("single_hop", 0.91, {"single_hop": 0.91}, "rules", 0.0, 1)
+        decision = RouteDecision(mode, c, "vector", "vector", reasons=["no_relational_structure"])
+    else:
+        decision = RouteDecision(mode, None, mode, mode, reasons=[f"forced:{mode}"])
+    return decision, Retrieved(list(HITS), [], [], 0.82, False, 12)
 
 
 def fake_chat(role: str, messages: list[dict[str, str]], **kw: Any) -> LLMResult:
     r = LLMResult(
         "Answer: Ankara\nTurkey's capital is Ankara [2][9].",
-        role,
-        f"model-{role}",  # type: ignore[arg-type]
+        role,  # type: ignore[arg-type]
+        f"model-{role}",
         900,
         40,
         0.0002,
@@ -58,13 +65,13 @@ def fake_chat(role: str, messages: list[dict[str, str]], **kw: Any) -> LLMResult
 @pytest.fixture(autouse=True)
 def fakes(monkeypatch: pytest.MonkeyPatch) -> None:
     saved.clear()
-    monkeypatch.setattr(pipeline.vector, "retrieve", fake_retrieved)
-    monkeypatch.setattr(pipeline.llm, "embed", fake_embed)
+    routed.clear()
+    monkeypatch.setattr(pipeline, "route_and_retrieve", fake_route)
     monkeypatch.setattr(answer_mod.llm, "chat", fake_chat)
     monkeypatch.setattr(Trace, "save", lambda self: saved.append(self.row()) or self.trace_id)
 
 
-def test_baseline_vector_question_to_cited_answer() -> None:
+def test_forced_vector_question_to_cited_answer() -> None:
     r = pipeline.answer_query(
         "What is the capital of the country whose largest city is Istanbul?", "vector"
     )
@@ -81,19 +88,39 @@ def test_baseline_vector_question_to_cited_answer() -> None:
     assert [s["name"] for s in row["detail"]["spans"]] == ["retrieve", "generate"]
 
 
+def test_every_mode_goes_through_the_router() -> None:
+    for mode in ("auto", "vector", "graph", "hybrid"):
+        pipeline.answer_query("q about Ankara", mode)  # type: ignore[arg-type]
+    assert [m for _, m in routed] == ["auto", "vector", "graph", "hybrid"]
+
+
+def test_auto_mode_keeps_the_classification_on_the_response() -> None:
+    r = pipeline.answer_query("What is the capital of Turkey?", "auto")
+    assert r.decision.classification is not None
+    route = saved[0]["detail"]["route"]
+    assert (route["label"], route["method"], route["reasons"]) == (
+        "single_hop",
+        "rules",
+        ["no_relational_structure"],
+    )
+
+
 def test_force_size_overrides_the_selector() -> None:
     r = pipeline.answer_query("q about Ankara", "vector", force_size="large")
     assert r.answer.size == "large" and r.answer.select_reason == "forced:large"
 
 
+def test_graph_route_asks_for_the_large_model() -> None:
+    assert pipeline.answer_query("What is the capital of Turkey?", "graph").answer.size == "large"
+
+
 def test_empty_retrieval_says_not_enough_context_without_a_model_call(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    monkeypatch.setattr(
-        pipeline.vector,
-        "retrieve",
-        lambda q, k, trace, qvec=None: Retrieved([], [], [], 0.0, False, 3),
-    )
+    def empty(question: str, mode: Mode, trace: Trace) -> tuple[RouteDecision, Retrieved]:
+        return RouteDecision(mode, None, "vector", "vector"), Retrieved([], [], [], 0.0, False, 3)
+
+    monkeypatch.setattr(pipeline, "route_and_retrieve", empty)
     r = pipeline.answer_query("q", "vector")
     assert (r.answer.short, r.answer.confidence, r.flagged) == ("not enough context", 0.0, True)
     assert saved[0]["total_cost_usd"] == 0
@@ -107,47 +134,3 @@ def test_budget_stop_is_saved_then_raised(monkeypatch: pytest.MonkeyPatch) -> No
     with pytest.raises(llm.BudgetExceeded):
         pipeline.answer_query("q", "vector")
     assert saved[0]["detail"]["budget_exceeded"] is True
-
-
-def test_graph_mode_goes_through_graph_retrieve(monkeypatch: pytest.MonkeyPatch) -> None:
-    calls: list[str] = []
-
-    def fake_graph(question: str, k: int, trace: Trace, qvec: Any = None) -> Retrieved:
-        calls.append(question)
-        hit = Hit(
-            "d2:sentence:0", "d2", "Ankara", "Ankara is the capital of Turkey.", 0.7, "graph", 1
-        )
-        return Retrieved([hit], [], [], 0.7, False, 5)
-
-    monkeypatch.setattr(pipeline.graph, "retrieve", fake_graph)
-    r = pipeline.answer_query("What is the capital of Turkey?", "graph")
-    assert calls == ["What is the capital of Turkey?"]
-    assert r.decision.reasons == ["forced:graph"] and r.retrieved.hits[0].source == "graph"
-    assert r.answer.size == "large"  # graph route asks for the large model
-
-
-def test_hybrid_merges_both_backends_with_one_embedding(monkeypatch: pytest.MonkeyPatch) -> None:
-    from adaptiverag.types import Edge, GraphPath
-
-    edge = Edge("r1", "e1", "Istanbul", "in", "e2", "Turkey", "d1:sentence:0", 0.9)
-
-    def fake_graph(question: str, k: int, trace: Trace, qvec: Any = None) -> Retrieved:
-        assert qvec is not None
-        trace.set(path_found=True)
-        hit = Hit("d1:sentence:0", "d1", "Istanbul", "Istanbul is in Turkey.", 0.6, "graph", 1)
-        return Retrieved([hit], [GraphPath((edge,), 0.6, True)], [], 0.6, True, 7)
-
-    merged: list[tuple[int, int]] = []
-
-    def fake_merge(v: list[Hit], g: list[Hit], qvec: Any, k: int, trace: Trace) -> list[Hit]:
-        merged.append((len(v), len(g)))
-        return v[:1] + g
-
-    embedded.clear()
-    monkeypatch.setattr(pipeline.graph, "retrieve", fake_graph)
-    monkeypatch.setattr(pipeline, "merge_rerank", fake_merge)
-    r = pipeline.answer_query("What is the capital?", "hybrid")
-    assert merged == [(2, 1)] and len(embedded) == 1
-    assert r.decision.reasons == ["forced:hybrid"] and r.decision.final == "hybrid"
-    assert r.retrieved.path_found and r.retrieved.paths and r.answer.size == "large"
-    assert saved[0]["n_results"] == 2 and saved[0]["path_found"] is True

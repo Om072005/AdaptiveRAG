@@ -2,15 +2,13 @@
 
 from typing import Any
 
-from adaptiverag import llm
 from adaptiverag.config import router_cfg
 from adaptiverag.eval import judge
 from adaptiverag.eval.run import store_judgement
 from adaptiverag.generate.answer import synthesize
 from adaptiverag.llm import BudgetExceeded
-from adaptiverag.router.hybrid import merge_rerank
+from adaptiverag.router.route import route_and_retrieve
 from adaptiverag.serialize import response_from_trace, to_response
-from adaptiverag.stores import graph, vector
 from adaptiverag.stores.db import conn
 from adaptiverag.stores.traces import chunk_texts, queue_review, read_judgement
 from adaptiverag.telemetry.trace import Trace
@@ -24,35 +22,7 @@ from adaptiverag.types import (
     ModelSize,
     QueryResult,
     Retrieved,
-    Route,
-    RouteDecision,
 )
-
-
-def retrieve_forced(question: str, route: Route, trace: Trace) -> Retrieved:
-    """One backend, or both merged for hybrid. The question is embedded once and reused."""
-    cfg = router_cfg()
-    k = int(cfg["vector"]["k"])
-    qvec = llm.embed([question], trace=trace)[0]
-    if route == "vector":
-        return vector.retrieve(question, k, trace, qvec)
-    if route == "graph":
-        return graph.retrieve(question, k, trace, qvec)
-    v = vector.retrieve(question, k, trace, qvec)
-    g = graph.retrieve(question, k, trace, qvec)
-    hits = merge_rerank(v.hits, g.hits, qvec, int(cfg["hybrid"]["k"]), trace)
-    trace.set(n_results=len(hits), top_score=v.top_score, path_found=g.path_found)
-    return Retrieved(hits, g.paths, g.seeds, v.top_score, g.path_found, v.latency_ms + g.latency_ms)
-
-
-def route_baseline(question: str, mode: Mode, trace: Trace) -> tuple[RouteDecision, Retrieved]:
-    """Forced modes go to their backend; auto stays on vector until the router lands (D8)."""
-    route: Route = "vector" if mode == "auto" else mode
-    reason = "baseline:router not wired yet" if mode == "auto" else f"forced:{mode}"
-    decision = RouteDecision(mode, None, route, route, reasons=[reason])
-    with trace.span("retrieve"):
-        retrieved = retrieve_forced(question, route, trace)
-    return decision, retrieved
 
 
 def answer_query(
@@ -61,7 +31,7 @@ def answer_query(
     """Route, retrieve, generate and save one trace."""
     trace = Trace(question, mode, source)
     try:
-        decision, retrieved = route_baseline(question, mode, trace)
+        decision, retrieved = route_and_retrieve(question, mode, trace)
         answer = synthesize(question, decision, retrieved, trace, force_size)
     except BudgetExceeded:
         # the cost spiral guard fired: keep the evidence, then let the caller see it
