@@ -228,7 +228,6 @@ def result_rows(c: psycopg.Connection[Any], run_id: str) -> list[dict[str, Any]]
 
 def start_run(c: psycopg.Connection[Any], args: argparse.Namespace) -> tuple[str, list[GoldItem]]:
     """Insert a new eval_runs row; the options needed to resume go into its summary."""
-    check_args(args.split, args.variant, args.size, settings().allow_test)
     items = select_items(args.split, args.limit)
     sha, dirty = git_state()
     run_id = make_run_id(datetime.now(), args.split, args.mode, args.variant)
@@ -285,6 +284,9 @@ def main(argv: list[str] | None = None, answer: AnswerFn | None = None) -> None:
     args = p.parse_args(argv)
     if not args.resume and not (args.split and args.mode and args.variant):
         p.error("--split, --mode and --variant are required unless --resume is given")
+    if not args.resume:
+        # refuse before any connection is opened; a resumed run is checked once its row is read
+        check_args(args.split, args.variant, args.size, settings().allow_test)
     for flag in ("questions", "pin"):
         if getattr(args, flag):
             raise SystemExit(f"--{flag} is not built yet")
