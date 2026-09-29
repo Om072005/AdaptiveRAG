@@ -1,17 +1,18 @@
 # Vercel serves only the static page in web/. Nothing Python is uploaded, so no function can exist.
-adaptiverag/
-api/
-bench/
-config/
-data/
-db/
-docs/
-scripts/
-tests/
-pyproject.toml
-uv.lock
-requirements.txt
-.python-version
-.env.example
-web/node_modules/
-web/dist/
+# Every entry is anchored with a leading slash so it cannot match inside web/ (web/scripts is needed).
+/adaptiverag/
+/api/
+/bench/
+/config/
+/data/
+/db/
+/docs/
+/scripts/
+/tests/
+/pyproject.toml
+/uv.lock
+/requirements.txt
+/.python-version
+/.env.example
+/web/node_modules/
+/web/dist/
