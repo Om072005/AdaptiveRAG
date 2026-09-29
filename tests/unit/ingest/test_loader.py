@@ -158,3 +158,22 @@ def test_committed_mini_corpus_sits_inside_full() -> None:
     assert full["question_ids"][:30] == mini["question_ids"]
     assert set(mini["doc_ids"]) <= set(full["doc_ids"])
     assert mini["seed"] == full["seed"] == 7
+
+
+def test_every_gold_question_is_answerable_from_the_full_corpus() -> None:
+    gold_dir = MANIFESTS.parent / "gold"
+    doc_ids = set(json.loads((MANIFESTS / "full.json").read_text(encoding="utf-8"))["doc_ids"])
+    items = [
+        json.loads(line)
+        for split in ("dev", "test")
+        for line in (gold_dir / f"{split}.jsonl").read_text(encoding="utf-8").splitlines()
+        if line
+    ]
+    assert len(items) == 150
+    missing = [
+        (i["id"], t)
+        for i in items
+        for t in i["supporting_titles"]
+        if doc_id(loader.SOURCE, t) not in doc_ids
+    ]
+    assert missing == []
