@@ -56,3 +56,64 @@ def test_split_cli_writes_files_once(tmp_path: Path) -> None:
     assert {i.split for i in gold.read_jsonl(tmp_path / "test.jsonl")} == {"test"}
     with pytest.raises(SystemExit, match="refusing to re-split"):
         gold.main(["split", "--candidates", str(src), "--gold-dir", str(tmp_path)])
+
+
+def test_replace_takes_the_next_unused_candidate_and_logs_the_old_item(tmp_path: Path) -> None:
+    src = tmp_path / "candidates.jsonl"
+    gold.write_jsonl(src, candidates())
+    gold.main(["split", "--candidates", str(src), "--gold-dir", str(tmp_path)])
+    before = gold.read_jsonl(tmp_path / "test.jsonl")[0]
+    used = {i.id for f in ("dev", "test") for i in gold.read_jsonl(tmp_path / f"{f}.jsonl")}
+    expected = next(c for c in gold.seeded_pool(candidates(), before.type) if c.id not in used)
+    gold.main(
+        [
+            "replace",
+            "101",
+            "--reason",
+            "answer is wrong",
+            "--gold-dir",
+            str(tmp_path),
+            "--candidates",
+            str(src),
+        ]
+    )
+    after = gold.read_jsonl(tmp_path / "test.jsonl")[0]
+    assert after.id == expected.id and after.split == "test" and after.verified_by == ""
+    assert after.notes == f"replaces {before.id}: answer is wrong"
+    logged = gold.read_jsonl(tmp_path / "replaced.jsonl")
+    assert logged[0].id == before.id and logged[0].notes.endswith(
+        f"replaced by {after.id}: answer is wrong"
+    )
+    gold.main(
+        [
+            "replace",
+            "101",
+            "--reason",
+            "again",
+            "--gold-dir",
+            str(tmp_path),
+            "--candidates",
+            str(src),
+        ]
+    )
+    third = gold.read_jsonl(tmp_path / "test.jsonl")[0]
+    assert third.id not in {before.id, after.id}
+
+
+def test_replace_refuses_out_of_range(tmp_path: Path) -> None:
+    src = tmp_path / "candidates.jsonl"
+    gold.write_jsonl(src, candidates())
+    gold.main(["split", "--candidates", str(src), "--gold-dir", str(tmp_path)])
+    with pytest.raises(SystemExit, match="out of range"):
+        gold.main(
+            [
+                "replace",
+                "151",
+                "--reason",
+                "x",
+                "--gold-dir",
+                str(tmp_path),
+                "--candidates",
+                str(src),
+            ]
+        )

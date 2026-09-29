@@ -1,4 +1,4 @@
-"""python -m adaptiverag.eval.gold build|generate|split|status|verify (see main for flags)"""
+"""python -m adaptiverag.eval.gold build|generate|split|verify|replace|status (see main)"""
 
 import argparse
 import json
@@ -115,8 +115,7 @@ def split_items(candidates: list[GoldItem], seed: int = 7) -> list[GoldItem]:
     """Draw dev then test per type with a fixed seed; items not drawn are left out."""
     out = []
     for qtype in sorted(QTYPES):
-        pool = sorted((c for c in candidates if c.type == qtype), key=lambda c: c.id)
-        random.Random(f"{seed}:{qtype}").shuffle(pool)
+        pool = seeded_pool(candidates, qtype, seed)
         need = SPLIT_MIX["dev"][qtype] + SPLIT_MIX["test"][qtype]
         if len(pool) < need:
             raise ValueError(f"{qtype}: {len(pool)} candidates, need {need}")
@@ -125,6 +124,23 @@ def split_items(candidates: list[GoldItem], seed: int = 7) -> list[GoldItem]:
             item.split = "dev" if i < n_dev else "test"
             out.append(item)
     return sorted(out, key=lambda i: (i.split, i.id))
+
+
+def seeded_pool(candidates: list[GoldItem], qtype: str, seed: int = 7) -> list[GoldItem]:
+    """Candidates of one type in the order split_items draws them."""
+    pool = sorted((c for c in candidates if c.type == qtype), key=lambda c: c.id)
+    random.Random(f"{seed}:{qtype}").shuffle(pool)
+    return pool
+
+
+def replacement_for(
+    item: GoldItem, candidates: list[GoldItem], used: set[str], seed: int = 7
+) -> GoldItem:
+    """The next candidate of the same type that no split uses, in the split's seeded order."""
+    for c in seeded_pool(candidates, item.type, seed):
+        if c.id not in used:
+            return GoldItem(**{**asdict(c), "split": item.split, "verified_by": ""})
+    raise SystemExit(f"no unused {item.type} candidate left to replace {item.id}")
 
 
 def load_split(
@@ -170,6 +186,28 @@ def cmd_split(sources: list[Path], gold_dir: Path, seed: int) -> None:
     print(f"wrote {n_dev} dev and {len(items) - n_dev} test items to {gold_dir}")
 
 
+def cmd_replace(n: int, reason: str, gold_dir: Path, sources: list[Path]) -> None:
+    from adaptiverag.eval import verify
+
+    items = [i for _, i in verify.numbered(gold_dir)]
+    if not 1 <= n <= len(items):
+        raise SystemExit(f"item {n} is out of range 1..{len(items)}")
+    log = gold_dir / "replaced.jsonl"
+    removed = {i.id for i in read_jsonl(log)} if log.exists() else set()
+    old = items[n - 1]
+    candidates = [c for src in sources for c in read_jsonl(src)]
+    new = replacement_for(old, candidates, {i.id for i in items} | removed)
+    new.notes = f"replaces {old.id}: {reason}"
+    items[n - 1] = new
+    verify.save(gold_dir, items)
+    # the removed item stays on record with its reason, it is never silently dropped
+    note = f"replaced by {new.id}: {reason}"
+    old.notes = f"{old.notes}; {note}" if old.notes else note
+    with log.open("a", encoding="utf-8") as f:
+        f.write(to_json(old) + "\n")
+    print(f"#{n}: {old.id} replaced by {new.id} ({new.type}, {new.split}), not verified yet")
+
+
 def main(argv: list[str] | None = None) -> None:
     p = argparse.ArgumentParser(prog="python -m adaptiverag.eval.gold")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -196,6 +234,16 @@ def main(argv: list[str] | None = None) -> None:
     v.add_argument("--to", dest="last", type=int, required=True)
     v.add_argument("--reviewer", required=True)
     v.add_argument("--gold-dir", type=Path, default=GOLD_DIR)
+    r = sub.add_parser("replace", help="swap item N for the next unused candidate of its type")
+    r.add_argument("n", type=int)
+    r.add_argument("--reason", required=True)
+    r.add_argument("--gold-dir", type=Path, default=GOLD_DIR)
+    r.add_argument(
+        "--candidates",
+        type=Path,
+        nargs="+",
+        default=[GOLD_DIR / "candidates.jsonl", GOLD_DIR / "single_hop.jsonl"],
+    )
     st = sub.add_parser("status", help="which items are not verified yet")
     st.add_argument("--gold-dir", type=Path, default=GOLD_DIR)
     args = p.parse_args(argv)
@@ -211,6 +259,8 @@ def main(argv: list[str] | None = None) -> None:
     elif args.cmd == "verify":
         counts = verify.run(args.gold_dir, args.first, args.last, args.reviewer.strip().lower())
         print(f"verified {counts['y']}, flagged {counts['n']}, skipped {counts['s']}")
+    elif args.cmd == "replace":
+        cmd_replace(args.n, args.reason, args.gold_dir, args.candidates)
     elif args.cmd == "status":
         s = verify.status(args.gold_dir)
         print(f"{s['total']} items, {len(s['unverified'])} not verified: {s['unverified']}")
