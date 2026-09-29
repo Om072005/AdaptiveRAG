@@ -122,3 +122,15 @@ def test_embed_keeps_order_when_index_is_missing(fake_provider: Install) -> None
     vecs = llm.embed(["a", "b"])
     assert vecs[0, 0] == pytest.approx(0.0)  # first text keeps the first vector
     assert vecs[1, 0] == pytest.approx(2**-0.5)
+
+
+def test_capped_trace_stops_before_the_provider_is_called(fake_provider: Install) -> None:
+    from adaptiverag.telemetry.trace import Trace
+
+    seen = fake_provider(lambda r: httpx.Response(200, json=chat_body()))
+    t = Trace("q", "auto", "cli")
+    for _ in range(4):
+        llm.chat("small", [{"role": "user", "content": "q"}], trace=t)
+    with pytest.raises(llm.BudgetExceeded):
+        llm.chat("small", [{"role": "user", "content": "q"}], trace=t)
+    assert len(seen) == 4

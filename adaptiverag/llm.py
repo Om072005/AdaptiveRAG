@@ -137,6 +137,8 @@ def chat(
         payload["response_format"] = {"type": "json_object"}
     if spec.reasoning_effort and role not in _no_reasoning_effort:
         payload["reasoning_effort"] = spec.reasoning_effort
+    if trace is not None:
+        trace.check_budget()  # before the provider is paid, not after
     key = request_key(payload)
     hit = cache.get_many([key]).get(key) if use_cache else None
     if hit is not None:
@@ -200,6 +202,8 @@ def normalize_rows(vecs: np.ndarray) -> np.ndarray:
 
 def embed(texts: list[str], *, trace: "Trace | None" = None) -> np.ndarray:
     """(n, 768) float32, L2 normalized, sent in batches of 100. Cached per text."""
+    if trace is not None:
+        trace.check_budget()
     spec = models()["embed"]
     dims = spec.dims or 768
     keys = [request_key({"model": spec.model, "input": t, "dimensions": dims}) for t in texts]

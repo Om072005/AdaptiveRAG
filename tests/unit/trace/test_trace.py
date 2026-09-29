@@ -75,3 +75,14 @@ def test_set_rejects_unknown_and_computed_columns() -> None:
 
 def test_forced_mode_is_the_default_route_taken() -> None:
     assert Trace("q", "graph", "cli").row()["route_taken"] == "graph"
+
+
+def test_fifth_call_raises_budget_exceeded() -> None:
+    from adaptiverag.llm import BudgetExceeded
+
+    t = Trace("q", "auto", "cli")
+    for _ in range(t.max_calls):
+        t.add_llm(call("small", 0.001))
+    with pytest.raises(BudgetExceeded):
+        t.add_llm(call("small", 0.001))
+    assert len(t.calls) == 4

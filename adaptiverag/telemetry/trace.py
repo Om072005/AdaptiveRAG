@@ -6,6 +6,8 @@ from collections.abc import Collection, Iterator
 from contextlib import contextmanager
 from typing import Any
 
+from adaptiverag.config import limits
+from adaptiverag.llm import BudgetExceeded
 from adaptiverag.stores import traces as store
 from adaptiverag.types import LLMResult, Mode
 
@@ -43,6 +45,7 @@ class Trace:
         self.fields: dict[str, Any] = {}
         self.spans: list[dict[str, Any]] = []
         self.calls: list[LLMResult] = []
+        self.max_calls = int(limits()["max_llm_calls_per_query"])
         self._started = time.perf_counter()
 
     @contextmanager
@@ -54,8 +57,14 @@ class Trace:
         finally:
             self.spans.append({"name": name, "ms": int((time.perf_counter() - started) * 1000)})
 
+    def check_budget(self) -> None:
+        """Raise BudgetExceeded if one more call would pass the per query cap."""
+        if len(self.calls) >= self.max_calls:
+            raise BudgetExceeded(f"trace {self.trace_id} already made {len(self.calls)} LLM calls")
+
     def add_llm(self, r: LLMResult) -> None:
-        """Append to the call ledger."""
+        """Append to the call ledger; raises BudgetExceeded past the per query cap."""
+        self.check_budget()
         self.calls.append(r)
 
     def set(self, **fields: Any) -> None:
