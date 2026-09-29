@@ -3,8 +3,10 @@
 from typing import Any
 
 import numpy as np
+from psycopg import Connection
 from psycopg.types.json import Jsonb
 
+from adaptiverag.config import router_cfg
 from adaptiverag.stores import db
 from adaptiverag.telemetry.trace import Trace
 from adaptiverag.types import Chunk, GraphPath, Retrieved, Seed, Strategy
@@ -50,8 +52,67 @@ def reject_counts(chunk_ids: list[str]) -> dict[str, int]:
     return {reason: n for reason, n in rows}
 
 
+# an alias counts as found when it matches a run of words in the question (pg_trgm word similarity)
+ALIAS_MATCH = """
+select a.surface_form, a.canonical_id, e.canonical_name, e.type, a.confidence,
+       word_similarity(lower(a.surface_form), lower(%(q)s))
+from aliases a join entities e using (canonical_id)
+where word_similarity(lower(a.surface_form), lower(%(q)s)) >= %(min)s
+"""
+NEAREST_ENTITY = """
+select canonical_id, canonical_name, type, 1 - (embedding <=> %(q)s)
+from entities where embedding is not null
+order by embedding <=> %(q)s limit 1
+"""
+# surface form, canonical id, name, type, alias confidence, word similarity
+AliasRow = tuple[str, str, str, str, float, float]
+
+
+def pick_seeds(rows: list[AliasRow], min_score: float) -> list[Seed]:
+    """One seed per entity scored alias confidence x word similarity, best first. An alias inside
+    a longer matched alias that scores as well is dropped ('Tim' when 'Tim Burton' matched)."""
+    best: dict[str, Seed] = {}
+    for surface, cid, name, type_, conf, sim in rows:
+        score = float(conf) * float(sim)
+        if score >= min_score and (cid not in best or score > best[cid].score):
+            best[cid] = Seed(cid, name, type_, score, surface)
+    seeds = sorted(best.values(), key=lambda s: (-s.score, -len(s.matched), s.canonical_id))
+    return [
+        s
+        for s in seeds
+        if not any(
+            len(o.matched) > len(s.matched)
+            and s.matched.lower() in o.matched.lower()
+            and o.score >= s.score
+            for o in seeds
+        )
+    ]
+
+
+def nearest_seed(rows: list[tuple[str, str, str, float]], min_score: float) -> list[Seed]:
+    """The entity nearest the question embedding, when no alias matched and it is close enough."""
+    return [
+        Seed(c, name, t, float(cos), "embedding") for c, name, t, cos in rows if cos >= min_score
+    ]
+
+
+def seeds_for(c: Connection[Any], question: str, qvec: np.ndarray, min_score: float) -> list[Seed]:
+    """Alias matches first; the embedding fallback only when no alias matched."""
+    seeds = pick_seeds(
+        c.execute(ALIAS_MATCH, {"q": question, "min": min_score}).fetchall(), min_score
+    )
+    if seeds:
+        return seeds
+    rows = c.execute(NEAREST_ENTITY, {"q": np.asarray(qvec, dtype=np.float32)}).fetchall()
+    return nearest_seed(rows, min_score)
+
+
 def link_entities(question: str, qvec: np.ndarray, trace: Trace) -> list[Seed]:
-    raise NotImplementedError
+    """Seed entities for the question: aliases found in it, else the nearest entity by embedding."""
+    with trace.span("link"):
+        return seeds_for(
+            db.shared(), question, qvec, float(router_cfg()["graph"]["min_seed_score"])
+        )
 
 
 def traverse(
