@@ -11,8 +11,9 @@ from starlette.exceptions import HTTPException
 
 from adaptiverag import __version__
 from adaptiverag.config import models
+from adaptiverag.eval.judge import JudgeFailed
 from adaptiverag.llm import BudgetExceeded, RateLimited
-from adaptiverag.pipeline import answer_query
+from adaptiverag.pipeline import answer_query, judge_answer
 from adaptiverag.serialize import response_from_trace
 from adaptiverag.stores.db import conn
 
@@ -74,3 +75,18 @@ def query(body: QueryIn) -> Any:
     except NotImplementedError as e:
         return error(503, str(e))
     return response_from_trace(result.trace_id)
+
+
+class JudgeIn(BaseModel):
+    trace_id: str = Field(pattern=r"^[0-9a-f-]{36}$")
+
+
+@app.post("/api/judge")
+def judge(body: JudgeIn) -> Any:
+    """Judge a stored answer once; later calls return the stored judgement without a model call."""
+    try:
+        return judge_answer(body.trace_id)
+    except KeyError:
+        return error(404, f"no trace {body.trace_id}")
+    except (RateLimited, JudgeFailed) as e:
+        return error(503, str(e))

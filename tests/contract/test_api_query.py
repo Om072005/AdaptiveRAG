@@ -59,3 +59,32 @@ def test_rate_limited_is_a_503_with_replay_hint(monkeypatch: pytest.MonkeyPatch)
     r = client.post("/api/query", json={"question": "What is the capital?"})
     assert r.status_code == 503
     assert r.json()["replay_suggested"] is None and "quota" in r.json()["error"]["message"]
+
+
+def test_judge_returns_the_judgement_shape(monkeypatch: pytest.MonkeyPatch) -> None:
+    j = {
+        "faithfulness": 0.75,
+        "relevance": 1.0,
+        "completeness": 0.5,
+        "rationale": "ok",
+        "cost_usd": 0.0004,
+        "flagged": True,
+        "queued": True,
+    }
+    monkeypatch.setattr(server, "judge_answer", lambda tid: j)
+    r = client.post("/api/judge", json={"trace_id": "012b5c33-89e6-450f-8ab8-88e35a09cb53"})
+    assert r.status_code == 200 and r.json() == j
+
+
+def test_judge_unknown_trace_is_404_and_bad_id_is_400(monkeypatch: pytest.MonkeyPatch) -> None:
+    def missing(tid: str) -> Any:
+        raise KeyError(tid)
+
+    monkeypatch.setattr(server, "judge_answer", missing)
+    assert (
+        client.post(
+            "/api/judge", json={"trace_id": "0" * 8 + "-0000-0000-0000-" + "0" * 12}
+        ).status_code
+        == 404
+    )
+    assert client.post("/api/judge", json={"trace_id": "nope"}).status_code == 400
