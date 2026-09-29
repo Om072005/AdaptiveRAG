@@ -30,9 +30,9 @@ export function FailureModes({ failures }: { failures: Results['tables']['failur
         </p>
         <p className="m-0 mt-6">
           Where a part uses a library default instead of our own code, we say so: vector search is served by
-          pgvector's HNSW index (our own HNSW is measured against it above), and embeddings come from the
-          provider's embedding model. Retrieval, routing, graph traversal, merging and the classifier are our own
-          code.
+          pgvector's HNSW index (our own HNSW is measured against it above), and embeddings come from an open
+          model, nomic-embed-text, served by Ollama on one of our machines. Retrieval, routing, graph traversal,
+          merging and the classifier are our own code.
         </p>
       </div>
     </div>
