@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "node scripts/design-check.mjs --data && tsc -b && vite build",
     "lint": "oxlint",
-    "check": "tsc -b && oxlint --deny-warnings && vite build",
-    "preview": "vite preview"
+    "check": "node scripts/design-check.mjs && oxlint --deny-warnings && npm run -s build",
+    "preview": "vite preview",
+    "design": "node scripts/design-check.mjs"
   },
   "dependencies": {
     "@fontsource-variable/source-serif-4": "^5.3.0",
