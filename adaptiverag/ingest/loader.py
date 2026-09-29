@@ -158,3 +158,9 @@ def corpus(
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(built, indent=1) + "\n", encoding="utf-8")
     return docs, questions
+
+
+def manifest_doc_ids(name: str, corpus_dir: Path = CORPUS_DIR) -> list[str]:
+    """doc_ids of a committed corpus manifest; needs no raw file."""
+    path = corpus_dir / f"{name}.json"
+    return list(json.loads(path.read_text(encoding="utf-8"))["doc_ids"])

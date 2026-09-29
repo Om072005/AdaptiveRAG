@@ -9,13 +9,19 @@ def calls(monkeypatch: pytest.MonkeyPatch) -> list[tuple[str, list[str]]]:
     seen: list[tuple[str, list[str]]] = []
     monkeypatch.setattr(pipeline, "main", lambda argv: seen.append(("run", argv)))
     monkeypatch.setattr(graph_cli, "main", lambda argv: seen.append(("graph", argv)))
+    monkeypatch.setattr(pipeline, "embed_main", lambda argv: seen.append(("embed", argv)))
     return seen
 
 
 def test_run_and_graph_get_the_rest_of_the_arguments(calls: list[tuple[str, list[str]]]) -> None:
     cli.main(["run", "--corpus", "mini"])
     cli.main(["graph", "--corpus", "mini", "--limit", "8"])
-    assert calls == [("run", ["--corpus", "mini"]), ("graph", ["--corpus", "mini", "--limit", "8"])]
+    cli.main(["embed", "--slice", "2/4"])
+    assert calls == [
+        ("run", ["--corpus", "mini"]),
+        ("graph", ["--corpus", "mini", "--limit", "8"]),
+        ("embed", ["--slice", "2/4"]),
+    ]
 
 
 @pytest.mark.parametrize("argv", [[], ["ingest"], ["--corpus", "mini"]])

@@ -27,10 +27,14 @@ def test_parse_strategies() -> None:
 
 
 def test_default_strategies_are_all_three(monkeypatch: pytest.MonkeyPatch) -> None:
-    seen: list[tuple[str, list[str]]] = []
-    monkeypatch.setattr(pipeline, "run", lambda name, strategies: seen.append((name, strategies)))
+    seen: list[tuple[str, list[str], bool]] = []
+
+    def run(name: str, strategies: list[str], embed: bool = True) -> None:
+        seen.append((name, strategies, embed))
+
+    monkeypatch.setattr(pipeline, "run", run)
     pipeline.main(["--corpus", "mini"])
-    assert seen == [("mini", ["fixed", "sentence", "semantic"])]
+    assert seen == [("mini", ["fixed", "sentence", "semantic"], True)]
 
 
 def test_chunk_docs_uses_the_configured_sizes() -> None:
@@ -80,6 +84,9 @@ class FakeStore:
 
     def chunked_doc_ids(self, c: object, strategy: str, doc_ids: list[str]) -> set[str]:
         return {ch.doc_id for ch in self.chunks.values() if ch.strategy == strategy}
+
+    def chunk_ids(self, c: object, strategy: str, doc_ids: list[str]) -> list[str]:
+        return sorted(i for i, ch in self.chunks.items() if ch.strategy == strategy)
 
     def chunks_without_embedding(
         self, c: object, strategies: list[str], doc_ids: list[str]
@@ -140,3 +147,83 @@ def test_a_run_stopped_by_the_quota_resumes_without_duplicates(
     assert set(first_chunks) <= set(store.chunks)
     assert set(store.vecs) == set(store.chunks)
     assert {ch.strategy for ch in store.chunks.values()} == {"sentence", "fixed"}
+
+
+def stored_store(monkeypatch: pytest.MonkeyPatch) -> FakeStore:
+    """A fake store holding the fixture's sentence and fixed chunks, none embedded yet."""
+    store = FakeStore()
+    docs, _ = fixture_sample(3)
+    cfg = ingest_cfg()["chunk"]
+    store.insert_chunks(
+        None, pipeline.chunk_docs(docs, "sentence", cfg) + pipeline.chunk_docs(docs, "fixed", cfg)
+    )
+    monkeypatch.setattr(pipeline, "corpus", store)
+    monkeypatch.setattr(pipeline, "conn", NoConn)
+    monkeypatch.setattr(pipeline.loader, "manifest_doc_ids", lambda name: [d.doc_id for d in docs])
+    monkeypatch.setattr(pipeline, "EMBED_BATCH", 1)
+    return store
+
+
+def test_slices_split_the_chunks_with_no_overlap_and_no_gap() -> None:
+    ids = [f"{i:016x}:sentence:{j}" for i in range(500) for j in range(4)]
+    slices = [[i for i in ids if pipeline.in_slice(i, k, 4)] for k in range(1, 5)]
+    assert sorted(i for s in slices for i in s) == sorted(ids)
+    assert all(400 <= len(s) <= 600 for s in slices)
+
+
+def test_parse_slice() -> None:
+    assert pipeline.parse_slice("2/4") == (2, 4)
+    for bad in ["0/4", "5/4", "2", "a/b", "2/4/1"]:
+        with pytest.raises(argparse.ArgumentTypeError):
+            pipeline.parse_slice(bad)
+
+
+def test_embed_fills_only_its_slice_and_resumes_after_the_quota(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    store = stored_store(monkeypatch)
+    budget = {"texts": 1}
+
+    def quota_embed(texts: list[str], *, trace: object = None) -> np.ndarray:
+        if budget["texts"] < len(texts):
+            raise llm.RateLimited("daily quota")
+        budget["texts"] -= len(texts)
+        return llm.normalize_rows(np.ones((len(texts), 768)))
+
+    monkeypatch.setattr(llm, "embed", quota_embed)
+    mine = {
+        i
+        for i, ch in store.chunks.items()
+        if ch.strategy == "sentence" and pipeline.in_slice(i, 1, 2)
+    }
+    assert len(mine) >= 2
+    with pytest.raises(SystemExit, match="slice 1/2 stopped"):
+        pipeline.embed_main(["--corpus", "full", "--strategy", "sentence", "--slice", "1/2"])
+    assert len(store.vecs) == 1 and set(store.vecs) <= mine
+
+    budget["texts"] = 10_000
+    pipeline.embed_main(["--corpus", "full", "--strategy", "sentence", "--slice", "1/2"])
+    assert set(store.vecs) == mine
+    pipeline.embed_main(["--corpus", "full", "--strategy", "sentence", "--slice", "2/2"])
+    assert set(store.vecs) == {i for i, ch in store.chunks.items() if ch.strategy == "sentence"}
+
+
+def test_embed_refuses_a_corpus_with_no_chunks(monkeypatch: pytest.MonkeyPatch) -> None:
+    store = stored_store(monkeypatch)
+    store.chunks.clear()
+    with pytest.raises(SystemExit, match="no sentence chunks"):
+        pipeline.embed_main(["--corpus", "full", "--strategy", "sentence"])
+
+
+def test_run_without_embeddings_stores_chunks_only(monkeypatch: pytest.MonkeyPatch) -> None:
+    store = FakeStore()
+    monkeypatch.setattr(pipeline, "corpus", store)
+    monkeypatch.setattr(pipeline, "conn", NoConn)
+    monkeypatch.setattr(pipeline.loader, "corpus", lambda name: fixture_sample(3))
+
+    def no_embed(texts: list[str], *, trace: object = None) -> np.ndarray:
+        raise AssertionError("--no-embed must not embed")
+
+    monkeypatch.setattr(llm, "embed", no_embed)
+    pipeline.main(["--corpus", "full", "--strategies", "sentence", "--no-embed"])
+    assert store.chunks and store.vecs == {}

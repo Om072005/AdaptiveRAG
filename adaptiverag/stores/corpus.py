@@ -56,6 +56,15 @@ def chunked_doc_ids(c: psycopg.Connection[Any], strategy: Strategy, doc_ids: lis
     return {r[0] for r in rows}
 
 
+def chunk_ids(c: psycopg.Connection[Any], strategy: Strategy, doc_ids: list[str]) -> list[str]:
+    """Every stored chunk id of these documents for one strategy."""
+    rows = c.execute(
+        "select chunk_id from chunks where strategy = %s and doc_id = any(%s) order by chunk_id",
+        (strategy, doc_ids),
+    ).fetchall()
+    return [r[0] for r in rows]
+
+
 def chunks_without_embedding(
     c: psycopg.Connection[Any], strategies: list[Strategy], doc_ids: list[str]
 ) -> list[Chunk]:
