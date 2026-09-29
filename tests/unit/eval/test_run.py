@@ -1,4 +1,5 @@
 from datetime import datetime
+from pathlib import Path
 
 import pytest
 
@@ -105,3 +106,14 @@ def test_pin_is_refused_before_any_connection(monkeypatch: pytest.MonkeyPatch) -
     monkeypatch.setattr(run, "git_state", lambda: ("abc", True))
     with pytest.raises(SystemExit, match="--pin refused: the working tree"):
         run.main(["--split", "dev", "--mode", "vector", "--variant", "baseline", "--pin"])
+
+
+def test_questions_file_selects_items_and_refuses_unknown_ids(tmp_path: Path) -> None:
+    f = tmp_path / "replays.toml"
+    f.write_text('[runs]\nauto = ""\n\n[[question]]\nid = "hp_1"\nwhy = "x"\n', encoding="utf-8")
+    assert run.question_ids(str(f)) == ["hp_1"]
+    other = GoldItem("hp_2", "q?", "a", "comparison", "dev", ["A"], [("A", 0)], "hotpotqa")
+    assert run.only([ITEM, other], ["hp_1"]) == [ITEM]
+    assert run.only([ITEM, other], None) == [ITEM, other]
+    with pytest.raises(SystemExit, match="not in this split: hp_9"):
+        run.only([ITEM], ["hp_9"])

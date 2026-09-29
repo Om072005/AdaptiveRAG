@@ -8,8 +8,10 @@ answers at most N more questions in this call, and --resume continues from there
 import argparse
 import subprocess
 import sys
+import tomllib
 from collections.abc import Callable
 from datetime import datetime
+from pathlib import Path
 from statistics import mean
 from typing import Any
 from urllib.parse import urlparse
@@ -217,6 +219,23 @@ def execute(
     return rows
 
 
+def question_ids(path: str) -> list[str]:
+    """The [[question]] ids of a questions file such as docs/results/replays.toml."""
+    return [
+        q["id"] for q in tomllib.loads(Path(path).read_text(encoding="utf-8")).get("question", [])
+    ]
+
+
+def only(items: list[GoldItem], ids: list[str] | None) -> list[GoldItem]:
+    """The items named in ids, refusing ids that are not in the split."""
+    if ids is None:
+        return items
+    missing = set(ids) - {i.id for i in items}
+    if missing:
+        raise SystemExit(f"not in this split: {', '.join(sorted(missing))}")
+    return [i for i in items if i.id in set(ids)]
+
+
 def select_items(split: str) -> list[GoldItem]:
     if split == "mini":
         # mini = dev questions whose supporting paragraphs are all in the mini corpus
@@ -242,10 +261,11 @@ def result_rows(c: psycopg.Connection[Any], run_id: str) -> list[dict[str, Any]]
 
 def start_run(c: psycopg.Connection[Any], args: argparse.Namespace) -> tuple[str, list[GoldItem]]:
     """Insert a new eval_runs row; the options needed to resume go into its summary."""
-    items = select_items(args.split)
+    ids = question_ids(args.questions) if args.questions else None
+    items = only(select_items(args.split), ids)
     sha, dirty = git_state()
     run_id = make_run_id(datetime.now(), args.split, args.mode, args.variant)
-    options = {"size": args.size, "judge": args.judge}
+    options = {"size": args.size, "judge": args.judge, "questions": ids}
     c.execute(
         "insert into eval_runs (run_id, split, mode, variant, git_sha, git_dirty, config_hash, n,"
         " summary) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
@@ -281,7 +301,8 @@ def resume_run(c: psycopg.Connection[Any], args: argparse.Namespace) -> tuple[st
     args.split, args.mode, args.variant, args.size = split, mode, variant, options["size"]
     args.judge = options.get("judge", False)
     done = {r["question_id"] for r in result_rows(c, args.resume)}
-    return args.resume, [i for i in select_items(split) if i.id not in done]
+    items = only(select_items(split), options.get("questions"))
+    return args.resume, [i for i in items if i.id not in done]
 
 
 def main(argv: list[str] | None = None, answer: AnswerFn | None = None) -> None:
@@ -301,8 +322,6 @@ def main(argv: list[str] | None = None, answer: AnswerFn | None = None) -> None:
     if not args.resume:
         # refuse before any connection is opened; a resumed run is checked once its row is read
         check_args(args.split, args.variant, args.size, settings().allow_test)
-    if args.questions:
-        raise SystemExit("--questions is not built yet")
     if args.pin and (found := pin_problems(git_state()[1], settings().database_url)):
         raise SystemExit("--pin refused: " + "; ".join(found))
     if answer is None:

@@ -81,7 +81,11 @@ def test_rate_limited_run_resumes_without_duplicates(c: psycopg.Connection[Any])
     ids = [r[0] for r in c.execute("select question_id from eval_results order by 1")]
     assert ids == ["hp_0", "hp_1", "hp_2", "hp_3", "hp_4"]
     summary = c.execute("select summary from eval_runs").fetchone()[0]  # type: ignore[index]
-    assert summary["n_done"] == 5 and summary["options"] == {"size": None, "judge": False}
+    assert summary["n_done"] == 5 and summary["options"] == {
+        "size": None,
+        "judge": False,
+        "questions": None,
+    }
 
     run.main(["--resume", run_id], answer=answer_failing_after(0))  # nothing left to answer
     assert c.execute("select count(*) from eval_results").fetchone() == (5,)
