@@ -1,5 +1,6 @@
 """Query classifiers: rules on cue features, logistic regression and a few shot model."""
 
+import json
 import re
 import time
 from functools import cache
@@ -8,6 +9,7 @@ from typing import cast
 
 import numpy as np
 
+from adaptiverag import llm
 from adaptiverag.config import router_cfg
 from adaptiverag.telemetry.trace import Trace
 from adaptiverag.types import Classification, QType
@@ -163,6 +165,51 @@ def classify_logreg(question: str, qvec: np.ndarray, path: Path = WEIGHTS) -> Cl
     return Classification(cast(QType, label), probs[label], probs, "logreg", 0.0, ms)
 
 
+# hand written examples, none taken from the dev or test questions
+FEW_SHOT = """Label the question by what answering it takes, as JSON probabilities for three labels:
+single_hop: one fact about one thing.
+multi_hop: a chain, where one fact names the thing a second fact is about.
+comparison: two named things compared, or checked for something in common.
+
+Question: When was the Eiffel Tower completed?
+{"single_hop": 0.95, "multi_hop": 0.04, "comparison": 0.01}
+Question: What instrument does the singer of the band that recorded Wonderwall play?
+{"single_hop": 0.05, "multi_hop": 0.92, "comparison": 0.03}
+Question: Which river is longer, the Danube or the Rhine?
+{"single_hop": 0.03, "multi_hop": 0.02, "comparison": 0.95}
+Question: In which city is the university that Marie Curie's husband attended?
+{"single_hop": 0.06, "multi_hop": 0.9, "comparison": 0.04}
+Question: Were Mozart and Haydn both born in Austria?
+{"single_hop": 0.04, "multi_hop": 0.06, "comparison": 0.9}
+Question: How many moons does Mars have?
+{"single_hop": 0.96, "multi_hop": 0.03, "comparison": 0.01}
+
+Reply with the JSON object only."""
+
+
+def llm_probs(text: str) -> dict[str, float]:
+    """The model's probabilities, normalized; missing or broken output counts as no opinion."""
+    try:
+        raw = json.loads(text)
+        values = {label: max(float(raw.get(label, 0.0)), 0.0) for label in LABELS}
+    except (ValueError, TypeError, AttributeError):
+        values = {label: 0.0 for label in LABELS}
+    total = sum(values.values())
+    return {k: v / total for k, v in values.items()} if total else {k: 1 / 3 for k in LABELS}
+
+
+def classify_llm(question: str, trace: Trace) -> Classification:
+    """Few shot classification by the 'classify' role, cached, its cost and latency on the trace."""
+    messages = [
+        {"role": "system", "content": FEW_SHOT},
+        {"role": "user", "content": f"Question: {question}"},
+    ]
+    r = llm.chat("classify", messages, json_mode=True, trace=trace)
+    probs = llm_probs(r.text)
+    label = max(LABELS, key=lambda lb: probs[lb])
+    return Classification(label, probs[label], probs, "llm", r.cost_usd, r.latency_ms)
+
+
 def classify(
     question: str, qvec: np.ndarray, trace: Trace, method: str | None = None
 ) -> Classification:
@@ -172,4 +219,6 @@ def classify(
         return classify_rules(question)
     if method == "logreg":
         return classify_logreg(question, qvec)
+    if method == "llm":
+        return classify_llm(question, trace)
     raise NotImplementedError(f"classifier method {method!r} is not built yet")

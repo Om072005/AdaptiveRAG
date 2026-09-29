@@ -77,4 +77,4 @@ def test_classify_dispatches_on_method() -> None:
     trace = Trace("q", "auto", "cli")
     assert classify("When was Zach Woods born?", None, trace, method="rules").method == "rules"  # type: ignore[arg-type]
     with pytest.raises(NotImplementedError):
-        classify("When was Zach Woods born?", None, trace, method="llm")  # type: ignore[arg-type]
+        classify("When was Zach Woods born?", None, trace, method="svm")  # type: ignore[arg-type]
