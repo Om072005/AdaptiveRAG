@@ -19,6 +19,8 @@ uv run mypy adaptiverag
 uv run pytest -q -m "not network"
 
 if [ -f web/package.json ]; then
+  # the page check runs oxlint, tsc and vite, so a fresh clone needs web dependencies first
+  [ -d web/node_modules ] || (cd web && npm ci --silent)
   (cd web && npm run -s check)
 fi
 
