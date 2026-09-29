@@ -52,7 +52,8 @@ function Edge({ edge, layout, kinds, t, marker }: {
   const a = layout.nodes[edge.from]
   const b = layout.nodes[edge.to]
   const points = route(a, kinds[edge.from], b, kinds[edge.to], layout.bends?.[edge.id])
-  const [lx, ly] = layout.labels?.[edge.id] ?? labelPoint(points)
+  const placed = layout.labels?.[edge.id]
+  const [lx, ly] = placed ?? labelPoint(points)
   const w = (edge.label?.length ?? 0) * 7 + 12
   return (
     <g>
@@ -64,7 +65,7 @@ function Edge({ edge, layout, kinds, t, marker }: {
         strokeDasharray={DASH[edge.style ?? 'solid']}
         markerEnd={`url(#${marker}-${t})`}
       />
-      {edge.label && (
+      {edge.label && placed !== null && (
         <>
           <rect x={lx - w / 2} y={ly - 10} width={w} height="20" className="fill-black" />
           <text x={lx} y={ly + 4} textAnchor="middle" className={`font-sans text-[13px] ${t === 'on' ? 'fill-white' : 'fill-muted'}`}>
@@ -105,6 +106,14 @@ function Drawing({ data, layout, which, lit, picked, onPick }: {
           </marker>
         ))}
       </defs>
+      {layout.groups?.map((g) => (
+        <g key={g.label}>
+          <rect x={g.box.x} y={g.box.y} width={g.box.w} height={g.box.h} fill="none" className="stroke-cream-600" strokeWidth="1" />
+          <text x={g.box.x + 8} y={g.box.y + 16} className="fill-muted font-sans text-[13px]">
+            {g.label}
+          </text>
+        </g>
+      ))}
       {data.edges.map((e) => (
         <Edge key={e.id} edge={e} layout={layout} kinds={kinds} t={tone(lit, 'edges', e.id)} marker={marker} />
       ))}

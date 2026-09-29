@@ -31,7 +31,9 @@ export type Layout = {
   // corner points between the two ends, when the default elbow is not the right path
   bends?: Record<string, Point[]>
   // where an edge label sits, when the middle of the longest segment is not the right place
-  labels?: Record<string, Point>
+  labels?: Record<string, Point | null> // null: no label in this layout
+  // labelled frames around related nodes, like the README's subgraphs
+  groups?: { label: string; box: Box }[]
 }
 
 export type DiagramData = {

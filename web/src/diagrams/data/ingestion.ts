@@ -1,0 +1,118 @@
+// The README "Ingestion pipeline": two parallel representations of every document, joined by the
+// provenance link. The README's "Fixed N tokens" is words here, as in the chunking table.
+import type { DiagramData } from '../types.ts'
+import { box, edge } from './shapes.ts'
+
+export const INGESTION: DiagramData = {
+  id: 'ingestion',
+  title: 'Ingestion pipeline',
+  desc: 'Raw documents are parsed and normalized, then take two paths: chunked three ways and embedded into the vector store, and read by a language model into triples that are validated against the source and resolved into entities in the graph store. Every graph edge keeps the id of the chunk it came from.',
+  nodes: [
+    { id: 'docs', lines: ['Raw', 'documents'], kind: 'step', detail: 'HotpotQA dev questions and their context paragraphs, sampled with a fixed seed.', module: 'adaptiverag/ingest/loader.py' },
+    { id: 'parse', lines: ['Parse and', 'normalize'], kind: 'step', detail: 'Unicode NFC and collapsed whitespace, keeping the character offsets of every original sentence.', module: 'adaptiverag/ingest/normalize.py' },
+    { id: 'strategy', lines: ['Chunking', 'strategy'], kind: 'decision', detail: 'Three strategies are built and compared; one serves the queries, chosen by measurement.', module: 'adaptiverag/ingest/chunking.py' },
+    { id: 'fixed', lines: ['Fixed size,', 'N words'], kind: 'step', detail: 'Windows of N words that overlap the previous window.', module: 'adaptiverag/ingest/chunking.py' },
+    { id: 'sentence', lines: ['Sentence', 'boundary'], kind: 'step', detail: 'Whole sentences packed up to a word limit, split by our own sentence splitter.', module: 'adaptiverag/ingest/chunking.py' },
+    { id: 'semantic', lines: ['Topic shift', 'split'], kind: 'step', detail: 'A new chunk wherever the embedding distance between neighbouring sentences jumps.', module: 'adaptiverag/ingest/chunking.py' },
+    { id: 'embed', lines: ['Embed'], kind: 'step', detail: 'One vector per chunk, normalized, cached so a rerun costs nothing.', module: 'adaptiverag/ingest/embed.py' },
+    { id: 'vdb', lines: ['Vector DB:', 'chunks and', 'embeddings'], kind: 'store', detail: 'Chunks with their embeddings in Postgres, searched through a pgvector HNSW index.', module: 'adaptiverag/stores/vector.py' },
+    { id: 'extract', lines: ['Language model', 'triple', 'extraction'], kind: 'step', detail: 'Four chunks per call: subject, predicate and object, their types from a closed list, and the quoted evidence.', module: 'adaptiverag/ingest/extract.py' },
+    { id: 'validate', lines: ['Validate', 'against the', 'source'], kind: 'step', detail: 'Both names must appear in the chunk text; every rejected triple is stored with its reason.', module: 'adaptiverag/ingest/validate.py' },
+    { id: 'resolve', lines: ['Entity', 'resolution,', 'merge aliases'], kind: 'step', detail: 'Names are normalized, blocked and merged by string or embedding similarity; two people also need a shared neighbour or document.', module: 'adaptiverag/ingest/resolve.py' },
+    { id: 'gdb', lines: ['Graph DB:', 'entities and', 'relations'], kind: 'store', detail: 'Entities, aliases and relations in Postgres, every relation citing its chunk.', module: 'adaptiverag/stores/graph.py' },
+  ],
+  edges: [
+    edge('docs', 'parse'),
+    edge('parse', 'strategy'),
+    edge('strategy', 'fixed', 'fixed size'),
+    edge('strategy', 'sentence', 'sentence aware'),
+    edge('strategy', 'semantic', 'semantic'),
+    edge('fixed', 'embed'),
+    edge('sentence', 'embed'),
+    edge('semantic', 'embed'),
+    edge('embed', 'vdb'),
+    edge('parse', 'extract'),
+    edge('extract', 'validate'),
+    edge('validate', 'resolve'),
+    edge('resolve', 'gdb'),
+    edge('vdb', 'gdb', 'chunk id', 'dotted'),
+    edge('gdb', 'vdb', 'provenance', 'dotted'),
+  ],
+  wide: {
+    width: 1040,
+    height: 392,
+    nodes: {
+      docs: box(64, 192, 112, 64),
+      parse: box(216, 192, 128, 64),
+      strategy: box(400, 112, 160, 96),
+      fixed: box(648, 40, 128, 64),
+      sentence: box(648, 112, 128, 64),
+      semantic: box(648, 184, 128, 64),
+      embed: box(808, 112, 112, 48),
+      vdb: box(952, 112, 160, 80),
+      extract: box(400, 320, 160, 80),
+      validate: box(584, 320, 128, 80),
+      resolve: box(744, 320, 128, 80),
+      gdb: box(912, 320, 160, 80),
+    },
+    bends: {
+      'parse-strategy': [
+        [296, 192],
+        [296, 112],
+      ],
+      'strategy-fixed': [[400, 40]],
+      'strategy-semantic': [[400, 184]],
+      'vdb-gdb': [[888, 216]],
+      'gdb-vdb': [[968, 216]],
+    },
+    labels: {
+      'strategy-fixed': [496, 40],
+      'strategy-sentence': [532, 112],
+      'strategy-semantic': [496, 184],
+      'vdb-gdb': [888, 216],
+      'gdb-vdb': [968, 248],
+    },
+  },
+  tall: {
+    width: 352,
+    height: 1072,
+    nodes: {
+      docs: box(176, 32, 160, 48),
+      parse: box(176, 120, 160, 64),
+      strategy: box(176, 240, 160, 96),
+      fixed: box(72, 368, 96, 64),
+      sentence: box(176, 368, 96, 64),
+      semantic: box(280, 368, 96, 64),
+      embed: box(176, 472, 112, 48),
+      vdb: box(176, 568, 160, 80),
+      extract: box(176, 696, 160, 80),
+      validate: box(176, 808, 160, 80),
+      resolve: box(176, 920, 160, 80),
+      gdb: box(176, 1024, 160, 80),
+    },
+    bends: {
+      'strategy-fixed': [[72, 240]],
+      'strategy-semantic': [[280, 240]],
+      'parse-extract': [
+        [336, 120],
+        [336, 696],
+      ],
+      'vdb-gdb': [
+        [40, 568],
+        [40, 1024],
+      ],
+      'gdb-vdb': [
+        [16, 1024],
+        [16, 568],
+      ],
+    },
+    labels: {
+      'strategy-fixed': [72, 296],
+      'strategy-sentence': [176, 312],
+      'strategy-semantic': [280, 296],
+      // one label over the pair of dotted lines; Show as text names both
+      'vdb-gdb': null,
+      'gdb-vdb': [52, 800],
+    },
+  },
+}

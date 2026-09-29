@@ -1,18 +1,10 @@
 // The README "Router decision logic" flowchart, plus the Unsure edge (decision table row 2) that the
 // README chart leaves out. Node ids follow the chart; an edge id is 'from-to'.
 import type { QueryResponse } from '../../types.ts'
-import type { Box, DiagramData, DiagramEdge, Lit } from '../types.ts'
+import type { DiagramData, Lit } from '../types.ts'
+import { box, edge } from './shapes.ts'
 
 type RouteBlock = QueryResponse['route']
-
-const box = (cx: number, cy: number, w: number, h: number): Box => ({ x: cx - w / 2, y: cy - h / 2, w, h })
-const edge = (from: string, to: string, label?: string, style?: DiagramEdge['style']): DiagramEdge => ({
-  id: `${from}-${to}`,
-  from,
-  to,
-  label,
-  style,
-})
 
 export const ROUTER: DiagramData = {
   id: 'router',
