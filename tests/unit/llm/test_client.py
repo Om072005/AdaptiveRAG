@@ -41,7 +41,7 @@ def test_chat_sends_role_model_and_reasoning_effort(fake_provider: Install) -> N
     seen = fake_provider(lambda r: httpx.Response(200, json=chat_body()))
     result = llm.chat("large", [{"role": "user", "content": "q"}], json_mode=True)
     sent = json.loads(seen[0].content)
-    assert seen[0].url.host == "api.groq.com"
+    assert str(seen[0].url) == models()["large"].base_url.rstrip("/") + "/chat/completions"
     assert sent["model"] == models()["large"].model
     assert sent["reasoning_effort"] == models()["large"].reasoning_effort
     assert sent["response_format"] == {"type": "json_object"}

@@ -1,10 +1,8 @@
-# Model ids and paid tier list prices in USD per million tokens, used for every cost number
-# even while we run on free tiers. Checked against the provider docs (URLs in the commit body).
+# Model ids and list prices in USD per million tokens, used for every cost number.
+# Generation, classification and extraction run on open weights served locally by Ollama (D16); their
+# price is the public list price of the same weights on OpenRouter (checked 2026-09-30), so cost
+# numbers stay comparable across roles. Only the judge calls a hosted API.
 # Any "PIN_ME" left in this file makes config.models() raise.
-
-[providers.groq]
-base_url = "https://api.groq.com/openai/v1"
-key_env = "GROQ_API_KEY"
 
 [providers.gemini]
 base_url = "https://generativelanguage.googleapis.com/v1beta/openai/"
@@ -15,36 +13,36 @@ base_url = "http://127.0.0.1:11434/v1"
 key_env = ""
 
 [roles.small]
-provider = "groq"
-model = "openai/gpt-oss-20b"
-price_in_per_m = 0.075
-price_out_per_m = 0.30
+provider = "ollama"
+model = "gpt-oss:20b"
+price_in_per_m = 0.018
+price_out_per_m = 0.09
 reasoning_effort = "low"
 
 [roles.large]
-provider = "groq"
-model = "openai/gpt-oss-120b"
+provider = "ollama"
+model = "qwen3.6:35b-a3b"          # mixture of experts, 3B active: a larger model that fits 8 GB VRAM + RAM
 price_in_per_m = 0.15
-price_out_per_m = 0.60
+price_out_per_m = 1.0
 reasoning_effort = "medium"
 
 [roles.classify]
-provider = "groq"
-model = "openai/gpt-oss-20b"
-price_in_per_m = 0.075
-price_out_per_m = 0.30
+provider = "ollama"
+model = "gpt-oss:20b"
+price_in_per_m = 0.018
+price_out_per_m = 0.09
 reasoning_effort = "low"
 
 [roles.extract]
-provider = "gemini"
-model = "gemini-3.5-flash-lite"   # 2.5-flash-lite returns 404 for new users (checked 2026-09-29)
-price_in_per_m = 0.30
-price_out_per_m = 2.50
-reasoning_effort = "minimal"      # 3.x models cannot turn thinking off; "none" is rejected
+provider = "ollama"
+model = "gpt-oss:20b"
+price_in_per_m = 0.018
+price_out_per_m = 0.09
+reasoning_effort = "low"
 
 [roles.judge]
 provider = "gemini"
-model = "gemini-3.8-flash"        # introductory price through 2026-12-31
+model = "gemini-3.8-flash"        # a different family from every generator; introductory price through 2026-12-31
 price_in_per_m = 0.75
 price_out_per_m = 3.75
 reasoning_effort = "low"

@@ -10,7 +10,7 @@ from adaptiverag.config import ConfigError
 def test_all_three_files_load() -> None:
     specs = config.models()
     assert set(specs) == {"small", "large", "extract", "judge", "classify", "embed"}
-    assert specs["large"].provider == "groq"
+    assert specs["large"].provider == "ollama"
     assert specs["judge"].provider == "gemini"
     assert specs["embed"].dims == 768
     assert config.limits()["max_llm_calls_per_query"] == 4
@@ -28,13 +28,13 @@ def test_placeholder_anywhere_raises(tmp_path: Path) -> None:
     for name in config.CONFIG_FILES:
         shutil.copy(config.CONFIG_DIR / name, tmp_path / name)
     text = (tmp_path / "models.toml").read_text(encoding="utf-8")
-    (tmp_path / "models.toml").write_text(text.replace("0.075", '"PIN_ME"', 1), encoding="utf-8")
+    (tmp_path / "models.toml").write_text(text.replace("0.018", '"PIN_ME"', 1), encoding="utf-8")
     with pytest.raises(ConfigError, match="roles.small.price_in_per_m"):
         config.read_toml("models.toml", tmp_path)
 
 
 def test_missing_role_raises() -> None:
-    data = {"providers": {"groq": {"base_url": "u", "key_env": "K"}}, "roles": {}}
+    data = {"providers": {"ollama": {"base_url": "u", "key_env": ""}}, "roles": {}}
     with pytest.raises(ConfigError, match="no role"):
         config.parse_models(data)
 

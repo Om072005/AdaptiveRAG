@@ -24,7 +24,6 @@ class ConfigError(Exception):
 class Settings:
     database_url: str
     database_url_direct: str
-    groq_api_key: str
     gemini_api_key: str
     allow_test: bool
     live_daily_budget_usd: float
@@ -74,7 +73,6 @@ def settings() -> Settings:
     return Settings(
         database_url=get("DATABASE_URL"),
         database_url_direct=get("DATABASE_URL_DIRECT"),
-        groq_api_key=get("GROQ_API_KEY"),
         gemini_api_key=get("GEMINI_API_KEY"),
         allow_test=get("ALLOW_TEST", "0") == "1",
         live_daily_budget_usd=float(get("LIVE_DAILY_BUDGET_USD", "0.25")),

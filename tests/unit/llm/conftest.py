@@ -13,7 +13,6 @@ def fake_provider(
     monkeypatch: pytest.MonkeyPatch,
 ) -> Iterator[Callable[[Handler], list[httpx.Request]]]:
     """Route every provider call to a handler; returns the list of requests it saw."""
-    monkeypatch.setenv("GROQ_API_KEY", "test-groq")
     monkeypatch.setenv("GEMINI_API_KEY", "test-gemini")
     clock = {"t": 1000.0}
 
