@@ -3,14 +3,10 @@ import { loadReplay } from '../data/load'
 import { useLoaded } from '../data/useLoaded'
 import type { ReplayIndex } from '../types'
 import { DataMissing } from './DataMissing'
-import { STAGES, ordered } from '../data/replay'
+import { ordered } from '../data/replay'
 import { ReplayList } from './ReplayList'
 import { ReplayPanel } from './ReplayPanel'
-import { AnswerStep } from './steps/AnswerStep'
-import { ClassifyStep } from './steps/ClassifyStep'
-import { RetrieveStep } from './steps/RetrieveStep'
-import { RouteStep } from './steps/RouteStep'
-import { StageSummary } from './steps/StageSummary'
+import { StageView } from './steps/StageView'
 
 export function FollowQuestion({ index }: { index: ReplayIndex }) {
   const [current, setCurrent] = useState(ordered(index.items)[0]?.question_id ?? '')
@@ -44,13 +40,7 @@ export function FollowQuestion({ index }: { index: ReplayIndex }) {
           <ReplayPanel
             key={current}
             replay={replay.data}
-            renderStage={(stage, run, r) => {
-              if (STAGES[stage] === 'Classify') return <ClassifyStep run={run} />
-              if (STAGES[stage] === 'Route') return <RouteStep run={run} />
-              if (STAGES[stage] === 'Retrieve') return <RetrieveStep run={run} />
-              if (STAGES[stage] === 'Answer') return <AnswerStep run={run} replay={r} />
-              return <StageSummary stage={stage} run={run} />
-            }}
+            renderStage={(stage, run, r) => <StageView stage={stage} run={run} replay={r} />}
             renderRoutes={(r) => <p className="text-small m-0">Recorded modes: {Object.keys(r.runs).join(', ')}</p>}
           />
         )}
