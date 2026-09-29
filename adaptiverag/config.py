@@ -43,6 +43,7 @@ class ModelSpec:
     price_out_per_m: float
     reasoning_effort: str | None
     dims: int | None
+    server_error_attempts: int = 5  # attempts on 5xx; 1 = never retry a busy provider
 
 
 def parse_env(text: str) -> dict[str, str]:
@@ -121,6 +122,7 @@ def parse_models(data: dict[str, Any]) -> dict[Role, ModelSpec]:
             price_out_per_m=float(spec.get("price_out_per_m", 0.0)),
             reasoning_effort=spec.get("reasoning_effort"),
             dims=spec.get("dims"),
+            server_error_attempts=int(spec.get("server_error_attempts", 5)),
         )
     return specs
 

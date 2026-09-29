@@ -156,6 +156,9 @@ def _post(
         if r.status_code == 429 and (quota := daily_quota(r)):
             # a refused retry can still count against the quota, so stop at once
             raise RateLimited(f"{spec.model}: daily quota used up ({quota}), resume tomorrow")
+        if r.status_code >= 500 and attempt + 1 >= spec.server_error_attempts:
+            # every refused attempt counts against a small daily quota (the judge has 20)
+            raise RateLimited(f"{spec.model}: provider busy ({r.status_code}), resume later")
         if r.status_code == 429 or r.status_code >= 500:
             if attempt == MAX_ATTEMPTS - 1:
                 raise RateLimited(f"{spec.model}: {r.status_code} after {MAX_ATTEMPTS} attempts")

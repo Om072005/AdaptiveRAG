@@ -44,6 +44,7 @@ model = "gemini-3.8-flash"        # introductory price through 2026-12-31
 price_in_per_m = 0.75
 price_out_per_m = 3.75
 reasoning_effort = "low"
+server_error_attempts = 1         # 20 calls a day on the free tier: a 503 retry would burn one
 
 [roles.embed]
 provider = "gemini"

@@ -105,3 +105,21 @@ def test_groq_tokens_per_day_message_is_daily() -> None:
         "error": {"message": "Rate limit reached for model on tokens per day (TPD): Limit 200000"}
     }
     assert llm.daily_quota(httpx.Response(429, json=body)) == "per day limit"
+
+
+def test_judge_does_not_retry_a_busy_provider(fake_provider: Install) -> None:
+    seen = fake_provider(lambda r: httpx.Response(503, json={"error": {"message": "high demand"}}))
+    with pytest.raises(llm.RateLimited, match="provider busy"):
+        llm.chat("judge", [{"role": "user", "content": "q"}])
+    assert len(seen) == 1
+
+
+def test_other_roles_still_retry_server_errors(fake_provider: Install) -> None:
+    calls = {"n": 0}
+
+    def handler(r: httpx.Request) -> httpx.Response:
+        calls["n"] += 1
+        return httpx.Response(503) if calls["n"] == 1 else httpx.Response(200, json=OK)
+
+    fake_provider(handler)
+    assert llm.chat("large", [{"role": "user", "content": "q"}]).retries == 1

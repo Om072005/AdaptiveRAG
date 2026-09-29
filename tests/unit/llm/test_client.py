@@ -81,7 +81,7 @@ def test_other_client_errors_are_not_retried(fake_provider: Install) -> None:
 def test_server_errors_retry_then_raise_rate_limited(fake_provider: Install) -> None:
     seen = fake_provider(lambda r: httpx.Response(503, json={"error": "busy"}))
     with pytest.raises(llm.RateLimited):
-        llm.chat("judge", [{"role": "user", "content": "q"}])
+        llm.chat("large", [{"role": "user", "content": "q"}])
     assert len(seen) == llm.MAX_ATTEMPTS
 
 
