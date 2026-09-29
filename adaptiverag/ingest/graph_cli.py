@@ -24,6 +24,7 @@ from adaptiverag.ingest.loader import SOURCE, read_raw
 from adaptiverag.ingest.normalize import doc_id
 from adaptiverag.ingest.pipeline import endpoint, in_slice, parse_slice
 from adaptiverag.ingest.resolve import (
+    build_rows,
     graph_texts,
     merge_decisions,
     name_texts,
@@ -299,11 +300,16 @@ def main(argv: list[str] | None = None) -> None:
     print(json.dumps({"extraction": summary}, indent=2))
 
     try:
-        entities, aliases, relations = resolve(kept)
+        if args.dry_run:
+            # no model call: names merge by trigram only, the embedding rule is left out
+            entities, aliases, relations = build_rows(kept, {}, ingest_cfg()["resolve"])
+        else:
+            entities, aliases, relations = resolve(kept)
         # a kept triple that is not a relation repeated one already kept, or both its ends
         # resolved to one entity
         graph: dict[str, Any] = {"triples_folded_by_resolution": len(kept) - len(relations)}
         if args.dry_run:
+            graph["merges"] = "by name only, a dry run embeds nothing"
             counts = {
                 "entities": len(entities),
                 "aliases": len(aliases),

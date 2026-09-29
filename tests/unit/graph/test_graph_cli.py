@@ -12,7 +12,7 @@ TRIPLE = Triple("Tim Burton", "PERSON", "directed", "Ed Wood", "WORK", CHUNK.chu
 
 
 def refuse(*args: Any, **kwargs: Any) -> None:
-    raise AssertionError("a dry run must not write or embed")
+    raise AssertionError("a dry run must not write or call a model")
 
 
 def test_dry_run_prints_counts_and_writes_nothing(
@@ -22,7 +22,10 @@ def test_dry_run_prints_counts_and_writes_nothing(
     monkeypatch.setattr(graph_cli, "corpus_doc_ids", lambda corpus: ["d1"])
     monkeypatch.setattr(graph_cli.store, "corpus_chunks", lambda ids, s: ([CHUNK], {"d1": ""}))
     monkeypatch.setattr(graph_cli, "extract_batches", lambda c, d, b: ([TRIPLE], [reject], []))
-    monkeypatch.setattr(graph_cli, "resolve", lambda kept: ([{}, {}], [{}, {}, {}], [{}]))
+    monkeypatch.setattr(
+        graph_cli, "build_rows", lambda kept, v, cfg: ([{}, {}], [{}, {}, {}], [{}])
+    )
+    monkeypatch.setattr(graph_cli, "resolve", refuse)
     for name in ["save_rejects", "write_graph"]:
         monkeypatch.setattr(graph_cli.store, name, refuse)
     monkeypatch.setattr(graph_cli.llm, "embed", refuse)
