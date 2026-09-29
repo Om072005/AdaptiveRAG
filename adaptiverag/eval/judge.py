@@ -116,8 +116,7 @@ def judge(question: str, answer: Answer, retrieved: Retrieved, trace: Trace) -> 
         ]
         calls.append(llm.chat("judge", retry, json_mode=True, trace=trace, max_tokens=1024))
         got = parse_scores(calls[-1].text)
-    cost = sum(c.cost_usd for c in calls)
-    trace.set(eval_cost_usd=cost)
+    cost = sum(c.cost_usd for c in calls)  # llm.chat already put each call on the trace ledger
     if isinstance(got, str):
         raise JudgeFailed(f"{got} after one retry: {calls[-1].text[:200]!r}")
     return {**got, "model": calls[-1].model, "cost_usd": cost}
