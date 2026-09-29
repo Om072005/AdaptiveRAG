@@ -1,15 +1,19 @@
 """Local API for the local page. Run: python -m adaptiverag serve"""
 
-from typing import Any
+from typing import Any, Literal
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
 from starlette.exceptions import HTTPException
 
 from adaptiverag import __version__
 from adaptiverag.config import models
+from adaptiverag.llm import BudgetExceeded, RateLimited
+from adaptiverag.pipeline import answer_query
+from adaptiverag.serialize import response_from_trace
 from adaptiverag.stores.db import conn
 
 LOCAL_PAGE_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173"]  # vite dev server
@@ -50,3 +54,23 @@ def health() -> dict[str, Any]:
         "version": __version__,
         "models": {role: spec.model for role, spec in models().items()},
     }
+
+
+class QueryIn(BaseModel):
+    question: str = Field(min_length=3, max_length=300)
+    mode: Literal["auto", "vector", "graph", "hybrid"] = "auto"
+
+
+@app.post("/api/query")
+def query(body: QueryIn) -> Any:
+    """Answer one question live; the body is the QueryResponse stored on its trace."""
+    try:
+        result = answer_query(body.question.strip(), body.mode, source="demo")
+    except (RateLimited, BudgetExceeded) as e:
+        return JSONResponse(
+            {"error": {"message": str(e), "fields": None}, "replay_suggested": None},
+            status_code=503,
+        )
+    except NotImplementedError as e:
+        return error(503, str(e))
+    return response_from_trace(result.trace_id)

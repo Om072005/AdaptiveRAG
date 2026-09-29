@@ -5,7 +5,7 @@ from typing import Any
 from psycopg import sql
 from psycopg.types.json import Jsonb
 
-from adaptiverag.stores.db import conn
+from adaptiverag.stores.db import conn, shared
 
 CALL_COLUMNS = [
     "trace_id",
@@ -42,6 +42,5 @@ def insert(row: dict[str, Any], calls: list[dict[str, Any]]) -> None:
 
 def read_detail(trace_id: str) -> dict[str, Any] | None:
     """traces.detail of one trace (the stored QueryResponse plus notes), or None."""
-    with conn() as c:
-        row = c.execute("select detail from traces where trace_id = %s", (trace_id,)).fetchone()
+    row = shared().execute("select detail from traces where trace_id = %s", (trace_id,)).fetchone()
     return dict(row[0]) if row else None
