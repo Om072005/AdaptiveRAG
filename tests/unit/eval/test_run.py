@@ -102,6 +102,25 @@ def test_pin_needs_a_clean_tree_and_neon_main() -> None:
     assert run.pin_problems(False, "") == ["DATABASE_URL is not Neon main"]
 
 
+def test_pin_needs_verified_gold() -> None:
+    main_url = "postgresql://u:p@ep-patient-wave-b3c33ztv-pooler.c-4.aws.neon.tech/adaptiverag"
+    assert run.pin_problems(False, main_url, []) == []
+    assert run.pin_problems(False, main_url, ["hp_2", "hp_9"]) == [
+        "2 gold items in this run are not verified, first hp_2"
+    ]
+
+
+def test_pin_refuses_unverified_items_before_any_connection(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    main_url = "postgresql://u:p@ep-patient-wave-b3c33ztv-pooler.c-4.aws.neon.tech/adaptiverag"
+    monkeypatch.setenv("DATABASE_URL", main_url)
+    monkeypatch.setattr(run, "git_state", lambda: ("abc", False))
+    monkeypatch.setattr(run, "select_items", lambda split: [ITEM])  # ITEM has no verified_by
+    with pytest.raises(SystemExit, match="1 gold items in this run are not verified, first hp_1"):
+        run.main(["--split", "dev", "--mode", "vector", "--variant", "baseline", "--pin"])
+
+
 def test_pin_is_refused_before_any_connection(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(run, "git_state", lambda: ("abc", True))
     with pytest.raises(SystemExit, match="--pin refused: the working tree"):

@@ -50,13 +50,18 @@ def check_args(split: str, variant: str, size: str | None, allow_test: bool) -> 
         raise SystemExit(f"variant {variant} needs --size {want}")
 
 
-def pin_problems(dirty: bool, database_url: str) -> list[str]:
-    """Why a run may not be pinned: a dirty working tree or a database other than Neon main."""
+def pin_problems(dirty: bool, database_url: str, unverified: list[str] | None = None) -> list[str]:
+    """Why a run may not be pinned: a dirty tree, a database other than Neon main, or gold items
+    no person has verified yet (a later fix would leave pinned numbers scored on old answers)."""
     found = []
     if dirty:
         found.append("the working tree has uncommitted changes")
     if not (urlparse(database_url).hostname or "").startswith(NEON_MAIN_HOST_PREFIX):
         found.append("DATABASE_URL is not Neon main")
+    if unverified:
+        found.append(
+            f"{len(unverified)} gold items in this run are not verified, first {unverified[0]}"
+        )
     return found
 
 
@@ -322,8 +327,15 @@ def main(argv: list[str] | None = None, answer: AnswerFn | None = None) -> None:
     if not args.resume:
         # refuse before any connection is opened; a resumed run is checked once its row is read
         check_args(args.split, args.variant, args.size, settings().allow_test)
-    if args.pin and (found := pin_problems(git_state()[1], settings().database_url)):
-        raise SystemExit("--pin refused: " + "; ".join(found))
+    if args.pin:
+        unverified = []
+        if not args.resume:
+            ids = question_ids(args.questions) if args.questions else None
+            unverified = [
+                i.id for i in only(select_items(args.split), ids) if not i.verified_by.strip()
+            ]
+        if found := pin_problems(git_state()[1], settings().database_url, unverified):
+            raise SystemExit("--pin refused: " + "; ".join(found))
     if answer is None:
         from adaptiverag.pipeline import answer_query
 
