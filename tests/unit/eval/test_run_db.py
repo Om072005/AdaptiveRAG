@@ -51,7 +51,7 @@ def c(monkeypatch: pytest.MonkeyPatch) -> Iterator[psycopg.Connection[Any]]:
             " text, n_words) values (%s, %s, 'sentence', 0, 0, 20, %s, 1)",
             (f"{t}:sentence:0", f"doc_{t}", "x" * 20),
         )
-    monkeypatch.setattr(run, "select_items", lambda split, limit: ITEMS[:limit])
+    monkeypatch.setattr(run, "select_items", lambda split: ITEMS)
     monkeypatch.setattr(run.db, "conn", lambda: contextlib.nullcontext(conn))
     yield conn
     conn.close()
@@ -81,13 +81,22 @@ def test_rate_limited_run_resumes_without_duplicates(c: psycopg.Connection[Any])
     ids = [r[0] for r in c.execute("select question_id from eval_results order by 1")]
     assert ids == ["hp_0", "hp_1", "hp_2", "hp_3", "hp_4"]
     summary = c.execute("select summary from eval_runs").fetchone()[0]  # type: ignore[index]
-    assert summary["n_done"] == 5 and summary["options"] == {
-        "size": None,
-        "limit": 5,
-        "judge": False,
-    }
+    assert summary["n_done"] == 5 and summary["options"] == {"size": None, "judge": False}
 
     run.main(["--resume", run_id], answer=answer_failing_after(0))  # nothing left to answer
+    assert c.execute("select count(*) from eval_results").fetchone() == (5,)
+
+
+def test_limit_caps_each_call_and_resume_continues(c: psycopg.Connection[Any]) -> None:
+    run.main(
+        ["--split", "mini", "--mode", "vector", "--variant", "daily", "--limit", "2"],
+        answer=answer_failing_after(99),
+    )
+    (run_id, n) = c.execute("select run_id, n from eval_runs").fetchone() or ("", 0)
+    assert n == 5 and c.execute("select count(*) from eval_results").fetchone() == (2,)
+    run.main(["--resume", run_id, "--limit", "2"], answer=answer_failing_after(99))
+    assert c.execute("select count(*) from eval_results").fetchone() == (4,)
+    run.main(["--resume", run_id], answer=answer_failing_after(99))
     assert c.execute("select count(*) from eval_results").fetchone() == (5,)
 
 

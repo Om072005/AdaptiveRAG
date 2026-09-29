@@ -1,7 +1,8 @@
 """python -m adaptiverag.eval.run --split dev --mode auto --variant <name> [options]
 
 Options: --judge, --limit N, --size small|large, --questions <file.toml>,
---resume <run_id>, --pin (contract section 3).
+--resume <run_id>, --pin (contract section 3). A run always covers its whole split; --limit N
+answers at most N more questions in this call, and --resume continues from there.
 """
 
 import argparse
@@ -216,7 +217,7 @@ def execute(
     return rows
 
 
-def select_items(split: str, limit: int | None) -> list[GoldItem]:
+def select_items(split: str) -> list[GoldItem]:
     if split == "mini":
         # mini = dev questions whose supporting paragraphs are all in the mini corpus
         from adaptiverag.ingest.loader import load_hotpot
@@ -225,7 +226,7 @@ def select_items(split: str, limit: int | None) -> list[GoldItem]:
         items = [i for i in gold.load_split("dev") if set(i.supporting_titles) <= titles]
     else:
         items = gold.load_split(split)
-    return items[:limit] if limit else items
+    return items
 
 
 def result_rows(c: psycopg.Connection[Any], run_id: str) -> list[dict[str, Any]]:
@@ -241,10 +242,10 @@ def result_rows(c: psycopg.Connection[Any], run_id: str) -> list[dict[str, Any]]
 
 def start_run(c: psycopg.Connection[Any], args: argparse.Namespace) -> tuple[str, list[GoldItem]]:
     """Insert a new eval_runs row; the options needed to resume go into its summary."""
-    items = select_items(args.split, args.limit)
+    items = select_items(args.split)
     sha, dirty = git_state()
     run_id = make_run_id(datetime.now(), args.split, args.mode, args.variant)
-    options = {"size": args.size, "limit": args.limit, "judge": args.judge}
+    options = {"size": args.size, "judge": args.judge}
     c.execute(
         "insert into eval_runs (run_id, split, mode, variant, git_sha, git_dirty, config_hash, n,"
         " summary) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
@@ -280,7 +281,7 @@ def resume_run(c: psycopg.Connection[Any], args: argparse.Namespace) -> tuple[st
     args.split, args.mode, args.variant, args.size = split, mode, variant, options["size"]
     args.judge = options.get("judge", False)
     done = {r["question_id"] for r in result_rows(c, args.resume)}
-    return args.resume, [i for i in select_items(split, options["limit"]) if i.id not in done]
+    return args.resume, [i for i in select_items(split) if i.id not in done]
 
 
 def main(argv: list[str] | None = None, answer: AnswerFn | None = None) -> None:
@@ -313,7 +314,7 @@ def main(argv: list[str] | None = None, answer: AnswerFn | None = None) -> None:
         c.execute("select 1")  # wake a suspended Neon compute before anything is timed
         run_id, items = resume_run(c, args) if args.resume else start_run(c, args)
         try:
-            execute(c, items, run_id, args.mode, args.size, answer, args.judge)
+            execute(c, items[: args.limit], run_id, args.mode, args.size, answer, args.judge)
         except RateLimited:
             print(f"rate limited, progress saved: resume with --resume {run_id}", file=sys.stderr)
             raise SystemExit(2) from None
