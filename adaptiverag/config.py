@@ -44,6 +44,7 @@ class ModelSpec:
     reasoning_effort: str | None
     dims: int | None
     server_error_attempts: int = 5  # attempts on 5xx; 1 = never retry a busy provider
+    texts_per_minute: int | None = None  # embeddings: paced under the provider's per minute cap
 
 
 def parse_env(text: str) -> dict[str, str]:
@@ -123,6 +124,7 @@ def parse_models(data: dict[str, Any]) -> dict[Role, ModelSpec]:
             reasoning_effort=spec.get("reasoning_effort"),
             dims=spec.get("dims"),
             server_error_attempts=int(spec.get("server_error_attempts", 5)),
+            texts_per_minute=spec.get("texts_per_minute"),
         )
     return specs
 

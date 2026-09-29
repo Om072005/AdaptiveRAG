@@ -29,6 +29,8 @@ MAX_RETRY_AFTER_S = (
 )
 
 _sleep = time.sleep  # swapped out in tests
+_now = time.monotonic  # swapped out in tests
+_sent: list[tuple[float, int]] = []  # (when, texts) of recent embedding requests, for pacing
 _client: httpx.Client | None = None
 _no_reasoning_effort: set[Role] = set()  # roles whose provider rejected reasoning_effort
 use_cache = True  # unit tests with a fake provider turn it off
@@ -288,12 +290,15 @@ def embed(texts: list[str], *, trace: "Trace | None" = None) -> np.ndarray:
         trace.add_llm(_embed_result(spec, tokens_in, latency_ms, cached=True, retries=0, wait_ms=0))
 
     missing = [i for i, k in enumerate(keys) if k not in hits]
-    for start in range(0, len(missing), EMBED_BATCH):
-        idx = missing[start : start + EMBED_BATCH]
+    size = min(EMBED_BATCH, spec.texts_per_minute or EMBED_BATCH)
+    for start in range(0, len(missing), size):
+        idx = missing[start : start + size]
         batch = [texts[i] for i in idx]
+        paced_ms = pace(len(batch), spec.texts_per_minute)
         body, latency_ms, retries, wait_ms = _post(
             spec, "embeddings", {"model": spec.model, "input": batch, "dimensions": dims}
         )
+        wait_ms += paced_ms  # pacing is throttle wait, never latency
         # Gemini omits "index"; a stable sort keeps the response order then
         rows = sorted(body["data"], key=lambda d: d.get("index", 0))
         vecs = np.array([row["embedding"] for row in rows], dtype=np.float32)
@@ -321,6 +326,26 @@ def embed(texts: list[str], *, trace: "Trace | None" = None) -> np.ndarray:
         if trace is not None:
             trace.add_llm(_embed_result(spec, tokens_in, latency_ms, False, retries, wait_ms))
     return out
+
+
+def pace(n_texts: int, per_minute: int | None) -> int:
+    """Wait until n_texts more stay under the per minute budget over 60 s; returns ms waited.
+
+    A refused request still counts against the free tier's daily quota, so waiting before a
+    batch is cheaper than a 429 and a retry.
+    """
+    if not per_minute:
+        return 0
+    waited = 0.0
+    while True:
+        now = _now()
+        _sent[:] = [(at, n) for at, n in _sent if now - at < 60.0]
+        if sum(n for _, n in _sent) + n_texts <= per_minute or not _sent:
+            _sent.append((now, n_texts))
+            return int(waited * 1000)
+        delay = 60.0 - (now - _sent[0][0]) + 0.5
+        _sleep(delay)
+        waited += delay
 
 
 def _embed_result(

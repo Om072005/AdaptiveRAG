@@ -15,7 +15,14 @@ def fake_provider(
     """Route every provider call to a handler; returns the list of requests it saw."""
     monkeypatch.setenv("GROQ_API_KEY", "test-groq")
     monkeypatch.setenv("GEMINI_API_KEY", "test-gemini")
-    monkeypatch.setattr(llm, "_sleep", lambda s: None)
+    clock = {"t": 1000.0}
+
+    def fake_sleep(s: float) -> None:  # time passes instantly, so pacing never really waits
+        clock["t"] += s
+
+    monkeypatch.setattr(llm, "_sleep", fake_sleep)
+    monkeypatch.setattr(llm, "_now", lambda: clock["t"])
+    monkeypatch.setattr(llm, "_sent", [])
     monkeypatch.setattr(llm, "_no_reasoning_effort", set())
     monkeypatch.setattr(llm, "use_cache", False)
     seen: list[httpx.Request] = []

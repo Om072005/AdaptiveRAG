@@ -123,3 +123,58 @@ def test_other_roles_still_retry_server_errors(fake_provider: Install) -> None:
 
     fake_provider(handler)
     assert llm.chat("large", [{"role": "user", "content": "q"}]).retries == 1
+
+
+class Clock:
+    def __init__(self) -> None:
+        self.t = 1000.0
+        self.slept: list[float] = []
+
+    def now(self) -> float:
+        return self.t
+
+    def sleep(self, s: float) -> None:
+        self.slept.append(s)
+        self.t += s
+
+
+def test_embeddings_are_paced_under_the_per_minute_budget(
+    fake_provider: Install, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    clock = Clock()
+    monkeypatch.setattr(llm, "_now", clock.now)
+    monkeypatch.setattr(llm, "_sleep", clock.sleep)
+    monkeypatch.setattr(llm, "_sent", [])
+    sizes: list[int] = []
+
+    def handler(r: httpx.Request) -> httpx.Response:
+        import json
+
+        texts = json.loads(r.content)["input"]
+        sizes.append(len(texts))
+        return httpx.Response(
+            200, json={"data": [{"embedding": [1.0] + [0.0] * 767} for _ in texts]}
+        )
+
+    fake_provider(handler)
+    budget = llm.models()["embed"].texts_per_minute
+    assert budget and budget < 100
+    llm.embed([f"t{i}" for i in range(250)])
+    assert all(s <= budget for s in sizes) and sum(sizes) == 250
+    assert len(clock.slept) == len(sizes) - 1  # every batch after the first waited for the window
+    assert all(55 <= s <= 61 for s in clock.slept)
+
+
+def test_pace_counts_only_the_last_minute() -> None:
+    clock = Clock()
+    llm._now, llm._sleep, llm._sent[:] = clock.now, clock.sleep, []
+    try:
+        assert llm.pace(50, 90) == 0
+        clock.t += 61
+        assert llm.pace(80, 90) == 0  # the first 50 left the window
+        assert llm.pace(20, 90) > 0
+    finally:
+        import time
+
+        llm._now, llm._sleep = time.monotonic, time.sleep
+        llm._sent[:] = []

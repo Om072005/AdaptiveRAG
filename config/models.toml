@@ -52,6 +52,7 @@ model = "gemini-embedding-001"    # request 768 dims, then L2 normalize
 price_in_per_m = 0.15
 price_out_per_m = 0.0
 dims = 768
+texts_per_minute = 90               # free tier allows 100 a minute and counts refused requests
 
 [limits]
 max_llm_calls_per_query = 4
