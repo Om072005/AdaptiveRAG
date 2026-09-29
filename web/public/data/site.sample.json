@@ -1,0 +1,13 @@
+{
+  "sample": true,
+  "repo_url": "https://github.com/Om072005/AdaptiveRAG",
+  "contact_email": "sample@example.com",
+  "license": "Sample",
+  "members": [
+    {
+      "name": "Sample member",
+      "role": "Sample role",
+      "github": "https://github.com/"
+    }
+  ]
+}

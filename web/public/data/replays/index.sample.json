@@ -1,0 +1,35 @@
+{
+  "sample": true,
+  "items": [
+    {
+      "question_id": "sample_single",
+      "question": "Sample single hop question: where was Beta City founded?",
+      "type": "single_hop",
+      "why": "Sample entry for building the page.",
+      "modes": [
+        "vector"
+      ],
+      "outcome": "correct"
+    },
+    {
+      "question_id": "sample_multi",
+      "question": "Sample multi hop question: what company did the founder of Acme Rockets later work for?",
+      "type": "multi_hop",
+      "why": "Sample entry for building the page.",
+      "modes": [
+        "vector"
+      ],
+      "outcome": "partial"
+    },
+    {
+      "question_id": "sample_wrong",
+      "question": "Sample comparison question: which is older, Alpha Town or Beta City?",
+      "type": "comparison",
+      "why": "Sample entry for building the page.",
+      "modes": [
+        "vector"
+      ],
+      "outcome": "misrouted"
+    }
+  ]
+}

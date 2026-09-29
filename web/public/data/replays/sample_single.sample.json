@@ -1,0 +1,99 @@
+{
+  "sample": true,
+  "question_id": "sample_single",
+  "question": "Sample single hop question: where was Beta City founded?",
+  "type": "single_hop",
+  "gold_answer": "Sample answer",
+  "supporting_titles": [
+    "Sample title"
+  ],
+  "why": "Sample entry for building the page.",
+  "recorded_at": "2026-01-01T00:00:00Z",
+  "git_sha": "0000000",
+  "config_hash": "000000000000",
+  "runs": {
+    "vector": {
+      "run_id": "20260101-0000-dev-vector-sample",
+      "response": {
+        "trace_id": "00000000-0000-4000-8000-000000000000",
+        "question": "Sample single hop question: where was Beta City founded?",
+        "answer": {
+          "short": "Sample answer",
+          "text": "Answer: Sample answer\nA sample explanation [1].",
+          "model": "sample-model",
+          "size": "small",
+          "select_reason": "sample",
+          "confidence": 0.5,
+          "flagged": false,
+          "citations": [
+            {
+              "n": 1,
+              "title": "Sample title",
+              "snippet": "Sample snippet.",
+              "chunk_id": "sample:sentence:0"
+            }
+          ]
+        },
+        "route": {
+          "requested": "vector",
+          "label": "single_hop",
+          "label_confidence": 0.5,
+          "method": "sample",
+          "initial": "vector",
+          "final": "vector",
+          "fallbacks": [],
+          "reasons": [
+            "forced:vector"
+          ]
+        },
+        "retrieval": {
+          "hits": [
+            {
+              "rank": 1,
+              "title": "Sample title",
+              "snippet": "Sample snippet.",
+              "score": 0.5,
+              "source": "vector",
+              "chunk_id": "sample:sentence:0"
+            }
+          ],
+          "graph": {
+            "nodes": [],
+            "edges": []
+          },
+          "top_score": 0.5,
+          "path_found": false
+        },
+        "trace": {
+          "spans": [
+            {
+              "name": "retrieve",
+              "ms": 10
+            },
+            {
+              "name": "generate",
+              "ms": 20
+            }
+          ],
+          "tokens_in": 10,
+          "tokens_out": 5,
+          "cost": {
+            "classifier": 0.0,
+            "generation": 0.0001,
+            "total": 0.0001
+          },
+          "total_ms": 30,
+          "throttle_wait_ms": 0,
+          "cached": false
+        },
+        "live": null
+      },
+      "metrics": {
+        "em": 0.0,
+        "f1": 0.5,
+        "recall_at_k": 0.5
+      },
+      "judgement": null
+    }
+  }
+}

@@ -54,8 +54,9 @@ function checkData() {
   } catch {
     return []
   }
+  // *.sample.json files are stripped from a production build, everything else ships
   return found
-    .filter((p) => JSON.parse(readFileSync(p, 'utf8')).sample === true)
+    .filter((p) => !p.endsWith('.sample.json') && JSON.parse(readFileSync(p, 'utf8')).sample === true)
     .map((p) => `${relative('.', p)}: sample data in a production build (set VITE_ALLOW_SAMPLE=1 only locally)`)
 }
 
