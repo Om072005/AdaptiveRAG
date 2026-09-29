@@ -32,13 +32,22 @@ def build_messages(doc: Document) -> list[dict[str, str]]:
     return [{"role": "user", "content": PROMPT.format(title=doc.title, sentences=lines)}]
 
 
+def names_subject(question: str, title: str) -> bool:
+    """True when the question contains a word of the title, ignoring any bracketed part."""
+    words = {
+        w for w in normalize_answer(title.split("(")[0]).split() if len(w) >= 3 and w.isalpha()
+    }
+    return not words or bool(words & set(normalize_answer(question).split()))
+
+
 def parse_item(raw: str, doc: Document, note: str) -> GoldItem | str:
     """A single hop GoldItem, or the reason the model output is rejected."""
     try:
         data = json.loads(raw)
         question, answer, i = (
             str(data["question"]).strip(),
-            str(data["answer"]).strip(),
+            # models sometimes wrap the copied span in quotes
+            str(data["answer"]).strip().strip("\"'“”‘’").strip(),
             data["sentence"],
         )
     except (ValueError, KeyError, TypeError):
@@ -52,6 +61,8 @@ def parse_item(raw: str, doc: Document, note: str) -> GoldItem | str:
         or normalize_answer(answer) not in normalize_answer(doc.text[start:end])
     ):
         return "answer_not_in_sentence"
+    if not names_subject(question, doc.title):
+        return "question_lacks_subject"
     return GoldItem(
         id=f"sh_{doc.doc_id}_{i}",
         question=question,
