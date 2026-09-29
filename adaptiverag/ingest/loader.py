@@ -22,6 +22,8 @@ MIRROR_PARAMS: dict[str, str | int] = {
     "split": "validation",
 }
 RAW_PATH = ROOT / "data" / "raw" / "hotpot_dev_distractor_v1.json"
+CORPUS_DIR = ROOT / "data" / "corpus"
+CORPUS_QUESTIONS = {"mini": 30, "full": 300}  # corpus sizes fixed by the contract (section 4)
 
 
 def load_hotpot(n_questions: int, seed: int = 7) -> tuple[list[Document], list[dict[str, Any]]]:
@@ -130,3 +132,29 @@ def from_records(
             }
         )
     return list(docs.values()), questions
+
+
+def manifest(questions: list[dict[str, Any]], docs: list[Document], seed: int) -> dict[str, Any]:
+    """The data/corpus/<name>.json content for a sample."""
+    return {
+        "seed": seed,
+        "source": "hotpotqa-dev-distractor",
+        "question_ids": [q["id"] for q in questions],
+        "doc_ids": [d.doc_id for d in docs],
+    }
+
+
+def corpus(
+    name: str, seed: int = 7, corpus_dir: Path = CORPUS_DIR
+) -> tuple[list[Document], list[dict[str, Any]]]:
+    """A named sample; writes data/corpus/<name>.json once and checks it on every later call."""
+    docs, questions = load_hotpot(CORPUS_QUESTIONS[name], seed)
+    built = manifest(questions, docs, seed)
+    path = corpus_dir / f"{name}.json"
+    if path.exists():
+        if json.loads(path.read_text(encoding="utf-8")) != built:
+            raise SystemExit(f"{path} does not match the {name} sample of the raw file")
+    else:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(built, indent=1) + "\n", encoding="utf-8")
+    return docs, questions

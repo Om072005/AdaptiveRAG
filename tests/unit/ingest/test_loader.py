@@ -7,8 +7,10 @@ import pytest
 
 from adaptiverag.ingest import loader
 from adaptiverag.ingest.normalize import doc_id, normalize
+from adaptiverag.types import Document
 
 FIXTURE = Path(__file__).parent / "fixtures" / "hotpot_3q.json"
+MANIFESTS = Path(__file__).parents[3] / "data" / "corpus"
 
 
 def records() -> list[dict[str, Any]]:
@@ -110,3 +112,49 @@ def test_mirror_row_converts_back_to_the_original_layout() -> None:
             },
         }
         assert loader.from_mirror_row(row) == original
+
+
+def fixture_sample(n: int, seed: int = 7) -> tuple[list[Document], list[dict[str, Any]]]:
+    return loader.from_records(records(), min(n, 3), seed)
+
+
+def test_manifest_lists_questions_and_documents() -> None:
+    docs, questions = fixture_sample(3)
+    m = loader.manifest(questions, docs, 7)
+    assert m["seed"] == 7 and m["source"] == "hotpotqa-dev-distractor"
+    assert m["question_ids"] == [q["id"] for q in questions]
+    assert m["doc_ids"] == [d.doc_id for d in docs]
+
+
+def test_every_supporting_title_is_a_manifest_document() -> None:
+    docs, questions = fixture_sample(3)
+    doc_ids = set(loader.manifest(questions, docs, 7)["doc_ids"])
+    assert all(
+        doc_id(loader.SOURCE, t) in doc_ids for q in questions for t, _ in q["supporting_facts"]
+    )
+
+
+def test_corpus_writes_the_manifest_then_checks_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(loader, "load_hotpot", fixture_sample)
+    first, _ = loader.corpus("mini", corpus_dir=tmp_path)
+    path = tmp_path / "mini.json"
+    assert json.loads(path.read_text(encoding="utf-8"))["doc_ids"] == [d.doc_id for d in first]
+    assert loader.corpus("mini", corpus_dir=tmp_path)[0] == first
+
+    stored = json.loads(path.read_text(encoding="utf-8"))
+    stored["doc_ids"] = stored["doc_ids"][:-1]
+    path.write_text(json.dumps(stored), encoding="utf-8")
+    with pytest.raises(SystemExit, match="does not match"):
+        loader.corpus("mini", corpus_dir=tmp_path)
+
+
+def test_committed_mini_corpus_sits_inside_full() -> None:
+    mini, full = (
+        json.loads((MANIFESTS / f"{n}.json").read_text(encoding="utf-8")) for n in ("mini", "full")
+    )
+    assert len(mini["question_ids"]) == 30 and len(full["question_ids"]) == 300
+    assert full["question_ids"][:30] == mini["question_ids"]
+    assert set(mini["doc_ids"]) <= set(full["doc_ids"])
+    assert mini["seed"] == full["seed"] == 7
