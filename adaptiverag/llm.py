@@ -213,7 +213,7 @@ def chat(
             cost_usd=cost_usd(spec, hit["tokens_in"], hit["tokens_out"]),
             latency_ms=hit["latency_ms"],
             cached=True,
-            estimated=False,
+            estimated=not hit["response"].get("usage"),
             retries=0,
             wait_ms=0,
         )
@@ -235,14 +235,21 @@ def _chat_uncached(role: Role, spec: ModelSpec, payload: dict[str, Any]) -> LLMR
         del payload["reasoning_effort"]
         body, latency_ms, retries, wait_ms = _post(spec, "chat/completions", payload)
 
-    tokens_in, tokens_out = usage_tokens(body.get("usage") or {})
+    usage = body.get("usage")
+    text = body["choices"][0]["message"].get("content") or ""
+    if usage:
+        tokens_in, tokens_out = usage_tokens(usage)
+    else:
+        # no usage block: estimate so the call is never counted as free, and say so on the ledger
+        tokens_in = estimate_tokens([m.get("content", "") for m in payload["messages"]])
+        tokens_out = estimate_tokens([text])
     if use_cache:
         row = {"key": request_key(payload), "role": role, "model": spec.model, "response": body}
         cache.put_many(
             [{**row, "tokens_in": tokens_in, "tokens_out": tokens_out, "latency_ms": latency_ms}]
         )
     return LLMResult(
-        text=body["choices"][0]["message"].get("content") or "",
+        text=text,
         role=role,
         model=spec.model,
         tokens_in=tokens_in,
@@ -250,7 +257,7 @@ def _chat_uncached(role: Role, spec: ModelSpec, payload: dict[str, Any]) -> LLMR
         cost_usd=cost_usd(spec, tokens_in, tokens_out),
         latency_ms=latency_ms,
         cached=False,
-        estimated=False,
+        estimated=not usage,
         retries=retries,
         wait_ms=wait_ms,
     )

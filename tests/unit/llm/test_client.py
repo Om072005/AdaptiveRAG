@@ -134,3 +134,20 @@ def test_capped_trace_stops_before_the_provider_is_called(fake_provider: Install
     with pytest.raises(llm.BudgetExceeded):
         llm.chat("small", [{"role": "user", "content": "q"}], trace=t)
     assert len(seen) == 4
+
+
+def test_missing_usage_is_estimated_and_flagged(fake_provider: Install) -> None:
+    fake_provider(
+        lambda r: httpx.Response(
+            200, json={"choices": [{"message": {"content": "Answer: Ankara"}}]}
+        )
+    )
+    r = llm.chat("small", [{"role": "user", "content": "x" * 400}])
+    assert r.estimated
+    assert r.tokens_in == 100 and r.tokens_out == 3  # 4 characters per token
+    assert r.cost_usd > 0
+
+
+def test_usage_present_is_not_estimated(fake_provider: Install) -> None:
+    fake_provider(lambda r: httpx.Response(200, json=chat_body()))
+    assert not llm.chat("small", [{"role": "user", "content": "q"}]).estimated

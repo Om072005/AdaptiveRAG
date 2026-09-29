@@ -56,3 +56,14 @@ def test_embed_only_sends_texts_not_in_cache(
     assert json.loads(seen[1].content)["input"] == ["ccc"]
     assert np.allclose(second[0], first[1]) and np.allclose(second[2], first[0])
     assert np.allclose(np.linalg.norm(second, axis=1), 1.0)
+
+
+def test_cache_hit_keeps_the_estimated_flag(
+    fake_provider: Install, memory_cache: dict[str, dict[str, object]]
+) -> None:
+    seen = fake_provider(
+        lambda r: httpx.Response(200, json={"choices": [{"message": {"content": "ok"}}]})
+    )
+    msgs = [{"role": "user", "content": "no usage here"}]
+    first, second = llm.chat("small", msgs), llm.chat("small", msgs)
+    assert len(seen) == 1 and first.estimated and second.cached and second.estimated
