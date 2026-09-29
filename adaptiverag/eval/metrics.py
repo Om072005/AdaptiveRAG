@@ -52,5 +52,17 @@ def mrr(hits: list[Hit], supporting_titles: list[str]) -> float:
 
 
 def sp_precision(hits: list[Hit], supporting_spans: list[tuple[str, int, int]]) -> float:
-    """Share of retrieved characters inside supporting sentences."""
-    raise NotImplementedError
+    """Share of retrieved characters inside supporting sentences. Spans are (chunk_id, start, end)
+    relative to the chunk text; the denominator is the sum of len(hit.text), so overlapping fixed
+    chunks count their shared characters twice."""
+    total = sum(len(h.text) for h in hits)
+    if total == 0:
+        return 0.0
+    inside = 0
+    for h in hits:
+        covered: set[int] = set()  # a set so overlapping spans in one chunk count once
+        for chunk_id, start, end in supporting_spans:
+            if chunk_id == h.chunk_id:
+                covered.update(range(max(start, 0), min(end, len(h.text))))
+        inside += len(covered)
+    return inside / total
