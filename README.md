@@ -271,6 +271,12 @@ erDiagram
 
 The `ALIAS` table is the entity-resolution surface: `"Apple Inc."`, `"Apple"`, and `"AAPL"` are three surface forms pointing at one `canonical_id`. Getting this wrong in the *other* direction — merging two distinct people who share a name — is the documented failure mode I most expect to hit.
 
+As built, three things differ from the diagram (reasons in [docs/decisions.md](docs/decisions.md)):
+
+- `aliases` has the primary key `(surface_form, canonical_id)`, not `surface_form` alone, so one surface form can point at two different people who share a name. Two PERSON entities with the same name merge only when they share a neighbour or a source document.
+- A relation also stores its `doc_id`, the evidence as character offsets into the document text (`evidence_start`, `evidence_end`) and an embedding of "subject predicate object", which traversal scores against the question. The database refuses a relation whose chunk does not exist.
+- When the evidence the model quotes is not found in its chunk, the relation keeps the whole chunk as its evidence span, and the graph report counts it as "evidence not located".
+
 ---
 
 ## Evaluation feedback loop

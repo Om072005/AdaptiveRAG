@@ -98,6 +98,26 @@ counts only the successful attempt; backoff after a 429 goes to `wait_ms` and `t
   index, so the extra strategies change nothing it returns.
 - **The page names members by GitHub username**, shows the lead's address as contact, and the repo is MIT.
 
+## Decided while building the graph and router (D4 onward)
+
+- **A second entity with the same name gets its own id.** Entity ids are `e_` plus 12 hex of
+  sha1(type|normalized name). When the person guard keeps two same-name people apart, the second one's key
+  also takes its anchor document id, so both keep stable ids and share one alias row per surface form.
+- **Evidence the model quotes but that is not in its chunk keeps the whole chunk as its span.** Offsets are
+  computed in code from the quote; when the quote is not found, the triple is kept with the chunk's own start
+  and end instead of offsets that could point at the wrong text, and the graph report counts these as
+  "evidence not located".
+- **Extraction batches are recorded and reused.** Batches of four consecutive chunks shifted whenever a gold
+  edit changed the dev scope, so cached requests stopped matching. `data/graph/extract_batches.jsonl` keeps
+  every batch sent; a planned batch is sent unchanged (its chunks outside the scope are dropped after
+  extraction) and only chunks no batch holds form new batches.
+- **The graph dry run calls no model.** It merges by name only and says so, so checking the counts costs no
+  embedding quota.
+- **The rules classifier's confidence is measured, not a vote share.** A vote share gave a one cue question
+  0.50, under `classifier.min_confidence`. The confidence is now the share of training questions with the
+  same winning label and lead in votes that carry that label (`router/weights/rules.json`); the threshold
+  did not change.
+
 ## Providers
 
 ### Models, list prices and free tier limits (checked 2026-09-29)
