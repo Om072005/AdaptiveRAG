@@ -90,3 +90,18 @@ def test_summarize_means_overall_and_by_type() -> None:
 def test_new_run_needs_split_mode_and_variant() -> None:
     with pytest.raises(SystemExit):
         run.main(["--split", "dev", "--mode", "auto"])
+
+
+def test_pin_needs_a_clean_tree_and_neon_main() -> None:
+    main_url = "postgresql://u:p@ep-patient-wave-b3c33ztv-pooler.c-4.aws.neon.tech/adaptiverag"
+    dev_url = "postgresql://u:p@ep-sweet-waterfall-b3erajkv-pooler.c-4.aws.neon.tech/adaptiverag"
+    assert run.pin_problems(False, main_url) == []
+    assert run.pin_problems(True, main_url) == ["the working tree has uncommitted changes"]
+    assert run.pin_problems(False, dev_url) == ["DATABASE_URL is not Neon main"]
+    assert run.pin_problems(False, "") == ["DATABASE_URL is not Neon main"]
+
+
+def test_pin_is_refused_before_any_connection(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(run, "git_state", lambda: ("abc", True))
+    with pytest.raises(SystemExit, match="--pin refused: the working tree"):
+        run.main(["--split", "dev", "--mode", "vector", "--variant", "baseline", "--pin"])

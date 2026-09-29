@@ -11,6 +11,7 @@ from collections.abc import Callable
 from datetime import datetime
 from statistics import mean
 from typing import Any
+from urllib.parse import urlparse
 
 import psycopg
 from psycopg.types.json import Jsonb
@@ -28,6 +29,8 @@ MODES = ("auto", "vector", "graph", "hybrid")
 SIZE_VARIANTS = {"always-small": "small", "always-large": "large"}
 METRICS = ("em", "f1", "recall_at_k", "mrr", "sp_precision")
 JUDGE_METRICS = ("faithfulness", "relevance", "completeness")
+# Neon main's endpoint (contract section 1): pinned runs are the only ones the README and page quote
+NEON_MAIN_HOST_PREFIX = "ep-patient-wave-b3c33ztv"
 MINI_QUESTIONS = 30  # the mini corpus size from contract section 4
 
 
@@ -42,6 +45,16 @@ def check_args(split: str, variant: str, size: str | None, allow_test: bool) -> 
     want = SIZE_VARIANTS.get(variant)
     if want and size != want:
         raise SystemExit(f"variant {variant} needs --size {want}")
+
+
+def pin_problems(dirty: bool, database_url: str) -> list[str]:
+    """Why a run may not be pinned: a dirty working tree or a database other than Neon main."""
+    found = []
+    if dirty:
+        found.append("the working tree has uncommitted changes")
+    if not (urlparse(database_url).hostname or "").startswith(NEON_MAIN_HOST_PREFIX):
+        found.append("DATABASE_URL is not Neon main")
+    return found
 
 
 def git_state() -> tuple[str, bool]:
@@ -287,9 +300,10 @@ def main(argv: list[str] | None = None, answer: AnswerFn | None = None) -> None:
     if not args.resume:
         # refuse before any connection is opened; a resumed run is checked once its row is read
         check_args(args.split, args.variant, args.size, settings().allow_test)
-    for flag in ("questions", "pin"):
-        if getattr(args, flag):
-            raise SystemExit(f"--{flag} is not built yet")
+    if args.questions:
+        raise SystemExit("--questions is not built yet")
+    if args.pin and (found := pin_problems(git_state()[1], settings().database_url)):
+        raise SystemExit("--pin refused: " + "; ".join(found))
     if answer is None:
         from adaptiverag.pipeline import answer_query
 
