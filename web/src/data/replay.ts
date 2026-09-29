@@ -1,5 +1,5 @@
 // Pure helpers the replay components share.
-import type { Mode, Replay, ReplayIndex } from '../types'
+import type { Mode, Replay, ReplayIndex } from '../types.ts'
 
 export type ReplayItem = ReplayIndex['items'][number]
 export type RecordedRun = NonNullable<Replay['runs'][Mode]>

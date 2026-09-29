@@ -7,10 +7,11 @@
     "dev": "vite",
     "build": "node scripts/design-check.mjs --data && tsc -b && vite build",
     "lint": "oxlint",
-    "check": "node scripts/design-check.mjs && oxlint --deny-warnings && npm run -s build",
+    "check": "node scripts/design-check.mjs && oxlint --deny-warnings && npm run -s unit && npm run -s build",
     "preview": "vite preview",
     "design": "node scripts/design-check.mjs",
-    "smoke": "playwright test"
+    "smoke": "playwright test",
+    "unit": "node --test src/**/*.test.ts"
   },
   "dependencies": {
     "@fontsource-variable/source-serif-4": "^5.3.0",

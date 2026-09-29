@@ -64,3 +64,13 @@ test('a not enough context answer is shown, in muted text', async ({ page }) => 
   await page.getByRole('button', { name: '5 Answer' }).click()
   await expect(page.getByText('Not enough context')).toHaveClass(/text-muted/)
 })
+
+test('classify and route steps read the recorded decision', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /Sample single hop question/ }).click()
+  await expect(page.getByText('Question type')).toBeVisible()
+  await expect(page.getByRole('img', { name: 'Confidence 0.50 of 1' })).toBeVisible()
+  await page.getByRole('button', { name: 'Next step' }).click()
+  await expect(page.getByText('This run asked for vector search, so the router did not choose.')).toBeVisible()
+  await expect(page.getByText('Route taken')).toBeVisible()
+})
