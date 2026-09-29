@@ -1,17 +1,36 @@
+import re
+import string
+from collections import Counter
+
 from adaptiverag.types import Hit
+
+# The official script scores a yes/no answer 0 unless both sides match exactly
+YES_NO = {"yes", "no", "noanswer"}
 
 
 def normalize_answer(s: str) -> str:
-    """HotpotQA official normalisation."""
-    raise NotImplementedError
+    """HotpotQA official normalisation: lower case, no punctuation, no articles, single spaces."""
+    s = "".join(ch for ch in s.lower() if ch not in string.punctuation)
+    s = re.sub(r"\b(a|an|the)\b", " ", s)
+    return " ".join(s.split())
 
 
 def em(pred: str, gold: str) -> float:
-    raise NotImplementedError
+    """1.0 when the normalized answers are equal, else 0.0."""
+    return float(normalize_answer(pred) == normalize_answer(gold))
 
 
 def f1(pred: str, gold: str) -> float:
-    raise NotImplementedError
+    """Token F1 between the normalized answers, as in the HotpotQA script."""
+    p, g = normalize_answer(pred), normalize_answer(gold)
+    if (p in YES_NO or g in YES_NO) and p != g:
+        return 0.0
+    p_tokens, g_tokens = p.split(), g.split()
+    same = sum((Counter(p_tokens) & Counter(g_tokens)).values())
+    if same == 0:
+        return 0.0
+    precision, recall = same / len(p_tokens), same / len(g_tokens)
+    return 2 * precision * recall / (precision + recall)
 
 
 def recall_at_k(hits: list[Hit], supporting_titles: list[str], k: int) -> float:
