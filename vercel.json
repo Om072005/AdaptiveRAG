@@ -3,5 +3,13 @@
   "framework": null,
   "installCommand": "echo \"static page only, installs happen in web/\"",
   "buildCommand": "cd web && npm ci && npm run build",
-  "outputDirectory": "web/dist"
+  "outputDirectory": "web/dist",
+  "git": {
+    "deploymentEnabled": {
+      "om072005": false,
+      "yash": false,
+      "danish": false,
+      "dhruv": false
+    }
+  }
 }
