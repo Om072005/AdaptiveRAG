@@ -24,6 +24,7 @@ MAX_ATTEMPTS = 5
 EMBED_BATCH = 100
 BACKOFF_BASE_S = 1.0
 BACKOFF_MAX_S = 30.0
+MAX_RETRY_AFTER_S = 60.0  # a longer wait means the daily quota is gone: stop and resume later
 
 _sleep = time.sleep  # swapped out in tests
 _client: httpx.Client | None = None
@@ -84,6 +85,29 @@ def backoff_s(attempt: int) -> float:
     return random.uniform(0, min(BACKOFF_MAX_S, BACKOFF_BASE_S * 2**attempt))
 
 
+def retry_after_s(r: httpx.Response) -> float | None:
+    """Seconds the provider asked us to wait: the retry-after header, or Gemini's retryDelay."""
+    header = r.headers.get("retry-after")
+    if header:
+        try:
+            return float(header)
+        except ValueError:
+            return None
+    try:
+        body = r.json()
+    except ValueError:
+        return None
+    errors = body if isinstance(body, list) else [body]
+    for err in errors:
+        inner = err.get("error") if isinstance(err, dict) else None
+        details = inner.get("details", []) if isinstance(inner, dict) else []
+        for d in details:
+            delay = str(d.get("retryDelay", "")) if isinstance(d, dict) else ""
+            if delay.endswith("s"):
+                return float(delay[:-1])
+    return None
+
+
 def _api_key(spec: ModelSpec) -> str:
     key = getattr(settings(), spec.key_env.lower(), "")
     if not key:
@@ -105,7 +129,12 @@ def _post(
         if r.status_code == 429 or r.status_code >= 500:
             if attempt == MAX_ATTEMPTS - 1:
                 raise RateLimited(f"{spec.model}: {r.status_code} after {MAX_ATTEMPTS} attempts")
-            delay = backoff_s(attempt)
+            asked = retry_after_s(r)
+            if asked is not None and asked > MAX_RETRY_AFTER_S:
+                raise RateLimited(
+                    f"{spec.model}: provider asks to wait {asked:.0f}s, quota exhausted"
+                )
+            delay = asked if asked is not None else backoff_s(attempt)
             _sleep(delay)
             retries += 1
             wait_ms += int(delay * 1000)
