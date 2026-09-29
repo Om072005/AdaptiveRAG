@@ -27,7 +27,7 @@
 
 ## What this is
 
-A research assistant that **routes queries between two retrieval strategies** — dense vector similarity search and graph-based multi-hop traversal — based on the structure of the question being asked. Every routing decision is instrumented for cost and latency, and an evaluation loop logs low-confidence answers so retrieval choices can be tuned against measured quality rather than intuition.
+A question answering system that **routes queries between two retrieval strategies** — dense vector similarity search and graph-based multi-hop traversal — based on the structure of the question being asked. Every routing decision is instrumented for cost and latency, and an evaluation loop logs low-confidence answers so retrieval choices can be tuned against measured quality rather than intuition.
 
 The core retrieval, routing, and agent logic are written **from scratch** rather than assembled from a framework, so that the failure modes are visible at the implementation level instead of hidden behind an API surface.
 
