@@ -1,4 +1,4 @@
-"""python -m adaptiverag.eval.gold build|split|verify --from N --to M --reviewer <name>"""
+"""python -m adaptiverag.eval.gold build|generate|split|verify --from N --to M --reviewer <name>"""
 
 import argparse
 import json
@@ -12,6 +12,7 @@ from adaptiverag.config import ROOT, settings
 GOLD_DIR = ROOT / "data" / "gold"
 RAW_HOTPOT = ROOT / "data" / "raw" / "hotpot_dev_distractor_v1.json"
 FULL_MANIFEST = ROOT / "data" / "corpus" / "full.json"
+FULL_QUESTIONS = 300  # the full corpus size from contract section 4
 
 HOTPOT_TYPES = {"bridge": "multi_hop", "comparison": "comparison"}
 QTYPES = {"single_hop", "multi_hop", "comparison"}
@@ -144,6 +145,19 @@ def cmd_build(raw: Path, manifest: Path, out: Path) -> None:
     print(f"wrote {len(items)} candidates to {out} {counts}")
 
 
+def cmd_generate(n: int, temperature: float, out: Path) -> None:
+    from adaptiverag import llm
+    from adaptiverag.eval import single_hop
+    from adaptiverag.ingest.loader import load_hotpot
+
+    docs, _ = load_hotpot(FULL_QUESTIONS)
+    items, rejects = single_hop.generate(single_hop.pick_documents(docs, n), llm.chat, temperature)
+    write_jsonl(out, items)
+    print(f"wrote {len(items)} single hop candidates to {out}, rejected {len(rejects)}")
+    for doc_id, reason in rejects:
+        print(f"  reject {doc_id}: {reason}")
+
+
 def cmd_split(sources: list[Path], gold_dir: Path, seed: int) -> None:
     outs = [gold_dir / f"{name}.jsonl" for name in ("dev", "test")]
     if any(o.exists() for o in outs):
@@ -163,6 +177,11 @@ def main(argv: list[str] | None = None) -> None:
     b.add_argument("--raw", type=Path, default=RAW_HOTPOT)
     b.add_argument("--manifest", type=Path, default=FULL_MANIFEST)
     b.add_argument("--out", type=Path, default=GOLD_DIR / "candidates.jsonl")
+    g = sub.add_parser("generate", help="single hop candidates from corpus paragraphs")
+    g.add_argument("--n", type=int, default=60)
+    # the contract allows a non zero temperature here only, so questions vary across paragraphs
+    g.add_argument("--temperature", type=float, default=0.7)
+    g.add_argument("--out", type=Path, default=GOLD_DIR / "single_hop.jsonl")
     sp = sub.add_parser("split", help="dev and test files with the contract type mix")
     sp.add_argument(
         "--candidates",
@@ -175,6 +194,8 @@ def main(argv: list[str] | None = None) -> None:
     args = p.parse_args(argv)
     if args.cmd == "build":
         cmd_build(args.raw, args.manifest, args.out)
+    elif args.cmd == "generate":
+        cmd_generate(args.n, args.temperature, args.out)
     elif args.cmd == "split":
         cmd_split(args.candidates, args.gold_dir, args.seed)
 
