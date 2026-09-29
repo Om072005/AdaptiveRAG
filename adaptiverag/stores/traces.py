@@ -38,3 +38,10 @@ def insert(row: dict[str, Any], calls: list[dict[str, Any]]) -> None:
         if calls:
             with c.cursor() as cur:
                 cur.executemany(call_sql, [[call[k] for k in CALL_COLUMNS] for call in calls])
+
+
+def read_detail(trace_id: str) -> dict[str, Any] | None:
+    """traces.detail of one trace (the stored QueryResponse plus notes), or None."""
+    with conn() as c:
+        row = c.execute("select detail from traces where trace_id = %s", (trace_id,)).fetchone()
+    return dict(row[0]) if row else None

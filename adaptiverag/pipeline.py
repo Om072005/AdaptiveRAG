@@ -3,6 +3,7 @@
 from adaptiverag.config import config_hash, router_cfg
 from adaptiverag.generate.answer import synthesize
 from adaptiverag.llm import BudgetExceeded
+from adaptiverag.serialize import to_response
 from adaptiverag.stores import vector
 from adaptiverag.telemetry.trace import Trace
 from adaptiverag.types import Mode, ModelSize, QueryResult, Retrieved, RouteDecision
@@ -42,7 +43,6 @@ def answer_query(
         answer_confidence=answer.confidence,
         flagged=flagged,
     )
-    trace.note(reasons=decision.reasons, answer=answer.text)
     row = trace.row()
     result = QueryResult(
         trace_id=trace.trace_id,
@@ -53,5 +53,7 @@ def answer_query(
         total_latency_ms=int(row["total_latency_ms"]),
         flagged=flagged,
     )
+    # every trace carries the full API response, so any stored run replays without a model call
+    trace.note(**to_response(result, question, trace))
     trace.save()
     return result
