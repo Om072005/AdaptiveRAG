@@ -36,3 +36,17 @@ def test_second_run_applies_nothing() -> None:
         pytest.skip("DATABASE_URL_DIRECT not set")
     migrate.apply(url)
     assert migrate.apply(url) == []
+
+
+@pytest.mark.network
+def test_shared_connection_is_reused_and_recovers() -> None:
+    from adaptiverag.stores import db
+
+    if not settings().database_url:
+        pytest.skip("DATABASE_URL not set")
+    first = db.shared()
+    assert db.shared() is first and first.autocommit
+    first.close()
+    second = db.shared()
+    assert second is not first and second.execute("select 1").fetchone() == (1,)
+    db.reset_shared()

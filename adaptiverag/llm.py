@@ -24,7 +24,9 @@ MAX_ATTEMPTS = 5
 EMBED_BATCH = 100
 BACKOFF_BASE_S = 1.0
 BACKOFF_MAX_S = 30.0
-MAX_RETRY_AFTER_S = 60.0  # a longer wait means the daily quota is gone: stop and resume later
+MAX_RETRY_AFTER_S = (
+    90.0  # per minute limits ask for up to ~60 s; longer means the daily quota is gone
+)
 
 _sleep = time.sleep  # swapped out in tests
 _client: httpx.Client | None = None

@@ -5,28 +5,14 @@ from typing import Any
 import psycopg
 from psycopg.types.json import Jsonb
 
-from adaptiverag.config import ConfigError, settings
-
-_conn: psycopg.Connection[Any] | None = None
-
-
-def _connection() -> psycopg.Connection[Any]:
-    # One long lived autocommit connection: a cache lookup should not pay for a new TLS handshake.
-    global _conn
-    if _conn is None or _conn.closed:
-        url = settings().database_url
-        if not url:
-            raise ConfigError("DATABASE_URL is not set (see .env.example)")
-        _conn = psycopg.connect(url, autocommit=True, prepare_threshold=None)
-    return _conn
+from adaptiverag.stores import db
 
 
 def _run(sql: str, params: Any = None, many: bool = False) -> list[tuple[Any, ...]]:
-    """Execute once, reconnecting a single time if Neon dropped the idle connection."""
-    global _conn
+    """Execute on the shared connection, reconnecting once if Neon dropped it while idle."""
     for attempt in range(2):
         try:
-            c = _connection()
+            c = db.shared()
             if many:
                 with c.cursor() as cur:
                     cur.executemany(sql, params)
@@ -34,7 +20,7 @@ def _run(sql: str, params: Any = None, many: bool = False) -> list[tuple[Any, ..
             cur = c.execute(sql, params)
             return cur.fetchall() if cur.description else []
         except psycopg.OperationalError:
-            _conn = None
+            db.reset_shared()
             if attempt == 1:
                 raise
     return []
