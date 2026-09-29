@@ -1,15 +1,21 @@
-"""python -m adaptiverag.ingest run --corpus mini|full [--strategies fixed,sentence,semantic]"""
+"""python -m adaptiverag.ingest run --corpus mini|full [--strategies ...] | graph --corpus ..."""
 
 import sys
 
-from adaptiverag.ingest import pipeline
+from adaptiverag.ingest import graph_cli, pipeline
 
-USAGE = "usage: python -m adaptiverag.ingest run --corpus mini|full [--strategies ...]"
+USAGE = (
+    "usage: python -m adaptiverag.ingest run --corpus mini|full [--strategies ...]\n"
+    "       python -m adaptiverag.ingest graph --corpus mini|full [...]"
+)
 
 
 def main(argv: list[str]) -> None:
-    if argv[:1] == ["run"]:
-        pipeline.main(argv[1:])
+    command, rest = (argv[0], argv[1:]) if argv else ("", [])
+    if command == "run":
+        pipeline.main(rest)
+    elif command == "graph":
+        graph_cli.main(rest)
     else:
         raise SystemExit(USAGE)
 
