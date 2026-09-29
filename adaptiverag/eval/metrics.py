@@ -34,11 +34,21 @@ def f1(pred: str, gold: str) -> float:
 
 
 def recall_at_k(hits: list[Hit], supporting_titles: list[str], k: int) -> float:
-    raise NotImplementedError
+    """Share of distinct supporting titles that appear among the top k hits by rank."""
+    gold = set(supporting_titles)
+    if not gold:
+        return 0.0
+    found = {h.title for h in sorted(hits, key=lambda h: h.rank)[:k]}
+    return len(gold & found) / len(gold)
 
 
 def mrr(hits: list[Hit], supporting_titles: list[str]) -> float:
-    raise NotImplementedError
+    """1 / position of the first hit from a supporting title, 0.0 if none is retrieved."""
+    gold = set(supporting_titles)
+    for position, h in enumerate(sorted(hits, key=lambda h: h.rank), start=1):
+        if h.title in gold:
+            return 1.0 / position
+    return 0.0
 
 
 def sp_precision(hits: list[Hit], supporting_spans: list[tuple[str, int, int]]) -> float:
