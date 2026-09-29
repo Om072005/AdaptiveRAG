@@ -145,10 +145,12 @@ def diff(new: dict[str, Any], old: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def fmt(v: float | None, signed: bool = False) -> str:
+def fmt(v: float | None, signed: bool = False, key: str = "") -> str:
+    """Metrics with 3 decimals, USD with 8 (the stored precision), milliseconds whole."""
     if v is None:
         return "n/a"
-    return f"{v:+.3f}" if signed else f"{v:.3f}"
+    spec = ".8f" if key.endswith("_usd") else ".0f" if key.endswith("_ms") else ".3f"
+    return format(v, f"+{spec}" if signed else spec)
 
 
 def render_md(run: dict[str, Any], agg: dict[str, Any], vs: dict[str, Any] | None) -> str:
@@ -169,8 +171,8 @@ def render_md(run: dict[str, Any], agg: dict[str, Any], vs: dict[str, Any] | Non
         "|---|---|---|",
     ]
     for k in (*METRICS, "cost_per_query_usd", "p50_ms", "p95_ms"):
-        change = fmt(d["overall"][k], signed=True) if d else ""
-        lines.append(f"| {k} | {fmt(agg[k])} | {change} |")
+        change = fmt(d["overall"][k], signed=True, key=k) if d else ""
+        lines.append(f"| {k} | {fmt(agg[k], key=k)} | {change} |")
     lines += [
         "",
         "| type | n | em | f1 | recall_at_k | faithfulness | f1 change |",

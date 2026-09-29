@@ -33,9 +33,15 @@ export function mainRun(replay: Replay): { mode: Mode; run: RecordedRun } | null
 
 export const NOT_ENOUGH = 'not enough context'
 
-/** The explanation under the "Answer:" line, split into text and [n] citation markers. */
-export function explanationParts(answerText: string): (string | number)[] {
-  const body = answerText.includes('\n') ? answerText.slice(answerText.indexOf('\n') + 1) : ''
+/** The explanation after the short answer, split into text and [n] citation markers. The stored
+ * text is either "Answer: X" plus a line, or the short answer followed by the explanation. */
+export function explanationParts(answerText: string, short = ''): (string | number)[] {
+  let body = answerText.trim()
+  if (/^answer:/i.test(body)) {
+    body = body.includes('\n') ? body.slice(body.indexOf('\n') + 1) : ''
+  } else if (short && body.toLowerCase().startsWith(short.trim().toLowerCase())) {
+    body = body.slice(short.trim().length).replace(/^[.:,]?\s*/, '')
+  }
   return body
     .split(/(\[\d+\])/)
     .filter((p) => p !== '')

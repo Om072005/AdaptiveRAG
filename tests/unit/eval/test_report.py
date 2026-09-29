@@ -84,3 +84,11 @@ def test_render_shows_provenance_and_changes() -> None:
 def test_render_without_a_previous_run() -> None:
     md = report.render_md(RUN, report.aggregate(NEW), None)
     assert "no earlier comparable run" in md and "| f1 | 0.500 |  |" in md
+
+
+def test_fmt_by_field_kind() -> None:
+    assert report.fmt(0.00010927, key="cost_per_query_usd") == "0.00010927"
+    assert report.fmt(1271.0, key="p50_ms") == "1271"
+    assert report.fmt(0.5) == "0.500"
+    assert report.fmt(-0.0001, signed=True, key="cost_per_query_usd") == "-0.00010000"
+    assert report.fmt(None) == "n/a"

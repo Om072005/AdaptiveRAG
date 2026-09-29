@@ -16,7 +16,7 @@ export function AnswerStep({ run, replay }: { run: RecordedRun; replay: Replay }
         {notEnough ? 'Not enough context' : answer.short}
       </p>
       <p className="text-body mt-4 mb-0">
-        {explanationParts(answer.text).map((part, i) =>
+        {explanationParts(answer.text, answer.short).map((part, i) =>
           typeof part === 'string' ? (
             <span key={i}>{part}</span>
           ) : (
