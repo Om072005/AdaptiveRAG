@@ -1,0 +1,25 @@
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage/
+htmlcov/
+
+# secrets
+.env
+.env.*
+!.env.example
+
+# data we never commit
+data/raw/
+
+# web
+web/node_modules/
+web/dist/
+.vercel/
+playwright-report/
+test-results/
