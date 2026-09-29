@@ -178,3 +178,39 @@ def test_pace_counts_only_the_last_minute() -> None:
 
         llm._now, llm._sleep = time.monotonic, time.sleep
         llm._sent[:] = []
+
+
+def test_read_timeout_is_retried_then_succeeds(fake_provider: Install) -> None:
+    calls = {"n": 0}
+
+    def handler(r: httpx.Request) -> httpx.Response:
+        calls["n"] += 1
+        if calls["n"] == 1:
+            raise httpx.ReadTimeout("read timed out", request=r)
+        return httpx.Response(200, json=OK)
+
+    fake_provider(handler)
+    result = llm.chat("extract", [{"role": "user", "content": "q"}])
+    assert result.retries == 1 and calls["n"] == 2
+
+
+def test_network_errors_every_time_raise_rate_limited_so_runs_resume(
+    fake_provider: Install,
+) -> None:
+    def handler(r: httpx.Request) -> httpx.Response:
+        raise httpx.ConnectError("connection refused", request=r)
+
+    seen = fake_provider(handler)
+    with pytest.raises(llm.RateLimited, match="network error"):
+        llm.chat("large", [{"role": "user", "content": "q"}])
+    assert len(seen) == llm.MAX_ATTEMPTS
+
+
+def test_judge_does_not_retry_a_network_error_either(fake_provider: Install) -> None:
+    def handler(r: httpx.Request) -> httpx.Response:
+        raise httpx.ReadTimeout("read timed out", request=r)
+
+    seen = fake_provider(handler)
+    with pytest.raises(llm.RateLimited):
+        llm.chat("judge", [{"role": "user", "content": "q"}])
+    assert len(seen) == 1

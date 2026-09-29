@@ -153,7 +153,17 @@ def _post(
     retries = wait_ms = 0
     for attempt in range(MAX_ATTEMPTS):
         started = time.perf_counter()
-        r = client().post(url, headers=headers, json=payload)
+        try:
+            r = client().post(url, headers=headers, json=payload)
+        except httpx.TransportError as e:
+            # timeouts and dropped connections: retried like a busy provider, same attempt limits
+            if attempt + 1 >= min(MAX_ATTEMPTS, spec.server_error_attempts):
+                raise RateLimited(f"{spec.model}: network error ({e!r}), resume later") from e
+            delay = backoff_s(attempt)
+            _sleep(delay)
+            retries += 1
+            wait_ms += int(delay * 1000)
+            continue
         latency_ms = int((time.perf_counter() - started) * 1000)
         if r.status_code == 429 and (quota := daily_quota(r)):
             # a refused retry can still count against the quota, so stop at once
