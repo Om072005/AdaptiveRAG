@@ -10,6 +10,7 @@ import { SampleBanner } from './components/SampleBanner'
 import { Section } from './components/Section'
 import { Team } from './components/Team'
 import { Workflows } from './components/Workflows'
+import { Architecture } from './diagrams/Architecture'
 import { loadReplayIndex, loadResults, loadSite } from './data/load'
 import { useLoaded } from './data/useLoaded'
 
@@ -32,7 +33,7 @@ export default function App() {
           title="One question, three ways to find the answer."
           lede="A classifier reads the question, a budgeter picks a route, and every answer is judged and logged."
         >
-          {null}
+          <Architecture />
         </Section>
         <Section
           id="follow"

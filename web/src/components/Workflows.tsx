@@ -1,12 +1,16 @@
 import type { ReactNode } from 'react'
+import { EvalLoop } from '../diagrams/EvalLoop'
+import { GraphSchema } from '../diagrams/GraphSchema'
+import { Ingestion } from '../diagrams/Ingestion'
 import { RouterFlow } from '../diagrams/RouterFlow'
 
-// The four README workflows. A block shows its SVG diagram from web/src/diagrams (which has its own
-// Show as text); blocks whose diagram has not landed yet show the same steps as a list.
+// The four README workflows, each with its SVG diagram from web/src/diagrams (which has its own
+// Show as text). The steps are the fallback list for a block without a diagram.
 const BLOCKS: { title: string; text: string; steps: string[]; diagram?: ReactNode }[] = [
   {
     title: 'Ingestion',
     text: 'Every document becomes two things: chunks with embeddings for similarity search, and validated triples for traversal. Each graph edge keeps the chunk it came from, so a graph answer can still cite text.',
+    diagram: <Ingestion />,
     steps: [
       'Documents are parsed and normalized.',
       'Text is chunked three ways (fixed size, sentence boundary, topic shift) and embedded into the vector database.',
@@ -29,6 +33,7 @@ const BLOCKS: { title: string; text: string; steps: string[]; diagram?: ReactNod
   {
     title: 'Graph schema',
     text: 'Entities, their aliases and the relations between them sit in the same database as the chunks. A relation cannot exist without the chunk it was read from.',
+    diagram: <GraphSchema />,
     steps: [
       'Entity: canonical id, name, type and embedding.',
       'Alias: a surface form pointing at an entity, with a confidence.',
@@ -39,6 +44,7 @@ const BLOCKS: { title: string; text: string; steps: string[]; diagram?: ReactNod
   {
     title: 'Evaluation loop',
     text: 'Every judged answer either passes or waits for a person. What the person finds decides whether the router, retrieval or extraction gets tuned.',
+    diagram: <EvalLoop />,
     steps: [
       'Answered, then judged by a model from a different family.',
       'All scores above the threshold: passed. Any below: flagged into the review queue.',
