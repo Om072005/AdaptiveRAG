@@ -22,7 +22,28 @@ def context_blocks(retrieved: Retrieved) -> str:
     return "\n\n".join(f"[{n}] {h.title}\n{h.text}" for n, h in enumerate(hits, start=1))
 
 
+def graph_facts(retrieved: Retrieved) -> list[str]:
+    """One line per path edge, '(subject) -[predicate]-> (object) [n]', n = its provenance block.
+
+    An edge whose source chunk is not among the blocks is left out: a fact must be citable.
+    """
+    block = {h.chunk_id: n for n, h in enumerate(sorted(retrieved.hits, key=lambda h: h.rank), 1)}
+    lines: list[str] = []
+    for path in retrieved.paths:
+        for e in path.edges:
+            if e.chunk_id not in block:
+                continue
+            line = f"({e.subject_name}) -[{e.predicate}]-> ({e.object_name}) [{block[e.chunk_id]}]"
+            if line not in lines:
+                lines.append(line)
+    return lines
+
+
 def build_prompt(question: str, retrieved: Retrieved) -> list[dict[str, str]]:
-    """Messages with numbered context blocks [1]..[k] in hit rank order."""
-    user = f"Context:\n\n{context_blocks(retrieved)}\n\nQuestion: {question}"
+    """Messages with numbered context blocks [1]..[k] in hit rank order, then graph facts if any."""
+    user = f"Context:\n\n{context_blocks(retrieved)}"
+    facts = graph_facts(retrieved)
+    if facts:
+        user += "\n\nGraph facts (each comes from the block in brackets):\n" + "\n".join(facts)
+    user += f"\n\nQuestion: {question}"
     return [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}]

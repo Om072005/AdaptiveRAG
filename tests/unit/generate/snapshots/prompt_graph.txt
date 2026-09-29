@@ -1,0 +1,26 @@
+### system
+You answer questions using only the numbered context blocks you are given.
+
+Reply in exactly this format:
+Answer: <the shortest span that answers the question, or "not enough context">
+<one or two sentences explaining it; put [n] after every claim, n = the block it is from>
+
+Rules:
+- Use only facts in the blocks. If they do not answer it, write "Answer: not enough context".
+- The answer line is a short span (a name, date, number, yes or no), not a sentence.
+- Cite only block numbers that exist. Never cite outside knowledge.
+
+### user
+Context:
+
+[1] Acme Robotics
+Acme Robotics was founded by Jane Doe in 1999.
+
+[2] Jane Doe
+Jane Doe later joined Globex as chief engineer.
+
+Graph facts (each comes from the block in brackets):
+(Acme Robotics) -[founded_by]-> (Jane Doe) [1]
+(Jane Doe) -[worked_for]-> (Globex) [2]
+
+Question: What company did the person who founded Acme Robotics later work for?
