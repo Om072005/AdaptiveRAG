@@ -1,5 +1,7 @@
 """Graph reads and writes on Postgres: corpus chunks for extraction, linking, traversal."""
 
+from collections import defaultdict
+from collections.abc import Callable
 from typing import Any
 
 import numpy as np
@@ -9,7 +11,7 @@ from psycopg.types.json import Jsonb
 from adaptiverag.config import router_cfg
 from adaptiverag.stores import db
 from adaptiverag.telemetry.trace import Trace
-from adaptiverag.types import Chunk, GraphPath, Retrieved, Seed, Strategy
+from adaptiverag.types import Chunk, Edge, GraphPath, Retrieved, Seed, Strategy
 
 
 def corpus_chunks(doc_ids: list[str], strategy: Strategy) -> tuple[list[Chunk], dict[str, str]]:
@@ -64,8 +66,20 @@ select canonical_id, canonical_name, type, 1 - (embedding <=> %(q)s)
 from entities where embedding is not null
 order by embedding <=> %(q)s limit 1
 """
+# every relation touching the frontier, with the cosine of its embedding to the question
+FRONTIER_EDGES = """
+select r.rel_id, r.subject_id, s.canonical_name, r.predicate, r.object_id, o.canonical_name,
+       r.chunk_id, r.extraction_confidence, coalesce(1 - (r.embedding <=> %(q)s), 0)
+from relations r
+join entities s on s.canonical_id = r.subject_id
+join entities o on o.canonical_id = r.object_id
+where r.subject_id = any(%(ids)s) or r.object_id = any(%(ids)s)
+"""
+
 # surface form, canonical id, name, type, alias confidence, word similarity
 AliasRow = tuple[str, str, str, str, float, float]
+# frontier ids -> (edge, cosine to the question) rows
+Fetch = Callable[[list[str]], list[tuple[Edge, float]]]
 
 
 def pick_seeds(rows: list[AliasRow], min_score: float) -> list[Seed]:
@@ -115,10 +129,68 @@ def link_entities(question: str, qvec: np.ndarray, trace: Trace) -> list[Seed]:
         )
 
 
+def edge_score(confidence: float, cos: float) -> float:
+    """D10: extraction confidence x (0.5 + 0.5 x cosine of the relation and the question)."""
+    return confidence * (0.5 + 0.5 * cos)
+
+
+def bfs(
+    seeds: list[Seed], fetch: Fetch, depth: int, fanout: int, max_paths: int
+) -> list[GraphPath]:
+    """Breadth first from every seed, one fetch per hop for the whole frontier. Each node keeps its
+    fanout best edges, a path never revisits a node, and a path's score is the product of its edge
+    scores. Paths joining two seeds rank first, then by score, ties by relation ids."""
+    seed_ids = {s.canonical_id for s in seeds}
+    # (start, end, edges, score, nodes on the path)
+    frontier: list[tuple[str, str, tuple[Edge, ...], float, frozenset[str]]] = [
+        (s, s, (), 1.0, frozenset({s})) for s in sorted(seed_ids)
+    ]
+    found: dict[tuple[str, ...], GraphPath] = {}
+    for _ in range(depth):
+        ends = sorted({end for _, end, _, _, _ in frontier})
+        if not ends:
+            break
+        best: dict[str, list[tuple[float, Edge]]] = defaultdict(list)
+        for edge, cos in fetch(ends):
+            for node in {edge.subject_id, edge.object_id} & set(ends):
+                best[node].append((edge_score(edge.confidence, cos), edge))
+        for node in best:
+            best[node] = sorted(best[node], key=lambda p: (-p[0], p[1].rel_id))[:fanout]
+        grown = []
+        for start, end, edges, score, seen in frontier:
+            for s, edge in best.get(end, []):
+                other = edge.object_id if edge.subject_id == end else edge.subject_id
+                if other in seen:
+                    continue
+                joins = bool(((seen | {other}) - {start}) & seed_ids)
+                path = GraphPath((*edges, edge), score * s, joins)
+                # the same edges walked from the other seed are the same path
+                key = tuple(sorted(e.rel_id for e in path.edges))
+                if key not in found or path.score > found[key].score:
+                    found[key] = path
+                grown.append((start, other, path.edges, path.score, seen | {other}))
+        frontier = grown
+    ranked = sorted(
+        found.values(), key=lambda p: (not p.connects_seeds, -p.score, [e.rel_id for e in p.edges])
+    )
+    return ranked[:max_paths]
+
+
+def edges_for(c: Connection[Any], ids: list[str], qvec: np.ndarray) -> list[tuple[Edge, float]]:
+    """Relations touching these entities, as edges with their cosine to the question."""
+    q = np.asarray(qvec, dtype=np.float32)
+    rows = c.execute(FRONTIER_EDGES, {"q": q, "ids": ids}).fetchall()
+    return [
+        (Edge(r[0], r[1], r[2], r[3], r[4], r[5], r[6], float(r[7])), float(r[8])) for r in rows
+    ]
+
+
 def traverse(
     seeds: list[Seed], qvec: np.ndarray, depth: int, fanout: int, max_paths: int
 ) -> list[GraphPath]:
-    raise NotImplementedError
+    """BFS from the seeds (D10), one query per hop for the whole frontier."""
+    c = db.shared()
+    return bfs(seeds, lambda ids: edges_for(c, ids, qvec), depth, fanout, max_paths)
 
 
 def retrieve(question: str, k: int, trace: Trace, qvec: np.ndarray | None = None) -> Retrieved:
