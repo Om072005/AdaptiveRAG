@@ -1,7 +1,20 @@
+import json
 from typing import Any
 
+from adaptiverag import llm
 from adaptiverag.telemetry.trace import Trace
 from adaptiverag.types import Answer, Retrieved
+
+SCORES = ("faithfulness", "relevance", "completeness")
+RETRY = (
+    "Your reply was not valid. Reply with one JSON object only, with integer scores from 1 to 5 "
+    'for "faithfulness", "relevance" and "completeness" and a short "rationale".'
+)
+
+
+class JudgeFailed(Exception):
+    """The judge gave no valid scores after one retry; stored as a failure, never as a score."""
+
 
 # Kept word for word in docs/eval-protocol.md; a test fails if the two drift apart.
 RUBRIC = """Score each metric from 1 to 5.
@@ -71,6 +84,40 @@ def build_messages(question: str, answer: Answer, retrieved: Retrieved) -> list[
     return [{"role": "user", "content": content}]
 
 
+def parse_scores(raw: str) -> dict[str, Any] | str:
+    """Scores mapped from 1..5 to 0..1 plus the rationale, or why the reply is invalid."""
+    try:
+        data = json.loads(raw)
+    except ValueError:
+        return "not json"
+    if not isinstance(data, dict):
+        return "not a json object"
+    out: dict[str, Any] = {}
+    for name in SCORES:
+        s = data.get(name)
+        if type(s) is not int or not 1 <= s <= 5:
+            return f"{name} is not an integer from 1 to 5"
+        out[name] = (s - 1) / 4
+    out["rationale"] = str(data.get("rationale", "")).strip()
+    return out
+
+
 def judge(question: str, answer: Answer, retrieved: Retrieved, trace: Trace) -> dict[str, Any]:
-    """{faithfulness, relevance, completeness in 0..1, rationale}."""
-    raise NotImplementedError
+    """{faithfulness, relevance, completeness in 0..1, rationale}. Raises JudgeFailed."""
+    messages = build_messages(question, answer, retrieved)
+    first = llm.chat("judge", messages, json_mode=True, trace=trace, max_tokens=1024)
+    got = parse_scores(first.text)
+    calls = [first]
+    if isinstance(got, str):
+        # a changed request, since the identical one would come back from the cache
+        retry = messages + [
+            {"role": "assistant", "content": first.text},
+            {"role": "user", "content": RETRY},
+        ]
+        calls.append(llm.chat("judge", retry, json_mode=True, trace=trace, max_tokens=1024))
+        got = parse_scores(calls[-1].text)
+    cost = sum(c.cost_usd for c in calls)
+    trace.set(eval_cost_usd=cost)
+    if isinstance(got, str):
+        raise JudgeFailed(f"{got} after one retry: {calls[-1].text[:200]!r}")
+    return {**got, "model": calls[-1].model, "cost_usd": cost}
