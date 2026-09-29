@@ -39,7 +39,26 @@ def fused_source(sources: set[Route]) -> Route:
 def mmr(
     hits: list[Hit], qvec: np.ndarray, vecs: dict[str, np.ndarray], lam: float, k: int
 ) -> list[Hit]:
-    raise NotImplementedError
+    """Maximal marginal relevance: pick lam * cos(query) - (1 - lam) * max cos(picked), k times.
+
+    vecs maps chunk_id to its stored unit embedding; a hit without one ranks after those that have
+    one, in input order. Scores and sources are kept, ranks are renumbered from 1.
+    """
+    known = [h for h in hits if h.chunk_id in vecs]
+    rest = [h for h in hits if h.chunk_id not in vecs]
+    picked: list[Hit] = []
+    if known:
+        m = np.array([vecs[h.chunk_id] for h in known], dtype=np.float32)
+        relevance = m @ np.asarray(qvec, dtype=np.float32)
+        redundancy = np.zeros(len(known), dtype=np.float32)  # a negative cosine counts as none
+        left = list(range(len(known)))
+        while left and len(picked) < k:
+            gain = lam * relevance[left] - (1 - lam) * redundancy[left]
+            best = left.pop(int(np.argmax(gain)))  # argmax takes the first of equal gains
+            picked.append(known[best])
+            redundancy = np.maximum(redundancy, m @ m[best])
+    ranked = picked + rest
+    return [replace(h, rank=rank) for rank, h in enumerate(ranked[:k], 1)]
 
 
 def merge_rerank(
