@@ -74,6 +74,10 @@ class Trace:
             raise ValueError(f"not a settable traces column: {', '.join(sorted(unknown))}")
         self.fields.update(fields)
 
+    def note(self, **values: Any) -> None:
+        """Merge values into traces.detail (citation errors, a budget stop, and so on)."""
+        self.fields["detail"] = {**self.fields.get("detail", {}), **values}
+
     def cost_by(self, roles: Collection[str]) -> float:
         return round(sum(c.cost_usd for c in self.calls if c.role in roles), 8)
 

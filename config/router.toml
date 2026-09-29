@@ -27,6 +27,7 @@ llm_rerank = false
 
 [answer]                      # M1, tuned by M4
 min_confidence = 0.55
+max_tokens = 2048              # reasoning tokens count against this on gpt-oss
 w_citation = 0.5
 w_retrieval = 0.5
 
