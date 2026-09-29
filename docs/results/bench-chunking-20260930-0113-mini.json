@@ -1,0 +1,597 @@
+{
+ "run_id": "20260930-0113-mini",
+ "name": "bench-chunking",
+ "created_at": "2026-09-30T01:13:22+05:30",
+ "git_sha": "48e20e914daf0f8dc37acd3f35e8db2aae66d765",
+ "git_dirty": false,
+ "config_hash": "cb955bd52cb9",
+ "params": {
+  "corpus": "mini",
+  "n_questions": 27,
+  "question_ids": [
+   "5a8b8a745542995d1e6f13e4",
+   "5ac06e24554299294b218fd1",
+   "5add1eed5542992ae4cec485",
+   "5a88bb4a554299206df2b353",
+   "5adfb4b8554299603e418381",
+   "5a7744555542994aec3b725b",
+   "5ae37d265542994393b9e6e7",
+   "5a815c2e5542995ce29dcbe8",
+   "5abc32cb55429959677d6a40",
+   "5ac5382c5542996feb3fea43",
+   "5a7cfea2554299452d57babe",
+   "5ac199955542994ab5c67d8c",
+   "5a7cc0d4554299452d57ba07",
+   "5a8c8f24554299653c1aa0ba",
+   "5a8bc3ac5542995e66a47501",
+   "5ac2ea1a5542990b17b154a1",
+   "5a80870d5542992bc0c4a752",
+   "5a84a97f5542992a431d1a87",
+   "5aba749855429955dce3ee34",
+   "5a70f6425542994082a3e44c",
+   "5ae64b015542992ae0d162bc",
+   "5ae12bcc5542997b2ef7d11a",
+   "5ac34994554299741d48a242",
+   "5ac29aa655429967731025b2",
+   "5a7625e8554299109176e66a",
+   "5a7561495542992db947364e",
+   "5ae3294155429928c423963d"
+  ],
+  "excluded_test": 3,
+  "k": 8,
+  "serving": "sentence",
+  "chunk": {
+   "fixed": {
+    "n_words": 64,
+    "overlap": 16
+   },
+   "sentence": {
+    "max_words": 96
+   },
+   "semantic": {
+    "percentile": 90
+   }
+  },
+  "bootstrap": 2000,
+  "seed": 7
+ },
+ "rows": [
+  {
+   "strategy": "fixed",
+   "params": "64 words, overlap 16",
+   "n_chunks": 635,
+   "precision": 0.13149957738870044,
+   "context_retention": 0.8987654320987654,
+   "mrr": 0.9567901234567903,
+   "retrieval_score": 0.9629629629629629,
+   "recall_vs_serving": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "verdict": "too close to call against sentence on this sample",
+   "per_question": [
+    {
+     "precision": 0.14985100042571306,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.1635118807893677,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.07101806239737274,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.0989010989010989,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.11925233644859813,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.11824175824175824,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.18113374667847654,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.18164723580293343,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.09925167388735723,
+     "context_retention": 0.0,
+     "recall_at_k": 0.5,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.11000383288616328,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.12645058023209282,
+     "context_retention": 0.5,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.07436873054306468,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.10724289715886355,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.2782033426183844,
+     "context_retention": 0.6,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.10136592379583034,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.09186697398748765,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.09966654316413487,
+     "context_retention": 0.6666666666666666,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.18983208955223882,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.0696969696969697,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 0.3333333333333333
+    },
+    {
+     "precision": 0.06110926602457655,
+     "context_retention": 0.5,
+     "recall_at_k": 0.5,
+     "mrr": 0.5
+    },
+    {
+     "precision": 0.14874945151382185,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.0982297813259285,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.2509238728750924,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.11106811145510836,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.16580554250821983,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.15015015015015015,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.13294573643410854,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    }
+   ]
+  },
+  {
+   "strategy": "sentence",
+   "params": "up to 96 words",
+   "n_chunks": 445,
+   "precision": 0.10507094021483863,
+   "context_retention": 0.9506172839506172,
+   "mrr": 0.9567901234567903,
+   "retrieval_score": 0.9629629629629629,
+   "recall_vs_serving": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "verdict": "serving now",
+   "per_question": [
+    {
+     "precision": 0.12998522895125553,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.1396628826969384,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.05318167845066093,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.08637236084452975,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.07707175646291375,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.09425367904695164,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.15694551036070606,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.10743193524650478,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.11836734693877551,
+     "context_retention": 0.5,
+     "recall_at_k": 0.5,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.08644578313253012,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.12855802314670003,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.06658408175905853,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.08038392321535692,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.23247907949790794,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.08496535100934016,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.0768595041322314,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.0560126582278481,
+     "context_retention": 0.6666666666666666,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.13584779706275033,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.06810490693739425,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 0.5
+    },
+    {
+     "precision": 0.054827175208581644,
+     "context_retention": 0.5,
+     "recall_at_k": 0.5,
+     "mrr": 0.3333333333333333
+    },
+    {
+     "precision": 0.10116383169203223,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.08289396602226128,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.2217287324906047,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.0883892824145365,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.09863090248672814,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.11046285492026449,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.09930515344528083,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    }
+   ]
+  },
+  {
+   "strategy": "semantic",
+   "params": "split above percentile 90",
+   "n_chunks": 532,
+   "precision": 0.11453429637028077,
+   "context_retention": 0.8950617283950616,
+   "mrr": 0.9814814814814815,
+   "retrieval_score": 0.9444444444444444,
+   "recall_vs_serving": [
+    -0.018518518518518517,
+    -0.05555555555555555,
+    0.0
+   ],
+   "verdict": "too close to call against sentence on this sample",
+   "per_question": [
+    {
+     "precision": 0.1436734693877551,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.14828341855368882,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.05479885967690846,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.08042895442359249,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.08307291666666666,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.10354118552732872,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.19156908665105388,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.07104622871046229,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.11975857687420584,
+     "context_retention": 0.5,
+     "recall_at_k": 0.5,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.06314797360980208,
+     "context_retention": 0.5,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.08832448824867324,
+     "context_retention": 0.5,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.08184240578606776,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.09892949427833149,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.24409665019220209,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.13196069255966308,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.061285500747384154,
+     "context_retention": 0.5,
+     "recall_at_k": 0.5,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.07944344703770198,
+     "context_retention": 0.6666666666666666,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.17858709960508995,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.04992248062015504,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.055842185128983306,
+     "context_retention": 0.5,
+     "recall_at_k": 0.5,
+     "mrr": 0.5
+    },
+    {
+     "precision": 0.11983032873807,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.08452807646356034,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.24923195084485408,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.10177304964539007,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.14720600500417014,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.1415752741774676,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    },
+    {
+     "precision": 0.11872620283835238,
+     "context_retention": 1.0,
+     "recall_at_k": 1.0,
+     "mrr": 1.0
+    }
+   ]
+  }
+ ]
+}
