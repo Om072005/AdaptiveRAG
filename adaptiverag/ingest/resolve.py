@@ -1,8 +1,14 @@
 """Entity resolution (06_DECISIONS.md D9): normalize names, block, merge, write alias rows."""
 
+import hashlib
 import re
+from collections import Counter, defaultdict
 from typing import Any
 
+import numpy as np
+
+from adaptiverag import llm
+from adaptiverag.config import ingest_cfg
 from adaptiverag.ingest.validate import match_form
 from adaptiverag.types import Triple
 
@@ -67,8 +73,172 @@ def trigram_sim(a: str, b: str) -> float:
     return len(ta & tb) / len(ta | tb) if ta or tb else 0.0
 
 
+# one name of one type in one document; namesakes in different documents start apart
+Node = tuple[str, str, str]  # (type, normalized name, doc_id)
+Name = tuple[str, str]  # (type, normalized name): the unit that gets one embedding
+
+
+def doc_of(chunk_id: str) -> str:
+    """Chunk ids are '{doc_id}:{strategy}:{ord}'."""
+    return chunk_id.split(":", 1)[0]
+
+
+def entity_id(type_: str, name: str, anchor_doc: str = "") -> str:
+    """'e_' + 12 hex of sha1(type|normalized name); a second namesake adds its anchor doc_id."""
+    key = f"{type_}|{normalize_name(name)}" + (f"|{anchor_doc}" if anchor_doc else "")
+    return "e_" + hashlib.sha1(key.encode()).hexdigest()[:12]
+
+
+def pick_name(counts: Counter[str]) -> str:
+    """Most frequent surface form, then the longest, then alphabetical, so reruns agree."""
+    return min(counts, key=lambda s: (-counts[s], -len(s), s))
+
+
+def ends(t: Triple) -> tuple[Node, Node]:
+    doc = doc_of(t.chunk_id)
+    subject: Node = (t.subject_type, normalize_name(t.subject), doc)
+    obj: Node = (t.object_type, normalize_name(t.object), doc)
+    return subject, obj
+
+
+def mentions(triples: list[Triple]) -> tuple[dict[Node, Counter[str]], dict[Node, set[Name]]]:
+    """Surface forms seen per node, and the names at the other end of each node's triples."""
+    surfaces: dict[Node, Counter[str]] = defaultdict(Counter)
+    neighbours: dict[Node, set[Name]] = defaultdict(set)
+    for t in triples:
+        s, o = ends(t)
+        if s[1] and o[1]:
+            surfaces[s][t.subject.strip()] += 1
+            surfaces[o][t.object.strip()] += 1
+            neighbours[s].add(o[:2])
+            neighbours[o].add(s[:2])
+    return surfaces, neighbours
+
+
+def cosine(vecs: dict[Name, np.ndarray], a: Name, b: Name) -> float:
+    return float(vecs[a] @ vecs[b]) if a in vecs and b in vecs else 0.0
+
+
+def same_entity(
+    a: Node,
+    b: Node,
+    neighbours: dict[Node, set[Name]],
+    vecs: dict[Name, np.ndarray],
+    cfg: dict[str, Any],
+) -> bool:
+    """D9 merge rule. Two PERSON nodes also need the same document or a shared neighbour."""
+    if a[0] != b[0]:
+        return False
+    names_close = trigram_sim(a[1], b[1]) >= cfg["name_sim"]
+    if not names_close and cosine(vecs, a[:2], b[:2]) < cfg["embed_sim"]:
+        return False
+    if a[0] == "PERSON" and cfg["person_needs_shared_neighbor"]:
+        return a[2] == b[2] or bool(neighbours[a] & neighbours[b])
+    return True
+
+
+def clusters(
+    nodes: list[Node],
+    neighbours: dict[Node, set[Name]],
+    vecs: dict[Name, np.ndarray],
+    cfg: dict[str, Any],
+) -> list[list[Node]]:
+    """Union find over pairs from the same (type, first token) block, in sorted order."""
+    parent = {n: n for n in nodes}
+
+    def root(n: Node) -> Node:
+        while parent[n] != n:
+            n = parent[n]
+        return n
+
+    blocks: dict[tuple[str, str], list[Node]] = defaultdict(list)
+    for n in sorted(nodes):
+        blocks[(n[0], blocking_key(n[1]))].append(n)
+    for block in blocks.values():
+        for i, a in enumerate(block):
+            for b in block[i + 1 :]:
+                if root(a) != root(b) and same_entity(a, b, neighbours, vecs, cfg):
+                    keep, drop = sorted((root(a), root(b)))
+                    parent[drop] = keep
+    groups: dict[Node, list[Node]] = defaultdict(list)
+    for n in sorted(nodes):
+        groups[root(n)].append(n)
+    return list(groups.values())
+
+
+def build_rows(
+    triples: list[Triple], vecs: dict[Name, np.ndarray], cfg: dict[str, Any]
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    """Pure core of resolve(): cluster the nodes, then one row per entity, alias and relation."""
+    surfaces, neighbours = mentions(triples)
+    groups = clusters(list(surfaces), neighbours, vecs, cfg)
+    # when namesakes stay apart, the most mentioned one keeps the plain contract id
+    groups.sort(key=lambda g: (-sum(sum(surfaces[n].values()) for n in g), min(n[2] for n in g)))
+
+    entities: list[dict[str, Any]] = []
+    aliases: list[dict[str, Any]] = []
+    entity_of: dict[Node, str] = {}
+    for group in groups:
+        counts: Counter[str] = Counter()
+        for n in group:
+            counts.update(surfaces[n])
+        type_, name = group[0][0], pick_name(counts)
+        eid = entity_id(type_, name)
+        if any(e["canonical_id"] == eid for e in entities):
+            eid = entity_id(type_, name, min(n[2] for n in group))
+        if any(e["canonical_id"] == eid for e in entities):
+            raise ValueError(f"two {type_} entities named {name!r} share an anchor document")
+        canon: Name = (type_, normalize_name(name))
+        entities.append(
+            {
+                "canonical_id": eid,
+                "canonical_name": name,
+                "type": type_,
+                "embedding": vecs.get(canon),
+            }
+        )
+        for surface in sorted(counts):
+            key: Name = (type_, normalize_name(surface))
+            conf = (
+                1.0 if key == canon else max(trigram_sim(surface, name), cosine(vecs, key, canon))
+            )
+            aliases.append(
+                {"surface_form": surface, "canonical_id": eid, "confidence": min(conf, 1.0)}
+            )
+        entity_of.update((n, eid) for n in group)
+
+    relations: dict[str, dict[str, Any]] = {}
+    for t in triples:
+        s_node, o_node = ends(t)
+        s, o = entity_of.get(s_node), entity_of.get(o_node)
+        # skipped: a name that normalizes to nothing, or both ends resolved to one entity
+        if s is None or o is None or s == o:
+            continue
+        rel_id = hashlib.sha1(f"{s}|{t.predicate}|{o}|{t.chunk_id}".encode()).hexdigest()[:16]
+        if rel_id in relations and relations[rel_id]["extraction_confidence"] >= t.confidence:
+            continue
+        relations[rel_id] = {
+            "rel_id": rel_id,
+            "subject_id": s,
+            "predicate": t.predicate,
+            "object_id": o,
+            "chunk_id": t.chunk_id,
+            "doc_id": doc_of(t.chunk_id),
+            "evidence_start": t.evidence_start,
+            "evidence_end": t.evidence_end,
+            "extraction_confidence": t.confidence,
+        }
+    return entities, aliases, list(relations.values())
+
+
 def resolve(
     triples: list[Triple],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
-    """(entities, aliases, relations) rows."""
-    raise NotImplementedError
+    """(entities, aliases, relations) rows. Each distinct name is embedded once via llm.embed."""
+    surfaces, _ = mentions(triples)
+    by_name: dict[Name, Counter[str]] = defaultdict(Counter)
+    for node, counts in surfaces.items():
+        by_name[node[:2]].update(counts)
+    names = sorted(by_name)
+    matrix = llm.embed([pick_name(by_name[n]) for n in names])
+    return build_rows(triples, dict(zip(names, matrix, strict=True)), ingest_cfg()["resolve"])
