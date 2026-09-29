@@ -1,6 +1,9 @@
-// The four README workflows. Each block holds its SVG diagram from web/src/diagrams once it lands;
-// until then the same steps are shown as text, which is also the diagram's text alternative.
-const BLOCKS: { title: string; text: string; steps: string[] }[] = [
+import type { ReactNode } from 'react'
+import { RouterFlow } from '../diagrams/RouterFlow'
+
+// The four README workflows. A block shows its SVG diagram from web/src/diagrams (which has its own
+// Show as text); blocks whose diagram has not landed yet show the same steps as a list.
+const BLOCKS: { title: string; text: string; steps: string[]; diagram?: ReactNode }[] = [
   {
     title: 'Ingestion',
     text: 'Every document becomes two things: chunks with embeddings for similarity search, and validated triples for traversal. Each graph edge keeps the chunk it came from, so a graph answer can still cite text.',
@@ -15,6 +18,7 @@ const BLOCKS: { title: string; text: string; steps: string[] }[] = [
   {
     title: 'Router decision logic',
     text: 'The router reads the question and picks the cheapest route that can answer it. A weak result falls back to hybrid once, never more.',
+    diagram: <RouterFlow />,
     steps: [
       'Relational or comparative structure? No: route to vector search.',
       'Yes: are the entities in the graph? No: vector search; yes: graph traversal.',
@@ -51,13 +55,17 @@ export function Workflows() {
         <div key={b.title} className="mb-16 md:mb-24">
           <h3 className="text-title m-0">{b.title}</h3>
           <p className="text-small m-0 mt-3 max-w-[60ch]">{b.text}</p>
-          <ol className="m-0 mt-6 max-w-[68ch] pl-5 text-[15px] leading-6">
-            {b.steps.map((s) => (
-              <li key={s} className="mb-2">
-                {s}
-              </li>
-            ))}
-          </ol>
+          {b.diagram ? (
+            <div className="mt-8">{b.diagram}</div>
+          ) : (
+            <ol className="m-0 mt-6 max-w-[68ch] pl-5 text-[15px] leading-6">
+              {b.steps.map((s) => (
+                <li key={s} className="mb-2">
+                  {s}
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
       ))}
     </div>
