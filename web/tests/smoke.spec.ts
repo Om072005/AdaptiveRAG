@@ -132,7 +132,8 @@ test('run it yourself: copy buttons, and the team from site content', async ({ p
   await expect(run.getByRole('button', { name: 'Copied' })).toHaveCount(1)
   expect(await page.evaluate(() => navigator.clipboard.readText())).toContain('git clone')
   const team = page.locator('#team')
-  await expect(team.getByText('Sample member')).toBeVisible()
+  await expect(team.getByText('Dhruvvv13')).toBeVisible()
+  await expect(team.locator('li')).toHaveCount(4)
   await expect(team.getByRole('link', { name: 'Open an issue' })).toHaveAttribute('href', 'https://github.com/Om072005/AdaptiveRAG/issues')
 })
 
