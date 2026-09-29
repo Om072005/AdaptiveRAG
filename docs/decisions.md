@@ -38,9 +38,9 @@ pinned variant on D13; every run records git sha, dirty flag and config hash; th
 
 ## Models and routing
 
-**D4 Groq GPT-OSS generates, Gemini extracts, judges and embeds.** Small and classify: `gpt-oss-20b`; large:
-`gpt-oss-120b`; extract: Gemini Flash-Lite; judge: Gemini Flash; embed: `gemini-embedding-001` at 768
-dimensions. The judge is a different family from the generator, as the README asks. One OpenAI compatible
+**D4 Groq GPT-OSS generates, Gemini extracts and judges.** Small and classify: `gpt-oss-20b`; large:
+`gpt-oss-120b`; extract: Gemini Flash-Lite; judge: Gemini Flash. Embeddings started on `gemini-embedding-001` at 768
+dimensions and moved to a local model on 2026-09-30 (D5). The judge is a different family from the generator, as the README asks. One OpenAI compatible
 gateway means a provider swap is a config change.
 
 **D5 Embeddings: a local open model, one query embedding reused.** Changed on 2026-09-30 from Gemini's
@@ -51,7 +51,8 @@ free tiers. Measured before switching: the full corpus (4,277 sentence chunks) e
 gold questions supporting title recall@8 is 0.945 (every supporting title in the top 8 for 89 of them), MRR 1.0.
 The model embeds questions and searched texts with different prefixes (`search_query: `, `search_document: `),
 set in `config/models.toml`; `llm.embed(kind=...)` picks one. Cost is recorded as 0 because it runs locally.
-A comparison with Gemini on the same chunks and questions is added below once measured. What we lose: anyone
+We did not run a side by side comparison with Gemini on the same questions; the switch rests on the local
+measurement above. What we lose: anyone
 embedding a new question needs Ollama running; every corpus, gold, training and replay question is cached on Neon
 `main`, so eval runs do not.
 
@@ -143,7 +144,8 @@ tiers, so a number does not depend on whose key ran the query.
 | large | Groq | `openai/gpt-oss-120b` | 0.15 / 0.60 | yes |
 | extract | Gemini | `gemini-3.5-flash-lite` | 0.30 / 2.50 | yes |
 | judge | Gemini | `gemini-3.8-flash` | 0.75 / 3.75, introductory until 2026-12-31, then 1.50 / 7.50 | yes |
-| embed | Gemini | `gemini-embedding-001` | 0.15 input | yes |
+| embed (until 2026-09-30, see D5) | Gemini | `gemini-embedding-001` | 0.15 input | yes |
+| embed (from 2026-09-30) | Ollama, local | `nomic-embed-text` v1.5 | 0, local compute | n/a |
 
 Sources: https://console.groq.com/docs/models, https://ai.google.dev/gemini-api/docs/pricing,
 https://developers.googleblog.com/gemini-embedding-available-gemini-api/
