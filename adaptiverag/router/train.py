@@ -1,4 +1,6 @@
 """python -m adaptiverag.router.train set              builds data/router/train.jsonl
+python -m adaptiverag.router.train embed --slice K/N   embeds one slice of its questions
+python -m adaptiverag.router.train                   writes adaptiverag/router/weights/logreg.npz
 
 The set: bridge and comparison questions from seeded pages of the HotpotQA train split (Hugging Face
 rows service, no download), plus single hop questions generated from train paragraphs that are not
@@ -13,12 +15,15 @@ from collections.abc import Callable
 from typing import Any
 
 import httpx
+import numpy as np
 
 from adaptiverag import llm
-from adaptiverag.config import ROOT
+from adaptiverag.config import ROOT, models, router_cfg
 from adaptiverag.eval import single_hop
 from adaptiverag.ingest.loader import SOURCE, from_mirror_row
 from adaptiverag.ingest.normalize import doc_id, join_sentences
+from adaptiverag.ingest.pipeline import in_slice, parse_slice
+from adaptiverag.router.classify import WEIGHTS, logreg_inputs, softmax
 from adaptiverag.types import Document, LLMResult
 
 TRAIN_PATH = ROOT / "data" / "router" / "train.jsonl"
@@ -147,17 +152,71 @@ def build_set(seed: int = 7) -> None:
     print(f"generator rejects: {len(rejects)}")
 
 
+CLASSES = ("single_hop", "multi_hop", "comparison")
+
+
+def fit(
+    x: np.ndarray, y: np.ndarray, lr: float, l2: float, epochs: int
+) -> tuple[np.ndarray, np.ndarray]:
+    """Multinomial logistic regression by full batch gradient descent from zero weights, so the
+    same data always gives the same weights."""
+    w = np.zeros((x.shape[1], len(CLASSES)))
+    b = np.zeros(len(CLASSES))
+    target = np.eye(len(CLASSES))[y]
+    for _ in range(epochs):
+        grad = (softmax(x @ w + b) - target) / len(x)
+        w -= lr * (x.T @ grad + l2 * w)
+        b -= lr * grad.sum(axis=0)
+    return w.astype(np.float32), b.astype(np.float32)
+
+
+def read_set() -> list[dict[str, str]]:
+    lines = TRAIN_PATH.read_text(encoding="utf-8").splitlines()
+    return [json.loads(line) for line in lines if line.strip()]
+
+
+def embed_slice(k: int, n: int) -> None:
+    """Embed slice k of n of the training questions into the cache; a rerun skips what is done."""
+    mine = [q["question"] for q in read_set() if in_slice(q["question"], k, n)]
+    print(f"training embeddings slice {k}/{n}: {len(mine)} questions")
+    try:
+        llm.embed(mine)
+    except llm.RateLimited as e:
+        raise SystemExit(f"slice {k}/{n} stopped by the quota ({e}); rerun later") from e
+    print(f"training embeddings slice {k}/{n}: all {len(mine)} embedded or already cached")
+
+
+def train_logreg() -> None:
+    """Fit on the whole training set (never on dev or test) and write the weights file."""
+    cfg = router_cfg()["classifier"]
+    items = read_set()
+    try:
+        vecs = llm.embed([q["question"] for q in items])
+    except llm.RateLimited as e:
+        raise SystemExit(
+            f"embeddings stopped by the quota ({e}); fill them with embed slices"
+        ) from e
+    x = np.stack([logreg_inputs(q["question"], v) for q, v in zip(items, vecs, strict=True)])
+    y = np.array([CLASSES.index(q["label"]) for q in items])
+    w, b = fit(x, y, float(cfg["learning_rate"]), float(cfg["l2"]), int(cfg["epochs"]))
+    WEIGHTS.parent.mkdir(parents=True, exist_ok=True)
+    np.savez(WEIGHTS, W=w, b=b, labels=np.array(CLASSES), embed_model=models()["embed"].model)
+    accuracy = float((np.argmax(x @ w + b, axis=1) == y).mean())
+    print(f"trained on {len(items)} questions, training accuracy {accuracy:.4f}; wrote {WEIGHTS}")
+
+
 def main(argv: list[str] | None = None) -> None:
     argv = sys.argv[1:] if argv is None else argv
     parser = argparse.ArgumentParser(prog="python -m adaptiverag.router.train")
-    parser.add_argument(
-        "command", nargs="?", choices=["set"], help="set: build the training questions"
-    )
+    parser.add_argument("command", nargs="?", choices=["set", "embed"])
+    parser.add_argument("--slice", type=parse_slice, default="1/1", help="K/N, for embed")
     args = parser.parse_args(argv)
     if args.command == "set":
         build_set()
+    elif args.command == "embed":
+        embed_slice(*args.slice)
     else:
-        raise SystemExit("training the logistic regression lands with the classifier row")
+        train_logreg()
 
 
 if __name__ == "__main__":

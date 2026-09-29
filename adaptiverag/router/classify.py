@@ -1,7 +1,10 @@
-"""Query classifiers: rules on cue features (this file), logistic regression and few shot LLM."""
+"""Query classifiers: rules on cue features, logistic regression and a few shot model."""
 
 import re
 import time
+from functools import cache
+from pathlib import Path
+from typing import cast
 
 import numpy as np
 
@@ -126,6 +129,40 @@ def classify_rules(question: str) -> Classification:
     return Classification(label, probs[label], probs, "rules", 0.0, ms)
 
 
+WEIGHTS = Path(__file__).parent / "weights" / "logreg.npz"
+
+
+def logreg_inputs(question: str, qvec: np.ndarray) -> np.ndarray:
+    """One input row of the logistic regression: [query embedding, cue features]."""
+    return np.concatenate([np.asarray(qvec, dtype=np.float32), features(question)])
+
+
+def softmax(z: np.ndarray) -> np.ndarray:
+    e = np.exp(z - z.max(axis=-1, keepdims=True))
+    return np.asarray(e / e.sum(axis=-1, keepdims=True))
+
+
+@cache
+def load_logreg(path: Path = WEIGHTS) -> tuple[np.ndarray, np.ndarray, tuple[str, ...]]:
+    """Weights, bias and label order written by python -m adaptiverag.router.train."""
+    if not path.exists():
+        raise FileNotFoundError(f"{path} is missing: run python -m adaptiverag.router.train")
+    data = np.load(path)
+    return data["W"], data["b"], tuple(str(x) for x in data["labels"])
+
+
+def classify_logreg(question: str, qvec: np.ndarray, path: Path = WEIGHTS) -> Classification:
+    """Softmax over the trained weights; its top probability is the classifier confidence. The
+    query embedding is reused from retrieval, so the call costs nothing."""
+    started = time.perf_counter()
+    w, b, labels = load_logreg(path)
+    p = softmax(logreg_inputs(question, qvec) @ w + b)
+    probs = {label: float(p[i]) for i, label in enumerate(labels)}
+    label = labels[int(np.argmax(p))]
+    ms = int((time.perf_counter() - started) * 1000)
+    return Classification(cast(QType, label), probs[label], probs, "logreg", 0.0, ms)
+
+
 def classify(
     question: str, qvec: np.ndarray, trace: Trace, method: str | None = None
 ) -> Classification:
@@ -133,4 +170,6 @@ def classify(
     method = method or router_cfg()["classifier"]["method"]
     if method == "rules":
         return classify_rules(question)
+    if method == "logreg":
+        return classify_logreg(question, qvec)
     raise NotImplementedError(f"classifier method {method!r} is not built yet")
