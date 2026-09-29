@@ -41,6 +41,19 @@ def test_merge_records_its_span_and_reads_vectors_once(stored: list[list[str]]) 
     assert [h.rank for h in merged] == [1, 2, 3]
 
 
+def test_graph_provenance_is_kept_and_duplicates_merged(stored: list[list[str]]) -> None:
+    vector_hits = [hit("v1:s:0", 1, "vector"), hit("both:s:0", 2, "vector")]
+    graph_hits = [hit("both:s:0", 1, "graph"), hit("g1:s:0", 2, "graph"), hit("g1:s:0", 3, "graph")]
+    merged = hybrid.merge_rerank(
+        vector_hits, graph_hits, unit(1, 0, 0), 8, Trace("q", "hybrid", "cli")
+    )
+    by_id = {h.chunk_id: h for h in merged}
+    assert len(merged) == len(by_id) == 3
+    assert by_id["both:s:0"].source == "hybrid"
+    assert by_id["g1:s:0"].source == "graph"
+    assert by_id["v1:s:0"].source == "vector"
+
+
 def test_k_caps_the_merged_list(stored: list[list[str]]) -> None:
     graph_hits = [hit("g1:s:0", 1, "graph")]
     vector_hits = [hit("v1:s:0", 1, "vector"), hit("both:s:0", 2, "vector")]
