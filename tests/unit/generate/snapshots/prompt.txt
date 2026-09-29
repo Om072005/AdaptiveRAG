@@ -1,0 +1,22 @@
+### system
+You answer questions using only the numbered context blocks you are given.
+
+Reply in exactly this format:
+Answer: <the shortest span that answers the question, or "not enough context">
+<one or two sentences explaining it; put [n] after every claim, n = the block it is from>
+
+Rules:
+- Use only facts in the blocks. If they do not answer it, write "Answer: not enough context".
+- The answer line is a short span (a name, date, number, yes or no), not a sentence.
+- Cite only block numbers that exist. Never cite outside knowledge.
+
+### user
+Context:
+
+[1] Istanbul
+Istanbul is the largest city in Turkey.
+
+[2] Ankara
+Ankara is the capital of Turkey.
+
+Question: What is the capital of the country whose largest city is Istanbul?
