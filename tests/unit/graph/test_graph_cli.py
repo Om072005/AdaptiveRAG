@@ -61,3 +61,16 @@ def test_embed_slices_split_the_texts_and_stop_cleanly_on_the_quota(
     monkeypatch.setattr(graph_cli.llm, "embed", quota)
     with pytest.raises(SystemExit, match="rerun later"):
         graph_cli.main(["embed", "--corpus", "mini", "--slice", "1/3"])
+
+
+def test_gold_documents_are_every_context_paragraph_or_the_generated_one() -> None:
+    from adaptiverag.ingest.loader import SOURCE
+    from adaptiverag.ingest.normalize import doc_id
+
+    raw = {
+        "q1": {"context": [["Ed Wood", []], ["Tim Burton", []]]},
+        "q2": {"context": [["Tim Burton", []], ["Burbank", []]]},
+    }
+    items = [{"id": "hp_q1"}, {"id": "hp_q2"}, {"id": "sh_abcdef0123456789_2"}]
+    expected = {doc_id(SOURCE, t) for t in ["Ed Wood", "Tim Burton", "Burbank"]}
+    assert graph_cli.gold_doc_ids(items, raw) == sorted(expected | {"abcdef0123456789"})

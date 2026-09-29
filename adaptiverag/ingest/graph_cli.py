@@ -1,5 +1,5 @@
-"""python -m adaptiverag.ingest graph --corpus mini|full [--limit N] [--dry-run]
-python -m adaptiverag.ingest graph embed --corpus mini|full [--slice K/N]
+"""python -m adaptiverag.ingest graph --corpus mini|dev|gold|full [--limit N] [--dry-run]
+python -m adaptiverag.ingest graph embed --corpus mini|dev|gold|full [--slice K/N]
 
 The build extracts triples (cached), stores the rejects, resolves entities and replaces the graph.
 The embed step fills the cache with the texts a build embeds, one slice at a time, so helpers can
@@ -9,22 +9,50 @@ spread them over their own keys; a rerun skips what is cached.
 import argparse
 import json
 import sys
+from pathlib import Path
 from typing import Any
 
 from adaptiverag import llm
 from adaptiverag.config import ROOT, router_cfg
 from adaptiverag.ingest.extract import extract_batches, summarize
+from adaptiverag.ingest.loader import SOURCE, read_raw
+from adaptiverag.ingest.normalize import doc_id
 from adaptiverag.ingest.pipeline import endpoint, in_slice, parse_slice
 from adaptiverag.ingest.resolve import graph_texts, relation_texts, resolve
 from adaptiverag.llm import RateLimited
 from adaptiverag.stores import graph as store
 from adaptiverag.types import Chunk, LLMResult, Triple
 
+CORPORA = ["mini", "dev", "gold", "full"]
+
+
+def gold_doc_ids(items: list[dict[str, Any]], raw: dict[str, dict[str, Any]]) -> list[str]:
+    """Documents of gold questions: a HotpotQA item brings all its context paragraphs, distractors
+    included; a generated single hop item ('sh_<doc_id>_<n>') brings its one paragraph."""
+    ids: set[str] = set()
+    for item in items:
+        if item["id"].startswith("hp_"):
+            ids |= {doc_id(SOURCE, title) for title, _ in raw[item["id"][3:]]["context"]}
+        else:
+            ids.add(item["id"].split("_")[1])
+    return sorted(ids)
+
 
 def corpus_doc_ids(corpus: str) -> list[str]:
-    """doc_ids from data/corpus/<corpus>.json."""
-    path = ROOT / "data" / "corpus" / f"{corpus}.json"
-    return list(json.loads(path.read_text(encoding="utf-8"))["doc_ids"])
+    """mini and full: the corpus manifests. dev: documents of the dev gold questions (the G2 graph).
+    gold: dev and test questions together; reading test items asks no test question."""
+    if corpus in ("mini", "full"):
+        path = ROOT / "data" / "corpus" / f"{corpus}.json"
+        return list(json.loads(path.read_text(encoding="utf-8"))["doc_ids"])
+    splits = ["dev"] if corpus == "dev" else ["dev", "test"]
+    items = [i for s in splits for i in read_jsonl_dicts(ROOT / "data" / "gold" / f"{s}.jsonl")]
+    return gold_doc_ids(items, {r["_id"]: r for r in read_raw()})
+
+
+def read_jsonl_dicts(path: Path) -> list[dict[str, Any]]:
+    return [
+        json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()
+    ]
 
 
 def extract_corpus(
@@ -49,7 +77,7 @@ def extract_corpus(
 
 def embed_main(argv: list[str]) -> None:
     parser = argparse.ArgumentParser(prog="python -m adaptiverag.ingest graph embed")
-    parser.add_argument("--corpus", choices=["mini", "full"], required=True)
+    parser.add_argument("--corpus", choices=CORPORA, required=True)
     parser.add_argument("--slice", type=parse_slice, default="1/1", help="K/N, for example 2/4")
     args = parser.parse_args(argv)
     k, n = args.slice
@@ -72,7 +100,7 @@ def main(argv: list[str] | None = None) -> None:
     if argv[:1] == ["embed"]:
         return embed_main(argv[1:])
     parser = argparse.ArgumentParser(prog="python -m adaptiverag.ingest graph")
-    parser.add_argument("--corpus", choices=["mini", "full"], required=True)
+    parser.add_argument("--corpus", choices=CORPORA, required=True)
     # keep it a multiple of chunks_per_call so the batches match a full run and stay cached
     parser.add_argument("--limit", type=int, help="first N chunks only, for development")
     parser.add_argument(
