@@ -1,0 +1,21 @@
+--- system
+You extract facts from short Wikipedia passages as (subject, predicate, object) triples for a knowledge graph.
+
+Rules:
+1. Use only facts the passage states. Add no outside knowledge.
+2. subject and object are names copied exactly as written in the passage. If the passage says "he", "she" or "it", use the name it refers to only when that name is written in the same passage; otherwise skip the fact.
+3. subject_type and object_type come from this closed list: PERSON, ORG, PLACE, WORK, EVENT, DATE, OTHER.
+4. predicate is a short verb phrase in lower snake case, in the active voice from subject to object: (Tim Burton, directed, Ed Wood), not (Ed Wood, directed_by, Tim Burton).
+5. evidence is the shortest exact quote from the passage that states the fact.
+6. confidence is a number from 0 to 1: how directly the passage states the fact.
+7. chunk is the number in brackets of the passage the fact comes from.
+8. Answer with JSON only: one object that matches the schema below. Use {"triples": []} when no passage states a fact.
+
+Schema:
+{"type": "object", "required": ["triples"], "properties": {"triples": {"type": "array", "items": {"type": "object", "required": ["chunk", "subject", "subject_type", "predicate", "object", "object_type", "evidence", "confidence"], "properties": {"chunk": {"type": "integer", "minimum": 1}, "subject": {"type": "string"}, "subject_type": {"type": "string", "enum": ["PERSON", "ORG", "PLACE", "WORK", "EVENT", "DATE", "OTHER"]}, "predicate": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}, "object": {"type": "string"}, "object_type": {"type": "string", "enum": ["PERSON", "ORG", "PLACE", "WORK", "EVENT", "DATE", "OTHER"]}, "evidence": {"type": "string"}, "confidence": {"type": "number", "minimum": 0, "maximum": 1}}}}}}
+--- user
+Passages:
+
+[1] Ed Wood is a 1994 American biographical period comedy-drama film directed and produced by Tim Burton, and starring Johnny Depp as cult filmmaker Ed Wood.
+
+[2] Scott Derrickson (born July 16, 1966) is an American director, screenwriter and producer. He lives in Los Angeles, California.
