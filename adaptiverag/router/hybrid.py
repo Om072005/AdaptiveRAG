@@ -2,6 +2,8 @@ from dataclasses import replace
 
 import numpy as np
 
+from adaptiverag.config import router_cfg
+from adaptiverag.stores import vector
 from adaptiverag.telemetry.trace import Trace
 from adaptiverag.types import Hit, Route
 
@@ -64,4 +66,9 @@ def mmr(
 def merge_rerank(
     vector_hits: list[Hit], graph_hits: list[Hit], qvec: np.ndarray, k: int, trace: Trace
 ) -> list[Hit]:
-    raise NotImplementedError
+    """RRF of both backends, then MMR over the stored chunk embeddings, in the merge span."""
+    cfg = router_cfg()["hybrid"]
+    with trace.span("merge"):
+        fused = rrf([vector_hits, graph_hits], int(cfg["rrf_k"]))
+        vecs = vector.chunk_vectors([h.chunk_id for h in fused])
+        return mmr(fused, qvec, vecs, float(cfg["mmr_lambda"]), k)
