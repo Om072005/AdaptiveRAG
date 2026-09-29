@@ -35,6 +35,7 @@ _sent: list[tuple[float, int]] = []  # (when, texts) of recent embedding request
 _client: httpx.Client | None = None
 _no_reasoning_effort: set[Role] = set()  # roles whose provider rejected reasoning_effort
 use_cache = True  # unit tests with a fake provider turn it off
+_loaded: str | None = None  # the model the local server last answered with
 
 
 class BudgetExceeded(Exception):
@@ -149,14 +150,32 @@ def _api_key(spec: ModelSpec) -> str:
     return str(key)
 
 
+def load_local(spec: ModelSpec) -> int:
+    """Load a local model before timing a call; returns the ms spent, reported as wait.
+
+    Two local models do not fit in memory together, so switching costs minutes of disk reads.
+    Counting that as latency would make whichever model ran second look slow."""
+    global _loaded
+    if not spec.load_url or _loaded == spec.model:
+        return 0
+    started = time.perf_counter()
+    try:
+        client().post(spec.load_url, json={"model": spec.model}).raise_for_status()
+    except httpx.HTTPError as e:
+        raise RateLimited(f"{spec.model}: local model server did not load it ({e!r})") from e
+    _loaded = spec.model
+    return int((time.perf_counter() - started) * 1000)
+
+
 def _post(
     spec: ModelSpec, path: str, payload: dict[str, Any]
 ) -> tuple[dict[str, Any], int, int, int]:
     """POST, retrying 429 and 5xx. Returns (json, latency_ms of good attempt, retries, wait_ms)."""
     url = spec.base_url.rstrip("/") + "/" + path
+    loaded_ms = load_local(spec) if path == "chat/completions" else 0
     key = _api_key(spec)
     headers = {"Authorization": f"Bearer {key}"} if key else {}
-    retries = wait_ms = 0
+    retries, wait_ms = 0, loaded_ms
     for attempt in range(MAX_ATTEMPTS):
         started = time.perf_counter()
         try:

@@ -46,6 +46,7 @@ class ModelSpec:
     texts_per_minute: int | None = None  # embeddings: paced under the provider's per minute cap
     document_prefix: str = ""  # embeddings: prepended to texts that are searched
     query_prefix: str = ""  # embeddings: prepended to questions
+    load_url: str = ""  # local server: load the model first, so loading is wait, not latency
 
 
 def parse_env(text: str) -> dict[str, str]:
@@ -127,6 +128,7 @@ def parse_models(data: dict[str, Any]) -> dict[Role, ModelSpec]:
             texts_per_minute=spec.get("texts_per_minute"),
             document_prefix=str(spec.get("document_prefix", "")),
             query_prefix=str(spec.get("query_prefix", "")),
+            load_url=str(provider.get("load_url", "")),
         )
     return specs
 

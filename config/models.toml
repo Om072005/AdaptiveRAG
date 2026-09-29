@@ -11,6 +11,7 @@ key_env = "GEMINI_API_KEY"
 [providers.ollama]                 # local model server (runs on the lead's GPU); needs no key
 base_url = "http://127.0.0.1:11434/v1"
 key_env = ""
+load_url = "http://127.0.0.1:11434/api/generate"   # a request with no prompt only loads the model
 
 [roles.small]
 provider = "ollama"

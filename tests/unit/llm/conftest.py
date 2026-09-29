@@ -24,6 +24,7 @@ def fake_provider(
     monkeypatch.setattr(llm, "_sent", [])
     monkeypatch.setattr(llm, "_no_reasoning_effort", set())
     monkeypatch.setattr(llm, "use_cache", False)
+    monkeypatch.setattr(llm, "load_local", lambda spec: 0)  # tested on its own in test_local_load
     seen: list[httpx.Request] = []
 
     def install(handler: Handler) -> list[httpx.Request]:
