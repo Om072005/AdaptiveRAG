@@ -51,12 +51,13 @@ reasoning_effort = "low"
 server_error_attempts = 1         # 20 calls a day on the free tier: a 503 retry would burn one
 
 [roles.embed]
-provider = "gemini"
-model = "gemini-embedding-001"    # request 768 dims, then L2 normalize
-price_in_per_m = 0.15
-price_out_per_m = 0.0
+provider = "ollama"
+model = "nomic-embed-text"         # nomic-embed-text v1.5 on a local GPU (Ollama), 768 dims; replaced
+price_in_per_m = 0.0               # gemini-embedding-001 on 2026-09-30: its free tier allowed
+price_out_per_m = 0.0              # 1,000 texts a day. Local compute is recorded as $0.
 dims = 768
-texts_per_minute = 90               # free tier allows 100 a minute and counts refused requests
+document_prefix = "search_document: "
+query_prefix = "search_query: "
 
 [limits]
 max_llm_calls_per_query = 4

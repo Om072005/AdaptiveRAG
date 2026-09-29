@@ -53,7 +53,8 @@ def test_embed_only_sends_texts_not_in_cache(
     seen = fake_provider(handler)
     first = llm.embed(["a", "bb"])
     second = llm.embed(["bb", "ccc", "a"])
-    assert json.loads(seen[1].content)["input"] == ["ccc"]
+    prefix = llm.models()["embed"].document_prefix
+    assert json.loads(seen[1].content)["input"] == [prefix + "ccc"]
     assert np.allclose(second[0], first[1]) and np.allclose(second[2], first[0])
     assert np.allclose(np.linalg.norm(second, axis=1), 1.0)
 

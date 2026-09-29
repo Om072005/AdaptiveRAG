@@ -157,8 +157,14 @@ def test_embeddings_are_paced_under_the_per_minute_budget(
         )
 
     fake_provider(handler)
-    budget = llm.models()["embed"].texts_per_minute
-    assert budget and budget < 100
+    import dataclasses
+
+    base = llm.models()
+    paced = dataclasses.replace(
+        base["embed"], texts_per_minute=90
+    )  # a free tier cap, whatever serves
+    monkeypatch.setattr(llm, "models", lambda: {**base, "embed": paced})
+    budget = 90
     llm.embed([f"t{i}" for i in range(250)])
     assert all(s <= budget for s in sizes) and sum(sizes) == 250
     assert len(clock.slept) == len(sizes) - 1  # every batch after the first waited for the window
