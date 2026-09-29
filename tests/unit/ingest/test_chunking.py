@@ -1,7 +1,14 @@
+import numpy as np
 import pytest
 
 from adaptiverag.config import ingest_cfg
-from adaptiverag.ingest.chunking import WORD, chunk_fixed, chunk_sentence, split_sentences
+from adaptiverag.ingest.chunking import (
+    WORD,
+    chunk_fixed,
+    chunk_semantic,
+    chunk_sentence,
+    split_sentences,
+)
 from adaptiverag.ingest.normalize import doc_id, join_sentences
 from adaptiverag.types import Chunk, Document
 
@@ -118,3 +125,47 @@ def test_sentence_chunker_edge_cases() -> None:
     assert chunk_sentence(make_doc([]), 10) == []
     with pytest.raises(ValueError):
         chunk_sentence(numbered(10), 0)
+
+
+def topic_vecs(topics: list[int], dim: int = 8) -> np.ndarray:
+    """One unit vector per sentence; sentences with the same topic number share a direction."""
+    rng = np.random.default_rng(7)
+    base = {t: rng.normal(size=dim) for t in set(topics)}
+    vecs = np.array([base[t] + rng.normal(scale=0.05, size=dim) for t in topics])
+    return vecs / np.linalg.norm(vecs, axis=1, keepdims=True)
+
+
+SIX = [
+    "Paris is big.",
+    "It is in France.",
+    "It has a tower.",
+    "Tea is a drink.",
+    "It is hot.",
+    "Some add milk.",
+]
+
+
+def test_semantic_split_at_the_one_known_topic_shift() -> None:
+    doc = make_doc(SIX)
+    chunks = chunk_semantic(doc, topic_vecs([0, 0, 0, 1, 1, 1]), 90)
+    assert [c.text for c in chunks] == [
+        "Paris is big. It is in France. It has a tower.",
+        "Tea is a drink. It is hot. Some add milk.",
+    ]
+    assert all(c.strategy == "semantic" and c.text == doc.text[c.start : c.end] for c in chunks)
+    assert [c.chunk_id for c in chunks] == [f"{doc.doc_id}:semantic:0", f"{doc.doc_id}:semantic:1"]
+
+
+def test_semantic_chunks_cover_the_whole_text_in_order() -> None:
+    doc = make_doc(SIX)
+    chunks = chunk_semantic(doc, topic_vecs([0, 1, 0, 1, 2, 2]), 50)
+    assert " ".join(c.text for c in chunks) == doc.text
+    assert [c.ord for c in chunks] == list(range(len(chunks)))
+
+
+def test_semantic_edge_cases() -> None:
+    one = make_doc(["Only one sentence here."])
+    assert [c.text for c in chunk_semantic(one, topic_vecs([0]), 90)] == [one.text]
+    assert chunk_semantic(make_doc([]), np.zeros((0, 8)), 90) == []
+    with pytest.raises(ValueError):
+        chunk_semantic(make_doc(SIX), topic_vecs([0, 0]), 90)

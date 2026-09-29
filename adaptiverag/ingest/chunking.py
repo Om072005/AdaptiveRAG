@@ -82,5 +82,22 @@ def chunk_sentence(doc: Document, max_words: int) -> list[Chunk]:
 
 
 def chunk_semantic(doc: Document, sentence_vecs: np.ndarray, percentile: float) -> list[Chunk]:
-    """Split where adjacent sentence cosine distance is above the percentile."""
-    raise NotImplementedError
+    """Split where adjacent sentence cosine distance is above the percentile.
+
+    sentence_vecs holds one unit vector per split_sentences(doc.text) span, in order.
+    """
+    spans = split_sentences(doc.text)
+    if len(sentence_vecs) != len(spans):
+        raise ValueError(f"{len(spans)} sentences but {len(sentence_vecs)} vectors")
+    if not spans:
+        return []
+    distances = 1.0 - np.sum(sentence_vecs[:-1] * sentence_vecs[1:], axis=1)
+    # the threshold is per document: a split marks this document's largest topic shifts
+    cut = np.percentile(distances, percentile) if len(distances) else 0.0
+    ends = [i for i, d in enumerate(distances) if d > cut] + [len(spans) - 1]
+    chunks: list[Chunk] = []
+    first = 0
+    for last in ends:
+        chunks.append(make_chunk(doc, "semantic", len(chunks), spans[first][0], spans[last][1]))
+        first = last + 1
+    return chunks
