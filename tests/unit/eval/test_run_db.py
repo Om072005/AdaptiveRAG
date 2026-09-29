@@ -2,6 +2,7 @@
 
 import contextlib
 from collections.abc import Iterator
+from decimal import Decimal
 from typing import Any
 
 import psycopg
@@ -9,10 +10,10 @@ import pytest
 from psycopg.types.json import Jsonb
 
 from adaptiverag.config import settings
-from adaptiverag.eval import run
+from adaptiverag.eval import judge, run
 from adaptiverag.eval.gold import GoldItem
 from adaptiverag.llm import RateLimited
-from adaptiverag.types import QueryResult
+from adaptiverag.types import LLMResult, QueryResult
 from tests.unit.eval.fakes import fake_result
 
 pytestmark = pytest.mark.network
@@ -29,7 +30,15 @@ def c(monkeypatch: pytest.MonkeyPatch) -> Iterator[psycopg.Connection[Any]]:
     if not url:
         pytest.skip("DATABASE_URL_DIRECT not set")
     conn = psycopg.connect(url)
-    for t in ("documents", "chunks", "eval_runs", "eval_results"):
+    for t in (
+        "documents",
+        "chunks",
+        "eval_runs",
+        "eval_results",
+        "traces",
+        "llm_calls",
+        "judgements",
+    ):
         conn.execute(f"create temp table {t} (like public.{t} including defaults)")
     for t in TITLES:
         conn.execute(
@@ -72,7 +81,58 @@ def test_rate_limited_run_resumes_without_duplicates(c: psycopg.Connection[Any])
     ids = [r[0] for r in c.execute("select question_id from eval_results order by 1")]
     assert ids == ["hp_0", "hp_1", "hp_2", "hp_3", "hp_4"]
     summary = c.execute("select summary from eval_runs").fetchone()[0]  # type: ignore[index]
-    assert summary["n_done"] == 5 and summary["options"] == {"size": None, "limit": 5}
+    assert summary["n_done"] == 5 and summary["options"] == {
+        "size": None,
+        "limit": 5,
+        "judge": False,
+    }
 
     run.main(["--resume", run_id], answer=answer_failing_after(0))  # nothing left to answer
     assert c.execute("select count(*) from eval_results").fetchone() == (5,)
+
+
+def test_judged_run_stores_scores_ledger_costs_and_failures(
+    c: psycopg.Connection[Any], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    replies = iter(
+        [
+            '{"faithfulness": 5, "relevance": 3, "completeness": 5, "rationale": "fine"}',
+            "bad",
+            "bad",
+        ]
+    )
+
+    def fake_chat(role: str, messages: list[dict[str, str]], **kw: Any) -> LLMResult:
+        r = LLMResult(next(replies), "judge", "gemini-x", 100, 20, 0.001, 30, False, False, 0, 0)
+        kw["trace"].add_llm(r)
+        return r
+
+    monkeypatch.setattr(judge.llm, "chat", fake_chat)
+    trace_ids = iter([f"00000000-0000-4000-8000-00000000000{n}" for n in (1, 2)])
+
+    def answer(q: str, mode: str, source: str, force_size: str | None) -> QueryResult:
+        tid = next(trace_ids)
+        c.execute(
+            "insert into traces (trace_id, source, question, mode, route_taken, total_cost_usd)"
+            " values (%s, 'eval', %s, 'vector', 'vector', 0.002)",
+            (tid, q),
+        )
+        return fake_result("Globex", [TITLES[int(q[1])]], trace_id=tid)
+
+    run.main(
+        ["--split", "mini", "--mode", "vector", "--variant", "j", "--limit", "2", "--judge"],
+        answer=answer,
+    )
+    got = c.execute("select question_id, faithfulness, relevance from eval_results order by 1")
+    assert got.fetchall() == [("hp_0", 1.0, 0.5), ("hp_1", None, None)]
+    assert c.execute("select count(*), sum(cost_usd) from judgements").fetchone() == (
+        1,
+        Decimal("0.00100000"),
+    )
+    assert c.execute("select count(*) from llm_calls where role = 'judge'").fetchone() == (1,)
+    costs = c.execute(
+        "select eval_cost_usd, total_cost_usd from traces order by trace_id"
+    ).fetchall()
+    assert costs == [(Decimal("0.00100000"), Decimal("0.00300000")), (0, Decimal("0.00200000"))]
+    summary = c.execute("select summary from eval_runs").fetchone()[0]  # type: ignore[index]
+    assert summary["faithfulness"] == 1.0 and summary["judge_failures"] == ["hp_1"]

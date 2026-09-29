@@ -16,16 +16,18 @@ import psycopg
 from psycopg.types.json import Jsonb
 
 from adaptiverag.config import ROOT, config_hash, router_cfg, settings
-from adaptiverag.eval import gold, metrics
+from adaptiverag.eval import gold, judge, metrics
 from adaptiverag.eval.gold import GoldItem
 from adaptiverag.llm import RateLimited
 from adaptiverag.stores import db
+from adaptiverag.telemetry.trace import Trace
 from adaptiverag.types import Mode, ModelSize, QueryResult
 
 AnswerFn = Callable[..., QueryResult]
 MODES = ("auto", "vector", "graph", "hybrid")
 SIZE_VARIANTS = {"always-small": "small", "always-large": "large"}
 METRICS = ("em", "f1", "recall_at_k", "mrr", "sp_precision")
+JUDGE_METRICS = ("faithfulness", "relevance", "completeness")
 MINI_QUESTIONS = 30  # the mini corpus size from contract section 4
 
 
@@ -88,20 +90,26 @@ def score(
     }
 
 
-def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
-    """Means per metric overall and per gold type, plus the count."""
+def summarize(rows: list[dict[str, Any]], judged: bool = False) -> dict[str, Any]:
+    """Means per metric overall and per gold type, plus judge means and failures if judged."""
     if not rows:
         return {"n_done": 0}
     by_type = {}
     for t in sorted({r["gold_type"] for r in rows}):
         sub = [r for r in rows if r["gold_type"] == t]
         by_type[t] = {"n": len(sub), **{m: mean(float(r[m]) for r in sub) for m in METRICS}}
-    return {
+    out = {
         "n_done": len(rows),
         **{m: mean(float(r[m]) for r in rows) for m in METRICS},
         "cost_usd": mean(float(r["cost_usd"]) for r in rows),
         "by_type": by_type,
     }
+    if judged:
+        scored = [r for r in rows if r.get("faithfulness") is not None]
+        out |= {m: mean(float(r[m]) for r in scored) if scored else None for m in JUDGE_METRICS}
+        # in a judged run a missing score means the judge failed twice on that question
+        out["judge_failures"] = [r["question_id"] for r in rows if r.get("faithfulness") is None]
+    return out
 
 
 def supporting_spans(
@@ -125,6 +133,36 @@ def supporting_spans(
     return chunk_spans(doc_spans, {cid: (d, s, e) for cid, d, s, e in chunks})
 
 
+def store_judgement(
+    c: psycopg.Connection[Any], trace_id: str, verdict: dict[str, Any], judge_trace: Trace
+) -> None:
+    """judgements row, the judge calls on the answer's llm_calls ledger, and the trace's costs."""
+    c.execute(
+        "insert into judgements (trace_id, faithfulness, relevance, completeness, rationale,"
+        " model, cost_usd) values (%s, %s, %s, %s, %s, %s, %s)",
+        (
+            trace_id,
+            *(verdict[m] for m in JUDGE_METRICS),
+            verdict["rationale"],
+            verdict["model"],
+            verdict["cost_usd"],
+        ),
+    )
+    for call in judge_trace.call_rows():
+        c.execute(
+            "insert into llm_calls (trace_id, role, model, tokens_in, tokens_out, cost_usd,"
+            " latency_ms, cached, estimated, retries, wait_ms) values (%(trace_id)s, %(role)s,"
+            " %(model)s, %(tokens_in)s, %(tokens_out)s, %(cost_usd)s, %(latency_ms)s, %(cached)s,"
+            " %(estimated)s, %(retries)s, %(wait_ms)s)",
+            {**call, "trace_id": trace_id},
+        )
+    c.execute(
+        "update traces set eval_cost_usd = eval_cost_usd + %s,"
+        " total_cost_usd = total_cost_usd + %s where trace_id = %s",
+        (verdict["cost_usd"], verdict["cost_usd"], trace_id),
+    )
+
+
 def execute(
     c: psycopg.Connection[Any],
     items: list[GoldItem],
@@ -132,6 +170,7 @@ def execute(
     mode: Mode,
     size: ModelSize | None,
     answer: AnswerFn,
+    judged: bool = False,
 ) -> list[dict[str, Any]]:
     """Answer and score each item, committing one eval_results row per question.
 
@@ -141,13 +180,22 @@ def execute(
     for item in items:
         result = answer(item.question, mode, source="eval", force_size=size)
         spans = supporting_spans(c, item, [h.chunk_id for h in result.retrieved.hits])
-        row = score(item, result, spans, k)
+        row = score(item, result, spans, k) | dict.fromkeys(JUDGE_METRICS)
+        if judged:
+            judge_trace = Trace(item.question, mode, "eval")
+            try:
+                verdict = judge.judge(item.question, result.answer, result.retrieved, judge_trace)
+                row |= {m: verdict[m] for m in JUDGE_METRICS}
+                store_judgement(c, result.trace_id, verdict, judge_trace)
+            except judge.JudgeFailed as e:
+                print(f"judge failed on {item.id}: {e}", file=sys.stderr)
         c.execute(
             "insert into eval_results (run_id, question_id, trace_id, gold_type, predicted_type,"
-            " route_taken, em, f1, recall_at_k, mrr, sp_precision, cost_usd, latency_ms) values"
-            " (%(run_id)s, %(question_id)s, %(trace_id)s, %(gold_type)s, %(predicted_type)s,"
-            " %(route_taken)s, %(em)s, %(f1)s, %(recall_at_k)s, %(mrr)s, %(sp_precision)s,"
-            " %(cost_usd)s, %(latency_ms)s)",
+            " route_taken, em, f1, recall_at_k, mrr, sp_precision, faithfulness, relevance,"
+            " completeness, cost_usd, latency_ms) values (%(run_id)s, %(question_id)s,"
+            " %(trace_id)s, %(gold_type)s, %(predicted_type)s, %(route_taken)s, %(em)s, %(f1)s,"
+            " %(recall_at_k)s, %(mrr)s, %(sp_precision)s, %(faithfulness)s, %(relevance)s,"
+            " %(completeness)s, %(cost_usd)s, %(latency_ms)s)",
             {"run_id": run_id, **row},
         )
         c.commit()
@@ -169,8 +217,9 @@ def select_items(split: str, limit: int | None) -> list[GoldItem]:
 
 def result_rows(c: psycopg.Connection[Any], run_id: str) -> list[dict[str, Any]]:
     cur = c.execute(
-        "select question_id, gold_type, em, f1, recall_at_k, mrr, sp_precision, cost_usd"
-        " from eval_results where run_id = %s order by question_id",
+        "select question_id, gold_type, em, f1, recall_at_k, mrr, sp_precision, faithfulness,"
+        " relevance, completeness, cost_usd from eval_results where run_id = %s"
+        " order by question_id",
         (run_id,),
     )
     names = [d.name for d in cur.description or []]
@@ -183,7 +232,7 @@ def start_run(c: psycopg.Connection[Any], args: argparse.Namespace) -> tuple[str
     items = select_items(args.split, args.limit)
     sha, dirty = git_state()
     run_id = make_run_id(datetime.now(), args.split, args.mode, args.variant)
-    options = {"size": args.size, "limit": args.limit}
+    options = {"size": args.size, "limit": args.limit, "judge": args.judge}
     c.execute(
         "insert into eval_runs (run_id, split, mode, variant, git_sha, git_dirty, config_hash, n,"
         " summary) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
@@ -217,6 +266,7 @@ def resume_run(c: psycopg.Connection[Any], args: argparse.Namespace) -> tuple[st
     options = summary["options"]
     check_args(split, variant, options["size"], settings().allow_test)
     args.split, args.mode, args.variant, args.size = split, mode, variant, options["size"]
+    args.judge = options.get("judge", False)
     done = {r["question_id"] for r in result_rows(c, args.resume)}
     return args.resume, [i for i in select_items(split, options["limit"]) if i.id not in done]
 
@@ -235,7 +285,7 @@ def main(argv: list[str] | None = None, answer: AnswerFn | None = None) -> None:
     args = p.parse_args(argv)
     if not args.resume and not (args.split and args.mode and args.variant):
         p.error("--split, --mode and --variant are required unless --resume is given")
-    for flag in ("judge", "questions", "pin"):
+    for flag in ("questions", "pin"):
         if getattr(args, flag):
             raise SystemExit(f"--{flag} is not built yet")
     if answer is None:
@@ -247,11 +297,11 @@ def main(argv: list[str] | None = None, answer: AnswerFn | None = None) -> None:
         c.execute("select 1")  # wake a suspended Neon compute before anything is timed
         run_id, items = resume_run(c, args) if args.resume else start_run(c, args)
         try:
-            execute(c, items, run_id, args.mode, args.size, answer)
+            execute(c, items, run_id, args.mode, args.size, answer, args.judge)
         except RateLimited:
             print(f"rate limited, progress saved: resume with --resume {run_id}", file=sys.stderr)
             raise SystemExit(2) from None
-        summary = summarize(result_rows(c, run_id))
+        summary = summarize(result_rows(c, run_id), args.judge)
         c.execute(
             "update eval_runs set summary = summary || %s where run_id = %s",
             (Jsonb(summary), run_id),
