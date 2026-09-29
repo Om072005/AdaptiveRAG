@@ -13,7 +13,8 @@ percentile = 90
 [extract]
 chunks_per_call = 4
 min_confidence = 0.5
-fuzzy_ratio = 0.9   # validation: an entity name matches the chunk text at this ratio or above
+max_tokens = 4096   # output cap for one extraction call (4 passages of triples plus thinking)
+fuzzy_ratio = 0.9  # validation: an entity name matches the chunk text at this ratio or above
 
 [resolve]
 name_sim = 0.92
