@@ -2,6 +2,8 @@
 python -m adaptiverag.router.train embed --slice K/N   embeds one slice of its questions
 python -m adaptiverag.router.train rules             writes adaptiverag/router/weights/rules.json
 python -m adaptiverag.router.train                   writes adaptiverag/router/weights/logreg.npz
+python -m adaptiverag.router.train compare [--methods rules,logreg,llm]
+                                                    writes docs/results/classifier-<run_id>.md
 
 The set: bridge and comparison questions from seeded pages of the HotpotQA train split (Hugging Face
 rows service, no download), plus single hop questions generated from train paragraphs that are not
@@ -13,6 +15,7 @@ import json
 import random
 import sys
 from collections.abc import Callable
+from statistics import median
 from typing import Any
 
 import httpx
@@ -21,19 +24,23 @@ import numpy as np
 from adaptiverag import llm
 from adaptiverag.config import ROOT, models, router_cfg
 from adaptiverag.eval import single_hop
+from adaptiverag.eval.report import confusion, macro_f1
 from adaptiverag.ingest.loader import SOURCE, from_mirror_row
 from adaptiverag.ingest.normalize import doc_id, join_sentences
 from adaptiverag.ingest.pipeline import in_slice, parse_slice
 from adaptiverag.router.classify import (
     RULES_CALIBRATION,
     WEIGHTS,
+    classify,
     features,
     logreg_inputs,
     rule_bucket,
     rule_votes,
     softmax,
 )
-from adaptiverag.types import Document, LLMResult
+from adaptiverag.telemetry.trace import Trace
+from adaptiverag.types import Classification, Document, LLMResult
+from bench import results
 
 TRAIN_PATH = ROOT / "data" / "router" / "train.jsonl"
 ROWS_URL = "https://datasets-server.huggingface.co/rows"
@@ -240,11 +247,110 @@ def train_rules() -> None:
         print(f"  {key}: {row}")
 
 
+DEV_PATH = ROOT / "data" / "gold" / "dev.jsonl"
+METHODS = ("rules", "logreg", "llm")
+
+
+def label_f1(matrix: list[list[int]]) -> list[float]:
+    """F1 per label, gold as rows; a label never predicted nor present scores 0."""
+    out = []
+    for i in range(len(matrix)):
+        predicted = sum(row[i] for row in matrix)
+        actual = sum(matrix[i])
+        out.append(2 * matrix[i][i] / (predicted + actual) if predicted + actual else 0.0)
+    return out
+
+
+def score(items: list[dict[str, Any]], preds: list[Classification]) -> dict[str, Any]:
+    """Macro F1 (the eval report's), F1 per label, cost and latency of one method on the items."""
+    rows = [
+        {"gold_type": q["type"], "predicted_type": p.label}
+        for q, p in zip(items, preds, strict=True)
+    ]
+    conf = confusion(rows)
+    if conf is None:
+        raise ValueError("no predictions to score")
+    return {
+        "macro_f1": macro_f1(conf["matrix"]),
+        "f1_by_label": dict(zip(conf["labels"], label_f1(conf["matrix"]), strict=True)),
+        "matrix": conf["matrix"],
+        "cost_per_query_usd": sum(p.cost_usd for p in preds) / len(preds),
+        "p50_ms": median(p.latency_ms for p in preds),
+    }
+
+
+def compare_md(run_id: str, items: list[dict[str, Any]], scores: dict[str, dict[str, Any]]) -> str:
+    """The comparison page for people; results.write fills in {header}."""
+    counts = ", ".join(f"{sum(q['type'] == t for q in items)} {t}" for t in CLASSES)
+    lines = [
+        f"# Classifier comparison, dev split ({run_id})",
+        "",
+        f"{{header}}{len(items)} dev questions ({counts}), each labelled by every method. Rules and"
+        " the logistic regression are trained on data/router/train.jsonl only. Latency is the"
+        " classifier alone: the logistic regression reuses the query embedding retrieval computes"
+        " anyway, and a cached model call keeps the latency recorded when it was first made. Cost"
+        " is at list price.",
+        "",
+        "| Method | Macro F1 | " + " | ".join(f"F1 {t}" for t in CLASSES) + " | Cost per query USD"
+        " | p50 ms |",
+        "|---|---|" + "---|" * len(CLASSES) + "---|---|",
+    ]
+    for method, s in scores.items():
+        f1s = " | ".join(f"{s['f1_by_label'][t]:.4f}" for t in CLASSES)
+        lines.append(
+            f"| {method} | {s['macro_f1']:.4f} | {f1s} | {s['cost_per_query_usd']:.8f}"
+            f" | {s['p50_ms']:g} |"
+        )
+    for method, s in scores.items():
+        lines += ["", f"{method}, gold as rows, predicted as columns:", ""]
+        lines += ["| | " + " | ".join(CLASSES) + " |", "|---|" + "---|" * len(CLASSES)]
+        lines += [
+            f"| {t} | " + " | ".join(str(n) for n in row) + " |"
+            for t, row in zip(CLASSES, s["matrix"], strict=True)
+        ]
+    return "\n".join([*lines, ""])
+
+
+def compare(methods: list[str]) -> None:
+    """Every method on the dev questions (never test). All three write the result file; fewer
+    print a preview only, since the report compares all three."""
+    items = [json.loads(line) for line in DEV_PATH.read_text(encoding="utf-8").splitlines() if line]
+    questions = [q["question"] for q in items]
+    vecs = np.zeros((len(items), models()["embed"].dims or 768), dtype=np.float32)
+    if "logreg" in methods:
+        try:
+            vecs = llm.embed(questions)
+        except llm.RateLimited as e:
+            raise SystemExit(f"dev question embeddings stopped by the quota ({e})") from e
+    scores = {}
+    for method in methods:
+        preds = [
+            classify(q, v, Trace(q, "auto", "cli"), method)
+            for q, v in zip(questions, vecs, strict=True)
+        ]
+        scores[method] = score(items, preds)
+        print(f"{method}: macro F1 {scores[method]['macro_f1']:.4f}")
+    if sorted(methods) != sorted(METHODS):
+        print("preview only: the report is written when all three methods run")
+        return
+    run_id = results.new_run_id("dev")
+    rows = [
+        {"method": m} | {k: s[k] for k in ("macro_f1", "cost_per_query_usd", "p50_ms")}
+        for m, s in scores.items()
+    ]
+    params = {"split": "dev", "questions": len(items), "scores": scores}
+    path = results.write("classifier", run_id, params, rows, compare_md(run_id, items, scores))
+    print(f"wrote {path}")
+
+
 def main(argv: list[str] | None = None) -> None:
     argv = sys.argv[1:] if argv is None else argv
     parser = argparse.ArgumentParser(prog="python -m adaptiverag.router.train")
-    parser.add_argument("command", nargs="?", choices=["set", "embed", "rules"])
+    parser.add_argument("command", nargs="?", choices=["set", "embed", "rules", "compare"])
     parser.add_argument("--slice", type=parse_slice, default="1/1", help="K/N, for embed")
+    parser.add_argument(
+        "--methods", default=",".join(METHODS), help="for compare, for example rules,llm"
+    )
     args = parser.parse_args(argv)
     if args.command == "set":
         build_set()
@@ -252,6 +358,8 @@ def main(argv: list[str] | None = None) -> None:
         embed_slice(*args.slice)
     elif args.command == "rules":
         train_rules()
+    elif args.command == "compare":
+        compare([m for m in args.methods.split(",") if m])
     else:
         train_logreg()
 
