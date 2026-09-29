@@ -80,3 +80,9 @@ def test_build_cli_writes_candidates(tmp_path: Path) -> None:
     out = tmp_path / "candidates.jsonl"
     gold.main(["build", "--raw", str(FIXTURE), "--manifest", str(manifest), "--out", str(out)])
     assert [i.type for i in gold.read_jsonl(out)] == ["multi_hop", "comparison"]
+
+
+def test_jsonl_is_written_with_lf_line_endings(tmp_path: Path) -> None:
+    path = tmp_path / "gold.jsonl"
+    gold.write_jsonl(path, gold.build_candidates(rows(), ["q_bridge", "q_compare"]))
+    assert b"\r\n" not in path.read_bytes()

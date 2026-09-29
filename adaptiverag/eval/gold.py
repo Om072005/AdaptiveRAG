@@ -3,6 +3,7 @@
 import argparse
 import json
 import random
+import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
@@ -108,7 +109,8 @@ def read_jsonl(path: Path) -> list[GoldItem]:
 
 def write_jsonl(path: Path, items: list[GoldItem]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("".join(to_json(i) + "\n" for i in items), encoding="utf-8")
+    # LF on every platform, so a Windows save does not rewrite every line in git
+    path.write_text("".join(to_json(i) + "\n" for i in items), encoding="utf-8", newline="\n")
 
 
 def split_items(candidates: list[GoldItem], seed: int = 7) -> list[GoldItem]:
@@ -203,7 +205,7 @@ def cmd_replace(n: int, reason: str, gold_dir: Path, sources: list[Path]) -> Non
     # the removed item stays on record with its reason, it is never silently dropped
     note = f"replaced by {new.id}: {reason}"
     old.notes = f"{old.notes}; {note}" if old.notes else note
-    with log.open("a", encoding="utf-8") as f:
+    with log.open("a", encoding="utf-8", newline="\n") as f:
         f.write(to_json(old) + "\n")
     print(f"#{n}: {old.id} replaced by {new.id} ({new.type}, {new.split}), not verified yet")
 
@@ -249,6 +251,10 @@ def main(argv: list[str] | None = None) -> None:
     args = p.parse_args(argv)
     if args.cmd in ("verify", "status"):
         from adaptiverag.eval import verify
+
+        # a Windows console defaults to cp1252 and cannot print names like Pavic with its accent
+        if hasattr(sys.stdout, "reconfigure"):
+            sys.stdout.reconfigure(encoding="utf-8")
 
     if args.cmd == "build":
         cmd_build(args.raw, args.manifest, args.out)
