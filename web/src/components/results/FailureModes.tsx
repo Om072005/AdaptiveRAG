@@ -6,7 +6,7 @@ export function FailureModes({ failures }: { failures: Results['tables']['failur
   return (
     <div>
       {failures && failures.length > 0 ? (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Failure log">
           <DataTable
             rows={failures}
             columns={[

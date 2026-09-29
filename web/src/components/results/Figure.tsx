@@ -20,7 +20,10 @@ export function Figure({ title, split, runIds, children, note }: {
           ))}
         </span>
       </figcaption>
-      <div className="mt-4 overflow-x-auto">{children}</div>
+      {/* focusable so a keyboard can scroll a wide table on a phone */}
+      <div className="mt-4 overflow-x-auto" tabIndex={0} role="region" aria-label={title}>
+        {children}
+      </div>
       {note && <p className="text-caption m-0 mt-4 max-w-[68ch]">{note}</p>}
     </figure>
   )

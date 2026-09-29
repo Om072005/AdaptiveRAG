@@ -11,7 +11,7 @@ export function CodeBlock({ code }: { code: string }) {
   }
   return (
     <div className="mt-3 flex items-start gap-2 rounded-[6px] bg-raised">
-      <pre className="m-0 min-w-0 flex-1 overflow-x-auto py-4 pl-5 font-mono text-[13px] leading-5 text-text md:text-[14px] md:leading-[22px]">
+      <pre tabIndex={0} className="m-0 min-w-0 flex-1 overflow-x-auto py-4 pl-5 font-mono text-[13px] leading-5 text-text md:text-[14px] md:leading-[22px]">
         <code>{code}</code>
       </pre>
       <button
