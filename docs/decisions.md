@@ -38,7 +38,7 @@ pinned variant on D13; every run records git sha, dirty flag and config hash; th
 
 ## Models and routing
 
-**D4 Groq GPT-OSS generates, Gemini extracts and judges.** Small and classify: `gpt-oss-20b`; large:
+**D4 Groq GPT-OSS generates, Gemini extracts and judges (generation and extraction moved local in D16).** Small and classify: `gpt-oss-20b`; large:
 `gpt-oss-120b`; extract: Gemini Flash-Lite; judge: Gemini Flash. Embeddings started on `gemini-embedding-001` at 768
 dimensions and moved to a local model on 2026-09-30 (D5). The judge is a different family from the generator, as the README asks. One OpenAI compatible
 gateway means a provider swap is a config change.
@@ -79,6 +79,17 @@ still get a badly grounded answer; logging both lets us show when.
 
 **D15 Free tiers, one account per member.** Limits are per Groq organization and per Gemini project. Latency
 counts only the successful attempt; backoff after a 429 goes to `wait_ms` and `throttle_wait_ms`.
+
+**D16 Every model but the judge runs locally (2026-09-30).** Small, classify and extract: `gpt-oss:20b`, the same
+open weights Groq served; large: `qwen3.6:35b-a3b`, a mixture of experts with 3B active parameters, the largest
+model that fits the lead's 8 GB GPU plus 32 GB RAM (`gpt-oss-120b` needs about 65 GB); both through Ollama. The judge
+stays on Gemini (`gemini-3.8-flash`), a different family from both generators. Why: the free tiers (200,000
+tokens a day per Groq organization, 500 extraction calls a day per Gemini project) set the pace of every eval
+run, and the team chose to stay free. Costs are the OpenRouter list price of the same weights (checked
+2026-09-30: `gpt-oss-20b` 0.018 / 0.09, `qwen3.6-35b-a3b` 0.15 / 1.00 USD per million tokens), so the economics
+tables still compare routes and model sizes. Latency is measured on that one machine (i5-13400F, RTX 2060 SUPER),
+not on a hosted provider. What changes: the large model is now a different family from the small one, and the
+graph is re-extracted by the local model; every run before this decision is superseded.
 
 ## Decided while building (D1 to D3)
 
@@ -140,9 +151,11 @@ tiers, so a number does not depend on whose key ran the query.
 
 | Role | Provider | Model id | In / out, USD per 1M tokens | Listed by `/models` |
 |---|---|---|---|---|
-| small, classify | Groq | `openai/gpt-oss-20b` | 0.075 / 0.30 | yes |
-| large | Groq | `openai/gpt-oss-120b` | 0.15 / 0.60 | yes |
-| extract | Gemini | `gemini-3.5-flash-lite` | 0.30 / 2.50 | yes |
+| small, classify (until D16) | Groq | `openai/gpt-oss-20b` | 0.075 / 0.30 | yes |
+| large (until D16) | Groq | `openai/gpt-oss-120b` | 0.15 / 0.60 | yes |
+| small, classify, extract (from D16) | Ollama, local | `gpt-oss:20b` | 0.018 / 0.09 (OpenRouter list) | n/a |
+| large (from D16) | Ollama, local | `qwen3.6:35b-a3b` | 0.15 / 1.00 (OpenRouter list) | n/a |
+| extract (until D16) | Gemini | `gemini-3.5-flash-lite` | 0.30 / 2.50 | yes |
 | judge | Gemini | `gemini-3.8-flash` | 0.75 / 3.75, introductory until 2026-12-31, then 1.50 / 7.50 | yes |
 | embed (until 2026-09-30, see D5) | Gemini | `gemini-embedding-001` | 0.15 input | yes |
 | embed (from 2026-09-30) | Ollama, local | `nomic-embed-text` v1.5 | 0, local compute | n/a |
