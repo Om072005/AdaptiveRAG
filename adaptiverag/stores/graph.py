@@ -56,46 +56,60 @@ def reject_counts(chunk_ids: list[str]) -> dict[str, int]:
     return {reason: n for reason, n in rows}
 
 
+def replace_graph(
+    c: Connection[Any],
+    entities: list[dict[str, Any]],
+    aliases: list[dict[str, Any]],
+    relations: list[dict[str, Any]],
+) -> None:
+    """Delete the graph and insert these rows on c, inside the caller's transaction."""
+    c.execute("delete from relations")
+    c.execute("delete from aliases")
+    c.execute("delete from entities")
+    with c.cursor() as cur:
+        cur.executemany(
+            "insert into entities (canonical_id, canonical_name, type, embedding) "
+            "values (%(canonical_id)s, %(canonical_name)s, %(type)s, %(embedding)s)",
+            entities,
+        )
+        cur.executemany(
+            "insert into aliases (surface_form, canonical_id, confidence) "
+            "values (%(surface_form)s, %(canonical_id)s, %(confidence)s)",
+            aliases,
+        )
+        cur.executemany(
+            "insert into relations (rel_id, subject_id, predicate, object_id, chunk_id, "
+            "doc_id, evidence_start, evidence_end, extraction_confidence, embedding) values "
+            "(%(rel_id)s, %(subject_id)s, %(predicate)s, %(object_id)s, %(chunk_id)s, "
+            "%(doc_id)s, %(evidence_start)s, %(evidence_end)s, %(extraction_confidence)s, "
+            "%(embedding)s)",
+            relations,
+        )
+
+
 def write_graph(
     entities: list[dict[str, Any]], aliases: list[dict[str, Any]], relations: list[dict[str, Any]]
 ) -> None:
     """Replace the whole graph in one transaction. Every relation cites its chunk; the foreign
     keys reject the write if one does not exist, and nothing is kept from a failed write."""
     with db.conn() as c:
-        c.execute("delete from relations")
-        c.execute("delete from aliases")
-        c.execute("delete from entities")
-        with c.cursor() as cur:
-            cur.executemany(
-                "insert into entities (canonical_id, canonical_name, type, embedding) "
-                "values (%(canonical_id)s, %(canonical_name)s, %(type)s, %(embedding)s)",
-                entities,
-            )
-            cur.executemany(
-                "insert into aliases (surface_form, canonical_id, confidence) "
-                "values (%(surface_form)s, %(canonical_id)s, %(confidence)s)",
-                aliases,
-            )
-            cur.executemany(
-                "insert into relations (rel_id, subject_id, predicate, object_id, chunk_id, "
-                "doc_id, evidence_start, evidence_end, extraction_confidence, embedding) values "
-                "(%(rel_id)s, %(subject_id)s, %(predicate)s, %(object_id)s, %(chunk_id)s, "
-                "%(doc_id)s, %(evidence_start)s, %(evidence_end)s, %(extraction_confidence)s, "
-                "%(embedding)s)",
-                relations,
-            )
+        replace_graph(c, entities, aliases, relations)
 
 
-def graph_counts() -> dict[str, int]:
+def graph_counts(c: Connection[Any] | None = None) -> dict[str, int]:
     """Rows per graph table, relations without a stored chunk, and relations without a vector."""
-    with db.conn() as c:
-        row = c.execute(
-            "select (select count(*) from entities), (select count(*) from aliases), "
-            "(select count(*) from relations), "
-            "(select count(*) from relations r left join chunks k using (chunk_id) "
-            " where k.chunk_id is null), "
-            "(select count(*) from relations where embedding is null)"
-        ).fetchone()
+    sql = (
+        "select (select count(*) from entities), (select count(*) from aliases), "
+        "(select count(*) from relations), "
+        "(select count(*) from relations r left join chunks k using (chunk_id) "
+        " where k.chunk_id is null), "
+        "(select count(*) from relations where embedding is null)"
+    )
+    if c is None:
+        with db.conn() as own:
+            row = own.execute(sql).fetchone()
+    else:
+        row = c.execute(sql).fetchone()
     names = [
         "entities",
         "aliases",
