@@ -1,6 +1,6 @@
 """python -m adaptiverag.ingest graph --corpus mini|full [--dry-run] | relink
 
-Until the graph writes land, this runs extraction only and prints the summary.
+Until the graph writes land, this runs extraction, stores the rejects and prints the summary.
 """
 
 import argparse
@@ -37,7 +37,15 @@ def main(argv: list[str] | None = None) -> None:
     except RateLimited as e:
         # finished batches are in the cache, so a rerun later picks up where this stopped
         raise SystemExit(f"rate limited, rerun later to resume: {e}") from e
-    print(json.dumps(summarize(chunks, kept, rejects, calls), indent=2))
+    summary = summarize(chunks, kept, rejects, calls)
+    ids = [c.chunk_id for c in chunks]
+    store.save_rejects(rejects, ids)
+    # read back from the table, so the printed rate and the stored log cannot drift apart
+    summary["stored_rejects_by_reason"] = store.reject_counts(ids)
+    summary["stored_matches_run"] = (
+        summary["stored_rejects_by_reason"] == summary["rejects_by_reason"]
+    )
+    print(json.dumps(summary, indent=2))
 
 
 if __name__ == "__main__":
