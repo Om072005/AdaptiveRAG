@@ -1,0 +1,40 @@
+[
+  {
+    "_id": "fx0000000000000000000001",
+    "question": "Were Scott Derrickson and Ed Wood of the same nationality?",
+    "answer": "yes",
+    "type": "comparison",
+    "level": "hard",
+    "supporting_facts": [["Scott Derrickson", 0], ["Ed Wood", 0]],
+    "context": [
+      ["Ed Wood", ["Edward Davis Wood Jr. (October 10, 1924 – December 10, 1978) was an American filmmaker, actor, writer, producer, and director.", " He is known for low budget films."]],
+      ["Scott Derrickson", ["Scott Derrickson (born July 16, 1966) is an American director, screenwriter and producer.", " He lives in Los Angeles,  California."]],
+      ["Doctor Strange (2016 film)", ["Doctor Strange is a 2016 American superhero film.", " It was directed by Scott Derrickson."]]
+    ]
+  },
+  {
+    "_id": "fx0000000000000000000002",
+    "question": "Who directed the 1994 film about the director of Plan 9 from Outer Space?",
+    "answer": "Tim Burton",
+    "type": "bridge",
+    "level": "medium",
+    "supporting_facts": [["Ed Wood (film)", 0], ["Ed Wood (film)", 1]],
+    "context": [
+      ["Ed Wood (film)", ["Ed Wood is a 1994 American biographical period comedy-drama film.", " It was directed and produced by Tim Burton.", ""]],
+      ["Ed Wood", ["Edward Davis Wood Jr. (October 10, 1924 – December 10, 1978) was an American filmmaker, actor, writer, producer, and director.", " He is known for low budget films."]],
+      ["Plan 9 from Outer Space", ["Plan 9 from Outer Space is a 1957 science fiction film written and directed by Ed Wood."]]
+    ]
+  },
+  {
+    "_id": "fx0000000000000000000003",
+    "question": "Which café in Paris did the author of A Moveable Feast write about?",
+    "answer": "Café de Flore",
+    "type": "bridge",
+    "level": "easy",
+    "supporting_facts": [["A Moveable Feast", 0], ["Café de Flore", 1]],
+    "context": [
+      ["A Moveable Feast", ["A Moveable Feast is a 1964 memoir by Ernest Hemingway.", " It is about his years in Paris."]],
+      ["Café de Flore", ["The Café de Flore is a coffeehouse in Paris.", "\tHemingway wrote about it."]]
+    ]
+  }
+]
