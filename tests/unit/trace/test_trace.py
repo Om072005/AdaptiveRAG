@@ -86,3 +86,21 @@ def test_fifth_call_raises_budget_exceeded() -> None:
     with pytest.raises(BudgetExceeded):
         t.add_llm(call("small", 0.001))
     assert len(t.calls) == 4
+
+
+def test_save_adds_git_state_and_config_hash(monkeypatch: pytest.MonkeyPatch) -> None:
+    from adaptiverag.telemetry import trace as trace_mod
+
+    stored: list[dict[str, object]] = []
+    monkeypatch.setattr(trace_mod.store, "insert", lambda row, calls: stored.append(row))
+    monkeypatch.setattr(trace_mod, "git_state", lambda: ("abc123", True))
+    Trace("q", "vector", "cli").save()
+    assert (stored[0]["git_sha"], stored[0]["git_dirty"]) == ("abc123", True)
+    assert len(str(stored[0]["config_hash"])) == 12
+
+
+def test_git_state_reads_this_checkout() -> None:
+    from adaptiverag.telemetry.trace import git_state
+
+    sha, dirty = git_state()
+    assert sha is None or (len(sha) == 40 and isinstance(dirty, bool))

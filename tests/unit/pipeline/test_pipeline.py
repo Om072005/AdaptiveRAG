@@ -65,7 +65,7 @@ def test_baseline_vector_question_to_cited_answer() -> None:
     assert row["trace_id"] == r.trace_id
     assert row["route_taken"] == "vector" and row["model_selected"] == "model-small"
     assert row["generation_cost_usd"] == pytest.approx(0.0002) == r.total_cost_usd
-    assert row["answer_confidence"] == r.answer.confidence and row["config_hash"]
+    assert row["answer_confidence"] == r.answer.confidence
     assert row["detail"]["citation_errors"] == 1
     assert [s["name"] for s in row["detail"]["spans"]] == ["retrieve", "generate"]
 

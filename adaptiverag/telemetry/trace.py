@@ -1,12 +1,13 @@
 """Per query trace: spans, the LLM call ledger and the traces row."""
 
+import subprocess
 import time
 import uuid
 from collections.abc import Collection, Iterator
 from contextlib import contextmanager
 from typing import Any
 
-from adaptiverag.config import limits
+from adaptiverag.config import ROOT, config_hash, limits
 from adaptiverag.llm import BudgetExceeded
 from adaptiverag.stores import traces as store
 from adaptiverag.types import LLMResult, Mode
@@ -129,5 +130,28 @@ class Trace:
 
     def save(self) -> str:
         """Insert traces and llm_calls in one transaction, return the trace_id."""
-        store.insert(self.row(), self.call_rows())
+        row = self.row()  # latency is measured first, so the git calls below never count
+        sha, dirty = git_state()
+        row.setdefault("git_sha", sha)
+        row.setdefault("git_dirty", dirty)
+        row.setdefault("config_hash", config_hash())
+        store.insert(row, self.call_rows())
         return self.trace_id
+
+
+def git_state() -> tuple[str | None, bool | None]:
+    """(commit sha, dirty tree) of the answering code, or (None, None) outside a checkout."""
+    try:
+        sha = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True
+        ).stdout.strip()
+        status = subprocess.run(
+            ["git", "status", "--porcelain", "--untracked-files=no"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+    except (OSError, subprocess.CalledProcessError):
+        return None, None
+    return sha, bool(status.strip())

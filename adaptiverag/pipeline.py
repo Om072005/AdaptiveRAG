@@ -1,6 +1,6 @@
 """Question in, cited answer and saved trace out."""
 
-from adaptiverag.config import config_hash, router_cfg
+from adaptiverag.config import router_cfg
 from adaptiverag.generate.answer import synthesize
 from adaptiverag.llm import BudgetExceeded
 from adaptiverag.serialize import to_response
@@ -25,7 +25,6 @@ def answer_query(
 ) -> QueryResult:
     """Route, retrieve, generate and save one trace."""
     trace = Trace(question, mode, source)
-    trace.set(config_hash=config_hash())
     try:
         decision, retrieved = route_baseline(question, mode, trace)
         answer = synthesize(question, decision, retrieved, trace, force_size)
