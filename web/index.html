@@ -5,34 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AdaptiveRAG</title>
     <meta name="description" content="A research assistant that decides how to search before it answers." />
-    <style>
-      :root {
-        --black: #000000;
-        --white: #ffffff;
-        --text: #edeae3;
-        --muted: #a59e90;
-        --cream-300: #d8cdb6;
-        --rule: #2a2823;
-      }
-      html { background: var(--black); color: var(--text); }
-      body { margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif; }
-      main { max-width: 1360px; padding: 160px clamp(20px, 5vw, 80px); }
-      h1 { font-family: "Source Serif 4", Georgia, serif; font-weight: 400; color: var(--white);
-           font-size: clamp(44px, 7vw, 80px); line-height: 1.05; letter-spacing: -0.015em; max-width: 18ch; margin: 0 0 32px; }
-      p { font-size: 19px; line-height: 30px; max-width: 60ch; margin: 0 0 24px; }
-      .muted { color: var(--muted); font-size: 15px; }
-      a { color: var(--cream-300); }
-      hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
-    </style>
   </head>
   <body>
-    <div id="root">
-      <hr />
-      <main>
-        <h1>A research assistant that decides how to search before it answers.</h1>
-        <p>AdaptiveRAG routes each question to vector search, graph traversal or both, answers with citations, and records the cost and latency of every decision.</p>
-        <p class="muted">The page is being built. Everything it will show comes from recorded runs. <a href="https://github.com/Om072005/AdaptiveRAG">View the code on GitHub</a></p>
-      </main>
-    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

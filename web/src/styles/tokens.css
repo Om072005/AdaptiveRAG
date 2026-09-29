@@ -1,0 +1,22 @@
+/* The only place colors, font families and the type scale are defined (02_DESIGN_SYSTEM.md 1 to 3). */
+@theme {
+  --color-*: initial;
+  --color-black: #000000;
+  --color-raised: #121210;
+  --color-white: #ffffff;
+  --color-text: #edeae3;
+  --color-cream-100: #f3ecdd;
+  --color-cream-300: #d8cdb6;
+  --color-cream-600: #7c7564;
+  --color-muted: #a59e90;
+  --color-rule: #2a2823;
+
+  --font-*: initial;
+  --font-serif: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+
+  --radius-control: 6px;
+  --radius-panel: 10px;
+  --ease-page: cubic-bezier(0.2, 0, 0, 1);
+}
