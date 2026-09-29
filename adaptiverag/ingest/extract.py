@@ -260,5 +260,5 @@ def summarize(
         "reject_rate": round(rejected_triples / returned, 4) if returned else None,
         "rejects_by_reason": dict(sorted(Counter(r["reason"] for r in rejects).items())),
         "bad_responses": bad_responses,
-        "evidence_not_found": whole_chunk,
+        "evidence_not_located": whole_chunk,
     }

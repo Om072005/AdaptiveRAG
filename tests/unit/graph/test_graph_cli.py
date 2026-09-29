@@ -129,3 +129,65 @@ def test_only_rejects_of_the_scope_are_counted() -> None:
     assert not graph_cli.in_scope({"chunk_id": "b:0", "raw": {}}, wanted)
     assert graph_cli.in_scope({"chunk_id": None, "raw": {"chunk_ids": ["b:0", "a:0"]}}, wanted)
     assert not graph_cli.in_scope({"chunk_id": None, "raw": {"chunk_ids": ["b:0"]}}, wanted)
+
+
+SUMMARY = {
+    "chunks": 8,
+    "calls": 2,
+    "triples_returned": 10,
+    "kept": 8,
+    "rejected": 2,
+    "reject_rate": 0.2,
+    "rejects_by_reason": {"bad_json": 1, "self_loop": 1, "subject_not_in_source": 1},
+    "bad_responses": 1,
+    "evidence_not_located": 3,
+}
+COUNTS = {
+    "entities": 6,
+    "aliases": 7,
+    "relations": 5,
+    "relations_without_chunk": 0,
+    "relations_without_vector": 0,
+}
+LABELLED = [
+    {"type": "PERSON", "rule": "name 1.00; same document", "label": "same"},
+    {"type": "ORG", "rule": "embedding 0.91", "label": "different"},
+]
+
+
+def test_the_report_waits_for_labels_and_a_clean_graph() -> None:
+    er = graph_cli.precision(LABELLED)
+    stored = SUMMARY["rejects_by_reason"]
+    assert graph_cli.report_problems(SUMMARY, stored, COUNTS, er, 0) == []
+    open_item = [*LABELLED, {"type": "ORG", "rule": "name 0.95", "label": ""}]
+    problems = graph_cli.report_problems(
+        SUMMARY, {"self_loop": 1}, COUNTS | {"relations_without_vector": 2},
+        graph_cli.precision(open_item), 3,
+    )  # fmt: skip
+    assert problems == [
+        "1 merge decisions are unlabelled",
+        "stored rejects differ from this extraction, rebuild the graph",
+        "some relations have no chunk or no vector",
+        "3 relations cite documents outside this scope",
+    ]
+    assert graph_cli.report_problems(SUMMARY, stored, COUNTS, graph_cli.precision([]), 0) == [
+        "no merge sample, run graph merges"
+    ]
+
+
+def test_the_report_carries_every_number_from_the_run() -> None:
+    er = graph_cli.precision(LABELLED)
+    row = graph_cli.report_rows(SUMMARY, COUNTS, er)
+    assert row == {"entities": 6, "relations": 5, "reject_rate": 0.2, "er_precision": 0.5}
+    md = graph_cli.report_md("dev", "r1", "sentence", SUMMARY, {"self_loop": 1}, COUNTS, er)
+    assert md.startswith("# Graph quality, dev scope (r1)\n\n{header}Built from 8 sentence")
+    for line in [
+        "| Relations without a chunk | 0 |",
+        "| Reject rate | 0.2000 |",
+        "| Evidence not located | 3 |",
+        "| subject_not_in_source | 1 | 0 |",
+        "| All | 2 | 1 | 0.5000 |",
+        "| By embedding | 1 | 0 | 0.0000 |",
+        "| PERSON pairs | 1 | 1 | 1.0000 |",
+    ]:
+        assert line in md

@@ -114,7 +114,7 @@ def test_triples_are_screened_with_a_reason_each(monkeypatch: pytest.MonkeyPatch
         "subject_not_in_source": 1,
     }
     assert summary["calls"] == 2 and summary["cost_usd_this_run"] == 0.002
-    assert summary["evidence_not_found"] == 0 and summary["chunks_with_triples"] == 1
+    assert summary["evidence_not_located"] == 0 and summary["chunks_with_triples"] == 1
 
 
 def test_a_cached_rerun_costs_nothing(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -131,12 +131,12 @@ def test_a_chunk_that_does_not_match_its_document_stops_the_run() -> None:
         extract_triples(chunks, {"d1": "x" + docs["d1"]})
 
 
-def test_evidence_not_found_is_counted(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_evidence_not_located_is_counted(monkeypatch: pytest.MonkeyPatch) -> None:
     answer = json.dumps({"triples": [fact(1, "Tim Burton", "Ed Wood", evidence="nowhere")]})
     monkeypatch.setattr(extract.llm, "chat", FakeGateway([answer, '{"triples": []}']))
     chunks, docs = corpus()
     summary = summarize(chunks, *extract_batches(chunks, docs))
-    assert summary["evidence_not_found"] == 1
+    assert summary["evidence_not_located"] == 1
 
 
 def test_every_reason_extraction_stores_is_allowed_by_the_latest_migration() -> None:

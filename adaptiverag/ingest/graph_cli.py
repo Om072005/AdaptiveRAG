@@ -2,6 +2,7 @@
 python -m adaptiverag.ingest graph embed --corpus mini|dev|gold|full [--slice K/N]
     [--part names|relations]
 python -m adaptiverag.ingest graph merges --corpus dev [--n 100] | --label | --precision
+python -m adaptiverag.ingest graph report --corpus dev    writes docs/results/graph-<run_id>.md
 python -m adaptiverag.ingest relink [--dry-run]
 
 The build extracts triples (cached), stores the rejects, resolves entities and replaces the graph.
@@ -36,6 +37,7 @@ from adaptiverag.ingest.resolve import (
 from adaptiverag.llm import RateLimited
 from adaptiverag.stores import graph as store
 from adaptiverag.types import Chunk, LLMResult, Triple
+from bench import results
 
 CORPORA = ["mini", "dev", "gold", "full"]
 
@@ -273,12 +275,145 @@ def merges_main(argv: list[str]) -> None:
     print(f"wrote {len(sample)} merge decisions to {LABELS_PATH}; label them with --label")
 
 
+def fmt(value: float | None) -> str:
+    return "n/a" if value is None else f"{value:.4f}"
+
+
+def report_rows(
+    summary: dict[str, Any], counts: dict[str, int], er: dict[str, Any]
+) -> dict[str, Any]:
+    """The graph row of the page, contract section 6b."""
+    return {
+        "entities": counts["entities"],
+        "relations": counts["relations"],
+        "reject_rate": summary["reject_rate"],
+        "er_precision": er["precision"],
+    }
+
+
+def report_problems(
+    summary: dict[str, Any],
+    stored: dict[str, int],
+    counts: dict[str, int],
+    er: dict[str, Any],
+    outside: int,
+) -> list[str]:
+    """Reasons the stored graph and labels cannot be reported yet; empty when they can."""
+    problems = []
+    if not er["labelled"] and not er["unlabelled"]:
+        problems.append("no merge sample, run graph merges")
+    elif er["unlabelled"]:
+        problems.append(f"{er['unlabelled']} merge decisions are unlabelled")
+    if stored != summary["rejects_by_reason"]:
+        problems.append("stored rejects differ from this extraction, rebuild the graph")
+    if not counts["relations"]:
+        problems.append("the graph is empty")
+    if counts["relations_without_chunk"] or counts["relations_without_vector"]:
+        problems.append("some relations have no chunk or no vector")
+    if outside:
+        problems.append(f"{outside} relations cite documents outside this scope")
+    return problems
+
+
+def report_md(
+    corpus: str,
+    run_id: str,
+    strategy: str,
+    s: dict[str, Any],
+    stored: dict[str, int],
+    counts: dict[str, int],
+    er: dict[str, Any],
+) -> str:
+    """The graph quality page for people; results.write fills in {header}."""
+    tables = [
+        ("entities", "Entities"),
+        ("aliases", "Aliases"),
+        ("relations", "Relations"),
+        ("relations_without_chunk", "Relations without a chunk"),
+        ("relations_without_vector", "Relations without a vector"),
+    ]
+    merges = [("name", "By name"), ("embedding", "By embedding"), ("person", "PERSON pairs")]
+    reasons = sorted(set(s["rejects_by_reason"]) | set(stored))
+    labels = LABELS_PATH.relative_to(ROOT).as_posix()
+    lines = [
+        f"# Graph quality, {corpus} scope ({run_id})",
+        "",
+        f"{{header}}Built from {s['chunks']} {strategy} chunks, the documents behind the {corpus}"
+        " gold questions. Entity resolution follows D9. Merge precision comes from merge decisions"
+        f" sampled from this scope and labelled by hand ({labels}).",
+        "",
+        "| Graph | Rows |",
+        "|---|---|",
+        *(f"| {label} | {counts[key]} |" for key, label in tables),
+        "",
+        "| Extraction | Value |",
+        "|---|---|",
+        f"| Model calls | {s['calls']} |",
+        f"| Triples returned | {s['triples_returned']} |",
+        f"| Kept | {s['kept']} |",
+        f"| Rejected | {s['rejected']} |",
+        f"| Reject rate | {fmt(s['reject_rate'])} |",
+        f"| Responses that were not JSON | {s['bad_responses']} |",
+        f"| Evidence not located | {s['evidence_not_located']} |",
+        "",
+        "Evidence not located: the quote the model gave was not found in its chunk, so the triple"
+        " is kept with the whole chunk as its evidence span, never with offsets that could point"
+        " at the wrong text. A response that was not JSON is counted under bad_json below but is"
+        " not a rejected triple.",
+        "",
+        "| Reject reason | This run | Stored |",
+        "|---|---|---|",
+        *(f"| {r} | {s['rejects_by_reason'].get(r, 0)} | {stored.get(r, 0)} |" for r in reasons),
+        "",
+        "| Merges | Labelled | Same entity | Precision |",
+        "|---|---|---|---|",
+        f"| All | {er['labelled']} | {er['same']} | {fmt(er['precision'])} |",
+        *(
+            f"| {label} | {er[k]['labelled']} | {er[k]['same']} | {fmt(er[k]['precision'])} |"
+            for k, label in merges
+        ),
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def report_main(argv: list[str]) -> None:
+    parser = argparse.ArgumentParser(prog="python -m adaptiverag.ingest graph report")
+    parser.add_argument("--corpus", choices=CORPORA, required=True)
+    args = parser.parse_args(argv)
+    strategy = router_cfg()["serving"]["chunk_strategy"]
+    chunks, kept, rejects, calls = extract_corpus(args.corpus, None)
+    summary = summarize(chunks, kept, rejects, calls)
+    stored = store.reject_counts([c.chunk_id for c in chunks])
+    counts = store.graph_counts()
+    er = precision(read_jsonl_dicts(LABELS_PATH) if LABELS_PATH.exists() else [])
+    outside = store.relations_outside(corpus_doc_ids(args.corpus))
+    problems = report_problems(summary, stored, counts, er, outside)
+    if problems:
+        raise SystemExit("no report: " + "; ".join(problems))
+    run_id = results.new_run_id(args.corpus)
+    params = {
+        "corpus": args.corpus,
+        "strategy": strategy,
+        "database": endpoint(),
+        "extraction": summary,
+        "stored_rejects_by_reason": stored,
+        "graph": counts,
+        "merges": er,
+    }
+    md = report_md(args.corpus, run_id, strategy, summary, stored, counts, er)
+    path = results.write("graph", run_id, params, [report_rows(summary, counts, er)], md)
+    print(f"wrote {path}")
+
+
 def main(argv: list[str] | None = None) -> None:
     argv = sys.argv[1:] if argv is None else argv
     if argv[:1] == ["embed"]:
         return embed_main(argv[1:])
     if argv[:1] == ["merges"]:
         return merges_main(argv[1:])
+    if argv[:1] == ["report"]:
+        return report_main(argv[1:])
     parser = argparse.ArgumentParser(prog="python -m adaptiverag.ingest graph")
     parser.add_argument("--corpus", choices=CORPORA, required=True)
     parser.add_argument("--limit", type=int, help="first N chunks only, for development")

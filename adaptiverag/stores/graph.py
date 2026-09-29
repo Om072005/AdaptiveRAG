@@ -120,6 +120,15 @@ def graph_counts(c: Connection[Any] | None = None) -> dict[str, int]:
     return dict(zip(names, row or (0,) * len(names), strict=True))
 
 
+def relations_outside(doc_ids: list[str]) -> int:
+    """Relations citing a document outside these, so a report cannot describe another scope."""
+    with db.conn() as c:
+        row = c.execute(
+            "select count(*) from relations where not (doc_id = any(%s))", (doc_ids,)
+        ).fetchone()
+    return int(row[0]) if row else 0
+
+
 def doc_titles(doc_ids: list[str]) -> dict[str, str]:
     """Titles of these documents, by doc_id."""
     with db.conn() as c:
