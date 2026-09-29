@@ -1,0 +1,10 @@
+{
+  "name": "adaptiverag-web",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Placeholder until the Vite page lands on D6. Build copies index.html into dist.",
+  "scripts": {
+    "build": "node scripts/build-placeholder.mjs",
+    "check": "node scripts/check-placeholder.mjs"
+  }
+}

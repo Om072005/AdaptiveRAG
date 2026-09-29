@@ -1,0 +1,17 @@
+# Vercel serves only the static page in web/. Nothing Python is uploaded, so no function can exist.
+adaptiverag/
+api/
+bench/
+config/
+data/
+db/
+docs/
+scripts/
+tests/
+pyproject.toml
+uv.lock
+requirements.txt
+.python-version
+.env.example
+web/node_modules/
+web/dist/
