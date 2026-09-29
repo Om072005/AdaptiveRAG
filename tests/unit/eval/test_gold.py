@@ -86,3 +86,14 @@ def test_jsonl_is_written_with_lf_line_endings(tmp_path: Path) -> None:
     path = tmp_path / "gold.jsonl"
     gold.write_jsonl(path, gold.build_candidates(rows(), ["q_bridge", "q_compare"]))
     assert b"\r\n" not in path.read_bytes()
+
+
+def test_unchanged_jsonl_is_not_rewritten(tmp_path: Path) -> None:
+    path = tmp_path / "gold.jsonl"
+    items = gold.build_candidates(rows(), ["q_bridge"])
+    path.write_bytes((gold.to_json(items[0]) + "\r\n").encode())  # a Windows checkout
+    gold.write_jsonl(path, items)
+    assert path.read_bytes().endswith(b"\r\n")
+    items[0].answer = "Initech"
+    gold.write_jsonl(path, items)
+    assert b"Initech" in path.read_bytes() and b"\r\n" not in path.read_bytes()

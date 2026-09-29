@@ -109,8 +109,12 @@ def read_jsonl(path: Path) -> list[GoldItem]:
 
 def write_jsonl(path: Path, items: list[GoldItem]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    # LF on every platform, so a Windows save does not rewrite every line in git
-    path.write_text("".join(to_json(i) + "\n" for i in items), encoding="utf-8", newline="\n")
+    body = "".join(to_json(i) + "\n" for i in items)
+    # an unchanged file is left alone: a Windows checkout has CRLF, and rewriting it with LF would
+    # show it as modified in git and stop the next rebase
+    if path.exists() and path.read_text(encoding="utf-8").replace("\r\n", "\n") == body:
+        return
+    path.write_text(body, encoding="utf-8", newline="\n")
 
 
 def split_items(candidates: list[GoldItem], seed: int = 7) -> list[GoldItem]:
