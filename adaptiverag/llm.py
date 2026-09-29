@@ -110,6 +110,31 @@ def retry_after_s(r: httpx.Response) -> float | None:
     return None
 
 
+def _error_bodies(r: httpx.Response) -> list[dict[str, Any]]:
+    try:
+        body = r.json()
+    except ValueError:
+        return []
+    items = body if isinstance(body, list) else [body]
+    inner = [i.get("error") for i in items if isinstance(i, dict)]
+    return [e for e in inner if isinstance(e, dict)]
+
+
+def daily_quota(r: httpx.Response) -> str | None:
+    """The quota name if a 429 is a per day limit: retrying cannot help until the day resets.
+
+    Gemini names it in QuotaFailure (quotaId ...PerDay...); Groq says "per day" in the message.
+    """
+    for err in _error_bodies(r):
+        for d in err.get("details", []):
+            for v in d.get("violations", []) if isinstance(d, dict) else []:
+                if "perday" in str(v.get("quotaId", "")).lower():
+                    return str(v["quotaId"])
+        if "per day" in str(err.get("message", "")).lower():
+            return "per day limit"
+    return None
+
+
 def _api_key(spec: ModelSpec) -> str:
     key = getattr(settings(), spec.key_env.lower(), "")
     if not key:
@@ -128,6 +153,9 @@ def _post(
         started = time.perf_counter()
         r = client().post(url, headers=headers, json=payload)
         latency_ms = int((time.perf_counter() - started) * 1000)
+        if r.status_code == 429 and (quota := daily_quota(r)):
+            # a refused retry can still count against the quota, so stop at once
+            raise RateLimited(f"{spec.model}: daily quota used up ({quota}), resume tomorrow")
         if r.status_code == 429 or r.status_code >= 500:
             if attempt == MAX_ATTEMPTS - 1:
                 raise RateLimited(f"{spec.model}: {r.status_code} after {MAX_ATTEMPTS} attempts")

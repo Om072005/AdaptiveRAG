@@ -52,3 +52,56 @@ def test_long_retry_after_stops_at_once(fake_provider: Install) -> None:
     with pytest.raises(llm.RateLimited, match="quota exhausted"):
         llm.chat("large", [{"role": "user", "content": "q"}])
     assert len(seen) == 1
+
+
+GEMINI_DAILY = {
+    "error": {
+        "code": 429,
+        "status": "RESOURCE_EXHAUSTED",
+        "details": [
+            {
+                "@type": "type.googleapis.com/google.rpc.QuotaFailure",
+                "violations": [
+                    {
+                        "quotaId": "EmbedContentRequestsPerDayPerProjectPerModel-FreeTier",
+                        "quotaValue": "1000",
+                    }
+                ],
+            },
+            {"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": "51s"},
+        ],
+    }
+}
+GEMINI_MINUTE = {
+    "error": {
+        "code": 429,
+        "details": [
+            {
+                "@type": "type.googleapis.com/google.rpc.QuotaFailure",
+                "violations": [
+                    {"quotaId": "EmbedContentRequestsPerMinutePerUserPerProjectPerModel-FreeTier"}
+                ],
+            },
+            {"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": "47s"},
+        ],
+    }
+}
+
+
+def test_daily_quota_stops_without_retrying(fake_provider: Install) -> None:
+    seen = fake_provider(lambda r: httpx.Response(429, json=GEMINI_DAILY))
+    with pytest.raises(llm.RateLimited, match="daily quota"):
+        llm.embed(["a"])
+    assert len(seen) == 1  # even though retryDelay (51 s) is under the cap
+
+
+def test_per_minute_quota_is_still_waited_out() -> None:
+    assert llm.daily_quota(httpx.Response(429, json=GEMINI_MINUTE)) is None
+    assert llm.retry_after_s(httpx.Response(429, json=GEMINI_MINUTE)) == 47.0
+
+
+def test_groq_tokens_per_day_message_is_daily() -> None:
+    body = {
+        "error": {"message": "Rate limit reached for model on tokens per day (TPD): Limit 200000"}
+    }
+    assert llm.daily_quota(httpx.Response(429, json=body)) == "per day limit"
