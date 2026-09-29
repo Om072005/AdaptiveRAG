@@ -27,6 +27,16 @@ def fake_retrieved(question: str, k: int, trace: Trace, qvec: Any = None) -> Ret
     return Retrieved(hits, [], [], 0.82, False, 12)
 
 
+def fake_embed(texts: list[str], *, trace: Trace | None = None) -> Any:
+    import numpy as np
+
+    embedded.append(texts)
+    return np.ones((len(texts), 768), dtype=np.float32)
+
+
+embedded: list[list[str]] = []
+
+
 def fake_chat(role: str, messages: list[dict[str, str]], **kw: Any) -> LLMResult:
     r = LLMResult(
         "Answer: Ankara\nTurkey's capital is Ankara [2][9].",
@@ -49,6 +59,7 @@ def fake_chat(role: str, messages: list[dict[str, str]], **kw: Any) -> LLMResult
 def fakes(monkeypatch: pytest.MonkeyPatch) -> None:
     saved.clear()
     monkeypatch.setattr(pipeline.vector, "retrieve", fake_retrieved)
+    monkeypatch.setattr(pipeline.llm, "embed", fake_embed)
     monkeypatch.setattr(answer_mod.llm, "chat", fake_chat)
     monkeypatch.setattr(Trace, "save", lambda self: saved.append(self.row()) or self.trace_id)
 
@@ -98,6 +109,45 @@ def test_budget_stop_is_saved_then_raised(monkeypatch: pytest.MonkeyPatch) -> No
     assert saved[0]["detail"]["budget_exceeded"] is True
 
 
-def test_graph_mode_is_not_wired_yet() -> None:
-    with pytest.raises(NotImplementedError):
-        pipeline.answer_query("q", "graph")
+def test_graph_mode_goes_through_graph_retrieve(monkeypatch: pytest.MonkeyPatch) -> None:
+    calls: list[str] = []
+
+    def fake_graph(question: str, k: int, trace: Trace, qvec: Any = None) -> Retrieved:
+        calls.append(question)
+        hit = Hit(
+            "d2:sentence:0", "d2", "Ankara", "Ankara is the capital of Turkey.", 0.7, "graph", 1
+        )
+        return Retrieved([hit], [], [], 0.7, False, 5)
+
+    monkeypatch.setattr(pipeline.graph, "retrieve", fake_graph)
+    r = pipeline.answer_query("What is the capital of Turkey?", "graph")
+    assert calls == ["What is the capital of Turkey?"]
+    assert r.decision.reasons == ["forced:graph"] and r.retrieved.hits[0].source == "graph"
+    assert r.answer.size == "large"  # graph route asks for the large model
+
+
+def test_hybrid_merges_both_backends_with_one_embedding(monkeypatch: pytest.MonkeyPatch) -> None:
+    from adaptiverag.types import Edge, GraphPath
+
+    edge = Edge("r1", "e1", "Istanbul", "in", "e2", "Turkey", "d1:sentence:0", 0.9)
+
+    def fake_graph(question: str, k: int, trace: Trace, qvec: Any = None) -> Retrieved:
+        assert qvec is not None
+        trace.set(path_found=True)
+        hit = Hit("d1:sentence:0", "d1", "Istanbul", "Istanbul is in Turkey.", 0.6, "graph", 1)
+        return Retrieved([hit], [GraphPath((edge,), 0.6, True)], [], 0.6, True, 7)
+
+    merged: list[tuple[int, int]] = []
+
+    def fake_merge(v: list[Hit], g: list[Hit], qvec: Any, k: int, trace: Trace) -> list[Hit]:
+        merged.append((len(v), len(g)))
+        return v[:1] + g
+
+    embedded.clear()
+    monkeypatch.setattr(pipeline.graph, "retrieve", fake_graph)
+    monkeypatch.setattr(pipeline, "merge_rerank", fake_merge)
+    r = pipeline.answer_query("What is the capital?", "hybrid")
+    assert merged == [(2, 1)] and len(embedded) == 1
+    assert r.decision.reasons == ["forced:hybrid"] and r.decision.final == "hybrid"
+    assert r.retrieved.path_found and r.retrieved.paths and r.answer.size == "large"
+    assert saved[0]["n_results"] == 2 and saved[0]["path_found"] is True

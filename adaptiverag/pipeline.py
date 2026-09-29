@@ -1,22 +1,39 @@
 """Question in, cited answer and saved trace out."""
 
+from adaptiverag import llm
 from adaptiverag.config import router_cfg
 from adaptiverag.generate.answer import synthesize
 from adaptiverag.llm import BudgetExceeded
+from adaptiverag.router.hybrid import merge_rerank
 from adaptiverag.serialize import to_response
-from adaptiverag.stores import vector
+from adaptiverag.stores import graph, vector
 from adaptiverag.telemetry.trace import Trace
-from adaptiverag.types import Mode, ModelSize, QueryResult, Retrieved, RouteDecision
+from adaptiverag.types import Mode, ModelSize, QueryResult, Retrieved, Route, RouteDecision
+
+
+def retrieve_forced(question: str, route: Route, trace: Trace) -> Retrieved:
+    """One backend, or both merged for hybrid. The question is embedded once and reused."""
+    cfg = router_cfg()
+    k = int(cfg["vector"]["k"])
+    qvec = llm.embed([question], trace=trace)[0]
+    if route == "vector":
+        return vector.retrieve(question, k, trace, qvec)
+    if route == "graph":
+        return graph.retrieve(question, k, trace, qvec)
+    v = vector.retrieve(question, k, trace, qvec)
+    g = graph.retrieve(question, k, trace, qvec)
+    hits = merge_rerank(v.hits, g.hits, qvec, int(cfg["hybrid"]["k"]), trace)
+    trace.set(n_results=len(hits), top_score=v.top_score, path_found=g.path_found)
+    return Retrieved(hits, g.paths, g.seeds, v.top_score, g.path_found, v.latency_ms + g.latency_ms)
 
 
 def route_baseline(question: str, mode: Mode, trace: Trace) -> tuple[RouteDecision, Retrieved]:
-    """Vector search only, until the router lands (graph on D6, auto on D8)."""
-    if mode in ("graph", "hybrid"):
-        raise NotImplementedError(f"mode {mode} arrives with the graph layer and the router")
-    reason = "forced:vector" if mode == "vector" else "baseline:router not wired yet"
-    decision = RouteDecision(mode, None, "vector", "vector", reasons=[reason])
+    """Forced modes go to their backend; auto stays on vector until the router lands (D8)."""
+    route: Route = "vector" if mode == "auto" else mode
+    reason = "baseline:router not wired yet" if mode == "auto" else f"forced:{mode}"
+    decision = RouteDecision(mode, None, route, route, reasons=[reason])
     with trace.span("retrieve"):
-        retrieved = vector.retrieve(question, int(router_cfg()["vector"]["k"]), trace)
+        retrieved = retrieve_forced(question, route, trace)
     return decision, retrieved
 
 
