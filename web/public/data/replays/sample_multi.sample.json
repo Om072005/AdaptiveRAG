@@ -3,7 +3,7 @@
   "question_id": "sample_multi",
   "question": "Sample multi hop question: what company did the founder of Acme Rockets later work for?",
   "type": "multi_hop",
-  "gold_answer": "Sample answer",
+  "gold_answer": "Globex",
   "supporting_titles": [
     "Sample title"
   ],
@@ -12,6 +12,145 @@
   "git_sha": "0000000",
   "config_hash": "000000000000",
   "runs": {
+    "auto": {
+      "run_id": "20260101-0000-dev-vector-sample",
+      "response": {
+        "trace_id": "00000000-0000-4000-8000-000000000000",
+        "question": "Sample multi hop question: what company did the founder of Acme Rockets later work for?",
+        "answer": {
+          "short": "Globex",
+          "text": "Answer: Globex\nJane Roe founded Acme Rockets [1] and later worked for Globex [2].",
+          "model": "sample-large",
+          "size": "large",
+          "select_reason": "large:route graph",
+          "confidence": 0.5,
+          "flagged": false,
+          "citations": [
+            {
+              "n": 1,
+              "title": "Acme Rockets",
+              "snippet": "Acme Rockets was founded by Jane Roe.",
+              "chunk_id": "sample:acme:0"
+            },
+            {
+              "n": 2,
+              "title": "Jane Roe",
+              "snippet": "She later worked for Globex.",
+              "chunk_id": "sample:jane:1"
+            }
+          ]
+        },
+        "route": {
+          "requested": "auto",
+          "label": "multi_hop",
+          "label_confidence": 0.5,
+          "method": "sample",
+          "initial": "graph",
+          "final": "graph",
+          "fallbacks": [],
+          "reasons": [
+            "relational:multi_hop"
+          ]
+        },
+        "retrieval": {
+          "hits": [
+            {
+              "rank": 1,
+              "title": "Acme Rockets",
+              "snippet": "Acme Rockets was founded by Jane Roe.",
+              "score": 0.5,
+              "source": "graph",
+              "chunk_id": "sample:acme:0"
+            },
+            {
+              "rank": 2,
+              "title": "Jane Roe",
+              "snippet": "She later worked for Globex.",
+              "score": 0.4,
+              "source": "graph",
+              "chunk_id": "sample:jane:1"
+            }
+          ],
+          "graph": {
+            "nodes": [
+              {
+                "id": "e1",
+                "name": "Acme Rockets",
+                "type": "ORG",
+                "seed": true
+              },
+              {
+                "id": "e2",
+                "name": "Jane Roe",
+                "type": "PERSON",
+                "seed": false
+              },
+              {
+                "id": "e3",
+                "name": "Globex",
+                "type": "ORG",
+                "seed": false
+              }
+            ],
+            "edges": [
+              {
+                "source": "e1",
+                "target": "e2",
+                "predicate": "founded_by",
+                "chunk_id": "sample:acme:0",
+                "confidence": 0.9
+              },
+              {
+                "source": "e2",
+                "target": "e3",
+                "predicate": "worked_for",
+                "chunk_id": "sample:jane:1",
+                "confidence": 0.8
+              }
+            ]
+          },
+          "top_score": 0.5,
+          "path_found": true
+        },
+        "trace": {
+          "spans": [
+            {
+              "name": "classify",
+              "ms": 2
+            },
+            {
+              "name": "link",
+              "ms": 40
+            },
+            {
+              "name": "retrieve",
+              "ms": 120
+            },
+            {
+              "name": "generate",
+              "ms": 900
+            }
+          ],
+          "tokens_in": 800,
+          "tokens_out": 120,
+          "cost": {
+            "classifier": 0.0,
+            "generation": 0.0002,
+            "total": 0.0002
+          },
+          "total_ms": 1062,
+          "throttle_wait_ms": 500,
+          "cached": false
+        },
+        "live": null
+      },
+      "metrics": {
+        "em": 1.0,
+        "f1": 1.0,
+        "recall_at_k": 1.0
+      },
+      "judgement": null
+    },
     "vector": {
       "run_id": "20260101-0000-dev-vector-sample",
       "response": {
@@ -92,6 +231,145 @@
         "em": 0.0,
         "f1": 0.5,
         "recall_at_k": 0.5
+      },
+      "judgement": null
+    },
+    "hybrid": {
+      "run_id": "20260101-0000-dev-vector-sample",
+      "response": {
+        "trace_id": "00000000-0000-4000-8000-000000000000",
+        "question": "Sample multi hop question: what company did the founder of Acme Rockets later work for?",
+        "answer": {
+          "short": "Globex Corporation",
+          "text": "Answer: Globex\nJane Roe founded Acme Rockets [1] and later worked for Globex [2].",
+          "model": "sample-large",
+          "size": "large",
+          "select_reason": "large:route graph",
+          "confidence": 0.5,
+          "flagged": false,
+          "citations": [
+            {
+              "n": 1,
+              "title": "Acme Rockets",
+              "snippet": "Acme Rockets was founded by Jane Roe.",
+              "chunk_id": "sample:acme:0"
+            },
+            {
+              "n": 2,
+              "title": "Jane Roe",
+              "snippet": "She later worked for Globex.",
+              "chunk_id": "sample:jane:1"
+            }
+          ]
+        },
+        "route": {
+          "requested": "hybrid",
+          "label": null,
+          "label_confidence": null,
+          "method": null,
+          "initial": "hybrid",
+          "final": "hybrid",
+          "fallbacks": [],
+          "reasons": [
+            "forced:hybrid"
+          ]
+        },
+        "retrieval": {
+          "hits": [
+            {
+              "rank": 1,
+              "title": "Acme Rockets",
+              "snippet": "Acme Rockets was founded by Jane Roe.",
+              "score": 0.5,
+              "source": "graph",
+              "chunk_id": "sample:acme:0"
+            },
+            {
+              "rank": 2,
+              "title": "Jane Roe",
+              "snippet": "She later worked for Globex.",
+              "score": 0.4,
+              "source": "graph",
+              "chunk_id": "sample:jane:1"
+            }
+          ],
+          "graph": {
+            "nodes": [
+              {
+                "id": "e1",
+                "name": "Acme Rockets",
+                "type": "ORG",
+                "seed": true
+              },
+              {
+                "id": "e2",
+                "name": "Jane Roe",
+                "type": "PERSON",
+                "seed": false
+              },
+              {
+                "id": "e3",
+                "name": "Globex",
+                "type": "ORG",
+                "seed": false
+              }
+            ],
+            "edges": [
+              {
+                "source": "e1",
+                "target": "e2",
+                "predicate": "founded_by",
+                "chunk_id": "sample:acme:0",
+                "confidence": 0.9
+              },
+              {
+                "source": "e2",
+                "target": "e3",
+                "predicate": "worked_for",
+                "chunk_id": "sample:jane:1",
+                "confidence": 0.8
+              }
+            ]
+          },
+          "top_score": 0.5,
+          "path_found": true
+        },
+        "trace": {
+          "spans": [
+            {
+              "name": "classify",
+              "ms": 2
+            },
+            {
+              "name": "link",
+              "ms": 40
+            },
+            {
+              "name": "retrieve",
+              "ms": 120
+            },
+            {
+              "name": "generate",
+              "ms": 900
+            }
+          ],
+          "tokens_in": 800,
+          "tokens_out": 120,
+          "cost": {
+            "classifier": 0.0,
+            "generation": 0.0002,
+            "total": 0.0002
+          },
+          "total_ms": 1062,
+          "throttle_wait_ms": 500,
+          "cached": false
+        },
+        "live": null
+      },
+      "metrics": {
+        "em": 0.0,
+        "f1": 0.5,
+        "recall_at_k": 1.0
       },
       "judgement": null
     }

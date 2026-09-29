@@ -8,6 +8,7 @@ import { ReplayList } from './ReplayList'
 import { ReplayPanel } from './ReplayPanel'
 import { AnswerStep } from './steps/AnswerStep'
 import { ClassifyStep } from './steps/ClassifyStep'
+import { RetrieveStep } from './steps/RetrieveStep'
 import { RouteStep } from './steps/RouteStep'
 import { StageSummary } from './steps/StageSummary'
 
@@ -46,6 +47,7 @@ export function FollowQuestion({ index }: { index: ReplayIndex }) {
             renderStage={(stage, run, r) => {
               if (STAGES[stage] === 'Classify') return <ClassifyStep run={run} />
               if (STAGES[stage] === 'Route') return <RouteStep run={run} />
+              if (STAGES[stage] === 'Retrieve') return <RetrieveStep run={run} />
               if (STAGES[stage] === 'Answer') return <AnswerStep run={run} replay={r} />
               return <StageSummary stage={stage} run={run} />
             }}

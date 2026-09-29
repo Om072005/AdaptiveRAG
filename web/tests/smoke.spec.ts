@@ -74,3 +74,14 @@ test('classify and route steps read the recorded decision', async ({ page }) => 
   await expect(page.getByText('This run asked for vector search, so the router did not choose.')).toBeVisible()
   await expect(page.getByText('Route taken')).toBeVisible()
 })
+
+test('retrieve step: graph edge shows the chunk it came from', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /Sample multi hop question/ }).click()
+  await page.getByRole('button', { name: '3 Retrieve' }).click()
+  const edge = page.getByRole('button', { name: 'worked_for, from chunk sample:jane:1' }).first()
+  await edge.click()
+  await expect(edge).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.getByText('worked_for, confidence 0.80')).toBeVisible()
+  await expect(page.locator('.bg-raised').getByText('She later worked for Globex.')).toBeVisible()
+})

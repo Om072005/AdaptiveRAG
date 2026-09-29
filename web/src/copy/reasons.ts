@@ -42,3 +42,26 @@ export function fallbackText(fallback: string): string {
   if (name === 'graph_no_path') return 'Graph traversal found no connected path, so the router tried hybrid.'
   return fallback
 }
+
+/** The model selector's reason string (generate/select.py) as a sentence. */
+export function selectText(reason: string): string {
+  const m = reason.match(/^(small|large):(.*)$/)
+  if (!m) return reason
+  const detail = m[2].trim()
+  const route = detail.match(/^route (\w+)$/)
+  if (route) return `The ${ROUTE[route[1]] ?? route[1]} route brings harder context, so the large model answered.`
+  const label = detail.match(/^label (\w+)$/)
+  if (label) {
+    return `The question is ${label[1] === 'comparison' ? 'a comparison' : 'multi hop'}, so the large model answered.`
+  }
+  const context = detail.match(/^context (\d+) tokens > (\d+)$/)
+  if (context) {
+    return `The context was ${context[1]} tokens, above the ${context[2]} token limit for the small model, so the large model answered.`
+  }
+  const small = detail.match(/^route (\w+), label (\w+), (\d+) tokens$/)
+  if (small) {
+    const kind = small[2] === 'none' ? 'an unclassified question' : `a ${(LABEL[small[2]] ?? small[2]).toLowerCase()} question`
+    return `A ${ROUTE[small[1]] ?? small[1]} route, ${kind} and ${small[3]} tokens of context fit the small model.`
+  }
+  return reason
+}
