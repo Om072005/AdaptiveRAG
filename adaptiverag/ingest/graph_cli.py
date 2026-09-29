@@ -1,5 +1,6 @@
 """python -m adaptiverag.ingest graph --corpus mini|dev|gold|full [--limit N] [--dry-run]
 python -m adaptiverag.ingest graph embed --corpus mini|dev|gold|full [--slice K/N]
+python -m adaptiverag.ingest relink [--dry-run]
 
 The build extracts triples (cached), stores the rejects, resolves entities and replaces the graph.
 The embed step fills the cache with the texts a build embeds, one slice at a time, so helpers can
@@ -18,7 +19,7 @@ from adaptiverag.ingest.extract import extract_batches, summarize
 from adaptiverag.ingest.loader import SOURCE, read_raw
 from adaptiverag.ingest.normalize import doc_id
 from adaptiverag.ingest.pipeline import endpoint, in_slice, parse_slice
-from adaptiverag.ingest.resolve import graph_texts, relation_texts, resolve
+from adaptiverag.ingest.resolve import graph_texts, relation_id, relation_texts, resolve
 from adaptiverag.llm import RateLimited
 from adaptiverag.stores import graph as store
 from adaptiverag.types import Chunk, LLMResult, Triple
@@ -142,6 +143,60 @@ def main(argv: list[str] | None = None) -> None:
         # embeddings are cached per text, so a rerun later continues where this stopped
         raise SystemExit(f"rate limited while embedding, rerun later to resume: {e}") from e
     print(json.dumps({"graph": graph}, indent=2))
+
+
+def best_chunk(start: int, end: int, chunks: list[store.Span]) -> str | None:
+    """The chunk sharing the most characters with the evidence span; a tie goes to the earlier."""
+    best, most = None, 0
+    for cid, lo, hi in chunks:
+        overlap = min(end, hi) - max(start, lo)
+        if overlap > most:
+            best, most = cid, overlap
+    return best
+
+
+def relink_plan(
+    rels: list[store.RelationRow], chunks: dict[str, list[store.Span]]
+) -> tuple[list[tuple[str, str, str]], list[str], list[str]]:
+    """(moves as (old id, new id, new chunk), duplicates dropped, relations left where they were).
+
+    A relation moves to the serving chunk its evidence overlaps most, and its id follows its chunk.
+    Two relations that land on one id are the same fact: the more confident one stays."""
+    keep: dict[str, tuple[float, str, str]] = {}  # new id -> (confidence, old id, chunk)
+    unmatched: list[str] = []
+    for rel_id, s, p, o, chunk, doc, start, end, conf in rels:
+        target = best_chunk(start, end, chunks.get(doc, []))
+        if target is None:
+            unmatched.append(rel_id)
+            target = chunk
+        # a relation that keeps its chunk keeps its id; a moved one takes the id of its new chunk
+        new_id = rel_id if target == chunk else relation_id(s, p, o, target)
+        if new_id not in keep or (conf, keep[new_id][1]) > (keep[new_id][0], rel_id):
+            keep[new_id] = (conf, rel_id, target)
+    kept = {old for _, old, _ in keep.values()}
+    dropped = sorted(r[0] for r in rels if r[0] not in kept)
+    moves = sorted((old, new, chunk) for new, (_, old, chunk) in keep.items() if new != old)
+    return moves, dropped, unmatched
+
+
+def relink_main(argv: list[str]) -> None:
+    parser = argparse.ArgumentParser(prog="python -m adaptiverag.ingest relink")
+    parser.add_argument("--dry-run", action="store_true", help="print the plan, change nothing")
+    args = parser.parse_args(argv)
+    strategy = router_cfg()["serving"]["chunk_strategy"]
+    print(f"database: {endpoint()}, serving strategy: {strategy}")
+    rels, chunks = store.relations_and_chunks(strategy)
+    moves, dropped, unmatched = relink_plan(rels, chunks)
+    summary: dict[str, Any] = {
+        "relations": len(rels),
+        "moved": len(moves),
+        "merged_as_duplicates": len(dropped),
+        "left_in_place_no_serving_chunk": len(unmatched),
+    }
+    if not args.dry_run:
+        store.apply_relink(moves, dropped)
+        summary["citing_another_strategy_after"] = store.off_strategy(strategy)
+    print(json.dumps(summary, indent=2))
 
 
 if __name__ == "__main__":

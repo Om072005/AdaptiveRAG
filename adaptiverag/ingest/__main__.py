@@ -1,4 +1,4 @@
-"""python -m adaptiverag.ingest run ... | embed ... | graph ... (see USAGE)"""
+"""python -m adaptiverag.ingest run ... | embed ... | graph ... | relink ... (see USAGE)"""
 
 import sys
 
@@ -7,7 +7,8 @@ from adaptiverag.ingest import graph_cli, pipeline
 USAGE = (
     "usage: python -m adaptiverag.ingest run --corpus mini|full [--strategies ...] [--no-embed]\n"
     "       python -m adaptiverag.ingest embed --corpus mini|full --strategy S [--slice K/N]\n"
-    "       python -m adaptiverag.ingest graph --corpus mini|full [...]"
+    "       python -m adaptiverag.ingest graph --corpus mini|full [...]\n"
+    "       python -m adaptiverag.ingest relink [--dry-run]"
 )
 
 
@@ -19,6 +20,8 @@ def main(argv: list[str]) -> None:
         pipeline.embed_main(rest)
     elif command == "graph":
         graph_cli.main(rest)
+    elif command == "relink":
+        graph_cli.relink_main(rest)
     else:
         raise SystemExit(USAGE)
 

@@ -10,6 +10,7 @@ def calls(monkeypatch: pytest.MonkeyPatch) -> list[tuple[str, list[str]]]:
     monkeypatch.setattr(pipeline, "main", lambda argv: seen.append(("run", argv)))
     monkeypatch.setattr(graph_cli, "main", lambda argv: seen.append(("graph", argv)))
     monkeypatch.setattr(pipeline, "embed_main", lambda argv: seen.append(("embed", argv)))
+    monkeypatch.setattr(graph_cli, "relink_main", lambda argv: seen.append(("relink", argv)))
     return seen
 
 
@@ -17,10 +18,12 @@ def test_run_and_graph_get_the_rest_of_the_arguments(calls: list[tuple[str, list
     cli.main(["run", "--corpus", "mini"])
     cli.main(["graph", "--corpus", "mini", "--limit", "8"])
     cli.main(["embed", "--slice", "2/4"])
+    cli.main(["relink", "--dry-run"])
     assert calls == [
         ("run", ["--corpus", "mini"]),
         ("graph", ["--corpus", "mini", "--limit", "8"]),
         ("embed", ["--slice", "2/4"]),
+        ("relink", ["--dry-run"]),
     ]
 
 

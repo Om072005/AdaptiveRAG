@@ -106,6 +106,52 @@ def graph_counts() -> dict[str, int]:
     return dict(zip(names, row or (0,) * len(names), strict=True))
 
 
+# rel_id, subject, predicate, object, chunk_id, doc_id, evidence start, evidence end, confidence
+RelationRow = tuple[str, str, str, str, str, str, int, int, float]
+Span = tuple[str, int, int]  # chunk_id, start, end in documents.text
+
+
+def relations_and_chunks(strategy: Strategy) -> tuple[list[RelationRow], dict[str, list[Span]]]:
+    """Every relation, and the chunks of one strategy in the documents they cite, by doc_id."""
+    with db.conn() as c:
+        rels = c.execute(
+            "select rel_id, subject_id, predicate, object_id, chunk_id, doc_id, evidence_start, "
+            "evidence_end, extraction_confidence from relations order by rel_id"
+        ).fetchall()
+        rows = c.execute(
+            "select doc_id, chunk_id, start_offset, end_offset from chunks where strategy = %s "
+            "and doc_id in (select distinct doc_id from relations) order by doc_id, ord",
+            (strategy,),
+        ).fetchall()
+    spans: dict[str, list[Span]] = defaultdict(list)
+    for doc, cid, start, end in rows:
+        spans[doc].append((cid, start, end))
+    return rels, dict(spans)
+
+
+def apply_relink(moves: list[tuple[str, str, str]], dropped: list[str]) -> None:
+    """In one transaction: drop the duplicates first, then move each relation (old id, new id,
+    new chunk). The foreign key still refuses a chunk that does not exist."""
+    with db.conn() as c, c.cursor() as cur:
+        if dropped:
+            cur.execute("delete from relations where rel_id = any(%s)", (dropped,))
+        cur.executemany(
+            "update relations set rel_id = %s, chunk_id = %s where rel_id = %s",
+            [(new, chunk, old) for old, new, chunk in moves],
+        )
+
+
+def off_strategy(strategy: Strategy) -> int:
+    """Relations citing a chunk of another strategy; 0 after a relink."""
+    with db.conn() as c:
+        row = c.execute(
+            "select count(*) from relations r join chunks k using (chunk_id) "
+            "where k.strategy <> %s",
+            (strategy,),
+        ).fetchone()
+    return int(row[0]) if row else 0
+
+
 # an alias counts as found when it matches a run of words in the question (pg_trgm word similarity)
 ALIAS_MATCH = """
 select a.surface_form, a.canonical_id, e.canonical_name, e.type, a.confidence,

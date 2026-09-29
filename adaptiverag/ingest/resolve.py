@@ -89,6 +89,13 @@ def entity_id(type_: str, name: str, anchor_doc: str = "") -> str:
     return "e_" + hashlib.sha1(key.encode()).hexdigest()[:12]
 
 
+def relation_id(subject_id: str, predicate: str, object_id: str, chunk_id: str) -> str:
+    """First 16 hex of sha1(subject|predicate|object|chunk), the contract's relation key."""
+    return hashlib.sha1(f"{subject_id}|{predicate}|{object_id}|{chunk_id}".encode()).hexdigest()[
+        :16
+    ]
+
+
 def pick_name(counts: Counter[str]) -> str:
     """Most frequent surface form, then the longest, then alphabetical, so reruns agree."""
     return min(counts, key=lambda s: (-counts[s], -len(s), s))
@@ -214,7 +221,7 @@ def build_rows(
         # skipped: a name that normalizes to nothing, or both ends resolved to one entity
         if s is None or o is None or s == o:
             continue
-        rel_id = hashlib.sha1(f"{s}|{t.predicate}|{o}|{t.chunk_id}".encode()).hexdigest()[:16]
+        rel_id = relation_id(s, t.predicate, o, t.chunk_id)
         if rel_id in relations and relations[rel_id]["extraction_confidence"] >= t.confidence:
             continue
         relations[rel_id] = {
