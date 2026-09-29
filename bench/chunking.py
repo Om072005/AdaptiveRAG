@@ -1,8 +1,9 @@
 """python -m bench.chunking [--k 8] [--limit N]
 
 The README chunking table, measured on the mini corpus's own HotpotQA questions (any that are in the
-gold test split are left out). For each strategy, the top k chunks of that strategy are retrieved
-with the serving search and scored:
+gold test split are left out). For each strategy, the top k chunks are found by exact cosine search
+over that strategy's stored chunks of the mini corpus documents only, so every strategy searches the
+same 300 documents (the full corpus has sentence chunks only), and scored:
   precision          share of retrieved characters inside gold supporting sentences (sp_precision)
   context retention  share of gold supporting sentences that sit whole inside one retrieved chunk
   retrieval score    supporting title recall@k, with MRR next to it
@@ -23,6 +24,7 @@ from adaptiverag.ingest import loader
 from adaptiverag.ingest.embed import embed_texts
 from adaptiverag.stores import corpus, vector
 from adaptiverag.stores.db import conn
+from adaptiverag.stores.flat import FlatIndex
 from adaptiverag.types import Document, Hit, Strategy
 from bench import results
 
@@ -74,22 +76,51 @@ def verdict(strategy: str, serving: str, interval: tuple[float, float, float]) -
     return f"too close to call against {serving} on this sample"
 
 
+Row = tuple[str, str, str, int, int]  # doc_id, title, text, start_offset, end_offset
+
+
+def pool(strategy: Strategy, doc_ids: list[str]) -> tuple[FlatIndex, list[str], dict[str, Row]]:
+    """One strategy's embedded chunks of these documents, as an exact index plus their rows."""
+    ids, vecs = vector.stored_vectors(strategy, doc_ids)
+    with conn() as c:
+        total = len(corpus.chunk_ids(c, strategy, doc_ids))
+        rows = corpus.hit_rows(c, ids)
+    if not ids or len(ids) < total:
+        raise SystemExit(f"{len(ids)} of {total} {strategy} chunks are embedded; embed them first")
+    index = FlatIndex()
+    index.add(vecs)
+    return index, ids, rows
+
+
+def top_hits(
+    index: FlatIndex, ids: list[str], rows: dict[str, Row], qvec: np.ndarray, k: int
+) -> list[Hit]:
+    """The k best chunks as ranked hits, the way the serving search reports them."""
+    found, scores = index.search(qvec, k)
+    hits = []
+    for rank, (i, score) in enumerate(zip(found.tolist(), scores.tolist(), strict=True), start=1):
+        doc_id, title, text, _, _ = rows[ids[i]]
+        hits.append(Hit(ids[i], doc_id, title, text, float(score), "vector", rank))
+    return hits
+
+
 def score_questions(
     strategy: Strategy,
     questions: list[dict[str, Any]],
     qvecs: np.ndarray,
     by_title: dict[str, Document],
     k: int,
-) -> list[dict[str, float]]:
-    """Per question metrics for one strategy's top k hits."""
-    rows = []
+    doc_ids: list[str],
+) -> tuple[int, list[dict[str, float]]]:
+    """Number of chunks searched, and per question metrics for this strategy's top k hits."""
+    index, ids, rows = pool(strategy, doc_ids)
+    per_question = []
     for q, qvec in zip(questions, qvecs, strict=True):
-        hits: list[Hit] = vector.search(qvec, k, strategy)
-        with conn() as c:
-            offsets = corpus.chunk_offsets(c, [h.chunk_id for h in hits])
+        hits = top_hits(index, ids, rows, qvec, k)
+        offsets = {h.chunk_id: (rows[h.chunk_id][0], *rows[h.chunk_id][3:]) for h in hits}
         spans = supporting_spans(q, by_title)
         titles = list(dict.fromkeys(t for t, _ in q["supporting_facts"]))
-        rows.append(
+        per_question.append(
             {
                 "precision": sp_precision(hits, chunk_spans(spans, offsets)),
                 "context_retention": retention(spans, list(offsets.values())),
@@ -97,7 +128,7 @@ def score_questions(
                 "mrr": mrr(hits, titles),
             }
         )
-    return rows
+    return len(ids), per_question
 
 
 def markdown(run_id: str, p: dict[str, Any], rows: list[dict[str, Any]]) -> str:
@@ -106,9 +137,10 @@ def markdown(run_id: str, p: dict[str, Any], rows: list[dict[str, Any]]) -> str:
         "",
         "{header}"
         f"{p['n_questions']} HotpotQA questions of the mini corpus ({p['excluded_test']} left out "
-        f"because they are in the gold test split), top {p['k']} chunks per strategy from the "
-        "serving search "
-        "(pgvector). This is a small sample: one question moves recall@k by "
+        f"because they are in the gold test split), top {p['k']} chunks per strategy by exact "
+        "cosine search. Fixed and semantic chunks exist only for the mini corpus's 300 documents "
+        "and the full corpus is sentence chunks only, so every strategy here searches the same "
+        "300 documents. This is a small sample: one question moves recall@k by "
         f"{1 / p['n_questions']:.3f}. Verdicts compare recall@k with the serving strategy "
         f"({p['serving']}) by a paired bootstrap over questions ({p['bootstrap']} resamples, seed "
         f"{p['seed']}); the config change is a separate, reviewed step.",
@@ -148,12 +180,11 @@ def main() -> None:
         "semantic": f"split above percentile {cfg['semantic']['percentile']}",
     }
     doc_ids = [d.doc_id for d in docs]
-    per_strategy = {s: score_questions(s, kept, qvecs, by_title, args.k) for s in STRATEGIES}
+    scored = {s: score_questions(s, kept, qvecs, by_title, args.k, doc_ids) for s in STRATEGIES}
+    per_strategy = {s: per_q for s, (_, per_q) in scored.items()}
     rows = []
     for s in STRATEGIES:
-        per_q = per_strategy[s]
-        with conn() as c:
-            n_chunks = len(corpus.chunk_ids(c, s, doc_ids))
+        n_chunks, per_q = scored[s]
         recall = [r["recall_at_k"] for r in per_q]
         interval = paired_bootstrap(recall, [r["recall_at_k"] for r in per_strategy[serving]])
         rows.append(

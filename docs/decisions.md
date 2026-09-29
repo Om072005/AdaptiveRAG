@@ -91,6 +91,11 @@ counts only the successful attempt; backoff after a 429 goes to `wait_ms` and `t
 - **Split Gemini quotas instead of billing.** Enabling billing on the team's Gemini project failed on Google's
   side (`OR_BACR2_59`), so embedding the full corpus is spread over the four members' own keys, one slice each,
   into Neon `main`, and judged runs grow 20 questions per key per day with `--resume`.
+- **Fixed and semantic chunks exist only for the mini corpus.** The chunking experiment compares the three
+  strategies on the mini corpus's 300 documents and its 27 HotpotQA questions that are not in the gold test
+  split. Neon `main` holds fixed and semantic chunks for those documents only; the full corpus (2,957 documents)
+  is chunked and embedded as sentence chunks only. Serving searches sentence chunks through their own partial
+  index, so the extra strategies change nothing it returns.
 - **The page names members by GitHub username**, shows the lead's address as contact, and the repo is MIT.
 
 ## Providers

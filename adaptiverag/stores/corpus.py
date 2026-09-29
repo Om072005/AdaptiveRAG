@@ -65,15 +65,16 @@ def chunk_ids(c: psycopg.Connection[Any], strategy: Strategy, doc_ids: list[str]
     return [r[0] for r in rows]
 
 
-def chunk_offsets(
+def hit_rows(
     c: psycopg.Connection[Any], chunk_ids: list[str]
-) -> dict[str, tuple[str, int, int]]:
-    """(doc_id, start_offset, end_offset) by chunk id, for the ids that exist."""
+) -> dict[str, tuple[str, str, str, int, int]]:
+    """(doc_id, title, text, start_offset, end_offset) by chunk id, for the ids that exist."""
     rows = c.execute(
-        "select chunk_id, doc_id, start_offset, end_offset from chunks where chunk_id = any(%s)",
+        "select ch.chunk_id, ch.doc_id, d.title, ch.text, ch.start_offset, ch.end_offset "
+        "from chunks ch join documents d using (doc_id) where ch.chunk_id = any(%s)",
         (chunk_ids,),
     ).fetchall()
-    return {r[0]: (r[1], r[2], r[3]) for r in rows}
+    return {r[0]: (r[1], r[2], r[3], r[4], r[5]) for r in rows}
 
 
 def chunks_without_embedding(

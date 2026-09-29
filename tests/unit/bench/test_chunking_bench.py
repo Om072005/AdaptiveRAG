@@ -1,6 +1,6 @@
 from adaptiverag.ingest.normalize import join_sentences
 from adaptiverag.types import Document
-from bench.chunking import paired_bootstrap, retention, supporting_spans, verdict
+from bench.chunking import paired_bootstrap, retention, supporting_spans, top_hits, verdict
 
 
 def doc(title: str, sentences: list[str]) -> Document:
@@ -42,3 +42,21 @@ def test_verdict_lines() -> None:
     assert verdict("fixed", "sentence", (0.1, 0.02, 0.2)).startswith("beats sentence")
     assert verdict("fixed", "sentence", (-0.1, -0.2, -0.01)).startswith("below sentence")
     assert verdict("semantic", "sentence", (0.05, -0.03, 0.12)).startswith("too close to call")
+
+
+def test_top_hits_rank_the_pool_exactly() -> None:
+    import numpy as np
+
+    from adaptiverag.stores.flat import FlatIndex
+
+    ids = ["d:fixed:0", "d:fixed:1", "d:fixed:2"]
+    vecs = np.array([[1.0, 0.0], [0.6, 0.8], [0.0, 1.0]], dtype=np.float32)
+    rows = {i: ("d", "Title", f"text {n}", n * 10, n * 10 + 9) for n, i in enumerate(ids)}
+    index = FlatIndex()
+    index.add(vecs)
+    hits = top_hits(index, ids, rows, np.array([0.0, 1.0]), 2)
+    assert [(h.chunk_id, h.rank, h.title, h.text) for h in hits] == [
+        ("d:fixed:2", 1, "Title", "text 2"),
+        ("d:fixed:1", 2, "Title", "text 1"),
+    ]
+    assert hits[0].score == 1.0 and all(h.source == "vector" for h in hits)
