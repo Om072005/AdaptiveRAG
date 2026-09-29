@@ -23,6 +23,8 @@ METRICS = (
     "completeness",
 )
 QTYPES = ("single_hop", "multi_hop", "comparison")
+# The README's "router misclassifying at high confidence" failure mode is watched from here up
+CONFIDENT_MISROUTE = 0.8
 
 
 def percentile(values: list[float], p: float) -> float | None:
@@ -52,7 +54,77 @@ def aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "by_type": {
             t: means(sub) for t in QTYPES if (sub := [r for r in rows if r["gold_type"] == t])
         },
+        "confusion": confusion(rows),
+        "misroutes": misroutes(rows),
     }
+
+
+def confusion(rows: list[dict[str, Any]]) -> dict[str, Any] | None:
+    """Counts with gold type as rows and predicted type as columns; None for a forced route run."""
+    judged = [r for r in rows if r.get("predicted_type") in QTYPES]
+    if not judged:
+        return None
+    matrix = [
+        [sum(r["gold_type"] == g and r["predicted_type"] == p for r in judged) for p in QTYPES]
+        for g in QTYPES
+    ]
+    return {"labels": list(QTYPES), "matrix": matrix}
+
+
+def macro_f1(matrix: list[list[int]]) -> float:
+    """Mean over labels of per label F1 (a label never predicted nor present scores 0)."""
+    scores = []
+    for i in range(len(matrix)):
+        predicted = sum(row[i] for row in matrix)
+        actual = sum(matrix[i])
+        scores.append(2 * matrix[i][i] / (predicted + actual) if predicted + actual else 0.0)
+    return mean(scores)
+
+
+def misroutes(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Questions whose predicted type is wrong, most confident first, confident ones marked."""
+    wrong = [
+        r
+        for r in rows
+        if r.get("predicted_type") in QTYPES and r["predicted_type"] != r["gold_type"]
+    ]
+    return [
+        {
+            "question_id": r["question_id"],
+            "gold_type": r["gold_type"],
+            "predicted_type": r["predicted_type"],
+            "confidence": r.get("classifier_confidence"),
+            "route_taken": r.get("route_taken"),
+            "confident": (r.get("classifier_confidence") or 0) >= CONFIDENT_MISROUTE,
+        }
+        for r in sorted(wrong, key=lambda r: -(r.get("classifier_confidence") or 0))
+    ]
+
+
+def render_router(conf: dict[str, Any], wrong: list[dict[str, Any]]) -> list[str]:
+    labels = conf["labels"]
+    lines = [
+        "",
+        f"## Router (macro F1 {fmt(macro_f1(conf['matrix']))})",
+        "",
+        "| gold, predicted | " + " | ".join(labels) + " |",
+        "|---|" + "---|" * len(labels),
+    ]
+    for label, row in zip(labels, conf["matrix"], strict=True):
+        lines.append(f"| {label} | " + " | ".join(str(n) for n in row) + " |")
+    confident = [w for w in wrong if w["confident"]]
+    other = [w for w in wrong if not w["confident"]]
+    for title, sub in [
+        (f"Confident misroutes (confidence at least {CONFIDENT_MISROUTE})", confident),
+        ("Other misroutes", other),
+    ]:
+        lines += ["", f"### {title}: {len(sub)}", ""]
+        lines += [
+            f"- `{w['question_id']}` {w['gold_type']} predicted {w['predicted_type']}"
+            f" at {fmt(w['confidence'])}, routed {w['route_taken']}"
+            for w in sub
+        ]
+    return lines
 
 
 def delta(new: float | None, old: float | None) -> float | None:
@@ -109,6 +181,8 @@ def render_md(run: dict[str, Any], agg: dict[str, Any], vs: dict[str, Any] | Non
             f"| {t} | {s['n']} | {fmt(s['em'])} | {fmt(s['f1'])} | {fmt(s['recall_at_k'])} | "
             f"{fmt(s['faithfulness'])} | {change} |"
         )
+    if agg.get("confusion"):
+        lines += render_router(agg["confusion"], agg["misroutes"])
     return "\n".join(lines) + "\n"
 
 
@@ -123,8 +197,11 @@ def load(c: psycopg.Connection[Any], run_id: str) -> tuple[dict[str, Any], list[
         raise SystemExit(f"no run {run_id}")
     run = dict(zip([d.name for d in cur.description or []], row, strict=True))
     cur = c.execute(
-        "select question_id, gold_type, em, f1, recall_at_k, mrr, sp_precision, faithfulness,"
-        " relevance, completeness, cost_usd, latency_ms from eval_results where run_id = %s",
+        "select r.question_id, r.gold_type, r.predicted_type, r.route_taken, r.em, r.f1,"
+        " r.recall_at_k, r.mrr, r.sp_precision, r.faithfulness, r.relevance, r.completeness,"
+        " r.cost_usd, r.latency_ms, t.classifier_confidence from eval_results r"
+        " left join traces t on t.trace_id = r.trace_id where r.run_id = %s"
+        " order by r.question_id",
         (run_id,),
     )
     names = [d.name for d in cur.description or []]
