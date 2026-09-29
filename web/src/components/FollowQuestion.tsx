@@ -3,9 +3,10 @@ import { loadReplay } from '../data/load'
 import { useLoaded } from '../data/useLoaded'
 import type { ReplayIndex } from '../types'
 import { DataMissing } from './DataMissing'
-import { ordered } from '../data/replay'
+import { STAGES, ordered } from '../data/replay'
 import { ReplayList } from './ReplayList'
 import { ReplayPanel } from './ReplayPanel'
+import { AnswerStep } from './steps/AnswerStep'
 import { StageSummary } from './steps/StageSummary'
 
 export function FollowQuestion({ index }: { index: ReplayIndex }) {
@@ -40,7 +41,9 @@ export function FollowQuestion({ index }: { index: ReplayIndex }) {
           <ReplayPanel
             key={current}
             replay={replay.data}
-            renderStage={(stage, run) => <StageSummary stage={stage} run={run} />}
+            renderStage={(stage, run, r) =>
+              STAGES[stage] === 'Answer' ? <AnswerStep run={run} replay={r} /> : <StageSummary stage={stage} run={run} />
+            }
             renderRoutes={(r) => <p className="text-small m-0">Recorded modes: {Object.keys(r.runs).join(', ')}</p>}
           />
         )}

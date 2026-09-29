@@ -44,3 +44,23 @@ test('went wrong questions are grouped with their outcome word', async ({ page }
   await expect(page.getByRole('heading', { name: 'Went wrong' })).toBeVisible()
   await expect(page.getByRole('button', { name: /which is older.*Misrouted/ })).toBeVisible()
 })
+
+test('answer step: citation marker highlights its source, gold answer and scores', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /Sample single hop question/ }).click()
+  await page.getByRole('button', { name: '5 Answer' }).click()
+  await expect(page.getByText('Sample answer', { exact: true }).first()).toBeVisible()
+  const marker = page.getByRole('button', { name: 'Source 1' })
+  await marker.click()
+  await expect(marker).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.getByRole('listitem').filter({ hasText: 'Sample snippet.' })).toHaveClass(/border-cream-100/)
+  await expect(page.getByText('Gold answer')).toBeVisible()
+  await expect(page.getByText('Token F1')).toBeVisible()
+})
+
+test('a not enough context answer is shown, in muted text', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /which is older/ }).click()
+  await page.getByRole('button', { name: '5 Answer' }).click()
+  await expect(page.getByText('Not enough context')).toHaveClass(/text-muted/)
+})

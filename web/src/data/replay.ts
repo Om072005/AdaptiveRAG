@@ -30,3 +30,14 @@ export function mainRun(replay: Replay): { mode: Mode; run: RecordedRun } | null
   }
   return null
 }
+
+export const NOT_ENOUGH = 'not enough context'
+
+/** The explanation under the "Answer:" line, split into text and [n] citation markers. */
+export function explanationParts(answerText: string): (string | number)[] {
+  const body = answerText.includes('\n') ? answerText.slice(answerText.indexOf('\n') + 1) : ''
+  return body
+    .split(/(\[\d+\])/)
+    .filter((p) => p !== '')
+    .map((p) => (/^\[\d+\]$/.test(p) ? Number(p.slice(1, -1)) : p))
+}
