@@ -1,4 +1,5 @@
 import { DataMissing } from './components/DataMissing'
+import { FollowQuestion } from './components/FollowQuestion'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
@@ -8,7 +9,6 @@ import { loadReplayIndex, loadResults } from './data/load'
 import { useLoaded } from './data/useLoaded'
 
 const REPO_URL = 'https://github.com/Om072005/AdaptiveRAG'
-const OUTCOME = { correct: 'Correct', partial: 'Partial', wrong: 'Wrong', misrouted: 'Misrouted' }
 
 export default function App() {
   const replays = useLoaded(loadReplayIndex)
@@ -36,15 +36,7 @@ export default function App() {
           {replays.status === 'loading' && <div className="h-px w-64 bg-rule" aria-label="Loading" />}
           {replays.status === 'missing' && <DataMissing />}
           {replays.status === 'error' && <DataMissing error={replays.message} />}
-          {replays.status === 'ok' && (
-            <ul className="m-0 list-none p-0">
-              {replays.data.items.map((item) => (
-                <li key={item.question_id} className="text-small border-b border-rule py-3">
-                  {item.question} <span className="text-muted">{OUTCOME[item.outcome]}</span>
-                </li>
-              ))}
-            </ul>
-          )}
+          {replays.status === 'ok' && <FollowQuestion index={replays.data} />}
         </Section>
         <Section
           id="workflows"
