@@ -1,4 +1,4 @@
-"""Linking against real Postgres (pg_trgm, pgvector) on your own dev branch.
+"""Linking and traversal against real Postgres (pg_trgm, pgvector) on your own dev branch.
 
 A fixture graph is inserted in one transaction and rolled back, so nothing stays behind.
 Run with: uv run pytest -m network tests/unit/graph/test_graph_db.py
@@ -12,7 +12,8 @@ import pytest
 from psycopg import Connection
 
 from adaptiverag.stores import db
-from adaptiverag.stores.graph import seeds_for
+from adaptiverag.stores.graph import retrieve_from_seeds, seeds_for
+from adaptiverag.telemetry.trace import Trace
 
 pytestmark = pytest.mark.network
 
@@ -104,3 +105,17 @@ def test_embedding_fallback_when_no_alias_matches(c: Connection[Any]) -> None:
         s.canonical_id == "e_fx_tb" and s.matched == "embedding" and s.score == pytest.approx(1.0)
     )
     assert seeds_for(c, "the director of the 1994 biopic", unit(700), MIN_SEED) == []
+
+
+def test_traversal_joins_two_seeds_through_the_film(c: Connection[Any]) -> None:
+    trace = Trace("q", "graph", "cli")
+    seeds = seeds_for(
+        c, "Which film did Tim Burton and Johnny Depp both work on?", unit(700), MIN_SEED
+    )
+    r = retrieve_from_seeds(c, seeds, 4, unit(1), trace)
+    best = r.paths[0]
+    assert best.connects_seeds and sorted(e.rel_id for e in best.edges) == ["fx_r1", "fx_r2"]
+    assert r.path_found and [h.chunk_id for h in r.hits] == [CHUNK]
+    assert r.hits[0].title == "Fixture" and r.hits[0].source == "graph"
+    # fx_r1 embeds on the question's axis: 0.9 x 1.0; fx_r2 is orthogonal: 0.9 x 0.5
+    assert best.score == pytest.approx(0.9 * 1.0 * 0.9 * 0.5, rel=1e-5)

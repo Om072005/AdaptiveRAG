@@ -1,9 +1,12 @@
 import random
 from typing import Any
 
+import numpy as np
 import pytest
 
-from adaptiverag.stores.graph import bfs, edge_score
+from adaptiverag.stores import graph
+from adaptiverag.stores.graph import bfs, edge_score, path_found, provenance, retrieve_from_seeds
+from adaptiverag.telemetry.trace import Trace
 from adaptiverag.types import Edge, Seed
 
 
@@ -98,3 +101,53 @@ def test_paths_never_revisit_a_node_and_max_paths_cuts() -> None:
 def test_no_seeds_no_paths() -> None:
     fetch = Graph(TOY)
     assert bfs([], fetch, 2, 25, 8) == [] and fetch.calls == 0
+
+
+def test_provenance_cites_each_chunk_once_in_path_order() -> None:
+    paths = bfs([seed("a"), seed("b")], Graph(TOY), 2, 25, 50)
+    cited = provenance(paths, k=3)
+    assert [c for c, _ in cited][:2] == ["d:sentence:r1", "d:sentence:r2"]
+    assert len(cited) == 3 and len({c for c, _ in cited}) == 3
+    assert cited[0][1] == paths[0].score
+
+
+def test_path_found_means_joined_seeds_or_a_strong_single_path() -> None:
+    joined = bfs([seed("a"), seed("b")], Graph(TOY), 2, 25, 50)
+    assert path_found(joined, min_path_score=0.99)
+    single = bfs([seed("a")], Graph(TOY), 1, 25, 50)
+    assert path_found(single, min_path_score=0.9)
+    assert not path_found(single, min_path_score=0.91)
+    assert not path_found([], 0.2)
+
+
+class FakeConn:
+    """Answers the frontier and chunk text queries from fixed rows."""
+
+    def __init__(self) -> None:
+        self.rows: list[Any] = []
+
+    def execute(self, sql: str, params: Any) -> "FakeConn":
+        if sql == graph.FRONTIER_EDGES:
+            ids = params["ids"]
+            self.rows = [
+                (e.rel_id, e.subject_id, e.subject_name, e.predicate, e.object_id)
+                + (e.object_name, e.chunk_id, e.confidence, c)
+                for e, c in TOY
+                if e.subject_id in ids or e.object_id in ids
+            ]
+        else:
+            self.rows = [(cid, "d", "Title", f"text of {cid}") for cid in params[0]]
+        return self
+
+    def fetchall(self) -> list[Any]:
+        return self.rows
+
+
+def test_retrieve_from_seeds_turns_paths_into_hits_and_fills_the_trace() -> None:
+    trace = Trace("q", "graph", "cli")
+    r = retrieve_from_seeds(FakeConn(), [seed("a"), seed("b")], 2, np.zeros(768), trace)  # type: ignore[arg-type]
+    assert [h.chunk_id for h in r.hits] == ["d:sentence:r1", "d:sentence:r2"]
+    assert [h.rank for h in r.hits] == [1, 2] and {h.source for h in r.hits} == {"graph"}
+    assert r.path_found and r.top_score == pytest.approx(0.54)
+    assert trace.fields["n_results"] == 2 and trace.fields["path_found"] is True
+    assert trace.fields["top_score"] == r.top_score

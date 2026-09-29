@@ -1,5 +1,6 @@
 """Graph reads and writes on Postgres: corpus chunks for extraction, linking, traversal."""
 
+import time
 from collections import defaultdict
 from collections.abc import Callable
 from typing import Any
@@ -8,10 +9,11 @@ import numpy as np
 from psycopg import Connection
 from psycopg.types.json import Jsonb
 
+from adaptiverag import llm
 from adaptiverag.config import router_cfg
 from adaptiverag.stores import db
 from adaptiverag.telemetry.trace import Trace
-from adaptiverag.types import Chunk, Edge, GraphPath, Retrieved, Seed, Strategy
+from adaptiverag.types import Chunk, Edge, GraphPath, Hit, Retrieved, Seed, Strategy
 
 
 def corpus_chunks(doc_ids: list[str], strategy: Strategy) -> tuple[list[Chunk], dict[str, str]]:
@@ -74,6 +76,10 @@ from relations r
 join entities s on s.canonical_id = r.subject_id
 join entities o on o.canonical_id = r.object_id
 where r.subject_id = any(%(ids)s) or r.object_id = any(%(ids)s)
+"""
+CHUNK_TEXT = """
+select c.chunk_id, c.doc_id, d.title, c.text
+from chunks c join documents d using (doc_id) where c.chunk_id = any(%s)
 """
 
 # surface form, canonical id, name, type, alias confidence, word similarity
@@ -193,6 +199,45 @@ def traverse(
     return bfs(seeds, lambda ids: edges_for(c, ids, qvec), depth, fanout, max_paths)
 
 
+def provenance(paths: list[GraphPath], k: int) -> list[tuple[str, float]]:
+    """(chunk_id, path score) of the chunks the best paths cite, in path order, each chunk once."""
+    order: dict[str, float] = {}
+    for p in paths:
+        for e in p.edges:
+            order.setdefault(e.chunk_id, p.score)
+    return list(order.items())[:k]
+
+
+def path_found(paths: list[GraphPath], min_path_score: float) -> bool:
+    """D10: a path joining two seeds, or a single seed path at or above graph.min_path_score."""
+    return any(p.connects_seeds or p.score >= min_path_score for p in paths)
+
+
+def retrieve_from_seeds(
+    c: Connection[Any], seeds: list[Seed], k: int, qvec: np.ndarray, trace: Trace
+) -> Retrieved:
+    """Traverse from seeds already linked; the cited chunks become hits. The router links once."""
+    cfg = router_cfg()["graph"]
+    started = time.perf_counter()
+    depth, fanout, max_paths = int(cfg["depth"]), int(cfg["fanout"]), int(cfg["max_paths"])
+    paths = bfs(seeds, lambda ids: edges_for(c, ids, qvec), depth, fanout, max_paths)
+    cited = provenance(paths, k)
+    rows = {r[0]: r for r in c.execute(CHUNK_TEXT, ([cid for cid, _ in cited],)).fetchall()}
+    stored = [(cid, score) for cid, score in cited if cid in rows]
+    hits = [
+        Hit(cid, rows[cid][1], rows[cid][2], rows[cid][3], score, "graph", rank)
+        for rank, (cid, score) in enumerate(stored, 1)
+    ]
+    latency_ms = int((time.perf_counter() - started) * 1000)
+    top = paths[0].score if paths else 0.0
+    found = path_found(paths, float(cfg["min_path_score"]))
+    trace.set(retrieval_latency_ms=latency_ms, n_results=len(hits), top_score=top, path_found=found)
+    return Retrieved(hits, paths, seeds, top, found, latency_ms)
+
+
 def retrieve(question: str, k: int, trace: Trace, qvec: np.ndarray | None = None) -> Retrieved:
     """Hits are the provenance chunks of the best paths."""
-    raise NotImplementedError
+    if qvec is None:
+        qvec = llm.embed([question], trace=trace)[0]
+    seeds = link_entities(question, qvec, trace)
+    return retrieve_from_seeds(db.shared(), seeds, k, qvec, trace)
