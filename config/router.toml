@@ -5,7 +5,7 @@
 chunk_strategy = "sentence"   # M2 sets it from the P1 experiment
 
 [classifier]                  # M3
-method = "rules"    # logreg until it is trained (router.train); rules needs no quota
+method = "logreg"            # best macro F1 at no cost, run 20260930-0112-dev
 min_confidence = 0.60
 learning_rate = 0.5           # logistic regression: full batch gradient descent from zero weights
 l2 = 0.001
