@@ -6,7 +6,8 @@ import json
 import logging
 import random
 import time
-from typing import TYPE_CHECKING, Any
+from dataclasses import replace
+from typing import TYPE_CHECKING, Any, Literal
 
 import httpx
 import numpy as np
@@ -138,6 +139,9 @@ def daily_quota(r: httpx.Response) -> str | None:
 
 
 def _api_key(spec: ModelSpec) -> str:
+    """The provider key from the environment; empty for a local provider that needs none."""
+    if not spec.key_env:
+        return ""
     key = getattr(settings(), spec.key_env.lower(), "")
     if not key:
         raise ProviderError(f"{spec.key_env} is not set (see .env.example)")
@@ -149,7 +153,8 @@ def _post(
 ) -> tuple[dict[str, Any], int, int, int]:
     """POST, retrying 429 and 5xx. Returns (json, latency_ms of good attempt, retries, wait_ms)."""
     url = spec.base_url.rstrip("/") + "/" + path
-    headers = {"Authorization": f"Bearer {_api_key(spec)}"}
+    key = _api_key(spec)
+    headers = {"Authorization": f"Bearer {key}"} if key else {}
     retries = wait_ms = 0
     for attempt in range(MAX_ATTEMPTS):
         started = time.perf_counter()
@@ -281,11 +286,22 @@ def normalize_rows(vecs: np.ndarray) -> np.ndarray:
     return (vecs / np.where(norms == 0, 1, norms)).astype(np.float32)
 
 
-def embed(texts: list[str], *, trace: "Trace | None" = None) -> np.ndarray:
-    """(n, 768) float32, L2 normalized, sent in batches of 100. Cached per text."""
+def embed(
+    texts: list[str],
+    *,
+    trace: "Trace | None" = None,
+    kind: Literal["document", "query"] = "document",
+) -> np.ndarray:
+    """(n, 768) float32, L2 normalized, sent in batches of 100. Cached per text.
+
+    kind says whether the texts are searched ("document") or are questions ("query"); models that
+    embed the two differently get their prefix from models.toml, others ignore it.
+    """
     if trace is not None:
         trace.check_budget()
     spec = models()["embed"]
+    prefix = spec.query_prefix if kind == "query" else spec.document_prefix
+    texts = [prefix + t for t in texts]
     dims = spec.dims or 768
     keys = [request_key({"model": spec.model, "input": t, "dimensions": dims}) for t in texts]
     hits = cache.get_many(keys) if use_cache else {}
@@ -316,7 +332,8 @@ def embed(texts: list[str], *, trace: "Trace | None" = None) -> np.ndarray:
             raise ProviderError(f"{spec.model}: expected {(len(batch), dims)}, got {vecs.shape}")
         vecs = normalize_rows(vecs)
         out[idx] = vecs
-        tokens_in = estimate_tokens(batch)  # the embeddings endpoint returns no usage block
+        usage = body.get("usage") or {}
+        tokens_in = int(usage.get("prompt_tokens") or 0) or estimate_tokens(batch)
         if use_cache:
             per_text_ms = latency_ms // len(batch)
             cache.put_many(
@@ -334,7 +351,8 @@ def embed(texts: list[str], *, trace: "Trace | None" = None) -> np.ndarray:
                 ]
             )
         if trace is not None:
-            trace.add_llm(_embed_result(spec, tokens_in, latency_ms, False, retries, wait_ms))
+            result = _embed_result(spec, tokens_in, latency_ms, False, retries, wait_ms)
+            trace.add_llm(replace(result, estimated=not usage.get("prompt_tokens")))
     return out
 
 

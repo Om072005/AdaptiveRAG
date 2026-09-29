@@ -45,6 +45,8 @@ class ModelSpec:
     dims: int | None
     server_error_attempts: int = 5  # attempts on 5xx; 1 = never retry a busy provider
     texts_per_minute: int | None = None  # embeddings: paced under the provider's per minute cap
+    document_prefix: str = ""  # embeddings: prepended to texts that are searched
+    query_prefix: str = ""  # embeddings: prepended to questions
 
 
 def parse_env(text: str) -> dict[str, str]:
@@ -125,6 +127,8 @@ def parse_models(data: dict[str, Any]) -> dict[Role, ModelSpec]:
             dims=spec.get("dims"),
             server_error_attempts=int(spec.get("server_error_attempts", 5)),
             texts_per_minute=spec.get("texts_per_minute"),
+            document_prefix=str(spec.get("document_prefix", "")),
+            query_prefix=str(spec.get("query_prefix", "")),
         )
     return specs
 

@@ -196,7 +196,7 @@ def embed_slice(k: int, n: int) -> None:
     mine = [q["question"] for q in read_set() if in_slice(q["question"], k, n)]
     print(f"training embeddings slice {k}/{n}: {len(mine)} questions")
     try:
-        llm.embed(mine)
+        llm.embed(mine, kind="query")
     except llm.RateLimited as e:
         raise SystemExit(f"slice {k}/{n} stopped by the quota ({e}); rerun later") from e
     print(f"training embeddings slice {k}/{n}: all {len(mine)} embedded or already cached")
@@ -207,7 +207,7 @@ def train_logreg() -> None:
     cfg = router_cfg()["classifier"]
     items = read_set()
     try:
-        vecs = llm.embed([q["question"] for q in items])
+        vecs = llm.embed([q["question"] for q in items], kind="query")
     except llm.RateLimited as e:
         raise SystemExit(
             f"embeddings stopped by the quota ({e}); fill them with embed slices"
@@ -319,7 +319,7 @@ def compare(methods: list[str]) -> None:
     vecs = np.zeros((len(items), models()["embed"].dims or 768), dtype=np.float32)
     if "logreg" in methods:
         try:
-            vecs = llm.embed(questions)
+            vecs = llm.embed(questions, kind="query")
         except llm.RateLimited as e:
             raise SystemExit(f"dev question embeddings stopped by the quota ({e})") from e
     scores = {}

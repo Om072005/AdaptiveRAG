@@ -10,6 +10,10 @@ key_env = "GROQ_API_KEY"
 base_url = "https://generativelanguage.googleapis.com/v1beta/openai/"
 key_env = "GEMINI_API_KEY"
 
+[providers.ollama]                 # local model server (runs on the lead's GPU); needs no key
+base_url = "http://127.0.0.1:11434/v1"
+key_env = ""
+
 [roles.small]
 provider = "groq"
 model = "openai/gpt-oss-20b"

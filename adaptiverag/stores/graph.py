@@ -364,6 +364,6 @@ def retrieve_from_seeds(
 def retrieve(question: str, k: int, trace: Trace, qvec: np.ndarray | None = None) -> Retrieved:
     """Hits are the provenance chunks of the best paths."""
     if qvec is None:
-        qvec = llm.embed([question], trace=trace)[0]
+        qvec = llm.embed([question], trace=trace, kind="query")[0]
     seeds = link_entities(question, qvec, trace)
     return retrieve_from_seeds(db.shared(), seeds, k, qvec, trace)

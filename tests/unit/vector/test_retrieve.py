@@ -39,7 +39,9 @@ def fake_search(seen: list[tuple[int, str]]) -> Callable[..., list[Hit]]:
 def test_retrieve_records_the_trace_fields(monkeypatch: pytest.MonkeyPatch) -> None:
     seen: list[tuple[int, str]] = []
     monkeypatch.setattr(vector, "search", fake_search(seen))
-    monkeypatch.setattr(llm, "embed", lambda texts, trace=None: np.ones((len(texts), 768)))
+    monkeypatch.setattr(
+        llm, "embed", lambda texts, trace=None, kind="document": np.ones((len(texts), 768))
+    )
     trace = Trace("Who directed Ed Wood?", "vector", "cli")
     r = vector.retrieve("Who directed Ed Wood?", 8, trace)
     assert seen == [(8, "sentence")]

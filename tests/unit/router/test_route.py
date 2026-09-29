@@ -39,7 +39,9 @@ class Backends:
         mp.setattr(route_mod, "merge_rerank", self.merge)
         mp.setattr(route_mod.db, "shared", lambda: None)
 
-    def embed(self, texts: list[str], trace: Trace | None = None) -> np.ndarray:
+    def embed(
+        self, texts: list[str], trace: Trace | None = None, kind: str = "document"
+    ) -> np.ndarray:
         self.calls.append("embed")
         return np.ones((len(texts), 768), dtype=np.float32)
 

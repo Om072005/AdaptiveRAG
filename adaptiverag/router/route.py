@@ -35,7 +35,7 @@ def route_and_retrieve(question: str, mode: Mode, trace: Trace) -> tuple[RouteDe
     """At most one fallback, always to hybrid."""
     cfg = router_cfg()
     k = int(cfg["vector"]["k"])
-    qvec = llm.embed([question], trace=trace)[0]  # once, reused by every step below
+    qvec = llm.embed([question], trace=trace, kind="query")[0]  # once, reused by every step below
     c: Classification | None = None
     seeds: list[Seed] | None = None
 

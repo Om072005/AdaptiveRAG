@@ -42,7 +42,7 @@ def fake_run(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> list[tuple[Any,
     path = tmp_path / "dev.jsonl"
     path.write_text("".join(json.dumps(q) + "\n" for q in ITEMS), encoding="utf-8")
     monkeypatch.setattr(train, "DEV_PATH", path)
-    monkeypatch.setattr(train.llm, "embed", lambda texts: np.ones((len(texts), 768)))
+    monkeypatch.setattr(train.llm, "embed", lambda texts, **kw: np.ones((len(texts), 768)))
     by_question = {q["question"]: q["type"] for q in ITEMS}
     monkeypatch.setattr(train, "classify", lambda q, v, t, m: pred(by_question[q], ms=2))
     written: list[tuple[Any, ...]] = []

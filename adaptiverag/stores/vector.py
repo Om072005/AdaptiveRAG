@@ -112,7 +112,7 @@ def read(query: LiteralString | sql.Composed, params: Any) -> list[tuple[Any, ..
 def retrieve(question: str, k: int, trace: Trace, qvec: np.ndarray | None = None) -> Retrieved:
     """Top k chunks of the serving strategy; the query embedding is its own ledger row."""
     if qvec is None:
-        qvec = llm.embed([question], trace=trace)[0]
+        qvec = llm.embed([question], trace=trace, kind="query")[0]
     started = time.perf_counter()
     hits = search(qvec, k, cast(Strategy, router_cfg()["serving"]["chunk_strategy"]))
     latency_ms = int((time.perf_counter() - started) * 1000)
