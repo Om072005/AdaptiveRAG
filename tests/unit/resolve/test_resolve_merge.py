@@ -5,7 +5,13 @@ import numpy as np
 import pytest
 
 from adaptiverag.ingest import resolve as resolve_mod
-from adaptiverag.ingest.resolve import build_rows, entity_id, normalize_name, resolve
+from adaptiverag.ingest.resolve import (
+    build_rows,
+    entity_id,
+    normalize_name,
+    relation_texts,
+    resolve,
+)
 from adaptiverag.types import Triple
 
 CFG = {"name_sim": 0.92, "embed_sim": 0.88, "person_needs_shared_neighbor": True}
@@ -171,3 +177,20 @@ def test_resolve_embeds_each_name_once(monkeypatch: pytest.MonkeyPatch) -> None:
     entities, _, _ = resolve(triples)
     assert sent == [["Apple", "Cupertino"]]
     assert all(e["embedding"] is not None and e["embedding"].shape == (768,) for e in entities)
+
+
+def test_relation_texts_use_canonical_names() -> None:
+    triples = [
+        triple("Tim Burton", "PERSON", "directed", "Ed Wood", "WORK", "docA"),
+        triple("Apple Inc.", "ORG", "based_in", "Cupertino", "PLACE", "docA"),
+        triple("Apple", "ORG", "founded_by", "Steve Jobs", "PERSON", "docB"),
+        triple("Apple", "ORG", "makes", "iPhone", "WORK", "docB"),
+    ]
+    entities, _, relations = build_rows(triples, {}, CFG)
+    texts = sorted(relation_texts(entities, relations))
+    assert texts == [
+        "Apple based in Cupertino",
+        "Apple founded by Steve Jobs",
+        "Apple makes iPhone",
+        "Tim Burton directed Ed Wood",
+    ]

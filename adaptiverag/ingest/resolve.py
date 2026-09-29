@@ -242,3 +242,12 @@ def resolve(
     names = sorted(by_name)
     matrix = llm.embed([pick_name(by_name[n]) for n in names])
     return build_rows(triples, dict(zip(names, matrix, strict=True)), ingest_cfg()["resolve"])
+
+
+def relation_texts(entities: list[dict[str, Any]], relations: list[dict[str, Any]]) -> list[str]:
+    """'subject predicate object' per relation, with canonical names; this is what gets embedded."""
+    names = {e["canonical_id"]: e["canonical_name"] for e in entities}
+    return [
+        f"{names[r['subject_id']]} {r['predicate'].replace('_', ' ')} {names[r['object_id']]}"
+        for r in relations
+    ]

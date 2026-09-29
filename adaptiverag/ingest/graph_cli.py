@@ -1,13 +1,15 @@
 """python -m adaptiverag.ingest graph --corpus mini|full [--dry-run] | relink
 
-Until the graph writes land, this runs extraction, stores the rejects and prints the summary.
+Extracts triples (cached), stores the rejects, resolves entities and replaces the graph.
 """
 
 import argparse
 import json
 
+from adaptiverag import llm
 from adaptiverag.config import ROOT, router_cfg
 from adaptiverag.ingest.extract import extract_batches, summarize
+from adaptiverag.ingest.resolve import relation_texts, resolve
 from adaptiverag.llm import RateLimited
 from adaptiverag.stores import graph as store
 
@@ -45,6 +47,16 @@ def main(argv: list[str] | None = None) -> None:
     summary["stored_matches_run"] = (
         summary["stored_rejects_by_reason"] == summary["rejects_by_reason"]
     )
+
+    entities, aliases, relations = resolve(kept)
+    vecs = llm.embed(relation_texts(entities, relations))
+    for rel, vec in zip(relations, vecs, strict=True):
+        rel["embedding"] = vec
+    store.write_graph(entities, aliases, relations)
+    # a kept triple that is not a relation repeated one already kept, or both its ends
+    # resolved to one entity
+    summary["triples_folded_by_resolution"] = len(kept) - len(relations)
+    summary["graph"] = store.graph_counts()
     print(json.dumps(summary, indent=2))
 
 
