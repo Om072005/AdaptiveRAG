@@ -17,6 +17,7 @@ def fake_provider(
     monkeypatch.setenv("GEMINI_API_KEY", "test-gemini")
     monkeypatch.setattr(llm, "_sleep", lambda s: None)
     monkeypatch.setattr(llm, "_no_reasoning_effort", set())
+    monkeypatch.setattr(llm, "use_cache", False)
     seen: list[httpx.Request] = []
 
     def install(handler: Handler) -> list[httpx.Request]:
@@ -28,3 +29,21 @@ def fake_provider(
         return seen
 
     yield install
+
+
+@pytest.fixture
+def memory_cache(monkeypatch: pytest.MonkeyPatch) -> dict[str, dict[str, object]]:
+    """Turn the cache on, backed by a dict instead of Postgres."""
+    store: dict[str, dict[str, object]] = {}
+
+    def get_many(keys: list[str]) -> dict[str, dict[str, object]]:
+        return {k: store[k] for k in keys if k in store}
+
+    def put_many(rows: list[dict[str, object]]) -> None:
+        for row in rows:
+            store.setdefault(str(row["key"]), row)
+
+    monkeypatch.setattr(llm, "use_cache", True)
+    monkeypatch.setattr(llm.cache, "get_many", get_many)
+    monkeypatch.setattr(llm.cache, "put_many", put_many)
+    return store

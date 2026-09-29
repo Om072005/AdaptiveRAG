@@ -20,3 +20,15 @@ def test_embed_three_texts_unit_norm() -> None:
     vecs = llm.embed(["Paris is the capital of France.", "Ankara", "a third sentence"])
     assert vecs.shape == (3, 768)
     assert np.allclose(np.linalg.norm(vecs, axis=1), 1.0, atol=1e-5)
+
+
+def test_same_call_twice_is_cached_with_original_tokens_and_latency() -> None:
+    msgs = [{"role": "user", "content": "Reply with the single word: cached"}]
+    first = llm.chat("small", msgs, max_tokens=256)
+    second = llm.chat("small", msgs, max_tokens=256)
+    assert second.cached
+    assert (second.tokens_in, second.tokens_out, second.latency_ms) == (
+        first.tokens_in,
+        first.tokens_out,
+        first.latency_ms,
+    ) or first.cached  # already cached by an earlier run: both come from the same row

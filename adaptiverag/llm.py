@@ -1,5 +1,8 @@
 """The only module that talks to model providers: chat and embeddings, cached, priced, capped."""
 
+import base64
+import hashlib
+import json
 import logging
 import random
 import time
@@ -9,6 +12,7 @@ import httpx
 import numpy as np
 
 from adaptiverag.config import ModelSpec, models, settings
+from adaptiverag.stores import cache
 from adaptiverag.types import LLMResult, Role
 
 if TYPE_CHECKING:
@@ -24,6 +28,7 @@ BACKOFF_MAX_S = 30.0
 _sleep = time.sleep  # swapped out in tests
 _client: httpx.Client | None = None
 _no_reasoning_effort: set[Role] = set()  # roles whose provider rejected reasoning_effort
+use_cache = True  # unit tests with a fake provider turn it off
 
 
 class BudgetExceeded(Exception):
@@ -61,6 +66,12 @@ def usage_tokens(usage: dict[str, Any]) -> tuple[int, int]:
     completion = int(usage.get("completion_tokens", 0))
     total = int(usage.get("total_tokens", 0))
     return tokens_in, max(completion, total - tokens_in)
+
+
+def request_key(payload: dict[str, Any]) -> str:
+    """sha256 of the canonical JSON of what is sent: model, messages or input, and every param."""
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
 def estimate_tokens(texts: list[str]) -> int:
@@ -126,6 +137,30 @@ def chat(
         payload["response_format"] = {"type": "json_object"}
     if spec.reasoning_effort and role not in _no_reasoning_effort:
         payload["reasoning_effort"] = spec.reasoning_effort
+    key = request_key(payload)
+    hit = cache.get_many([key]).get(key) if use_cache else None
+    if hit is not None:
+        result = LLMResult(
+            text=hit["response"]["choices"][0]["message"].get("content") or "",
+            role=role,
+            model=spec.model,
+            tokens_in=hit["tokens_in"],
+            tokens_out=hit["tokens_out"],
+            cost_usd=cost_usd(spec, hit["tokens_in"], hit["tokens_out"]),
+            latency_ms=hit["latency_ms"],
+            cached=True,
+            estimated=False,
+            retries=0,
+            wait_ms=0,
+        )
+    else:
+        result = _chat_uncached(role, spec, payload)
+    if trace is not None:
+        trace.add_llm(result)
+    return result
+
+
+def _chat_uncached(role: Role, spec: ModelSpec, payload: dict[str, Any]) -> LLMResult:
     try:
         body, latency_ms, retries, wait_ms = _post(spec, "chat/completions", payload)
     except ProviderError as e:
@@ -136,10 +171,14 @@ def chat(
         del payload["reasoning_effort"]
         body, latency_ms, retries, wait_ms = _post(spec, "chat/completions", payload)
 
-    text = body["choices"][0]["message"].get("content") or ""
     tokens_in, tokens_out = usage_tokens(body.get("usage") or {})
-    result = LLMResult(
-        text=text,
+    if use_cache:
+        row = {"key": request_key(payload), "role": role, "model": spec.model, "response": body}
+        cache.put_many(
+            [{**row, "tokens_in": tokens_in, "tokens_out": tokens_out, "latency_ms": latency_ms}]
+        )
+    return LLMResult(
+        text=body["choices"][0]["message"].get("content") or "",
         role=role,
         model=spec.model,
         tokens_in=tokens_in,
@@ -151,9 +190,6 @@ def chat(
         retries=retries,
         wait_ms=wait_ms,
     )
-    if trace is not None:
-        trace.add_llm(result)
-    return result
 
 
 def normalize_rows(vecs: np.ndarray) -> np.ndarray:
@@ -163,35 +199,70 @@ def normalize_rows(vecs: np.ndarray) -> np.ndarray:
 
 
 def embed(texts: list[str], *, trace: "Trace | None" = None) -> np.ndarray:
-    """(n, 768) float32, L2 normalized, sent in batches of 100."""
+    """(n, 768) float32, L2 normalized, sent in batches of 100. Cached per text."""
     spec = models()["embed"]
     dims = spec.dims or 768
-    out: list[np.ndarray] = []
-    for start in range(0, len(texts), EMBED_BATCH):
-        batch = texts[start : start + EMBED_BATCH]
-        payload = {"model": spec.model, "input": batch, "dimensions": dims}
-        body, latency_ms, retries, wait_ms = _post(spec, "embeddings", payload)
+    keys = [request_key({"model": spec.model, "input": t, "dimensions": dims}) for t in texts]
+    hits = cache.get_many(keys) if use_cache else {}
+    out = np.zeros((len(texts), dims), dtype=np.float32)
+
+    cached_idx = [i for i, k in enumerate(keys) if k in hits]
+    for i in cached_idx:
+        out[i] = np.frombuffer(base64.b64decode(hits[keys[i]]["response"]["b64"]), dtype=np.float32)
+    if cached_idx and trace is not None:
+        tokens_in = sum(hits[keys[i]]["tokens_in"] for i in cached_idx)
+        latency_ms = sum(hits[keys[i]]["latency_ms"] for i in cached_idx)
+        trace.add_llm(_embed_result(spec, tokens_in, latency_ms, cached=True, retries=0, wait_ms=0))
+
+    missing = [i for i, k in enumerate(keys) if k not in hits]
+    for start in range(0, len(missing), EMBED_BATCH):
+        idx = missing[start : start + EMBED_BATCH]
+        batch = [texts[i] for i in idx]
+        body, latency_ms, retries, wait_ms = _post(
+            spec, "embeddings", {"model": spec.model, "input": batch, "dimensions": dims}
+        )
         # Gemini omits "index"; a stable sort keeps the response order then
         rows = sorted(body["data"], key=lambda d: d.get("index", 0))
         vecs = np.array([row["embedding"] for row in rows], dtype=np.float32)
         if vecs.shape != (len(batch), dims):
             raise ProviderError(f"{spec.model}: expected {(len(batch), dims)}, got {vecs.shape}")
-        out.append(normalize_rows(vecs))
-        usage = body.get("usage")
-        tokens_in = int(usage["prompt_tokens"]) if usage else estimate_tokens(batch)
-        result = LLMResult(
-            text="",
-            role="embed",
-            model=spec.model,
-            tokens_in=tokens_in,
-            tokens_out=0,
-            cost_usd=cost_usd(spec, tokens_in, 0),
-            latency_ms=latency_ms,
-            cached=False,
-            estimated=usage is None,
-            retries=retries,
-            wait_ms=wait_ms,
-        )
+        vecs = normalize_rows(vecs)
+        out[idx] = vecs
+        tokens_in = estimate_tokens(batch)  # the embeddings endpoint returns no usage block
+        if use_cache:
+            per_text_ms = latency_ms // len(batch)
+            cache.put_many(
+                [
+                    {
+                        "key": keys[i],
+                        "role": "embed",
+                        "model": spec.model,
+                        "response": {"b64": base64.b64encode(vec.tobytes()).decode()},
+                        "tokens_in": estimate_tokens([texts[i]]),
+                        "tokens_out": 0,
+                        "latency_ms": per_text_ms,
+                    }
+                    for i, vec in zip(idx, vecs, strict=True)
+                ]
+            )
         if trace is not None:
-            trace.add_llm(result)
-    return np.vstack(out) if out else np.zeros((0, dims), dtype=np.float32)
+            trace.add_llm(_embed_result(spec, tokens_in, latency_ms, False, retries, wait_ms))
+    return out
+
+
+def _embed_result(
+    spec: ModelSpec, tokens_in: int, latency_ms: int, cached: bool, retries: int, wait_ms: int
+) -> LLMResult:
+    return LLMResult(
+        text="",
+        role="embed",
+        model=spec.model,
+        tokens_in=tokens_in,
+        tokens_out=0,
+        cost_usd=cost_usd(spec, tokens_in, 0),
+        latency_ms=latency_ms,
+        cached=cached,
+        estimated=True,
+        retries=retries,
+        wait_ms=wait_ms,
+    )
