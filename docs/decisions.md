@@ -165,7 +165,9 @@ tokens produces the same verdict with the larger budget; only the calls that ran
 rebuilds each unscored answer through the pipeline from the model cache (same answer, same context, so the same
 judge prompt; the rebuilt trace is saved with source `cli`, which eval metrics never count) and stores the verdict on the run's own trace and
 result row. The dev and replay runs keep their commit `4e370b9`; their late verdicts were made at the D22 commit,
-and the test split runs at the D22 commit from the start.
+and the test split runs at the D22 commit from the start. Checked afterwards: all 57 rebuilt answers are
+identical to the ones the runs recorded, so every late verdict scores the run's own answer; `eval.rejudge` now
+refuses to judge a rebuilt answer that differs.
 
 **D23 Answer confidence stays as it is, and full width citation markers count (2026-09-30).** Calibrated
 against the judge on the judged dev auto run (`20260930-1346-dev-auto-baseline`), answer confidence correlates

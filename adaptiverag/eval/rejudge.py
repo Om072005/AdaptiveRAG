@@ -16,19 +16,21 @@ from psycopg.types.json import Jsonb
 
 from adaptiverag.eval import gold, judge
 from adaptiverag.eval.run import JUDGE_METRICS, result_rows, store_judgement, summarize
+from adaptiverag.eval.spotcheck import answer_text
 from adaptiverag.telemetry.trace import Trace
 from adaptiverag.types import Mode, ModelSize
 
-Missing = tuple[str, str]  # (question_id, the run's trace_id)
+Missing = tuple[str, str, str]  # (question_id, the run's trace_id, the run's answer text)
 
 
 def missing(c: psycopg.Connection[Any], run_id: str) -> list[Missing]:
     rows = c.execute(
-        "select question_id, trace_id::text from eval_results where run_id = %s"
-        " and faithfulness is null order by question_id",
+        "select r.question_id, r.trace_id::text, t.detail from eval_results r"
+        " join traces t on t.trace_id = r.trace_id"
+        " where r.run_id = %s and r.faithfulness is null order by r.question_id",
         (run_id,),
     ).fetchall()
-    return [(str(q), str(t)) for q, t in rows]
+    return [(str(q), str(t), answer_text(d or {})) for q, t, d in rows]
 
 
 def rejudge(
@@ -41,11 +43,17 @@ def rejudge(
     store: Callable[[str, str, dict[str, Any], Trace], None],
 ) -> tuple[int, list[str]]:
     """Judge each missing question; store(question_id, trace_id, verdict, judge_trace). Returns
-    (judged, question ids that failed again)."""
+    (judged, question ids that failed again or whose rebuilt answer differs from the run's).
+    A rebuilt answer that differs (a model cache miss, or a parser change) is never judged in the
+    run's name: the verdict would score a different answer than the one the run recorded."""
     judged, failed = 0, []
-    for qid, trace_id in todo:
+    for qid, trace_id, original in todo:
         question = questions[qid]
         result = answer(question, mode, source="cli", force_size=size)
+        if result.answer.text.strip() != original.strip():
+            print(f"rebuilt answer differs from the run's on {qid}, not judged", file=sys.stderr)
+            failed.append(qid)
+            continue
         judge_trace = Trace(question, mode, "eval")
         try:
             verdict = judge_one(question, result.answer, result.retrieved, judge_trace)
@@ -90,22 +98,25 @@ def main(argv: list[str] | None = None) -> None:
                 )
                 c.commit()
 
-            judged, failed = rejudge(
-                todo,
-                questions,
-                mode,
-                options.get("size"),
-                pipeline.answer_query,
-                judge.judge,
-                store,
-            )
-            summary = summarize(result_rows(c, run_id), True)
-            c.execute(
-                "update eval_runs set summary = summary || %s where run_id = %s",
-                (Jsonb(summary), run_id),
-            )
-            c.commit()
-        print(f"{run_id}: {len(todo)} unjudged, {judged} judged now, {len(failed)} failed again")
+            judged, failed = 0, list[str]()
+            try:
+                judged, failed = rejudge(
+                    todo,
+                    questions,
+                    mode,
+                    options.get("size"),
+                    pipeline.answer_query,
+                    judge.judge,
+                    store,
+                )
+            finally:  # the summary follows the stored rows even when the loop stops early
+                summary = summarize(result_rows(c, run_id), True)
+                c.execute(
+                    "update eval_runs set summary = summary || %s where run_id = %s",
+                    (Jsonb(summary), run_id),
+                )
+                c.commit()
+        print(f"{run_id}: {len(todo)} unjudged, {judged} judged now, {len(failed)} not judged")
 
 
 if __name__ == "__main__":
