@@ -110,6 +110,17 @@ graph) always-small matched the selector and always-large
 runs after this decision comes from the server for model calls answered from the cache and from the lead's
 PC for new calls and database time; each trace records which calls were cached.
 
+**D18 Entities merge by name only (2026-09-30).** 100 merge decisions sampled from the local graph and labelled
+against both source passages (labels by Claude for the lead, `data/graph/merge_labels.jsonl` at `d1c3727`) put the
+name rule at precision 0.96 (50 of 52) and the embedding rule at 0.125 (6 of 48). The correct embedding merges
+scored cosine 0.90 to 0.97 and the wrong ones 0.88 to 0.94, so no threshold separates them; 28 of the 42 wrong
+ones joined two different dates ("November 1, 1961" with "November 19, 1957"), others joined Cork City and Cork
+County Council or two different Gundam series. `resolve.embed_merge = false` turns the rule off and keeps it in
+code. The graph on Neon main was rebuilt from the cached extraction: 7,073 entities (was 6,542) and 6,567
+relations; a fresh sample of 100 decisions labelled the same way scores 0.91 (graph report). What it costs:
+the six correct embedding merges in the first sample (Paris and "Paris, France", two names of the NCTA) now stay
+two entities, which the alias lookup and the vector side of hybrid still reach.
+
 ## Decided while building (D1 to D3)
 
 - **`aliases` primary key is `(surface_form, canonical_id)`**, not `surface_form` alone as the README draws it,
