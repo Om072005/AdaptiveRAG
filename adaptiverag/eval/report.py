@@ -4,6 +4,7 @@ import argparse
 import json
 import math
 import sys
+from collections import Counter
 from pathlib import Path
 from statistics import mean
 from typing import Any
@@ -24,6 +25,7 @@ METRICS = (
     "completeness",
 )
 QTYPES = ("single_hop", "multi_hop", "comparison")
+ROUTES = ("vector", "graph", "hybrid")
 # The README's "router misclassifying at high confidence" failure mode is watched from here up
 CONFIDENT_MISROUTE = 0.8
 
@@ -57,6 +59,19 @@ def aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         },
         "confusion": confusion(rows),
         "misroutes": misroutes(rows),
+        "routing": routes_and_fallbacks(rows),
+    }
+
+
+def routes_and_fallbacks(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    """Final route counts and how many questions fell back, by fallback kind (G3)."""
+    kinds: Counter[str] = Counter(
+        f.split("->")[0] for r in rows for f in (r.get("fallbacks") or [])
+    )
+    return {
+        "routes": {route: sum(r.get("route_taken") == route for r in rows) for route in ROUTES},
+        "fallbacks": sum(bool(r.get("fallbacks")) for r in rows),
+        "fallbacks_by_kind": dict(sorted(kinds.items())),
     }
 
 
@@ -102,11 +117,19 @@ def misroutes(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     ]
 
 
-def render_router(conf: dict[str, Any], wrong: list[dict[str, Any]]) -> list[str]:
+def render_router(
+    conf: dict[str, Any], wrong: list[dict[str, Any]], routing: dict[str, Any]
+) -> list[str]:
     labels = conf["labels"]
+    n = sum(routing["routes"].values())
+    kinds = ", ".join(f"{k} {v}" for k, v in routing["fallbacks_by_kind"].items())
     lines = [
         "",
         f"## Router (macro F1 {fmt(macro_f1(conf['matrix']))})",
+        "",
+        "Routes taken: " + ", ".join(f"{r} {c}" for r, c in routing["routes"].items()),
+        "",
+        f"Fallbacks: {routing['fallbacks']} of {n} questions" + (f" ({kinds})" if kinds else ""),
         "",
         "| gold, predicted | " + " | ".join(labels) + " |",
         "|---|" + "---|" * len(labels),
@@ -185,7 +208,7 @@ def render_md(run: dict[str, Any], agg: dict[str, Any], vs: dict[str, Any] | Non
             f"{fmt(s['faithfulness'])} | {change} |"
         )
     if agg.get("confusion"):
-        lines += render_router(agg["confusion"], agg["misroutes"])
+        lines += render_router(agg["confusion"], agg["misroutes"], agg["routing"])
     return "\n".join(lines) + "\n"
 
 
@@ -202,7 +225,7 @@ def load(c: psycopg.Connection[Any], run_id: str) -> tuple[dict[str, Any], list[
     cur = c.execute(
         "select r.question_id, r.gold_type, r.predicted_type, r.route_taken, r.em, r.f1,"
         " r.recall_at_k, r.mrr, r.sp_precision, r.faithfulness, r.relevance, r.completeness,"
-        " r.cost_usd, r.latency_ms, t.classifier_confidence from eval_results r"
+        " r.cost_usd, r.latency_ms, t.classifier_confidence, t.fallbacks from eval_results r"
         " left join traces t on t.trace_id = r.trace_id where r.run_id = %s"
         " order by r.question_id",
         (run_id,),

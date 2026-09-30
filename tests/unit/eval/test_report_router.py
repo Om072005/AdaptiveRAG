@@ -81,3 +81,32 @@ def test_router_section_in_the_report() -> None:
     assert "### Confident misroutes (confidence at least 0.8): 1" in md
     assert "- `c` multi_hop predicted single_hop at 0.950, routed vector" in md
     assert "### Other misroutes: 1" in md
+
+
+def test_routes_and_fallbacks_are_counted() -> None:
+    rows = [
+        row("a", "single_hop", "single_hop", 0.9) | {"route_taken": "vector", "fallbacks": []},
+        row("b", "single_hop", "single_hop", 0.9)
+        | {"route_taken": "hybrid", "fallbacks": ["vector_low_score->hybrid"]},
+        row("c", "multi_hop", "multi_hop", 0.9) | {"route_taken": "hybrid", "fallbacks": None},
+    ]
+    assert report.routes_and_fallbacks(rows) == {
+        "routes": {"vector": 1, "graph": 0, "hybrid": 2},
+        "fallbacks": 1,
+        "fallbacks_by_kind": {"vector_low_score": 1},
+    }
+
+
+def test_router_section_names_the_fallback_count() -> None:
+    lines = report.render_router(
+        report.confusion(ROWS) or {},
+        [],
+        {
+            "routes": {"vector": 3, "graph": 0, "hybrid": 2},
+            "fallbacks": 1,
+            "fallbacks_by_kind": {"graph_no_path": 1},
+        },
+    )
+    md = "\n".join(lines)
+    assert "Routes taken: vector 3, graph 0, hybrid 2" in md
+    assert "Fallbacks: 1 of 5 questions (graph_no_path 1)" in md
