@@ -1,7 +1,7 @@
 {
   "sample": false,
-  "generated_at": "2026-09-30T16:28:46+00:00",
-  "git_sha": "2c6ffac1d96b0462ae7c9fff5a8267119adc2f37",
+  "generated_at": "2026-09-30T16:41:24+00:00",
+  "git_sha": "3f44db108779273547ff6864ea6bb947a7c83087",
   "runs": {
     "20260930-1453-test-vector-baseline": {
       "split": "test",
@@ -1063,6 +1063,22 @@
         "fix": "D18: `resolve.embed_merge = false`, graph rebuilt from the cached extraction",
         "status": "Fixed: a new sample of 100 decisions scores precision 0.91, all by the name rule",
         "run_id": "first labelled sample at `d1c3727`, graph report after D18"
+      },
+      {
+        "n": 5,
+        "symptom": "Answer confidence hardly tracks the judge: correlation with faithfulness 0.04 on the judged dev auto run, and correct answers with a single clear citation were flagged low confidence (Hawaii Senate, the National World War I Memorial, L. B. Day Amphitheatre on the test split)",
+        "root_cause": "gpt-oss sometimes writes citation markers as `\u30101\u3011`, which the citation parser did not read, so citation coverage was 0; beyond that, citation coverage and retrieval strength are weak signals of faithfulness when almost every answer is faithful (mean 0.975)",
+        "fix": "`cite.py` reads full width brackets (D23); calibration found no weighting worth applying",
+        "status": "Open: the confidence signal needs a better input than coverage and retrieval strength",
+        "run_id": "20260930-1346-dev-auto-baseline`, `20260930-1557-test-auto-baseline"
+      },
+      {
+        "n": 6,
+        "symptom": "A correct numeric answer scores F1 0: \"25\" against the gold \"twenty-five\" (Hawaii Senate, test split)",
+        "root_cause": "Token F1 compares normalized words; numerals and number words are different tokens",
+        "fix": "None: the metric stays HotpotQA's, so numbers compare with published results; the judge scored the answer fully faithful",
+        "status": "Known limitation of the metric",
+        "run_id": "20260930-1557-test-auto-baseline"
       }
     ]
   }

@@ -3,6 +3,8 @@
 import type { Replay, ReplayIndex, Results, SiteContent } from '../types'
 
 export const ALLOW_SAMPLE = import.meta.env.VITE_ALLOW_SAMPLE === '1'
+// sample builds for the smoke tests read samples even when the real release data sits beside them
+const FORCE_SAMPLE = ALLOW_SAMPLE && import.meta.env.VITE_FORCE_SAMPLE === '1'
 
 export type Loaded<T> =
   | { status: 'ok'; data: T; sample: boolean }
@@ -20,7 +22,8 @@ async function fetchJson(path: string): Promise<unknown | null> {
 
 export async function loadData<T>(name: string, isValid: (d: unknown) => boolean): Promise<Loaded<T>> {
   try {
-    let data = await fetchJson(`/data/${name}.json`)
+    // site content is real in every build; only results and replays have samples to force
+    let data = FORCE_SAMPLE && name !== 'site' ? null : await fetchJson(`/data/${name}.json`)
     if (data === null && ALLOW_SAMPLE) data = await fetchJson(`/data/${name}.sample.json`)
     if (data === null) return { status: 'missing' }
     if (!isValid(data)) return { status: 'error', message: `/data/${name} does not match the contract` }
