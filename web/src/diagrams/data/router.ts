@@ -29,7 +29,7 @@ export const ROUTER: DiagramData = {
     edge('q', 'relational'),
     edge('relational', 'vector', 'No'),
     edge('relational', 'entities', 'Yes'),
-    edge('relational', 'fallback', 'Unsure, or relational'),
+    edge('relational', 'fallback', 'Unsure, or\nrelational'),
     edge('entities', 'vector', 'No'),
     edge('entities', 'graph', 'Yes', 'dashed'),
     edge('vector', 'topk'),
@@ -76,7 +76,7 @@ export const ROUTER: DiagramData = {
     labels: {
       'relational-vector': [224, 112],
       'relational-entities': [224, 304],
-      'relational-fallback': [336, 208],
+      'relational-fallback': [432, 208],
       'entities-vector': [376, 152],
       'topk-fallback': [544, 144],
       'topk-answer': [720, 64],

@@ -54,7 +54,9 @@ function Edge({ edge, layout, kinds, t, marker }: {
   const points = route(a, kinds[edge.from], b, kinds[edge.to], layout.bends?.[edge.id])
   const placed = layout.labels?.[edge.id]
   const [lx, ly] = placed ?? labelPoint(points)
-  const w = (edge.label?.length ?? 0) * 7 + 12
+  const lines = edge.label?.split('\n') ?? []  // a label may take two lines where the gap is narrow
+  const w = Math.max(0, ...lines.map((l) => l.length)) * 7 + 12
+  const h = 20 * lines.length
   return (
     <g>
       <path
@@ -67,9 +69,13 @@ function Edge({ edge, layout, kinds, t, marker }: {
       />
       {edge.label && placed !== null && (
         <>
-          <rect x={lx - w / 2} y={ly - 10} width={w} height="20" className="fill-black" />
-          <text x={lx} y={ly + 4} textAnchor="middle" className={`font-sans text-[13px] ${t === 'on' ? 'fill-white' : 'fill-muted'}`}>
-            {edge.label}
+          <rect x={lx - w / 2} y={ly - h / 2} width={w} height={h} className="fill-black" />
+          <text x={lx} y={ly + 4 - 10 * (lines.length - 1)} textAnchor="middle" className={`font-sans text-[13px] ${t === 'on' ? 'fill-white' : 'fill-muted'}`}>
+            {lines.map((l, i) => (
+              <tspan key={l} x={lx} dy={i === 0 ? 0 : 20}>
+                {l}
+              </tspan>
+            ))}
           </text>
         </>
       )}
@@ -160,7 +166,7 @@ function AsText({ data, lit }: { data: DiagramData; lit: Lit | null }) {
                 {' '}
                 Next:{' '}
                 {next
-                  .map((e) => `${e.label ? `${e.label}, ` : ''}${name[e.to]}${lit?.edges.has(e.id) ? ' (taken)' : ''}`)
+                  .map((e) => `${e.label ? `${e.label.replace('\n', ' ')}, ` : ''}${name[e.to]}${lit?.edges.has(e.id) ? ' (taken)' : ''}`)
                   .join('; ')}
                 .
               </span>
