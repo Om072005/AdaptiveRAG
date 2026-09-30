@@ -501,15 +501,16 @@ Dates are planning estimates, not commitments.
 
 ## Getting started
 
-Needs Python 3.12 with [uv](https://docs.astral.sh/uv/), Node 22, a free [Neon](https://neon.tech) Postgres database,
-a free [Google AI Studio](https://aistudio.google.com) key (the judge is the only hosted model), and
-[Ollama](https://ollama.com) for every other model: `ollama pull nomic-embed-text`, `ollama pull gpt-oss:20b` and
-`ollama pull qwen3.6:35b-a3b` (about 37 GB together; an 8 GB GPU plus 32 GB of RAM runs them).
+Needs Python 3.12 with [uv](https://docs.astral.sh/uv/), Node 22, a free [Neon](https://neon.tech) Postgres database
+and [Ollama](https://ollama.com) for every model, the judge included (D21): `ollama pull nomic-embed-text`,
+`ollama pull gpt-oss:20b`, `ollama pull qwen3.6:35b-a3b` and, for judged runs, `ollama pull gemma4:31b` (about 57 GB
+together). An 8 GB GPU plus 32 GB of RAM answers questions; the judge wants a 24 GB GPU or runs slowly. No API key
+is needed.
 
 ```bash
 git clone https://github.com/Om072005/AdaptiveRAG.git && cd AdaptiveRAG
 uv sync
-cp .env.example .env                                   # your Neon strings and your Gemini key
+cp .env.example .env                                   # your Neon strings
 uv run python -m adaptiverag.stores.migrate            # create the tables
 uv run python -m adaptiverag.ingest run --corpus mini  # 30 questions, their paragraphs, chunks and embeddings
 uv run python -m adaptiverag ask "Who was born first, Yanka Dyagileva or Alexander Bashlachev?"
