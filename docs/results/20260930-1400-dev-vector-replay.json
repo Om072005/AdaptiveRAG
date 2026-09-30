@@ -1,0 +1,121 @@
+{
+  "run": {
+    "run_id": "20260930-1400-dev-vector-replay",
+    "created_at": "2026-09-30T14:00:52.399528+00:00",
+    "split": "dev",
+    "mode": "vector",
+    "variant": "replay",
+    "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+    "git_dirty": false,
+    "config_hash": "d67a90a95faa",
+    "n": 15
+  },
+  "aggregate": {
+    "n": 15,
+    "em": 0.5333333333333333,
+    "f1": 0.6247619066666666,
+    "recall_at_k": 0.9666666666666667,
+    "mrr": 1.0,
+    "sp_precision": 0.08582932806666667,
+    "faithfulness": 0.8833333333333333,
+    "relevance": 0.45,
+    "completeness": 0.9333333333333333,
+    "cost_per_query_usd": 2.4756e-05,
+    "p50_ms": 1028.0,
+    "p95_ms": 4738.0,
+    "by_type": {
+      "single_hop": {
+        "n": 5,
+        "em": 0.8,
+        "f1": 0.8,
+        "recall_at_k": 1.0,
+        "mrr": 1.0,
+        "sp_precision": 0.045430307,
+        "faithfulness": 1.0,
+        "relevance": 0.35,
+        "completeness": 1.0
+      },
+      "multi_hop": {
+        "n": 6,
+        "em": 0.3333333333333333,
+        "f1": 0.5619047666666667,
+        "recall_at_k": 0.9166666666666666,
+        "mrr": 1.0,
+        "sp_precision": 0.10283239266666666,
+        "faithfulness": 0.7083333333333334,
+        "relevance": 0.5,
+        "completeness": 0.8333333333333334
+      },
+      "comparison": {
+        "n": 4,
+        "em": 0.5,
+        "f1": 0.5,
+        "recall_at_k": 1.0,
+        "mrr": 1.0,
+        "sp_precision": 0.1108235075,
+        "faithfulness": 1.0,
+        "relevance": 0.5,
+        "completeness": 1.0
+      }
+    },
+    "confusion": null,
+    "misroutes": [],
+    "routing": {
+      "routes": {
+        "vector": 15,
+        "graph": 0,
+        "hybrid": 0
+      },
+      "fallbacks": 0,
+      "fallbacks_by_kind": {}
+    }
+  },
+  "vs": "20260930-1248-dev-vector-baseline",
+  "diff": {
+    "overall": {
+      "em": -0.17666666666666664,
+      "f1": -0.1511544007333333,
+      "recall_at_k": 0.021666666666666723,
+      "mrr": 0.0,
+      "sp_precision": 0.005007708556666671,
+      "faithfulness": -0.05166666666666675,
+      "relevance": -0.019999999999999962,
+      "completeness": -0.036666666666666625,
+      "cost_per_query_usd": -4.6279999999999835e-07,
+      "p50_ms": -2.0,
+      "p95_ms": 3443.0
+    },
+    "by_type": {
+      "single_hop": {
+        "em": -0.1393939393939394,
+        "f1": -0.1515151515151515,
+        "recall_at_k": 0.0,
+        "mrr": 0.0,
+        "sp_precision": 0.003198405939393946,
+        "faithfulness": 0.0,
+        "relevance": 0.0318181818181818,
+        "completeness": 0.0
+      },
+      "multi_hop": {
+        "em": -0.14035087719298245,
+        "f1": -0.07471709491228073,
+        "recall_at_k": 0.06140350877192979,
+        "mrr": 0.0,
+        "sp_precision": 0.004543654429824559,
+        "faithfulness": -0.17982456140350878,
+        "relevance": -0.013157894736842146,
+        "completeness": -0.11403508771929816
+      },
+      "comparison": {
+        "em": -0.2586206896551724,
+        "f1": -0.2586206896551724,
+        "recall_at_k": 0.0,
+        "mrr": 0.0,
+        "sp_precision": 0.008977398431034483,
+        "faithfulness": 0.07758620689655171,
+        "relevance": -0.08620689655172409,
+        "completeness": 0.03448275862068961
+      }
+    }
+  }
+}

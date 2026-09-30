@@ -1,0 +1,111 @@
+{
+  "run": {
+    "run_id": "20260930-1248-dev-graph-baseline",
+    "created_at": "2026-09-30T12:48:20.020230+00:00",
+    "split": "dev",
+    "mode": "graph",
+    "variant": "baseline",
+    "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+    "git_dirty": false,
+    "config_hash": "d67a90a95faa",
+    "n": 100
+  },
+  "aggregate": {
+    "n": 100,
+    "em": 0.48,
+    "f1": 0.4980000004,
+    "recall_at_k": 0.675,
+    "mrr": 0.6806666672,
+    "sp_precision": 0.15359095926,
+    "faithfulness": 0.9425,
+    "relevance": 0.6225,
+    "completeness": 0.97,
+    "cost_per_query_usd": 1.93126e-05,
+    "p50_ms": 5492.0,
+    "p95_ms": 7554.0,
+    "by_type": {
+      "single_hop": {
+        "n": 33,
+        "em": 0.8181818181818182,
+        "f1": 0.8303030303030303,
+        "recall_at_k": 0.9090909090909091,
+        "mrr": 0.8434343436363636,
+        "sp_precision": 0.10450005481818182,
+        "faithfulness": 1.0,
+        "relevance": 0.48484848484848486,
+        "completeness": 1.0
+      },
+      "multi_hop": {
+        "n": 38,
+        "em": 0.15789473684210525,
+        "f1": 0.19473684315789475,
+        "recall_at_k": 0.40789473684210525,
+        "mrr": 0.560964912631579,
+        "sp_precision": 0.15907639394736842,
+        "faithfulness": 0.9013157894736842,
+        "relevance": 0.5921052631578947,
+        "completeness": 0.9736842105263158
+      },
+      "comparison": {
+        "n": 29,
+        "em": 0.5172413793103449,
+        "f1": 0.5172413793103449,
+        "recall_at_k": 0.7586206896551724,
+        "mrr": 0.6522988517241379,
+        "sp_precision": 0.20226521196551725,
+        "faithfulness": 0.9310344827586207,
+        "relevance": 0.8189655172413793,
+        "completeness": 0.9310344827586207
+      }
+    },
+    "confusion": null,
+    "misroutes": [],
+    "routing": {
+      "routes": {
+        "vector": 0,
+        "graph": 100,
+        "hybrid": 0
+      },
+      "fallbacks": 0,
+      "fallbacks_by_kind": {}
+    }
+  },
+  "vs": "20260930-1546-dev-graph-baseline",
+  "diff": {
+    "overall": {
+      "em": 0.13999999999999996,
+      "f1": 0.12999999959999997,
+      "recall_at_k": 0.1050000000000001,
+      "mrr": 0.06933333320000001,
+      "sp_precision": -0.03003053248000001,
+      "faithfulness": 0.057499999999999996,
+      "relevance": -0.0774999999999999,
+      "completeness": 0.030000000000000027,
+      "cost_per_query_usd": -4.541999999999998e-07,
+      "p50_ms": 811.0,
+      "p95_ms": 844.0
+    },
+    "by_type": {
+      "multi_hop": {
+        "em": -0.06432748538011696,
+        "f1": -0.07933723239766083,
+        "recall_at_k": -0.018031189083820676,
+        "mrr": 0.01219948003898641,
+        "sp_precision": 0.0034602448362573146,
+        "faithfulness": 0.04020467836257302,
+        "relevance": -0.03752436647173496,
+        "completeness": 0.01072124756335291
+      },
+      "comparison": {
+        "em": 0.038980509745127456,
+        "f1": 0.038980509745127456,
+        "recall_at_k": 0.019490254872563728,
+        "mrr": -0.032483757841079486,
+        "sp_precision": -0.01423211677361319,
+        "faithfulness": 0.01799100449775115,
+        "relevance": 0.03635682158920539,
+        "completeness": 0.01799100449775115
+      }
+    }
+  }
+}

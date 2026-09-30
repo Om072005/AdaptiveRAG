@@ -1,0 +1,239 @@
+{
+  "run": {
+    "run_id": "20260930-1248-dev-auto-always-large",
+    "created_at": "2026-09-30T12:48:19.876202+00:00",
+    "split": "dev",
+    "mode": "auto",
+    "variant": "always-large",
+    "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+    "git_dirty": false,
+    "config_hash": "d67a90a95faa",
+    "n": 100
+  },
+  "aggregate": {
+    "n": 100,
+    "em": 0.82,
+    "f1": 0.859035088,
+    "recall_at_k": 0.945,
+    "mrr": 1.0,
+    "sp_precision": 0.08116149763,
+    "faithfulness": 0.99,
+    "relevance": 0.44,
+    "completeness": 1.0,
+    "cost_per_query_usd": 0.0013858875,
+    "p50_ms": 35044.0,
+    "p95_ms": 66140.0,
+    "by_type": {
+      "single_hop": {
+        "n": 33,
+        "em": 0.9696969696969697,
+        "f1": 0.9818181818181818,
+        "recall_at_k": 1.0,
+        "mrr": 1.0,
+        "sp_precision": 0.04231659351515152,
+        "faithfulness": 1.0,
+        "relevance": 0.29545454545454547,
+        "completeness": 1.0
+      },
+      "multi_hop": {
+        "n": 38,
+        "em": 0.631578947368421,
+        "f1": 0.7062326868421053,
+        "recall_at_k": 0.8552631578947368,
+        "mrr": 1.0,
+        "sp_precision": 0.09908865668421053,
+        "faithfulness": 0.9802631578947368,
+        "relevance": 0.45394736842105265,
+        "completeness": 1.0
+      },
+      "comparison": {
+        "n": 29,
+        "em": 0.896551724137931,
+        "f1": 0.9195402310344828,
+        "recall_at_k": 1.0,
+        "mrr": 1.0,
+        "sp_precision": 0.1018735594137931,
+        "faithfulness": 0.9913793103448276,
+        "relevance": 0.5862068965517241,
+        "completeness": 1.0
+      }
+    },
+    "confusion": {
+      "labels": [
+        "single_hop",
+        "multi_hop",
+        "comparison"
+      ],
+      "matrix": [
+        [
+          32,
+          1,
+          0
+        ],
+        [
+          11,
+          27,
+          0
+        ],
+        [
+          1,
+          0,
+          28
+        ]
+      ]
+    },
+    "misroutes": [
+      {
+        "question_id": "sh_8fd983e4b981c2d6_0",
+        "gold_type": "single_hop",
+        "predicted_type": "multi_hop",
+        "confidence": 0.92071605,
+        "route_taken": "hybrid",
+        "confident": true
+      },
+      {
+        "question_id": "hp_5a81ad9855429903bc27b9a3",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.84213036,
+        "route_taken": "hybrid",
+        "confident": true
+      },
+      {
+        "question_id": "hp_5a887293554299206df2b273",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.7910149,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5aba5e2555429955dce3edf1",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.75876874,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5ae180d855429901ffe4aecc",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.6746827,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5ae326d85542991a06ce9938",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.65936834,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5addda9b5542992200553b5b",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.64210737,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5a7e7c725542991319bc94be",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.6240969,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5ab5ee055542997d4ad1f259",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.56544024,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5a845e9055429933447460ec",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.55143964,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5ab23d8a55429970612095c9",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.5172583,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5a865bbf5542991e77181615",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.5147079,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5ac38ce255429939154137c2",
+        "gold_type": "comparison",
+        "predicted_type": "single_hop",
+        "confidence": 0.46507108,
+        "route_taken": "hybrid",
+        "confident": false
+      }
+    ],
+    "routing": {
+      "routes": {
+        "vector": 11,
+        "graph": 0,
+        "hybrid": 89
+      },
+      "fallbacks": 0,
+      "fallbacks_by_kind": {}
+    }
+  },
+  "vs": "20260930-1637-dev-auto-always-large",
+  "diff": {
+    "overall": {
+      "em": -0.05500000000000005,
+      "f1": -0.0992982495000001,
+      "recall_at_k": -0.05500000000000005,
+      "mrr": 0.0,
+      "sp_precision": -0.020406936245000007,
+      "faithfulness": 0.05249999999999999,
+      "relevance": -0.06,
+      "completeness": 0.0,
+      "cost_per_query_usd": -0.00013828124999999995,
+      "p50_ms": -4662.0,
+      "p95_ms": 690.0
+    },
+    "by_type": {
+      "multi_hop": {
+        "em": -0.368421052631579,
+        "f1": -0.2937673131578947,
+        "recall_at_k": -0.14473684210526316,
+        "mrr": 0.0,
+        "sp_precision": 0.03532358168421053,
+        "faithfulness": 0.23026315789473684,
+        "relevance": -0.046052631578947345,
+        "completeness": 0.0
+      },
+      "comparison": {
+        "em": 0.06321839080459768,
+        "f1": -0.0249042189655172,
+        "recall_at_k": 0.0,
+        "mrr": 0.0,
+        "sp_precision": -0.012295994086206907,
+        "faithfulness": -0.008620689655172376,
+        "relevance": 0.08620689655172409,
+        "completeness": 0.0
+      }
+    }
+  }
+}

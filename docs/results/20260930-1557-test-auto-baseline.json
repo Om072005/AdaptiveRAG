@@ -1,0 +1,163 @@
+{
+  "run": {
+    "run_id": "20260930-1557-test-auto-baseline",
+    "created_at": "2026-09-30T15:57:13.096066+00:00",
+    "split": "test",
+    "mode": "auto",
+    "variant": "baseline",
+    "git_sha": "b08eb961436491f278866409690e3acbcf11218f",
+    "git_dirty": false,
+    "config_hash": "e52cef8141c0",
+    "n": 50
+  },
+  "aggregate": {
+    "n": 50,
+    "em": 0.72,
+    "f1": 0.8108095254,
+    "recall_at_k": 0.97,
+    "mrr": 0.99,
+    "sp_precision": 0.08743290004,
+    "faithfulness": 0.935,
+    "relevance": 0.47,
+    "completeness": 0.97,
+    "cost_per_query_usd": 0.001054751,
+    "p50_ms": 9522.0,
+    "p95_ms": 14925.0,
+    "by_type": {
+      "single_hop": {
+        "n": 17,
+        "em": 0.8235294117647058,
+        "f1": 0.8739495805882352,
+        "recall_at_k": 1.0,
+        "mrr": 1.0,
+        "sp_precision": 0.04770107411764706,
+        "faithfulness": 1.0,
+        "relevance": 0.3235294117647059,
+        "completeness": 1.0
+      },
+      "multi_hop": {
+        "n": 20,
+        "em": 0.6,
+        "f1": 0.74416667,
+        "recall_at_k": 0.925,
+        "mrr": 0.975,
+        "sp_precision": 0.1045290991,
+        "faithfulness": 0.8625,
+        "relevance": 0.4875,
+        "completeness": 0.925
+      },
+      "comparison": {
+        "n": 13,
+        "em": 0.7692307692307693,
+        "f1": 0.8307692307692308,
+        "recall_at_k": 1.0,
+        "mrr": 1.0,
+        "sp_precision": 0.11308805846153847,
+        "faithfulness": 0.9615384615384616,
+        "relevance": 0.6346153846153846,
+        "completeness": 1.0
+      }
+    },
+    "confusion": {
+      "labels": [
+        "single_hop",
+        "multi_hop",
+        "comparison"
+      ],
+      "matrix": [
+        [
+          14,
+          2,
+          1
+        ],
+        [
+          2,
+          15,
+          3
+        ],
+        [
+          0,
+          0,
+          13
+        ]
+      ]
+    },
+    "misroutes": [
+      {
+        "question_id": "sh_91c9dc978e62c013_0",
+        "gold_type": "single_hop",
+        "predicted_type": "multi_hop",
+        "confidence": 0.75625354,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5adebc51554299728e26c799",
+        "gold_type": "multi_hop",
+        "predicted_type": "comparison",
+        "confidence": 0.7280937,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5a80db5055429938b6142218",
+        "gold_type": "multi_hop",
+        "predicted_type": "comparison",
+        "confidence": 0.7001623,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5abe2b0155429976d4830a83",
+        "gold_type": "multi_hop",
+        "predicted_type": "comparison",
+        "confidence": 0.559719,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "sh_8561b9741de9054e_2",
+        "gold_type": "single_hop",
+        "predicted_type": "multi_hop",
+        "confidence": 0.54207337,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5a832a625542990548d0b1b4",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.53558016,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5ab9fe1255429939ce03dc40",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.510443,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "sh_93a2dca4c1276f82_0",
+        "gold_type": "single_hop",
+        "predicted_type": "comparison",
+        "confidence": 0.39249387,
+        "route_taken": "hybrid",
+        "confident": false
+      }
+    ],
+    "routing": {
+      "routes": {
+        "vector": 4,
+        "graph": 0,
+        "hybrid": 46
+      },
+      "fallbacks": 0,
+      "fallbacks_by_kind": {}
+    }
+  },
+  "vs": null,
+  "diff": null
+}
