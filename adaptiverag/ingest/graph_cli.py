@@ -335,12 +335,14 @@ def report_md(
     merges = [("name", "By name"), ("embedding", "By embedding"), ("person", "PERSON pairs")]
     reasons = sorted(set(s["rejects_by_reason"]) | set(stored))
     labels = LABELS_PATH.relative_to(ROOT).as_posix()
+    scope = "gold" if corpus == "gold" else f"{corpus} gold"
     lines = [
         f"# Graph quality, {corpus} scope ({run_id})",
         "",
-        f"{{header}}Built from {s['chunks']} {strategy} chunks, the documents behind the {corpus}"
-        " gold questions. Entity resolution follows D9. Merge precision comes from merge decisions"
-        f" sampled from this scope and labelled by hand ({labels}).",
+        f"{{header}}Built from {s['chunks']} {strategy} chunks, the documents behind the {scope}"
+        " questions. Entity resolution follows D9 with embedding merges off (D18). Merge precision"
+        f" comes from merge decisions sampled from this scope and labelled against both source"
+        f" passages ({labels}).",
         "",
         "| Graph | Rows |",
         "|---|---|",
