@@ -1,0 +1,79 @@
+{
+ "run_id": "20260930-1457-gold",
+ "name": "graph",
+ "created_at": "2026-09-30T14:57:40+05:30",
+ "git_sha": "1b5f5fbeda4ed570c2f7723835581f6cfddd68d5",
+ "git_dirty": false,
+ "config_hash": "aeb2e20b481a",
+ "params": {
+  "corpus": "gold",
+  "strategy": "sentence",
+  "database": "ep-patient-wave-b3c33ztv-pooler",
+  "extraction": {
+   "chunks": 1419,
+   "chunks_with_triples": 1247,
+   "calls": 369,
+   "calls_cached": 369,
+   "tokens_in": 351740,
+   "tokens_out": 682060,
+   "cost_usd_list_price": 0.06771679,
+   "cost_usd_this_run": 0,
+   "triples_returned": 7297,
+   "kept": 6620,
+   "rejected": 677,
+   "reject_rate": 0.0928,
+   "rejects_by_reason": {
+    "bad_json": 60,
+    "empty": 5,
+    "object_not_in_source": 153,
+    "self_loop": 22,
+    "subject_not_in_source": 437
+   },
+   "bad_responses": 0,
+   "evidence_not_located": 795
+  },
+  "stored_rejects_by_reason": {
+   "bad_json": 60,
+   "empty": 5,
+   "object_not_in_source": 153,
+   "self_loop": 22,
+   "subject_not_in_source": 437
+  },
+  "graph": {
+   "entities": 7073,
+   "aliases": 7106,
+   "relations": 6567,
+   "relations_without_chunk": 0,
+   "relations_without_vector": 0
+  },
+  "merges": {
+   "labelled": 100,
+   "same": 91,
+   "precision": 0.91,
+   "unlabelled": 0,
+   "name": {
+    "labelled": 100,
+    "same": 91,
+    "precision": 0.91
+   },
+   "embedding": {
+    "labelled": 0,
+    "same": 0,
+    "precision": null
+   },
+   "person": {
+    "labelled": 5,
+    "same": 5,
+    "precision": 1.0
+   }
+  }
+ },
+ "rows": [
+  {
+   "entities": 7073,
+   "relations": 6567,
+   "reject_rate": 0.0928,
+   "er_precision": 0.91
+  }
+ ]
+}
