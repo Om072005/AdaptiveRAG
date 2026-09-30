@@ -11,9 +11,9 @@ export function Footer({ repoUrl }: { repoUrl: string }) {
     <footer>
       <div className="page-wrap pb-12">
         <div className="ink-block flex flex-col items-start gap-8 p-8 md:p-12 lg:flex-row lg:items-end lg:justify-between">
-          <div>
+          <div className="w-full min-w-0">
             <p className="m-0 font-mono text-[12px] tracking-[0.08em] uppercase opacity-70">Last word</p>
-            <h2 className="m-0 mt-3 font-headline text-[48px] leading-[0.9] md:text-[80px]">See how it handles your questions.</h2>
+            <h2 className="m-0 mt-3 font-headline text-[48px] [overflow-wrap:anywhere] leading-[0.9] md:text-[80px]">See how it handles your questions.</h2>
             <p className="m-0 mt-4 max-w-[46ch] font-sans text-[20px] leading-[26px] opacity-85">
               Clone it, pull the open models and ask anything. Everything runs on your machine.
             </p>

@@ -79,6 +79,7 @@
   line-height: 0.88;
   letter-spacing: -0.02em;
   color: var(--color-ink);
+  overflow-wrap: anywhere;
   @media (width >= 48rem) {
     font-size: 104px;
   }
@@ -93,6 +94,7 @@
   letter-spacing: -0.015em;
   color: var(--color-ink);
   max-width: 20ch;
+  overflow-wrap: anywhere;
   @media (width >= 48rem) {
     font-size: 80px;
   }

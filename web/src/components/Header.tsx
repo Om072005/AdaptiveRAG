@@ -59,10 +59,10 @@ export function Header({ repoUrl }: { repoUrl: string }) {
     <header className="sticky top-0 z-40 border-b border-ink bg-(--header-bg) backdrop-blur-sm">
       <div className="page-wrap flex h-16 items-center justify-between gap-3 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-4">
         <p className="m-0 hidden font-sans text-[17px] leading-6 text-ink md:block">Vol. 1 · Open source · HotpotQA</p>
-        <div className="col-start-1 justify-self-start md:col-start-2 md:justify-self-center">
+        <div className="col-start-1 min-w-0 justify-self-start overflow-hidden md:col-start-2 md:justify-self-center">
           <Wordmark />
         </div>
-        <div className="col-start-3 flex items-center justify-self-end gap-2">
+        <div className="col-start-3 flex shrink-0 items-center justify-self-end gap-2">
           <ThemeToggle />
           <a
             href={repoUrl}
