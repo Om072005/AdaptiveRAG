@@ -1,0 +1,1153 @@
+{
+ "sample": false,
+ "question_id": "hp_5a7f677455429969796c1a37",
+ "question": "Were Stanley Kubrick and Elio Petri from different countries?",
+ "type": "comparison",
+ "gold_answer": "yes",
+ "supporting_titles": [
+  "Elio Petri",
+  "Stanley Kubrick"
+ ],
+ "why": "A comparison hybrid answers and graph traversal alone gets wrong.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "87d9d02e-8d21-4ccf-8d24-7de8793ce11d",
+    "question": "Were Stanley Kubrick and Elio Petri from different countries?",
+    "answer": {
+     "short": "Yes",
+     "text": "Yes. Elio Petri was Italian [1], while Stanley Kubrick was American [2], meaning they were from different countries.",
+     "model": "qwen3.6:35b-a3b",
+     "size": "large",
+     "select_reason": "large:label comparison",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Elio Petri",
+       "snippet": "Elio Petri (29 January 1929 – 10 November 1982) was an Italian political filmmaker.",
+       "chunk_id": "4a08b9260eb891d5:sentence:0"
+      },
+      {
+       "n": 2,
+       "title": "Stanley Kubrick",
+       "snippet": "Stanley Kubrick ( ; July 26, 1928 – March 7, 1999) was an American film director, screenwriter, producer, cinematographer, editor, and photographer. He is frequently cited as one of the greatest and most influential directors in cinematic history. His films, which are mostly adaptations of novels or short stories, cover a wide range of genres, and are noted for their realism, dark humor, unique cinematography, extensive set designs, and evocative use of music.",
+       "chunk_id": "ed8679f16e9fa6bb:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "comparison",
+     "label_confidence": 0.9934768080711365,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "relational:comparison"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Elio Petri",
+       "snippet": "Elio Petri (29 January 1929 – 10 November 1982) was an Italian political filmmaker.",
+       "score": 0.01639344262295082,
+       "source": "vector",
+       "chunk_id": "4a08b9260eb891d5:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Stanley Kubrick",
+       "snippet": "Stanley Kubrick ( ; July 26, 1928 – March 7, 1999) was an American film director, screenwriter, producer, cinematographer, editor, and photographer. He is frequently cited as one of the greatest and most influential directors in cinematic history. His films, which are mostly adaptations of novels or short stories, cover a wide range of genres, and are noted for their realism, dark humor, unique cinematography, extensive set designs, and evocative use of music.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "ed8679f16e9fa6bb:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Luigi Kuveiller",
+       "snippet": "Luigi Kuveiller (3 October 1927 - 10 January 2013) was an Italian cinematographer, best known for his collaboration with Elio Petri.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "4fc68eb261b3b8e4:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "S Is for Stanley",
+       "snippet": "S is for Stanley (Italian: \"S Is for Stanley - Trent'anni dietro al volante per Stanley Kubrick\" ) is a 2016 Italian documentary film co-written and directed by Alex Infascelli. It depicts the relationship between celebrated director Stanley Kubrick and his personal chauffeur and assistant, Emilio D'Alessandro. It was produced by Kinethica and Lock And Valentine. It is based on D'Alessandro's autobiography \"Stanley Kubrick and Me\".",
+       "score": 0.032018442622950824,
+       "source": "hybrid",
+       "chunk_id": "a5d6520de1376366:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Sergio Donati",
+       "snippet": "Sergio Donati (born 13 April 1933) is an Italian screenwriter. He has written for more than 70 films since 1952. He was born in Rome, Italy. He started as a writer and had some of his books optioned for film. He is well known for his collaboration with Italian director Sergio Leone, who encouraged him to take up screenwriting as a full-time career, and with Italian producer Dino de Laurentis.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "0add1c8c8aeecba7:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Eli Roth",
+       "snippet": "Eli Raphael Roth (born April 18, 1972) is an American film director, producer, writer, and actor. As a director and producer, he is most closely associated with the horror genre, first coming to prominence by directing the 2005 film \"Hostel\" and its 2007 sequel, \"\". As an actor, his most prominent role was as Donny \"The Bear Jew\" Donowitz in Quentin Tarantino's war film \"Inglourious Basterds\" for which he won both a SAG Award (Best Ensemble) and a BFCA Critic's Choice Award (Best Acting Ensemble).",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "e10e6e9c5a99b35a:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "The Assassin (1961 film)",
+       "snippet": "The Assassin (Italian: \"L'assassino\" ) is a 1961 Italian crime film directed by Elio Petri. It is the feature film debut of Petri. It was entered into the 11th Berlin International Film Festival.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "5e15107caf90fbad:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Sergio Leone",
+       "snippet": "Sergio Leone (] ; 3 January 1929 – 30 April 1989) was an Italian film director, producer and screenwriter, credited as the inventor of the \"Spaghetti Western\" genre.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "4386cd6a33149950:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_0f0b60e664dd",
+        "name": "S is for Stanley",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_245934296982",
+        "name": "Stanley Kubrick",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_bed89eb7ca86",
+        "name": "Stanley Kubrick and Me",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_dcfb7b4822ff",
+        "name": "Emilio D'Alessandro",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_20c53e706eb6",
+        "name": "Kinethica",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b67a5bf4451e",
+        "name": "Alex Infascelli",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_40cd6fde4c43",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_77a03e18c6d1",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_810937611e00",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_decccc77e92a",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_df578eaef2b3",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_e23b1e14c61e",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f903234d0b3a",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_88e9baa9b0ca",
+        "name": "Stanley Kubrick's Boxes",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8ac8f7f2350d",
+        "name": "Different Faces",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_f9221eb2d88b",
+        "name": "Stanley Park",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_d06a6504945d",
+        "name": "From Divine",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_4c0310c350ff",
+        "name": "A and C",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_f2b6cb74d1d1",
+        "name": "Kubrick's house",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_7c75ed402243",
+        "name": "state",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_df6411cc868d",
+        "name": "key",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_efe0933527bc",
+        "name": "STR",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_371537387e16",
+        "name": "Kubrick's estate",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_becc16cacfcd",
+        "name": "a variety of countries",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_feb8feffb113",
+        "name": "the county",
+        "type": "PLACE",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_245934296982",
+        "predicate": "depicts_relationship_with",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_bed89eb7ca86",
+        "predicate": "based_on",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_dcfb7b4822ff",
+        "predicate": "depicts_relationship_with",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_20c53e706eb6",
+        "predicate": "produced_by",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_b67a5bf4451e",
+        "predicate": "co_written_by",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7484172805672077,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 254
+      },
+      {
+       "name": "retrieve",
+       "ms": 210
+      },
+      {
+       "name": "retrieve",
+       "ms": 811
+      },
+      {
+       "name": "merge",
+       "ms": 391
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 971,
+     "tokens_out": 1138,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 0.00128365,
+      "total": 0.00128365
+     },
+     "total_ms": 6998,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.75,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context, the majority of the context blocks are relevant to the entities mentioned, and the question is answered completely.",
+    "cost_usd": 0.00026902,
+    "flagged": false,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "2da2d9fe-b9a7-4dd1-826e-2db086b7e525",
+    "question": "Were Stanley Kubrick and Elio Petri from different countries?",
+    "answer": {
+     "short": "yes",
+     "text": "yes. Stanley Kubrick was American [2] and Elio Petri was Italian [1].",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 634 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 2,
+       "title": "Stanley Kubrick",
+       "snippet": "Stanley Kubrick ( ; July 26, 1928 – March 7, 1999) was an American film director, screenwriter, producer, cinematographer, editor, and photographer. He is frequently cited as one of the greatest and most influential directors in cinematic history. His films, which are mostly adaptations of novels or short stories, cover a wide range of genres, and are noted for their realism, dark humor, unique cinematography, extensive set designs, and evocative use of music.",
+       "chunk_id": "ed8679f16e9fa6bb:sentence:0"
+      },
+      {
+       "n": 1,
+       "title": "Elio Petri",
+       "snippet": "Elio Petri (29 January 1929 – 10 November 1982) was an Italian political filmmaker.",
+       "chunk_id": "4a08b9260eb891d5:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Elio Petri",
+       "snippet": "Elio Petri (29 January 1929 – 10 November 1982) was an Italian political filmmaker.",
+       "score": 0.7484172805672077,
+       "source": "vector",
+       "chunk_id": "4a08b9260eb891d5:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Stanley Kubrick",
+       "snippet": "Stanley Kubrick ( ; July 26, 1928 – March 7, 1999) was an American film director, screenwriter, producer, cinematographer, editor, and photographer. He is frequently cited as one of the greatest and most influential directors in cinematic history. His films, which are mostly adaptations of novels or short stories, cover a wide range of genres, and are noted for their realism, dark humor, unique cinematography, extensive set designs, and evocative use of music.",
+       "score": 0.7112215373284086,
+       "source": "vector",
+       "chunk_id": "ed8679f16e9fa6bb:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Luigi Kuveiller",
+       "snippet": "Luigi Kuveiller (3 October 1927 - 10 January 2013) was an Italian cinematographer, best known for his collaboration with Elio Petri.",
+       "score": 0.5923096118065602,
+       "source": "vector",
+       "chunk_id": "4fc68eb261b3b8e4:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "S Is for Stanley",
+       "snippet": "S is for Stanley (Italian: \"S Is for Stanley - Trent'anni dietro al volante per Stanley Kubrick\" ) is a 2016 Italian documentary film co-written and directed by Alex Infascelli. It depicts the relationship between celebrated director Stanley Kubrick and his personal chauffeur and assistant, Emilio D'Alessandro. It was produced by Kinethica and Lock And Valentine. It is based on D'Alessandro's autobiography \"Stanley Kubrick and Me\".",
+       "score": 0.5902726230106542,
+       "source": "vector",
+       "chunk_id": "a5d6520de1376366:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Eli Roth",
+       "snippet": "Eli Raphael Roth (born April 18, 1972) is an American film director, producer, writer, and actor. As a director and producer, he is most closely associated with the horror genre, first coming to prominence by directing the 2005 film \"Hostel\" and its 2007 sequel, \"\". As an actor, his most prominent role was as Donny \"The Bear Jew\" Donowitz in Quentin Tarantino's war film \"Inglourious Basterds\" for which he won both a SAG Award (Best Ensemble) and a BFCA Critic's Choice Award (Best Acting Ensemble).",
+       "score": 0.5758603982883813,
+       "source": "vector",
+       "chunk_id": "e10e6e9c5a99b35a:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Sergio Leone",
+       "snippet": "Sergio Leone (] ; 3 January 1929 – 30 April 1989) was an Italian film director, producer and screenwriter, credited as the inventor of the \"Spaghetti Western\" genre.",
+       "score": 0.5743417911035359,
+       "source": "vector",
+       "chunk_id": "4386cd6a33149950:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Sergio Donati",
+       "snippet": "Sergio Donati (born 13 April 1933) is an Italian screenwriter. He has written for more than 70 films since 1952. He was born in Rome, Italy. He started as a writer and had some of his books optioned for film. He is well known for his collaboration with Italian director Sergio Leone, who encouraged him to take up screenwriting as a full-time career, and with Italian producer Dino de Laurentis.",
+       "score": 0.5600904917636136,
+       "source": "vector",
+       "chunk_id": "0add1c8c8aeecba7:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "The Assassin (1961 film)",
+       "snippet": "The Assassin (Italian: \"L'assassino\" ) is a 1961 Italian crime film directed by Elio Petri. It is the feature film debut of Petri. It was entered into the 11th Berlin International Film Festival.",
+       "score": 0.5431697258206959,
+       "source": "vector",
+       "chunk_id": "5e15107caf90fbad:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.7484172805672077,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 214
+      },
+      {
+       "name": "generate",
+       "ms": 197
+      }
+     ],
+     "tokens_in": 850,
+     "tokens_out": 54,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.016e-05,
+      "total": 2.016e-05
+     },
+     "total_ms": 964,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely addresses the question. Approximately half of the context blocks are relevant to the entities mentioned.",
+    "cost_usd": 0.00026576,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "c07f3da4-19de-4b06-8f1a-6c28e706b0e8",
+    "question": "Were Stanley Kubrick and Elio Petri from different countries?",
+    "answer": {
+     "short": "not enough context",
+     "text": "not enough context",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 114 tokens",
+     "confidence": 0.0,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "S Is for Stanley",
+       "snippet": "S is for Stanley (Italian: \"S Is for Stanley - Trent'anni dietro al volante per Stanley Kubrick\" ) is a 2016 Italian documentary film co-written and directed by Alex Infascelli. It depicts the relationship between celebrated director Stanley Kubrick and his personal chauffeur and assistant, Emilio D'Alessandro. It was produced by Kinethica and Lock And Valentine. It is based on D'Alessandro's autobiography \"Stanley Kubrick and Me\".",
+       "score": 0.7800391399872049,
+       "source": "graph",
+       "chunk_id": "a5d6520de1376366:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_0f0b60e664dd",
+        "name": "S is for Stanley",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_245934296982",
+        "name": "Stanley Kubrick",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_bed89eb7ca86",
+        "name": "Stanley Kubrick and Me",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_dcfb7b4822ff",
+        "name": "Emilio D'Alessandro",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_20c53e706eb6",
+        "name": "Kinethica",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b67a5bf4451e",
+        "name": "Alex Infascelli",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_40cd6fde4c43",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_77a03e18c6d1",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_810937611e00",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_decccc77e92a",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_df578eaef2b3",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_e23b1e14c61e",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f903234d0b3a",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_88e9baa9b0ca",
+        "name": "Stanley Kubrick's Boxes",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8ac8f7f2350d",
+        "name": "Different Faces",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_f9221eb2d88b",
+        "name": "Stanley Park",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_d06a6504945d",
+        "name": "From Divine",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_4c0310c350ff",
+        "name": "A and C",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_f2b6cb74d1d1",
+        "name": "Kubrick's house",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_7c75ed402243",
+        "name": "state",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_df6411cc868d",
+        "name": "key",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_efe0933527bc",
+        "name": "STR",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_371537387e16",
+        "name": "Kubrick's estate",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_becc16cacfcd",
+        "name": "a variety of countries",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_feb8feffb113",
+        "name": "the county",
+        "type": "PLACE",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_245934296982",
+        "predicate": "depicts_relationship_with",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_bed89eb7ca86",
+        "predicate": "based_on",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_dcfb7b4822ff",
+        "predicate": "depicts_relationship_with",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_20c53e706eb6",
+        "predicate": "produced_by",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_b67a5bf4451e",
+        "predicate": "co_written_by",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7800391399872049,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 260
+      },
+      {
+       "name": "retrieve",
+       "ms": 808
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 434,
+     "tokens_out": 75,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 1.456e-05,
+      "total": 1.456e-05
+     },
+     "total_ms": 1859,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 0.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The context mentions Stanley Kubrick but does not mention Elio Petri or the nationality of either person; therefore, the answer 'not enough context' is correct and faithful.",
+    "cost_usd": 0.00068708,
+    "flagged": true,
+    "queued": true
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "1cc4e65e-7977-452d-9871-121a1f67fdb5",
+    "question": "Were Stanley Kubrick and Elio Petri from different countries?",
+    "answer": {
+     "short": "yes",
+     "text": "yes. Elio Petri was Italian and Stanley Kubrick was American. [1][2]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 634 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Elio Petri",
+       "snippet": "Elio Petri (29 January 1929 – 10 November 1982) was an Italian political filmmaker.",
+       "chunk_id": "4a08b9260eb891d5:sentence:0"
+      },
+      {
+       "n": 2,
+       "title": "Stanley Kubrick",
+       "snippet": "Stanley Kubrick ( ; July 26, 1928 – March 7, 1999) was an American film director, screenwriter, producer, cinematographer, editor, and photographer. He is frequently cited as one of the greatest and most influential directors in cinematic history. His films, which are mostly adaptations of novels or short stories, cover a wide range of genres, and are noted for their realism, dark humor, unique cinematography, extensive set designs, and evocative use of music.",
+       "chunk_id": "ed8679f16e9fa6bb:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Elio Petri",
+       "snippet": "Elio Petri (29 January 1929 – 10 November 1982) was an Italian political filmmaker.",
+       "score": 0.01639344262295082,
+       "source": "vector",
+       "chunk_id": "4a08b9260eb891d5:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Stanley Kubrick",
+       "snippet": "Stanley Kubrick ( ; July 26, 1928 – March 7, 1999) was an American film director, screenwriter, producer, cinematographer, editor, and photographer. He is frequently cited as one of the greatest and most influential directors in cinematic history. His films, which are mostly adaptations of novels or short stories, cover a wide range of genres, and are noted for their realism, dark humor, unique cinematography, extensive set designs, and evocative use of music.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "ed8679f16e9fa6bb:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Luigi Kuveiller",
+       "snippet": "Luigi Kuveiller (3 October 1927 - 10 January 2013) was an Italian cinematographer, best known for his collaboration with Elio Petri.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "4fc68eb261b3b8e4:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "S Is for Stanley",
+       "snippet": "S is for Stanley (Italian: \"S Is for Stanley - Trent'anni dietro al volante per Stanley Kubrick\" ) is a 2016 Italian documentary film co-written and directed by Alex Infascelli. It depicts the relationship between celebrated director Stanley Kubrick and his personal chauffeur and assistant, Emilio D'Alessandro. It was produced by Kinethica and Lock And Valentine. It is based on D'Alessandro's autobiography \"Stanley Kubrick and Me\".",
+       "score": 0.032018442622950824,
+       "source": "hybrid",
+       "chunk_id": "a5d6520de1376366:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Sergio Donati",
+       "snippet": "Sergio Donati (born 13 April 1933) is an Italian screenwriter. He has written for more than 70 films since 1952. He was born in Rome, Italy. He started as a writer and had some of his books optioned for film. He is well known for his collaboration with Italian director Sergio Leone, who encouraged him to take up screenwriting as a full-time career, and with Italian producer Dino de Laurentis.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "0add1c8c8aeecba7:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Eli Roth",
+       "snippet": "Eli Raphael Roth (born April 18, 1972) is an American film director, producer, writer, and actor. As a director and producer, he is most closely associated with the horror genre, first coming to prominence by directing the 2005 film \"Hostel\" and its 2007 sequel, \"\". As an actor, his most prominent role was as Donny \"The Bear Jew\" Donowitz in Quentin Tarantino's war film \"Inglourious Basterds\" for which he won both a SAG Award (Best Ensemble) and a BFCA Critic's Choice Award (Best Acting Ensemble).",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "e10e6e9c5a99b35a:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "The Assassin (1961 film)",
+       "snippet": "The Assassin (Italian: \"L'assassino\" ) is a 1961 Italian crime film directed by Elio Petri. It is the feature film debut of Petri. It was entered into the 11th Berlin International Film Festival.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "5e15107caf90fbad:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Sergio Leone",
+       "snippet": "Sergio Leone (] ; 3 January 1929 – 30 April 1989) was an Italian film director, producer and screenwriter, credited as the inventor of the \"Spaghetti Western\" genre.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "4386cd6a33149950:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_0f0b60e664dd",
+        "name": "S is for Stanley",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_245934296982",
+        "name": "Stanley Kubrick",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_bed89eb7ca86",
+        "name": "Stanley Kubrick and Me",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_dcfb7b4822ff",
+        "name": "Emilio D'Alessandro",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_20c53e706eb6",
+        "name": "Kinethica",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b67a5bf4451e",
+        "name": "Alex Infascelli",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_40cd6fde4c43",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_77a03e18c6d1",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_810937611e00",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_decccc77e92a",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_df578eaef2b3",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_e23b1e14c61e",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f903234d0b3a",
+        "name": "Elio Petri",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_88e9baa9b0ca",
+        "name": "Stanley Kubrick's Boxes",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8ac8f7f2350d",
+        "name": "Different Faces",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_f9221eb2d88b",
+        "name": "Stanley Park",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_d06a6504945d",
+        "name": "From Divine",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_4c0310c350ff",
+        "name": "A and C",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_f2b6cb74d1d1",
+        "name": "Kubrick's house",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_7c75ed402243",
+        "name": "state",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_df6411cc868d",
+        "name": "key",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_efe0933527bc",
+        "name": "STR",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_371537387e16",
+        "name": "Kubrick's estate",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_becc16cacfcd",
+        "name": "a variety of countries",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_feb8feffb113",
+        "name": "the county",
+        "type": "PLACE",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_245934296982",
+        "predicate": "depicts_relationship_with",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_bed89eb7ca86",
+        "predicate": "based_on",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_dcfb7b4822ff",
+        "predicate": "depicts_relationship_with",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_20c53e706eb6",
+        "predicate": "produced_by",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_0f0b60e664dd",
+        "target": "e_b67a5bf4451e",
+        "predicate": "co_written_by",
+        "chunk_id": "a5d6520de1376366:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7484172805672077,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 213
+      },
+      {
+       "name": "link",
+       "ms": 258
+      },
+      {
+       "name": "retrieve",
+       "ms": 816
+      },
+      {
+       "name": "merge",
+       "ms": 396
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 965,
+     "tokens_out": 51,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.196e-05,
+      "total": 2.196e-05
+     },
+     "total_ms": 6101,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely addresses the question. About half of the context blocks are relevant to the entities mentioned.",
+    "cost_usd": 0.00037466,
+    "flagged": true,
+    "queued": false
+   }
+  }
+ }
+}

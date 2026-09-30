@@ -1,0 +1,1198 @@
+{
+ "sample": false,
+ "question_id": "hp_5a77d4eb55429949eeb29f74",
+ "question": "Who was born first, Yanka Dyagileva or Alexander Bashlachev?",
+ "type": "comparison",
+ "gold_answer": "Alexander Bashlachev",
+ "supporting_titles": [
+  "Yanka Dyagileva",
+  "Alexander Bashlachev"
+ ],
+ "why": "Hybrid with the small model (F1 0.57) does worse than vector search alone (1.0); the served route's large model answers it fully.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "20b2975c-f024-4031-9860-7015d2f7b4a7",
+    "question": "Who was born first, Yanka Dyagileva or Alexander Bashlachev?",
+    "answer": {
+     "short": "Alexander Bashlachev",
+     "text": "Alexander Bashlachev. Alexander Bashlachev was born on May 27, 1960 [2], while Yanka Dyagileva was born on September 4, 1966 [1]. Therefore, Bashlachev was born first.",
+     "model": "qwen3.6:35b-a3b",
+     "size": "large",
+     "select_reason": "large:label comparison",
+     "confidence": 0.75,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 2,
+       "title": "Alexander Bashlachev",
+       "snippet": "Alexander Nickolaevich Bashlachev (Russian: Алекса́ндр Никола́евич Башлачёв ; ] ; May 27, 1960 – February 17, 1988) was a Soviet poet, singer-songwriter and guitarist, one of the most influential performers in Russian rock music, included in the 27 Club.",
+       "chunk_id": "2665f2f60c8cd33d:sentence:0"
+      },
+      {
+       "n": 1,
+       "title": "Yanka Dyagileva",
+       "snippet": "Yana \"Yanka\" Stanislavovna Dyagileva (Russian: Яна Станиславовна Дягилева ; 4 September 1966 – 9 May 1991) was a Russian poet and singer-songwriter and one of the most popular figures of her time in Russia's underground punk scene. She both played solo and performed with others, including Yegor Letov and bands Grazhdanskaya Oborona and Velikiye Oktyabri (\"Great Octobers\"). Dyagileva was greatly influenced by Letov and Alexander Bashlachev, who were her friends. Her songs explored themes of desperation and depression, punk-style nihilism, and folk-like lamentations.",
+       "chunk_id": "3684170e9a764ddd:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "comparison",
+     "label_confidence": 0.9406217932701111,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "relational:comparison"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Yanka Dyagileva",
+       "snippet": "Yana \"Yanka\" Stanislavovna Dyagileva (Russian: Яна Станиславовна Дягилева ; 4 September 1966 – 9 May 1991) was a Russian poet and singer-songwriter and one of the most popular figures of her time in Russia's underground punk scene. She both played solo and performed with others, including Yegor Letov and bands Grazhdanskaya Oborona and Velikiye Oktyabri (\"Great Octobers\"). Dyagileva was greatly influenced by Letov and Alexander Bashlachev, who were her friends. Her songs explored themes of desperation and depression, punk-style nihilism, and folk-like lamentations.",
+       "score": 0.03278688524590164,
+       "source": "hybrid",
+       "chunk_id": "3684170e9a764ddd:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Alexander Bashlachev",
+       "snippet": "Alexander Nickolaevich Bashlachev (Russian: Алекса́ндр Никола́евич Башлачёв ; ] ; May 27, 1960 – February 17, 1988) was a Soviet poet, singer-songwriter and guitarist, one of the most influential performers in Russian rock music, included in the 27 Club.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "2665f2f60c8cd33d:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Alexander Amini",
+       "snippet": "Alexander Amini (born April 29, 1995) is an American scientist from Dublin, Ireland, currently studying at the Massachusetts Institute of Technology (MIT) in America. He is the first prize winner of the 23rd European Union Contest for Young Scientists and the 47th BT Young Scientist and Technology Exhibition in 2011 at the age of fifteen for his project entitled: “Tennis Sensor Data Analysis: An Automated System for Macro Motion Refinement”, in which he combined his passions for computer science, mathematics, and tennis.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "25519ea81d3c13d7:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Olga Zaitseva (tennis)",
+       "snippet": "Olga Zaitseva (born 12 March 1962) is a former competitor for the Soviet Union at the 1979, 1980, 1981 and 1983 editions of the Federation Cup. Despite posting doubles victories over top professionals such as Betty Stöve, Hana Mandlíková and Renáta Tomanová, Zaitseva did not compete at any point on the women's professional tennis circuit or at any of the Grand Slams and thus never attained a world ranking.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "0877f9deeb974b7a:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Genndy Tartakovsky",
+       "snippet": "Genndy Tartakovsky ( ; born Gennady Borisovich Tartakovsky, Russian: Геннадий Борисович Тартаковский ; January 17, 1970) is a Russian–American animator, director, storyboard artist, producer, and screenwriter. He is best known for creating the Cartoon Network animated television series \"Dexter's Laboratory\", \"Samurai Jack\", and \".\"",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "494c09bb156536af:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Alexander Glazunov",
+       "snippet": "Alexander Konstantinovich Glazunov (Russian: Алекса́ндр Константи́нович Глазуно́в , 10 August 1865 – 21 March 1936) was a Russian composer, music teacher, and conductor of the late Russian Romantic period. He served as director of the Saint Petersburg Conservatory between 1905 and 1928 and was instrumental in the reorganization of the institute into the Petrograd Conservatory, then the Leningrad Conservatory, following the Bolshevik Revolution. He continued heading the Conservatory until 1930, though he had left the Soviet Union in 1928 and did not return.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "6f82fa50c7e92e61:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Valyantsin Byalkevich",
+       "snippet": "Valyantsin Byalkevich (Belarusian: Валянцін Бялькевіч ; 27 January 1973 – 1 August 2014), also sometimes spelled \"Valiantsin Bialkevich\") was a Belarusian football player. He was most notably a member of the Ukrainian club Dynamo Kyiv from 1996 to 2008. During the late 1990s, he was a playmaker for Dynamo Kyiv of the UEFA Champions League, and helped them reach the semi-finals of 1998–99 competition.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "1ff55ae73d10e03e:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Yegor Letov",
+       "snippet": "Igor Fyodorovich \"Yegor\" Letov (Russian: И́горь Фёдорович (Его́р) Ле́тов ] ; 10 September 1964 – 19 February 2008) was a Russian poet, musician, singer-songwriter, audio engineer and conceptual art painter, best known as the founder and leader of the post-punk/psychedelic rock band Grazhdanskaya Oborona (Civil Defense). He was also the founder of a conceptual art avant-garde project Kommunizm and psychedelic rock outfit Egor i Opizdenevshie. Letov is a younger brother of famous free jazz saxophonist Sergey Letov. He also collaborated with singer-songwriter Yanka Dyagileva and some other Siberi",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "e081e1700d456c95:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_5d61ac70945b",
+        "name": "Yana \"Yanka\" Stanislavovna Dyagileva",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_bf91393276b0",
+        "name": "Alexander Bashlachev",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_9cbfdd77239e",
+        "name": "Russian poet and singer-songwriter",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2e735c1a29d1",
+        "name": "Yegor Letov",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2230cc75da85",
+        "name": "one of the most popular figures of her time in Russia's underground punk scene",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_98808d92dc49",
+        "name": "Velikiye Oktyabri",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_3eef7c7b6518",
+        "name": "Grazhdanskaya Oborona",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_0d3db8bae13f",
+        "name": "solo",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_c6b1d928b489",
+        "name": "Yanka Dyagileva",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_818fb1692527",
+        "name": "Alexander Amini",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_87429dafb5d3",
+        "name": "Alexander Peya",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_06544ff4d41a",
+        "name": "Scott Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_446b9f33ed2f",
+        "name": "Kelly Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_efd267f7ceb5",
+        "name": "Franz Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_e4a65e4bd306",
+        "name": "Alexander Nickolaevich Bashlachev",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_12f600bb01b3",
+        "name": "fire",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_50ad67b52801",
+        "name": "Bernhard Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_cc678a97ff8b",
+        "name": "Alexander Samsonov",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4ae5d6efdd77",
+        "name": "Alexander the Great",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_6418ad613fee",
+        "name": "Zechariah Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_0e12ac863294",
+        "name": "First Blood",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_838d5ced8e8d",
+        "name": "Yanco",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_ee2a2a2e2daf",
+        "name": "Bob",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4bbb4f7076c0",
+        "name": "first single",
+        "type": "OTHER",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_bf91393276b0",
+        "predicate": "was_influenced_by",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_9cbfdd77239e",
+        "predicate": "was",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_2e735c1a29d1",
+        "predicate": "was_influenced_by",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_2230cc75da85",
+        "predicate": "was",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_2e735c1a29d1",
+        "predicate": "performed_with",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_98808d92dc49",
+        "predicate": "performed_with",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_3eef7c7b6518",
+        "predicate": "performed_with",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_0d3db8bae13f",
+        "predicate": "played",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7181796171451122,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 2
+      },
+      {
+       "name": "link",
+       "ms": 272
+      },
+      {
+       "name": "retrieve",
+       "ms": 214
+      },
+      {
+       "name": "retrieve",
+       "ms": 790
+      },
+      {
+       "name": "merge",
+       "ms": 391
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 1543,
+     "tokens_out": 1021,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 0.00125245,
+      "total": 0.00125245
+     },
+     "total_ms": 43704,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely addresses the question. However, only two of the eight provided context blocks are relevant to the entities and the question.",
+    "cost_usd": 0.00086306,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "833a2df7-3a0f-4f8e-83b9-e62568c4bc88",
+    "question": "Who was born first, Yanka Dyagileva or Alexander Bashlachev?",
+    "answer": {
+     "short": "Alexander Bashlachev",
+     "text": "Alexander Bashlachev. He was born on May 27, 1960, which is earlier than Yanka Dyagileva’s birth on September 4, 1966. [1][2]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 977 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Yanka Dyagileva",
+       "snippet": "Yana \"Yanka\" Stanislavovna Dyagileva (Russian: Яна Станиславовна Дягилева ; 4 September 1966 – 9 May 1991) was a Russian poet and singer-songwriter and one of the most popular figures of her time in Russia's underground punk scene. She both played solo and performed with others, including Yegor Letov and bands Grazhdanskaya Oborona and Velikiye Oktyabri (\"Great Octobers\"). Dyagileva was greatly influenced by Letov and Alexander Bashlachev, who were her friends. Her songs explored themes of desperation and depression, punk-style nihilism, and folk-like lamentations.",
+       "chunk_id": "3684170e9a764ddd:sentence:0"
+      },
+      {
+       "n": 2,
+       "title": "Alexander Bashlachev",
+       "snippet": "Alexander Nickolaevich Bashlachev (Russian: Алекса́ндр Никола́евич Башлачёв ; ] ; May 27, 1960 – February 17, 1988) was a Soviet poet, singer-songwriter and guitarist, one of the most influential performers in Russian rock music, included in the 27 Club.",
+       "chunk_id": "2665f2f60c8cd33d:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Yanka Dyagileva",
+       "snippet": "Yana \"Yanka\" Stanislavovna Dyagileva (Russian: Яна Станиславовна Дягилева ; 4 September 1966 – 9 May 1991) was a Russian poet and singer-songwriter and one of the most popular figures of her time in Russia's underground punk scene. She both played solo and performed with others, including Yegor Letov and bands Grazhdanskaya Oborona and Velikiye Oktyabri (\"Great Octobers\"). Dyagileva was greatly influenced by Letov and Alexander Bashlachev, who were her friends. Her songs explored themes of desperation and depression, punk-style nihilism, and folk-like lamentations.",
+       "score": 0.7181796171451122,
+       "source": "vector",
+       "chunk_id": "3684170e9a764ddd:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Alexander Bashlachev",
+       "snippet": "Alexander Nickolaevich Bashlachev (Russian: Алекса́ндр Никола́евич Башлачёв ; ] ; May 27, 1960 – February 17, 1988) was a Soviet poet, singer-songwriter and guitarist, one of the most influential performers in Russian rock music, included in the 27 Club.",
+       "score": 0.7123615741729736,
+       "source": "vector",
+       "chunk_id": "2665f2f60c8cd33d:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Alexander Glazunov",
+       "snippet": "Alexander Konstantinovich Glazunov (Russian: Алекса́ндр Константи́нович Глазуно́в , 10 August 1865 – 21 March 1936) was a Russian composer, music teacher, and conductor of the late Russian Romantic period. He served as director of the Saint Petersburg Conservatory between 1905 and 1928 and was instrumental in the reorganization of the institute into the Petrograd Conservatory, then the Leningrad Conservatory, following the Bolshevik Revolution. He continued heading the Conservatory until 1930, though he had left the Soviet Union in 1928 and did not return.",
+       "score": 0.5492137015803255,
+       "source": "vector",
+       "chunk_id": "6f82fa50c7e92e61:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Olga Zaitseva (tennis)",
+       "snippet": "Olga Zaitseva (born 12 March 1962) is a former competitor for the Soviet Union at the 1979, 1980, 1981 and 1983 editions of the Federation Cup. Despite posting doubles victories over top professionals such as Betty Stöve, Hana Mandlíková and Renáta Tomanová, Zaitseva did not compete at any point on the women's professional tennis circuit or at any of the Grand Slams and thus never attained a world ranking.",
+       "score": 0.5341987291456036,
+       "source": "vector",
+       "chunk_id": "0877f9deeb974b7a:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Valyantsin Byalkevich",
+       "snippet": "Valyantsin Byalkevich (Belarusian: Валянцін Бялькевіч ; 27 January 1973 – 1 August 2014), also sometimes spelled \"Valiantsin Bialkevich\") was a Belarusian football player. He was most notably a member of the Ukrainian club Dynamo Kyiv from 1996 to 2008. During the late 1990s, he was a playmaker for Dynamo Kyiv of the UEFA Champions League, and helped them reach the semi-finals of 1998–99 competition.",
+       "score": 0.5225616097450256,
+       "source": "vector",
+       "chunk_id": "1ff55ae73d10e03e:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Alexander Amini",
+       "snippet": "Alexander Amini (born April 29, 1995) is an American scientist from Dublin, Ireland, currently studying at the Massachusetts Institute of Technology (MIT) in America. He is the first prize winner of the 23rd European Union Contest for Young Scientists and the 47th BT Young Scientist and Technology Exhibition in 2011 at the age of fifteen for his project entitled: “Tennis Sensor Data Analysis: An Automated System for Macro Motion Refinement”, in which he combined his passions for computer science, mathematics, and tennis.",
+       "score": 0.5189958810806274,
+       "source": "vector",
+       "chunk_id": "25519ea81d3c13d7:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Yegor Letov",
+       "snippet": "Igor Fyodorovich \"Yegor\" Letov (Russian: И́горь Фёдорович (Его́р) Ле́тов ] ; 10 September 1964 – 19 February 2008) was a Russian poet, musician, singer-songwriter, audio engineer and conceptual art painter, best known as the founder and leader of the post-punk/psychedelic rock band Grazhdanskaya Oborona (Civil Defense). He was also the founder of a conceptual art avant-garde project Kommunizm and psychedelic rock outfit Egor i Opizdenevshie. Letov is a younger brother of famous free jazz saxophonist Sergey Letov. He also collaborated with singer-songwriter Yanka Dyagileva and some other Siberi",
+       "score": 0.5188093936088503,
+       "source": "vector",
+       "chunk_id": "e081e1700d456c95:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Genndy Tartakovsky",
+       "snippet": "Genndy Tartakovsky ( ; born Gennady Borisovich Tartakovsky, Russian: Геннадий Борисович Тартаковский ; January 17, 1970) is a Russian–American animator, director, storyboard artist, producer, and screenwriter. He is best known for creating the Cartoon Network animated television series \"Dexter's Laboratory\", \"Samurai Jack\", and \".\"",
+       "score": 0.5137455463409424,
+       "source": "vector",
+       "chunk_id": "494c09bb156536af:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.7181796171451122,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 215
+      },
+      {
+       "name": "generate",
+       "ms": 197
+      }
+     ],
+     "tokens_in": 1232,
+     "tokens_out": 92,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 3.046e-05,
+      "total": 3.046e-05
+     },
+     "total_ms": 4738,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely answers the question, but only two of the eight provided context blocks are relevant to the query.",
+    "cost_usd": 0.00079364,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "40ee24a5-54cf-41e4-9561-8cc4ea1f1774",
+    "question": "Who was born first, Yanka Dyagileva or Alexander Bashlachev?",
+    "answer": {
+     "short": "not enough context",
+     "text": "not enough context",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 147 tokens",
+     "confidence": 0.0,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Yanka Dyagileva",
+       "snippet": "Yana \"Yanka\" Stanislavovna Dyagileva (Russian: Яна Станиславовна Дягилева ; 4 September 1966 – 9 May 1991) was a Russian poet and singer-songwriter and one of the most popular figures of her time in Russia's underground punk scene. She both played solo and performed with others, including Yegor Letov and bands Grazhdanskaya Oborona and Velikiye Oktyabri (\"Great Octobers\"). Dyagileva was greatly influenced by Letov and Alexander Bashlachev, who were her friends. Her songs explored themes of desperation and depression, punk-style nihilism, and folk-like lamentations.",
+       "score": 0.9017526507377625,
+       "source": "graph",
+       "chunk_id": "3684170e9a764ddd:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_5d61ac70945b",
+        "name": "Yana \"Yanka\" Stanislavovna Dyagileva",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_bf91393276b0",
+        "name": "Alexander Bashlachev",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_9cbfdd77239e",
+        "name": "Russian poet and singer-songwriter",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2e735c1a29d1",
+        "name": "Yegor Letov",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2230cc75da85",
+        "name": "one of the most popular figures of her time in Russia's underground punk scene",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_98808d92dc49",
+        "name": "Velikiye Oktyabri",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_3eef7c7b6518",
+        "name": "Grazhdanskaya Oborona",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_0d3db8bae13f",
+        "name": "solo",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_c6b1d928b489",
+        "name": "Yanka Dyagileva",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_818fb1692527",
+        "name": "Alexander Amini",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_87429dafb5d3",
+        "name": "Alexander Peya",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_06544ff4d41a",
+        "name": "Scott Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_446b9f33ed2f",
+        "name": "Kelly Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_efd267f7ceb5",
+        "name": "Franz Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_e4a65e4bd306",
+        "name": "Alexander Nickolaevich Bashlachev",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_12f600bb01b3",
+        "name": "fire",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_50ad67b52801",
+        "name": "Bernhard Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_cc678a97ff8b",
+        "name": "Alexander Samsonov",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4ae5d6efdd77",
+        "name": "Alexander the Great",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_6418ad613fee",
+        "name": "Zechariah Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_0e12ac863294",
+        "name": "First Blood",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_838d5ced8e8d",
+        "name": "Yanco",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_ee2a2a2e2daf",
+        "name": "Bob",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4bbb4f7076c0",
+        "name": "first single",
+        "type": "OTHER",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_bf91393276b0",
+        "predicate": "was_influenced_by",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_9cbfdd77239e",
+        "predicate": "was",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_2e735c1a29d1",
+        "predicate": "was_influenced_by",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_2230cc75da85",
+        "predicate": "was",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_2e735c1a29d1",
+        "predicate": "performed_with",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_98808d92dc49",
+        "predicate": "performed_with",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_3eef7c7b6518",
+        "predicate": "performed_with",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_0d3db8bae13f",
+        "predicate": "played",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.9017526507377625,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 282
+      },
+      {
+       "name": "retrieve",
+       "ms": 794
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 633,
+     "tokens_out": 67,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 1.742e-05,
+      "total": 1.742e-05
+     },
+     "total_ms": 9091,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 0.5
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "completeness": 1.0,
+    "rationale": "The context provides Yanka Dyagileva's birth date but not Alexander Bashlachev's, so the answer 'not enough context' is correct.",
+    "cost_usd": 0.00017614,
+    "flagged": false,
+    "queued": true
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "93f4b337-abfc-43f7-9ad0-96e3883270b5",
+    "question": "Who was born first, Yanka Dyagileva or Alexander Bashlachev?",
+    "answer": {
+     "short": "Alexander Bashlachev was born first",
+     "text": "Alexander Bashlachev was born first. He was born on May 27, 1960, while Yanka Dyagileva was born on September 4, 1966. [2][1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 977 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 2,
+       "title": "Alexander Bashlachev",
+       "snippet": "Alexander Nickolaevich Bashlachev (Russian: Алекса́ндр Никола́евич Башлачёв ; ] ; May 27, 1960 – February 17, 1988) was a Soviet poet, singer-songwriter and guitarist, one of the most influential performers in Russian rock music, included in the 27 Club.",
+       "chunk_id": "2665f2f60c8cd33d:sentence:0"
+      },
+      {
+       "n": 1,
+       "title": "Yanka Dyagileva",
+       "snippet": "Yana \"Yanka\" Stanislavovna Dyagileva (Russian: Яна Станиславовна Дягилева ; 4 September 1966 – 9 May 1991) was a Russian poet and singer-songwriter and one of the most popular figures of her time in Russia's underground punk scene. She both played solo and performed with others, including Yegor Letov and bands Grazhdanskaya Oborona and Velikiye Oktyabri (\"Great Octobers\"). Dyagileva was greatly influenced by Letov and Alexander Bashlachev, who were her friends. Her songs explored themes of desperation and depression, punk-style nihilism, and folk-like lamentations.",
+       "chunk_id": "3684170e9a764ddd:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Yanka Dyagileva",
+       "snippet": "Yana \"Yanka\" Stanislavovna Dyagileva (Russian: Яна Станиславовна Дягилева ; 4 September 1966 – 9 May 1991) was a Russian poet and singer-songwriter and one of the most popular figures of her time in Russia's underground punk scene. She both played solo and performed with others, including Yegor Letov and bands Grazhdanskaya Oborona and Velikiye Oktyabri (\"Great Octobers\"). Dyagileva was greatly influenced by Letov and Alexander Bashlachev, who were her friends. Her songs explored themes of desperation and depression, punk-style nihilism, and folk-like lamentations.",
+       "score": 0.03278688524590164,
+       "source": "hybrid",
+       "chunk_id": "3684170e9a764ddd:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Alexander Bashlachev",
+       "snippet": "Alexander Nickolaevich Bashlachev (Russian: Алекса́ндр Никола́евич Башлачёв ; ] ; May 27, 1960 – February 17, 1988) was a Soviet poet, singer-songwriter and guitarist, one of the most influential performers in Russian rock music, included in the 27 Club.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "2665f2f60c8cd33d:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Alexander Amini",
+       "snippet": "Alexander Amini (born April 29, 1995) is an American scientist from Dublin, Ireland, currently studying at the Massachusetts Institute of Technology (MIT) in America. He is the first prize winner of the 23rd European Union Contest for Young Scientists and the 47th BT Young Scientist and Technology Exhibition in 2011 at the age of fifteen for his project entitled: “Tennis Sensor Data Analysis: An Automated System for Macro Motion Refinement”, in which he combined his passions for computer science, mathematics, and tennis.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "25519ea81d3c13d7:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Olga Zaitseva (tennis)",
+       "snippet": "Olga Zaitseva (born 12 March 1962) is a former competitor for the Soviet Union at the 1979, 1980, 1981 and 1983 editions of the Federation Cup. Despite posting doubles victories over top professionals such as Betty Stöve, Hana Mandlíková and Renáta Tomanová, Zaitseva did not compete at any point on the women's professional tennis circuit or at any of the Grand Slams and thus never attained a world ranking.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "0877f9deeb974b7a:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Genndy Tartakovsky",
+       "snippet": "Genndy Tartakovsky ( ; born Gennady Borisovich Tartakovsky, Russian: Геннадий Борисович Тартаковский ; January 17, 1970) is a Russian–American animator, director, storyboard artist, producer, and screenwriter. He is best known for creating the Cartoon Network animated television series \"Dexter's Laboratory\", \"Samurai Jack\", and \".\"",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "494c09bb156536af:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Alexander Glazunov",
+       "snippet": "Alexander Konstantinovich Glazunov (Russian: Алекса́ндр Константи́нович Глазуно́в , 10 August 1865 – 21 March 1936) was a Russian composer, music teacher, and conductor of the late Russian Romantic period. He served as director of the Saint Petersburg Conservatory between 1905 and 1928 and was instrumental in the reorganization of the institute into the Petrograd Conservatory, then the Leningrad Conservatory, following the Bolshevik Revolution. He continued heading the Conservatory until 1930, though he had left the Soviet Union in 1928 and did not return.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "6f82fa50c7e92e61:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Valyantsin Byalkevich",
+       "snippet": "Valyantsin Byalkevich (Belarusian: Валянцін Бялькевіч ; 27 January 1973 – 1 August 2014), also sometimes spelled \"Valiantsin Bialkevich\") was a Belarusian football player. He was most notably a member of the Ukrainian club Dynamo Kyiv from 1996 to 2008. During the late 1990s, he was a playmaker for Dynamo Kyiv of the UEFA Champions League, and helped them reach the semi-finals of 1998–99 competition.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "1ff55ae73d10e03e:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Yegor Letov",
+       "snippet": "Igor Fyodorovich \"Yegor\" Letov (Russian: И́горь Фёдорович (Его́р) Ле́тов ] ; 10 September 1964 – 19 February 2008) was a Russian poet, musician, singer-songwriter, audio engineer and conceptual art painter, best known as the founder and leader of the post-punk/psychedelic rock band Grazhdanskaya Oborona (Civil Defense). He was also the founder of a conceptual art avant-garde project Kommunizm and psychedelic rock outfit Egor i Opizdenevshie. Letov is a younger brother of famous free jazz saxophonist Sergey Letov. He also collaborated with singer-songwriter Yanka Dyagileva and some other Siberi",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "e081e1700d456c95:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_5d61ac70945b",
+        "name": "Yana \"Yanka\" Stanislavovna Dyagileva",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_bf91393276b0",
+        "name": "Alexander Bashlachev",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_9cbfdd77239e",
+        "name": "Russian poet and singer-songwriter",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2e735c1a29d1",
+        "name": "Yegor Letov",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2230cc75da85",
+        "name": "one of the most popular figures of her time in Russia's underground punk scene",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_98808d92dc49",
+        "name": "Velikiye Oktyabri",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_3eef7c7b6518",
+        "name": "Grazhdanskaya Oborona",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_0d3db8bae13f",
+        "name": "solo",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_c6b1d928b489",
+        "name": "Yanka Dyagileva",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_818fb1692527",
+        "name": "Alexander Amini",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_87429dafb5d3",
+        "name": "Alexander Peya",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_06544ff4d41a",
+        "name": "Scott Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_446b9f33ed2f",
+        "name": "Kelly Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_efd267f7ceb5",
+        "name": "Franz Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_e4a65e4bd306",
+        "name": "Alexander Nickolaevich Bashlachev",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_12f600bb01b3",
+        "name": "fire",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_50ad67b52801",
+        "name": "Bernhard Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_cc678a97ff8b",
+        "name": "Alexander Samsonov",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4ae5d6efdd77",
+        "name": "Alexander the Great",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_6418ad613fee",
+        "name": "Zechariah Alexander",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_0e12ac863294",
+        "name": "First Blood",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_838d5ced8e8d",
+        "name": "Yanco",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_ee2a2a2e2daf",
+        "name": "Bob",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4bbb4f7076c0",
+        "name": "first single",
+        "type": "OTHER",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_bf91393276b0",
+        "predicate": "was_influenced_by",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_9cbfdd77239e",
+        "predicate": "was",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_2e735c1a29d1",
+        "predicate": "was_influenced_by",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_2230cc75da85",
+        "predicate": "was",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_2e735c1a29d1",
+        "predicate": "performed_with",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_98808d92dc49",
+        "predicate": "performed_with",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_3eef7c7b6518",
+        "predicate": "performed_with",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5d61ac70945b",
+        "target": "e_0d3db8bae13f",
+        "predicate": "played",
+        "chunk_id": "3684170e9a764ddd:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7181796171451122,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 225
+      },
+      {
+       "name": "link",
+       "ms": 266
+      },
+      {
+       "name": "retrieve",
+       "ms": 796
+      },
+      {
+       "name": "merge",
+       "ms": 397
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1489,
+     "tokens_out": 90,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 3.49e-05,
+      "total": 3.49e-05
+     },
+     "total_ms": 12666,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.5714286,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and correctly identifies who was born first using the provided dates. Only a few of the provided context blocks are relevant to the question.",
+    "cost_usd": 0.00036986,
+    "flagged": true,
+    "queued": false
+   }
+  }
+ }
+}

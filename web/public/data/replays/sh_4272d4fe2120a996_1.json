@@ -1,0 +1,880 @@
+{
+ "sample": false,
+ "question_id": "sh_4272d4fe2120a996_1",
+ "question": "When was Dwell magazine launched?",
+ "type": "single_hop",
+ "gold_answer": "September 2000",
+ "supporting_titles": [
+  "Dwell (magazine)"
+ ],
+ "why": "Another single hop question that stays on the cheap vector route, for comparison with the hybrid ones.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "d03753a4-5ca1-4e37-8b7e-0141102e9b99",
+    "question": "When was Dwell magazine launched?",
+    "answer": {
+     "short": "September 2000",
+     "text": "September 2000. The launch date is stated in block [1].",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label single_hop, 893 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Dwell (magazine)",
+       "snippet": "Dwell is a design and technology brand. It was launched with a magazine in September 2000 to bridge the gap between design professionals and enthusiasts by Lara Hedberg Deam with architecture and design critic Karrie Jacobs as its Editor-in-Chief. In August 2002 Jacobs left the magazine and was replaced by Senior Editor Allison Arieff. Following Arieff, Sam Grawe held the position from 2006 - 2011. Current Editor-in-Chief and EVP Content Amanda Dameron joined Dwell in 2008.",
+       "chunk_id": "4272d4fe2120a996:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "single_hop",
+     "label_confidence": 0.8886280655860901,
+     "method": "logreg",
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "no_relational_structure"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Dwell (magazine)",
+       "snippet": "Dwell is a design and technology brand. It was launched with a magazine in September 2000 to bridge the gap between design professionals and enthusiasts by Lara Hedberg Deam with architecture and design critic Karrie Jacobs as its Editor-in-Chief. In August 2002 Jacobs left the magazine and was replaced by Senior Editor Allison Arieff. Following Arieff, Sam Grawe held the position from 2006 - 2011. Current Editor-in-Chief and EVP Content Amanda Dameron joined Dwell in 2008.",
+       "score": 0.8669122557211307,
+       "source": "vector",
+       "chunk_id": "4272d4fe2120a996:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Dwell (magazine)",
+       "snippet": "Her work has been published in numerous domestic and international titles, from Condé Nast Traveler, Los Angeles Magazine, Urbis, Vogue Living and Elle Décor UK. As Editor-in-Chief of Dwell Media and EVP Content, she directs content across all the company's platforms, extending from print and digital to live events, e-commerce, research, and other ancillary products.",
+       "score": 0.7444757888742526,
+       "source": "vector",
+       "chunk_id": "4272d4fe2120a996:sentence:1"
+      },
+      {
+       "rank": 3,
+       "title": "Queen (magazine)",
+       "snippet": "Queen (originally The Queen) magazine was a British society publication established by Samuel Beeton in 1861. In 1958, the magazine was sold to Jocelyn Stevens, who dropped the prefix \"\"The\"\" and used it as his vehicle to represent the younger side of the British Establishment, sometimes referred to as the \"Chelsea Set\" under the editorial direction of Beatrix Miller. In 1964 the magazine gave birth to Radio Caroline, the first daytime commercial pirate radio station serving London, England. Stevens sold \"Queen\" in 1968.",
+       "score": 0.6126248374730165,
+       "source": "vector",
+       "chunk_id": "0622c716362a241f:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Pyramid (magazine)",
+       "snippet": "Pyramid is a gaming magazine, publishing articles primarily on role-playing games, but including board games, card games, and other sorts of games. It began life in 1993 as a print publication of Steve Jackson Games for its first 30 issues, though it has been published on the Internet since March 1998. Print issues were bimonthly; the first online version published new articles each week; the second online version is monthly. \"Pyramid\" is headquartered in Austin, Texas. It replaced Steve Jackson Games' previous magazine \"Roleplayer\".",
+       "score": 0.6084872665550558,
+       "source": "vector",
+       "chunk_id": "a7d0bbe338137976:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Harper's Young People",
+       "snippet": "Harper's Young People was an American children's magazine between 1879 and 1899. The first issue appeared in the fall of 1879. It was published by Harper & Brothers. It was Harper's fourth magazine to be established, after \"Harper's Magazine\" (1850), \"Harper's Weekly\" (1857), and \"Harper's Bazaar\" (1867). \"Harper's Young People\" was the first of the four magazines to cease publication.",
+       "score": 0.5984043896673932,
+       "source": "vector",
+       "chunk_id": "07d246f5920e72af:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Godspy",
+       "snippet": "Godspy is a dormant English-language online magazine \"for Catholics and other seekers\" launched in 2003, dealing with subjects from \"politics to the arts, science to the economy, sexuality to ecology,\" and exploring the \"ideas and experiences that reveal God’s presence in the world.\" The magazines name was inspired by the line in King Lear \"\"And take upon's the mystery of things, As if we were God's spies\".\"",
+       "score": 0.59690143456762,
+       "source": "vector",
+       "chunk_id": "6384e0b7dbb82a39:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Activision",
+       "snippet": "Activision Publishing, Inc., also known as Activision, is an American video game publisher. It was founded on October 1, 1979 and was the world's first independent developer and distributor of video games for gaming consoles. Its first products were cartridges for the Atari 2600 video console system published from July 1980 for the US market and from August 1981 for the international market (UK).",
+       "score": 0.5946731390156536,
+       "source": "vector",
+       "chunk_id": "9770c419bc19defd:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Southern Living",
+       "snippet": "Southern Living is a widely read lifestyle magazine aimed at readers in the Southern United States featuring recipes, house plans, garden plans,and information about Southern culture and travel. It is published by Birmingham, Alabama–based Southern Progress Corporation, a unit of Time Inc.",
+       "score": 0.5879969176053148,
+       "source": "vector",
+       "chunk_id": "3f641b9fdc5bbf36:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.8669122557211307,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 232
+      },
+      {
+       "name": "retrieve",
+       "ms": 211
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 995,
+     "tokens_out": 52,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.259e-05,
+      "total": 2.259e-05
+     },
+     "total_ms": 1187,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is directly supported by the context and fully addresses the question, but only two of the eight provided context blocks are relevant to the subject.",
+    "cost_usd": 0.00030262,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "6cc4781e-2fc6-4be0-b590-5a052eb299ff",
+    "question": "When was Dwell magazine launched?",
+    "answer": {
+     "short": "September 2000",
+     "text": "September 2000. The launch date is stated in block [1].",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 893 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Dwell (magazine)",
+       "snippet": "Dwell is a design and technology brand. It was launched with a magazine in September 2000 to bridge the gap between design professionals and enthusiasts by Lara Hedberg Deam with architecture and design critic Karrie Jacobs as its Editor-in-Chief. In August 2002 Jacobs left the magazine and was replaced by Senior Editor Allison Arieff. Following Arieff, Sam Grawe held the position from 2006 - 2011. Current Editor-in-Chief and EVP Content Amanda Dameron joined Dwell in 2008.",
+       "chunk_id": "4272d4fe2120a996:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Dwell (magazine)",
+       "snippet": "Dwell is a design and technology brand. It was launched with a magazine in September 2000 to bridge the gap between design professionals and enthusiasts by Lara Hedberg Deam with architecture and design critic Karrie Jacobs as its Editor-in-Chief. In August 2002 Jacobs left the magazine and was replaced by Senior Editor Allison Arieff. Following Arieff, Sam Grawe held the position from 2006 - 2011. Current Editor-in-Chief and EVP Content Amanda Dameron joined Dwell in 2008.",
+       "score": 0.8669122557211307,
+       "source": "vector",
+       "chunk_id": "4272d4fe2120a996:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Dwell (magazine)",
+       "snippet": "Her work has been published in numerous domestic and international titles, from Condé Nast Traveler, Los Angeles Magazine, Urbis, Vogue Living and Elle Décor UK. As Editor-in-Chief of Dwell Media and EVP Content, she directs content across all the company's platforms, extending from print and digital to live events, e-commerce, research, and other ancillary products.",
+       "score": 0.7444757888742526,
+       "source": "vector",
+       "chunk_id": "4272d4fe2120a996:sentence:1"
+      },
+      {
+       "rank": 3,
+       "title": "Queen (magazine)",
+       "snippet": "Queen (originally The Queen) magazine was a British society publication established by Samuel Beeton in 1861. In 1958, the magazine was sold to Jocelyn Stevens, who dropped the prefix \"\"The\"\" and used it as his vehicle to represent the younger side of the British Establishment, sometimes referred to as the \"Chelsea Set\" under the editorial direction of Beatrix Miller. In 1964 the magazine gave birth to Radio Caroline, the first daytime commercial pirate radio station serving London, England. Stevens sold \"Queen\" in 1968.",
+       "score": 0.6126248374730165,
+       "source": "vector",
+       "chunk_id": "0622c716362a241f:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Pyramid (magazine)",
+       "snippet": "Pyramid is a gaming magazine, publishing articles primarily on role-playing games, but including board games, card games, and other sorts of games. It began life in 1993 as a print publication of Steve Jackson Games for its first 30 issues, though it has been published on the Internet since March 1998. Print issues were bimonthly; the first online version published new articles each week; the second online version is monthly. \"Pyramid\" is headquartered in Austin, Texas. It replaced Steve Jackson Games' previous magazine \"Roleplayer\".",
+       "score": 0.6084872665550558,
+       "source": "vector",
+       "chunk_id": "a7d0bbe338137976:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Harper's Young People",
+       "snippet": "Harper's Young People was an American children's magazine between 1879 and 1899. The first issue appeared in the fall of 1879. It was published by Harper & Brothers. It was Harper's fourth magazine to be established, after \"Harper's Magazine\" (1850), \"Harper's Weekly\" (1857), and \"Harper's Bazaar\" (1867). \"Harper's Young People\" was the first of the four magazines to cease publication.",
+       "score": 0.5984043896673932,
+       "source": "vector",
+       "chunk_id": "07d246f5920e72af:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Godspy",
+       "snippet": "Godspy is a dormant English-language online magazine \"for Catholics and other seekers\" launched in 2003, dealing with subjects from \"politics to the arts, science to the economy, sexuality to ecology,\" and exploring the \"ideas and experiences that reveal God’s presence in the world.\" The magazines name was inspired by the line in King Lear \"\"And take upon's the mystery of things, As if we were God's spies\".\"",
+       "score": 0.59690143456762,
+       "source": "vector",
+       "chunk_id": "6384e0b7dbb82a39:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Activision",
+       "snippet": "Activision Publishing, Inc., also known as Activision, is an American video game publisher. It was founded on October 1, 1979 and was the world's first independent developer and distributor of video games for gaming consoles. Its first products were cartridges for the Atari 2600 video console system published from July 1980 for the US market and from August 1981 for the international market (UK).",
+       "score": 0.5946731390156536,
+       "source": "vector",
+       "chunk_id": "9770c419bc19defd:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Southern Living",
+       "snippet": "Southern Living is a widely read lifestyle magazine aimed at readers in the Southern United States featuring recipes, house plans, garden plans,and information about Southern culture and travel. It is published by Birmingham, Alabama–based Southern Progress Corporation, a unit of Time Inc.",
+       "score": 0.5879969176053148,
+       "source": "vector",
+       "chunk_id": "3f641b9fdc5bbf36:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.8669122557211307,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 216
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 995,
+     "tokens_out": 52,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.259e-05,
+      "total": 2.259e-05
+     },
+     "total_ms": 964,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is directly supported by the context and fully addresses the question, but only two of the eight provided context blocks are relevant to the subject.",
+    "cost_usd": 0.00030262,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "04c0b3a4-61a7-4517-b041-fc6e1082e34b",
+    "question": "When was Dwell magazine launched?",
+    "answer": {
+     "short": "September 2000",
+     "text": "September 2000. The launch date is stated in block [1].",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 437 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Dwell (magazine)",
+       "snippet": "Dwell is a design and technology brand. It was launched with a magazine in September 2000 to bridge the gap between design professionals and enthusiasts by Lara Hedberg Deam with architecture and design critic Karrie Jacobs as its Editor-in-Chief. In August 2002 Jacobs left the magazine and was replaced by Senior Editor Allison Arieff. Following Arieff, Sam Grawe held the position from 2006 - 2011. Current Editor-in-Chief and EVP Content Amanda Dameron joined Dwell in 2008.",
+       "chunk_id": "4272d4fe2120a996:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Dwell (magazine)",
+       "snippet": "Dwell is a design and technology brand. It was launched with a magazine in September 2000 to bridge the gap between design professionals and enthusiasts by Lara Hedberg Deam with architecture and design critic Karrie Jacobs as its Editor-in-Chief. In August 2002 Jacobs left the magazine and was replaced by Senior Editor Allison Arieff. Following Arieff, Sam Grawe held the position from 2006 - 2011. Current Editor-in-Chief and EVP Content Amanda Dameron joined Dwell in 2008.",
+       "score": 0.9143239681221282,
+       "source": "graph",
+       "chunk_id": "4272d4fe2120a996:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Southern Living",
+       "snippet": "Southern Living is a widely read lifestyle magazine aimed at readers in the Southern United States featuring recipes, house plans, garden plans,and information about Southern culture and travel. It is published by Birmingham, Alabama–based Southern Progress Corporation, a unit of Time Inc.",
+       "score": 0.7897645446728369,
+       "source": "graph",
+       "chunk_id": "3f641b9fdc5bbf36:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Branko Tomović",
+       "snippet": "Entity won two awards at the London Independent Film Festival 2013 and Best Film at the British Horror Film Festival where Branko was also nominated for Best Actor. The British Filmmakers Alliance honoured him as Best International Actor for his role and he was also chosen as a Rising Star by Icon Magazine. He is set to play the title character of Nikola Tesla in the upcoming bio-pic Tesla. In 2014, he played Jack Bauer's right-hand man, the mysterious and dangerous Belcheck, next to Kiefer Sutherland in 24: Live Another Day.",
+       "score": 0.7601603633022077,
+       "source": "graph",
+       "chunk_id": "99c64ce265ff717c:sentence:4"
+      },
+      {
+       "rank": 4,
+       "title": "Odessa, Texas",
+       "snippet": "The metropolitan area is also a component of the larger Midland–Odessa combined statistical area, which had a 2010 census population of 278,801; a recent report from the United States Census Bureau estimates that the combined population as of July 2015 is 320,513. In 2014, \"Forbes\" magazine ranked Odessa as the third fastest-growing small city in the United States.",
+       "score": 0.7250091783710588,
+       "source": "graph",
+       "chunk_id": "f83ecb75130d4a96:sentence:1"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_ae6e883b8233",
+        "name": "Dwell",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_5521052e1b48",
+        "name": "September 2000",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_e53385dafd94",
+        "name": "Lara Hedberg Deam",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_9736243de75f",
+        "name": "design and technology brand",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_932ea44e02fd",
+        "name": "Karrie Jacobs",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_1d661c2e410e",
+        "name": "Amanda Dameron",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_481ca905e10e",
+        "name": "Southern Living",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_715af545cf6b",
+        "name": "lifestyle magazine",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_02355d741280",
+        "name": "Branko",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_a26045714e13",
+        "name": "Icon Magazine",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_4143921f4848",
+        "name": "Forbes magazine",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_56c55e37f4db",
+        "name": "Odessa",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_0227aae8b75f",
+        "name": "When I Was a Kid",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_756078787644",
+        "name": "\"Family Life\" magazine",
+        "type": "ORG",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_ae6e883b8233",
+        "target": "e_5521052e1b48",
+        "predicate": "launched_with",
+        "chunk_id": "4272d4fe2120a996:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_ae6e883b8233",
+        "target": "e_e53385dafd94",
+        "predicate": "launched_by",
+        "chunk_id": "4272d4fe2120a996:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_ae6e883b8233",
+        "target": "e_9736243de75f",
+        "predicate": "is_a",
+        "chunk_id": "4272d4fe2120a996:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_932ea44e02fd",
+        "target": "e_ae6e883b8233",
+        "predicate": "editor_in_chief_of",
+        "chunk_id": "4272d4fe2120a996:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d661c2e410e",
+        "target": "e_ae6e883b8233",
+        "predicate": "joined",
+        "chunk_id": "4272d4fe2120a996:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_481ca905e10e",
+        "target": "e_715af545cf6b",
+        "predicate": "is_a",
+        "chunk_id": "3f641b9fdc5bbf36:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_02355d741280",
+        "target": "e_a26045714e13",
+        "predicate": "chosen_as",
+        "chunk_id": "99c64ce265ff717c:sentence:4",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_4143921f4848",
+        "target": "e_56c55e37f4db",
+        "predicate": "ranked",
+        "chunk_id": "f83ecb75130d4a96:sentence:1",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.9143239681221282,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 232
+      },
+      {
+       "name": "retrieve",
+       "ms": 587
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 746,
+     "tokens_out": 41,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 1.712e-05,
+      "total": 1.712e-05
+     },
+     "total_ms": 4560,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is directly supported by the context and fully addresses the question, but only one of the four provided context blocks is relevant.",
+    "cost_usd": 0.00021876,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "75ba1874-f3a3-4737-b05f-2eb47852dedb",
+    "question": "When was Dwell magazine launched?",
+    "answer": {
+     "short": "September 2000",
+     "text": "September 2000. The launch date of Dwell magazine is stated as September 2000 in the provided context. [1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 893 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Dwell (magazine)",
+       "snippet": "Dwell is a design and technology brand. It was launched with a magazine in September 2000 to bridge the gap between design professionals and enthusiasts by Lara Hedberg Deam with architecture and design critic Karrie Jacobs as its Editor-in-Chief. In August 2002 Jacobs left the magazine and was replaced by Senior Editor Allison Arieff. Following Arieff, Sam Grawe held the position from 2006 - 2011. Current Editor-in-Chief and EVP Content Amanda Dameron joined Dwell in 2008.",
+       "chunk_id": "4272d4fe2120a996:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Dwell (magazine)",
+       "snippet": "Dwell is a design and technology brand. It was launched with a magazine in September 2000 to bridge the gap between design professionals and enthusiasts by Lara Hedberg Deam with architecture and design critic Karrie Jacobs as its Editor-in-Chief. In August 2002 Jacobs left the magazine and was replaced by Senior Editor Allison Arieff. Following Arieff, Sam Grawe held the position from 2006 - 2011. Current Editor-in-Chief and EVP Content Amanda Dameron joined Dwell in 2008.",
+       "score": 0.03278688524590164,
+       "source": "hybrid",
+       "chunk_id": "4272d4fe2120a996:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Dwell (magazine)",
+       "snippet": "Her work has been published in numerous domestic and international titles, from Condé Nast Traveler, Los Angeles Magazine, Urbis, Vogue Living and Elle Décor UK. As Editor-in-Chief of Dwell Media and EVP Content, she directs content across all the company's platforms, extending from print and digital to live events, e-commerce, research, and other ancillary products.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "4272d4fe2120a996:sentence:1"
+      },
+      {
+       "rank": 3,
+       "title": "Activision",
+       "snippet": "Activision Publishing, Inc., also known as Activision, is an American video game publisher. It was founded on October 1, 1979 and was the world's first independent developer and distributor of video games for gaming consoles. Its first products were cartridges for the Atari 2600 video console system published from July 1980 for the US market and from August 1981 for the international market (UK).",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "9770c419bc19defd:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Harper's Young People",
+       "snippet": "Harper's Young People was an American children's magazine between 1879 and 1899. The first issue appeared in the fall of 1879. It was published by Harper & Brothers. It was Harper's fourth magazine to be established, after \"Harper's Magazine\" (1850), \"Harper's Weekly\" (1857), and \"Harper's Bazaar\" (1867). \"Harper's Young People\" was the first of the four magazines to cease publication.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "07d246f5920e72af:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Pyramid (magazine)",
+       "snippet": "Pyramid is a gaming magazine, publishing articles primarily on role-playing games, but including board games, card games, and other sorts of games. It began life in 1993 as a print publication of Steve Jackson Games for its first 30 issues, though it has been published on the Internet since March 1998. Print issues were bimonthly; the first online version published new articles each week; the second online version is monthly. \"Pyramid\" is headquartered in Austin, Texas. It replaced Steve Jackson Games' previous magazine \"Roleplayer\".",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "a7d0bbe338137976:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Southern Living",
+       "snippet": "Southern Living is a widely read lifestyle magazine aimed at readers in the Southern United States featuring recipes, house plans, garden plans,and information about Southern culture and travel. It is published by Birmingham, Alabama–based Southern Progress Corporation, a unit of Time Inc.",
+       "score": 0.030834914611005692,
+       "source": "hybrid",
+       "chunk_id": "3f641b9fdc5bbf36:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Godspy",
+       "snippet": "Godspy is a dormant English-language online magazine \"for Catholics and other seekers\" launched in 2003, dealing with subjects from \"politics to the arts, science to the economy, sexuality to ecology,\" and exploring the \"ideas and experiences that reveal God’s presence in the world.\" The magazines name was inspired by the line in King Lear \"\"And take upon's the mystery of things, As if we were God's spies\".\"",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "6384e0b7dbb82a39:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Queen (magazine)",
+       "snippet": "Queen (originally The Queen) magazine was a British society publication established by Samuel Beeton in 1861. In 1958, the magazine was sold to Jocelyn Stevens, who dropped the prefix \"\"The\"\" and used it as his vehicle to represent the younger side of the British Establishment, sometimes referred to as the \"Chelsea Set\" under the editorial direction of Beatrix Miller. In 1964 the magazine gave birth to Radio Caroline, the first daytime commercial pirate radio station serving London, England. Stevens sold \"Queen\" in 1968.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "0622c716362a241f:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_ae6e883b8233",
+        "name": "Dwell",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_5521052e1b48",
+        "name": "September 2000",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_e53385dafd94",
+        "name": "Lara Hedberg Deam",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_9736243de75f",
+        "name": "design and technology brand",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_932ea44e02fd",
+        "name": "Karrie Jacobs",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_1d661c2e410e",
+        "name": "Amanda Dameron",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_481ca905e10e",
+        "name": "Southern Living",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_715af545cf6b",
+        "name": "lifestyle magazine",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_02355d741280",
+        "name": "Branko",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_a26045714e13",
+        "name": "Icon Magazine",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_4143921f4848",
+        "name": "Forbes magazine",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_56c55e37f4db",
+        "name": "Odessa",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_0227aae8b75f",
+        "name": "When I Was a Kid",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_756078787644",
+        "name": "\"Family Life\" magazine",
+        "type": "ORG",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_ae6e883b8233",
+        "target": "e_5521052e1b48",
+        "predicate": "launched_with",
+        "chunk_id": "4272d4fe2120a996:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_ae6e883b8233",
+        "target": "e_e53385dafd94",
+        "predicate": "launched_by",
+        "chunk_id": "4272d4fe2120a996:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_ae6e883b8233",
+        "target": "e_9736243de75f",
+        "predicate": "is_a",
+        "chunk_id": "4272d4fe2120a996:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_932ea44e02fd",
+        "target": "e_ae6e883b8233",
+        "predicate": "editor_in_chief_of",
+        "chunk_id": "4272d4fe2120a996:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d661c2e410e",
+        "target": "e_ae6e883b8233",
+        "predicate": "joined",
+        "chunk_id": "4272d4fe2120a996:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_481ca905e10e",
+        "target": "e_715af545cf6b",
+        "predicate": "is_a",
+        "chunk_id": "3f641b9fdc5bbf36:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_02355d741280",
+        "target": "e_a26045714e13",
+        "predicate": "chosen_as",
+        "chunk_id": "99c64ce265ff717c:sentence:4",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_4143921f4848",
+        "target": "e_56c55e37f4db",
+        "predicate": "ranked",
+        "chunk_id": "f83ecb75130d4a96:sentence:1",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.8669122557211307,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 213
+      },
+      {
+       "name": "link",
+       "ms": 234
+      },
+      {
+       "name": "retrieve",
+       "ms": 592
+      },
+      {
+       "name": "merge",
+       "ms": 592
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1115,
+     "tokens_out": 47,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.43e-05,
+      "total": 2.43e-05
+     },
+     "total_ms": 6643,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is directly supported by the context and fully addresses the question. Only two of the eight provided context blocks are relevant to Dwell magazine.",
+    "cost_usd": 0.00033248,
+    "flagged": true,
+    "queued": false
+   }
+  }
+ }
+}

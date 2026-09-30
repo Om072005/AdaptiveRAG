@@ -1,0 +1,2401 @@
+{
+ "sample": false,
+ "question_id": "hp_5a815c2e5542995ce29dcbe8",
+ "question": "Where was the NBA Draft held in which Harrison Bryce Jordan Barnes was selected by the Golden State Warriors in the first round of the draft with the seventh overall pick?",
+ "type": "multi_hop",
+ "gold_answer": "Prudential Center in Newark",
+ "supporting_titles": [
+  "Harrison Barnes",
+  "2012 NBA draft"
+ ],
+ "why": "Hybrid with the small model scores F1 0 where vector search alone scores 0.80; the large model on the served route recovers the 0.80.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "8b223892-adfc-4bfc-a65b-6cca89b1afd6",
+    "question": "Where was the NBA Draft held in which Harrison Bryce Jordan Barnes was selected by the Golden State Warriors in the first round of the draft with the seventh overall pick?",
+    "answer": {
+     "short": "Prudential Center in Newark, New Jersey",
+     "text": "Prudential Center in Newark, New Jersey. Harrison Barnes was selected in the 2012 NBA draft [1], which was held at the Prudential Center in Newark, New Jersey [2].",
+     "model": "qwen3.6:35b-a3b",
+     "size": "large",
+     "select_reason": "large:label multi_hop",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Harrison Barnes",
+       "snippet": "Harrison Bryce Jordan Barnes (born May 30, 1992) is an American professional basketball player for the Dallas Mavericks of the National Basketball Association (NBA). He played college basketball for the North Carolina Tar Heels before being selected by the Golden State Warriors in the first round of the 2012 NBA draft with the seventh overall pick. Barnes won an NBA championship with the Warriors in 2015.",
+       "chunk_id": "db5c6cc4fb7f6c8f:sentence:0"
+      },
+      {
+       "n": 2,
+       "title": "2012 NBA draft",
+       "snippet": "The 2012 NBA Draft was held on June 28, 2012, at Prudential Center in Newark, New Jersey. The draft started at 7:00 pm Eastern Daylight Time (2300 UTC), and was broadcast in the United States on ESPN. In this draft, National Basketball Association (NBA) teams took turns selecting amateur U.S. college basketball players and other eligible players, including international players. This draft marked the first time that the first two players selected were from the same school (Anthony Davis and Michael Kidd-Gilchrist were teammates at Kentucky).",
+       "chunk_id": "8bb471fa3055900f:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "multi_hop",
+     "label_confidence": 0.8598613739013672,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "relational:multi_hop"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Harrison Barnes",
+       "snippet": "Harrison Bryce Jordan Barnes (born May 30, 1992) is an American professional basketball player for the Dallas Mavericks of the National Basketball Association (NBA). He played college basketball for the North Carolina Tar Heels before being selected by the Golden State Warriors in the first round of the 2012 NBA draft with the seventh overall pick. Barnes won an NBA championship with the Warriors in 2015.",
+       "score": 0.03278688524590164,
+       "source": "hybrid",
+       "chunk_id": "db5c6cc4fb7f6c8f:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "2012 NBA draft",
+       "snippet": "The 2012 NBA Draft was held on June 28, 2012, at Prudential Center in Newark, New Jersey. The draft started at 7:00 pm Eastern Daylight Time (2300 UTC), and was broadcast in the United States on ESPN. In this draft, National Basketball Association (NBA) teams took turns selecting amateur U.S. college basketball players and other eligible players, including international players. This draft marked the first time that the first two players selected were from the same school (Anthony Davis and Michael Kidd-Gilchrist were teammates at Kentucky).",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "8bb471fa3055900f:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "1972 NBA draft",
+       "snippet": "The Portland Trail Blazers won the coin flip and were awarded the first overall pick, while the Buffalo Braves were awarded the second pick. The remaining first-round picks and the subsequent rounds were assigned to teams in reverse order of their win–loss record in the previous season. As a result of last year's supplemental hardship draft, the Cincinnati Royals, the Atlanta Hawks, the Golden State Warriors and the Baltimore Bullets forfeited their first round picks, while the Los Angeles Lakers forfeited their fourth round pick.",
+       "score": 0.03128054740957967,
+       "source": "hybrid",
+       "chunk_id": "302d4db14c3d543a:sentence:1"
+      },
+      {
+       "rank": 4,
+       "title": "1976 NBA draft",
+       "snippet": "The 1976 NBA draft was the 30th annual draft of the National Basketball Association (NBA). The draft was held on June 8, 1976, before the 1976–77 season. In this draft, 18 NBA teams took turns selecting amateur U.S. college basketball players and other eligible players, including international players. The first two picks in the draft belonged to the teams that finished last in each conference, with the order determined by a coin flip. The Atlanta Hawks won the coin flip and were awarded the first overall pick, while the Chicago Bulls were awarded the second pick.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "91da91b9b4f8b92a:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "1970 NBA draft",
+       "snippet": "Three expansion franchises, the Buffalo Braves, the Cleveland Cavaliers and the Portland Trail Blazers, took part in the NBA Draft for the first time and were assigned the seventh, the eighth and the ninth pick in each round. In the first round, the Cavaliers had the seventh pick, while the Blazers and the Braves had the eighth and the ninth pick respectively. In the subsequent rounds, the Cavaliers and the Braves exchanged their order of selection, while the Blazers had the eighth pick throughout the draft.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "1bdf125fd1d07492:sentence:2"
+      },
+      {
+       "rank": 6,
+       "title": "2002 NBA draft",
+       "snippet": "The 2002 NBA draft was held on June 26, 2002, at The Theater at Madison Square Garden. In this draft, National Basketball Association (NBA) teams took turns selecting 57 amateur college basketball players and other first-time eligible players, such as players from non-North American leagues. The draft was broadcast on TNT at 7:30 PM (EDT). The NBA announced that about 42 college and high school players, and five international players, had filed as early-entry candidates for the draft.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "79a66f3ace5b7eb3:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "1980 NBA draft",
+       "snippet": "The Boston Celtics, who obtained the Detroit Pistons' first-round pick in a trade, won the coin flip and were awarded the first overall pick, while the Utah Jazz were awarded the second pick. The Celtics then traded the first pick to the Golden State Warriors before the draft. The remaining first-round picks and the subsequent rounds were assigned to teams in reverse order of their win–loss record in the previous season. An expansion franchise, the Dallas Mavericks, took part in the NBA Draft for the first time and were assigned the eleventh pick in each round.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "6a72ed11a5fd712d:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "1970 NBA draft",
+       "snippet": "The 1970 NBA draft was the 24th annual draft of the National Basketball Association (NBA). The draft was held on March 23, 1970, before the 1970–71 season. In this draft, 17 NBA teams took turns selecting amateur U.S. college basketball players and other eligible players, including international players. A player who had finished his four-year college eligibility was eligible for selection. If a player left college early, he would not be eligible for selection until his college class graduated.",
+       "score": 0.015873015873015872,
+       "source": "graph",
+       "chunk_id": "1bdf125fd1d07492:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_c541d65de822",
+        "name": "Harrison Bryce Jordan Barnes",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_8989d4bdf91e",
+        "name": "Golden State Warriors",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_86957d021a00",
+        "name": "first round pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_f1affa45fe16",
+        "name": "1970 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_3724302ed85e",
+        "name": "24th annual draft of the NBA",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_898d00ea2ed5",
+        "name": "2012 NBA Draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_0ea60e001641",
+        "name": "North Carolina Tar Heels",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ae9338f8ae94",
+        "name": "Dallas Mavericks",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2a3546883b0e",
+        "name": "NBA championship",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_e937dc66a0ab",
+        "name": "May 30, 1992",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_1e98ff6a6a55",
+        "name": "draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_8b2d4dc1f730",
+        "name": "draft",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_00d18b745cfd",
+        "name": "NBA",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_354a5b0c2a23",
+        "name": "The Seven",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_baf2f97502ba",
+        "name": "11th overall pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_06ca898b5ac3",
+        "name": "sixth overall pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_f9b5bae197e3",
+        "name": "16th overall",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_763ea1da5a24",
+        "name": "first overall pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_006184f16128",
+        "name": "1976 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_42c98437cd54",
+        "name": "2002 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_4adcf601ed3d",
+        "name": "1979 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_5f1f161cc1a8",
+        "name": "1980 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_cbd2bf7a04da",
+        "name": "1972 NBA draft",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_d691806271c1",
+        "name": "1986 NBA Draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_de24cd7bbb18",
+        "name": "The first HERC",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_416e0e7aa586",
+        "name": "The film",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_078bfc89f875",
+        "name": "seventh pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_be54203a7ba0",
+        "name": "seventh season",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_b9b79fa3006e",
+        "name": "first-round draft pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_42b6b67b56ed",
+        "name": "the final round",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_eab6497e13c5",
+        "name": "selection",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_12f600bb01b3",
+        "name": "fire",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_e60f7a443c2d",
+        "name": "Stan",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_c83d2509223a",
+        "name": "Josh Golden",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_ff9cb50220cf",
+        "name": "Lisa Barnes",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_ec1c9389bfcf",
+        "name": "seventh child",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_58389e0e3cdf",
+        "name": "the series overall",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_9989b6550340",
+        "name": "the series overall",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_29a62a752c51",
+        "name": "NBA draft lottery",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_2d16e32c5f0b",
+        "name": "The Dugu",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_053fa75d9de2",
+        "name": "State Fair",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_d86f535e9085",
+        "name": "Iowa State",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_edd5328008b6",
+        "name": "13 of them",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_59e6e056d252",
+        "name": "the Wiz",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_49f84f2ede5a",
+        "name": "Day of the Dead",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_40e75acce24c",
+        "name": "Land of the Dead",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_fa795bbb7e62",
+        "name": "The first building",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_de519e2dfcf8",
+        "name": "First Round Management",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_b6d24a1f02c8",
+        "name": "third round of the DFB-Pokal",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_5c3f82631abb",
+        "name": "Dance with the Wind",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_63bbf423725a",
+        "name": "Dawn of the Dead",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_af3856060960",
+        "name": "End of the Line",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_caa6b97a1369",
+        "name": "The Thick of It",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_00835cda2924",
+        "name": "Delta State",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_0e12ac863294",
+        "name": "First Blood",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7a3e77bca227",
+        "name": "Boise State",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_a5e137e057e8",
+        "name": "Eric Harris",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_b02ba3f6657e",
+        "name": "State House",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_d736b1c1dd82",
+        "name": "\"The Float\"",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_796a758d1c1e",
+        "name": "The Office",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_02c2e922198f",
+        "name": "the shark",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0e6e29440ca4",
+        "name": "The Storm",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_407cd9126733",
+        "name": "The score",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_60304ca059bb",
+        "name": "19 rounds",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_a7f62350a81f",
+        "name": "The Grove",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_e1d21bf29585",
+        "name": "the forum",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8588c0a0f1f0",
+        "name": "The Bet",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_6753b39fb35a",
+        "name": "NBC",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_7cbce00c63ca",
+        "name": "She",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_efe0933527bc",
+        "name": "STR",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_14dfad7d7b9c",
+        "name": "Dagger of the Mind",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_0b9f8bd47da7",
+        "name": "Diary of the Dead",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_5882506704ed",
+        "name": "Land of the Fire",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_5b36b9c643af",
+        "name": "Washington State",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_a1e7f313337a",
+        "name": "The Man in the Moon",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_9961123fef59",
+        "name": "Michael Jordan",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_39ab0419f8cf",
+        "name": "Kansas State",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4bbb4f7076c0",
+        "name": "first single",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4e07cf3d85ad",
+        "name": "The Drifters",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_f7bd6253e1df",
+        "name": "Jared Harris",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_444163d5d236",
+        "name": "On the Day",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_5b97ae93ef95",
+        "name": "The Wanted",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8028b5f34604",
+        "name": "The Sounds",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_bac7117dc416",
+        "name": "The Divide",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_efcf749a29d8",
+        "name": "ninth pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_7bc0e64ac202",
+        "name": "The Other",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_5d94030ce745",
+        "name": "The Boss",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8431719964a6",
+        "name": "the book",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_ab026a5c9ce8",
+        "name": "the band",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_d879b49414c9",
+        "name": "The Owls",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_ec49d3c5bebf",
+        "name": "the boys",
+        "type": "PERSON",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_c541d65de822",
+        "target": "e_8989d4bdf91e",
+        "predicate": "selected_by",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_8989d4bdf91e",
+        "target": "e_86957d021a00",
+        "predicate": "forfeited",
+        "chunk_id": "302d4db14c3d543a:sentence:1",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f1affa45fe16",
+        "target": "e_3724302ed85e",
+        "predicate": "was_the",
+        "chunk_id": "1bdf125fd1d07492:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_898d00ea2ed5",
+        "predicate": "selected_in",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 0.9
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_0ea60e001641",
+        "predicate": "played_college_basketball_for",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_ae9338f8ae94",
+        "predicate": "plays_for",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_2a3546883b0e",
+        "predicate": "won",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_e937dc66a0ab",
+        "predicate": "born",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.8546102046966553,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 376
+      },
+      {
+       "name": "retrieve",
+       "ms": 248
+      },
+      {
+       "name": "retrieve",
+       "ms": 1008
+      },
+      {
+       "name": "merge",
+       "ms": 201
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 1354,
+     "tokens_out": 1322,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 0.0015251,
+      "total": 0.0015251
+     },
+     "total_ms": 48960,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.8,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely answers the question. However, only two of the eight provided context blocks are relevant to the question.",
+    "cost_usd": 0.00041706,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "d937ce14-6173-4583-8688-dab490ad12b6",
+    "question": "Where was the NBA Draft held in which Harrison Bryce Jordan Barnes was selected by the Golden State Warriors in the first round of the draft with the seventh overall pick?",
+    "answer": {
+     "short": "Prudential Center in Newark, New Jersey",
+     "text": "Prudential Center in Newark, New Jersey. The 2012 NBA Draft was held at the Prudential Center in Newark, New Jersey. [2]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 1061 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 2,
+       "title": "2012 NBA draft",
+       "snippet": "The 2012 NBA Draft was held on June 28, 2012, at Prudential Center in Newark, New Jersey. The draft started at 7:00 pm Eastern Daylight Time (2300 UTC), and was broadcast in the United States on ESPN. In this draft, National Basketball Association (NBA) teams took turns selecting amateur U.S. college basketball players and other eligible players, including international players. This draft marked the first time that the first two players selected were from the same school (Anthony Davis and Michael Kidd-Gilchrist were teammates at Kentucky).",
+       "chunk_id": "8bb471fa3055900f:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Harrison Barnes",
+       "snippet": "Harrison Bryce Jordan Barnes (born May 30, 1992) is an American professional basketball player for the Dallas Mavericks of the National Basketball Association (NBA). He played college basketball for the North Carolina Tar Heels before being selected by the Golden State Warriors in the first round of the 2012 NBA draft with the seventh overall pick. Barnes won an NBA championship with the Warriors in 2015.",
+       "score": 0.8546102046966553,
+       "source": "vector",
+       "chunk_id": "db5c6cc4fb7f6c8f:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "2012 NBA draft",
+       "snippet": "The 2012 NBA Draft was held on June 28, 2012, at Prudential Center in Newark, New Jersey. The draft started at 7:00 pm Eastern Daylight Time (2300 UTC), and was broadcast in the United States on ESPN. In this draft, National Basketball Association (NBA) teams took turns selecting amateur U.S. college basketball players and other eligible players, including international players. This draft marked the first time that the first two players selected were from the same school (Anthony Davis and Michael Kidd-Gilchrist were teammates at Kentucky).",
+       "score": 0.7471129894256592,
+       "source": "vector",
+       "chunk_id": "8bb471fa3055900f:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "1976 NBA draft",
+       "snippet": "The 1976 NBA draft was the 30th annual draft of the National Basketball Association (NBA). The draft was held on June 8, 1976, before the 1976–77 season. In this draft, 18 NBA teams took turns selecting amateur U.S. college basketball players and other eligible players, including international players. The first two picks in the draft belonged to the teams that finished last in each conference, with the order determined by a coin flip. The Atlanta Hawks won the coin flip and were awarded the first overall pick, while the Chicago Bulls were awarded the second pick.",
+       "score": 0.7297464826627521,
+       "source": "vector",
+       "chunk_id": "91da91b9b4f8b92a:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "1970 NBA draft",
+       "snippet": "Three expansion franchises, the Buffalo Braves, the Cleveland Cavaliers and the Portland Trail Blazers, took part in the NBA Draft for the first time and were assigned the seventh, the eighth and the ninth pick in each round. In the first round, the Cavaliers had the seventh pick, while the Blazers and the Braves had the eighth and the ninth pick respectively. In the subsequent rounds, the Cavaliers and the Braves exchanged their order of selection, while the Blazers had the eighth pick throughout the draft.",
+       "score": 0.7237706996134136,
+       "source": "vector",
+       "chunk_id": "1bdf125fd1d07492:sentence:2"
+      },
+      {
+       "rank": 5,
+       "title": "2002 NBA draft",
+       "snippet": "The 2002 NBA draft was held on June 26, 2002, at The Theater at Madison Square Garden. In this draft, National Basketball Association (NBA) teams took turns selecting 57 amateur college basketball players and other first-time eligible players, such as players from non-North American leagues. The draft was broadcast on TNT at 7:30 PM (EDT). The NBA announced that about 42 college and high school players, and five international players, had filed as early-entry candidates for the draft.",
+       "score": 0.7144244909286499,
+       "source": "vector",
+       "chunk_id": "79a66f3ace5b7eb3:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "1972 NBA draft",
+       "snippet": "The Portland Trail Blazers won the coin flip and were awarded the first overall pick, while the Buffalo Braves were awarded the second pick. The remaining first-round picks and the subsequent rounds were assigned to teams in reverse order of their win–loss record in the previous season. As a result of last year's supplemental hardship draft, the Cincinnati Royals, the Atlanta Hawks, the Golden State Warriors and the Baltimore Bullets forfeited their first round picks, while the Los Angeles Lakers forfeited their fourth round pick.",
+       "score": 0.714337944984436,
+       "source": "vector",
+       "chunk_id": "302d4db14c3d543a:sentence:1"
+      },
+      {
+       "rank": 7,
+       "title": "1980 NBA draft",
+       "snippet": "The Boston Celtics, who obtained the Detroit Pistons' first-round pick in a trade, won the coin flip and were awarded the first overall pick, while the Utah Jazz were awarded the second pick. The Celtics then traded the first pick to the Golden State Warriors before the draft. The remaining first-round picks and the subsequent rounds were assigned to teams in reverse order of their win–loss record in the previous season. An expansion franchise, the Dallas Mavericks, took part in the NBA Draft for the first time and were assigned the eleventh pick in each round.",
+       "score": 0.7085519606738127,
+       "source": "vector",
+       "chunk_id": "6a72ed11a5fd712d:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "1972 NBA draft",
+       "snippet": "The 1972 NBA draft was the 26th annual draft of the National Basketball Association (NBA). The draft was held on April 10 and 15, 1972 before the 1972–73 season. In this draft, 17 NBA teams took turns selecting amateur U.S. college basketball players and other eligible players, including international players. The first two picks in the draft belonged to the teams that finished last in each conference, with the order determined by a coin flip.",
+       "score": 0.7082765102386475,
+       "source": "vector",
+       "chunk_id": "302d4db14c3d543a:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.8546102046966553,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 217
+      },
+      {
+       "name": "generate",
+       "ms": 197
+      }
+     ],
+     "tokens_in": 1139,
+     "tokens_out": 67,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.653e-05,
+      "total": 2.653e-05
+     },
+     "total_ms": 1028,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.8,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and correctly identifies the location of the 2012 NBA Draft. However, only two of the eight provided context blocks are relevant to the question.",
+    "cost_usd": 0.00036528,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "674f0f58-be32-4879-baf7-344acff817ca",
+    "question": "Where was the NBA Draft held in which Harrison Bryce Jordan Barnes was selected by the Golden State Warriors in the first round of the draft with the seventh overall pick?",
+    "answer": {
+     "short": "not enough context",
+     "text": "not enough context",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 376 tokens",
+     "confidence": 0.0,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Harrison Barnes",
+       "snippet": "Harrison Bryce Jordan Barnes (born May 30, 1992) is an American professional basketball player for the Dallas Mavericks of the National Basketball Association (NBA). He played college basketball for the North Carolina Tar Heels before being selected by the Golden State Warriors in the first round of the 2012 NBA draft with the seventh overall pick. Barnes won an NBA championship with the Warriors in 2015.",
+       "score": 0.9017354965727181,
+       "source": "graph",
+       "chunk_id": "db5c6cc4fb7f6c8f:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "1972 NBA draft",
+       "snippet": "The Portland Trail Blazers won the coin flip and were awarded the first overall pick, while the Buffalo Braves were awarded the second pick. The remaining first-round picks and the subsequent rounds were assigned to teams in reverse order of their win–loss record in the previous season. As a result of last year's supplemental hardship draft, the Cincinnati Royals, the Atlanta Hawks, the Golden State Warriors and the Baltimore Bullets forfeited their first round picks, while the Los Angeles Lakers forfeited their fourth round pick.",
+       "score": 0.8288029232264438,
+       "source": "graph",
+       "chunk_id": "302d4db14c3d543a:sentence:1"
+      },
+      {
+       "rank": 3,
+       "title": "1970 NBA draft",
+       "snippet": "The 1970 NBA draft was the 24th annual draft of the National Basketball Association (NBA). The draft was held on March 23, 1970, before the 1970–71 season. In this draft, 17 NBA teams took turns selecting amateur U.S. college basketball players and other eligible players, including international players. A player who had finished his four-year college eligibility was eligible for selection. If a player left college early, he would not be eligible for selection until his college class graduated.",
+       "score": 0.8280266225337982,
+       "source": "graph",
+       "chunk_id": "1bdf125fd1d07492:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_c541d65de822",
+        "name": "Harrison Bryce Jordan Barnes",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_8989d4bdf91e",
+        "name": "Golden State Warriors",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_86957d021a00",
+        "name": "first round pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_f1affa45fe16",
+        "name": "1970 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_3724302ed85e",
+        "name": "24th annual draft of the NBA",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_898d00ea2ed5",
+        "name": "2012 NBA Draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_0ea60e001641",
+        "name": "North Carolina Tar Heels",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ae9338f8ae94",
+        "name": "Dallas Mavericks",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2a3546883b0e",
+        "name": "NBA championship",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_e937dc66a0ab",
+        "name": "May 30, 1992",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_1e98ff6a6a55",
+        "name": "draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_8b2d4dc1f730",
+        "name": "draft",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_00d18b745cfd",
+        "name": "NBA",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_354a5b0c2a23",
+        "name": "The Seven",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_baf2f97502ba",
+        "name": "11th overall pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_06ca898b5ac3",
+        "name": "sixth overall pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_f9b5bae197e3",
+        "name": "16th overall",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_763ea1da5a24",
+        "name": "first overall pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_006184f16128",
+        "name": "1976 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_42c98437cd54",
+        "name": "2002 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_4adcf601ed3d",
+        "name": "1979 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_5f1f161cc1a8",
+        "name": "1980 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_cbd2bf7a04da",
+        "name": "1972 NBA draft",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_d691806271c1",
+        "name": "1986 NBA Draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_de24cd7bbb18",
+        "name": "The first HERC",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_416e0e7aa586",
+        "name": "The film",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_078bfc89f875",
+        "name": "seventh pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_be54203a7ba0",
+        "name": "seventh season",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_b9b79fa3006e",
+        "name": "first-round draft pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_42b6b67b56ed",
+        "name": "the final round",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_eab6497e13c5",
+        "name": "selection",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_12f600bb01b3",
+        "name": "fire",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_e60f7a443c2d",
+        "name": "Stan",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_c83d2509223a",
+        "name": "Josh Golden",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_ff9cb50220cf",
+        "name": "Lisa Barnes",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_ec1c9389bfcf",
+        "name": "seventh child",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_58389e0e3cdf",
+        "name": "the series overall",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_9989b6550340",
+        "name": "the series overall",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_29a62a752c51",
+        "name": "NBA draft lottery",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_2d16e32c5f0b",
+        "name": "The Dugu",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_053fa75d9de2",
+        "name": "State Fair",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_d86f535e9085",
+        "name": "Iowa State",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_edd5328008b6",
+        "name": "13 of them",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_59e6e056d252",
+        "name": "the Wiz",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_49f84f2ede5a",
+        "name": "Day of the Dead",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_40e75acce24c",
+        "name": "Land of the Dead",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_fa795bbb7e62",
+        "name": "The first building",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_de519e2dfcf8",
+        "name": "First Round Management",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_b6d24a1f02c8",
+        "name": "third round of the DFB-Pokal",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_5c3f82631abb",
+        "name": "Dance with the Wind",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_63bbf423725a",
+        "name": "Dawn of the Dead",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_af3856060960",
+        "name": "End of the Line",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_caa6b97a1369",
+        "name": "The Thick of It",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_00835cda2924",
+        "name": "Delta State",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_0e12ac863294",
+        "name": "First Blood",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7a3e77bca227",
+        "name": "Boise State",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_a5e137e057e8",
+        "name": "Eric Harris",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_b02ba3f6657e",
+        "name": "State House",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_d736b1c1dd82",
+        "name": "\"The Float\"",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_796a758d1c1e",
+        "name": "The Office",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_02c2e922198f",
+        "name": "the shark",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0e6e29440ca4",
+        "name": "The Storm",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_407cd9126733",
+        "name": "The score",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_60304ca059bb",
+        "name": "19 rounds",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_a7f62350a81f",
+        "name": "The Grove",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_e1d21bf29585",
+        "name": "the forum",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8588c0a0f1f0",
+        "name": "The Bet",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_6753b39fb35a",
+        "name": "NBC",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_7cbce00c63ca",
+        "name": "She",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_efe0933527bc",
+        "name": "STR",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_14dfad7d7b9c",
+        "name": "Dagger of the Mind",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_0b9f8bd47da7",
+        "name": "Diary of the Dead",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_5882506704ed",
+        "name": "Land of the Fire",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_5b36b9c643af",
+        "name": "Washington State",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_a1e7f313337a",
+        "name": "The Man in the Moon",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_9961123fef59",
+        "name": "Michael Jordan",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_39ab0419f8cf",
+        "name": "Kansas State",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4bbb4f7076c0",
+        "name": "first single",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4e07cf3d85ad",
+        "name": "The Drifters",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_f7bd6253e1df",
+        "name": "Jared Harris",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_444163d5d236",
+        "name": "On the Day",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_5b97ae93ef95",
+        "name": "The Wanted",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8028b5f34604",
+        "name": "The Sounds",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_bac7117dc416",
+        "name": "The Divide",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_efcf749a29d8",
+        "name": "ninth pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_7bc0e64ac202",
+        "name": "The Other",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_5d94030ce745",
+        "name": "The Boss",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8431719964a6",
+        "name": "the book",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_ab026a5c9ce8",
+        "name": "the band",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_d879b49414c9",
+        "name": "The Owls",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_ec49d3c5bebf",
+        "name": "the boys",
+        "type": "PERSON",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_c541d65de822",
+        "target": "e_8989d4bdf91e",
+        "predicate": "selected_by",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_8989d4bdf91e",
+        "target": "e_86957d021a00",
+        "predicate": "forfeited",
+        "chunk_id": "302d4db14c3d543a:sentence:1",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f1affa45fe16",
+        "target": "e_3724302ed85e",
+        "predicate": "was_the",
+        "chunk_id": "1bdf125fd1d07492:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_898d00ea2ed5",
+        "predicate": "selected_in",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 0.9
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_0ea60e001641",
+        "predicate": "played_college_basketball_for",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_ae9338f8ae94",
+        "predicate": "plays_for",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_2a3546883b0e",
+        "predicate": "won",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_e937dc66a0ab",
+        "predicate": "born",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.9017354965727181,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 366
+      },
+      {
+       "name": "retrieve",
+       "ms": 989
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 719,
+     "tokens_out": 50,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 1.744e-05,
+      "total": 1.744e-05
+     },
+     "total_ms": 5495,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 0.5
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The context identifies the draft as the 2012 NBA draft but does not mention its location, so 'not enough context' is the correct answer. Only one of the three context blocks is relevant to the specific player and draft mentioned.",
+    "cost_usd": 0.00024792,
+    "flagged": true,
+    "queued": true
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "28850cb2-f65c-4d9f-9755-73e86d3326b3",
+    "question": "Where was the NBA Draft held in which Harrison Bryce Jordan Barnes was selected by the Golden State Warriors in the first round of the draft with the seventh overall pick?",
+    "answer": {
+     "short": "not enough context",
+     "text": "not enough context",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 1074 tokens",
+     "confidence": 0.0,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Harrison Barnes",
+       "snippet": "Harrison Bryce Jordan Barnes (born May 30, 1992) is an American professional basketball player for the Dallas Mavericks of the National Basketball Association (NBA). He played college basketball for the North Carolina Tar Heels before being selected by the Golden State Warriors in the first round of the 2012 NBA draft with the seventh overall pick. Barnes won an NBA championship with the Warriors in 2015.",
+       "score": 0.03278688524590164,
+       "source": "hybrid",
+       "chunk_id": "db5c6cc4fb7f6c8f:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "2012 NBA draft",
+       "snippet": "The 2012 NBA Draft was held on June 28, 2012, at Prudential Center in Newark, New Jersey. The draft started at 7:00 pm Eastern Daylight Time (2300 UTC), and was broadcast in the United States on ESPN. In this draft, National Basketball Association (NBA) teams took turns selecting amateur U.S. college basketball players and other eligible players, including international players. This draft marked the first time that the first two players selected were from the same school (Anthony Davis and Michael Kidd-Gilchrist were teammates at Kentucky).",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "8bb471fa3055900f:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "1972 NBA draft",
+       "snippet": "The Portland Trail Blazers won the coin flip and were awarded the first overall pick, while the Buffalo Braves were awarded the second pick. The remaining first-round picks and the subsequent rounds were assigned to teams in reverse order of their win–loss record in the previous season. As a result of last year's supplemental hardship draft, the Cincinnati Royals, the Atlanta Hawks, the Golden State Warriors and the Baltimore Bullets forfeited their first round picks, while the Los Angeles Lakers forfeited their fourth round pick.",
+       "score": 0.03128054740957967,
+       "source": "hybrid",
+       "chunk_id": "302d4db14c3d543a:sentence:1"
+      },
+      {
+       "rank": 4,
+       "title": "1976 NBA draft",
+       "snippet": "The 1976 NBA draft was the 30th annual draft of the National Basketball Association (NBA). The draft was held on June 8, 1976, before the 1976–77 season. In this draft, 18 NBA teams took turns selecting amateur U.S. college basketball players and other eligible players, including international players. The first two picks in the draft belonged to the teams that finished last in each conference, with the order determined by a coin flip. The Atlanta Hawks won the coin flip and were awarded the first overall pick, while the Chicago Bulls were awarded the second pick.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "91da91b9b4f8b92a:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "1970 NBA draft",
+       "snippet": "Three expansion franchises, the Buffalo Braves, the Cleveland Cavaliers and the Portland Trail Blazers, took part in the NBA Draft for the first time and were assigned the seventh, the eighth and the ninth pick in each round. In the first round, the Cavaliers had the seventh pick, while the Blazers and the Braves had the eighth and the ninth pick respectively. In the subsequent rounds, the Cavaliers and the Braves exchanged their order of selection, while the Blazers had the eighth pick throughout the draft.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "1bdf125fd1d07492:sentence:2"
+      },
+      {
+       "rank": 6,
+       "title": "2002 NBA draft",
+       "snippet": "The 2002 NBA draft was held on June 26, 2002, at The Theater at Madison Square Garden. In this draft, National Basketball Association (NBA) teams took turns selecting 57 amateur college basketball players and other first-time eligible players, such as players from non-North American leagues. The draft was broadcast on TNT at 7:30 PM (EDT). The NBA announced that about 42 college and high school players, and five international players, had filed as early-entry candidates for the draft.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "79a66f3ace5b7eb3:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "1980 NBA draft",
+       "snippet": "The Boston Celtics, who obtained the Detroit Pistons' first-round pick in a trade, won the coin flip and were awarded the first overall pick, while the Utah Jazz were awarded the second pick. The Celtics then traded the first pick to the Golden State Warriors before the draft. The remaining first-round picks and the subsequent rounds were assigned to teams in reverse order of their win–loss record in the previous season. An expansion franchise, the Dallas Mavericks, took part in the NBA Draft for the first time and were assigned the eleventh pick in each round.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "6a72ed11a5fd712d:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "1970 NBA draft",
+       "snippet": "The 1970 NBA draft was the 24th annual draft of the National Basketball Association (NBA). The draft was held on March 23, 1970, before the 1970–71 season. In this draft, 17 NBA teams took turns selecting amateur U.S. college basketball players and other eligible players, including international players. A player who had finished his four-year college eligibility was eligible for selection. If a player left college early, he would not be eligible for selection until his college class graduated.",
+       "score": 0.015873015873015872,
+       "source": "graph",
+       "chunk_id": "1bdf125fd1d07492:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_c541d65de822",
+        "name": "Harrison Bryce Jordan Barnes",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_8989d4bdf91e",
+        "name": "Golden State Warriors",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_86957d021a00",
+        "name": "first round pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_f1affa45fe16",
+        "name": "1970 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_3724302ed85e",
+        "name": "24th annual draft of the NBA",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_898d00ea2ed5",
+        "name": "2012 NBA Draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_0ea60e001641",
+        "name": "North Carolina Tar Heels",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ae9338f8ae94",
+        "name": "Dallas Mavericks",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2a3546883b0e",
+        "name": "NBA championship",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_e937dc66a0ab",
+        "name": "May 30, 1992",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_1e98ff6a6a55",
+        "name": "draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_8b2d4dc1f730",
+        "name": "draft",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_00d18b745cfd",
+        "name": "NBA",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_354a5b0c2a23",
+        "name": "The Seven",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_baf2f97502ba",
+        "name": "11th overall pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_06ca898b5ac3",
+        "name": "sixth overall pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_f9b5bae197e3",
+        "name": "16th overall",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_763ea1da5a24",
+        "name": "first overall pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_006184f16128",
+        "name": "1976 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_42c98437cd54",
+        "name": "2002 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_4adcf601ed3d",
+        "name": "1979 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_5f1f161cc1a8",
+        "name": "1980 NBA draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_cbd2bf7a04da",
+        "name": "1972 NBA draft",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_d691806271c1",
+        "name": "1986 NBA Draft",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_de24cd7bbb18",
+        "name": "The first HERC",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_416e0e7aa586",
+        "name": "The film",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_078bfc89f875",
+        "name": "seventh pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_be54203a7ba0",
+        "name": "seventh season",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_b9b79fa3006e",
+        "name": "first-round draft pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_42b6b67b56ed",
+        "name": "the final round",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_eab6497e13c5",
+        "name": "selection",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_12f600bb01b3",
+        "name": "fire",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_e60f7a443c2d",
+        "name": "Stan",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_c83d2509223a",
+        "name": "Josh Golden",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_ff9cb50220cf",
+        "name": "Lisa Barnes",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_ec1c9389bfcf",
+        "name": "seventh child",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_58389e0e3cdf",
+        "name": "the series overall",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_9989b6550340",
+        "name": "the series overall",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_29a62a752c51",
+        "name": "NBA draft lottery",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_2d16e32c5f0b",
+        "name": "The Dugu",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_053fa75d9de2",
+        "name": "State Fair",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_d86f535e9085",
+        "name": "Iowa State",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_edd5328008b6",
+        "name": "13 of them",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_59e6e056d252",
+        "name": "the Wiz",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_49f84f2ede5a",
+        "name": "Day of the Dead",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_40e75acce24c",
+        "name": "Land of the Dead",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_fa795bbb7e62",
+        "name": "The first building",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_de519e2dfcf8",
+        "name": "First Round Management",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_b6d24a1f02c8",
+        "name": "third round of the DFB-Pokal",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_5c3f82631abb",
+        "name": "Dance with the Wind",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_63bbf423725a",
+        "name": "Dawn of the Dead",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_af3856060960",
+        "name": "End of the Line",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_caa6b97a1369",
+        "name": "The Thick of It",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_00835cda2924",
+        "name": "Delta State",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_0e12ac863294",
+        "name": "First Blood",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7a3e77bca227",
+        "name": "Boise State",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_a5e137e057e8",
+        "name": "Eric Harris",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_b02ba3f6657e",
+        "name": "State House",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_d736b1c1dd82",
+        "name": "\"The Float\"",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_796a758d1c1e",
+        "name": "The Office",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_02c2e922198f",
+        "name": "the shark",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0e6e29440ca4",
+        "name": "The Storm",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_407cd9126733",
+        "name": "The score",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_60304ca059bb",
+        "name": "19 rounds",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_a7f62350a81f",
+        "name": "The Grove",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_e1d21bf29585",
+        "name": "the forum",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8588c0a0f1f0",
+        "name": "The Bet",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_6753b39fb35a",
+        "name": "NBC",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_7cbce00c63ca",
+        "name": "She",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_efe0933527bc",
+        "name": "STR",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_14dfad7d7b9c",
+        "name": "Dagger of the Mind",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_0b9f8bd47da7",
+        "name": "Diary of the Dead",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_5882506704ed",
+        "name": "Land of the Fire",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_5b36b9c643af",
+        "name": "Washington State",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_a1e7f313337a",
+        "name": "The Man in the Moon",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_9961123fef59",
+        "name": "Michael Jordan",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_39ab0419f8cf",
+        "name": "Kansas State",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4bbb4f7076c0",
+        "name": "first single",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4e07cf3d85ad",
+        "name": "The Drifters",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_f7bd6253e1df",
+        "name": "Jared Harris",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_444163d5d236",
+        "name": "On the Day",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_5b97ae93ef95",
+        "name": "The Wanted",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8028b5f34604",
+        "name": "The Sounds",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_bac7117dc416",
+        "name": "The Divide",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_efcf749a29d8",
+        "name": "ninth pick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_7bc0e64ac202",
+        "name": "The Other",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_5d94030ce745",
+        "name": "The Boss",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8431719964a6",
+        "name": "the book",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_ab026a5c9ce8",
+        "name": "the band",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_d879b49414c9",
+        "name": "The Owls",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_ec49d3c5bebf",
+        "name": "the boys",
+        "type": "PERSON",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_c541d65de822",
+        "target": "e_8989d4bdf91e",
+        "predicate": "selected_by",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_8989d4bdf91e",
+        "target": "e_86957d021a00",
+        "predicate": "forfeited",
+        "chunk_id": "302d4db14c3d543a:sentence:1",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f1affa45fe16",
+        "target": "e_3724302ed85e",
+        "predicate": "was_the",
+        "chunk_id": "1bdf125fd1d07492:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_898d00ea2ed5",
+        "predicate": "selected_in",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 0.9
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_0ea60e001641",
+        "predicate": "played_college_basketball_for",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_ae9338f8ae94",
+        "predicate": "plays_for",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_2a3546883b0e",
+        "predicate": "won",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c541d65de822",
+        "target": "e_e937dc66a0ab",
+        "predicate": "born",
+        "chunk_id": "db5c6cc4fb7f6c8f:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.8546102046966553,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 220
+      },
+      {
+       "name": "link",
+       "ms": 366
+      },
+      {
+       "name": "retrieve",
+       "ms": 1009
+      },
+      {
+       "name": "merge",
+       "ms": 203
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1320,
+     "tokens_out": 50,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.826e-05,
+      "total": 2.826e-05
+     },
+     "total_ms": 6887,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 0.0,
+    "relevance": 0.25,
+    "completeness": 0.0,
+    "rationale": "The context provides the answer: Harrison Barnes was selected in the 2012 NBA draft [1], which was held at the Prudential Center in Newark, New Jersey [2]. Therefore, the answer 'not enough context' is incorrect.",
+    "cost_usd": 0.00039602,
+    "flagged": true,
+    "queued": true
+   }
+  }
+ }
+}

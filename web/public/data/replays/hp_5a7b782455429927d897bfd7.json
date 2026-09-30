@@ -1,0 +1,1389 @@
+{
+ "sample": false,
+ "question_id": "hp_5a7b782455429927d897bfd7",
+ "question": "Staten Island Summer, starred what actress who was a cast member of \"Saturday Night Live\"?",
+ "type": "multi_hop",
+ "gold_answer": "Cecily Strong",
+ "supporting_titles": [
+  "Staten Island Summer",
+  "Cecily Strong"
+ ],
+ "why": "Multi hop through hybrid: hybrid and vector answer it, graph traversal alone does not.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "e1182018-5733-4170-ac20-3b83df1fb4f1",
+    "question": "Staten Island Summer, starred what actress who was a cast member of \"Saturday Night Live\"?",
+    "answer": {
+     "short": "Cecily Strong",
+     "text": "Cecily Strong. The film Staten Island Summer lists her among its stars, and she is known for being a cast member of Saturday Night Live [1][2].",
+     "model": "qwen3.6:35b-a3b",
+     "size": "large",
+     "select_reason": "large:label multi_hop",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Staten Island Summer",
+       "snippet": "Staten Island Summer is a 2015 American comedy film directed by Rhys Thomas and written by Colin Jost. The film stars Graham Phillips, Zack Pearlman, John DeLuca, Bobby Moynihan, Will Forte, Fred Armisen, Cecily Strong, and Ashley Greene. The film was released for digital download on June 30, 2015, by Paramount Pictures.",
+       "chunk_id": "b9141547f9ecd473:sentence:0"
+      },
+      {
+       "n": 2,
+       "title": "Cecily Strong",
+       "snippet": "Cecily Legler Strong (born February 8, 1984) is an American actress, voice actress, and comedian, known as a cast member of \"Saturday Night Live\", having joined the show in 2012.",
+       "chunk_id": "bda2d27e6c96dfef:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "multi_hop",
+     "label_confidence": 0.9658276438713074,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "relational:multi_hop"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Staten Island Summer",
+       "snippet": "Staten Island Summer is a 2015 American comedy film directed by Rhys Thomas and written by Colin Jost. The film stars Graham Phillips, Zack Pearlman, John DeLuca, Bobby Moynihan, Will Forte, Fred Armisen, Cecily Strong, and Ashley Greene. The film was released for digital download on June 30, 2015, by Paramount Pictures.",
+       "score": 0.01639344262295082,
+       "source": "vector",
+       "chunk_id": "b9141547f9ecd473:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Cecily Strong",
+       "snippet": "Cecily Legler Strong (born February 8, 1984) is an American actress, voice actress, and comedian, known as a cast member of \"Saturday Night Live\", having joined the show in 2012.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "bda2d27e6c96dfef:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Staten Island",
+       "snippet": "Staten Island is one of the five boroughs of New York City in the U.S. state of New York. In the southwest of the city, Staten Island is the southernmost part of both the city and state of New York, with Conference House Park at the southern tip of the island and the state. The borough is separated from New Jersey by the Arthur Kill and the Kill Van Kull, and from the rest of New York by New York Bay.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "cced368c27727586:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Ellen Cleghorne",
+       "snippet": "Ellen Cleghorne (born November 29, 1965) is an American actress and comedian, best known as a cast member of \"Saturday Night Live\" from 1991 to 1995. Cleghorne was the sketch comedy show's second African-American female repertory cast member, succeeding Danitra Vance in its eleventh season, and the first African-American female cast member to stay for more than one season. She returned for its 40th anniversary special on February 15, 2015. Cleghorne was ranked the 69th greatest \"Saturday Night Live\" cast member by \"Rolling Stone\" magazine.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "3a539e7eed1f1d7c:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Christy Carlson Romano",
+       "snippet": "Christy Carlson Romano (born March 20, 1984 ) is an American actress and singer. She is known for her role as Ren Stevens in the Disney Channel sitcom \"Even Stevens\", and as the voice of the titular character in the Disney Channel animated series \"Kim Possible.\"",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "5937ab21c50be2dc:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "List of Saturday Night Live episodes",
+       "snippet": "<section begin=head />\"Saturday Night Live\" (\"SNL\") is a late-night sketch comedy and variety show created by Lorne Michaels. It premiered on NBC, a terrestrial television network, on October 11, 1975 under the title \"NBC's Saturday Night\". The show often satirizes contemporary American popular culture and politics. \"Saturday Night Live\" features a two-tiered cast: the repertory members, also known as the \"Not Ready for Prime-Time Players,\" and newer cast members, known as \"Featured Players.\" Each week, the show features a host, often a well-known celebrity, who delivers an opening monologue a",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "cd69e415f693a3aa:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Andrea Martin",
+       "snippet": "Andrea Louise Martin (born January 15, 1947) is an American actress, singer, author and comedian, best known for her work in the television series \"SCTV\". She has appeared in films such as \"Black Christmas\" (1974), \"Wag the Dog\" (1997), \"Hedwig and the Angry Inch\" (2001), \"My Big Fat Greek Wedding\" (2002) and \"My Big Fat Greek Wedding 2\" (2016), and lent her voice to the animated films \"Anastasia\" (1997), \"The Rugrats Movie\" (1998) and \"\" (2001).",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "d5e3155352895cf1:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Staten Island Register",
+       "snippet": "The Staten Island Register was a weekly newspaper serving the borough of Staten Island in New York City as an independent alternative to other news sources, including the \"Staten Island Advance\". It began publication in 1966 under the ownership of the Sclafani family. Joseph was the Owner. The \"Staten Island Register\" was sold in August 2002 to Elauwit, LLC, a company formed by Daniel McDonough of New Jersey, was sold by McDonough to an investor in 2004, and ceased publication in December 2005.",
+       "score": 0.03125763125763126,
+       "source": "hybrid",
+       "chunk_id": "da6709c0b8c4c666:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_a707aaa8ef62",
+        "name": "Staten Island Borough Hall",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_9dab85878da2",
+        "name": "Staten Island Ferry Terminal",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_1d6c7a01c18c",
+        "name": "Boaz Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_d4c812146942",
+        "name": "Gate's Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_34de78b373f7",
+        "name": "Yates Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_27473a28286b",
+        "name": "Somerset Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_012f1aeaa124",
+        "name": "Ireland Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_1bd6e3f17d4c",
+        "name": "Staten Island",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ddbb18c4aa0c",
+        "name": "Staten Island Register",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_02ea2ceaf617",
+        "name": "cast member of Saturday Night Live",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_dd0d45301eb5",
+        "name": "Staten Island Summer",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_0c559a7c86dd",
+        "name": "actress",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_e60f7a443c2d",
+        "name": "Stan",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_713785404063",
+        "name": "Lian Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_8e0f670f338d",
+        "name": "Long Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_7cf13c0215bb",
+        "name": "Saddle Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_6183d8572cf4",
+        "name": "48 islands",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_89126d9a823f",
+        "name": "Summer of '42",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_e2da71eaf412",
+        "name": "Goose Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_e67c31733d53",
+        "name": "Mulga Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_ea377e88f03f",
+        "name": "Rhode Island",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_511474cbebff",
+        "name": "Likoma Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_87550b8c401a",
+        "name": "Brutus Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_ab1d6c78f9e7",
+        "name": "Penghu Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_e69b03245380",
+        "name": "Birnie Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_3eecd9bb0eed",
+        "name": "actor",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_7c62a16e8931",
+        "name": "Lie",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_86ccf4b79787",
+        "name": "SAB",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_efe0933527bc",
+        "name": "STR",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0ff69a2b1808",
+        "name": "Darrell's Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_95084a6a01be",
+        "name": "Up All Night",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_d86f535e9085",
+        "name": "Iowa State",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_053fa75d9de2",
+        "name": "State Fair",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_54a880a82bbc",
+        "name": "Nighthawks",
+        "type": "WORK",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_a707aaa8ef62",
+        "target": "e_9dab85878da2",
+        "predicate": "opposite",
+        "chunk_id": "a3a143242fca2ffb:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_d4c812146942",
+        "predicate": "formerly_known_as",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_34de78b373f7",
+        "predicate": "formerly_known_as",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_27473a28286b",
+        "predicate": "connected_to",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_27473a28286b",
+        "predicate": "lies_between",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_012f1aeaa124",
+        "predicate": "lies_between",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_012f1aeaa124",
+        "predicate": "connected_to",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_a707aaa8ef62",
+        "target": "e_1bd6e3f17d4c",
+        "predicate": "located_in",
+        "chunk_id": "a3a143242fca2ffb:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_ddbb18c4aa0c",
+        "target": "e_1bd6e3f17d4c",
+        "predicate": "served",
+        "chunk_id": "da6709c0b8c4c666:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7749536439859326,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 309
+      },
+      {
+       "name": "retrieve",
+       "ms": 210
+      },
+      {
+       "name": "retrieve",
+       "ms": 790
+      },
+      {
+       "name": "merge",
+       "ms": 392
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 1112,
+     "tokens_out": 858,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 0.0010248,
+      "total": 0.0010248
+     },
+     "total_ms": 5819,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely addresses the question. Approximately half of the context blocks are relevant to the entities mentioned in the question.",
+    "cost_usd": 0.00030978,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "aa30340e-9df6-4719-adf4-d0ef753e3e0c",
+    "question": "Staten Island Summer, starred what actress who was a cast member of \"Saturday Night Live\"?",
+    "answer": {
+     "short": "Cecily Strong",
+     "text": "Cecily Strong. Cecily Strong is listed as a star of *Staten Island Summer* and is a cast member of “Saturday Night Live”【1】【2】",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 876 tokens",
+     "confidence": 0.5,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Staten Island Summer",
+       "snippet": "Staten Island Summer is a 2015 American comedy film directed by Rhys Thomas and written by Colin Jost. The film stars Graham Phillips, Zack Pearlman, John DeLuca, Bobby Moynihan, Will Forte, Fred Armisen, Cecily Strong, and Ashley Greene. The film was released for digital download on June 30, 2015, by Paramount Pictures.",
+       "score": 0.7749536439859326,
+       "source": "vector",
+       "chunk_id": "b9141547f9ecd473:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Cecily Strong",
+       "snippet": "Cecily Legler Strong (born February 8, 1984) is an American actress, voice actress, and comedian, known as a cast member of \"Saturday Night Live\", having joined the show in 2012.",
+       "score": 0.6842229946652434,
+       "source": "vector",
+       "chunk_id": "bda2d27e6c96dfef:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Ellen Cleghorne",
+       "snippet": "Ellen Cleghorne (born November 29, 1965) is an American actress and comedian, best known as a cast member of \"Saturday Night Live\" from 1991 to 1995. Cleghorne was the sketch comedy show's second African-American female repertory cast member, succeeding Danitra Vance in its eleventh season, and the first African-American female cast member to stay for more than one season. She returned for its 40th anniversary special on February 15, 2015. Cleghorne was ranked the 69th greatest \"Saturday Night Live\" cast member by \"Rolling Stone\" magazine.",
+       "score": 0.6417038316417254,
+       "source": "vector",
+       "chunk_id": "3a539e7eed1f1d7c:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Staten Island",
+       "snippet": "Staten Island is one of the five boroughs of New York City in the U.S. state of New York. In the southwest of the city, Staten Island is the southernmost part of both the city and state of New York, with Conference House Park at the southern tip of the island and the state. The borough is separated from New Jersey by the Arthur Kill and the Kill Van Kull, and from the rest of New York by New York Bay.",
+       "score": 0.6278838958878686,
+       "source": "vector",
+       "chunk_id": "cced368c27727586:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Staten Island Register",
+       "snippet": "The Staten Island Register was a weekly newspaper serving the borough of Staten Island in New York City as an independent alternative to other news sources, including the \"Staten Island Advance\". It began publication in 1966 under the ownership of the Sclafani family. Joseph was the Owner. The \"Staten Island Register\" was sold in August 2002 to Elauwit, LLC, a company formed by Daniel McDonough of New Jersey, was sold by McDonough to an investor in 2004, and ceased publication in December 2005.",
+       "score": 0.6015384672238312,
+       "source": "vector",
+       "chunk_id": "da6709c0b8c4c666:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Christy Carlson Romano",
+       "snippet": "Christy Carlson Romano (born March 20, 1984 ) is an American actress and singer. She is known for her role as Ren Stevens in the Disney Channel sitcom \"Even Stevens\", and as the voice of the titular character in the Disney Channel animated series \"Kim Possible.\"",
+       "score": 0.597521055040238,
+       "source": "vector",
+       "chunk_id": "5937ab21c50be2dc:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "List of Saturday Night Live episodes",
+       "snippet": "<section begin=head />\"Saturday Night Live\" (\"SNL\") is a late-night sketch comedy and variety show created by Lorne Michaels. It premiered on NBC, a terrestrial television network, on October 11, 1975 under the title \"NBC's Saturday Night\". The show often satirizes contemporary American popular culture and politics. \"Saturday Night Live\" features a two-tiered cast: the repertory members, also known as the \"Not Ready for Prime-Time Players,\" and newer cast members, known as \"Featured Players.\" Each week, the show features a host, often a well-known celebrity, who delivers an opening monologue a",
+       "score": 0.5971178296664007,
+       "source": "vector",
+       "chunk_id": "cd69e415f693a3aa:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Andrea Martin",
+       "snippet": "Andrea Louise Martin (born January 15, 1947) is an American actress, singer, author and comedian, best known for her work in the television series \"SCTV\". She has appeared in films such as \"Black Christmas\" (1974), \"Wag the Dog\" (1997), \"Hedwig and the Angry Inch\" (2001), \"My Big Fat Greek Wedding\" (2002) and \"My Big Fat Greek Wedding 2\" (2016), and lent her voice to the animated films \"Anastasia\" (1997), \"The Rugrats Movie\" (1998) and \"\" (2001).",
+       "score": 0.5958891751832357,
+       "source": "vector",
+       "chunk_id": "d5e3155352895cf1:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.7749536439859326,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 214
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1067,
+     "tokens_out": 138,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 3.163e-05,
+      "total": 3.163e-05
+     },
+     "total_ms": 1292,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely addresses the question. Approximately half of the context blocks are irrelevant to the query.",
+    "cost_usd": 0.0003111,
+    "flagged": true,
+    "queued": true
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "c2d59f4e-3543-454b-a506-4d76562c2500",
+    "question": "Staten Island Summer, starred what actress who was a cast member of \"Saturday Night Live\"?",
+    "answer": {
+     "short": "not enough context",
+     "text": "not enough context",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 360 tokens",
+     "confidence": 0.0,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Staten Island Borough Hall",
+       "snippet": "Staten Island Borough Hall is the primary municipal building for the borough of Staten Island in New York City. It is located at 10 Richmond Terrace, next to the Richmond County Courthouse and opposite the Staten Island Ferry Terminal. Staten Island Borough Hall houses the Borough President's office, offices of the Departments of Buildings and T",
+       "score": 0.7610560201969176,
+       "source": "graph",
+       "chunk_id": "a3a143242fca2ffb:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Boaz Island, Bermuda",
+       "snippet": "Boaz Island, formerly known as \"Gate's Island\" or \"Yates Island\", is one of the six main islands of Bermuda. It is part of a chain of islands in the west of the country that make up Sandys Parish, lying between the larger Ireland Island and Somerset Island, and is connected to both by bridges. Its east coast forms part of the edge of the Great Sound. Boaz Island was part of the Royal Naval base, which included the HM Dockyard on Ireland Island. From 1939, Boaz Island was used as a Royal Naval Air Station.",
+       "score": 0.7034387676883156,
+       "source": "graph",
+       "chunk_id": "b6b67ce30d5dbb27:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Staten Island Register",
+       "snippet": "The Staten Island Register was a weekly newspaper serving the borough of Staten Island in New York City as an independent alternative to other news sources, including the \"Staten Island Advance\". It began publication in 1966 under the ownership of the Sclafani family. Joseph was the Owner. The \"Staten Island Register\" was sold in August 2002 to Elauwit, LLC, a company formed by Daniel McDonough of New Jersey, was sold by McDonough to an investor in 2004, and ceased publication in December 2005.",
+       "score": 0.5998371248034429,
+       "source": "graph",
+       "chunk_id": "da6709c0b8c4c666:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_a707aaa8ef62",
+        "name": "Staten Island Borough Hall",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_9dab85878da2",
+        "name": "Staten Island Ferry Terminal",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_1d6c7a01c18c",
+        "name": "Boaz Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_d4c812146942",
+        "name": "Gate's Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_34de78b373f7",
+        "name": "Yates Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_27473a28286b",
+        "name": "Somerset Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_012f1aeaa124",
+        "name": "Ireland Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_1bd6e3f17d4c",
+        "name": "Staten Island",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ddbb18c4aa0c",
+        "name": "Staten Island Register",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_02ea2ceaf617",
+        "name": "cast member of Saturday Night Live",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_dd0d45301eb5",
+        "name": "Staten Island Summer",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_0c559a7c86dd",
+        "name": "actress",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_e60f7a443c2d",
+        "name": "Stan",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_713785404063",
+        "name": "Lian Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_8e0f670f338d",
+        "name": "Long Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_7cf13c0215bb",
+        "name": "Saddle Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_6183d8572cf4",
+        "name": "48 islands",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_89126d9a823f",
+        "name": "Summer of '42",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_e2da71eaf412",
+        "name": "Goose Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_e67c31733d53",
+        "name": "Mulga Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_ea377e88f03f",
+        "name": "Rhode Island",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_511474cbebff",
+        "name": "Likoma Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_87550b8c401a",
+        "name": "Brutus Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_ab1d6c78f9e7",
+        "name": "Penghu Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_e69b03245380",
+        "name": "Birnie Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_3eecd9bb0eed",
+        "name": "actor",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_7c62a16e8931",
+        "name": "Lie",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_86ccf4b79787",
+        "name": "SAB",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_efe0933527bc",
+        "name": "STR",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0ff69a2b1808",
+        "name": "Darrell's Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_95084a6a01be",
+        "name": "Up All Night",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_d86f535e9085",
+        "name": "Iowa State",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_053fa75d9de2",
+        "name": "State Fair",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_54a880a82bbc",
+        "name": "Nighthawks",
+        "type": "WORK",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_a707aaa8ef62",
+        "target": "e_9dab85878da2",
+        "predicate": "opposite",
+        "chunk_id": "a3a143242fca2ffb:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_d4c812146942",
+        "predicate": "formerly_known_as",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_34de78b373f7",
+        "predicate": "formerly_known_as",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_27473a28286b",
+        "predicate": "connected_to",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_27473a28286b",
+        "predicate": "lies_between",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_012f1aeaa124",
+        "predicate": "lies_between",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_012f1aeaa124",
+        "predicate": "connected_to",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_a707aaa8ef62",
+        "target": "e_1bd6e3f17d4c",
+        "predicate": "located_in",
+        "chunk_id": "a3a143242fca2ffb:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_ddbb18c4aa0c",
+        "target": "e_1bd6e3f17d4c",
+        "predicate": "served",
+        "chunk_id": "da6709c0b8c4c666:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7610560201969176,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 280
+      },
+      {
+       "name": "retrieve",
+       "ms": 791
+      },
+      {
+       "name": "generate",
+       "ms": 195
+      }
+     ],
+     "tokens_in": 716,
+     "tokens_out": 61,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 1.838e-05,
+      "total": 1.838e-05
+     },
+     "total_ms": 5621,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 0.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.0,
+    "completeness": 1.0,
+    "rationale": "The context contains no information about the movie 'Staten Island Summer' or any actress from 'Saturday Night Live', making the answer 'not enough context' correct. The retrieved blocks are irrelevant to the specific entities in the question.",
+    "cost_usd": 0.0002747,
+    "flagged": true,
+    "queued": true
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "0dba67bb-cdf4-4516-9afd-e30ae9e6634d",
+    "question": "Staten Island Summer, starred what actress who was a cast member of \"Saturday Night Live\"?",
+    "answer": {
+     "short": "Cecily Strong",
+     "text": "Cecily Strong. Cecily Strong is listed as a star of *Staten Island Summer* and is a cast member of “Saturday Night Live”【1】【2】",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 876 tokens",
+     "confidence": 0.5,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Staten Island Summer",
+       "snippet": "Staten Island Summer is a 2015 American comedy film directed by Rhys Thomas and written by Colin Jost. The film stars Graham Phillips, Zack Pearlman, John DeLuca, Bobby Moynihan, Will Forte, Fred Armisen, Cecily Strong, and Ashley Greene. The film was released for digital download on June 30, 2015, by Paramount Pictures.",
+       "score": 0.01639344262295082,
+       "source": "vector",
+       "chunk_id": "b9141547f9ecd473:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Cecily Strong",
+       "snippet": "Cecily Legler Strong (born February 8, 1984) is an American actress, voice actress, and comedian, known as a cast member of \"Saturday Night Live\", having joined the show in 2012.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "bda2d27e6c96dfef:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Staten Island",
+       "snippet": "Staten Island is one of the five boroughs of New York City in the U.S. state of New York. In the southwest of the city, Staten Island is the southernmost part of both the city and state of New York, with Conference House Park at the southern tip of the island and the state. The borough is separated from New Jersey by the Arthur Kill and the Kill Van Kull, and from the rest of New York by New York Bay.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "cced368c27727586:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Ellen Cleghorne",
+       "snippet": "Ellen Cleghorne (born November 29, 1965) is an American actress and comedian, best known as a cast member of \"Saturday Night Live\" from 1991 to 1995. Cleghorne was the sketch comedy show's second African-American female repertory cast member, succeeding Danitra Vance in its eleventh season, and the first African-American female cast member to stay for more than one season. She returned for its 40th anniversary special on February 15, 2015. Cleghorne was ranked the 69th greatest \"Saturday Night Live\" cast member by \"Rolling Stone\" magazine.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "3a539e7eed1f1d7c:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Christy Carlson Romano",
+       "snippet": "Christy Carlson Romano (born March 20, 1984 ) is an American actress and singer. She is known for her role as Ren Stevens in the Disney Channel sitcom \"Even Stevens\", and as the voice of the titular character in the Disney Channel animated series \"Kim Possible.\"",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "5937ab21c50be2dc:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "List of Saturday Night Live episodes",
+       "snippet": "<section begin=head />\"Saturday Night Live\" (\"SNL\") is a late-night sketch comedy and variety show created by Lorne Michaels. It premiered on NBC, a terrestrial television network, on October 11, 1975 under the title \"NBC's Saturday Night\". The show often satirizes contemporary American popular culture and politics. \"Saturday Night Live\" features a two-tiered cast: the repertory members, also known as the \"Not Ready for Prime-Time Players,\" and newer cast members, known as \"Featured Players.\" Each week, the show features a host, often a well-known celebrity, who delivers an opening monologue a",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "cd69e415f693a3aa:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Andrea Martin",
+       "snippet": "Andrea Louise Martin (born January 15, 1947) is an American actress, singer, author and comedian, best known for her work in the television series \"SCTV\". She has appeared in films such as \"Black Christmas\" (1974), \"Wag the Dog\" (1997), \"Hedwig and the Angry Inch\" (2001), \"My Big Fat Greek Wedding\" (2002) and \"My Big Fat Greek Wedding 2\" (2016), and lent her voice to the animated films \"Anastasia\" (1997), \"The Rugrats Movie\" (1998) and \"\" (2001).",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "d5e3155352895cf1:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Staten Island Register",
+       "snippet": "The Staten Island Register was a weekly newspaper serving the borough of Staten Island in New York City as an independent alternative to other news sources, including the \"Staten Island Advance\". It began publication in 1966 under the ownership of the Sclafani family. Joseph was the Owner. The \"Staten Island Register\" was sold in August 2002 to Elauwit, LLC, a company formed by Daniel McDonough of New Jersey, was sold by McDonough to an investor in 2004, and ceased publication in December 2005.",
+       "score": 0.03125763125763126,
+       "source": "hybrid",
+       "chunk_id": "da6709c0b8c4c666:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_a707aaa8ef62",
+        "name": "Staten Island Borough Hall",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_9dab85878da2",
+        "name": "Staten Island Ferry Terminal",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_1d6c7a01c18c",
+        "name": "Boaz Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_d4c812146942",
+        "name": "Gate's Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_34de78b373f7",
+        "name": "Yates Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_27473a28286b",
+        "name": "Somerset Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_012f1aeaa124",
+        "name": "Ireland Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_1bd6e3f17d4c",
+        "name": "Staten Island",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ddbb18c4aa0c",
+        "name": "Staten Island Register",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_02ea2ceaf617",
+        "name": "cast member of Saturday Night Live",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_dd0d45301eb5",
+        "name": "Staten Island Summer",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_0c559a7c86dd",
+        "name": "actress",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_e60f7a443c2d",
+        "name": "Stan",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_713785404063",
+        "name": "Lian Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_8e0f670f338d",
+        "name": "Long Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_7cf13c0215bb",
+        "name": "Saddle Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_6183d8572cf4",
+        "name": "48 islands",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_89126d9a823f",
+        "name": "Summer of '42",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_e2da71eaf412",
+        "name": "Goose Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_e67c31733d53",
+        "name": "Mulga Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_ea377e88f03f",
+        "name": "Rhode Island",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_511474cbebff",
+        "name": "Likoma Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_87550b8c401a",
+        "name": "Brutus Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_ab1d6c78f9e7",
+        "name": "Penghu Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_e69b03245380",
+        "name": "Birnie Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_3eecd9bb0eed",
+        "name": "actor",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_7c62a16e8931",
+        "name": "Lie",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_86ccf4b79787",
+        "name": "SAB",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_efe0933527bc",
+        "name": "STR",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0ff69a2b1808",
+        "name": "Darrell's Island",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_95084a6a01be",
+        "name": "Up All Night",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_d86f535e9085",
+        "name": "Iowa State",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_053fa75d9de2",
+        "name": "State Fair",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_54a880a82bbc",
+        "name": "Nighthawks",
+        "type": "WORK",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_a707aaa8ef62",
+        "target": "e_9dab85878da2",
+        "predicate": "opposite",
+        "chunk_id": "a3a143242fca2ffb:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_d4c812146942",
+        "predicate": "formerly_known_as",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_34de78b373f7",
+        "predicate": "formerly_known_as",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_27473a28286b",
+        "predicate": "connected_to",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_27473a28286b",
+        "predicate": "lies_between",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_012f1aeaa124",
+        "predicate": "lies_between",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1d6c7a01c18c",
+        "target": "e_012f1aeaa124",
+        "predicate": "connected_to",
+        "chunk_id": "b6b67ce30d5dbb27:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_a707aaa8ef62",
+        "target": "e_1bd6e3f17d4c",
+        "predicate": "located_in",
+        "chunk_id": "a3a143242fca2ffb:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_ddbb18c4aa0c",
+        "target": "e_1bd6e3f17d4c",
+        "predicate": "served",
+        "chunk_id": "da6709c0b8c4c666:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7749536439859326,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 213
+      },
+      {
+       "name": "link",
+       "ms": 319
+      },
+      {
+       "name": "retrieve",
+       "ms": 798
+      },
+      {
+       "name": "merge",
+       "ms": 397
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1095,
+     "tokens_out": 136,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 3.195e-05,
+      "total": 3.195e-05
+     },
+     "total_ms": 10608,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely answers the question. Approximately half of the context blocks are irrelevant to the specific query.",
+    "cost_usd": 0.00035674,
+    "flagged": true,
+    "queued": true
+   }
+  }
+ }
+}

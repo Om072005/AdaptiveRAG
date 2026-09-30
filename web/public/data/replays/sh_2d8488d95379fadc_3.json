@@ -1,0 +1,1047 @@
+{
+ "sample": false,
+ "question_id": "sh_2d8488d95379fadc_3",
+ "question": "How many elected members does Cork City Council have?",
+ "type": "single_hop",
+ "gold_answer": "31",
+ "supporting_titles": [
+  "Cork City Council"
+ ],
+ "why": "The classifier is right but under the 0.85 bar (0.77), so the router uses hybrid.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "520404d6-0b7c-4758-b25c-edfeeb5089a5",
+    "question": "How many elected members does Cork City Council have?",
+    "answer": {
+     "short": "31",
+     "text": "31. The council has 31 elected members. [1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label single_hop, 1000 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Cork City Council",
+       "snippet": "Cork City Council (Irish: \"Comhairle Cathrach Chorcaí\" ) is the authority responsible for local government in the city of Cork in Ireland. As a city council, it is governed by the Local Government Act 2001. The council is responsible for housing and community, roads and transportation, urban planning and development, amenity and culture, and environment. The council has 31 elected members. Elections are held every five years and are by single transferable vote. The head of the council has the honorific title of Lord Mayor of Cork.",
+       "chunk_id": "2d8488d95379fadc:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "single_hop",
+     "label_confidence": 0.7722388505935669,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "ambiguous:single_hop 0.77"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Cork City Council",
+       "snippet": "Cork City Council (Irish: \"Comhairle Cathrach Chorcaí\" ) is the authority responsible for local government in the city of Cork in Ireland. As a city council, it is governed by the Local Government Act 2001. The council is responsible for housing and community, roads and transportation, urban planning and development, amenity and culture, and environment. The council has 31 elected members. Elections are held every five years and are by single transferable vote. The head of the council has the honorific title of Lord Mayor of Cork.",
+       "score": 0.03252247488101534,
+       "source": "hybrid",
+       "chunk_id": "2d8488d95379fadc:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Cork City Council",
+       "snippet": "The city administration is headed by a Chief Executive, Ann Doherty. The council meets at Cork City Hall. The 2015 Cork Local Government Review recommended merging Cork City Council and Cork County Council into a single \"super council\", within which a metropolitan district council will govern the Metropolitan Cork area; however, a minority report opposed the merger. This was subsequently followed in 2017 by a report published by an expert advisory group recommending a city boundary extension.",
+       "score": 0.03252247488101534,
+       "source": "hybrid",
+       "chunk_id": "2d8488d95379fadc:sentence:1"
+      },
+      {
+       "rank": 3,
+       "title": "Cork City Council",
+       "snippet": "The city boundary will be extended to include Little Island, Cork Airport, Ballincollig, Blarney, and Carrigtwohill, adding a population of over 100,000. Places farther out will remain part of the county, including Cobh, Carrigaline, and Midleton, as well as Ringaskiddy, the centre of the Port of Cork. The report gives parameters for compensation to be paid by the city to the county for the consequent reduction in its revenue. The revised proposal was welcomed by Micheál Martin but criticised by some county councillors. The city council voted unanimously to accept it.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "2d8488d95379fadc:sentence:2"
+      },
+      {
+       "rank": 4,
+       "title": "Dublin City Council",
+       "snippet": "Dublin City Council (Irish: \"Comhairle Cathrach Bhaile Átha Cliath\" ) is the authority responsible for local government in the city of Dublin in Ireland. As a city council, it is governed by the Local Government Act 2001. Until 2001, the council was known as \"Dublin Corporation\". The council is responsible for housing and community, roads and transportation, urban planning and development, amenity and culture and environment. The council has 63 elected members and is the largest local council in Ireland. Elections are held every five years and are by single transferable vote.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "7bcadca0c1a77816:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Dorset County Council election, 2013",
+       "snippet": "An election to Dorset County Council took place on 2 May 2013 as part of the United Kingdom local elections. 45 councillors were elected from 42 electoral divisions, which returned either one or two county councillors each by first-past-the-post voting for a four-year term of office. The electoral divisions were the same as those used at the previous election in 2009. No elections were held in Bournemouth or Poole, which are unitary authorities outside the area covered by the County Council. The election saw the Conservative Party maintain overall control of the council.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "efc48f0ed897a49c:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "New Jersey Tidelands Resource Council",
+       "snippet": "The Tidelands Resource Council is a body of twelve Governor-appointed members. The Council meets monthly and makes decisions to sell or rent state tidelands. All of the decisions must then be approved by the Commissioner of the Department of Environmental Protection, the Attorney General and the Governor. The council meets the first Wednesday of every month, with the exception of January, at NJ Civil Service Commission, 44 S. Clinton Ave., Trenton, NJ. Council meetings begin at 10 am and are open to the public.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "fa4879134039d1e3:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "James Reilly (Irish politician)",
+       "snippet": "Reilly was a Teachta Dála (TD) for the Dublin North constituency since the 2007 general election until he lost his seat in the 2016 general election. Reilly was nominated by Taoiseach Enda Kenny to Seanad Éireann in May 2016. James Reilly was re-appointed as deputy leader of Fine Gael on 4 July 2016.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "5200f6bb68a3dd37:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "Dublin City Council",
+       "snippet": "The head of the council has the honorific title of Lord Mayor. The city administration is headed by a Chief Executive, Owen Keegan. The council meets at City Hall, Dublin.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "7bcadca0c1a77816:sentence:1"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_05cb59b42f4d",
+        "name": "Cork City Council",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_72d4f4c79afc",
+        "name": "Cork City Hall",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_d95c4cc22eb6",
+        "name": "Ann Doherty",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_264aed057aff",
+        "name": "Local Government Act 2001",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b28b90d5e7c3",
+        "name": "Lord Mayor of Cork",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_d11821d09c74",
+        "name": "Cork",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_88b5f73cb588",
+        "name": "2015 Cork Local Government Review",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_beb76a64133c",
+        "name": "Cork County Council",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_f32755005323",
+        "name": "Ad Council",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_619374a0fc3a",
+        "name": "Elele",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4e1fa723884c",
+        "name": "city and county councils",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_bc129f259e2d",
+        "name": "Charlotte City Council",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_9b0910142c18",
+        "name": "county-level city",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_6735c4f1a6ec",
+        "name": "New York City",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_802167248447",
+        "name": "manga",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_dcf6fba4a1b2",
+        "name": "Manly",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_feb8feffb113",
+        "name": "the county",
+        "type": "PLACE",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_05cb59b42f4d",
+        "target": "e_72d4f4c79afc",
+        "predicate": "meets_at",
+        "chunk_id": "2d8488d95379fadc:sentence:1",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d95c4cc22eb6",
+        "target": "e_05cb59b42f4d",
+        "predicate": "is_chief_executive_of",
+        "chunk_id": "2d8488d95379fadc:sentence:1",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_05cb59b42f4d",
+        "target": "e_264aed057aff",
+        "predicate": "governed_by",
+        "chunk_id": "2d8488d95379fadc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_05cb59b42f4d",
+        "target": "e_b28b90d5e7c3",
+        "predicate": "has_head_title",
+        "chunk_id": "2d8488d95379fadc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_05cb59b42f4d",
+        "target": "e_d11821d09c74",
+        "predicate": "responsible_for",
+        "chunk_id": "2d8488d95379fadc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_88b5f73cb588",
+        "target": "e_05cb59b42f4d",
+        "predicate": "recommended_merging_with",
+        "chunk_id": "2d8488d95379fadc:sentence:1",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_88b5f73cb588",
+        "target": "e_beb76a64133c",
+        "predicate": "recommended_merging_with",
+        "chunk_id": "2d8488d95379fadc:sentence:1",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.8576329521208664,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 249
+      },
+      {
+       "name": "retrieve",
+       "ms": 214
+      },
+      {
+       "name": "retrieve",
+       "ms": 791
+      },
+      {
+       "name": "merge",
+       "ms": 392
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 1229,
+     "tokens_out": 38,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.554e-05,
+      "total": 2.554e-05
+     },
+     "total_ms": 6277,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is directly supported by the context and fully addresses the question. Three of the eight provided context blocks are relevant to the question's entities.",
+    "cost_usd": 0.00032582,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "debf4f54-0784-49fc-9be4-cfd32c6b6f5c",
+    "question": "How many elected members does Cork City Council have?",
+    "answer": {
+     "short": "31",
+     "text": "31. The council has 31 elected members. [1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 1000 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Cork City Council",
+       "snippet": "Cork City Council (Irish: \"Comhairle Cathrach Chorcaí\" ) is the authority responsible for local government in the city of Cork in Ireland. As a city council, it is governed by the Local Government Act 2001. The council is responsible for housing and community, roads and transportation, urban planning and development, amenity and culture, and environment. The council has 31 elected members. Elections are held every five years and are by single transferable vote. The head of the council has the honorific title of Lord Mayor of Cork.",
+       "chunk_id": "2d8488d95379fadc:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Cork City Council",
+       "snippet": "Cork City Council (Irish: \"Comhairle Cathrach Chorcaí\" ) is the authority responsible for local government in the city of Cork in Ireland. As a city council, it is governed by the Local Government Act 2001. The council is responsible for housing and community, roads and transportation, urban planning and development, amenity and culture, and environment. The council has 31 elected members. Elections are held every five years and are by single transferable vote. The head of the council has the honorific title of Lord Mayor of Cork.",
+       "score": 0.8576329521208664,
+       "source": "vector",
+       "chunk_id": "2d8488d95379fadc:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Cork City Council",
+       "snippet": "The city administration is headed by a Chief Executive, Ann Doherty. The council meets at Cork City Hall. The 2015 Cork Local Government Review recommended merging Cork City Council and Cork County Council into a single \"super council\", within which a metropolitan district council will govern the Metropolitan Cork area; however, a minority report opposed the merger. This was subsequently followed in 2017 by a report published by an expert advisory group recommending a city boundary extension.",
+       "score": 0.7813697587627442,
+       "source": "vector",
+       "chunk_id": "2d8488d95379fadc:sentence:1"
+      },
+      {
+       "rank": 3,
+       "title": "Dublin City Council",
+       "snippet": "Dublin City Council (Irish: \"Comhairle Cathrach Bhaile Átha Cliath\" ) is the authority responsible for local government in the city of Dublin in Ireland. As a city council, it is governed by the Local Government Act 2001. Until 2001, the council was known as \"Dublin Corporation\". The council is responsible for housing and community, roads and transportation, urban planning and development, amenity and culture and environment. The council has 63 elected members and is the largest local council in Ireland. Elections are held every five years and are by single transferable vote.",
+       "score": 0.7583561683681032,
+       "source": "vector",
+       "chunk_id": "7bcadca0c1a77816:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Cork City Council",
+       "snippet": "The city boundary will be extended to include Little Island, Cork Airport, Ballincollig, Blarney, and Carrigtwohill, adding a population of over 100,000. Places farther out will remain part of the county, including Cobh, Carrigaline, and Midleton, as well as Ringaskiddy, the centre of the Port of Cork. The report gives parameters for compensation to be paid by the city to the county for the consequent reduction in its revenue. The revised proposal was welcomed by Micheál Martin but criticised by some county councillors. The city council voted unanimously to accept it.",
+       "score": 0.7127241958266791,
+       "source": "vector",
+       "chunk_id": "2d8488d95379fadc:sentence:2"
+      },
+      {
+       "rank": 5,
+       "title": "Dublin City Council",
+       "snippet": "The head of the council has the honorific title of Lord Mayor. The city administration is headed by a Chief Executive, Owen Keegan. The council meets at City Hall, Dublin.",
+       "score": 0.6815168084974305,
+       "source": "vector",
+       "chunk_id": "7bcadca0c1a77816:sentence:1"
+      },
+      {
+       "rank": 6,
+       "title": "Dorset County Council election, 2013",
+       "snippet": "An election to Dorset County Council took place on 2 May 2013 as part of the United Kingdom local elections. 45 councillors were elected from 42 electoral divisions, which returned either one or two county councillors each by first-past-the-post voting for a four-year term of office. The electoral divisions were the same as those used at the previous election in 2009. No elections were held in Bournemouth or Poole, which are unitary authorities outside the area covered by the County Council. The election saw the Conservative Party maintain overall control of the council.",
+       "score": 0.6487246139697388,
+       "source": "vector",
+       "chunk_id": "efc48f0ed897a49c:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "James Reilly (Irish politician)",
+       "snippet": "Reilly was a Teachta Dála (TD) for the Dublin North constituency since the 2007 general election until he lost his seat in the 2016 general election. Reilly was nominated by Taoiseach Enda Kenny to Seanad Éireann in May 2016. James Reilly was re-appointed as deputy leader of Fine Gael on 4 July 2016.",
+       "score": 0.6273744106292769,
+       "source": "vector",
+       "chunk_id": "5200f6bb68a3dd37:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "New Jersey Tidelands Resource Council",
+       "snippet": "The Tidelands Resource Council is a body of twelve Governor-appointed members. The Council meets monthly and makes decisions to sell or rent state tidelands. All of the decisions must then be approved by the Commissioner of the Department of Environmental Protection, the Attorney General and the Governor. The council meets the first Wednesday of every month, with the exception of January, at NJ Civil Service Commission, 44 S. Clinton Ave., Trenton, NJ. Council meetings begin at 10 am and are open to the public.",
+       "score": 0.6235535516472799,
+       "source": "vector",
+       "chunk_id": "fa4879134039d1e3:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.8576329521208664,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 213
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1065,
+     "tokens_out": 38,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.259e-05,
+      "total": 2.259e-05
+     },
+     "total_ms": 905,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is directly supported by the context and fully addresses the question. Three of the eight provided context blocks are relevant to Cork City Council.",
+    "cost_usd": 0.00026302,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "45d12992-bef6-4c4a-8253-4fcf1c45c6b8",
+    "question": "How many elected members does Cork City Council have?",
+    "answer": {
+     "short": "31",
+     "text": "31. The council has 31 elected members. [2]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 269 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 2,
+       "title": "Cork City Council",
+       "snippet": "Cork City Council (Irish: \"Comhairle Cathrach Chorcaí\" ) is the authority responsible for local government in the city of Cork in Ireland. As a city council, it is governed by the Local Government Act 2001. The council is responsible for housing and community, roads and transportation, urban planning and development, amenity and culture, and environment. The council has 31 elected members. Elections are held every five years and are by single transferable vote. The head of the council has the honorific title of Lord Mayor of Cork.",
+       "chunk_id": "2d8488d95379fadc:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Cork City Council",
+       "snippet": "The city administration is headed by a Chief Executive, Ann Doherty. The council meets at Cork City Hall. The 2015 Cork Local Government Review recommended merging Cork City Council and Cork County Council into a single \"super council\", within which a metropolitan district council will govern the Metropolitan Cork area; however, a minority report opposed the merger. This was subsequently followed in 2017 by a report published by an expert advisory group recommending a city boundary extension.",
+       "score": 0.873374722801133,
+       "source": "graph",
+       "chunk_id": "2d8488d95379fadc:sentence:1"
+      },
+      {
+       "rank": 2,
+       "title": "Cork City Council",
+       "snippet": "Cork City Council (Irish: \"Comhairle Cathrach Chorcaí\" ) is the authority responsible for local government in the city of Cork in Ireland. As a city council, it is governed by the Local Government Act 2001. The council is responsible for housing and community, roads and transportation, urban planning and development, amenity and culture, and environment. The council has 31 elected members. Elections are held every five years and are by single transferable vote. The head of the council has the honorific title of Lord Mayor of Cork.",
+       "score": 0.7596458480860974,
+       "source": "graph",
+       "chunk_id": "2d8488d95379fadc:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_05cb59b42f4d",
+        "name": "Cork City Council",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_72d4f4c79afc",
+        "name": "Cork City Hall",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_d95c4cc22eb6",
+        "name": "Ann Doherty",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_264aed057aff",
+        "name": "Local Government Act 2001",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b28b90d5e7c3",
+        "name": "Lord Mayor of Cork",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_d11821d09c74",
+        "name": "Cork",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_88b5f73cb588",
+        "name": "2015 Cork Local Government Review",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_beb76a64133c",
+        "name": "Cork County Council",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_f32755005323",
+        "name": "Ad Council",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_619374a0fc3a",
+        "name": "Elele",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4e1fa723884c",
+        "name": "city and county councils",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_bc129f259e2d",
+        "name": "Charlotte City Council",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_9b0910142c18",
+        "name": "county-level city",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_6735c4f1a6ec",
+        "name": "New York City",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_802167248447",
+        "name": "manga",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_dcf6fba4a1b2",
+        "name": "Manly",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_feb8feffb113",
+        "name": "the county",
+        "type": "PLACE",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_05cb59b42f4d",
+        "target": "e_72d4f4c79afc",
+        "predicate": "meets_at",
+        "chunk_id": "2d8488d95379fadc:sentence:1",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d95c4cc22eb6",
+        "target": "e_05cb59b42f4d",
+        "predicate": "is_chief_executive_of",
+        "chunk_id": "2d8488d95379fadc:sentence:1",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_05cb59b42f4d",
+        "target": "e_264aed057aff",
+        "predicate": "governed_by",
+        "chunk_id": "2d8488d95379fadc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_05cb59b42f4d",
+        "target": "e_b28b90d5e7c3",
+        "predicate": "has_head_title",
+        "chunk_id": "2d8488d95379fadc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_05cb59b42f4d",
+        "target": "e_d11821d09c74",
+        "predicate": "responsible_for",
+        "chunk_id": "2d8488d95379fadc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_88b5f73cb588",
+        "target": "e_05cb59b42f4d",
+        "predicate": "recommended_merging_with",
+        "chunk_id": "2d8488d95379fadc:sentence:1",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_88b5f73cb588",
+        "target": "e_beb76a64133c",
+        "predicate": "recommended_merging_with",
+        "chunk_id": "2d8488d95379fadc:sentence:1",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.873374722801133,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 249
+      },
+      {
+       "name": "retrieve",
+       "ms": 789
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 593,
+     "tokens_out": 38,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 1.409e-05,
+      "total": 1.409e-05
+     },
+     "total_ms": 4223,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "completeness": 1.0,
+    "rationale": "The answer is directly stated in the context, the context blocks are relevant to the question, and the question is fully answered.",
+    "cost_usd": 0.00018678,
+    "flagged": false,
+    "queued": false
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "73cb199a-c1ed-4f3e-9d42-0dfb265b5269",
+    "question": "How many elected members does Cork City Council have?",
+    "answer": {
+     "short": "31",
+     "text": "31. The council has 31 elected members. [1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 1000 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Cork City Council",
+       "snippet": "Cork City Council (Irish: \"Comhairle Cathrach Chorcaí\" ) is the authority responsible for local government in the city of Cork in Ireland. As a city council, it is governed by the Local Government Act 2001. The council is responsible for housing and community, roads and transportation, urban planning and development, amenity and culture, and environment. The council has 31 elected members. Elections are held every five years and are by single transferable vote. The head of the council has the honorific title of Lord Mayor of Cork.",
+       "chunk_id": "2d8488d95379fadc:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Cork City Council",
+       "snippet": "Cork City Council (Irish: \"Comhairle Cathrach Chorcaí\" ) is the authority responsible for local government in the city of Cork in Ireland. As a city council, it is governed by the Local Government Act 2001. The council is responsible for housing and community, roads and transportation, urban planning and development, amenity and culture, and environment. The council has 31 elected members. Elections are held every five years and are by single transferable vote. The head of the council has the honorific title of Lord Mayor of Cork.",
+       "score": 0.03252247488101534,
+       "source": "hybrid",
+       "chunk_id": "2d8488d95379fadc:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Cork City Council",
+       "snippet": "The city administration is headed by a Chief Executive, Ann Doherty. The council meets at Cork City Hall. The 2015 Cork Local Government Review recommended merging Cork City Council and Cork County Council into a single \"super council\", within which a metropolitan district council will govern the Metropolitan Cork area; however, a minority report opposed the merger. This was subsequently followed in 2017 by a report published by an expert advisory group recommending a city boundary extension.",
+       "score": 0.03252247488101534,
+       "source": "hybrid",
+       "chunk_id": "2d8488d95379fadc:sentence:1"
+      },
+      {
+       "rank": 3,
+       "title": "Cork City Council",
+       "snippet": "The city boundary will be extended to include Little Island, Cork Airport, Ballincollig, Blarney, and Carrigtwohill, adding a population of over 100,000. Places farther out will remain part of the county, including Cobh, Carrigaline, and Midleton, as well as Ringaskiddy, the centre of the Port of Cork. The report gives parameters for compensation to be paid by the city to the county for the consequent reduction in its revenue. The revised proposal was welcomed by Micheál Martin but criticised by some county councillors. The city council voted unanimously to accept it.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "2d8488d95379fadc:sentence:2"
+      },
+      {
+       "rank": 4,
+       "title": "Dublin City Council",
+       "snippet": "Dublin City Council (Irish: \"Comhairle Cathrach Bhaile Átha Cliath\" ) is the authority responsible for local government in the city of Dublin in Ireland. As a city council, it is governed by the Local Government Act 2001. Until 2001, the council was known as \"Dublin Corporation\". The council is responsible for housing and community, roads and transportation, urban planning and development, amenity and culture and environment. The council has 63 elected members and is the largest local council in Ireland. Elections are held every five years and are by single transferable vote.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "7bcadca0c1a77816:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Dorset County Council election, 2013",
+       "snippet": "An election to Dorset County Council took place on 2 May 2013 as part of the United Kingdom local elections. 45 councillors were elected from 42 electoral divisions, which returned either one or two county councillors each by first-past-the-post voting for a four-year term of office. The electoral divisions were the same as those used at the previous election in 2009. No elections were held in Bournemouth or Poole, which are unitary authorities outside the area covered by the County Council. The election saw the Conservative Party maintain overall control of the council.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "efc48f0ed897a49c:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "New Jersey Tidelands Resource Council",
+       "snippet": "The Tidelands Resource Council is a body of twelve Governor-appointed members. The Council meets monthly and makes decisions to sell or rent state tidelands. All of the decisions must then be approved by the Commissioner of the Department of Environmental Protection, the Attorney General and the Governor. The council meets the first Wednesday of every month, with the exception of January, at NJ Civil Service Commission, 44 S. Clinton Ave., Trenton, NJ. Council meetings begin at 10 am and are open to the public.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "fa4879134039d1e3:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "James Reilly (Irish politician)",
+       "snippet": "Reilly was a Teachta Dála (TD) for the Dublin North constituency since the 2007 general election until he lost his seat in the 2016 general election. Reilly was nominated by Taoiseach Enda Kenny to Seanad Éireann in May 2016. James Reilly was re-appointed as deputy leader of Fine Gael on 4 July 2016.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "5200f6bb68a3dd37:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "Dublin City Council",
+       "snippet": "The head of the council has the honorific title of Lord Mayor. The city administration is headed by a Chief Executive, Owen Keegan. The council meets at City Hall, Dublin.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "7bcadca0c1a77816:sentence:1"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_05cb59b42f4d",
+        "name": "Cork City Council",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_72d4f4c79afc",
+        "name": "Cork City Hall",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_d95c4cc22eb6",
+        "name": "Ann Doherty",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_264aed057aff",
+        "name": "Local Government Act 2001",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b28b90d5e7c3",
+        "name": "Lord Mayor of Cork",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_d11821d09c74",
+        "name": "Cork",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_88b5f73cb588",
+        "name": "2015 Cork Local Government Review",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_beb76a64133c",
+        "name": "Cork County Council",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_f32755005323",
+        "name": "Ad Council",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_619374a0fc3a",
+        "name": "Elele",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4e1fa723884c",
+        "name": "city and county councils",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_bc129f259e2d",
+        "name": "Charlotte City Council",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_9b0910142c18",
+        "name": "county-level city",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_6735c4f1a6ec",
+        "name": "New York City",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_802167248447",
+        "name": "manga",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_dcf6fba4a1b2",
+        "name": "Manly",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_feb8feffb113",
+        "name": "the county",
+        "type": "PLACE",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_05cb59b42f4d",
+        "target": "e_72d4f4c79afc",
+        "predicate": "meets_at",
+        "chunk_id": "2d8488d95379fadc:sentence:1",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d95c4cc22eb6",
+        "target": "e_05cb59b42f4d",
+        "predicate": "is_chief_executive_of",
+        "chunk_id": "2d8488d95379fadc:sentence:1",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_05cb59b42f4d",
+        "target": "e_264aed057aff",
+        "predicate": "governed_by",
+        "chunk_id": "2d8488d95379fadc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_05cb59b42f4d",
+        "target": "e_b28b90d5e7c3",
+        "predicate": "has_head_title",
+        "chunk_id": "2d8488d95379fadc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_05cb59b42f4d",
+        "target": "e_d11821d09c74",
+        "predicate": "responsible_for",
+        "chunk_id": "2d8488d95379fadc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_88b5f73cb588",
+        "target": "e_05cb59b42f4d",
+        "predicate": "recommended_merging_with",
+        "chunk_id": "2d8488d95379fadc:sentence:1",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_88b5f73cb588",
+        "target": "e_beb76a64133c",
+        "predicate": "recommended_merging_with",
+        "chunk_id": "2d8488d95379fadc:sentence:1",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.8576329521208664,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 212
+      },
+      {
+       "name": "link",
+       "ms": 251
+      },
+      {
+       "name": "retrieve",
+       "ms": 795
+      },
+      {
+       "name": "merge",
+       "ms": 396
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1229,
+     "tokens_out": 38,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.554e-05,
+      "total": 2.554e-05
+     },
+     "total_ms": 6290,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is directly supported by the context and fully addresses the question. Three of the eight provided context blocks are relevant to the question's entities.",
+    "cost_usd": 0.00032582,
+    "flagged": true,
+    "queued": false
+   }
+  }
+ }
+}

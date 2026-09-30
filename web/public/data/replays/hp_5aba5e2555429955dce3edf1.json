@@ -1,0 +1,1113 @@
+{
+ "sample": false,
+ "question_id": "hp_5aba5e2555429955dce3edf1",
+ "question": "Where does Yannick Ferreira Carrasco play home games?",
+ "type": "multi_hop",
+ "gold_answer": "Wanda Metropolitano",
+ "supporting_titles": [
+  "Yannick Ferreira Carrasco",
+  "Atlético Madrid"
+ ],
+ "why": "Misrouted as single hop at 0.76, yet hybrid answers it; vector search alone scores 0.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "4b4a7d41-69e9-47ad-8571-49c5cad193b9",
+    "question": "Where does Yannick Ferreira Carrasco play home games?",
+    "answer": {
+     "short": "Wanda Metropolitano",
+     "text": "Wanda Metropolitano. Yannick Ferreira Carrasco plays for Atlético Madrid, whose home games are at the Wanda Metropolitano stadium. [3]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label single_hop, 715 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 3,
+       "title": "Atlético Madrid",
+       "snippet": "Club Atlético de Madrid, SAD (] ), commonly known as Atlético Madrid, or simply as Atlético or Atleti, is a Spanish professional football club based in Madrid, that plays in La Liga. The club play their home games at the Wanda Metropolitano, which has a capacity of 68,000.",
+       "chunk_id": "e4ea8c079bb7af9a:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "single_hop",
+     "label_confidence": 0.7587687373161316,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "ambiguous:single_hop 0.76"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Yannick Ferreira Carrasco",
+       "snippet": "Yannick Ferreira Carrasco (born 4 September 1993) is a Belgian professional footballer who plays as a winger for Spanish club Atlético Madrid and the Belgium national team.",
+       "score": 0.03278688524590164,
+       "source": "hybrid",
+       "chunk_id": "5df1bb84590166ea:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "London Irish",
+       "snippet": "In 2016 it played in the British and Irish Cup in addition to the Championship. The club will play its home games at the Madejski Stadium in Reading, Berkshire until at least 2019.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "e6271aa3c18bb9ba:sentence:1"
+      },
+      {
+       "rank": 3,
+       "title": "Atlético Madrid",
+       "snippet": "Club Atlético de Madrid, SAD (] ), commonly known as Atlético Madrid, or simply as Atlético or Atleti, is a Spanish professional football club based in Madrid, that plays in La Liga. The club play their home games at the Wanda Metropolitano, which has a capacity of 68,000.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "e4ea8c079bb7af9a:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Yanco Agricultural High School",
+       "snippet": "Yanco Agricultural High School is a co-educational agricultural secondary school located in Yanco in the local government area of Leeton in south western New South Wales. The school is one of four agricultural high schools in New South Wales which include Farrer Memorial Agricultural High School in Tamworth in northern New South Wales, James Ruse Agricultural High School in western Sydney and Hurlstone Agricultural High School in south-western Sydney. The school was officially opened in March 1922 and is the only residential boarding school in New South Wales to have no day students.",
+       "score": 0.015873015873015872,
+       "source": "graph",
+       "chunk_id": "04550eab7198fddd:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Yacoub Meite",
+       "snippet": "Yacoub Meite (born 10 February 1990 in Paris) is a French-born Ivorian footballer who plays for Swiss team FC Le Mont. Meite made his Ligue 2 debut at Tours FC during the 2011-2012 season.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "4239fedc13fcef6f:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Kjøbenhavns Boldklub",
+       "snippet": "Kjøbenhavns Boldklub or KB is a Danish sports club based in Copenhagen. The club was founded 26 April 1876 on the grassy fields in outer Copenhagen which later became Fælledparken. Football and cricket has been played in KB since 1879, making KB one of the oldest football clubs on Continental Europe and the oldest general sports club on the continent (with more than just one sport). Tennis has been played since 1883. The club hosted, in 1921, one of the early tennis majors: the World Covered Court Championships, won by William Laurentz that year.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "cf7be6fee978bf89:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "FC Dynamo Kyiv",
+       "snippet": "Football Club Dynamo Kyiv (Ukrainian: Футбольний клуб «Динамо» Київ , ] ) is a Ukrainian professional football club based in Kiev. Founded in 1927 as part of the Soviet Dynamo Sports Society, the club plays in the Ukrainian Premier League, and has never been relegated to a lower division. Their home is the 70,050 capacity Olimpiyskiy National Sports Complex.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "cd3af0cebf52bbbd:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Palacio de Deportes de la Comunidad de Madrid",
+       "snippet": "Palacio de Deportes de la Comunidad de Madrid (English: \"Community of Madrid Sports Centre\"), since November 2016 called WiZink Center for sponsorship reasons, is an indoor sporting arena located in Madrid, Spain. Its capacity is 15,000 people for basketball matches and 15,500 for concerts (with standing public ramp).",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "91d4708aee20cd4a:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_343d6e1e5d95",
+        "name": "Yannick Ferreira Carrasco",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_6f569e6af1c3",
+        "name": "Atlético Madrid",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_a685f4023e15",
+        "name": "Belgium national team",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_204cfe8a6b2f",
+        "name": "games",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0a0dd09e07d1",
+        "name": "Palacio Municipal de Deportes de Granada",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_635df66f2d06",
+        "name": "Yanco Agricultural High School",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_838d5ced8e8d",
+        "name": "Yanco",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_faf38ca05116",
+        "name": "The New Mexico Governor's Residence",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_929ddfd48292",
+        "name": "third home",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_c5395402dc46",
+        "name": "Robert Emmet Hurley, Sr.",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ed2d66297b81",
+        "name": "1000 games",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_86f6cfd2fd3c",
+        "name": "Back Home",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_60eee6d3fe9a",
+        "name": "Stephanie Cole",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_7c8c28e30b52",
+        "name": "Ashley Cheadle",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_18afd4bb6791",
+        "name": "Home and Away",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_76d6134199cc",
+        "name": "Ferrari",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_1d8c472eeeaf",
+        "name": "names",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_83df0aab9511",
+        "name": "gay",
+        "type": "OTHER",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_343d6e1e5d95",
+        "target": "e_6f569e6af1c3",
+        "predicate": "plays_for",
+        "chunk_id": "5df1bb84590166ea:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_343d6e1e5d95",
+        "target": "e_a685f4023e15",
+        "predicate": "plays_for",
+        "chunk_id": "5df1bb84590166ea:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_204cfe8a6b2f",
+        "target": "e_0a0dd09e07d1",
+        "predicate": "played_at",
+        "chunk_id": "727ba546676f615f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_635df66f2d06",
+        "target": "e_838d5ced8e8d",
+        "predicate": "located_in",
+        "chunk_id": "04550eab7198fddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_faf38ca05116",
+        "target": "e_929ddfd48292",
+        "predicate": "is_the_third_home_to_serve_this_function",
+        "chunk_id": "7f07f576fdf1a68d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c5395402dc46",
+        "target": "e_ed2d66297b81",
+        "predicate": "became_tenth",
+        "chunk_id": "d8c9b5406df0834a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_86f6cfd2fd3c",
+        "target": "e_60eee6d3fe9a",
+        "predicate": "starring",
+        "chunk_id": "7945c5ada5c527d9:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_7c8c28e30b52",
+        "target": "e_18afd4bb6791",
+        "predicate": "acted_in",
+        "chunk_id": "85d1d08a2ab1f8f3:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.800227344036108,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 246
+      },
+      {
+       "name": "retrieve",
+       "ms": 211
+      },
+      {
+       "name": "retrieve",
+       "ms": 589
+      },
+      {
+       "name": "merge",
+       "ms": 586
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 940,
+     "tokens_out": 64,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.268e-05,
+      "total": 2.268e-05
+     },
+     "total_ms": 6802,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely answers the question, but only two of the eight provided context blocks are relevant to the query.",
+    "cost_usd": 0.00038302,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "fd3dad6b-36f7-4bea-9e38-05bffe0e0fb3",
+    "question": "Where does Yannick Ferreira Carrasco play home games?",
+    "answer": {
+     "short": "not enough context",
+     "text": "not enough context",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 694 tokens",
+     "confidence": 0.0,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Yannick Ferreira Carrasco",
+       "snippet": "Yannick Ferreira Carrasco (born 4 September 1993) is a Belgian professional footballer who plays as a winger for Spanish club Atlético Madrid and the Belgium national team.",
+       "score": 0.800227344036108,
+       "source": "vector",
+       "chunk_id": "5df1bb84590166ea:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Atlético Madrid",
+       "snippet": "Club Atlético de Madrid, SAD (] ), commonly known as Atlético Madrid, or simply as Atlético or Atleti, is a Spanish professional football club based in Madrid, that plays in La Liga. The club play their home games at the Wanda Metropolitano, which has a capacity of 68,000.",
+       "score": 0.6989489018290593,
+       "source": "vector",
+       "chunk_id": "e4ea8c079bb7af9a:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "London Irish",
+       "snippet": "In 2016 it played in the British and Irish Cup in addition to the Championship. The club will play its home games at the Madejski Stadium in Reading, Berkshire until at least 2019.",
+       "score": 0.6810888838119089,
+       "source": "vector",
+       "chunk_id": "e6271aa3c18bb9ba:sentence:1"
+      },
+      {
+       "rank": 4,
+       "title": "FC Dynamo Kyiv",
+       "snippet": "Football Club Dynamo Kyiv (Ukrainian: Футбольний клуб «Динамо» Київ , ] ) is a Ukrainian professional football club based in Kiev. Founded in 1927 as part of the Soviet Dynamo Sports Society, the club plays in the Ukrainian Premier League, and has never been relegated to a lower division. Their home is the 70,050 capacity Olimpiyskiy National Sports Complex.",
+       "score": 0.6537921612014963,
+       "source": "vector",
+       "chunk_id": "cd3af0cebf52bbbd:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Palacio de Deportes de la Comunidad de Madrid",
+       "snippet": "Palacio de Deportes de la Comunidad de Madrid (English: \"Community of Madrid Sports Centre\"), since November 2016 called WiZink Center for sponsorship reasons, is an indoor sporting arena located in Madrid, Spain. Its capacity is 15,000 people for basketball matches and 15,500 for concerts (with standing public ramp).",
+       "score": 0.6366934396807391,
+       "source": "vector",
+       "chunk_id": "91d4708aee20cd4a:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Aalborg Boldspilklub",
+       "snippet": "Aalborg Boldspilklub is a Danish sports club based in the city of Aalborg. The club is also known as AaB for short (cf. logo) or Aalborg BK. Through time the club has had branches in cricket, tennis, ice hockey, handball, and basketball, but currently controls teams in football, American football, and floorball. All teams are competing in the top-flight Danish league in their respective sport. The kit sponsor for the club is Adidas, and the principal sponsor for the football team is the regional bank Spar Nord.",
+       "score": 0.6339734196662948,
+       "source": "vector",
+       "chunk_id": "538e3f63e9a57bec:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Kjøbenhavns Boldklub",
+       "snippet": "Kjøbenhavns Boldklub or KB is a Danish sports club based in Copenhagen. The club was founded 26 April 1876 on the grassy fields in outer Copenhagen which later became Fælledparken. Football and cricket has been played in KB since 1879, making KB one of the oldest football clubs on Continental Europe and the oldest general sports club on the continent (with more than just one sport). Tennis has been played since 1883. The club hosted, in 1921, one of the early tennis majors: the World Covered Court Championships, won by William Laurentz that year.",
+       "score": 0.631064273778456,
+       "source": "vector",
+       "chunk_id": "cf7be6fee978bf89:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Yacoub Meite",
+       "snippet": "Yacoub Meite (born 10 February 1990 in Paris) is a French-born Ivorian footballer who plays for Swiss team FC Le Mont. Meite made his Ligue 2 debut at Tours FC during the 2011-2012 season.",
+       "score": 0.6264110430234149,
+       "source": "vector",
+       "chunk_id": "4239fedc13fcef6f:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.800227344036108,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 218
+      },
+      {
+       "name": "generate",
+       "ms": 197
+      }
+     ],
+     "tokens_in": 875,
+     "tokens_out": 71,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.214e-05,
+      "total": 2.214e-05
+     },
+     "total_ms": 1030,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 0.0,
+    "relevance": 0.25,
+    "completeness": 0.0,
+    "rationale": "The context provides the answer: Yannick Ferreira Carrasco plays for Atlético Madrid [1], and Atlético Madrid plays home games at the Wanda Metropolitano [2]. Therefore, the answer 'not enough context' is incorrect.",
+    "cost_usd": 0.00025654,
+    "flagged": true,
+    "queued": true
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "d6b450e9-bed3-4b8b-a8a4-7ff207bafcbf",
+    "question": "Where does Yannick Ferreira Carrasco play home games?",
+    "answer": {
+     "short": "not enough context",
+     "text": "not enough context",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 710 tokens",
+     "confidence": 0.0,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Yannick Ferreira Carrasco",
+       "snippet": "Yannick Ferreira Carrasco (born 4 September 1993) is a Belgian professional footballer who plays as a winger for Spanish club Atlético Madrid and the Belgium national team.",
+       "score": 0.919715471838308,
+       "source": "graph",
+       "chunk_id": "5df1bb84590166ea:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "2014 FIBA Basketball World Cup Group A",
+       "snippet": "Group A of the 2014 FIBA Basketball World Cup was the group stage of the 2014 FIBA Basketball World Cup for Spain , Serbia , France , Brazil , Egypt and Iran . Each team played each other once, for a total of five games per team, with all games played at Palacio Municipal de Deportes de Granada, Granada. After all of the games were played, the four teams with the best records qualified for the final round.",
+       "score": 0.7866811072852212,
+       "source": "graph",
+       "chunk_id": "727ba546676f615f:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Yanco Agricultural High School",
+       "snippet": "Yanco Agricultural High School is a co-educational agricultural secondary school located in Yanco in the local government area of Leeton in south western New South Wales. The school is one of four agricultural high schools in New South Wales which include Farrer Memorial Agricultural High School in Tamworth in northern New South Wales, James Ruse Agricultural High School in western Sydney and Hurlstone Agricultural High School in south-western Sydney. The school was officially opened in March 1922 and is the only residential boarding school in New South Wales to have no day students.",
+       "score": 0.7828394602036843,
+       "source": "graph",
+       "chunk_id": "04550eab7198fddd:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "New Mexico Governor's Mansion",
+       "snippet": "The New Mexico Governor's Residence is the official residence of the Governor of New Mexico and his or her family. The current structure, located at 1 Mansion Drive in Santa Fe, New Mexico, has served as the Governor's official residence since 1954. It is the third home to serve this function.",
+       "score": 0.7401041990456501,
+       "source": "graph",
+       "chunk_id": "7f07f576fdf1a68d:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Bob Hurley",
+       "snippet": "Robert Emmet Hurley, Sr. (born July 31, 1947) is a basketball coach at St. Anthony High School in Jersey City, New Jersey. Hurley has amassed 28 state championships and more than 1000 wins in 39 years as a coach. On February 2, 2011, Hurley became the tenth coach in high school history to win 1000 games. He is featured in the documentary \"The Street Stops Here\". Five of his teams have gone undefeated.",
+       "score": 0.7298704957807656,
+       "source": "graph",
+       "chunk_id": "d8c9b5406df0834a:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Back Home (novel)",
+       "snippet": "Back Home is a children's historical novel by Michelle Magorian, first published in 1984. The novel was adapted into a TV drama, \"Back Home\" (1990), starring Hayley Mills and Haley Carr, and again in 2001 starring Sarah Lancashire, Stephanie Cole and Jessica Fox.",
+       "score": 0.7256277040021247,
+       "source": "graph",
+       "chunk_id": "7945c5ada5c527d9:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Ashley Cheadle",
+       "snippet": "Ashley Cheadle is an Australian actress, surfer and singer, who now lives in Australia . Cheadle's has acted in many independent films, many of which have received international attention, her pop-culture popularity in the Surfing industry also led her to Australian television, including roles in Home and Away, Rescue special ops, Rake. Tropfest winner of the best film for best cinema photography called No dice Hollywood, on ABC television's \"Blue Water High\" and in the 2008 film \"Fool's Gold\".",
+       "score": 0.7153834870229108,
+       "source": "graph",
+       "chunk_id": "85d1d08a2ab1f8f3:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_343d6e1e5d95",
+        "name": "Yannick Ferreira Carrasco",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_6f569e6af1c3",
+        "name": "Atlético Madrid",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_a685f4023e15",
+        "name": "Belgium national team",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_204cfe8a6b2f",
+        "name": "games",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0a0dd09e07d1",
+        "name": "Palacio Municipal de Deportes de Granada",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_635df66f2d06",
+        "name": "Yanco Agricultural High School",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_838d5ced8e8d",
+        "name": "Yanco",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_faf38ca05116",
+        "name": "The New Mexico Governor's Residence",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_929ddfd48292",
+        "name": "third home",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_c5395402dc46",
+        "name": "Robert Emmet Hurley, Sr.",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ed2d66297b81",
+        "name": "1000 games",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_86f6cfd2fd3c",
+        "name": "Back Home",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_60eee6d3fe9a",
+        "name": "Stephanie Cole",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_7c8c28e30b52",
+        "name": "Ashley Cheadle",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_18afd4bb6791",
+        "name": "Home and Away",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_76d6134199cc",
+        "name": "Ferrari",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_1d8c472eeeaf",
+        "name": "names",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_83df0aab9511",
+        "name": "gay",
+        "type": "OTHER",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_343d6e1e5d95",
+        "target": "e_6f569e6af1c3",
+        "predicate": "plays_for",
+        "chunk_id": "5df1bb84590166ea:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_343d6e1e5d95",
+        "target": "e_a685f4023e15",
+        "predicate": "plays_for",
+        "chunk_id": "5df1bb84590166ea:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_204cfe8a6b2f",
+        "target": "e_0a0dd09e07d1",
+        "predicate": "played_at",
+        "chunk_id": "727ba546676f615f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_635df66f2d06",
+        "target": "e_838d5ced8e8d",
+        "predicate": "located_in",
+        "chunk_id": "04550eab7198fddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_faf38ca05116",
+        "target": "e_929ddfd48292",
+        "predicate": "is_the_third_home_to_serve_this_function",
+        "chunk_id": "7f07f576fdf1a68d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c5395402dc46",
+        "target": "e_ed2d66297b81",
+        "predicate": "became_tenth",
+        "chunk_id": "d8c9b5406df0834a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_86f6cfd2fd3c",
+        "target": "e_60eee6d3fe9a",
+        "predicate": "starring",
+        "chunk_id": "7945c5ada5c527d9:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_7c8c28e30b52",
+        "target": "e_18afd4bb6791",
+        "predicate": "acted_in",
+        "chunk_id": "85d1d08a2ab1f8f3:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.919715471838308,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 253
+      },
+      {
+       "name": "retrieve",
+       "ms": 590
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 1027,
+     "tokens_out": 70,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.479e-05,
+      "total": 2.479e-05
+     },
+     "total_ms": 6289,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 0.5
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The context mentions the teams Yannick Ferreira Carrasco plays for but does not state where their home games are played, making the answer correct. Only one of the seven context blocks is relevant to the person in the question.",
+    "cost_usd": 0.0002906,
+    "flagged": true,
+    "queued": true
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "f6854b92-3b72-49e6-bad8-5c1ddfcc2e28",
+    "question": "Where does Yannick Ferreira Carrasco play home games?",
+    "answer": {
+     "short": "Wanda Metropolitano",
+     "text": "Wanda Metropolitano. Yannick Ferreira Carrasco plays for Atlético Madrid, whose home games are at the Wanda Metropolitano stadium. [3]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 715 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 3,
+       "title": "Atlético Madrid",
+       "snippet": "Club Atlético de Madrid, SAD (] ), commonly known as Atlético Madrid, or simply as Atlético or Atleti, is a Spanish professional football club based in Madrid, that plays in La Liga. The club play their home games at the Wanda Metropolitano, which has a capacity of 68,000.",
+       "chunk_id": "e4ea8c079bb7af9a:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Yannick Ferreira Carrasco",
+       "snippet": "Yannick Ferreira Carrasco (born 4 September 1993) is a Belgian professional footballer who plays as a winger for Spanish club Atlético Madrid and the Belgium national team.",
+       "score": 0.03278688524590164,
+       "source": "hybrid",
+       "chunk_id": "5df1bb84590166ea:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "London Irish",
+       "snippet": "In 2016 it played in the British and Irish Cup in addition to the Championship. The club will play its home games at the Madejski Stadium in Reading, Berkshire until at least 2019.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "e6271aa3c18bb9ba:sentence:1"
+      },
+      {
+       "rank": 3,
+       "title": "Atlético Madrid",
+       "snippet": "Club Atlético de Madrid, SAD (] ), commonly known as Atlético Madrid, or simply as Atlético or Atleti, is a Spanish professional football club based in Madrid, that plays in La Liga. The club play their home games at the Wanda Metropolitano, which has a capacity of 68,000.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "e4ea8c079bb7af9a:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Yanco Agricultural High School",
+       "snippet": "Yanco Agricultural High School is a co-educational agricultural secondary school located in Yanco in the local government area of Leeton in south western New South Wales. The school is one of four agricultural high schools in New South Wales which include Farrer Memorial Agricultural High School in Tamworth in northern New South Wales, James Ruse Agricultural High School in western Sydney and Hurlstone Agricultural High School in south-western Sydney. The school was officially opened in March 1922 and is the only residential boarding school in New South Wales to have no day students.",
+       "score": 0.015873015873015872,
+       "source": "graph",
+       "chunk_id": "04550eab7198fddd:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Yacoub Meite",
+       "snippet": "Yacoub Meite (born 10 February 1990 in Paris) is a French-born Ivorian footballer who plays for Swiss team FC Le Mont. Meite made his Ligue 2 debut at Tours FC during the 2011-2012 season.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "4239fedc13fcef6f:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Kjøbenhavns Boldklub",
+       "snippet": "Kjøbenhavns Boldklub or KB is a Danish sports club based in Copenhagen. The club was founded 26 April 1876 on the grassy fields in outer Copenhagen which later became Fælledparken. Football and cricket has been played in KB since 1879, making KB one of the oldest football clubs on Continental Europe and the oldest general sports club on the continent (with more than just one sport). Tennis has been played since 1883. The club hosted, in 1921, one of the early tennis majors: the World Covered Court Championships, won by William Laurentz that year.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "cf7be6fee978bf89:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "FC Dynamo Kyiv",
+       "snippet": "Football Club Dynamo Kyiv (Ukrainian: Футбольний клуб «Динамо» Київ , ] ) is a Ukrainian professional football club based in Kiev. Founded in 1927 as part of the Soviet Dynamo Sports Society, the club plays in the Ukrainian Premier League, and has never been relegated to a lower division. Their home is the 70,050 capacity Olimpiyskiy National Sports Complex.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "cd3af0cebf52bbbd:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Palacio de Deportes de la Comunidad de Madrid",
+       "snippet": "Palacio de Deportes de la Comunidad de Madrid (English: \"Community of Madrid Sports Centre\"), since November 2016 called WiZink Center for sponsorship reasons, is an indoor sporting arena located in Madrid, Spain. Its capacity is 15,000 people for basketball matches and 15,500 for concerts (with standing public ramp).",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "91d4708aee20cd4a:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_343d6e1e5d95",
+        "name": "Yannick Ferreira Carrasco",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_6f569e6af1c3",
+        "name": "Atlético Madrid",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_a685f4023e15",
+        "name": "Belgium national team",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_204cfe8a6b2f",
+        "name": "games",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0a0dd09e07d1",
+        "name": "Palacio Municipal de Deportes de Granada",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_635df66f2d06",
+        "name": "Yanco Agricultural High School",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_838d5ced8e8d",
+        "name": "Yanco",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_faf38ca05116",
+        "name": "The New Mexico Governor's Residence",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_929ddfd48292",
+        "name": "third home",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_c5395402dc46",
+        "name": "Robert Emmet Hurley, Sr.",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ed2d66297b81",
+        "name": "1000 games",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_86f6cfd2fd3c",
+        "name": "Back Home",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_60eee6d3fe9a",
+        "name": "Stephanie Cole",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_7c8c28e30b52",
+        "name": "Ashley Cheadle",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_18afd4bb6791",
+        "name": "Home and Away",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_76d6134199cc",
+        "name": "Ferrari",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_1d8c472eeeaf",
+        "name": "names",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_83df0aab9511",
+        "name": "gay",
+        "type": "OTHER",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_343d6e1e5d95",
+        "target": "e_6f569e6af1c3",
+        "predicate": "plays_for",
+        "chunk_id": "5df1bb84590166ea:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_343d6e1e5d95",
+        "target": "e_a685f4023e15",
+        "predicate": "plays_for",
+        "chunk_id": "5df1bb84590166ea:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_204cfe8a6b2f",
+        "target": "e_0a0dd09e07d1",
+        "predicate": "played_at",
+        "chunk_id": "727ba546676f615f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_635df66f2d06",
+        "target": "e_838d5ced8e8d",
+        "predicate": "located_in",
+        "chunk_id": "04550eab7198fddd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_faf38ca05116",
+        "target": "e_929ddfd48292",
+        "predicate": "is_the_third_home_to_serve_this_function",
+        "chunk_id": "7f07f576fdf1a68d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c5395402dc46",
+        "target": "e_ed2d66297b81",
+        "predicate": "became_tenth",
+        "chunk_id": "d8c9b5406df0834a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_86f6cfd2fd3c",
+        "target": "e_60eee6d3fe9a",
+        "predicate": "starring",
+        "chunk_id": "7945c5ada5c527d9:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_7c8c28e30b52",
+        "target": "e_18afd4bb6791",
+        "predicate": "acted_in",
+        "chunk_id": "85d1d08a2ab1f8f3:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.800227344036108,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 212
+      },
+      {
+       "name": "link",
+       "ms": 249
+      },
+      {
+       "name": "retrieve",
+       "ms": 595
+      },
+      {
+       "name": "merge",
+       "ms": 596
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 940,
+     "tokens_out": 64,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.268e-05,
+      "total": 2.268e-05
+     },
+     "total_ms": 6824,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely answers the question, but only two of the eight provided context blocks are relevant to the query.",
+    "cost_usd": 0.00038302,
+    "flagged": true,
+    "queued": false
+   }
+  }
+ }
+}

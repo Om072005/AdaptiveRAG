@@ -1,0 +1,1388 @@
+{
+ "sample": false,
+ "question_id": "sh_8fd983e4b981c2d6_0",
+ "question": "According to the Swedish governmental line of succession, what position can the Prime Minister of Sweden appoint from among the cabinet ministers?",
+ "type": "single_hop",
+ "gold_answer": "Deputy Prime Minister",
+ "supporting_titles": [
+  "Swedish governmental line of succession"
+ ],
+ "why": "A confident misroute: a single hop question read as multi hop at 0.92. Hybrid still finds the answer.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "6e70198e-eb68-4eff-aaaa-238f012fc598",
+    "question": "According to the Swedish governmental line of succession, what position can the Prime Minister of Sweden appoint from among the cabinet ministers?",
+    "answer": {
+     "short": "Deputy Prime Minister",
+     "text": "Deputy Prime Minister. According to the Swedish constitution, the Prime Minister can appoint a cabinet minister as the Deputy Prime Minister to act in their absence or incapacity [1].",
+     "model": "qwen3.6:35b-a3b",
+     "size": "large",
+     "select_reason": "large:label multi_hop",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Swedish governmental line of succession",
+       "snippet": "The Swedish constitution of 1974 allows the Prime Minister of Sweden to appoint one of the Ministers in the cabinet as Deputy Prime Minister (\"biträdande statsminister\", also unofficially known as \"vice statsminister\", \"Vice Prime Minister\"), in case the Prime Minister for some reason is prevented from performing his or her duties. However, if a Deputy Prime Minister has not been appointed, the Minister in the cabinet who has served the longest time (and if there are several with equal experience the one who is oldest) takes over as head of government.",
+       "chunk_id": "8fd983e4b981c2d6:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "multi_hop",
+     "label_confidence": 0.9207160472869873,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "relational:multi_hop"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Swedish governmental line of succession",
+       "snippet": "The Swedish constitution of 1974 allows the Prime Minister of Sweden to appoint one of the Ministers in the cabinet as Deputy Prime Minister (\"biträdande statsminister\", also unofficially known as \"vice statsminister\", \"Vice Prime Minister\"), in case the Prime Minister for some reason is prevented from performing his or her duties. However, if a Deputy Prime Minister has not been appointed, the Minister in the cabinet who has served the longest time (and if there are several with equal experience the one who is oldest) takes over as head of government.",
+       "score": 0.01639344262295082,
+       "source": "vector",
+       "chunk_id": "8fd983e4b981c2d6:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Swedish governmental line of succession",
+       "snippet": "The only case where the governmental line of succession becomes relevant is when the Prime Minister dies (upon which the person next in the line of succession serves as the head of a government \"ad interim\") or when the Prime Minister is on leave or for any other reason incapable of serving, but still remains in office. This might be compared to the Presidential line of succession in the United States, where the person next in line assumes the Presidency throughout the remainder of the term if the President dies, resigns or is impeached.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "8fd983e4b981c2d6:sentence:2"
+      },
+      {
+       "rank": 3,
+       "title": "Swedish governmental line of succession",
+       "snippet": "Note that the person acting as Prime Minister does not do so on a permanent basis: if a Prime Minister dies, resigns or loses a vote of confidence in the Riksdag, the Speaker of the Riksdag will then confer with the parties of the Riksdag and propose a new Prime Minister, who must be tolerated by a majority of the Riksdag. If the Prime Minister has resigned or lost a vote of confidence, he or she will remain the head of a government \"ad interim\" until the new Prime Minister assumes his or her office.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "8fd983e4b981c2d6:sentence:1"
+      },
+      {
+       "rank": 4,
+       "title": "Nobel Prize in Literature",
+       "snippet": "The Swedish Academy decides who, if anyone, will receive the prize in any given year. The academy announces the name of the chosen laureate in early October. It is one of the five Nobel Prizes established by the will of Alfred Nobel in 1895; the others are the Nobel Prize in Chemistry, Nobel Prize in Physics, Nobel Peace Prize, and Nobel Prize in Physiology or Medicine.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "bea58a0a84fe083c:sentence:1"
+      },
+      {
+       "rank": 5,
+       "title": "Cabinet of Malaysia",
+       "snippet": "The Cabinet of Malaysia is the executive branch of Malaysia's government. Led by the Prime Minister, the cabinet is a council of ministers who are accountable collectively to the Parliament. According to the Article 43 of the Constitution, members of the Cabinet can only be selected from members of either houses of Parliament. Formally, the Yang di-Pertuan Agong appoints all Ministers on the advice of the Prime Minister.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "b3b47461493ce83e:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Cabinet of Malaysia",
+       "snippet": "The constitution is amended by repealing the Clause (8) of Article 43, enabling a person who is a member of State Legislative Assembly to continue to be one even when he or she is appointed as a minister or deputy minister in the cabinet. Ministers other than the Prime Minister shall hold office during the pleasure of the Yang di-Pertuan Agong, unless the appointment of any Minister shall have been revoked by the Yang di-Pertuan Agong on the advice of the Prime Minister but any Minister may resign his office.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "b3b47461493ce83e:sentence:1"
+      },
+      {
+       "rank": 7,
+       "title": "Prime Minister of Armenia",
+       "snippet": "It will be fully introduced in 2018. The office of President will become ceremonial post and Prime Minister's office will be the most powerful in the country.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "072a7d764fdc3297:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "Cabinet of Malaysia",
+       "snippet": "In practice, the Yang di-Pertuan Agong is obliged to follow the advice of the Prime Minister on the appointment and dismissal of ministers.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "b3b47461493ce83e:sentence:2"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_61f0dbd753fb",
+        "name": "Government House",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_101284929bc0",
+        "name": "Imperial Government",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_473d30724af9",
+        "name": "Governor-General",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_58011ca5bd3d",
+        "name": "Governor-General of Barbados",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_fbe9f1a7d1ea",
+        "name": "Governor of Barbados",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_16a807b49cd6",
+        "name": "The Bagatelle Great House",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ffaf47579d1c",
+        "name": "Quaker Plantation",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b2cacb73f899",
+        "name": "Maja Ivarsson",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_6823d593bc9c",
+        "name": "Swedish singer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8028b5f34604",
+        "name": "The Sounds",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_02f6c47e819d",
+        "name": "colonial days",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_054d0965d405",
+        "name": "Sweden",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_bf4b0a3ebaae",
+        "name": "To",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_1d3c01114113",
+        "name": "Prime Minister of Kenya",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_0302f4baa14f",
+        "name": "Line 6",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_a3f13e5fdc38",
+        "name": "point",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_2166346927cc",
+        "name": "opposition",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_e810f3278239",
+        "name": "Song to the Sun",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_13a5adb87f84",
+        "name": "Government of Nepal",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_088a0f8030fc",
+        "name": "local government area",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_af3856060960",
+        "name": "End of the Line",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_02c2e922198f",
+        "name": "the shark",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0e6e29440ca4",
+        "name": "The Storm",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_354a5b0c2a23",
+        "name": "The Seven",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_407cd9126733",
+        "name": "The score",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_59e6e056d252",
+        "name": "the Wiz",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8588c0a0f1f0",
+        "name": "The Bet",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_2b6f7cc896de",
+        "name": "Canoa",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_fb23da11ed69",
+        "name": "Prism",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7c62a16e8931",
+        "name": "Lie",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7cbce00c63ca",
+        "name": "She",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f6ee3303f0f0",
+        "name": "modern British government",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0ef6ecbb6284",
+        "name": "The building",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_feb8feffb113",
+        "name": "the county",
+        "type": "PLACE",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_101284929bc0",
+        "predicate": "purchased_by",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_473d30724af9",
+        "predicate": "continued_role_of",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_58011ca5bd3d",
+        "predicate": "is_official_residence_of",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_fbe9f1a7d1ea",
+        "predicate": "was_residence_of",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_16a807b49cd6",
+        "predicate": "acted_as_replacement_to",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_ffaf47579d1c",
+        "predicate": "was",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_b2cacb73f899",
+        "target": "e_6823d593bc9c",
+        "predicate": "is_a",
+        "chunk_id": "379dc1e7855a43d1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_b2cacb73f899",
+        "target": "e_8028b5f34604",
+        "predicate": "lead_vocalist_of",
+        "chunk_id": "379dc1e7855a43d1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_02f6c47e819d",
+        "predicate": "built_in",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.8358757691531515,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 327
+      },
+      {
+       "name": "retrieve",
+       "ms": 211
+      },
+      {
+       "name": "retrieve",
+       "ms": 793
+      },
+      {
+       "name": "merge",
+       "ms": 393
+      },
+      {
+       "name": "generate",
+       "ms": 195
+      }
+     ],
+     "tokens_in": 916,
+     "tokens_out": 616,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 0.0007534,
+      "total": 0.0007534
+     },
+     "total_ms": 5147,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely addresses the question. However, only 3 out of the 8 provided context blocks are relevant to the query.",
+    "cost_usd": 0.00027796,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "f5d18258-9824-40fc-b4a7-4984bf6d8a5b",
+    "question": "According to the Swedish governmental line of succession, what position can the Prime Minister of Sweden appoint from among the cabinet ministers?",
+    "answer": {
+     "short": "Deputy Prime Minister",
+     "text": "Deputy Prime Minister. The Swedish constitution allows the Prime Minister to appoint one of the cabinet ministers as Deputy Prime Minister (also called vice prime minister) [1].",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 872 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Swedish governmental line of succession",
+       "snippet": "The Swedish constitution of 1974 allows the Prime Minister of Sweden to appoint one of the Ministers in the cabinet as Deputy Prime Minister (\"biträdande statsminister\", also unofficially known as \"vice statsminister\", \"Vice Prime Minister\"), in case the Prime Minister for some reason is prevented from performing his or her duties. However, if a Deputy Prime Minister has not been appointed, the Minister in the cabinet who has served the longest time (and if there are several with equal experience the one who is oldest) takes over as head of government.",
+       "chunk_id": "8fd983e4b981c2d6:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Swedish governmental line of succession",
+       "snippet": "The Swedish constitution of 1974 allows the Prime Minister of Sweden to appoint one of the Ministers in the cabinet as Deputy Prime Minister (\"biträdande statsminister\", also unofficially known as \"vice statsminister\", \"Vice Prime Minister\"), in case the Prime Minister for some reason is prevented from performing his or her duties. However, if a Deputy Prime Minister has not been appointed, the Minister in the cabinet who has served the longest time (and if there are several with equal experience the one who is oldest) takes over as head of government.",
+       "score": 0.8358757691531515,
+       "source": "vector",
+       "chunk_id": "8fd983e4b981c2d6:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Swedish governmental line of succession",
+       "snippet": "Note that the person acting as Prime Minister does not do so on a permanent basis: if a Prime Minister dies, resigns or loses a vote of confidence in the Riksdag, the Speaker of the Riksdag will then confer with the parties of the Riksdag and propose a new Prime Minister, who must be tolerated by a majority of the Riksdag. If the Prime Minister has resigned or lost a vote of confidence, he or she will remain the head of a government \"ad interim\" until the new Prime Minister assumes his or her office.",
+       "score": 0.7538584764172517,
+       "source": "vector",
+       "chunk_id": "8fd983e4b981c2d6:sentence:1"
+      },
+      {
+       "rank": 3,
+       "title": "Swedish governmental line of succession",
+       "snippet": "The only case where the governmental line of succession becomes relevant is when the Prime Minister dies (upon which the person next in the line of succession serves as the head of a government \"ad interim\") or when the Prime Minister is on leave or for any other reason incapable of serving, but still remains in office. This might be compared to the Presidential line of succession in the United States, where the person next in line assumes the Presidency throughout the remainder of the term if the President dies, resigns or is impeached.",
+       "score": 0.7486907243728638,
+       "source": "vector",
+       "chunk_id": "8fd983e4b981c2d6:sentence:2"
+      },
+      {
+       "rank": 4,
+       "title": "Cabinet of Malaysia",
+       "snippet": "The constitution is amended by repealing the Clause (8) of Article 43, enabling a person who is a member of State Legislative Assembly to continue to be one even when he or she is appointed as a minister or deputy minister in the cabinet. Ministers other than the Prime Minister shall hold office during the pleasure of the Yang di-Pertuan Agong, unless the appointment of any Minister shall have been revoked by the Yang di-Pertuan Agong on the advice of the Prime Minister but any Minister may resign his office.",
+       "score": 0.7112196339630695,
+       "source": "vector",
+       "chunk_id": "b3b47461493ce83e:sentence:1"
+      },
+      {
+       "rank": 5,
+       "title": "Cabinet of Malaysia",
+       "snippet": "The Cabinet of Malaysia is the executive branch of Malaysia's government. Led by the Prime Minister, the cabinet is a council of ministers who are accountable collectively to the Parliament. According to the Article 43 of the Constitution, members of the Cabinet can only be selected from members of either houses of Parliament. Formally, the Yang di-Pertuan Agong appoints all Ministers on the advice of the Prime Minister.",
+       "score": 0.6982951580461967,
+       "source": "vector",
+       "chunk_id": "b3b47461493ce83e:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Cabinet of Malaysia",
+       "snippet": "In practice, the Yang di-Pertuan Agong is obliged to follow the advice of the Prime Minister on the appointment and dismissal of ministers.",
+       "score": 0.6921695493611318,
+       "source": "vector",
+       "chunk_id": "b3b47461493ce83e:sentence:2"
+      },
+      {
+       "rank": 7,
+       "title": "Nobel Prize in Literature",
+       "snippet": "The Swedish Academy decides who, if anyone, will receive the prize in any given year. The academy announces the name of the chosen laureate in early October. It is one of the five Nobel Prizes established by the will of Alfred Nobel in 1895; the others are the Nobel Prize in Chemistry, Nobel Prize in Physics, Nobel Peace Prize, and Nobel Prize in Physiology or Medicine.",
+       "score": 0.6771892309188843,
+       "source": "vector",
+       "chunk_id": "bea58a0a84fe083c:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "Prime Minister of Armenia",
+       "snippet": "It will be fully introduced in 2018. The office of President will become ceremonial post and Prime Minister's office will be the most powerful in the country.",
+       "score": 0.6632150813084791,
+       "source": "vector",
+       "chunk_id": "072a7d764fdc3297:sentence:1"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.8358757691531515,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 213
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 946,
+     "tokens_out": 51,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.162e-05,
+      "total": 2.162e-05
+     },
+     "total_ms": 956,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely addresses the question. However, only three of the eight context blocks are relevant to the Swedish governmental line of succession.",
+    "cost_usd": 0.00029018,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "a79f6e03-147d-4b14-9db7-a23da5138673",
+    "question": "According to the Swedish governmental line of succession, what position can the Prime Minister of Sweden appoint from among the cabinet ministers?",
+    "answer": {
+     "short": "not enough context",
+     "text": "not enough context",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 173 tokens",
+     "confidence": 0.0,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Government House, Barbados",
+       "snippet": "The Government House is the official residence and office of the Governor-General of Barbados. It was built in the colonial days and was the residence of the Governor of Barbados. It later continued in the role of official residence and office of the Governor-General following political independence from the United Kingdom in 1966. Government House was once a Quaker Plantation, until it was purchased by the Imperial Government, when it acted as a replacement to The Bagatelle Great House in the Parish of St. Thomas.",
+       "score": 0.7480758875608444,
+       "source": "graph",
+       "chunk_id": "246dbb276e98576a:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Maja Ivarsson",
+       "snippet": "Maja Ivarsson, (] , born 2 October 1979) is a Swedish singer and lead vocalist of the Swedish indie rock band The Sounds.",
+       "score": 0.5605862281003086,
+       "source": "graph",
+       "chunk_id": "379dc1e7855a43d1:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_61f0dbd753fb",
+        "name": "Government House",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_101284929bc0",
+        "name": "Imperial Government",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_473d30724af9",
+        "name": "Governor-General",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_58011ca5bd3d",
+        "name": "Governor-General of Barbados",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_fbe9f1a7d1ea",
+        "name": "Governor of Barbados",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_16a807b49cd6",
+        "name": "The Bagatelle Great House",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ffaf47579d1c",
+        "name": "Quaker Plantation",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b2cacb73f899",
+        "name": "Maja Ivarsson",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_6823d593bc9c",
+        "name": "Swedish singer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8028b5f34604",
+        "name": "The Sounds",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_02f6c47e819d",
+        "name": "colonial days",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_054d0965d405",
+        "name": "Sweden",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_bf4b0a3ebaae",
+        "name": "To",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_1d3c01114113",
+        "name": "Prime Minister of Kenya",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_0302f4baa14f",
+        "name": "Line 6",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_a3f13e5fdc38",
+        "name": "point",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_2166346927cc",
+        "name": "opposition",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_e810f3278239",
+        "name": "Song to the Sun",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_13a5adb87f84",
+        "name": "Government of Nepal",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_088a0f8030fc",
+        "name": "local government area",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_af3856060960",
+        "name": "End of the Line",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_02c2e922198f",
+        "name": "the shark",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0e6e29440ca4",
+        "name": "The Storm",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_354a5b0c2a23",
+        "name": "The Seven",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_407cd9126733",
+        "name": "The score",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_59e6e056d252",
+        "name": "the Wiz",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8588c0a0f1f0",
+        "name": "The Bet",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_2b6f7cc896de",
+        "name": "Canoa",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_fb23da11ed69",
+        "name": "Prism",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7c62a16e8931",
+        "name": "Lie",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7cbce00c63ca",
+        "name": "She",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f6ee3303f0f0",
+        "name": "modern British government",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0ef6ecbb6284",
+        "name": "The building",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_feb8feffb113",
+        "name": "the county",
+        "type": "PLACE",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_101284929bc0",
+        "predicate": "purchased_by",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_473d30724af9",
+        "predicate": "continued_role_of",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_58011ca5bd3d",
+        "predicate": "is_official_residence_of",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_fbe9f1a7d1ea",
+        "predicate": "was_residence_of",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_16a807b49cd6",
+        "predicate": "acted_as_replacement_to",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_ffaf47579d1c",
+        "predicate": "was",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_b2cacb73f899",
+        "target": "e_6823d593bc9c",
+        "predicate": "is_a",
+        "chunk_id": "379dc1e7855a43d1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_b2cacb73f899",
+        "target": "e_8028b5f34604",
+        "predicate": "lead_vocalist_of",
+        "chunk_id": "379dc1e7855a43d1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_02f6c47e819d",
+        "predicate": "built_in",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7480758875608444,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 328
+      },
+      {
+       "name": "retrieve",
+       "ms": 600
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 564,
+     "tokens_out": 73,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 1.672e-05,
+      "total": 1.672e-05
+     },
+     "total_ms": 1721,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 0.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.0,
+    "completeness": 1.0,
+    "rationale": "The context contains no information about the Swedish governmental line of succession, so the answer 'not enough context' is correct. However, the retrieved context blocks are completely irrelevant to the question.",
+    "cost_usd": 0.00018306,
+    "flagged": true,
+    "queued": true
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "792329b0-f62b-4431-8cb8-723c69528f97",
+    "question": "According to the Swedish governmental line of succession, what position can the Prime Minister of Sweden appoint from among the cabinet ministers?",
+    "answer": {
+     "short": "Deputy Prime Minister",
+     "text": "Deputy Prime Minister. The Prime Minister may appoint one of the cabinet ministers as Deputy Prime Minister. [1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 872 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Swedish governmental line of succession",
+       "snippet": "The Swedish constitution of 1974 allows the Prime Minister of Sweden to appoint one of the Ministers in the cabinet as Deputy Prime Minister (\"biträdande statsminister\", also unofficially known as \"vice statsminister\", \"Vice Prime Minister\"), in case the Prime Minister for some reason is prevented from performing his or her duties. However, if a Deputy Prime Minister has not been appointed, the Minister in the cabinet who has served the longest time (and if there are several with equal experience the one who is oldest) takes over as head of government.",
+       "chunk_id": "8fd983e4b981c2d6:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Swedish governmental line of succession",
+       "snippet": "The Swedish constitution of 1974 allows the Prime Minister of Sweden to appoint one of the Ministers in the cabinet as Deputy Prime Minister (\"biträdande statsminister\", also unofficially known as \"vice statsminister\", \"Vice Prime Minister\"), in case the Prime Minister for some reason is prevented from performing his or her duties. However, if a Deputy Prime Minister has not been appointed, the Minister in the cabinet who has served the longest time (and if there are several with equal experience the one who is oldest) takes over as head of government.",
+       "score": 0.01639344262295082,
+       "source": "vector",
+       "chunk_id": "8fd983e4b981c2d6:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Swedish governmental line of succession",
+       "snippet": "The only case where the governmental line of succession becomes relevant is when the Prime Minister dies (upon which the person next in the line of succession serves as the head of a government \"ad interim\") or when the Prime Minister is on leave or for any other reason incapable of serving, but still remains in office. This might be compared to the Presidential line of succession in the United States, where the person next in line assumes the Presidency throughout the remainder of the term if the President dies, resigns or is impeached.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "8fd983e4b981c2d6:sentence:2"
+      },
+      {
+       "rank": 3,
+       "title": "Swedish governmental line of succession",
+       "snippet": "Note that the person acting as Prime Minister does not do so on a permanent basis: if a Prime Minister dies, resigns or loses a vote of confidence in the Riksdag, the Speaker of the Riksdag will then confer with the parties of the Riksdag and propose a new Prime Minister, who must be tolerated by a majority of the Riksdag. If the Prime Minister has resigned or lost a vote of confidence, he or she will remain the head of a government \"ad interim\" until the new Prime Minister assumes his or her office.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "8fd983e4b981c2d6:sentence:1"
+      },
+      {
+       "rank": 4,
+       "title": "Nobel Prize in Literature",
+       "snippet": "The Swedish Academy decides who, if anyone, will receive the prize in any given year. The academy announces the name of the chosen laureate in early October. It is one of the five Nobel Prizes established by the will of Alfred Nobel in 1895; the others are the Nobel Prize in Chemistry, Nobel Prize in Physics, Nobel Peace Prize, and Nobel Prize in Physiology or Medicine.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "bea58a0a84fe083c:sentence:1"
+      },
+      {
+       "rank": 5,
+       "title": "Cabinet of Malaysia",
+       "snippet": "The Cabinet of Malaysia is the executive branch of Malaysia's government. Led by the Prime Minister, the cabinet is a council of ministers who are accountable collectively to the Parliament. According to the Article 43 of the Constitution, members of the Cabinet can only be selected from members of either houses of Parliament. Formally, the Yang di-Pertuan Agong appoints all Ministers on the advice of the Prime Minister.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "b3b47461493ce83e:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Cabinet of Malaysia",
+       "snippet": "The constitution is amended by repealing the Clause (8) of Article 43, enabling a person who is a member of State Legislative Assembly to continue to be one even when he or she is appointed as a minister or deputy minister in the cabinet. Ministers other than the Prime Minister shall hold office during the pleasure of the Yang di-Pertuan Agong, unless the appointment of any Minister shall have been revoked by the Yang di-Pertuan Agong on the advice of the Prime Minister but any Minister may resign his office.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "b3b47461493ce83e:sentence:1"
+      },
+      {
+       "rank": 7,
+       "title": "Prime Minister of Armenia",
+       "snippet": "It will be fully introduced in 2018. The office of President will become ceremonial post and Prime Minister's office will be the most powerful in the country.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "072a7d764fdc3297:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "Cabinet of Malaysia",
+       "snippet": "In practice, the Yang di-Pertuan Agong is obliged to follow the advice of the Prime Minister on the appointment and dismissal of ministers.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "b3b47461493ce83e:sentence:2"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_61f0dbd753fb",
+        "name": "Government House",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_101284929bc0",
+        "name": "Imperial Government",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_473d30724af9",
+        "name": "Governor-General",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_58011ca5bd3d",
+        "name": "Governor-General of Barbados",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_fbe9f1a7d1ea",
+        "name": "Governor of Barbados",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_16a807b49cd6",
+        "name": "The Bagatelle Great House",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ffaf47579d1c",
+        "name": "Quaker Plantation",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b2cacb73f899",
+        "name": "Maja Ivarsson",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_6823d593bc9c",
+        "name": "Swedish singer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8028b5f34604",
+        "name": "The Sounds",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_02f6c47e819d",
+        "name": "colonial days",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_054d0965d405",
+        "name": "Sweden",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_bf4b0a3ebaae",
+        "name": "To",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_1d3c01114113",
+        "name": "Prime Minister of Kenya",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_0302f4baa14f",
+        "name": "Line 6",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_a3f13e5fdc38",
+        "name": "point",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_2166346927cc",
+        "name": "opposition",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_e810f3278239",
+        "name": "Song to the Sun",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_13a5adb87f84",
+        "name": "Government of Nepal",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_088a0f8030fc",
+        "name": "local government area",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_af3856060960",
+        "name": "End of the Line",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_02c2e922198f",
+        "name": "the shark",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0e6e29440ca4",
+        "name": "The Storm",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_354a5b0c2a23",
+        "name": "The Seven",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_407cd9126733",
+        "name": "The score",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_59e6e056d252",
+        "name": "the Wiz",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8588c0a0f1f0",
+        "name": "The Bet",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_2b6f7cc896de",
+        "name": "Canoa",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_fb23da11ed69",
+        "name": "Prism",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7c62a16e8931",
+        "name": "Lie",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7cbce00c63ca",
+        "name": "She",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f6ee3303f0f0",
+        "name": "modern British government",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0ef6ecbb6284",
+        "name": "The building",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_feb8feffb113",
+        "name": "the county",
+        "type": "PLACE",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_101284929bc0",
+        "predicate": "purchased_by",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_473d30724af9",
+        "predicate": "continued_role_of",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_58011ca5bd3d",
+        "predicate": "is_official_residence_of",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_fbe9f1a7d1ea",
+        "predicate": "was_residence_of",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_16a807b49cd6",
+        "predicate": "acted_as_replacement_to",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_ffaf47579d1c",
+        "predicate": "was",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_b2cacb73f899",
+        "target": "e_6823d593bc9c",
+        "predicate": "is_a",
+        "chunk_id": "379dc1e7855a43d1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_b2cacb73f899",
+        "target": "e_8028b5f34604",
+        "predicate": "lead_vocalist_of",
+        "chunk_id": "379dc1e7855a43d1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_61f0dbd753fb",
+        "target": "e_02f6c47e819d",
+        "predicate": "built_in",
+        "chunk_id": "246dbb276e98576a:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.8358757691531515,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 212
+      },
+      {
+       "name": "link",
+       "ms": 335
+      },
+      {
+       "name": "retrieve",
+       "ms": 607
+      },
+      {
+       "name": "merge",
+       "ms": 397
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 946,
+     "tokens_out": 46,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.117e-05,
+      "total": 2.117e-05
+     },
+     "total_ms": 5730,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely addresses the question. Three of the eight context blocks are relevant to the Swedish governmental line of succession, while the others are irrelevant.",
+    "cost_usd": 0.00030528,
+    "flagged": true,
+    "queued": false
+   }
+  }
+ }
+}

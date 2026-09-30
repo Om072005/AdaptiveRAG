@@ -1,0 +1,1233 @@
+{
+ "sample": false,
+ "question_id": "hp_5a8bae135542996e8ac889b6",
+ "question": "Nathan Bridger was a character played by which actor and amateur boxer?",
+ "type": "multi_hop",
+ "gold_answer": "Roy Scheider",
+ "supporting_titles": [
+  "Nathan Bridger",
+  "Roy Scheider"
+ ],
+ "why": "Hybrid beats both backends alone: F1 1.0 against 0.57 for vector and 0 for graph.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "40e7de11-21f4-4090-be20-084e1feb5fb0",
+    "question": "Nathan Bridger was a character played by which actor and amateur boxer?",
+    "answer": {
+     "short": "Roy Scheider",
+     "text": "Roy Scheider. Nathan Bridger was played by Roy Scheider [1], who is identified in the provided text as an American actor and amateur boxer [3].",
+     "model": "qwen3.6:35b-a3b",
+     "size": "large",
+     "select_reason": "large:label multi_hop",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Nathan Bridger",
+       "snippet": "Captain Nathan Hale Bridger was a character on the television series \"seaQuest DSV\" and was played by Roy Scheider. Within the canon of the series, Bridger was not only the commanding officer of both UEO submarines named \"seaQuest DSV\", but was also the designer of the boats.",
+       "chunk_id": "d05166af6f2fe8ca:sentence:0"
+      },
+      {
+       "n": 3,
+       "title": "Roy Scheider",
+       "snippet": "Roy Richard Scheider (November 10, 1932 – February 10, 2008) was an American actor and amateur boxer.",
+       "chunk_id": "05cef590f324c1fe:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "multi_hop",
+     "label_confidence": 0.8981411457061768,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "relational:multi_hop"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Nathan Bridger",
+       "snippet": "Captain Nathan Hale Bridger was a character on the television series \"seaQuest DSV\" and was played by Roy Scheider. Within the canon of the series, Bridger was not only the commanding officer of both UEO submarines named \"seaQuest DSV\", but was also the designer of the boats.",
+       "score": 0.03252247488101534,
+       "source": "hybrid",
+       "chunk_id": "d05166af6f2fe8ca:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Jonathan Hamm",
+       "snippet": "Jonathan Hamm (born October 14, 1985) is a former standout amateur boxer, actor, football player and current mixed martial artist. Hamm was the #1 Super-Heavyweight Amateur boxer in the United States in 2011 after winning the 2011 U.S. Nationals. Hamm was an alternate in the super-heavyweight division of the 2012 London Olympic Games for the U.S. Hamm earned Black College All-American, 1st Team All Conference, 1st Team All-Region and The Marion E. Jackson Defensive Player of the Year in 2006.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "8756901c1599b4a0:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Roy Scheider",
+       "snippet": "Roy Richard Scheider (November 10, 1932 – February 10, 2008) was an American actor and amateur boxer.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "05cef590f324c1fe:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Jamie Campbell Bower",
+       "snippet": "James Metcalfe Campbell Bower (born 22 November 1988) is an English actor, singer, and model. He is best known for his roles as Anthony Hope in \"\", Caius in \"The Twilight Saga\", King Arthur in the Starz series \"Camelot\", the young Gellert Grindelwald in \"Harry Potter and the Deathly Hallows – Part 1\", and Jace Wayland in \"\". As of 2017, he portrays Elizabethan playwright Kit Marlowe in the TNT series \"Will\".",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "69053d02cc66e7a5:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Byron Mann",
+       "snippet": "Byron Mann () is a Chinese American actor who has made films in Hollywood, Hong Kong and Mainland China. He is perhaps best known for his performances as Mr. Chau in \"The Big Short\", Chang in \"Hell on Wheels\", Ryu in \"Street Fighter\", Silver Lion in \"The Man with the Iron Fists\" and Yao Fei in the first season of \"Arrow\".",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "865f7b0d9e63cdf8:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Abraham Whistler",
+       "snippet": "Abraham Whistler is a fictional character in the Marvel Comics universe. He is a vampire hunter and the mentor of Blade. Screenwriter David S. Goyer created him for the 1998 film \"Blade\" (in which the part was played by Kris Kristofferson), but he first appeared on screen in \"Spider-Man: The Animated Series\" where he was voiced by Malcolm McDowell and later by Oliver Muirhead. In 2006, Abraham Whistler appeared in the television show \"\". He shares many traits and is partially inspired by the character Jamal Afari.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "0cddfa8f90f74478:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Dave Bautista",
+       "snippet": "David Michael Bautista Jr. (born January 18, 1969) is an American actor, semi-retired professional wrestler, former mixed martial artist, and bodybuilder.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "849e61f310eda5b1:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Eros Correa",
+       "snippet": "Eros Correa (born January 13, 1993, in San Jose, California) is a Mexican-American amateur boxer in the Flyweight division. He is currently the number one rated amateur boxer at Flyweight in the U.S.",
+       "score": 0.015625,
+       "source": "graph",
+       "chunk_id": "a2c92f52b0b618bd:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_041501476481",
+        "name": "Cr. George Tomas Gahan JP",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_07b45309c195",
+        "name": "amateur boxer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_3562ece1269d",
+        "name": "Victorian amateur boxer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_b72b0416947e",
+        "name": "Captain Nathan Hale Bridger",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_45b4e2ec59ff",
+        "name": "Roy Scheider",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_f4a04123fe83",
+        "name": "Roy Scheider",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_706a6e4c4370",
+        "name": "Captain Nathan Bridger",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_07fc1720ba11",
+        "name": "Eros Correa",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_23d7d1575667",
+        "name": "Mexican-American amateur boxer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_125ca945af03",
+        "name": "seaQuest DSV 4600",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_a84255518615",
+        "name": "Juan Carlos Rodríguez Patiño",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_78b37b58deb8",
+        "name": "Venezuelan amateur boxer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_41bd6a7657fb",
+        "name": "Bridger",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_3eecd9bb0eed",
+        "name": "actor",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_47f535be034a",
+        "name": "The Boxer",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_4a33be8c2d03",
+        "name": "Chaz",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4c0310c350ff",
+        "name": "A and C",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_60276f666bf0",
+        "name": "fictional character",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_dc6a043ef578",
+        "name": "Nathan Chapman",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_c3a4eeb3ff4f",
+        "name": "Bridgestone",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_036011ac0a85",
+        "name": "brick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_d0ac7b3117f9",
+        "name": "Chase",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_ee2a2a2e2daf",
+        "name": "Bob",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_3cda7dcde82b",
+        "name": "Indian actor",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_cc7aacf14114",
+        "name": "Jeff Bridges",
+        "type": "PERSON",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_041501476481",
+        "target": "e_07b45309c195",
+        "predicate": "began_training_as",
+        "chunk_id": "b38277cb6734f75f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_041501476481",
+        "target": "e_3562ece1269d",
+        "predicate": "was_a",
+        "chunk_id": "b38277cb6734f75f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_b72b0416947e",
+        "target": "e_45b4e2ec59ff",
+        "predicate": "played_by",
+        "chunk_id": "d05166af6f2fe8ca:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f4a04123fe83",
+        "target": "e_706a6e4c4370",
+        "predicate": "portrayed",
+        "chunk_id": "9bfaa35fcf6edf17:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_07fc1720ba11",
+        "target": "e_23d7d1575667",
+        "predicate": "is_a",
+        "chunk_id": "a2c92f52b0b618bd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_706a6e4c4370",
+        "target": "e_125ca945af03",
+        "predicate": "commander_of",
+        "chunk_id": "9bfaa35fcf6edf17:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_a84255518615",
+        "target": "e_78b37b58deb8",
+        "predicate": "is_a",
+        "chunk_id": "ef7d155ccc02d5db:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.6953290235211793,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 265
+      },
+      {
+       "name": "retrieve",
+       "ms": 211
+      },
+      {
+       "name": "retrieve",
+       "ms": 785
+      },
+      {
+       "name": "merge",
+       "ms": 586
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 915,
+     "tokens_out": 1180,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 0.00131725,
+      "total": 0.00131725
+     },
+     "total_ms": 43307,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and correctly identifies the actor. Approximately half of the context blocks are irrelevant to the question.",
+    "cost_usd": 0.00028096,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "78b85b74-30db-484c-b212-27e3fd30e90e",
+    "question": "Nathan Bridger was a character played by which actor and amateur boxer?",
+    "answer": {
+     "short": "Roy Scheider and Jonathan Hamm",
+     "text": "Roy Scheider and Jonathan Hamm. [1] identifies Bridger as a character; [2] names Roy Scheider as the actor; [3] lists Jonathan Hamm as an amateur boxer.",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 742 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Nathan Bridger",
+       "snippet": "Captain Nathan Hale Bridger was a character on the television series \"seaQuest DSV\" and was played by Roy Scheider. Within the canon of the series, Bridger was not only the commanding officer of both UEO submarines named \"seaQuest DSV\", but was also the designer of the boats.",
+       "chunk_id": "d05166af6f2fe8ca:sentence:0"
+      },
+      {
+       "n": 2,
+       "title": "Roy Scheider",
+       "snippet": "Roy Richard Scheider (November 10, 1932 – February 10, 2008) was an American actor and amateur boxer.",
+       "chunk_id": "05cef590f324c1fe:sentence:0"
+      },
+      {
+       "n": 3,
+       "title": "Jonathan Hamm",
+       "snippet": "Jonathan Hamm (born October 14, 1985) is a former standout amateur boxer, actor, football player and current mixed martial artist. Hamm was the #1 Super-Heavyweight Amateur boxer in the United States in 2011 after winning the 2011 U.S. Nationals. Hamm was an alternate in the super-heavyweight division of the 2012 London Olympic Games for the U.S. Hamm earned Black College All-American, 1st Team All Conference, 1st Team All-Region and The Marion E. Jackson Defensive Player of the Year in 2006.",
+       "chunk_id": "8756901c1599b4a0:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Nathan Bridger",
+       "snippet": "Captain Nathan Hale Bridger was a character on the television series \"seaQuest DSV\" and was played by Roy Scheider. Within the canon of the series, Bridger was not only the commanding officer of both UEO submarines named \"seaQuest DSV\", but was also the designer of the boats.",
+       "score": 0.6953290235211793,
+       "source": "vector",
+       "chunk_id": "d05166af6f2fe8ca:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Roy Scheider",
+       "snippet": "Roy Richard Scheider (November 10, 1932 – February 10, 2008) was an American actor and amateur boxer.",
+       "score": 0.6871115342245706,
+       "source": "vector",
+       "chunk_id": "05cef590f324c1fe:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Jonathan Hamm",
+       "snippet": "Jonathan Hamm (born October 14, 1985) is a former standout amateur boxer, actor, football player and current mixed martial artist. Hamm was the #1 Super-Heavyweight Amateur boxer in the United States in 2011 after winning the 2011 U.S. Nationals. Hamm was an alternate in the super-heavyweight division of the 2012 London Olympic Games for the U.S. Hamm earned Black College All-American, 1st Team All Conference, 1st Team All-Region and The Marion E. Jackson Defensive Player of the Year in 2006.",
+       "score": 0.647428652797432,
+       "source": "vector",
+       "chunk_id": "8756901c1599b4a0:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Jamie Campbell Bower",
+       "snippet": "James Metcalfe Campbell Bower (born 22 November 1988) is an English actor, singer, and model. He is best known for his roles as Anthony Hope in \"\", Caius in \"The Twilight Saga\", King Arthur in the Starz series \"Camelot\", the young Gellert Grindelwald in \"Harry Potter and the Deathly Hallows – Part 1\", and Jace Wayland in \"\". As of 2017, he portrays Elizabethan playwright Kit Marlowe in the TNT series \"Will\".",
+       "score": 0.6378460958187511,
+       "source": "vector",
+       "chunk_id": "69053d02cc66e7a5:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Dave Bautista",
+       "snippet": "David Michael Bautista Jr. (born January 18, 1969) is an American actor, semi-retired professional wrestler, former mixed martial artist, and bodybuilder.",
+       "score": 0.6370873883858501,
+       "source": "vector",
+       "chunk_id": "849e61f310eda5b1:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Abraham Whistler",
+       "snippet": "Abraham Whistler is a fictional character in the Marvel Comics universe. He is a vampire hunter and the mentor of Blade. Screenwriter David S. Goyer created him for the 1998 film \"Blade\" (in which the part was played by Kris Kristofferson), but he first appeared on screen in \"Spider-Man: The Animated Series\" where he was voiced by Malcolm McDowell and later by Oliver Muirhead. In 2006, Abraham Whistler appeared in the television show \"\". He shares many traits and is partially inspired by the character Jamal Afari.",
+       "score": 0.635958877573281,
+       "source": "vector",
+       "chunk_id": "0cddfa8f90f74478:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Byron Mann",
+       "snippet": "Byron Mann () is a Chinese American actor who has made films in Hollywood, Hong Kong and Mainland China. He is perhaps best known for his performances as Mr. Chau in \"The Big Short\", Chang in \"Hell on Wheels\", Ryu in \"Street Fighter\", Silver Lion in \"The Man with the Iron Fists\" and Yao Fei in the first season of \"Arrow\".",
+       "score": 0.6349138078247664,
+       "source": "vector",
+       "chunk_id": "865f7b0d9e63cdf8:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Armie Hammer",
+       "snippet": "Armand Douglas \"Armie\" Hammer (born August 28, 1986) is an American actor. He is known for his portrayal of the Winklevoss twins in the film \"The Social Network\" (2010), Prince Andrew Alcott in \"Mirror Mirror\" (2012), the title character in the adventure film \"The Lone Ranger\" (2013), Mike in \"Mine\" (2016), and the voice role of Jackson Storm in 2017's Disney-Pixar Film \"Cars 3\". He played the role of Illya Kuryakin in \"The Man from U.N.C.L.E.\" (2015), and stars as Oliver in the 2017 romance drama \"Call Me by Your Name\".",
+       "score": 0.6318292680091986,
+       "source": "vector",
+       "chunk_id": "a036100487ed083e:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.6953290235211793,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 220
+      },
+      {
+       "name": "generate",
+       "ms": 197
+      }
+     ],
+     "tokens_in": 972,
+     "tokens_out": 89,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.551e-05,
+      "total": 2.551e-05
+     },
+     "total_ms": 1100,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.5714286,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 0.25,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer incorrectly claims that Jonathan Hamm played Nathan Bridger, whereas the context only states that Roy Scheider played him. While the answer addresses the question, it hallucinates a role for Jonathan Hamm.",
+    "cost_usd": 0.0004393,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "71436951-0c39-4e6b-b2ae-a3e40f460269",
+    "question": "Nathan Bridger was a character played by which actor and amateur boxer?",
+    "answer": {
+     "short": "not enough context",
+     "text": "not enough context",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 452 tokens",
+     "confidence": 0.0,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "George Thomas Gahan",
+       "snippet": "Cr. George Tomas Gahan JP (21 July 191224 June 1980) was an Australian politician and Victorian amateur boxer. He was born in Inglewood, Victoria to Benjamin Edward Gahan and Emma Gahan \"née Walker\". The Gahan family later moved to the Melbourne suburb of Prahran where George became a building contractor. At a young age George began training as an amateur boxer. In his mid 30's Gahan attempted to join the Australian Army and defend his country in World War II.",
+       "score": 0.6554391138380924,
+       "source": "graph",
+       "chunk_id": "b38277cb6734f75f:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Nathan Bridger",
+       "snippet": "Captain Nathan Hale Bridger was a character on the television series \"seaQuest DSV\" and was played by Roy Scheider. Within the canon of the series, Bridger was not only the commanding officer of both UEO submarines named \"seaQuest DSV\", but was also the designer of the boats.",
+       "score": 0.8624327752799335,
+       "source": "graph",
+       "chunk_id": "d05166af6f2fe8ca:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "SeaQuest DSV",
+       "snippet": "SeaQuest DSV (stylized as seaQuest DSV and also promoted as simply seaQuest) is an American science fiction television series created by Rockne S. O'Bannon. It originally aired on NBC between 1993 and 1996. In its final season, it was renamed seaQuest 2032. Set in \"the near future\"—originally the year 2018 in the first season—\"seaQuest DSV\" originally mixed high drama with realistic scientific fiction. It originally starred film star Roy Scheider as Captain Nathan Bridger, designer and commander of the eponymous naval submarine \"seaQuest\" DSV 4600.",
+       "score": 0.8586200132453424,
+       "source": "graph",
+       "chunk_id": "9bfaa35fcf6edf17:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Eros Correa",
+       "snippet": "Eros Correa (born January 13, 1993, in San Jose, California) is a Mexican-American amateur boxer in the Flyweight division. He is currently the number one rated amateur boxer at Flyweight in the U.S.",
+       "score": 0.8072531429751837,
+       "source": "graph",
+       "chunk_id": "a2c92f52b0b618bd:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Juan Carlos Rodríguez (boxer)",
+       "snippet": "Juan Carlos Rodríguez Patiño (born August 14, 1990 in Cumaná, Venezuela) is a Venezuelan amateur boxer in the Middleweight division. He is considered top amateur boxer at middleweight in Venezuela.",
+       "score": 0.7879853248596274,
+       "source": "graph",
+       "chunk_id": "ef7d155ccc02d5db:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_041501476481",
+        "name": "Cr. George Tomas Gahan JP",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_07b45309c195",
+        "name": "amateur boxer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_3562ece1269d",
+        "name": "Victorian amateur boxer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_b72b0416947e",
+        "name": "Captain Nathan Hale Bridger",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_45b4e2ec59ff",
+        "name": "Roy Scheider",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_f4a04123fe83",
+        "name": "Roy Scheider",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_706a6e4c4370",
+        "name": "Captain Nathan Bridger",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_07fc1720ba11",
+        "name": "Eros Correa",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_23d7d1575667",
+        "name": "Mexican-American amateur boxer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_125ca945af03",
+        "name": "seaQuest DSV 4600",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_a84255518615",
+        "name": "Juan Carlos Rodríguez Patiño",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_78b37b58deb8",
+        "name": "Venezuelan amateur boxer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_41bd6a7657fb",
+        "name": "Bridger",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_3eecd9bb0eed",
+        "name": "actor",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_47f535be034a",
+        "name": "The Boxer",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_4a33be8c2d03",
+        "name": "Chaz",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4c0310c350ff",
+        "name": "A and C",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_60276f666bf0",
+        "name": "fictional character",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_dc6a043ef578",
+        "name": "Nathan Chapman",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_c3a4eeb3ff4f",
+        "name": "Bridgestone",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_036011ac0a85",
+        "name": "brick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_d0ac7b3117f9",
+        "name": "Chase",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_ee2a2a2e2daf",
+        "name": "Bob",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_3cda7dcde82b",
+        "name": "Indian actor",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_cc7aacf14114",
+        "name": "Jeff Bridges",
+        "type": "PERSON",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_041501476481",
+        "target": "e_07b45309c195",
+        "predicate": "began_training_as",
+        "chunk_id": "b38277cb6734f75f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_041501476481",
+        "target": "e_3562ece1269d",
+        "predicate": "was_a",
+        "chunk_id": "b38277cb6734f75f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_b72b0416947e",
+        "target": "e_45b4e2ec59ff",
+        "predicate": "played_by",
+        "chunk_id": "d05166af6f2fe8ca:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f4a04123fe83",
+        "target": "e_706a6e4c4370",
+        "predicate": "portrayed",
+        "chunk_id": "9bfaa35fcf6edf17:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_07fc1720ba11",
+        "target": "e_23d7d1575667",
+        "predicate": "is_a",
+        "chunk_id": "a2c92f52b0b618bd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_706a6e4c4370",
+        "target": "e_125ca945af03",
+        "predicate": "commander_of",
+        "chunk_id": "9bfaa35fcf6edf17:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_a84255518615",
+        "target": "e_78b37b58deb8",
+        "predicate": "is_a",
+        "chunk_id": "ef7d155ccc02d5db:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.6554391138380924,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 268
+      },
+      {
+       "name": "retrieve",
+       "ms": 787
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 822,
+     "tokens_out": 90,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.29e-05,
+      "total": 2.29e-05
+     },
+     "total_ms": 7270,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 0.5
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "completeness": 1.0,
+    "rationale": "The context identifies Roy Scheider as the actor who played Nathan Bridger, but it does not state that he is an amateur boxer. Therefore, the answer 'not enough context' is correct.",
+    "cost_usd": 0.00026914,
+    "flagged": false,
+    "queued": true
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "99c2ee38-bb80-4c5f-a50e-c10263f54c0f",
+    "question": "Nathan Bridger was a character played by which actor and amateur boxer?",
+    "answer": {
+     "short": "Roy Scheider",
+     "text": "Roy Scheider. Roy Scheider was the actor who played Nathan Bridger, and he was also an amateur boxer. [1][3]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 660 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Nathan Bridger",
+       "snippet": "Captain Nathan Hale Bridger was a character on the television series \"seaQuest DSV\" and was played by Roy Scheider. Within the canon of the series, Bridger was not only the commanding officer of both UEO submarines named \"seaQuest DSV\", but was also the designer of the boats.",
+       "chunk_id": "d05166af6f2fe8ca:sentence:0"
+      },
+      {
+       "n": 3,
+       "title": "Roy Scheider",
+       "snippet": "Roy Richard Scheider (November 10, 1932 – February 10, 2008) was an American actor and amateur boxer.",
+       "chunk_id": "05cef590f324c1fe:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Nathan Bridger",
+       "snippet": "Captain Nathan Hale Bridger was a character on the television series \"seaQuest DSV\" and was played by Roy Scheider. Within the canon of the series, Bridger was not only the commanding officer of both UEO submarines named \"seaQuest DSV\", but was also the designer of the boats.",
+       "score": 0.03252247488101534,
+       "source": "hybrid",
+       "chunk_id": "d05166af6f2fe8ca:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Jonathan Hamm",
+       "snippet": "Jonathan Hamm (born October 14, 1985) is a former standout amateur boxer, actor, football player and current mixed martial artist. Hamm was the #1 Super-Heavyweight Amateur boxer in the United States in 2011 after winning the 2011 U.S. Nationals. Hamm was an alternate in the super-heavyweight division of the 2012 London Olympic Games for the U.S. Hamm earned Black College All-American, 1st Team All Conference, 1st Team All-Region and The Marion E. Jackson Defensive Player of the Year in 2006.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "8756901c1599b4a0:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Roy Scheider",
+       "snippet": "Roy Richard Scheider (November 10, 1932 – February 10, 2008) was an American actor and amateur boxer.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "05cef590f324c1fe:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Jamie Campbell Bower",
+       "snippet": "James Metcalfe Campbell Bower (born 22 November 1988) is an English actor, singer, and model. He is best known for his roles as Anthony Hope in \"\", Caius in \"The Twilight Saga\", King Arthur in the Starz series \"Camelot\", the young Gellert Grindelwald in \"Harry Potter and the Deathly Hallows – Part 1\", and Jace Wayland in \"\". As of 2017, he portrays Elizabethan playwright Kit Marlowe in the TNT series \"Will\".",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "69053d02cc66e7a5:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Byron Mann",
+       "snippet": "Byron Mann () is a Chinese American actor who has made films in Hollywood, Hong Kong and Mainland China. He is perhaps best known for his performances as Mr. Chau in \"The Big Short\", Chang in \"Hell on Wheels\", Ryu in \"Street Fighter\", Silver Lion in \"The Man with the Iron Fists\" and Yao Fei in the first season of \"Arrow\".",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "865f7b0d9e63cdf8:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Abraham Whistler",
+       "snippet": "Abraham Whistler is a fictional character in the Marvel Comics universe. He is a vampire hunter and the mentor of Blade. Screenwriter David S. Goyer created him for the 1998 film \"Blade\" (in which the part was played by Kris Kristofferson), but he first appeared on screen in \"Spider-Man: The Animated Series\" where he was voiced by Malcolm McDowell and later by Oliver Muirhead. In 2006, Abraham Whistler appeared in the television show \"\". He shares many traits and is partially inspired by the character Jamal Afari.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "0cddfa8f90f74478:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Dave Bautista",
+       "snippet": "David Michael Bautista Jr. (born January 18, 1969) is an American actor, semi-retired professional wrestler, former mixed martial artist, and bodybuilder.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "849e61f310eda5b1:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Eros Correa",
+       "snippet": "Eros Correa (born January 13, 1993, in San Jose, California) is a Mexican-American amateur boxer in the Flyweight division. He is currently the number one rated amateur boxer at Flyweight in the U.S.",
+       "score": 0.015625,
+       "source": "graph",
+       "chunk_id": "a2c92f52b0b618bd:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_041501476481",
+        "name": "Cr. George Tomas Gahan JP",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_07b45309c195",
+        "name": "amateur boxer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_3562ece1269d",
+        "name": "Victorian amateur boxer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_b72b0416947e",
+        "name": "Captain Nathan Hale Bridger",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_45b4e2ec59ff",
+        "name": "Roy Scheider",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_f4a04123fe83",
+        "name": "Roy Scheider",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_706a6e4c4370",
+        "name": "Captain Nathan Bridger",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_07fc1720ba11",
+        "name": "Eros Correa",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_23d7d1575667",
+        "name": "Mexican-American amateur boxer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_125ca945af03",
+        "name": "seaQuest DSV 4600",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_a84255518615",
+        "name": "Juan Carlos Rodríguez Patiño",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_78b37b58deb8",
+        "name": "Venezuelan amateur boxer",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_41bd6a7657fb",
+        "name": "Bridger",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_3eecd9bb0eed",
+        "name": "actor",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_47f535be034a",
+        "name": "The Boxer",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_4a33be8c2d03",
+        "name": "Chaz",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4c0310c350ff",
+        "name": "A and C",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_60276f666bf0",
+        "name": "fictional character",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_dc6a043ef578",
+        "name": "Nathan Chapman",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_c3a4eeb3ff4f",
+        "name": "Bridgestone",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_036011ac0a85",
+        "name": "brick",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_d0ac7b3117f9",
+        "name": "Chase",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_ee2a2a2e2daf",
+        "name": "Bob",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_3cda7dcde82b",
+        "name": "Indian actor",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_cc7aacf14114",
+        "name": "Jeff Bridges",
+        "type": "PERSON",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_041501476481",
+        "target": "e_07b45309c195",
+        "predicate": "began_training_as",
+        "chunk_id": "b38277cb6734f75f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_041501476481",
+        "target": "e_3562ece1269d",
+        "predicate": "was_a",
+        "chunk_id": "b38277cb6734f75f:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_b72b0416947e",
+        "target": "e_45b4e2ec59ff",
+        "predicate": "played_by",
+        "chunk_id": "d05166af6f2fe8ca:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f4a04123fe83",
+        "target": "e_706a6e4c4370",
+        "predicate": "portrayed",
+        "chunk_id": "9bfaa35fcf6edf17:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_07fc1720ba11",
+        "target": "e_23d7d1575667",
+        "predicate": "is_a",
+        "chunk_id": "a2c92f52b0b618bd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_706a6e4c4370",
+        "target": "e_125ca945af03",
+        "predicate": "commander_of",
+        "chunk_id": "9bfaa35fcf6edf17:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_a84255518615",
+        "target": "e_78b37b58deb8",
+        "predicate": "is_a",
+        "chunk_id": "ef7d155ccc02d5db:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.6953290235211793,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 216
+      },
+      {
+       "name": "link",
+       "ms": 267
+      },
+      {
+       "name": "retrieve",
+       "ms": 794
+      },
+      {
+       "name": "merge",
+       "ms": 594
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 925,
+     "tokens_out": 51,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.124e-05,
+      "total": 2.124e-05
+     },
+     "total_ms": 6284,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and addresses all parts of the question. Approximately half of the provided context blocks are irrelevant to the specific query.",
+    "cost_usd": 0.00029264,
+    "flagged": true,
+    "queued": false
+   }
+  }
+ }
+}

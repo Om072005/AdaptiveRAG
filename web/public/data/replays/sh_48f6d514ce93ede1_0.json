@@ -1,0 +1,820 @@
+{
+ "sample": false,
+ "question_id": "sh_48f6d514ce93ede1_0",
+ "question": "In what year was Prophet's Prey released?",
+ "type": "single_hop",
+ "gold_answer": "2015",
+ "supporting_titles": [
+  "Prophet's Prey"
+ ],
+ "why": "A confident single hop question: the router sends it to vector search and the small model answers it.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "463b664e-70fd-487e-9a4d-d3df20951894",
+    "question": "In what year was Prophet's Prey released?",
+    "answer": {
+     "short": "2015",
+     "text": "2015. The documentary premiered at the 2015 Sundance Film Festival and had its television premiere on October 10, 2015. [1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label single_hop, 982 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Prophet's Prey",
+       "snippet": "Prophet's Prey is a 2015 American documentary film directed by Amy J. Berg. The film is an adaptation of the 2011 book \"Prophet's Prey: My Seven-Year Investigation into Warren Jeffs and the Fundamentalist Church of Latter-Day Saints\". It was produced by Katherine LeBlond and Sam Brower, the author of the book, for Showtime and Imagine Entertainment. It premiered at the 2015 Sundance Film Festival and had its television premiere on October 10, 2015.",
+       "chunk_id": "48f6d514ce93ede1:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "single_hop",
+     "label_confidence": 0.915573000907898,
+     "method": "logreg",
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "no_relational_structure"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Prophet's Prey",
+       "snippet": "Prophet's Prey is a 2015 American documentary film directed by Amy J. Berg. The film is an adaptation of the 2011 book \"Prophet's Prey: My Seven-Year Investigation into Warren Jeffs and the Fundamentalist Church of Latter-Day Saints\". It was produced by Katherine LeBlond and Sam Brower, the author of the book, for Showtime and Imagine Entertainment. It premiered at the 2015 Sundance Film Festival and had its television premiere on October 10, 2015.",
+       "score": 0.8126670345464904,
+       "source": "vector",
+       "chunk_id": "48f6d514ce93ede1:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Dawn of the Dead (1978 film)",
+       "snippet": "Dawn of the Dead (also known internationally as Zombi) is a 1978 American independent zombie horror film directed by George A. Romero. It was written by Romero in collaboration with the Italian filmmaker Dario Argento and produced by Richard P. Rubinstein. It was the second film made in Romero's \"Living Dead\" series and shows in a larger scale the apocalyptic effects on society, though it contains no characters or settings from \"Night of the Living Dead\". In the film, a phenomenon of unidentified origin has caused the reanimation of the dead, who prey on human flesh.",
+       "score": 0.6574509552179628,
+       "source": "vector",
+       "chunk_id": "f8174a52a57af522:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Nocturnal Animals",
+       "snippet": "Nocturnal Animals is a 2016 American neo-noir psychological thriller film written, co-produced, and directed by Tom Ford, based on the 1993 novel \"Tony and Susan\" by Austin Wright. The film stars Amy Adams, Jake Gyllenhaal, Michael Shannon, Aaron Taylor-Johnson, Isla Fisher, Armie Hammer, Laura Linney, Andrea Riseborough, Karl Glusman, and Michael Sheen. Principal photography began on October 5, 2015, in Los Angeles, California. The film was released in the United States on November 18, 2016, by Focus Features, received generally positive reviews from critics and has grossed $30 million worldw",
+       "score": 0.6524557678427846,
+       "source": "vector",
+       "chunk_id": "9c11fed1a7c03986:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Dawn of the Dead (2004 film)",
+       "snippet": "Dawn of the Dead is a 2004 American horror film directed by Zack Snyder in his feature film directorial debut. A remake of George A. Romero's 1978 film of the same name, it was written by James Gunn and stars Sarah Polley, Ving Rhames, Jake Weber, and Mekhi Phifer.",
+       "score": 0.6487148017457257,
+       "source": "vector",
+       "chunk_id": "cbb4808cad06bd65:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "The Black Hole",
+       "snippet": "The film was released on December 18, 1979 in the United Kingdom and on December 21, 1979 in the United States.",
+       "score": 0.6329298426827861,
+       "source": "vector",
+       "chunk_id": "5bbdaabee424cbd9:sentence:1"
+      },
+      {
+       "rank": 6,
+       "title": "The 10th Victim",
+       "snippet": "The 10th Victim (Italian: \"La decima vittima\" ) is a 1965 Italian-French science fiction film directed by Elio Petri and starring Marcello Mastroianni and Ursula Andress, and featuring Elsa Martinelli in a supporting role. The picture is based on Robert Sheckley's 1953 short story \"Seventh Victim\". Sheckley later published a novelization of the film in 1966, and two sequels (\"Victim Prime\" and \"Hunter/Victim\") in 1987 and 1988, respectively. In the United States, the film was theatrically released by Joseph E. Levine's Embassy Pictures.",
+       "score": 0.632690056241744,
+       "source": "vector",
+       "chunk_id": "91c9dc978e62c013:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Sorcerer (film)",
+       "snippet": "Sorcerer is a 1977 American existential thriller film directed and produced by William Friedkin and starring Roy Scheider, Bruno Cremer, Francisco Rabal, and Amidou. The second adaptation of Georges Arnaud's 1950 French novel \"Le Salaire de la peur\", it has been widely considered a remake of the first adaptation, the 1953 film \"The Wages of Fear\". Friedkin, however, has disagreed with this assessment. The plot depicts four outcasts from varied backgrounds meeting in a South American village, where they are assigned to transport cargoes of nitroglycerin.",
+       "score": 0.6310599290061082,
+       "source": "vector",
+       "chunk_id": "27ad6096d76fb28d:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Strange Fruit (novel)",
+       "snippet": "Strange Fruit is a 1944 bestselling novel debut by American author Lillian Smith that dealt with the then-forbidden and controversial theme of interracial romance. The title was originally \"Jordan is so Chilly\", with Smith later changing the title to \"Strange Fruit\". In her autobiography, singer Billie Holiday wrote that Smith chose to name the book after her song \"Strange Fruit\", which was about the lynching and racism against African-Americans, although Smith maintained that the book's title referred to the \"damaged, twisted people (both black and white) who are the products or results of ou",
+       "score": 0.6289396694618588,
+       "source": "vector",
+       "chunk_id": "7e3bb7dfc1609a18:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.8126670345464904,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 239
+      },
+      {
+       "name": "retrieve",
+       "ms": 210
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 1139,
+     "tokens_out": 75,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.725e-05,
+      "total": 2.725e-05
+     },
+     "total_ms": 1321,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely answers the question, but only one of the eight provided context blocks is relevant to the query.",
+    "cost_usd": 0.00028528,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "96934222-a193-4c0a-83a0-6440dbe8de2a",
+    "question": "In what year was Prophet's Prey released?",
+    "answer": {
+     "short": "2015",
+     "text": "2015. The documentary premiered at the 2015 Sundance Film Festival and had its television premiere on October 10, 2015. [1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 982 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Prophet's Prey",
+       "snippet": "Prophet's Prey is a 2015 American documentary film directed by Amy J. Berg. The film is an adaptation of the 2011 book \"Prophet's Prey: My Seven-Year Investigation into Warren Jeffs and the Fundamentalist Church of Latter-Day Saints\". It was produced by Katherine LeBlond and Sam Brower, the author of the book, for Showtime and Imagine Entertainment. It premiered at the 2015 Sundance Film Festival and had its television premiere on October 10, 2015.",
+       "chunk_id": "48f6d514ce93ede1:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Prophet's Prey",
+       "snippet": "Prophet's Prey is a 2015 American documentary film directed by Amy J. Berg. The film is an adaptation of the 2011 book \"Prophet's Prey: My Seven-Year Investigation into Warren Jeffs and the Fundamentalist Church of Latter-Day Saints\". It was produced by Katherine LeBlond and Sam Brower, the author of the book, for Showtime and Imagine Entertainment. It premiered at the 2015 Sundance Film Festival and had its television premiere on October 10, 2015.",
+       "score": 0.8126670345464904,
+       "source": "vector",
+       "chunk_id": "48f6d514ce93ede1:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Dawn of the Dead (1978 film)",
+       "snippet": "Dawn of the Dead (also known internationally as Zombi) is a 1978 American independent zombie horror film directed by George A. Romero. It was written by Romero in collaboration with the Italian filmmaker Dario Argento and produced by Richard P. Rubinstein. It was the second film made in Romero's \"Living Dead\" series and shows in a larger scale the apocalyptic effects on society, though it contains no characters or settings from \"Night of the Living Dead\". In the film, a phenomenon of unidentified origin has caused the reanimation of the dead, who prey on human flesh.",
+       "score": 0.6574509552179628,
+       "source": "vector",
+       "chunk_id": "f8174a52a57af522:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Nocturnal Animals",
+       "snippet": "Nocturnal Animals is a 2016 American neo-noir psychological thriller film written, co-produced, and directed by Tom Ford, based on the 1993 novel \"Tony and Susan\" by Austin Wright. The film stars Amy Adams, Jake Gyllenhaal, Michael Shannon, Aaron Taylor-Johnson, Isla Fisher, Armie Hammer, Laura Linney, Andrea Riseborough, Karl Glusman, and Michael Sheen. Principal photography began on October 5, 2015, in Los Angeles, California. The film was released in the United States on November 18, 2016, by Focus Features, received generally positive reviews from critics and has grossed $30 million worldw",
+       "score": 0.6524557678427846,
+       "source": "vector",
+       "chunk_id": "9c11fed1a7c03986:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Dawn of the Dead (2004 film)",
+       "snippet": "Dawn of the Dead is a 2004 American horror film directed by Zack Snyder in his feature film directorial debut. A remake of George A. Romero's 1978 film of the same name, it was written by James Gunn and stars Sarah Polley, Ving Rhames, Jake Weber, and Mekhi Phifer.",
+       "score": 0.6487148017457257,
+       "source": "vector",
+       "chunk_id": "cbb4808cad06bd65:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "The Black Hole",
+       "snippet": "The film was released on December 18, 1979 in the United Kingdom and on December 21, 1979 in the United States.",
+       "score": 0.6329298426827861,
+       "source": "vector",
+       "chunk_id": "5bbdaabee424cbd9:sentence:1"
+      },
+      {
+       "rank": 6,
+       "title": "The 10th Victim",
+       "snippet": "The 10th Victim (Italian: \"La decima vittima\" ) is a 1965 Italian-French science fiction film directed by Elio Petri and starring Marcello Mastroianni and Ursula Andress, and featuring Elsa Martinelli in a supporting role. The picture is based on Robert Sheckley's 1953 short story \"Seventh Victim\". Sheckley later published a novelization of the film in 1966, and two sequels (\"Victim Prime\" and \"Hunter/Victim\") in 1987 and 1988, respectively. In the United States, the film was theatrically released by Joseph E. Levine's Embassy Pictures.",
+       "score": 0.632690056241744,
+       "source": "vector",
+       "chunk_id": "91c9dc978e62c013:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Sorcerer (film)",
+       "snippet": "Sorcerer is a 1977 American existential thriller film directed and produced by William Friedkin and starring Roy Scheider, Bruno Cremer, Francisco Rabal, and Amidou. The second adaptation of Georges Arnaud's 1950 French novel \"Le Salaire de la peur\", it has been widely considered a remake of the first adaptation, the 1953 film \"The Wages of Fear\". Friedkin, however, has disagreed with this assessment. The plot depicts four outcasts from varied backgrounds meeting in a South American village, where they are assigned to transport cargoes of nitroglycerin.",
+       "score": 0.6310599290061082,
+       "source": "vector",
+       "chunk_id": "27ad6096d76fb28d:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Strange Fruit (novel)",
+       "snippet": "Strange Fruit is a 1944 bestselling novel debut by American author Lillian Smith that dealt with the then-forbidden and controversial theme of interracial romance. The title was originally \"Jordan is so Chilly\", with Smith later changing the title to \"Strange Fruit\". In her autobiography, singer Billie Holiday wrote that Smith chose to name the book after her song \"Strange Fruit\", which was about the lynching and racism against African-Americans, although Smith maintained that the book's title referred to the \"damaged, twisted people (both black and white) who are the products or results of ou",
+       "score": 0.6289396694618588,
+       "source": "vector",
+       "chunk_id": "7e3bb7dfc1609a18:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.8126670345464904,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 215
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1139,
+     "tokens_out": 75,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.725e-05,
+      "total": 2.725e-05
+     },
+     "total_ms": 1090,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely answers the question, but only one of the eight provided context blocks is relevant to the query.",
+    "cost_usd": 0.00028528,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "6481e408-cf6c-4186-a25a-59fb4c37ae72",
+    "question": "In what year was Prophet's Prey released?",
+    "answer": {
+     "short": "2015",
+     "text": "2015. The film was released in 2015. [1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 117 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Prophet's Prey",
+       "snippet": "Prophet's Prey is a 2015 American documentary film directed by Amy J. Berg. The film is an adaptation of the 2011 book \"Prophet's Prey: My Seven-Year Investigation into Warren Jeffs and the Fundamentalist Church of Latter-Day Saints\". It was produced by Katherine LeBlond and Sam Brower, the author of the book, for Showtime and Imagine Entertainment. It premiered at the 2015 Sundance Film Festival and had its television premiere on October 10, 2015.",
+       "chunk_id": "48f6d514ce93ede1:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Prophet's Prey",
+       "snippet": "Prophet's Prey is a 2015 American documentary film directed by Amy J. Berg. The film is an adaptation of the 2011 book \"Prophet's Prey: My Seven-Year Investigation into Warren Jeffs and the Fundamentalist Church of Latter-Day Saints\". It was produced by Katherine LeBlond and Sam Brower, the author of the book, for Showtime and Imagine Entertainment. It premiered at the 2015 Sundance Film Festival and had its television premiere on October 10, 2015.",
+       "score": 0.9463709922807826,
+       "source": "graph",
+       "chunk_id": "48f6d514ce93ede1:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_d69db228c301",
+        "name": "Prophet's Prey",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_b5b4a6d67e4d",
+        "name": "2015",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_63bf6a9b8d11",
+        "name": "October 10, 2015",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_fa42a5a2c160",
+        "name": "Sundance Film Festival",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_121f209a85bf",
+        "name": "Sam Brower",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_d71ece5db861",
+        "name": "Katherine LeBlond",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_419a0a4a5717",
+        "name": "Showtime",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_a8536186b9c6",
+        "name": "Imagine Entertainment",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_f05e8ed7391b",
+        "name": "Amy J. Berg",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b4b9fe0d5a12",
+        "name": "U. S.",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_eac7c496313e",
+        "name": "I",
+        "type": "OTHER",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_d69db228c301",
+        "target": "e_b5b4a6d67e4d",
+        "predicate": "released_in_year",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_63bf6a9b8d11",
+        "predicate": "television_premiere_on",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_fa42a5a2c160",
+        "predicate": "premiered_at",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_121f209a85bf",
+        "predicate": "produced_by",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_d71ece5db861",
+        "predicate": "produced_by",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_419a0a4a5717",
+        "predicate": "produced_for",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_a8536186b9c6",
+        "predicate": "produced_for",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_f05e8ed7391b",
+        "predicate": "directed_by",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.9463709922807826,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 240
+      },
+      {
+       "name": "retrieve",
+       "ms": 586
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 513,
+     "tokens_out": 46,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 1.337e-05,
+      "total": 1.337e-05
+     },
+     "total_ms": 4389,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "completeness": 1.0,
+    "rationale": "The answer is directly supported by the context, the context is perfectly relevant to the question, and the question is fully answered.",
+    "cost_usd": 0.0002069,
+    "flagged": false,
+    "queued": false
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "b2020415-5248-4c66-b45b-f8fdf7ce7874",
+    "question": "In what year was Prophet's Prey released?",
+    "answer": {
+     "short": "2015",
+     "text": "2015. The film was released in 2015. [1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 982 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Prophet's Prey",
+       "snippet": "Prophet's Prey is a 2015 American documentary film directed by Amy J. Berg. The film is an adaptation of the 2011 book \"Prophet's Prey: My Seven-Year Investigation into Warren Jeffs and the Fundamentalist Church of Latter-Day Saints\". It was produced by Katherine LeBlond and Sam Brower, the author of the book, for Showtime and Imagine Entertainment. It premiered at the 2015 Sundance Film Festival and had its television premiere on October 10, 2015.",
+       "chunk_id": "48f6d514ce93ede1:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Prophet's Prey",
+       "snippet": "Prophet's Prey is a 2015 American documentary film directed by Amy J. Berg. The film is an adaptation of the 2011 book \"Prophet's Prey: My Seven-Year Investigation into Warren Jeffs and the Fundamentalist Church of Latter-Day Saints\". It was produced by Katherine LeBlond and Sam Brower, the author of the book, for Showtime and Imagine Entertainment. It premiered at the 2015 Sundance Film Festival and had its television premiere on October 10, 2015.",
+       "score": 0.03278688524590164,
+       "source": "hybrid",
+       "chunk_id": "48f6d514ce93ede1:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "The Black Hole",
+       "snippet": "The film was released on December 18, 1979 in the United Kingdom and on December 21, 1979 in the United States.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "5bbdaabee424cbd9:sentence:1"
+      },
+      {
+       "rank": 3,
+       "title": "Dawn of the Dead (1978 film)",
+       "snippet": "Dawn of the Dead (also known internationally as Zombi) is a 1978 American independent zombie horror film directed by George A. Romero. It was written by Romero in collaboration with the Italian filmmaker Dario Argento and produced by Richard P. Rubinstein. It was the second film made in Romero's \"Living Dead\" series and shows in a larger scale the apocalyptic effects on society, though it contains no characters or settings from \"Night of the Living Dead\". In the film, a phenomenon of unidentified origin has caused the reanimation of the dead, who prey on human flesh.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "f8174a52a57af522:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Strange Fruit (novel)",
+       "snippet": "Strange Fruit is a 1944 bestselling novel debut by American author Lillian Smith that dealt with the then-forbidden and controversial theme of interracial romance. The title was originally \"Jordan is so Chilly\", with Smith later changing the title to \"Strange Fruit\". In her autobiography, singer Billie Holiday wrote that Smith chose to name the book after her song \"Strange Fruit\", which was about the lynching and racism against African-Americans, although Smith maintained that the book's title referred to the \"damaged, twisted people (both black and white) who are the products or results of ou",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "7e3bb7dfc1609a18:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Nocturnal Animals",
+       "snippet": "Nocturnal Animals is a 2016 American neo-noir psychological thriller film written, co-produced, and directed by Tom Ford, based on the 1993 novel \"Tony and Susan\" by Austin Wright. The film stars Amy Adams, Jake Gyllenhaal, Michael Shannon, Aaron Taylor-Johnson, Isla Fisher, Armie Hammer, Laura Linney, Andrea Riseborough, Karl Glusman, and Michael Sheen. Principal photography began on October 5, 2015, in Los Angeles, California. The film was released in the United States on November 18, 2016, by Focus Features, received generally positive reviews from critics and has grossed $30 million worldw",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "9c11fed1a7c03986:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "The 10th Victim",
+       "snippet": "The 10th Victim (Italian: \"La decima vittima\" ) is a 1965 Italian-French science fiction film directed by Elio Petri and starring Marcello Mastroianni and Ursula Andress, and featuring Elsa Martinelli in a supporting role. The picture is based on Robert Sheckley's 1953 short story \"Seventh Victim\". Sheckley later published a novelization of the film in 1966, and two sequels (\"Victim Prime\" and \"Hunter/Victim\") in 1987 and 1988, respectively. In the United States, the film was theatrically released by Joseph E. Levine's Embassy Pictures.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "91c9dc978e62c013:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Sorcerer (film)",
+       "snippet": "Sorcerer is a 1977 American existential thriller film directed and produced by William Friedkin and starring Roy Scheider, Bruno Cremer, Francisco Rabal, and Amidou. The second adaptation of Georges Arnaud's 1950 French novel \"Le Salaire de la peur\", it has been widely considered a remake of the first adaptation, the 1953 film \"The Wages of Fear\". Friedkin, however, has disagreed with this assessment. The plot depicts four outcasts from varied backgrounds meeting in a South American village, where they are assigned to transport cargoes of nitroglycerin.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "27ad6096d76fb28d:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Dawn of the Dead (2004 film)",
+       "snippet": "Dawn of the Dead is a 2004 American horror film directed by Zack Snyder in his feature film directorial debut. A remake of George A. Romero's 1978 film of the same name, it was written by James Gunn and stars Sarah Polley, Ving Rhames, Jake Weber, and Mekhi Phifer.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "cbb4808cad06bd65:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_d69db228c301",
+        "name": "Prophet's Prey",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_b5b4a6d67e4d",
+        "name": "2015",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_63bf6a9b8d11",
+        "name": "October 10, 2015",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_fa42a5a2c160",
+        "name": "Sundance Film Festival",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_121f209a85bf",
+        "name": "Sam Brower",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_d71ece5db861",
+        "name": "Katherine LeBlond",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_419a0a4a5717",
+        "name": "Showtime",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_a8536186b9c6",
+        "name": "Imagine Entertainment",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_f05e8ed7391b",
+        "name": "Amy J. Berg",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b4b9fe0d5a12",
+        "name": "U. S.",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_eac7c496313e",
+        "name": "I",
+        "type": "OTHER",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_d69db228c301",
+        "target": "e_b5b4a6d67e4d",
+        "predicate": "released_in_year",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_63bf6a9b8d11",
+        "predicate": "television_premiere_on",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_fa42a5a2c160",
+        "predicate": "premiered_at",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_121f209a85bf",
+        "predicate": "produced_by",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_d71ece5db861",
+        "predicate": "produced_by",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_419a0a4a5717",
+        "predicate": "produced_for",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_a8536186b9c6",
+        "predicate": "produced_for",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d69db228c301",
+        "target": "e_f05e8ed7391b",
+        "predicate": "directed_by",
+        "chunk_id": "48f6d514ce93ede1:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.8126670345464904,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 213
+      },
+      {
+       "name": "link",
+       "ms": 292
+      },
+      {
+       "name": "retrieve",
+       "ms": 591
+      },
+      {
+       "name": "merge",
+       "ms": 591
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1327,
+     "tokens_out": 40,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.749e-05,
+      "total": 2.749e-05
+     },
+     "total_ms": 6404,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely answers the question, but only one of the eight provided context blocks is relevant to the query.",
+    "cost_usd": 0.00030084,
+    "flagged": true,
+    "queued": false
+   }
+  }
+ }
+}

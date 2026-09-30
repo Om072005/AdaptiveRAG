@@ -1,0 +1,1302 @@
+{
+ "sample": false,
+ "question_id": "hp_5a7e7c725542991319bc94be",
+ "question": "In what year did Farda Amiga win a race at the Saratoga Race course?",
+ "type": "multi_hop",
+ "gold_answer": "2002",
+ "supporting_titles": [
+  "Farda Amiga",
+  "Alabama Stakes"
+ ],
+ "why": "Went wrong on every route: the year needs three sentences about one horse's seasons.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "4a0ff68f-3f07-4dbf-a61b-33a9473e8f84",
+    "question": "In what year did Farda Amiga win a race at the Saratoga Race course?",
+    "answer": {
+     "short": "2001",
+     "text": "2001. The only win mentioned for Farda Amiga is her racecourse debut as a juvenile in 2001, which was on turf【1】.",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label single_hop, 952 tokens",
+     "confidence": 0.5,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "auto",
+     "label": "single_hop",
+     "label_confidence": 0.6240968704223633,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "ambiguous:single_hop 0.62"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Farda Amiga",
+       "snippet": "Farda Amiga (foaled February 1, 1999) is an American Thoroughbred racehorse and broodmare. Bred in Kentucky, but owned and trained by Brazilian horsemen, she showed some promise racing on turf as a juvenile in 2001, winning on her racecourse debut and finishing fifth at Grade III level on her only subsequent start. In the following season she won one of her first two races on turf before being switched to run on dirt and showed improved form.",
+       "score": 0.03177805800756621,
+       "source": "hybrid",
+       "chunk_id": "957ab1ab6d22b9ab:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Saratoga Race Course",
+       "snippet": "Saratoga Race Course is a thoroughbred horse racing track in Saratoga Springs, New York, United States, with a capacity of 50,000. Opened in 1863, it is often considered to be the oldest sporting venue of any kind in the country, but is actually the fourth oldest racetrack in the US (after 3rd oldest Pleasanton Fairgrounds Racetrack, 2nd oldest Fair Grounds Race Course, and oldest Freehold Raceway).",
+       "score": 0.03252247488101534,
+       "source": "hybrid",
+       "chunk_id": "9ae8c89fdac2e32d:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Fourstardave",
+       "snippet": "Fourstardave (April 2, 1985 — October 14, 2002) was an American Thoroughbred racehorse who won at least one race at Saratoga Race Course each year from 1987 to 1994, earning him the nickname \"The Sultan of Saratoga\". He died of a heart attack in October 2002 at the age of 17 while preparing for a parade of retired New York bred horses at Belmont Park and was buried in Clare Court at Saratoga Race Course.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "827b7e4672b6ac8b:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Glens Falls Handicap",
+       "snippet": "The Glens Falls Handicap is an American Thoroughbred horse race held annually at Saratoga Race Course in Saratoga Springs, New York. Open to fillies and mares age three and older, it is run at a distance of one and three-eighths miles (11 furlongs) on the turf. A Grade III event, it currently offers a purse of $200,000. The event at Saratoga Race Course is named after the nearby city of Glens Falls, New York.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "e589a9eddea94408:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Saratoga Casino Hotel",
+       "snippet": "Saratoga Casino Hotel (formerly Saratoga Casino and Raceway) is an establishment in Saratoga Springs, New York. Saratoga Casino Hotel is home to a -mile standardbred race track, with a racino and hotel located inside the racetrack's grandstand. Saratoga Casino Hotel is not to be confused with the historic Saratoga Race Course thoroughbred race track located across the street on Nelson Avenue.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "9f6a449a52e30a65:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Alydar",
+       "snippet": "Alydar (March 23, 1975 – November 15, 1990) was a chestnut colt and an American Thoroughbred race horse who was most famous for finishing a close second to Affirmed in all three races of the Triple Crown. With each successive race, Alydar narrowed Affirmed's margin of victory; Affirmed won by 1.5 lengths in the Kentucky Derby, by a neck in the Preakness and by a head in the Belmont Stakes. Alydar has been described as the best horse in the history of Thoroughbred racing never to have won a championship.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "76f86ed9050a42a0:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Schuylerville Stakes",
+       "snippet": "The Schuylerville Stakes is an American Thoroughbred horse race held annually at Saratoga Race Course in Saratoga Springs, New York. Open to two-year-old fillies, it is contested at a distance of six furlongs on dirt. A Grade III event, it currently offers a purse of $150,000. In 2006, the race was downgraded from a Grade II to a Grade III. By tradition, the Schuylerville opens the Saratoga meet each year. The race is named for the nearby town of Schuylerville, New York.",
+       "score": 0.031024531024531024,
+       "source": "hybrid",
+       "chunk_id": "a7a096bb34f333e8:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "National Museum of Racing and Hall of Fame",
+       "snippet": "The National Museum of Racing and Hall of Fame was founded in 1950 in Saratoga Springs, New York, to honor the achievements of American Thoroughbred race horses, jockeys, and trainers. In 1955, the museum moved to its current location on Union Avenue near Saratoga race course, at which time inductions into the hall of fame began. Each spring, following the tabulation of the final votes, the announcement of new inductees is made, usually during Kentucky Derby Week in early May. The actual inductions are held in mid-August during the Saratoga race meeting.",
+       "score": 0.031054405392392875,
+       "source": "hybrid",
+       "chunk_id": "0e01083678c685fd:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_03f22a5cad24",
+        "name": "Saratoga Race Course",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_de5413818623",
+        "name": "Saratoga Springs",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_5f3d64aff103",
+        "name": "National Museum of Racing and Hall of Fame",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_1a623c774fa4",
+        "name": "Union Avenue near Saratoga race course",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_dc5e8b74c125",
+        "name": "Saratoga race meeting",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_3aba0b6c78ef",
+        "name": "Schuylerville Stakes",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_db6e56d93522",
+        "name": "Saratoga meet",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_464d6964866e",
+        "name": "1863",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b8950e648fbe",
+        "name": "Richard Thornton Wilson, Jr.",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2e78a62be3c9",
+        "name": "Farda Amiga",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_8a86a876ef98",
+        "name": "February 1, 1999",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_75cf6371a2c7",
+        "name": "2001",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_49a6b7e3bb63",
+        "name": "Saratoga Race Course",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_857f56d29c71",
+        "name": "The Rat Race",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_c7f81a28feaa",
+        "name": "Clare Court at Saratoga Race Course",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_320f08825886",
+        "name": "The Heat",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_bb3471be4b07",
+        "name": "What Did I Do?",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_953588103f42",
+        "name": "At the Movies",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_ab89f674d4d4",
+        "name": "course record",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_d736b1c1dd82",
+        "name": "\"The Float\"",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_02c2e922198f",
+        "name": "the shark",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0e6e29440ca4",
+        "name": "The Storm",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_354a5b0c2a23",
+        "name": "The Seven",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_407cd9126733",
+        "name": "The score",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_59e6e056d252",
+        "name": "the Wiz",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8588c0a0f1f0",
+        "name": "The Bet",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7cbce00c63ca",
+        "name": "She",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_86ccf4b79787",
+        "name": "SAB",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_8028b5f34604",
+        "name": "The Sounds",
+        "type": "ORG",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_03f22a5cad24",
+        "target": "e_de5413818623",
+        "predicate": "located_in",
+        "chunk_id": "9ae8c89fdac2e32d:sentence:0",
+        "confidence": 0.9
+       },
+       {
+        "source": "e_5f3d64aff103",
+        "target": "e_1a623c774fa4",
+        "predicate": "moved_to",
+        "chunk_id": "0e01083678c685fd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5f3d64aff103",
+        "target": "e_dc5e8b74c125",
+        "predicate": "holds_inductions_during",
+        "chunk_id": "0e01083678c685fd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_3aba0b6c78ef",
+        "target": "e_03f22a5cad24",
+        "predicate": "held_at",
+        "chunk_id": "a7a096bb34f333e8:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_3aba0b6c78ef",
+        "target": "e_db6e56d93522",
+        "predicate": "opens",
+        "chunk_id": "a7a096bb34f333e8:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_03f22a5cad24",
+        "target": "e_464d6964866e",
+        "predicate": "opened_on",
+        "chunk_id": "9ae8c89fdac2e32d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_b8950e648fbe",
+        "target": "e_03f22a5cad24",
+        "predicate": "was_president_of",
+        "chunk_id": "169a6ce07c42aff7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2e78a62be3c9",
+        "target": "e_8a86a876ef98",
+        "predicate": "foaled_on",
+        "chunk_id": "957ab1ab6d22b9ab:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2e78a62be3c9",
+        "target": "e_75cf6371a2c7",
+        "predicate": "won_on_turf_as_junior_in",
+        "chunk_id": "957ab1ab6d22b9ab:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.8395232808447866,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 271
+      },
+      {
+       "name": "retrieve",
+       "ms": 210
+      },
+      {
+       "name": "retrieve",
+       "ms": 790
+      },
+      {
+       "name": "merge",
+       "ms": 391
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 1317,
+     "tokens_out": 105,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 3.316e-05,
+      "total": 3.316e-05
+     },
+     "total_ms": 9474,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 0.5
+   },
+   "judgement": {
+    "faithfulness": 0.0,
+    "relevance": 1.0,
+    "completeness": 1.0,
+    "rationale": "The answer claims Farda Amiga won at Saratoga in 2001, but the context only states she won a race in 2001 without mentioning the location.",
+    "cost_usd": 0.00085538,
+    "flagged": true,
+    "queued": true
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "8ef5ba06-951e-4011-94c6-5104532dd326",
+    "question": "In what year did Farda Amiga win a race at the Saratoga Race course?",
+    "answer": {
+     "short": "not enough context",
+     "text": "not enough context",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 952 tokens",
+     "confidence": 0.0,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Farda Amiga",
+       "snippet": "Farda Amiga (foaled February 1, 1999) is an American Thoroughbred racehorse and broodmare. Bred in Kentucky, but owned and trained by Brazilian horsemen, she showed some promise racing on turf as a juvenile in 2001, winning on her racecourse debut and finishing fifth at Grade III level on her only subsequent start. In the following season she won one of her first two races on turf before being switched to run on dirt and showed improved form.",
+       "score": 0.8395232808447866,
+       "source": "vector",
+       "chunk_id": "957ab1ab6d22b9ab:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Saratoga Race Course",
+       "snippet": "Saratoga Race Course is a thoroughbred horse racing track in Saratoga Springs, New York, United States, with a capacity of 50,000. Opened in 1863, it is often considered to be the oldest sporting venue of any kind in the country, but is actually the fourth oldest racetrack in the US (after 3rd oldest Pleasanton Fairgrounds Racetrack, 2nd oldest Fair Grounds Race Course, and oldest Freehold Raceway).",
+       "score": 0.7405554276870322,
+       "source": "vector",
+       "chunk_id": "9ae8c89fdac2e32d:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Saratoga Casino Hotel",
+       "snippet": "Saratoga Casino Hotel (formerly Saratoga Casino and Raceway) is an establishment in Saratoga Springs, New York. Saratoga Casino Hotel is home to a -mile standardbred race track, with a racino and hotel located inside the racetrack's grandstand. Saratoga Casino Hotel is not to be confused with the historic Saratoga Race Course thoroughbred race track located across the street on Nelson Avenue.",
+       "score": 0.6963172347451109,
+       "source": "vector",
+       "chunk_id": "9f6a449a52e30a65:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Fourstardave",
+       "snippet": "Fourstardave (April 2, 1985 — October 14, 2002) was an American Thoroughbred racehorse who won at least one race at Saratoga Race Course each year from 1987 to 1994, earning him the nickname \"The Sultan of Saratoga\". He died of a heart attack in October 2002 at the age of 17 while preparing for a parade of retired New York bred horses at Belmont Park and was buried in Clare Court at Saratoga Race Course.",
+       "score": 0.6851140464876311,
+       "source": "vector",
+       "chunk_id": "827b7e4672b6ac8b:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Glens Falls Handicap",
+       "snippet": "The Glens Falls Handicap is an American Thoroughbred horse race held annually at Saratoga Race Course in Saratoga Springs, New York. Open to fillies and mares age three and older, it is run at a distance of one and three-eighths miles (11 furlongs) on the turf. A Grade III event, it currently offers a purse of $200,000. The event at Saratoga Race Course is named after the nearby city of Glens Falls, New York.",
+       "score": 0.6741325460115837,
+       "source": "vector",
+       "chunk_id": "e589a9eddea94408:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Schuylerville Stakes",
+       "snippet": "The Schuylerville Stakes is an American Thoroughbred horse race held annually at Saratoga Race Course in Saratoga Springs, New York. Open to two-year-old fillies, it is contested at a distance of six furlongs on dirt. A Grade III event, it currently offers a purse of $150,000. In 2006, the race was downgraded from a Grade II to a Grade III. By tradition, the Schuylerville opens the Saratoga meet each year. The race is named for the nearby town of Schuylerville, New York.",
+       "score": 0.6678293744376514,
+       "source": "vector",
+       "chunk_id": "a7a096bb34f333e8:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "National Museum of Racing and Hall of Fame",
+       "snippet": "The National Museum of Racing and Hall of Fame was founded in 1950 in Saratoga Springs, New York, to honor the achievements of American Thoroughbred race horses, jockeys, and trainers. In 1955, the museum moved to its current location on Union Avenue near Saratoga race course, at which time inductions into the hall of fame began. Each spring, following the tabulation of the final votes, the announcement of new inductees is made, usually during Kentucky Derby Week in early May. The actual inductions are held in mid-August during the Saratoga race meeting.",
+       "score": 0.6523467703954374,
+       "source": "vector",
+       "chunk_id": "0e01083678c685fd:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Alydar",
+       "snippet": "Alydar (March 23, 1975 – November 15, 1990) was a chestnut colt and an American Thoroughbred race horse who was most famous for finishing a close second to Affirmed in all three races of the Triple Crown. With each successive race, Alydar narrowed Affirmed's margin of victory; Affirmed won by 1.5 lengths in the Kentucky Derby, by a neck in the Preakness and by a head in the Belmont Stakes. Alydar has been described as the best horse in the history of Thoroughbred racing never to have won a championship.",
+       "score": 0.6266442573090631,
+       "source": "vector",
+       "chunk_id": "76f86ed9050a42a0:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.8395232808447866,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 215
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1125,
+     "tokens_out": 85,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.79e-05,
+      "total": 2.79e-05
+     },
+     "total_ms": 1095,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 0.5
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The context contains information about Farda Amiga and Saratoga Race Course, but never mentions a connection between the two; therefore, 'not enough context' is the correct answer. About half of the provided context blocks are irrelevant to the specific question.",
+    "cost_usd": 0.00038872,
+    "flagged": true,
+    "queued": true
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "ad3018c9-b96f-403e-8dab-018bfeb4479f",
+    "question": "In what year did Farda Amiga win a race at the Saratoga Race course?",
+    "answer": {
+     "short": "not enough context",
+     "text": "not enough context",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 583 tokens",
+     "confidence": 0.0,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Saratoga Race Course",
+       "snippet": "Saratoga Race Course is a thoroughbred horse racing track in Saratoga Springs, New York, United States, with a capacity of 50,000. Opened in 1863, it is often considered to be the oldest sporting venue of any kind in the country, but is actually the fourth oldest racetrack in the US (after 3rd oldest Pleasanton Fairgrounds Racetrack, 2nd oldest Fair Grounds Race Course, and oldest Freehold Raceway).",
+       "score": 0.7509782552427585,
+       "source": "graph",
+       "chunk_id": "9ae8c89fdac2e32d:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "National Museum of Racing and Hall of Fame",
+       "snippet": "The National Museum of Racing and Hall of Fame was founded in 1950 in Saratoga Springs, New York, to honor the achievements of American Thoroughbred race horses, jockeys, and trainers. In 1955, the museum moved to its current location on Union Avenue near Saratoga race course, at which time inductions into the hall of fame began. Each spring, following the tabulation of the final votes, the announcement of new inductees is made, usually during Kentucky Derby Week in early May. The actual inductions are held in mid-August during the Saratoga race meeting.",
+       "score": 0.6924054995228449,
+       "source": "graph",
+       "chunk_id": "0e01083678c685fd:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Schuylerville Stakes",
+       "snippet": "The Schuylerville Stakes is an American Thoroughbred horse race held annually at Saratoga Race Course in Saratoga Springs, New York. Open to two-year-old fillies, it is contested at a distance of six furlongs on dirt. A Grade III event, it currently offers a purse of $150,000. In 2006, the race was downgraded from a Grade II to a Grade III. By tradition, the Schuylerville opens the Saratoga meet each year. The race is named for the nearby town of Schuylerville, New York.",
+       "score": 0.6528177774599496,
+       "source": "graph",
+       "chunk_id": "a7a096bb34f333e8:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Wilson Stakes",
+       "snippet": "The Wilson Stakes/Handicap was an American Thoroughbred horse race run for twenty-nine years between 1930 and 1958. Inaugurated at the Saratoga Race Course in Saratoga Springs, New York, it was named In honor of Richard Thornton Wilson, Jr., a prominent Thoroughbred owner and president of Saratoga Race Course.",
+       "score": 0.6114907905991228,
+       "source": "graph",
+       "chunk_id": "169a6ce07c42aff7:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Farda Amiga",
+       "snippet": "Farda Amiga (foaled February 1, 1999) is an American Thoroughbred racehorse and broodmare. Bred in Kentucky, but owned and trained by Brazilian horsemen, she showed some promise racing on turf as a juvenile in 2001, winning on her racecourse debut and finishing fifth at Grade III level on her only subsequent start. In the following season she won one of her first two races on turf before being switched to run on dirt and showed improved form.",
+       "score": 0.8946915684548489,
+       "source": "graph",
+       "chunk_id": "957ab1ab6d22b9ab:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_03f22a5cad24",
+        "name": "Saratoga Race Course",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_de5413818623",
+        "name": "Saratoga Springs",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_5f3d64aff103",
+        "name": "National Museum of Racing and Hall of Fame",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_1a623c774fa4",
+        "name": "Union Avenue near Saratoga race course",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_dc5e8b74c125",
+        "name": "Saratoga race meeting",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_3aba0b6c78ef",
+        "name": "Schuylerville Stakes",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_db6e56d93522",
+        "name": "Saratoga meet",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_464d6964866e",
+        "name": "1863",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b8950e648fbe",
+        "name": "Richard Thornton Wilson, Jr.",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2e78a62be3c9",
+        "name": "Farda Amiga",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_8a86a876ef98",
+        "name": "February 1, 1999",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_75cf6371a2c7",
+        "name": "2001",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_49a6b7e3bb63",
+        "name": "Saratoga Race Course",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_857f56d29c71",
+        "name": "The Rat Race",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_c7f81a28feaa",
+        "name": "Clare Court at Saratoga Race Course",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_320f08825886",
+        "name": "The Heat",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_bb3471be4b07",
+        "name": "What Did I Do?",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_953588103f42",
+        "name": "At the Movies",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_ab89f674d4d4",
+        "name": "course record",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_d736b1c1dd82",
+        "name": "\"The Float\"",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_02c2e922198f",
+        "name": "the shark",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0e6e29440ca4",
+        "name": "The Storm",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_354a5b0c2a23",
+        "name": "The Seven",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_407cd9126733",
+        "name": "The score",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_59e6e056d252",
+        "name": "the Wiz",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8588c0a0f1f0",
+        "name": "The Bet",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7cbce00c63ca",
+        "name": "She",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_86ccf4b79787",
+        "name": "SAB",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_8028b5f34604",
+        "name": "The Sounds",
+        "type": "ORG",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_03f22a5cad24",
+        "target": "e_de5413818623",
+        "predicate": "located_in",
+        "chunk_id": "9ae8c89fdac2e32d:sentence:0",
+        "confidence": 0.9
+       },
+       {
+        "source": "e_5f3d64aff103",
+        "target": "e_1a623c774fa4",
+        "predicate": "moved_to",
+        "chunk_id": "0e01083678c685fd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5f3d64aff103",
+        "target": "e_dc5e8b74c125",
+        "predicate": "holds_inductions_during",
+        "chunk_id": "0e01083678c685fd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_3aba0b6c78ef",
+        "target": "e_03f22a5cad24",
+        "predicate": "held_at",
+        "chunk_id": "a7a096bb34f333e8:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_3aba0b6c78ef",
+        "target": "e_db6e56d93522",
+        "predicate": "opens",
+        "chunk_id": "a7a096bb34f333e8:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_03f22a5cad24",
+        "target": "e_464d6964866e",
+        "predicate": "opened_on",
+        "chunk_id": "9ae8c89fdac2e32d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_b8950e648fbe",
+        "target": "e_03f22a5cad24",
+        "predicate": "was_president_of",
+        "chunk_id": "169a6ce07c42aff7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2e78a62be3c9",
+        "target": "e_8a86a876ef98",
+        "predicate": "foaled_on",
+        "chunk_id": "957ab1ab6d22b9ab:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2e78a62be3c9",
+        "target": "e_75cf6371a2c7",
+        "predicate": "won_on_turf_as_junior_in",
+        "chunk_id": "957ab1ab6d22b9ab:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7509782552427585,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 273
+      },
+      {
+       "name": "retrieve",
+       "ms": 792
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 982,
+     "tokens_out": 56,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.272e-05,
+      "total": 2.272e-05
+     },
+     "total_ms": 5683,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 0.5
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "completeness": 1.0,
+    "rationale": "The context mentions Farda Amiga's wins in 2001 and 2002, but it never specifies that these races took place at the Saratoga Race Course. Therefore, the answer 'not enough context' is correct.",
+    "cost_usd": 0.0002953,
+    "flagged": false,
+    "queued": true
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "b5eda914-f568-4c4e-a5a2-1c82b9fe313e",
+    "question": "In what year did Farda Amiga win a race at the Saratoga Race course?",
+    "answer": {
+     "short": "2001",
+     "text": "2001. The only win mentioned for Farda Amiga is her racecourse debut as a juvenile in 2001, which was on turf【1】.",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 952 tokens",
+     "confidence": 0.5,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Farda Amiga",
+       "snippet": "Farda Amiga (foaled February 1, 1999) is an American Thoroughbred racehorse and broodmare. Bred in Kentucky, but owned and trained by Brazilian horsemen, she showed some promise racing on turf as a juvenile in 2001, winning on her racecourse debut and finishing fifth at Grade III level on her only subsequent start. In the following season she won one of her first two races on turf before being switched to run on dirt and showed improved form.",
+       "score": 0.03177805800756621,
+       "source": "hybrid",
+       "chunk_id": "957ab1ab6d22b9ab:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Saratoga Race Course",
+       "snippet": "Saratoga Race Course is a thoroughbred horse racing track in Saratoga Springs, New York, United States, with a capacity of 50,000. Opened in 1863, it is often considered to be the oldest sporting venue of any kind in the country, but is actually the fourth oldest racetrack in the US (after 3rd oldest Pleasanton Fairgrounds Racetrack, 2nd oldest Fair Grounds Race Course, and oldest Freehold Raceway).",
+       "score": 0.03252247488101534,
+       "source": "hybrid",
+       "chunk_id": "9ae8c89fdac2e32d:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Fourstardave",
+       "snippet": "Fourstardave (April 2, 1985 — October 14, 2002) was an American Thoroughbred racehorse who won at least one race at Saratoga Race Course each year from 1987 to 1994, earning him the nickname \"The Sultan of Saratoga\". He died of a heart attack in October 2002 at the age of 17 while preparing for a parade of retired New York bred horses at Belmont Park and was buried in Clare Court at Saratoga Race Course.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "827b7e4672b6ac8b:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Glens Falls Handicap",
+       "snippet": "The Glens Falls Handicap is an American Thoroughbred horse race held annually at Saratoga Race Course in Saratoga Springs, New York. Open to fillies and mares age three and older, it is run at a distance of one and three-eighths miles (11 furlongs) on the turf. A Grade III event, it currently offers a purse of $200,000. The event at Saratoga Race Course is named after the nearby city of Glens Falls, New York.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "e589a9eddea94408:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Saratoga Casino Hotel",
+       "snippet": "Saratoga Casino Hotel (formerly Saratoga Casino and Raceway) is an establishment in Saratoga Springs, New York. Saratoga Casino Hotel is home to a -mile standardbred race track, with a racino and hotel located inside the racetrack's grandstand. Saratoga Casino Hotel is not to be confused with the historic Saratoga Race Course thoroughbred race track located across the street on Nelson Avenue.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "9f6a449a52e30a65:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Alydar",
+       "snippet": "Alydar (March 23, 1975 – November 15, 1990) was a chestnut colt and an American Thoroughbred race horse who was most famous for finishing a close second to Affirmed in all three races of the Triple Crown. With each successive race, Alydar narrowed Affirmed's margin of victory; Affirmed won by 1.5 lengths in the Kentucky Derby, by a neck in the Preakness and by a head in the Belmont Stakes. Alydar has been described as the best horse in the history of Thoroughbred racing never to have won a championship.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "76f86ed9050a42a0:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Schuylerville Stakes",
+       "snippet": "The Schuylerville Stakes is an American Thoroughbred horse race held annually at Saratoga Race Course in Saratoga Springs, New York. Open to two-year-old fillies, it is contested at a distance of six furlongs on dirt. A Grade III event, it currently offers a purse of $150,000. In 2006, the race was downgraded from a Grade II to a Grade III. By tradition, the Schuylerville opens the Saratoga meet each year. The race is named for the nearby town of Schuylerville, New York.",
+       "score": 0.031024531024531024,
+       "source": "hybrid",
+       "chunk_id": "a7a096bb34f333e8:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "National Museum of Racing and Hall of Fame",
+       "snippet": "The National Museum of Racing and Hall of Fame was founded in 1950 in Saratoga Springs, New York, to honor the achievements of American Thoroughbred race horses, jockeys, and trainers. In 1955, the museum moved to its current location on Union Avenue near Saratoga race course, at which time inductions into the hall of fame began. Each spring, following the tabulation of the final votes, the announcement of new inductees is made, usually during Kentucky Derby Week in early May. The actual inductions are held in mid-August during the Saratoga race meeting.",
+       "score": 0.031054405392392875,
+       "source": "hybrid",
+       "chunk_id": "0e01083678c685fd:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_03f22a5cad24",
+        "name": "Saratoga Race Course",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_de5413818623",
+        "name": "Saratoga Springs",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_5f3d64aff103",
+        "name": "National Museum of Racing and Hall of Fame",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_1a623c774fa4",
+        "name": "Union Avenue near Saratoga race course",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_dc5e8b74c125",
+        "name": "Saratoga race meeting",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_3aba0b6c78ef",
+        "name": "Schuylerville Stakes",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_db6e56d93522",
+        "name": "Saratoga meet",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_464d6964866e",
+        "name": "1863",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b8950e648fbe",
+        "name": "Richard Thornton Wilson, Jr.",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2e78a62be3c9",
+        "name": "Farda Amiga",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_8a86a876ef98",
+        "name": "February 1, 1999",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_75cf6371a2c7",
+        "name": "2001",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_49a6b7e3bb63",
+        "name": "Saratoga Race Course",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_857f56d29c71",
+        "name": "The Rat Race",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_c7f81a28feaa",
+        "name": "Clare Court at Saratoga Race Course",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_320f08825886",
+        "name": "The Heat",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_bb3471be4b07",
+        "name": "What Did I Do?",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_953588103f42",
+        "name": "At the Movies",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_ab89f674d4d4",
+        "name": "course record",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_d736b1c1dd82",
+        "name": "\"The Float\"",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_02c2e922198f",
+        "name": "the shark",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0e6e29440ca4",
+        "name": "The Storm",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_354a5b0c2a23",
+        "name": "The Seven",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_407cd9126733",
+        "name": "The score",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_59e6e056d252",
+        "name": "the Wiz",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8588c0a0f1f0",
+        "name": "The Bet",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7cbce00c63ca",
+        "name": "She",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_86ccf4b79787",
+        "name": "SAB",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_8028b5f34604",
+        "name": "The Sounds",
+        "type": "ORG",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_03f22a5cad24",
+        "target": "e_de5413818623",
+        "predicate": "located_in",
+        "chunk_id": "9ae8c89fdac2e32d:sentence:0",
+        "confidence": 0.9
+       },
+       {
+        "source": "e_5f3d64aff103",
+        "target": "e_1a623c774fa4",
+        "predicate": "moved_to",
+        "chunk_id": "0e01083678c685fd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5f3d64aff103",
+        "target": "e_dc5e8b74c125",
+        "predicate": "holds_inductions_during",
+        "chunk_id": "0e01083678c685fd:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_3aba0b6c78ef",
+        "target": "e_03f22a5cad24",
+        "predicate": "held_at",
+        "chunk_id": "a7a096bb34f333e8:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_3aba0b6c78ef",
+        "target": "e_db6e56d93522",
+        "predicate": "opens",
+        "chunk_id": "a7a096bb34f333e8:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_03f22a5cad24",
+        "target": "e_464d6964866e",
+        "predicate": "opened_on",
+        "chunk_id": "9ae8c89fdac2e32d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_b8950e648fbe",
+        "target": "e_03f22a5cad24",
+        "predicate": "was_president_of",
+        "chunk_id": "169a6ce07c42aff7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2e78a62be3c9",
+        "target": "e_8a86a876ef98",
+        "predicate": "foaled_on",
+        "chunk_id": "957ab1ab6d22b9ab:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2e78a62be3c9",
+        "target": "e_75cf6371a2c7",
+        "predicate": "won_on_turf_as_junior_in",
+        "chunk_id": "957ab1ab6d22b9ab:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.8395232808447866,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 213
+      },
+      {
+       "name": "link",
+       "ms": 267
+      },
+      {
+       "name": "retrieve",
+       "ms": 798
+      },
+      {
+       "name": "merge",
+       "ms": 397
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1317,
+     "tokens_out": 105,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 3.316e-05,
+      "total": 3.316e-05
+     },
+     "total_ms": 9491,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 0.5
+   },
+   "judgement": {
+    "faithfulness": 0.0,
+    "relevance": 1.0,
+    "completeness": 1.0,
+    "rationale": "The answer claims Farda Amiga won at Saratoga in 2001, but the context only states she won a race in 2001 without mentioning the location.",
+    "cost_usd": 0.00085538,
+    "flagged": true,
+    "queued": true
+   }
+  }
+ }
+}

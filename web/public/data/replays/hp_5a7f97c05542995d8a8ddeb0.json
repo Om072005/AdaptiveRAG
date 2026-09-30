@@ -1,0 +1,1754 @@
+{
+ "sample": false,
+ "question_id": "hp_5a7f97c05542995d8a8ddeb0",
+ "question": "Whom was the cofounder of Orange County Choppers and appeared with Paul Teutul Sr on American Chopper?",
+ "type": "multi_hop",
+ "gold_answer": "Paul Teutul Jr.",
+ "supporting_titles": [
+  "Orange County Choppers",
+  "Paul Teutul Sr."
+ ],
+ "why": "Graph traversal alone (F1 1.0) beats hybrid with the small model (0.67); the served route, which sends it to the large model, gets it right.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "534dc8bb-daf2-4270-aba5-cd26411dbe00",
+    "question": "Whom was the cofounder of Orange County Choppers and appeared with Paul Teutul Sr on American Chopper?",
+    "answer": {
+     "short": "Paul Teutul Jr",
+     "text": "Paul Teutul Jr. Paul Michael Teutul co-founded Orange County Choppers with his father in 1999 [2][4]. He also starred alongside Paul Teutul Sr. on the reality television series American Chopper [5].",
+     "model": "qwen3.6:35b-a3b",
+     "size": "large",
+     "select_reason": "large:label multi_hop",
+     "confidence": 0.8333,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 2,
+       "title": "Paul Teutul Jr.",
+       "snippet": "Paul Michael Teutul (born October 2, 1974) was one of the stars of the American reality television series \"American Chopper\". He co-founded Orange County Choppers (OCC) with his father, Paul Teutul Sr. in 1999. Teutul was the chief designer and fabricator of OCC. Prior to this, Teutul was head of the rail shop at Orange County Ironworks. He was also responsible for designing the logo for OCC. He is the owner of Paul Jr. Designs, which manufactures custom motorcycles and sells branded clothing.",
+       "chunk_id": "d6a5bb54ca752177:sentence:0"
+      },
+      {
+       "n": 4,
+       "title": "Orange County Choppers",
+       "snippet": "Orange County Choppers (OCC) is a motorcycle manufacturer and lifestyle brand company based in the town of Newburgh, located in Orange County, New York, that was founded in 1999 by Paul Teutul Sr., and Paul Teutul Jr. The company was featured on \"American Chopper\", a reality TV show that debuted in September 2002 on the Discovery Channel. The series moved to Discovery Channel's sister channel TLC in 2007. Following cancellation of the Discovery series, the company was also featured on \"Orange County Choppers\" on the CMT network in 2013.",
+       "chunk_id": "1b764e1792aa4772:sentence:0"
+      },
+      {
+       "n": 5,
+       "title": "American Chopper",
+       "snippet": "American Chopper is an American reality television series that aired on Discovery Channel from 2003-2010, produced by Pilgrim Films & Television. The series centers on Paul Teutul, Sr. (frequently called \"Senior\"), and his son Paul Teutul, Jr. (also known as \"Paulie\" or simply \"Junior\"), who manufacture custom chopper-style motorcycles. Orange County Choppers is in Newburgh, New York.",
+       "chunk_id": "04d44742fdfeae19:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "multi_hop",
+     "label_confidence": 0.625736653804779,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "ambiguous:multi_hop 0.63"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Paul Teutul Sr.",
+       "snippet": "Paul John Teutul is the founder of Orange County Choppers, a manufacturer of custom motorcycles and the focus of the reality television series \"American Chopper\". Teutul first appeared on the show with his sons Paul Teutul Jr., Michael Teutul. In 2013 his new show \"Orange County Choppers\" premiered on CMT",
+       "score": 0.032266458495966696,
+       "source": "hybrid",
+       "chunk_id": "f727e0454fa35a86:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Paul Teutul Jr.",
+       "snippet": "Paul Michael Teutul (born October 2, 1974) was one of the stars of the American reality television series \"American Chopper\". He co-founded Orange County Choppers (OCC) with his father, Paul Teutul Sr. in 1999. Teutul was the chief designer and fabricator of OCC. Prior to this, Teutul was head of the rail shop at Orange County Ironworks. He was also responsible for designing the logo for OCC. He is the owner of Paul Jr. Designs, which manufactures custom motorcycles and sells branded clothing.",
+       "score": 0.03225806451612903,
+       "source": "hybrid",
+       "chunk_id": "d6a5bb54ca752177:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Michael Teutul",
+       "snippet": "Michael Joseph Teutul (born November 26, 1978) is a television celebrity who appeared on the reality programs \"Orange County Choppers\" \"American Chopper\" and \"\".",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "634f7b64bd155a31:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Orange County Choppers",
+       "snippet": "Orange County Choppers (OCC) is a motorcycle manufacturer and lifestyle brand company based in the town of Newburgh, located in Orange County, New York, that was founded in 1999 by Paul Teutul Sr., and Paul Teutul Jr. The company was featured on \"American Chopper\", a reality TV show that debuted in September 2002 on the Discovery Channel. The series moved to Discovery Channel's sister channel TLC in 2007. Following cancellation of the Discovery series, the company was also featured on \"Orange County Choppers\" on the CMT network in 2013.",
+       "score": 0.03177805800756621,
+       "source": "hybrid",
+       "chunk_id": "1b764e1792aa4772:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "American Chopper",
+       "snippet": "American Chopper is an American reality television series that aired on Discovery Channel from 2003-2010, produced by Pilgrim Films & Television. The series centers on Paul Teutul, Sr. (frequently called \"Senior\"), and his son Paul Teutul, Jr. (also known as \"Paulie\" or simply \"Junior\"), who manufacture custom chopper-style motorcycles. Orange County Choppers is in Newburgh, New York.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "04d44742fdfeae19:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Jason Pohl",
+       "snippet": "Jason Pohl (born July 1, 1981) is a chopper designer who works at Orange County Choppers. He is most commonly known for his workplace being the subject of the American TV series American Chopper.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "283d402dd9dcbd28:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Vincent DiMartino",
+       "snippet": "Vincent \"Vinnie\" DiMartino (born October 9, 1972) is an American motorcycle builder, best known for his work from 2002 to 2007 at Orange County Choppers (OCC), the subject of the American TV show \"American Chopper\". In August 2007 DiMartino left Orange County Choppers and founded V-Force Customs, a custom motorcycle shop in Rock Tavern, NY. Several months later, Cody Connelly, a friend and co-worker of DiMartino at Orange County Choppers also left to join him at V-force Customs.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "8f985d67856bbb1c:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Cody Connelly",
+       "snippet": "Cody Connelly is an American motorcycle builder, best known for his work at Orange County Choppers (OCC), the subject of the American TV show \"American Chopper\". Cody left Orange County Choppers and joined V-Force Customs (a custom motorcycle shop in Rock Tavern, NY) where he works with friend and former colleague of Orange County Choppers Vincent DiMartino. Cody has since made several appearances on the show \"\" alongside Paul Teutul, Jr. and DiMartino, helping out at Paul Jr. Designs.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "63530e5bc4747eb1:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_e69c3b0ee579",
+        "name": "Orange County Choppers",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_e7fd7c1b5822",
+        "name": "Paul Teutul Sr.",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_2ad1eb9ce123",
+        "name": "Paul Michael Teutul",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_a692d373c233",
+        "name": "Paul Teutul Jr.",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f8b996b76a52",
+        "name": "Paul John Teutul",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_63b6bbb6845c",
+        "name": "American Chopper",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_74c00be5be2f",
+        "name": "Orange County Choppers",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_c10ff406425e",
+        "name": "American Chopper",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_1dced1566954",
+        "name": "Paul Teutul Sr.",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_18600f427357",
+        "name": "Orange County Choppers bikes",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_7061a402b35f",
+        "name": "Paul Teutul Jr.",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_e07701295fbc",
+        "name": "African Americans",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_e65a64222621",
+        "name": "American actor",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_19ca20b8fff2",
+        "name": "American Idol",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_5af241fa16f0",
+        "name": "American Idol",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_feb8feffb113",
+        "name": "the county",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_234cfb7d8a73",
+        "name": "Orange County, New York",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_6efc2acb0534",
+        "name": "first appeared",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0a49fde92fcd",
+        "name": "Wood County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_77759ec7f934",
+        "name": "county seat",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4c0310c350ff",
+        "name": "A and C",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7eb146fa48b5",
+        "name": "Change",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_01343a783516",
+        "name": "Ocean County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_559bff67de52",
+        "name": "Union County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_6cdfd35e64e2",
+        "name": "the Americas",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_720da28c4257",
+        "name": "Kings County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_8992f0f4dba2",
+        "name": "Orange Juice",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_c74cec16a9bb",
+        "name": "Ector County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_685007b08c41",
+        "name": "Portage County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_4222b28aecb4",
+        "name": "German Americans",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_beb76a64133c",
+        "name": "Cork County Council",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_cc210079ff29",
+        "name": "American novelist",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_909e190bb753",
+        "name": "Irish Americans",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_1a9eff139372",
+        "name": "Carroll County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_33b0d379c2e5",
+        "name": "Queens County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_3619c527234e",
+        "name": "North America",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_707610ebff78",
+        "name": "Nassau County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_86b08b72c9c5",
+        "name": "Howard County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_cad132356e6e",
+        "name": "Bartow County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_4cbb526ebb42",
+        "name": "Paul Feig",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_b157457cc6ca",
+        "name": "Paul Feig",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_59e6e056d252",
+        "name": "the Wiz",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8588c0a0f1f0",
+        "name": "The Bet",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_f6a23ffdb2df",
+        "name": "Teutoni",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0c4a8974d793",
+        "name": "tea",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_f220b1021a7c",
+        "name": "An American in Paris",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_025c46d4afd5",
+        "name": "American scientist",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_92d9327a4999",
+        "name": "American Scientist",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_f5fbc9276e5d",
+        "name": "Chittenden County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_9f8d5b46b02b",
+        "name": "Polish Americans",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_07c38979dab8",
+        "name": "Kaiping county",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_9f2e6815d2dc",
+        "name": "Midland County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_5b97ae93ef95",
+        "name": "The Wanted",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_6fc8cf5052f4",
+        "name": "Paul Kelly",
+        "type": "PERSON",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_e69c3b0ee579",
+        "target": "e_e7fd7c1b5822",
+        "predicate": "founded_by",
+        "chunk_id": "1b764e1792aa4772:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2ad1eb9ce123",
+        "target": "e_e69c3b0ee579",
+        "predicate": "co_founded",
+        "chunk_id": "d6a5bb54ca752177:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_e69c3b0ee579",
+        "target": "e_a692d373c233",
+        "predicate": "founded_by",
+        "chunk_id": "1b764e1792aa4772:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f8b996b76a52",
+        "target": "e_e69c3b0ee579",
+        "predicate": "founder_of",
+        "chunk_id": "f727e0454fa35a86:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2ad1eb9ce123",
+        "target": "e_e69c3b0ee579",
+        "predicate": "chief_designer_of",
+        "chunk_id": "d6a5bb54ca752177:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f8b996b76a52",
+        "target": "e_63b6bbb6845c",
+        "predicate": "appeared_on",
+        "chunk_id": "f727e0454fa35a86:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2ad1eb9ce123",
+        "target": "e_e69c3b0ee579",
+        "predicate": "designed_logo_for",
+        "chunk_id": "d6a5bb54ca752177:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2ad1eb9ce123",
+        "target": "e_63b6bbb6845c",
+        "predicate": "starred_in",
+        "chunk_id": "d6a5bb54ca752177:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.9029853286138388,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 294
+      },
+      {
+       "name": "retrieve",
+       "ms": 229
+      },
+      {
+       "name": "retrieve",
+       "ms": 998
+      },
+      {
+       "name": "merge",
+       "ms": 200
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 1164,
+     "tokens_out": 1255,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 0.0014296,
+      "total": 0.0014296
+     },
+     "total_ms": 48084,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context, all provided context blocks are relevant to the entities mentioned, and the answer completely addresses all parts of the question.",
+    "cost_usd": 0.00033826,
+    "flagged": false,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "2abf2b2b-789f-41b8-ac1b-731ee5731b58",
+    "question": "Whom was the cofounder of Orange County Choppers and appeared with Paul Teutul Sr on American Chopper?",
+    "answer": {
+     "short": "Paul Teutul Jr",
+     "text": "Paul Teutul Jr. He co‑founded Orange County Choppers with his father and appeared on “American Chopper”【2】【4】",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 809 tokens",
+     "confidence": 0.5,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Paul Teutul Sr.",
+       "snippet": "Paul John Teutul is the founder of Orange County Choppers, a manufacturer of custom motorcycles and the focus of the reality television series \"American Chopper\". Teutul first appeared on the show with his sons Paul Teutul Jr., Michael Teutul. In 2013 his new show \"Orange County Choppers\" premiered on CMT",
+       "score": 0.9029853286138388,
+       "source": "vector",
+       "chunk_id": "f727e0454fa35a86:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Paul Teutul Jr.",
+       "snippet": "Paul Michael Teutul (born October 2, 1974) was one of the stars of the American reality television series \"American Chopper\". He co-founded Orange County Choppers (OCC) with his father, Paul Teutul Sr. in 1999. Teutul was the chief designer and fabricator of OCC. Prior to this, Teutul was head of the rail shop at Orange County Ironworks. He was also responsible for designing the logo for OCC. He is the owner of Paul Jr. Designs, which manufactures custom motorcycles and sells branded clothing.",
+       "score": 0.89126123294101,
+       "source": "vector",
+       "chunk_id": "d6a5bb54ca752177:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Michael Teutul",
+       "snippet": "Michael Joseph Teutul (born November 26, 1978) is a television celebrity who appeared on the reality programs \"Orange County Choppers\" \"American Chopper\" and \"\".",
+       "score": 0.8258868702020312,
+       "source": "vector",
+       "chunk_id": "634f7b64bd155a31:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "American Chopper",
+       "snippet": "American Chopper is an American reality television series that aired on Discovery Channel from 2003-2010, produced by Pilgrim Films & Television. The series centers on Paul Teutul, Sr. (frequently called \"Senior\"), and his son Paul Teutul, Jr. (also known as \"Paulie\" or simply \"Junior\"), who manufacture custom chopper-style motorcycles. Orange County Choppers is in Newburgh, New York.",
+       "score": 0.8168041706085205,
+       "source": "vector",
+       "chunk_id": "04d44742fdfeae19:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Orange County Choppers",
+       "snippet": "Orange County Choppers (OCC) is a motorcycle manufacturer and lifestyle brand company based in the town of Newburgh, located in Orange County, New York, that was founded in 1999 by Paul Teutul Sr., and Paul Teutul Jr. The company was featured on \"American Chopper\", a reality TV show that debuted in September 2002 on the Discovery Channel. The series moved to Discovery Channel's sister channel TLC in 2007. Following cancellation of the Discovery series, the company was also featured on \"Orange County Choppers\" on the CMT network in 2013.",
+       "score": 0.7972091082085299,
+       "source": "vector",
+       "chunk_id": "1b764e1792aa4772:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Jason Pohl",
+       "snippet": "Jason Pohl (born July 1, 1981) is a chopper designer who works at Orange County Choppers. He is most commonly known for his workplace being the subject of the American TV series American Chopper.",
+       "score": 0.7650850415229797,
+       "source": "vector",
+       "chunk_id": "283d402dd9dcbd28:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Vincent DiMartino",
+       "snippet": "Vincent \"Vinnie\" DiMartino (born October 9, 1972) is an American motorcycle builder, best known for his work from 2002 to 2007 at Orange County Choppers (OCC), the subject of the American TV show \"American Chopper\". In August 2007 DiMartino left Orange County Choppers and founded V-Force Customs, a custom motorcycle shop in Rock Tavern, NY. Several months later, Cody Connelly, a friend and co-worker of DiMartino at Orange County Choppers also left to join him at V-force Customs.",
+       "score": 0.723274843497585,
+       "source": "vector",
+       "chunk_id": "8f985d67856bbb1c:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Cody Connelly",
+       "snippet": "Cody Connelly is an American motorcycle builder, best known for his work at Orange County Choppers (OCC), the subject of the American TV show \"American Chopper\". Cody left Orange County Choppers and joined V-Force Customs (a custom motorcycle shop in Rock Tavern, NY) where he works with friend and former colleague of Orange County Choppers Vincent DiMartino. Cody has since made several appearances on the show \"\" alongside Paul Teutul, Jr. and DiMartino, helping out at Paul Jr. Designs.",
+       "score": 0.7149606516980749,
+       "source": "vector",
+       "chunk_id": "63530e5bc4747eb1:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.9029853286138388,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 213
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1008,
+     "tokens_out": 68,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.426e-05,
+      "total": 2.426e-05
+     },
+     "total_ms": 1008,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context, all provided context blocks are relevant to the entities and the question, and the answer completely addresses all parts of the question.",
+    "cost_usd": 0.00033612,
+    "flagged": false,
+    "queued": true
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "075f02bd-8155-4872-a59f-812a71ecaafb",
+    "question": "Whom was the cofounder of Orange County Choppers and appeared with Paul Teutul Sr on American Chopper?",
+    "answer": {
+     "short": "Paul Teutul Jr",
+     "text": "Paul Teutul Jr. He co‑founded Orange County Choppers and appeared with Paul Teutul Sr. on American Chopper. [2][3]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 354 tokens",
+     "confidence": 0.75,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 2,
+       "title": "Paul Teutul Jr.",
+       "snippet": "Paul Michael Teutul (born October 2, 1974) was one of the stars of the American reality television series \"American Chopper\". He co-founded Orange County Choppers (OCC) with his father, Paul Teutul Sr. in 1999. Teutul was the chief designer and fabricator of OCC. Prior to this, Teutul was head of the rail shop at Orange County Ironworks. He was also responsible for designing the logo for OCC. He is the owner of Paul Jr. Designs, which manufactures custom motorcycles and sells branded clothing.",
+       "chunk_id": "d6a5bb54ca752177:sentence:0"
+      },
+      {
+       "n": 3,
+       "title": "Paul Teutul Sr.",
+       "snippet": "Paul John Teutul is the founder of Orange County Choppers, a manufacturer of custom motorcycles and the focus of the reality television series \"American Chopper\". Teutul first appeared on the show with his sons Paul Teutul Jr., Michael Teutul. In 2013 his new show \"Orange County Choppers\" premiered on CMT",
+       "chunk_id": "f727e0454fa35a86:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Orange County Choppers",
+       "snippet": "Orange County Choppers (OCC) is a motorcycle manufacturer and lifestyle brand company based in the town of Newburgh, located in Orange County, New York, that was founded in 1999 by Paul Teutul Sr., and Paul Teutul Jr. The company was featured on \"American Chopper\", a reality TV show that debuted in September 2002 on the Discovery Channel. The series moved to Discovery Channel's sister channel TLC in 2007. Following cancellation of the Discovery series, the company was also featured on \"Orange County Choppers\" on the CMT network in 2013.",
+       "score": 0.941963255405426,
+       "source": "graph",
+       "chunk_id": "1b764e1792aa4772:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Paul Teutul Jr.",
+       "snippet": "Paul Michael Teutul (born October 2, 1974) was one of the stars of the American reality television series \"American Chopper\". He co-founded Orange County Choppers (OCC) with his father, Paul Teutul Sr. in 1999. Teutul was the chief designer and fabricator of OCC. Prior to this, Teutul was head of the rail shop at Orange County Ironworks. He was also responsible for designing the logo for OCC. He is the owner of Paul Jr. Designs, which manufactures custom motorcycles and sells branded clothing.",
+       "score": 0.9416010677814484,
+       "source": "graph",
+       "chunk_id": "d6a5bb54ca752177:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Paul Teutul Sr.",
+       "snippet": "Paul John Teutul is the founder of Orange County Choppers, a manufacturer of custom motorcycles and the focus of the reality television series \"American Chopper\". Teutul first appeared on the show with his sons Paul Teutul Jr., Michael Teutul. In 2013 his new show \"Orange County Choppers\" premiered on CMT",
+       "score": 0.9377551674842834,
+       "source": "graph",
+       "chunk_id": "f727e0454fa35a86:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_e69c3b0ee579",
+        "name": "Orange County Choppers",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_e7fd7c1b5822",
+        "name": "Paul Teutul Sr.",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_2ad1eb9ce123",
+        "name": "Paul Michael Teutul",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_a692d373c233",
+        "name": "Paul Teutul Jr.",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f8b996b76a52",
+        "name": "Paul John Teutul",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_63b6bbb6845c",
+        "name": "American Chopper",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_74c00be5be2f",
+        "name": "Orange County Choppers",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_c10ff406425e",
+        "name": "American Chopper",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_1dced1566954",
+        "name": "Paul Teutul Sr.",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_18600f427357",
+        "name": "Orange County Choppers bikes",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_7061a402b35f",
+        "name": "Paul Teutul Jr.",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_e07701295fbc",
+        "name": "African Americans",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_e65a64222621",
+        "name": "American actor",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_19ca20b8fff2",
+        "name": "American Idol",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_5af241fa16f0",
+        "name": "American Idol",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_feb8feffb113",
+        "name": "the county",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_234cfb7d8a73",
+        "name": "Orange County, New York",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_6efc2acb0534",
+        "name": "first appeared",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0a49fde92fcd",
+        "name": "Wood County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_77759ec7f934",
+        "name": "county seat",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4c0310c350ff",
+        "name": "A and C",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7eb146fa48b5",
+        "name": "Change",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_01343a783516",
+        "name": "Ocean County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_559bff67de52",
+        "name": "Union County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_6cdfd35e64e2",
+        "name": "the Americas",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_720da28c4257",
+        "name": "Kings County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_8992f0f4dba2",
+        "name": "Orange Juice",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_c74cec16a9bb",
+        "name": "Ector County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_685007b08c41",
+        "name": "Portage County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_4222b28aecb4",
+        "name": "German Americans",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_beb76a64133c",
+        "name": "Cork County Council",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_cc210079ff29",
+        "name": "American novelist",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_909e190bb753",
+        "name": "Irish Americans",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_1a9eff139372",
+        "name": "Carroll County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_33b0d379c2e5",
+        "name": "Queens County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_3619c527234e",
+        "name": "North America",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_707610ebff78",
+        "name": "Nassau County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_86b08b72c9c5",
+        "name": "Howard County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_cad132356e6e",
+        "name": "Bartow County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_4cbb526ebb42",
+        "name": "Paul Feig",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_b157457cc6ca",
+        "name": "Paul Feig",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_59e6e056d252",
+        "name": "the Wiz",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8588c0a0f1f0",
+        "name": "The Bet",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_f6a23ffdb2df",
+        "name": "Teutoni",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0c4a8974d793",
+        "name": "tea",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_f220b1021a7c",
+        "name": "An American in Paris",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_025c46d4afd5",
+        "name": "American scientist",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_92d9327a4999",
+        "name": "American Scientist",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_f5fbc9276e5d",
+        "name": "Chittenden County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_9f8d5b46b02b",
+        "name": "Polish Americans",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_07c38979dab8",
+        "name": "Kaiping county",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_9f2e6815d2dc",
+        "name": "Midland County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_5b97ae93ef95",
+        "name": "The Wanted",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_6fc8cf5052f4",
+        "name": "Paul Kelly",
+        "type": "PERSON",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_e69c3b0ee579",
+        "target": "e_e7fd7c1b5822",
+        "predicate": "founded_by",
+        "chunk_id": "1b764e1792aa4772:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2ad1eb9ce123",
+        "target": "e_e69c3b0ee579",
+        "predicate": "co_founded",
+        "chunk_id": "d6a5bb54ca752177:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_e69c3b0ee579",
+        "target": "e_a692d373c233",
+        "predicate": "founded_by",
+        "chunk_id": "1b764e1792aa4772:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f8b996b76a52",
+        "target": "e_e69c3b0ee579",
+        "predicate": "founder_of",
+        "chunk_id": "f727e0454fa35a86:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2ad1eb9ce123",
+        "target": "e_e69c3b0ee579",
+        "predicate": "chief_designer_of",
+        "chunk_id": "d6a5bb54ca752177:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f8b996b76a52",
+        "target": "e_63b6bbb6845c",
+        "predicate": "appeared_on",
+        "chunk_id": "f727e0454fa35a86:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2ad1eb9ce123",
+        "target": "e_e69c3b0ee579",
+        "predicate": "designed_logo_for",
+        "chunk_id": "d6a5bb54ca752177:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2ad1eb9ce123",
+        "target": "e_63b6bbb6845c",
+        "predicate": "starred_in",
+        "chunk_id": "d6a5bb54ca752177:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.941963255405426,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 299
+      },
+      {
+       "name": "retrieve",
+       "ms": 1002
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 753,
+     "tokens_out": 81,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.084e-05,
+      "total": 2.084e-05
+     },
+     "total_ms": 6923,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the provided context, all context blocks are relevant to the question, and all parts of the question are answered.",
+    "cost_usd": 0.00028222,
+    "flagged": false,
+    "queued": false
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "f37f0c97-4ebf-472e-89ba-f029f511bb87",
+    "question": "Whom was the cofounder of Orange County Choppers and appeared with Paul Teutul Sr on American Chopper?",
+    "answer": {
+     "short": "Paul Michael Teutul",
+     "text": "Paul Michael Teutul. [2] The co‑founder of Orange County Choppers is Paul Michael Teutul, and he appeared with Paul Teutul Sr. on American Chopper.",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 809 tokens",
+     "confidence": 0.75,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 2,
+       "title": "Paul Teutul Jr.",
+       "snippet": "Paul Michael Teutul (born October 2, 1974) was one of the stars of the American reality television series \"American Chopper\". He co-founded Orange County Choppers (OCC) with his father, Paul Teutul Sr. in 1999. Teutul was the chief designer and fabricator of OCC. Prior to this, Teutul was head of the rail shop at Orange County Ironworks. He was also responsible for designing the logo for OCC. He is the owner of Paul Jr. Designs, which manufactures custom motorcycles and sells branded clothing.",
+       "chunk_id": "d6a5bb54ca752177:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Paul Teutul Sr.",
+       "snippet": "Paul John Teutul is the founder of Orange County Choppers, a manufacturer of custom motorcycles and the focus of the reality television series \"American Chopper\". Teutul first appeared on the show with his sons Paul Teutul Jr., Michael Teutul. In 2013 his new show \"Orange County Choppers\" premiered on CMT",
+       "score": 0.032266458495966696,
+       "source": "hybrid",
+       "chunk_id": "f727e0454fa35a86:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Paul Teutul Jr.",
+       "snippet": "Paul Michael Teutul (born October 2, 1974) was one of the stars of the American reality television series \"American Chopper\". He co-founded Orange County Choppers (OCC) with his father, Paul Teutul Sr. in 1999. Teutul was the chief designer and fabricator of OCC. Prior to this, Teutul was head of the rail shop at Orange County Ironworks. He was also responsible for designing the logo for OCC. He is the owner of Paul Jr. Designs, which manufactures custom motorcycles and sells branded clothing.",
+       "score": 0.03225806451612903,
+       "source": "hybrid",
+       "chunk_id": "d6a5bb54ca752177:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Michael Teutul",
+       "snippet": "Michael Joseph Teutul (born November 26, 1978) is a television celebrity who appeared on the reality programs \"Orange County Choppers\" \"American Chopper\" and \"\".",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "634f7b64bd155a31:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Orange County Choppers",
+       "snippet": "Orange County Choppers (OCC) is a motorcycle manufacturer and lifestyle brand company based in the town of Newburgh, located in Orange County, New York, that was founded in 1999 by Paul Teutul Sr., and Paul Teutul Jr. The company was featured on \"American Chopper\", a reality TV show that debuted in September 2002 on the Discovery Channel. The series moved to Discovery Channel's sister channel TLC in 2007. Following cancellation of the Discovery series, the company was also featured on \"Orange County Choppers\" on the CMT network in 2013.",
+       "score": 0.03177805800756621,
+       "source": "hybrid",
+       "chunk_id": "1b764e1792aa4772:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "American Chopper",
+       "snippet": "American Chopper is an American reality television series that aired on Discovery Channel from 2003-2010, produced by Pilgrim Films & Television. The series centers on Paul Teutul, Sr. (frequently called \"Senior\"), and his son Paul Teutul, Jr. (also known as \"Paulie\" or simply \"Junior\"), who manufacture custom chopper-style motorcycles. Orange County Choppers is in Newburgh, New York.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "04d44742fdfeae19:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Jason Pohl",
+       "snippet": "Jason Pohl (born July 1, 1981) is a chopper designer who works at Orange County Choppers. He is most commonly known for his workplace being the subject of the American TV series American Chopper.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "283d402dd9dcbd28:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Vincent DiMartino",
+       "snippet": "Vincent \"Vinnie\" DiMartino (born October 9, 1972) is an American motorcycle builder, best known for his work from 2002 to 2007 at Orange County Choppers (OCC), the subject of the American TV show \"American Chopper\". In August 2007 DiMartino left Orange County Choppers and founded V-Force Customs, a custom motorcycle shop in Rock Tavern, NY. Several months later, Cody Connelly, a friend and co-worker of DiMartino at Orange County Choppers also left to join him at V-force Customs.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "8f985d67856bbb1c:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Cody Connelly",
+       "snippet": "Cody Connelly is an American motorcycle builder, best known for his work at Orange County Choppers (OCC), the subject of the American TV show \"American Chopper\". Cody left Orange County Choppers and joined V-Force Customs (a custom motorcycle shop in Rock Tavern, NY) where he works with friend and former colleague of Orange County Choppers Vincent DiMartino. Cody has since made several appearances on the show \"\" alongside Paul Teutul, Jr. and DiMartino, helping out at Paul Jr. Designs.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "63530e5bc4747eb1:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_e69c3b0ee579",
+        "name": "Orange County Choppers",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_e7fd7c1b5822",
+        "name": "Paul Teutul Sr.",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_2ad1eb9ce123",
+        "name": "Paul Michael Teutul",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_a692d373c233",
+        "name": "Paul Teutul Jr.",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f8b996b76a52",
+        "name": "Paul John Teutul",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_63b6bbb6845c",
+        "name": "American Chopper",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_74c00be5be2f",
+        "name": "Orange County Choppers",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_c10ff406425e",
+        "name": "American Chopper",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_1dced1566954",
+        "name": "Paul Teutul Sr.",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_18600f427357",
+        "name": "Orange County Choppers bikes",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_7061a402b35f",
+        "name": "Paul Teutul Jr.",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_e07701295fbc",
+        "name": "African Americans",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_e65a64222621",
+        "name": "American actor",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_19ca20b8fff2",
+        "name": "American Idol",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_5af241fa16f0",
+        "name": "American Idol",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_feb8feffb113",
+        "name": "the county",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_234cfb7d8a73",
+        "name": "Orange County, New York",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_6efc2acb0534",
+        "name": "first appeared",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0a49fde92fcd",
+        "name": "Wood County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_77759ec7f934",
+        "name": "county seat",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4c0310c350ff",
+        "name": "A and C",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_7eb146fa48b5",
+        "name": "Change",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_01343a783516",
+        "name": "Ocean County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_559bff67de52",
+        "name": "Union County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_6cdfd35e64e2",
+        "name": "the Americas",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_720da28c4257",
+        "name": "Kings County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_8992f0f4dba2",
+        "name": "Orange Juice",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_c74cec16a9bb",
+        "name": "Ector County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_685007b08c41",
+        "name": "Portage County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_4222b28aecb4",
+        "name": "German Americans",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_beb76a64133c",
+        "name": "Cork County Council",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_cc210079ff29",
+        "name": "American novelist",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_909e190bb753",
+        "name": "Irish Americans",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_1a9eff139372",
+        "name": "Carroll County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_33b0d379c2e5",
+        "name": "Queens County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_3619c527234e",
+        "name": "North America",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_707610ebff78",
+        "name": "Nassau County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_86b08b72c9c5",
+        "name": "Howard County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_cad132356e6e",
+        "name": "Bartow County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_4cbb526ebb42",
+        "name": "Paul Feig",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_b157457cc6ca",
+        "name": "Paul Feig",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_59e6e056d252",
+        "name": "the Wiz",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8588c0a0f1f0",
+        "name": "The Bet",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_f6a23ffdb2df",
+        "name": "Teutoni",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0c4a8974d793",
+        "name": "tea",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_f220b1021a7c",
+        "name": "An American in Paris",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_025c46d4afd5",
+        "name": "American scientist",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_92d9327a4999",
+        "name": "American Scientist",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_f5fbc9276e5d",
+        "name": "Chittenden County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_9f8d5b46b02b",
+        "name": "Polish Americans",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_07c38979dab8",
+        "name": "Kaiping county",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_9f2e6815d2dc",
+        "name": "Midland County",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_5b97ae93ef95",
+        "name": "The Wanted",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_6fc8cf5052f4",
+        "name": "Paul Kelly",
+        "type": "PERSON",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_e69c3b0ee579",
+        "target": "e_e7fd7c1b5822",
+        "predicate": "founded_by",
+        "chunk_id": "1b764e1792aa4772:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2ad1eb9ce123",
+        "target": "e_e69c3b0ee579",
+        "predicate": "co_founded",
+        "chunk_id": "d6a5bb54ca752177:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_e69c3b0ee579",
+        "target": "e_a692d373c233",
+        "predicate": "founded_by",
+        "chunk_id": "1b764e1792aa4772:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f8b996b76a52",
+        "target": "e_e69c3b0ee579",
+        "predicate": "founder_of",
+        "chunk_id": "f727e0454fa35a86:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2ad1eb9ce123",
+        "target": "e_e69c3b0ee579",
+        "predicate": "chief_designer_of",
+        "chunk_id": "d6a5bb54ca752177:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f8b996b76a52",
+        "target": "e_63b6bbb6845c",
+        "predicate": "appeared_on",
+        "chunk_id": "f727e0454fa35a86:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2ad1eb9ce123",
+        "target": "e_e69c3b0ee579",
+        "predicate": "designed_logo_for",
+        "chunk_id": "d6a5bb54ca752177:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2ad1eb9ce123",
+        "target": "e_63b6bbb6845c",
+        "predicate": "starred_in",
+        "chunk_id": "d6a5bb54ca752177:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.9029853286138388,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 232
+      },
+      {
+       "name": "link",
+       "ms": 310
+      },
+      {
+       "name": "retrieve",
+       "ms": 1004
+      },
+      {
+       "name": "merge",
+       "ms": 1058
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1195,
+     "tokens_out": 79,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.862e-05,
+      "total": 2.862e-05
+     },
+     "total_ms": 8930,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.6666667,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context, all provided context blocks are relevant to the entities and show mentioned, and the answer addresses all parts of the question.",
+    "cost_usd": 0.00035642,
+    "flagged": false,
+    "queued": false
+   }
+  }
+ }
+}

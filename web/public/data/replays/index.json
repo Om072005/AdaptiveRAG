@@ -1,0 +1,200 @@
+{
+ "sample": false,
+ "items": [
+  {
+   "question_id": "sh_48f6d514ce93ede1_0",
+   "question": "In what year was Prophet's Prey released?",
+   "type": "single_hop",
+   "why": "A confident single hop question: the router sends it to vector search and the small model answers it.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "correct"
+  },
+  {
+   "question_id": "sh_4272d4fe2120a996_1",
+   "question": "When was Dwell magazine launched?",
+   "type": "single_hop",
+   "why": "Another single hop question that stays on the cheap vector route, for comparison with the hybrid ones.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "correct"
+  },
+  {
+   "question_id": "sh_2d8488d95379fadc_3",
+   "question": "How many elected members does Cork City Council have?",
+   "type": "single_hop",
+   "why": "The classifier is right but under the 0.85 bar (0.77), so the router uses hybrid.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "correct"
+  },
+  {
+   "question_id": "sh_8fd983e4b981c2d6_0",
+   "question": "According to the Swedish governmental line of succession, what position can the Prime Minister of Sweden appoint from among the cabinet ministers?",
+   "type": "single_hop",
+   "why": "A confident misroute: a single hop question read as multi hop at 0.92. Hybrid still finds the answer.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "misrouted"
+  },
+  {
+   "question_id": "sh_8c427798f2e932b7_0",
+   "question": "How many short animated films are in Early Abstractions?",
+   "type": "single_hop",
+   "why": "Went wrong on every route: vector, graph and hybrid all score F1 0 on this count.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "wrong"
+  },
+  {
+   "question_id": "hp_5a7b782455429927d897bfd7",
+   "question": "Staten Island Summer, starred what actress who was a cast member of \"Saturday Night Live\"?",
+   "type": "multi_hop",
+   "why": "Multi hop through hybrid: hybrid and vector answer it, graph traversal alone does not.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "correct"
+  },
+  {
+   "question_id": "hp_5a8bae135542996e8ac889b6",
+   "question": "Nathan Bridger was a character played by which actor and amateur boxer?",
+   "type": "multi_hop",
+   "why": "Hybrid beats both backends alone: F1 1.0 against 0.57 for vector and 0 for graph.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "correct"
+  },
+  {
+   "question_id": "hp_5a7f97c05542995d8a8ddeb0",
+   "question": "Whom was the cofounder of Orange County Choppers and appeared with Paul Teutul Sr on American Chopper?",
+   "type": "multi_hop",
+   "why": "Graph traversal alone (F1 1.0) beats hybrid with the small model (0.67); the served route, which sends it to the large model, gets it right.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "correct"
+  },
+  {
+   "question_id": "hp_5a815c2e5542995ce29dcbe8",
+   "question": "Where was the NBA Draft held in which Harrison Bryce Jordan Barnes was selected by the Golden State Warriors in the first round of the draft with the seventh overall pick?",
+   "type": "multi_hop",
+   "why": "Hybrid with the small model scores F1 0 where vector search alone scores 0.80; the large model on the served route recovers the 0.80.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "partial"
+  },
+  {
+   "question_id": "hp_5aba5e2555429955dce3edf1",
+   "question": "Where does Yannick Ferreira Carrasco play home games?",
+   "type": "multi_hop",
+   "why": "Misrouted as single hop at 0.76, yet hybrid answers it; vector search alone scores 0.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "misrouted"
+  },
+  {
+   "question_id": "hp_5a7e7c725542991319bc94be",
+   "question": "In what year did Farda Amiga win a race at the Saratoga Race course?",
+   "type": "multi_hop",
+   "why": "Went wrong on every route: the year needs three sentences about one horse's seasons.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "misrouted"
+  },
+  {
+   "question_id": "hp_5a79332555429907847277e7",
+   "question": "Who died first, Bryce Courtenay or Juan Carlos Onetti?",
+   "type": "comparison",
+   "why": "A comparison that vector search alone gets wrong and both graph traversal and hybrid get right.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "correct"
+  },
+  {
+   "question_id": "hp_5a77d4eb55429949eeb29f74",
+   "question": "Who was born first, Yanka Dyagileva or Alexander Bashlachev?",
+   "type": "comparison",
+   "why": "Hybrid with the small model (F1 0.57) does worse than vector search alone (1.0); the served route's large model answers it fully.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "correct"
+  },
+  {
+   "question_id": "hp_5ac38ce255429939154137c2",
+   "question": "What do a Flaming beverage and a Gin and tonic have in common?",
+   "type": "comparison",
+   "why": "Went wrong: the classifier was unsure (0.47, read as single hop) and every route scores F1 0.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "misrouted"
+  },
+  {
+   "question_id": "hp_5a7f677455429969796c1a37",
+   "question": "Were Stanley Kubrick and Elio Petri from different countries?",
+   "type": "comparison",
+   "why": "A comparison hybrid answers and graph traversal alone gets wrong.",
+   "modes": [
+    "auto",
+    "vector",
+    "graph",
+    "hybrid"
+   ],
+   "outcome": "correct"
+  }
+ ]
+}

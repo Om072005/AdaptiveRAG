@@ -1,0 +1,1178 @@
+{
+ "sample": false,
+ "question_id": "hp_5ac38ce255429939154137c2",
+ "question": "What do a Flaming beverage and a Gin and tonic have in common?",
+ "type": "comparison",
+ "gold_answer": "cocktails",
+ "supporting_titles": [
+  "Flaming beverage",
+  "Gin and tonic"
+ ],
+ "why": "Went wrong: the classifier was unsure (0.47, read as single hop) and every route scores F1 0.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "0fa82ee3-881d-4da0-b6e8-42dda9903fc3",
+    "question": "What do a Flaming beverage and a Gin and tonic have in common?",
+    "answer": {
+     "short": "beverage",
+     "text": "beverage. Both are types of drinks that contain alcohol. [1][2]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label single_hop, 721 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Flaming beverage",
+       "snippet": "Flaming beverages include cocktails and other mixed drinks that contain flammable, high-proof alcohol, which is ignited prior to consumption. The alcohol may be an integral part of the drink, or it may be floated as a thin layer across the top of the drink. The flames are mostly for dramatic flair. However, in combination with certain ingredients, the flavor of the drink is altered. Some flavors are enhanced, and it may impart a toasted flavor to some drinks.",
+       "chunk_id": "ab92fcbe5e90e368:sentence:0"
+      },
+      {
+       "n": 2,
+       "title": "Gin and tonic",
+       "snippet": "A gin and tonic is a highball cocktail made with gin and tonic water poured over ice. It is usually garnished with a slice or wedge of lime. The amount of gin varies according to taste. Suggested ratios of gin to tonic are between 1:1 and 1:3.",
+       "chunk_id": "5233047bc2dc836d:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "single_hop",
+     "label_confidence": 0.46507108211517334,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "ambiguous:single_hop 0.47"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Flaming beverage",
+       "snippet": "Flaming beverages include cocktails and other mixed drinks that contain flammable, high-proof alcohol, which is ignited prior to consumption. The alcohol may be an integral part of the drink, or it may be floated as a thin layer across the top of the drink. The flames are mostly for dramatic flair. However, in combination with certain ingredients, the flavor of the drink is altered. Some flavors are enhanced, and it may impart a toasted flavor to some drinks.",
+       "score": 0.01639344262295082,
+       "source": "vector",
+       "chunk_id": "ab92fcbe5e90e368:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Gin and tonic",
+       "snippet": "A gin and tonic is a highball cocktail made with gin and tonic water poured over ice. It is usually garnished with a slice or wedge of lime. The amount of gin varies according to taste. Suggested ratios of gin to tonic are between 1:1 and 1:3.",
+       "score": 0.03252247488101534,
+       "source": "hybrid",
+       "chunk_id": "5233047bc2dc836d:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Tequila and tonic",
+       "snippet": "Tequila and tonic, also known as TnT or Teqtonic, is a non-standard highball beverage. The drink is made with a 2:1 ratio of tonic water to tequila and is served with lemon or lime wedges on ice.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "59a424e42e5df7a9:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Tonic water",
+       "snippet": "Tonic water (or Indian tonic water) is a carbonated soft drink in which quinine is dissolved. Originally used as a prophylactic against malaria, tonic water usually now has a significantly lower quinine content and is consumed for its distinctive bitter flavour. It is often used in mixed drinks, particularly in gin and tonic.",
+       "score": 0.031754032258064516,
+       "source": "hybrid",
+       "chunk_id": "648ac0016617dcaf:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Sweet Melissa",
+       "snippet": "A Sweet Melissa is a gin-based cocktail that was named by its creator, Daniel Bouie, after his wife Melissa Chabran Bouie. Sweet Melissa is made with gin, tonic water and a splash of Jack Daniel's in a short glass of ice. Care must be taken not to add too much whiskey to this gin & tonic beverage.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "2b9b60b081c6f431:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Beer in Slovakia",
+       "snippet": "This is the amount of dissolved solids before fermentation, and tells roughly how much fermentable material (usually malted barley) was used and hints at what the alcohol content might be. Common measurements of 10° or 12° would be equivalent to 1040 or 1048 in the English \"original gravity\" scale. A common misconception is that this is a measure of the colour of the beer.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "dcdb9f7b5f433671:sentence:1"
+      },
+      {
+       "rank": 7,
+       "title": "Bittering agent",
+       "snippet": "A bittering agent is a flavoring agent added to a food or beverage to impart a bitter taste, possibly in addition to other effects. While many substances are bitter to a greater or lesser degree, a few substances are used specifically for their bitterness, especially to balance other flavors, such as sweetness. Notable beverage examples include caffeine, found naturally in tea and coffee and added to many soft drinks, hops in beer, and quinine in tonic water.",
+       "score": 0.03057889822595705,
+       "source": "hybrid",
+       "chunk_id": "112c6789b7d9be88:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Malt liquor",
+       "snippet": "Malt liquor, in North America, is beer with high alcohol content. Legally, it often includes any alcoholic beverage with 5% or more alcohol by volume made with malted barley. In common usage, it refers to beers containing a high alcohol content, generally above 6%, which are made with ingredients and processes resembling those for American-style lagers.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "626e16249433bc6b:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_d529dc7ec42f",
+        "name": "gin and tonic",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_5ce9cd36b0ea",
+        "name": "Tonic water",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_f97e51a972d6",
+        "name": "ice",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_f9e595b3b5b8",
+        "name": "gin",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_fef1c01e8739",
+        "name": "lime",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b42765ba4f56",
+        "name": "carbonated soft drink",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_64360925a66e",
+        "name": "distinctive bitter flavour",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_24fd22c810f4",
+        "name": "quinine",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_f8f750016a01",
+        "name": "Flaming beverages",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4c0310c350ff",
+        "name": "A and C",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8fd0095c7e04",
+        "name": "Beveren",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_bb3471be4b07",
+        "name": "What Did I Do?",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_dab1ebb1cc77",
+        "name": "Tequila and tonic",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8586f12f9699",
+        "name": "Flames",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8d8f65e16296",
+        "name": "tonic note",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_03867a8d02eb",
+        "name": "tonic chord",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0f3f21e5f231",
+        "name": "Beijing",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_27efa55e8a48",
+        "name": "A. doui",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_5aa60a1f2c7c",
+        "name": "In Love",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_756fe5bf17c9",
+        "name": "Flash",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_046571a3ee2b",
+        "name": "BEF",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_45160a85426b",
+        "name": "BET",
+        "type": "ORG",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_d529dc7ec42f",
+        "target": "e_5ce9cd36b0ea",
+        "predicate": "made_with",
+        "chunk_id": "5233047bc2dc836d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d529dc7ec42f",
+        "target": "e_f97e51a972d6",
+        "predicate": "poured_over",
+        "chunk_id": "5233047bc2dc836d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d529dc7ec42f",
+        "target": "e_f9e595b3b5b8",
+        "predicate": "made_with",
+        "chunk_id": "5233047bc2dc836d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d529dc7ec42f",
+        "target": "e_fef1c01e8739",
+        "predicate": "garnished_with",
+        "chunk_id": "5233047bc2dc836d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5ce9cd36b0ea",
+        "target": "e_b42765ba4f56",
+        "predicate": "is_a",
+        "chunk_id": "648ac0016617dcaf:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5ce9cd36b0ea",
+        "target": "e_64360925a66e",
+        "predicate": "consumed_for",
+        "chunk_id": "648ac0016617dcaf:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5ce9cd36b0ea",
+        "target": "e_24fd22c810f4",
+        "predicate": "contains",
+        "chunk_id": "648ac0016617dcaf:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5ce9cd36b0ea",
+        "target": "e_24fd22c810f4",
+        "predicate": "contains",
+        "chunk_id": "112c6789b7d9be88:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7880771160125732,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 259
+      },
+      {
+       "name": "retrieve",
+       "ms": 210
+      },
+      {
+       "name": "retrieve",
+       "ms": 786
+      },
+      {
+       "name": "merge",
+       "ms": 392
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 1000,
+     "tokens_out": 89,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.601e-05,
+      "total": 2.601e-05
+     },
+     "total_ms": 8011,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.75,
+    "completeness": 1.0,
+    "rationale": "The answer is supported by the context as both are described as cocktails/beverages containing alcohol. Most context blocks are relevant, though a few (Beer in Slovakia, Malt liquor) are not.",
+    "cost_usd": 0.00075494,
+    "flagged": false,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "5ec7b28b-f24a-47c9-a34f-fcc6c5c961f9",
+    "question": "What do a Flaming beverage and a Gin and tonic have in common?",
+    "answer": {
+     "short": "alcohol",
+     "text": "alcohol. Both are alcoholic mixed drinks that contain alcohol as a key ingredient. [1][2]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 721 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Flaming beverage",
+       "snippet": "Flaming beverages include cocktails and other mixed drinks that contain flammable, high-proof alcohol, which is ignited prior to consumption. The alcohol may be an integral part of the drink, or it may be floated as a thin layer across the top of the drink. The flames are mostly for dramatic flair. However, in combination with certain ingredients, the flavor of the drink is altered. Some flavors are enhanced, and it may impart a toasted flavor to some drinks.",
+       "chunk_id": "ab92fcbe5e90e368:sentence:0"
+      },
+      {
+       "n": 2,
+       "title": "Gin and tonic",
+       "snippet": "A gin and tonic is a highball cocktail made with gin and tonic water poured over ice. It is usually garnished with a slice or wedge of lime. The amount of gin varies according to taste. Suggested ratios of gin to tonic are between 1:1 and 1:3.",
+       "chunk_id": "5233047bc2dc836d:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Flaming beverage",
+       "snippet": "Flaming beverages include cocktails and other mixed drinks that contain flammable, high-proof alcohol, which is ignited prior to consumption. The alcohol may be an integral part of the drink, or it may be floated as a thin layer across the top of the drink. The flames are mostly for dramatic flair. However, in combination with certain ingredients, the flavor of the drink is altered. Some flavors are enhanced, and it may impart a toasted flavor to some drinks.",
+       "score": 0.7880771160125732,
+       "source": "vector",
+       "chunk_id": "ab92fcbe5e90e368:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Gin and tonic",
+       "snippet": "A gin and tonic is a highball cocktail made with gin and tonic water poured over ice. It is usually garnished with a slice or wedge of lime. The amount of gin varies according to taste. Suggested ratios of gin to tonic are between 1:1 and 1:3.",
+       "score": 0.7662031650543213,
+       "source": "vector",
+       "chunk_id": "5233047bc2dc836d:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Tequila and tonic",
+       "snippet": "Tequila and tonic, also known as TnT or Teqtonic, is a non-standard highball beverage. The drink is made with a 2:1 ratio of tonic water to tequila and is served with lemon or lime wedges on ice.",
+       "score": 0.7025040806832374,
+       "source": "vector",
+       "chunk_id": "59a424e42e5df7a9:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Tonic water",
+       "snippet": "Tonic water (or Indian tonic water) is a carbonated soft drink in which quinine is dissolved. Originally used as a prophylactic against malaria, tonic water usually now has a significantly lower quinine content and is consumed for its distinctive bitter flavour. It is often used in mixed drinks, particularly in gin and tonic.",
+       "score": 0.6541549563407898,
+       "source": "vector",
+       "chunk_id": "648ac0016617dcaf:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Sweet Melissa",
+       "snippet": "A Sweet Melissa is a gin-based cocktail that was named by its creator, Daniel Bouie, after his wife Melissa Chabran Bouie. Sweet Melissa is made with gin, tonic water and a splash of Jack Daniel's in a short glass of ice. Care must be taken not to add too much whiskey to this gin & tonic beverage.",
+       "score": 0.6015840172767639,
+       "source": "vector",
+       "chunk_id": "2b9b60b081c6f431:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Malt liquor",
+       "snippet": "Malt liquor, in North America, is beer with high alcohol content. Legally, it often includes any alcoholic beverage with 5% or more alcohol by volume made with malted barley. In common usage, it refers to beers containing a high alcohol content, generally above 6%, which are made with ingredients and processes resembling those for American-style lagers.",
+       "score": 0.5928808031344656,
+       "source": "vector",
+       "chunk_id": "626e16249433bc6b:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Beer in Slovakia",
+       "snippet": "This is the amount of dissolved solids before fermentation, and tells roughly how much fermentable material (usually malted barley) was used and hints at what the alcohol content might be. Common measurements of 10° or 12° would be equivalent to 1040 or 1048 in the English \"original gravity\" scale. A common misconception is that this is a measure of the colour of the beer.",
+       "score": 0.5847041606903076,
+       "source": "vector",
+       "chunk_id": "dcdb9f7b5f433671:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "Bittering agent",
+       "snippet": "A bittering agent is a flavoring agent added to a food or beverage to impart a bitter taste, possibly in addition to other effects. While many substances are bitter to a greater or lesser degree, a few substances are used specifically for their bitterness, especially to balance other flavors, such as sweetness. Notable beverage examples include caffeine, found naturally in tea and coffee and added to many soft drinks, hops in beer, and quinine in tonic water.",
+       "score": 0.5798984938829691,
+       "source": "vector",
+       "chunk_id": "112c6789b7d9be88:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.7880771160125732,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 213
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 853,
+     "tokens_out": 74,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.201e-05,
+      "total": 2.201e-05
+     },
+     "total_ms": 1028,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.75,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context, as both are described as cocktails/mixed drinks containing alcohol. Most context blocks are relevant to the entities, though a couple (malt liquor and beer in Slovakia) are not. The question is answered completely.",
+    "cost_usd": 0.00031166,
+    "flagged": false,
+    "queued": false
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "48559cbb-c033-4037-b29c-223c3e56e62a",
+    "question": "What do a Flaming beverage and a Gin and tonic have in common?",
+    "answer": {
+     "short": "not enough context",
+     "text": "not enough context",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 272 tokens",
+     "confidence": 0.0,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Gin and tonic",
+       "snippet": "A gin and tonic is a highball cocktail made with gin and tonic water poured over ice. It is usually garnished with a slice or wedge of lime. The amount of gin varies according to taste. Suggested ratios of gin to tonic are between 1:1 and 1:3.",
+       "score": 0.8248806998204774,
+       "source": "graph",
+       "chunk_id": "5233047bc2dc836d:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Tonic water",
+       "snippet": "Tonic water (or Indian tonic water) is a carbonated soft drink in which quinine is dissolved. Originally used as a prophylactic against malaria, tonic water usually now has a significantly lower quinine content and is consumed for its distinctive bitter flavour. It is often used in mixed drinks, particularly in gin and tonic.",
+       "score": 0.6682017242914523,
+       "source": "graph",
+       "chunk_id": "648ac0016617dcaf:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Bittering agent",
+       "snippet": "A bittering agent is a flavoring agent added to a food or beverage to impart a bitter taste, possibly in addition to other effects. While many substances are bitter to a greater or lesser degree, a few substances are used specifically for their bitterness, especially to balance other flavors, such as sweetness. Notable beverage examples include caffeine, found naturally in tea and coffee and added to many soft drinks, hops in beer, and quinine in tonic water.",
+       "score": 0.6559089276950069,
+       "source": "graph",
+       "chunk_id": "112c6789b7d9be88:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_d529dc7ec42f",
+        "name": "gin and tonic",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_5ce9cd36b0ea",
+        "name": "Tonic water",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_f97e51a972d6",
+        "name": "ice",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_f9e595b3b5b8",
+        "name": "gin",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_fef1c01e8739",
+        "name": "lime",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b42765ba4f56",
+        "name": "carbonated soft drink",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_64360925a66e",
+        "name": "distinctive bitter flavour",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_24fd22c810f4",
+        "name": "quinine",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_f8f750016a01",
+        "name": "Flaming beverages",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4c0310c350ff",
+        "name": "A and C",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8fd0095c7e04",
+        "name": "Beveren",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_bb3471be4b07",
+        "name": "What Did I Do?",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_dab1ebb1cc77",
+        "name": "Tequila and tonic",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8586f12f9699",
+        "name": "Flames",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8d8f65e16296",
+        "name": "tonic note",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_03867a8d02eb",
+        "name": "tonic chord",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0f3f21e5f231",
+        "name": "Beijing",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_27efa55e8a48",
+        "name": "A. doui",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_5aa60a1f2c7c",
+        "name": "In Love",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_756fe5bf17c9",
+        "name": "Flash",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_046571a3ee2b",
+        "name": "BEF",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_45160a85426b",
+        "name": "BET",
+        "type": "ORG",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_d529dc7ec42f",
+        "target": "e_5ce9cd36b0ea",
+        "predicate": "made_with",
+        "chunk_id": "5233047bc2dc836d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d529dc7ec42f",
+        "target": "e_f97e51a972d6",
+        "predicate": "poured_over",
+        "chunk_id": "5233047bc2dc836d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d529dc7ec42f",
+        "target": "e_f9e595b3b5b8",
+        "predicate": "made_with",
+        "chunk_id": "5233047bc2dc836d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d529dc7ec42f",
+        "target": "e_fef1c01e8739",
+        "predicate": "garnished_with",
+        "chunk_id": "5233047bc2dc836d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5ce9cd36b0ea",
+        "target": "e_b42765ba4f56",
+        "predicate": "is_a",
+        "chunk_id": "648ac0016617dcaf:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5ce9cd36b0ea",
+        "target": "e_64360925a66e",
+        "predicate": "consumed_for",
+        "chunk_id": "648ac0016617dcaf:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5ce9cd36b0ea",
+        "target": "e_24fd22c810f4",
+        "predicate": "contains",
+        "chunk_id": "648ac0016617dcaf:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5ce9cd36b0ea",
+        "target": "e_24fd22c810f4",
+        "predicate": "contains",
+        "chunk_id": "112c6789b7d9be88:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.8248806998204774,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 260
+      },
+      {
+       "name": "retrieve",
+       "ms": 789
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 598,
+     "tokens_out": 65,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 1.661e-05,
+      "total": 1.661e-05
+     },
+     "total_ms": 5889,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 0.5
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "completeness": 1.0,
+    "rationale": "The context provides information about Gin and tonic but contains no mention of a 'Flaming beverage', making it impossible to find a commonality. Therefore, the answer 'not enough context' is correct and faithful.",
+    "cost_usd": 0.0003325,
+    "flagged": false,
+    "queued": true
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "437a776b-f4b7-43e4-bb98-d1c89ca2167c",
+    "question": "What do a Flaming beverage and a Gin and tonic have in common?",
+    "answer": {
+     "short": "beverage",
+     "text": "beverage. Both are types of drinks that contain alcohol. [1][2]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 721 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Flaming beverage",
+       "snippet": "Flaming beverages include cocktails and other mixed drinks that contain flammable, high-proof alcohol, which is ignited prior to consumption. The alcohol may be an integral part of the drink, or it may be floated as a thin layer across the top of the drink. The flames are mostly for dramatic flair. However, in combination with certain ingredients, the flavor of the drink is altered. Some flavors are enhanced, and it may impart a toasted flavor to some drinks.",
+       "chunk_id": "ab92fcbe5e90e368:sentence:0"
+      },
+      {
+       "n": 2,
+       "title": "Gin and tonic",
+       "snippet": "A gin and tonic is a highball cocktail made with gin and tonic water poured over ice. It is usually garnished with a slice or wedge of lime. The amount of gin varies according to taste. Suggested ratios of gin to tonic are between 1:1 and 1:3.",
+       "chunk_id": "5233047bc2dc836d:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Flaming beverage",
+       "snippet": "Flaming beverages include cocktails and other mixed drinks that contain flammable, high-proof alcohol, which is ignited prior to consumption. The alcohol may be an integral part of the drink, or it may be floated as a thin layer across the top of the drink. The flames are mostly for dramatic flair. However, in combination with certain ingredients, the flavor of the drink is altered. Some flavors are enhanced, and it may impart a toasted flavor to some drinks.",
+       "score": 0.01639344262295082,
+       "source": "vector",
+       "chunk_id": "ab92fcbe5e90e368:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Gin and tonic",
+       "snippet": "A gin and tonic is a highball cocktail made with gin and tonic water poured over ice. It is usually garnished with a slice or wedge of lime. The amount of gin varies according to taste. Suggested ratios of gin to tonic are between 1:1 and 1:3.",
+       "score": 0.03252247488101534,
+       "source": "hybrid",
+       "chunk_id": "5233047bc2dc836d:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Tequila and tonic",
+       "snippet": "Tequila and tonic, also known as TnT or Teqtonic, is a non-standard highball beverage. The drink is made with a 2:1 ratio of tonic water to tequila and is served with lemon or lime wedges on ice.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "59a424e42e5df7a9:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Tonic water",
+       "snippet": "Tonic water (or Indian tonic water) is a carbonated soft drink in which quinine is dissolved. Originally used as a prophylactic against malaria, tonic water usually now has a significantly lower quinine content and is consumed for its distinctive bitter flavour. It is often used in mixed drinks, particularly in gin and tonic.",
+       "score": 0.031754032258064516,
+       "source": "hybrid",
+       "chunk_id": "648ac0016617dcaf:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Sweet Melissa",
+       "snippet": "A Sweet Melissa is a gin-based cocktail that was named by its creator, Daniel Bouie, after his wife Melissa Chabran Bouie. Sweet Melissa is made with gin, tonic water and a splash of Jack Daniel's in a short glass of ice. Care must be taken not to add too much whiskey to this gin & tonic beverage.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "2b9b60b081c6f431:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Beer in Slovakia",
+       "snippet": "This is the amount of dissolved solids before fermentation, and tells roughly how much fermentable material (usually malted barley) was used and hints at what the alcohol content might be. Common measurements of 10° or 12° would be equivalent to 1040 or 1048 in the English \"original gravity\" scale. A common misconception is that this is a measure of the colour of the beer.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "dcdb9f7b5f433671:sentence:1"
+      },
+      {
+       "rank": 7,
+       "title": "Bittering agent",
+       "snippet": "A bittering agent is a flavoring agent added to a food or beverage to impart a bitter taste, possibly in addition to other effects. While many substances are bitter to a greater or lesser degree, a few substances are used specifically for their bitterness, especially to balance other flavors, such as sweetness. Notable beverage examples include caffeine, found naturally in tea and coffee and added to many soft drinks, hops in beer, and quinine in tonic water.",
+       "score": 0.03057889822595705,
+       "source": "hybrid",
+       "chunk_id": "112c6789b7d9be88:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Malt liquor",
+       "snippet": "Malt liquor, in North America, is beer with high alcohol content. Legally, it often includes any alcoholic beverage with 5% or more alcohol by volume made with malted barley. In common usage, it refers to beers containing a high alcohol content, generally above 6%, which are made with ingredients and processes resembling those for American-style lagers.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "626e16249433bc6b:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_d529dc7ec42f",
+        "name": "gin and tonic",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_5ce9cd36b0ea",
+        "name": "Tonic water",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_f97e51a972d6",
+        "name": "ice",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_f9e595b3b5b8",
+        "name": "gin",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_fef1c01e8739",
+        "name": "lime",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_b42765ba4f56",
+        "name": "carbonated soft drink",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_64360925a66e",
+        "name": "distinctive bitter flavour",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_24fd22c810f4",
+        "name": "quinine",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_f8f750016a01",
+        "name": "Flaming beverages",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4c0310c350ff",
+        "name": "A and C",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8fd0095c7e04",
+        "name": "Beveren",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_bb3471be4b07",
+        "name": "What Did I Do?",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_dab1ebb1cc77",
+        "name": "Tequila and tonic",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_8586f12f9699",
+        "name": "Flames",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_8d8f65e16296",
+        "name": "tonic note",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_03867a8d02eb",
+        "name": "tonic chord",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0f3f21e5f231",
+        "name": "Beijing",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_27efa55e8a48",
+        "name": "A. doui",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_5aa60a1f2c7c",
+        "name": "In Love",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_756fe5bf17c9",
+        "name": "Flash",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_046571a3ee2b",
+        "name": "BEF",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_45160a85426b",
+        "name": "BET",
+        "type": "ORG",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_d529dc7ec42f",
+        "target": "e_5ce9cd36b0ea",
+        "predicate": "made_with",
+        "chunk_id": "5233047bc2dc836d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d529dc7ec42f",
+        "target": "e_f97e51a972d6",
+        "predicate": "poured_over",
+        "chunk_id": "5233047bc2dc836d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d529dc7ec42f",
+        "target": "e_f9e595b3b5b8",
+        "predicate": "made_with",
+        "chunk_id": "5233047bc2dc836d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_d529dc7ec42f",
+        "target": "e_fef1c01e8739",
+        "predicate": "garnished_with",
+        "chunk_id": "5233047bc2dc836d:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5ce9cd36b0ea",
+        "target": "e_b42765ba4f56",
+        "predicate": "is_a",
+        "chunk_id": "648ac0016617dcaf:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5ce9cd36b0ea",
+        "target": "e_64360925a66e",
+        "predicate": "consumed_for",
+        "chunk_id": "648ac0016617dcaf:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5ce9cd36b0ea",
+        "target": "e_24fd22c810f4",
+        "predicate": "contains",
+        "chunk_id": "648ac0016617dcaf:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_5ce9cd36b0ea",
+        "target": "e_24fd22c810f4",
+        "predicate": "contains",
+        "chunk_id": "112c6789b7d9be88:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7880771160125732,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 212
+      },
+      {
+       "name": "link",
+       "ms": 268
+      },
+      {
+       "name": "retrieve",
+       "ms": 798
+      },
+      {
+       "name": "merge",
+       "ms": 395
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1000,
+     "tokens_out": 89,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.601e-05,
+      "total": 2.601e-05
+     },
+     "total_ms": 8041,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.75,
+    "completeness": 1.0,
+    "rationale": "The answer is supported by the context as both are described as cocktails/beverages containing alcohol. Most context blocks are relevant, though a few (Beer in Slovakia, Malt liquor) are not.",
+    "cost_usd": 0.00075494,
+    "flagged": false,
+    "queued": false
+   }
+  }
+ }
+}

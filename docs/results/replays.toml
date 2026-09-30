@@ -4,10 +4,10 @@
 # --judge --pin, once per mode on the frozen commit; put their run ids below.
 
 [runs]
-auto = ""
-vector = ""
-graph = ""
-hybrid = ""
+auto = "20260930-1400-dev-auto-replay"
+vector = "20260930-1400-dev-vector-replay"
+graph = "20260930-1400-dev-graph-replay"
+hybrid = "20260930-1400-dev-hybrid-replay"
 
 
 [[question]]
@@ -40,11 +40,11 @@ why = "Hybrid beats both backends alone: F1 1.0 against 0.57 for vector and 0 fo
 
 [[question]]
 id = "hp_5a7f97c05542995d8a8ddeb0"
-why = "One of the few questions where graph traversal alone (F1 1.0) beats hybrid (0.67)."
+why = "Graph traversal alone (F1 1.0) beats hybrid with the small model (0.67); the served route, which sends it to the large model, gets it right."
 
 [[question]]
 id = "hp_5a815c2e5542995ce29dcbe8"
-why = "Went wrong under the served route: vector search alone scores F1 0.80, hybrid 0."
+why = "Hybrid with the small model scores F1 0 where vector search alone scores 0.80; the large model on the served route recovers the 0.80."
 
 [[question]]
 id = "hp_5aba5e2555429955dce3edf1"
@@ -60,7 +60,7 @@ why = "A comparison that vector search alone gets wrong and both graph traversal
 
 [[question]]
 id = "hp_5a77d4eb55429949eeb29f74"
-why = "A comparison where hybrid (F1 0.57) does worse than vector search alone (1.0)."
+why = "Hybrid with the small model (F1 0.57) does worse than vector search alone (1.0); the served route's large model answers it fully."
 
 [[question]]
 id = "hp_5ac38ce255429939154137c2"

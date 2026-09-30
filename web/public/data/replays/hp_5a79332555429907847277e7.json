@@ -1,0 +1,1304 @@
+{
+ "sample": false,
+ "question_id": "hp_5a79332555429907847277e7",
+ "question": "Who died first, Bryce Courtenay or Juan Carlos Onetti?",
+ "type": "comparison",
+ "gold_answer": "Juan Carlos Onetti",
+ "supporting_titles": [
+  "Bryce Courtenay",
+  "Juan Carlos Onetti"
+ ],
+ "why": "A comparison that vector search alone gets wrong and both graph traversal and hybrid get right.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "b2c56337-eef6-4874-bfcf-e9d78463a22a",
+    "question": "Who died first, Bryce Courtenay or Juan Carlos Onetti?",
+    "answer": {
+     "short": "Juan Carlos Onetti",
+     "text": "Juan Carlos Onetti. Juan Carlos Onetti died on May 30, 1994 [2], while Bryce Courtenay died on November 22, 2012 [1]. Therefore, Onetti passed away first.",
+     "model": "qwen3.6:35b-a3b",
+     "size": "large",
+     "select_reason": "large:label comparison",
+     "confidence": 0.75,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 2,
+       "title": "Juan Carlos Onetti",
+       "snippet": "Juan Carlos Onetti Borges (July 1, 1909, Montevideo – May 30, 1994, Madrid) was an Uruguayan novelist and author of short stories.",
+       "chunk_id": "fd34cd047bda8507:sentence:0"
+      },
+      {
+       "n": 1,
+       "title": "Bryce Courtenay",
+       "snippet": "Bryce Courtenay, AM (14 August 193322 November 2012) was a South African/Australian advertising director and novelist. He is one of Australia's best-selling authors, notable for his book \"The Power of One\".",
+       "chunk_id": "a1c8883d3d633dcc:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "comparison",
+     "label_confidence": 0.953731894493103,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "relational:comparison"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Bryce Courtenay",
+       "snippet": "Bryce Courtenay, AM (14 August 193322 November 2012) was a South African/Australian advertising director and novelist. He is one of Australia's best-selling authors, notable for his book \"The Power of One\".",
+       "score": 0.032266458495966696,
+       "source": "hybrid",
+       "chunk_id": "a1c8883d3d633dcc:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Juan Carlos Onetti",
+       "snippet": "Juan Carlos Onetti Borges (July 1, 1909, Montevideo – May 30, 1994, Madrid) was an Uruguayan novelist and author of short stories.",
+       "score": 0.031754032258064516,
+       "source": "hybrid",
+       "chunk_id": "fd34cd047bda8507:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Emilio Sánchez",
+       "snippet": "Emilio Ángel Sánchez Vicario (born 29 May 1965) is a former professional tennis player from Spain. He won three Grand Slam doubles titles and the men's doubles silver medal at the 1988 Olympic Games. He is the brother of multiple Grand Slam winner Arantxa. Sanchez since retiring captained his nation to Davis Cup success in 2008. In 2012 Sanchez was a tournament director for two wheelchair tennis events.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "64e2c3a133be7bfc:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "April Fool's Day (novel)",
+       "snippet": "April Fool's Day is a 1993 book by Australian author Bryce Courtenay. The book is a tribute to the author's son, Damon Courtenay, a haemophiliac who contracted HIV/AIDS through an infected blood transfusion. The title refers to the date of Damon's death, 1 April 1991 (April Fools' Day).",
+       "score": 0.03200204813108039,
+       "source": "hybrid",
+       "chunk_id": "b0e7e6f938564d16:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Philip K. Dick",
+       "snippet": "Philip Kindred Dick (December 16, 1928 – March 2, 1982) was an American writer notable for publishing works of science fiction.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "af30b08043602771:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Felipe VI of Spain",
+       "snippet": "Felipe VI (] ; Felipe Juan Pablo Alfonso de Todos los Santos de Borbón y Grecia; born 30 January 1968) is the King of Spain. He ascended to the throne on 19 June 2014 following the abdication of his father, King Juan Carlos I. He is the only son of Juan Carlos and his wife Sofía of Greece and Denmark. When Juan Carlos was chosen in 1969 to be Francisco Franco's successor, Felipe became second in line to the Spanish throne.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "21efecf27b15c581:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Juan Pablo Montoya",
+       "snippet": "Juan Pablo Montoya Roldán (] ; born September 20, 1975) is a Colombian racing driver. He currently competes in the Verizon IndyCar Series driving for Team Penske.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "2a02a8f85ee61035:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Concurso Literario Juan Carlos Onetti",
+       "snippet": "The Juan Carlos Onetti Literary Contest (Spanish: Concurso Literario Juan Carlos Onetti ) is an important literary award in Uruguay.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "dc2a524b99ca9ab5:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_36daaaf9e95b",
+        "name": "Juan Carlos I Park",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_4bcb3f2ac09f",
+        "name": "King Juan Carlos I",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_bea9880eca38",
+        "name": "April Fool's Day",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2cd953d07557",
+        "name": "Damon Courtenay",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4f524289124f",
+        "name": "Bryce Courtenay",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_9681ff5b47a2",
+        "name": "many modern sculptures",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_e552f9b0ba15",
+        "name": "Bryce Courtenay",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f0becd167c85",
+        "name": "South African/Australian advertising director and novelist",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_979a69001778",
+        "name": "The Power of One",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_1a5a95a676c8",
+        "name": "Juan Carlos Onetti Borges",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_e52cf26eb2b1",
+        "name": "May 30, 1994",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_803fec3572d4",
+        "name": "Madrid",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_9274091e5a9f",
+        "name": "July 1, 1909",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ab7ca9b039e9",
+        "name": "Bryce Courtenay",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_c8bb97206743",
+        "name": "Juan Carlos",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4e86f664953a",
+        "name": "Juan Carlos I",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_211440934d45",
+        "name": "Don Carlos",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_ab2144987d48",
+        "name": "Juan Carlos Salazar",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_12f600bb01b3",
+        "name": "fire",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0e12ac863294",
+        "name": "First Blood",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_c0636a732d34",
+        "name": "Juan Carlos Onetti Literary Contest",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_e0c99032ec27",
+        "name": "Carlos Condit",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_130365a35cac",
+        "name": "Cartman",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f5efe55bfc46",
+        "name": "Cartman",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_6efc2acb0534",
+        "name": "first appeared",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4bbb4f7076c0",
+        "name": "first single",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_7347f6bf5f83",
+        "name": "Carlo Simi",
+        "type": "PERSON",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_36daaaf9e95b",
+        "target": "e_4bcb3f2ac09f",
+        "predicate": "named_after",
+        "chunk_id": "6bb684cae1a152a4:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_bea9880eca38",
+        "target": "e_2cd953d07557",
+        "predicate": "is_a_tribute_to",
+        "chunk_id": "b0e7e6f938564d16:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_bea9880eca38",
+        "target": "e_4f524289124f",
+        "predicate": "written_by",
+        "chunk_id": "b0e7e6f938564d16:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_36daaaf9e95b",
+        "target": "e_9681ff5b47a2",
+        "predicate": "contains",
+        "chunk_id": "6bb684cae1a152a4:sentence:0",
+        "confidence": 0.8
+       },
+       {
+        "source": "e_e552f9b0ba15",
+        "target": "e_f0becd167c85",
+        "predicate": "was",
+        "chunk_id": "a1c8883d3d633dcc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_e552f9b0ba15",
+        "target": "e_979a69001778",
+        "predicate": "wrote",
+        "chunk_id": "a1c8883d3d633dcc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1a5a95a676c8",
+        "target": "e_e52cf26eb2b1",
+        "predicate": "died_in",
+        "chunk_id": "fd34cd047bda8507:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1a5a95a676c8",
+        "target": "e_803fec3572d4",
+        "predicate": "died_in_place",
+        "chunk_id": "fd34cd047bda8507:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1a5a95a676c8",
+        "target": "e_9274091e5a9f",
+        "predicate": "born_in",
+        "chunk_id": "fd34cd047bda8507:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7398364388845242,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 253
+      },
+      {
+       "name": "retrieve",
+       "ms": 218
+      },
+      {
+       "name": "retrieve",
+       "ms": 788
+      },
+      {
+       "name": "merge",
+       "ms": 396
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 928,
+     "tokens_out": 1683,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 0.0018222,
+      "total": 0.0018222
+     },
+     "total_ms": 61116,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and correctly identifies who died first. About half of the provided context blocks are irrelevant to the question.",
+    "cost_usd": 0.0002988,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "d27ab7e3-9641-4bc1-8fbe-7ce617dbb45a",
+    "question": "Who died first, Bryce Courtenay or Juan Carlos Onetti?",
+    "answer": {
+     "short": "30 May 1994",
+     "text": "30 May 1994. Juan Carlos Onetti died on 30 May 1994, before Bryce Courtenay who died on 22 November 2012. [2][1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 522 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 2,
+       "title": "Juan Carlos Onetti",
+       "snippet": "Juan Carlos Onetti Borges (July 1, 1909, Montevideo – May 30, 1994, Madrid) was an Uruguayan novelist and author of short stories.",
+       "chunk_id": "fd34cd047bda8507:sentence:0"
+      },
+      {
+       "n": 1,
+       "title": "Bryce Courtenay",
+       "snippet": "Bryce Courtenay, AM (14 August 193322 November 2012) was a South African/Australian advertising director and novelist. He is one of Australia's best-selling authors, notable for his book \"The Power of One\".",
+       "chunk_id": "a1c8883d3d633dcc:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Bryce Courtenay",
+       "snippet": "Bryce Courtenay, AM (14 August 193322 November 2012) was a South African/Australian advertising director and novelist. He is one of Australia's best-selling authors, notable for his book \"The Power of One\".",
+       "score": 0.7398364388845242,
+       "source": "vector",
+       "chunk_id": "a1c8883d3d633dcc:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Juan Carlos Onetti",
+       "snippet": "Juan Carlos Onetti Borges (July 1, 1909, Montevideo – May 30, 1994, Madrid) was an Uruguayan novelist and author of short stories.",
+       "score": 0.6467427015304565,
+       "source": "vector",
+       "chunk_id": "fd34cd047bda8507:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "April Fool's Day (novel)",
+       "snippet": "April Fool's Day is a 1993 book by Australian author Bryce Courtenay. The book is a tribute to the author's son, Damon Courtenay, a haemophiliac who contracted HIV/AIDS through an infected blood transfusion. The title refers to the date of Damon's death, 1 April 1991 (April Fools' Day).",
+       "score": 0.5564103986972343,
+       "source": "vector",
+       "chunk_id": "b0e7e6f938564d16:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Concurso Literario Juan Carlos Onetti",
+       "snippet": "The Juan Carlos Onetti Literary Contest (Spanish: Concurso Literario Juan Carlos Onetti ) is an important literary award in Uruguay.",
+       "score": 0.5185144521576857,
+       "source": "vector",
+       "chunk_id": "dc2a524b99ca9ab5:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Emilio Sánchez",
+       "snippet": "Emilio Ángel Sánchez Vicario (born 29 May 1965) is a former professional tennis player from Spain. He won three Grand Slam doubles titles and the men's doubles silver medal at the 1988 Olympic Games. He is the brother of multiple Grand Slam winner Arantxa. Sanchez since retiring captained his nation to Davis Cup success in 2008. In 2012 Sanchez was a tournament director for two wheelchair tennis events.",
+       "score": 0.5142061710357666,
+       "source": "vector",
+       "chunk_id": "64e2c3a133be7bfc:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Felipe VI of Spain",
+       "snippet": "Felipe VI (] ; Felipe Juan Pablo Alfonso de Todos los Santos de Borbón y Grecia; born 30 January 1968) is the King of Spain. He ascended to the throne on 19 June 2014 following the abdication of his father, King Juan Carlos I. He is the only son of Juan Carlos and his wife Sofía of Greece and Denmark. When Juan Carlos was chosen in 1969 to be Francisco Franco's successor, Felipe became second in line to the Spanish throne.",
+       "score": 0.5035633740685368,
+       "source": "vector",
+       "chunk_id": "21efecf27b15c581:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Juan Pablo Montoya",
+       "snippet": "Juan Pablo Montoya Roldán (] ; born September 20, 1975) is a Colombian racing driver. He currently competes in the Verizon IndyCar Series driving for Team Penske.",
+       "score": 0.5021991729736328,
+       "source": "vector",
+       "chunk_id": "2a02a8f85ee61035:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Philip K. Dick",
+       "snippet": "Philip Kindred Dick (December 16, 1928 – March 2, 1982) was an American writer notable for publishing works of science fiction.",
+       "score": 0.4983693660277515,
+       "source": "vector",
+       "chunk_id": "af30b08043602771:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.7398364388845242,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 223
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 738,
+     "tokens_out": 96,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.192e-05,
+      "total": 2.192e-05
+     },
+     "total_ms": 1115,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and correctly identifies who died first. Half of the provided context blocks are relevant to the entities in the question, while the other half are not.",
+    "cost_usd": 0.00032122,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "eb97b121-e3e1-4250-b381-32e956d6f307",
+    "question": "Who died first, Bryce Courtenay or Juan Carlos Onetti?",
+    "answer": {
+     "short": "Juan Carlos Onetti",
+     "text": "Juan Carlos Onetti. Juan Carlos Onetti died on 30 May 1994, while Bryce Courtenay died on 22 November 2012. [4][3]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 227 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 4,
+       "title": "Juan Carlos Onetti",
+       "snippet": "Juan Carlos Onetti Borges (July 1, 1909, Montevideo – May 30, 1994, Madrid) was an Uruguayan novelist and author of short stories.",
+       "chunk_id": "fd34cd047bda8507:sentence:0"
+      },
+      {
+       "n": 3,
+       "title": "Bryce Courtenay",
+       "snippet": "Bryce Courtenay, AM (14 August 193322 November 2012) was a South African/Australian advertising director and novelist. He is one of Australia's best-selling authors, notable for his book \"The Power of One\".",
+       "chunk_id": "a1c8883d3d633dcc:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Juan Carlos I Park",
+       "snippet": "Juan Carlos I Park (Spanish: \"Parque Juan Carlos I\" ) is the main municipal park in Madrid, Spain. The park was named after King Juan Carlos I. The park contains many modern sculptures.",
+       "score": 0.7089806670558059,
+       "source": "graph",
+       "chunk_id": "6bb684cae1a152a4:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "April Fool's Day (novel)",
+       "snippet": "April Fool's Day is a 1993 book by Australian author Bryce Courtenay. The book is a tribute to the author's son, Damon Courtenay, a haemophiliac who contracted HIV/AIDS through an infected blood transfusion. The title refers to the date of Damon's death, 1 April 1991 (April Fools' Day).",
+       "score": 0.5845622842064032,
+       "source": "graph",
+       "chunk_id": "b0e7e6f938564d16:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Bryce Courtenay",
+       "snippet": "Bryce Courtenay, AM (14 August 193322 November 2012) was a South African/Australian advertising director and novelist. He is one of Australia's best-selling authors, notable for his book \"The Power of One\".",
+       "score": 0.8501562178134918,
+       "source": "graph",
+       "chunk_id": "a1c8883d3d633dcc:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Juan Carlos Onetti",
+       "snippet": "Juan Carlos Onetti Borges (July 1, 1909, Montevideo – May 30, 1994, Madrid) was an Uruguayan novelist and author of short stories.",
+       "score": 0.8255161941051483,
+       "source": "graph",
+       "chunk_id": "fd34cd047bda8507:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_36daaaf9e95b",
+        "name": "Juan Carlos I Park",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_4bcb3f2ac09f",
+        "name": "King Juan Carlos I",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_bea9880eca38",
+        "name": "April Fool's Day",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2cd953d07557",
+        "name": "Damon Courtenay",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4f524289124f",
+        "name": "Bryce Courtenay",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_9681ff5b47a2",
+        "name": "many modern sculptures",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_e552f9b0ba15",
+        "name": "Bryce Courtenay",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f0becd167c85",
+        "name": "South African/Australian advertising director and novelist",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_979a69001778",
+        "name": "The Power of One",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_1a5a95a676c8",
+        "name": "Juan Carlos Onetti Borges",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_e52cf26eb2b1",
+        "name": "May 30, 1994",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_803fec3572d4",
+        "name": "Madrid",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_9274091e5a9f",
+        "name": "July 1, 1909",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ab7ca9b039e9",
+        "name": "Bryce Courtenay",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_c8bb97206743",
+        "name": "Juan Carlos",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4e86f664953a",
+        "name": "Juan Carlos I",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_211440934d45",
+        "name": "Don Carlos",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_ab2144987d48",
+        "name": "Juan Carlos Salazar",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_12f600bb01b3",
+        "name": "fire",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0e12ac863294",
+        "name": "First Blood",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_c0636a732d34",
+        "name": "Juan Carlos Onetti Literary Contest",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_e0c99032ec27",
+        "name": "Carlos Condit",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_130365a35cac",
+        "name": "Cartman",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f5efe55bfc46",
+        "name": "Cartman",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_6efc2acb0534",
+        "name": "first appeared",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4bbb4f7076c0",
+        "name": "first single",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_7347f6bf5f83",
+        "name": "Carlo Simi",
+        "type": "PERSON",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_36daaaf9e95b",
+        "target": "e_4bcb3f2ac09f",
+        "predicate": "named_after",
+        "chunk_id": "6bb684cae1a152a4:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_bea9880eca38",
+        "target": "e_2cd953d07557",
+        "predicate": "is_a_tribute_to",
+        "chunk_id": "b0e7e6f938564d16:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_bea9880eca38",
+        "target": "e_4f524289124f",
+        "predicate": "written_by",
+        "chunk_id": "b0e7e6f938564d16:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_36daaaf9e95b",
+        "target": "e_9681ff5b47a2",
+        "predicate": "contains",
+        "chunk_id": "6bb684cae1a152a4:sentence:0",
+        "confidence": 0.8
+       },
+       {
+        "source": "e_e552f9b0ba15",
+        "target": "e_f0becd167c85",
+        "predicate": "was",
+        "chunk_id": "a1c8883d3d633dcc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_e552f9b0ba15",
+        "target": "e_979a69001778",
+        "predicate": "wrote",
+        "chunk_id": "a1c8883d3d633dcc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1a5a95a676c8",
+        "target": "e_e52cf26eb2b1",
+        "predicate": "died_in",
+        "chunk_id": "fd34cd047bda8507:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1a5a95a676c8",
+        "target": "e_803fec3572d4",
+        "predicate": "died_in_place",
+        "chunk_id": "fd34cd047bda8507:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1a5a95a676c8",
+        "target": "e_9274091e5a9f",
+        "predicate": "born_in",
+        "chunk_id": "fd34cd047bda8507:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7089806670558059,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 251
+      },
+      {
+       "name": "retrieve",
+       "ms": 787
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 664,
+     "tokens_out": 85,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 1.96e-05,
+      "total": 1.96e-05
+     },
+     "total_ms": 6490,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.75,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context, providing the specific death dates for both individuals to correctly identify who died first. Most context blocks are relevant to the entities, although one is about a park.",
+    "cost_usd": 0.0003458,
+    "flagged": false,
+    "queued": false
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "18f99d2a-739a-491a-9b4b-570e99bc4bcc",
+    "question": "Who died first, Bryce Courtenay or Juan Carlos Onetti?",
+    "answer": {
+     "short": "Juan Carlos Onetti",
+     "text": "Juan Carlos Onetti. Juan Carlos Onetti died on 30 May 1994, before Bryce Courtenay’s death on 22 November 2012. [2]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 522 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 2,
+       "title": "Juan Carlos Onetti",
+       "snippet": "Juan Carlos Onetti Borges (July 1, 1909, Montevideo – May 30, 1994, Madrid) was an Uruguayan novelist and author of short stories.",
+       "chunk_id": "fd34cd047bda8507:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Bryce Courtenay",
+       "snippet": "Bryce Courtenay, AM (14 August 193322 November 2012) was a South African/Australian advertising director and novelist. He is one of Australia's best-selling authors, notable for his book \"The Power of One\".",
+       "score": 0.032266458495966696,
+       "source": "hybrid",
+       "chunk_id": "a1c8883d3d633dcc:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Juan Carlos Onetti",
+       "snippet": "Juan Carlos Onetti Borges (July 1, 1909, Montevideo – May 30, 1994, Madrid) was an Uruguayan novelist and author of short stories.",
+       "score": 0.031754032258064516,
+       "source": "hybrid",
+       "chunk_id": "fd34cd047bda8507:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Emilio Sánchez",
+       "snippet": "Emilio Ángel Sánchez Vicario (born 29 May 1965) is a former professional tennis player from Spain. He won three Grand Slam doubles titles and the men's doubles silver medal at the 1988 Olympic Games. He is the brother of multiple Grand Slam winner Arantxa. Sanchez since retiring captained his nation to Davis Cup success in 2008. In 2012 Sanchez was a tournament director for two wheelchair tennis events.",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "64e2c3a133be7bfc:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "April Fool's Day (novel)",
+       "snippet": "April Fool's Day is a 1993 book by Australian author Bryce Courtenay. The book is a tribute to the author's son, Damon Courtenay, a haemophiliac who contracted HIV/AIDS through an infected blood transfusion. The title refers to the date of Damon's death, 1 April 1991 (April Fools' Day).",
+       "score": 0.03200204813108039,
+       "source": "hybrid",
+       "chunk_id": "b0e7e6f938564d16:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Philip K. Dick",
+       "snippet": "Philip Kindred Dick (December 16, 1928 – March 2, 1982) was an American writer notable for publishing works of science fiction.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "af30b08043602771:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Felipe VI of Spain",
+       "snippet": "Felipe VI (] ; Felipe Juan Pablo Alfonso de Todos los Santos de Borbón y Grecia; born 30 January 1968) is the King of Spain. He ascended to the throne on 19 June 2014 following the abdication of his father, King Juan Carlos I. He is the only son of Juan Carlos and his wife Sofía of Greece and Denmark. When Juan Carlos was chosen in 1969 to be Francisco Franco's successor, Felipe became second in line to the Spanish throne.",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "21efecf27b15c581:sentence:0"
+      },
+      {
+       "rank": 7,
+       "title": "Juan Pablo Montoya",
+       "snippet": "Juan Pablo Montoya Roldán (] ; born September 20, 1975) is a Colombian racing driver. He currently competes in the Verizon IndyCar Series driving for Team Penske.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "2a02a8f85ee61035:sentence:0"
+      },
+      {
+       "rank": 8,
+       "title": "Concurso Literario Juan Carlos Onetti",
+       "snippet": "The Juan Carlos Onetti Literary Contest (Spanish: Concurso Literario Juan Carlos Onetti ) is an important literary award in Uruguay.",
+       "score": 0.015625,
+       "source": "vector",
+       "chunk_id": "dc2a524b99ca9ab5:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_36daaaf9e95b",
+        "name": "Juan Carlos I Park",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_4bcb3f2ac09f",
+        "name": "King Juan Carlos I",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_bea9880eca38",
+        "name": "April Fool's Day",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_2cd953d07557",
+        "name": "Damon Courtenay",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4f524289124f",
+        "name": "Bryce Courtenay",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_9681ff5b47a2",
+        "name": "many modern sculptures",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_e552f9b0ba15",
+        "name": "Bryce Courtenay",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f0becd167c85",
+        "name": "South African/Australian advertising director and novelist",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_979a69001778",
+        "name": "The Power of One",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_1a5a95a676c8",
+        "name": "Juan Carlos Onetti Borges",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_e52cf26eb2b1",
+        "name": "May 30, 1994",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_803fec3572d4",
+        "name": "Madrid",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_9274091e5a9f",
+        "name": "July 1, 1909",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_ab7ca9b039e9",
+        "name": "Bryce Courtenay",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_c8bb97206743",
+        "name": "Juan Carlos",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_4e86f664953a",
+        "name": "Juan Carlos I",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_211440934d45",
+        "name": "Don Carlos",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_ab2144987d48",
+        "name": "Juan Carlos Salazar",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_12f600bb01b3",
+        "name": "fire",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_0e12ac863294",
+        "name": "First Blood",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_c0636a732d34",
+        "name": "Juan Carlos Onetti Literary Contest",
+        "type": "EVENT",
+        "seed": true
+       },
+       {
+        "id": "e_e0c99032ec27",
+        "name": "Carlos Condit",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_130365a35cac",
+        "name": "Cartman",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_f5efe55bfc46",
+        "name": "Cartman",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_6efc2acb0534",
+        "name": "first appeared",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_4bbb4f7076c0",
+        "name": "first single",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_7347f6bf5f83",
+        "name": "Carlo Simi",
+        "type": "PERSON",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_36daaaf9e95b",
+        "target": "e_4bcb3f2ac09f",
+        "predicate": "named_after",
+        "chunk_id": "6bb684cae1a152a4:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_bea9880eca38",
+        "target": "e_2cd953d07557",
+        "predicate": "is_a_tribute_to",
+        "chunk_id": "b0e7e6f938564d16:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_bea9880eca38",
+        "target": "e_4f524289124f",
+        "predicate": "written_by",
+        "chunk_id": "b0e7e6f938564d16:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_36daaaf9e95b",
+        "target": "e_9681ff5b47a2",
+        "predicate": "contains",
+        "chunk_id": "6bb684cae1a152a4:sentence:0",
+        "confidence": 0.8
+       },
+       {
+        "source": "e_e552f9b0ba15",
+        "target": "e_f0becd167c85",
+        "predicate": "was",
+        "chunk_id": "a1c8883d3d633dcc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_e552f9b0ba15",
+        "target": "e_979a69001778",
+        "predicate": "wrote",
+        "chunk_id": "a1c8883d3d633dcc:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1a5a95a676c8",
+        "target": "e_e52cf26eb2b1",
+        "predicate": "died_in",
+        "chunk_id": "fd34cd047bda8507:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1a5a95a676c8",
+        "target": "e_803fec3572d4",
+        "predicate": "died_in_place",
+        "chunk_id": "fd34cd047bda8507:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_1a5a95a676c8",
+        "target": "e_9274091e5a9f",
+        "predicate": "born_in",
+        "chunk_id": "fd34cd047bda8507:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.7398364388845242,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 214
+      },
+      {
+       "name": "link",
+       "ms": 254
+      },
+      {
+       "name": "retrieve",
+       "ms": 804
+      },
+      {
+       "name": "merge",
+       "ms": 397
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 911,
+     "tokens_out": 90,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.45e-05,
+      "total": 2.45e-05
+     },
+     "total_ms": 8133,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 1.0,
+    "f1": 1.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.5,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and correctly identifies who died first. Approximately half of the context blocks are irrelevant to the question.",
+    "cost_usd": 0.0003114,
+    "flagged": true,
+    "queued": false
+   }
+  }
+ }
+}

@@ -1,0 +1,1193 @@
+{
+ "sample": false,
+ "question_id": "sh_8c427798f2e932b7_0",
+ "question": "How many short animated films are in Early Abstractions?",
+ "type": "single_hop",
+ "gold_answer": "seven",
+ "supporting_titles": [
+  "Early Abstractions"
+ ],
+ "why": "Went wrong on every route: vector, graph and hybrid all score F1 0 on this count.",
+ "recorded_at": "2026-09-30T14:00:52.534061+00:00",
+ "git_sha": "4e370b935ce4c96dc88f46d676ed7aace3486ae6",
+ "config_hash": "d67a90a95faa",
+ "runs": {
+  "auto": {
+   "run_id": "20260930-1400-dev-auto-replay",
+   "response": {
+    "trace_id": "aafc7bc1-1f27-4dca-9c53-fe26f422e134",
+    "question": "How many short animated films are in Early Abstractions?",
+    "answer": {
+     "short": "7",
+     "text": "7. The collection “Early Abstractions” is described as a collection of seven short animated films. [1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label single_hop, 975 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Early Abstractions",
+       "snippet": "Early Abstractions is a collection of seven short animated films created by Harry Everett Smith between 1939 and 1956. Each film is between two and six minutes long, and is named according to the chronological order in which it was made. The collection includes \"Numbers 1–5\", \"7\", and \"10\", while the missing \"Numbers 8\" and \"9\" are presumed to have been lost.",
+       "chunk_id": "8c427798f2e932b7:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "auto",
+     "label": "single_hop",
+     "label_confidence": 0.8068929314613342,
+     "method": "logreg",
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "ambiguous:single_hop 0.81"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Early Abstractions",
+       "snippet": "Early Abstractions is a collection of seven short animated films created by Harry Everett Smith between 1939 and 1956. Each film is between two and six minutes long, and is named according to the chronological order in which it was made. The collection includes \"Numbers 1–5\", \"7\", and \"10\", while the missing \"Numbers 8\" and \"9\" are presumed to have been lost.",
+       "score": 0.03278688524590164,
+       "source": "hybrid",
+       "chunk_id": "8c427798f2e932b7:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Off His Rockers",
+       "snippet": "Off His Rockers is an animated short film produced by Walt Disney Feature Animation and released in 1992. It was released theatrically accompanying the film \"Honey, I Blew Up the Kid\". The film started as a side project of director Barry Cook, who, at the time, was working at Walt Disney Feature Animation Florida. Starting with a core of six people, the project ended up involving most of the Florida studio's staff of 73 (and some in California), all of whom \"donated\" their time to the project beyond their official duties.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "1390a7166b9f2881:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "The Newcomer in The Cabbage",
+       "snippet": "The Newcomer in The Cabbage (Russian: Пришелец в капусте ) is a 1989 short Soviet Russian stop-motion animation film by Vladimir Danilevich. It is the first film of a tetralogy about the adventures of The Newcomer Vaniusha and his friends. It was followed by \"Vaniusha The Newcomer\", \"Vaniusha and The Space Pirate\" and \"Vaniusha and The Giant\".",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "235d0353590d6554:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Academy Award for Best Live Action Short Film",
+       "snippet": "This name for the Academy Award for Live Action Short Film was introduced in 1974. For the three preceding years it was known as \"Short Subjects, Live Action Films\". The term \"Short Subjects, Live Action Subjects\" was used from 1957 until 1970. From 1936 until 1956 there were two separate awards, \"Best Short Subject, One-reel\" and \"Best Short Subject, Two-reel\". These categories referred to the running time of the short: a reel of film, in this context, being 1000 feet or less, or about 11 minutes.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "8d5c2faed1dbf87d:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Also Sprach Zarathustra (painting)",
+       "snippet": "Six paintings of the series were purchased by the Moscow Museum of Modern Art and by some important private collectors. The oil painting \"Also Sprach Zarathustra\" series was exhibited several times — including the exhibition at the Institute of Philosophy of the Russian Academy of Sciences in 1997 and at the First Moscow Biennale of contemporary art in 2005.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "372f0519d3d5f324:sentence:1"
+      },
+      {
+       "rank": 6,
+       "title": "Star Wars: The Clone Wars (2008 TV series)",
+       "snippet": "In 2007, \"Star Wars\" creator George Lucas stated \"there will be at least 100 episodes produced [about five seasons]\". Dave Filoni is the supervising director of the series. Genndy Tartakovsky, director of the first \"Clone Wars\" series, was not involved with the production, but character designer Kilian Plunkett referred to the character designs from the 2D series when designing the characters for the 3D series. There is also an online comic, depicting story-snippets between the single episodes.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "aea8520245b5fc6c:sentence:1"
+      },
+      {
+       "rank": 7,
+       "title": "Chicago film industry",
+       "snippet": "Early film companies such as Essanay Studios produced multiple silent films every week and rented viewing equipment to showcase the latest cinematography to the public. This rental culture gave birth to the popularity of Nickelodeons up until the Great Depression. However, due to the high demand for motion pictures during this time, a black market for films and equipment developed. The Motion Picture Patents Company, established in 1909 as a conglomerate of the major studios, sought to eliminate all illegal use of patented film equipment. As a result, independent ventures entered the film scen",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "a6bf8a7f02688263:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "Jolin Tsai filmography",
+       "snippet": "Taiwanese entertainer Jolin Tsai ( ) has been featured in two feature films, five short films, four television dramas, and one variety show. In 2001, she made her acting debut as a guest appearance in the television drama, \"Six Friends\", which was directed by Ma Kung-wei. Her next television dramas, \"Come to My Place\", directed by Doze Niu, and \"In Love\", directed by Ouyang Sheng and Chang Chih-chao, were released in 2002.",
+       "score": 0.016129032258064516,
+       "source": "graph",
+       "chunk_id": "e862bd61753c8bed:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_2522beb9853e",
+        "name": "Early Abstractions",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_691fc19a3af5",
+        "name": "7",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_92d8a4305061",
+        "name": "10",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_17fb6950ed78",
+        "name": "Numbers 1–5",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_36ec3ef4432d",
+        "name": "Harry Everett Smith",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_73d2eb9ebf49",
+        "name": "Jolin Tsai",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_87952f92adab",
+        "name": "five short films",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_86eb518b0c1f",
+        "name": "Vladimir Petrovich Danilevich",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_74f654be3721",
+        "name": "animator",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_c89fb1daafa0",
+        "name": "Lego",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_d0151ab1227e",
+        "name": "Lego films",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_f334b15b6efd",
+        "name": "Taylor Swift",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_187a7eceae8a",
+        "name": "five films",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_e5b5138299ca",
+        "name": "film",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_d9727c3da12d",
+        "name": "early 2008",
+        "type": "DATE",
+        "seed": true
+       },
+       {
+        "id": "e_5dfa5065d174",
+        "name": "early 1990s",
+        "type": "DATE",
+        "seed": true
+       },
+       {
+        "id": "e_ae4bf6dac1c9",
+        "name": "early 1950s",
+        "type": "DATE",
+        "seed": true
+       },
+       {
+        "id": "e_802167248447",
+        "name": "manga",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_97b88e2c404f",
+        "name": "Lions",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_dcf6fba4a1b2",
+        "name": "Manly",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_41e57411eba9",
+        "name": "ABC",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_7cbce00c63ca",
+        "name": "She",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_8d95befeeff9",
+        "name": "short IMAX film",
+        "type": "WORK",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_2522beb9853e",
+        "target": "e_691fc19a3af5",
+        "predicate": "includes",
+        "chunk_id": "8c427798f2e932b7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2522beb9853e",
+        "target": "e_92d8a4305061",
+        "predicate": "includes",
+        "chunk_id": "8c427798f2e932b7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2522beb9853e",
+        "target": "e_17fb6950ed78",
+        "predicate": "includes",
+        "chunk_id": "8c427798f2e932b7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2522beb9853e",
+        "target": "e_36ec3ef4432d",
+        "predicate": "created_by",
+        "chunk_id": "8c427798f2e932b7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_73d2eb9ebf49",
+        "target": "e_87952f92adab",
+        "predicate": "has_featured_in",
+        "chunk_id": "e862bd61753c8bed:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_86eb518b0c1f",
+        "target": "e_74f654be3721",
+        "predicate": "worked_as",
+        "chunk_id": "37c6a1181d2d25c5:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c89fb1daafa0",
+        "target": "e_d0151ab1227e",
+        "predicate": "includes",
+        "chunk_id": "094077055eb264df:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f334b15b6efd",
+        "target": "e_187a7eceae8a",
+        "predicate": "appeared_in",
+        "chunk_id": "fe4b5f14ae1cf2a5:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.9002069949857067,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "classify",
+       "ms": 0
+      },
+      {
+       "name": "link",
+       "ms": 251
+      },
+      {
+       "name": "retrieve",
+       "ms": 215
+      },
+      {
+       "name": "retrieve",
+       "ms": 788
+      },
+      {
+       "name": "merge",
+       "ms": 393
+      },
+      {
+       "name": "generate",
+       "ms": 195
+      }
+     ],
+     "tokens_in": 1213,
+     "tokens_out": 66,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.777e-05,
+      "total": 2.777e-05
+     },
+     "total_ms": 2454,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely answers the question, but only one of the eight provided context blocks is relevant.",
+    "cost_usd": 0.00025946,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "vector": {
+   "run_id": "20260930-1400-dev-vector-replay",
+   "response": {
+    "trace_id": "53d3753a-3512-4b33-9b03-a584f95e5cf4",
+    "question": "How many short animated films are in Early Abstractions?",
+    "answer": {
+     "short": "7",
+     "text": "7. The collection contains seven short animated films【1】",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route vector, label none, 964 tokens",
+     "confidence": 0.5,
+     "flagged": true,
+     "citations": []
+    },
+    "route": {
+     "requested": "vector",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "vector",
+     "final": "vector",
+     "fallbacks": [],
+     "reasons": [
+      "forced:vector"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Early Abstractions",
+       "snippet": "Early Abstractions is a collection of seven short animated films created by Harry Everett Smith between 1939 and 1956. Each film is between two and six minutes long, and is named according to the chronological order in which it was made. The collection includes \"Numbers 1–5\", \"7\", and \"10\", while the missing \"Numbers 8\" and \"9\" are presumed to have been lost.",
+       "score": 0.9002069949857067,
+       "source": "vector",
+       "chunk_id": "8c427798f2e932b7:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Off His Rockers",
+       "snippet": "Off His Rockers is an animated short film produced by Walt Disney Feature Animation and released in 1992. It was released theatrically accompanying the film \"Honey, I Blew Up the Kid\". The film started as a side project of director Barry Cook, who, at the time, was working at Walt Disney Feature Animation Florida. Starting with a core of six people, the project ended up involving most of the Florida studio's staff of 73 (and some in California), all of whom \"donated\" their time to the project beyond their official duties.",
+       "score": 0.6571513823090382,
+       "source": "vector",
+       "chunk_id": "1390a7166b9f2881:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Academy Award for Best Live Action Short Film",
+       "snippet": "This name for the Academy Award for Live Action Short Film was introduced in 1974. For the three preceding years it was known as \"Short Subjects, Live Action Films\". The term \"Short Subjects, Live Action Subjects\" was used from 1957 until 1970. From 1936 until 1956 there were two separate awards, \"Best Short Subject, One-reel\" and \"Best Short Subject, Two-reel\". These categories referred to the running time of the short: a reel of film, in this context, being 1000 feet or less, or about 11 minutes.",
+       "score": 0.6366768479347229,
+       "source": "vector",
+       "chunk_id": "8d5c2faed1dbf87d:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Academy Award for Best Live Action Short Film",
+       "snippet": "A third category \"Best Short Subject, color\" was used only for 1936 and 1937. From the initiation of short subject awards for 1932 until 1935 the terms were \"Best Short Subject, comedy\" and \"Best Short Subject, novelty\". Below is a list of Oscar-winning short films. The winning film is listed first, with the other nominated films for that year/category below.",
+       "score": 0.6328576803207397,
+       "source": "vector",
+       "chunk_id": "8d5c2faed1dbf87d:sentence:1"
+      },
+      {
+       "rank": 5,
+       "title": "The Newcomer in The Cabbage",
+       "snippet": "The Newcomer in The Cabbage (Russian: Пришелец в капусте ) is a 1989 short Soviet Russian stop-motion animation film by Vladimir Danilevich. It is the first film of a tetralogy about the adventures of The Newcomer Vaniusha and his friends. It was followed by \"Vaniusha The Newcomer\", \"Vaniusha and The Space Pirate\" and \"Vaniusha and The Giant\".",
+       "score": 0.6305406657344723,
+       "source": "vector",
+       "chunk_id": "235d0353590d6554:sentence:0"
+      },
+      {
+       "rank": 6,
+       "title": "Chicago film industry",
+       "snippet": "Early film companies such as Essanay Studios produced multiple silent films every week and rented viewing equipment to showcase the latest cinematography to the public. This rental culture gave birth to the popularity of Nickelodeons up until the Great Depression. However, due to the high demand for motion pictures during this time, a black market for films and equipment developed. The Motion Picture Patents Company, established in 1909 as a conglomerate of the major studios, sought to eliminate all illegal use of patented film equipment. As a result, independent ventures entered the film scen",
+       "score": 0.6201154589653015,
+       "source": "vector",
+       "chunk_id": "a6bf8a7f02688263:sentence:1"
+      },
+      {
+       "rank": 7,
+       "title": "Also Sprach Zarathustra (painting)",
+       "snippet": "Six paintings of the series were purchased by the Moscow Museum of Modern Art and by some important private collectors. The oil painting \"Also Sprach Zarathustra\" series was exhibited several times — including the exhibition at the Institute of Philosophy of the Russian Academy of Sciences in 1997 and at the First Moscow Biennale of contemporary art in 2005.",
+       "score": 0.6145899478968965,
+       "source": "vector",
+       "chunk_id": "372f0519d3d5f324:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "Star Wars: The Clone Wars (2008 TV series)",
+       "snippet": "In 2007, \"Star Wars\" creator George Lucas stated \"there will be at least 100 episodes produced [about five seasons]\". Dave Filoni is the supervising director of the series. Genndy Tartakovsky, director of the first \"Clone Wars\" series, was not involved with the production, but character designer Kilian Plunkett referred to the character designs from the 2D series when designing the characters for the 3D series. There is also an online comic, depicting story-snippets between the single episodes.",
+       "score": 0.6088571548461914,
+       "source": "vector",
+       "chunk_id": "aea8520245b5fc6c:sentence:1"
+      }
+     ],
+     "graph": {
+      "nodes": [],
+      "edges": []
+     },
+     "top_score": 0.9002069949857067,
+     "path_found": false
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 213
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1091,
+     "tokens_out": 57,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.477e-05,
+      "total": 2.477e-05
+     },
+     "total_ms": 983,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is directly supported by context block [1]. Only one of the eight provided context blocks is relevant to the question, and the answer fully addresses the query.",
+    "cost_usd": 0.00026688,
+    "flagged": true,
+    "queued": true
+   }
+  },
+  "graph": {
+   "run_id": "20260930-1400-dev-graph-replay",
+   "response": {
+    "trace_id": "0c552c97-90bc-4e89-ad0b-26793b34793c",
+    "question": "How many short animated films are in Early Abstractions?",
+    "answer": {
+     "short": "7",
+     "text": "7. The collection “Early Abstractions” is described as a collection of seven short animated films. [1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route graph, label none, 519 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Early Abstractions",
+       "snippet": "Early Abstractions is a collection of seven short animated films created by Harry Everett Smith between 1939 and 1956. Each film is between two and six minutes long, and is named according to the chronological order in which it was made. The collection includes \"Numbers 1–5\", \"7\", and \"10\", while the missing \"Numbers 8\" and \"9\" are presumed to have been lost.",
+       "chunk_id": "8c427798f2e932b7:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "graph",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "graph",
+     "final": "graph",
+     "fallbacks": [],
+     "reasons": [
+      "forced:graph"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Early Abstractions",
+       "snippet": "Early Abstractions is a collection of seven short animated films created by Harry Everett Smith between 1939 and 1956. Each film is between two and six minutes long, and is named according to the chronological order in which it was made. The collection includes \"Numbers 1–5\", \"7\", and \"10\", while the missing \"Numbers 8\" and \"9\" are presumed to have been lost.",
+       "score": 0.8997666001459009,
+       "source": "graph",
+       "chunk_id": "8c427798f2e932b7:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Jolin Tsai filmography",
+       "snippet": "Taiwanese entertainer Jolin Tsai ( ) has been featured in two feature films, five short films, four television dramas, and one variety show. In 2001, she made her acting debut as a guest appearance in the television drama, \"Six Friends\", which was directed by Ma Kung-wei. Her next television dramas, \"Come to My Place\", directed by Doze Niu, and \"In Love\", directed by Ouyang Sheng and Chang Chih-chao, were released in 2002.",
+       "score": 0.8257528453167884,
+       "source": "graph",
+       "chunk_id": "e862bd61753c8bed:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "Vladimir Danilevich",
+       "snippet": "Vladimir Petrovich Danilevich (Russian: Владимир Петрович Данилевич ; 4 September 1924 — 9 October 2001) was well-known Soviet and Russian Animator: who successfully worked as the film director, the screenwriter, the art director and the animator.",
+       "score": 0.7920469343662262,
+       "source": "graph",
+       "chunk_id": "37c6a1181d2d25c5:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "History of Lego",
+       "snippet": "The History of Lego began in 1932 in a Danish carpentry workshop and continues into the 21st century as a popular and very profitable line of construction toys and related products and services, including Lego board games, retail stores, Lego video games, Lego films, Legoland theme parks, and Lego Serious Play consultant services, with a significant impact on various areas of popular culture. Despite its expansion, the company remains privately held.",
+       "score": 0.7701989412307739,
+       "source": "graph",
+       "chunk_id": "094077055eb264df:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Taylor Swift videography",
+       "snippet": "American singer-songwriter Taylor Swift has released four video albums and has appeared in thirty-eight music videos, five films and three television shows. From her eponymous debut album (2006), she released music videos for the singles \"Tim McGraw\", \"Teardrops on My Guitar\", \"Our Song\", and \"Picture to Burn\", all directed by Trey Fanjoy and released from 2006–08. For the second of these, she earned an MTV Video Music Award for Best New Artist nomination.",
+       "score": 0.7637577934553887,
+       "source": "graph",
+       "chunk_id": "fe4b5f14ae1cf2a5:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_2522beb9853e",
+        "name": "Early Abstractions",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_691fc19a3af5",
+        "name": "7",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_92d8a4305061",
+        "name": "10",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_17fb6950ed78",
+        "name": "Numbers 1–5",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_36ec3ef4432d",
+        "name": "Harry Everett Smith",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_73d2eb9ebf49",
+        "name": "Jolin Tsai",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_87952f92adab",
+        "name": "five short films",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_86eb518b0c1f",
+        "name": "Vladimir Petrovich Danilevich",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_74f654be3721",
+        "name": "animator",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_c89fb1daafa0",
+        "name": "Lego",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_d0151ab1227e",
+        "name": "Lego films",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_f334b15b6efd",
+        "name": "Taylor Swift",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_187a7eceae8a",
+        "name": "five films",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_e5b5138299ca",
+        "name": "film",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_d9727c3da12d",
+        "name": "early 2008",
+        "type": "DATE",
+        "seed": true
+       },
+       {
+        "id": "e_5dfa5065d174",
+        "name": "early 1990s",
+        "type": "DATE",
+        "seed": true
+       },
+       {
+        "id": "e_ae4bf6dac1c9",
+        "name": "early 1950s",
+        "type": "DATE",
+        "seed": true
+       },
+       {
+        "id": "e_802167248447",
+        "name": "manga",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_97b88e2c404f",
+        "name": "Lions",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_dcf6fba4a1b2",
+        "name": "Manly",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_41e57411eba9",
+        "name": "ABC",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_7cbce00c63ca",
+        "name": "She",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_8d95befeeff9",
+        "name": "short IMAX film",
+        "type": "WORK",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_2522beb9853e",
+        "target": "e_691fc19a3af5",
+        "predicate": "includes",
+        "chunk_id": "8c427798f2e932b7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2522beb9853e",
+        "target": "e_92d8a4305061",
+        "predicate": "includes",
+        "chunk_id": "8c427798f2e932b7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2522beb9853e",
+        "target": "e_17fb6950ed78",
+        "predicate": "includes",
+        "chunk_id": "8c427798f2e932b7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2522beb9853e",
+        "target": "e_36ec3ef4432d",
+        "predicate": "created_by",
+        "chunk_id": "8c427798f2e932b7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_73d2eb9ebf49",
+        "target": "e_87952f92adab",
+        "predicate": "has_featured_in",
+        "chunk_id": "e862bd61753c8bed:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_86eb518b0c1f",
+        "target": "e_74f654be3721",
+        "predicate": "worked_as",
+        "chunk_id": "37c6a1181d2d25c5:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c89fb1daafa0",
+        "target": "e_d0151ab1227e",
+        "predicate": "includes",
+        "chunk_id": "094077055eb264df:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f334b15b6efd",
+        "target": "e_187a7eceae8a",
+        "predicate": "appeared_in",
+        "chunk_id": "fe4b5f14ae1cf2a5:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.8997666001459009,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "link",
+       "ms": 294
+      },
+      {
+       "name": "retrieve",
+       "ms": 790
+      },
+      {
+       "name": "generate",
+       "ms": 194
+      }
+     ],
+     "tokens_in": 852,
+     "tokens_out": 65,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.119e-05,
+      "total": 2.119e-05
+     },
+     "total_ms": 6640,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is directly supported by the first context block and fully addresses the question, but only one of the five provided context blocks is relevant.",
+    "cost_usd": 0.00023822,
+    "flagged": true,
+    "queued": false
+   }
+  },
+  "hybrid": {
+   "run_id": "20260930-1400-dev-hybrid-replay",
+   "response": {
+    "trace_id": "ea9c0649-c7d6-4781-a87c-52302f31f9f8",
+    "question": "How many short animated films are in Early Abstractions?",
+    "answer": {
+     "short": "7",
+     "text": "7. The collection “Early Abstractions” is described as a collection of seven short animated films. [1]",
+     "model": "gpt-oss:20b",
+     "size": "small",
+     "select_reason": "small:route hybrid, label none, 975 tokens",
+     "confidence": 1.0,
+     "flagged": false,
+     "citations": [
+      {
+       "n": 1,
+       "title": "Early Abstractions",
+       "snippet": "Early Abstractions is a collection of seven short animated films created by Harry Everett Smith between 1939 and 1956. Each film is between two and six minutes long, and is named according to the chronological order in which it was made. The collection includes \"Numbers 1–5\", \"7\", and \"10\", while the missing \"Numbers 8\" and \"9\" are presumed to have been lost.",
+       "chunk_id": "8c427798f2e932b7:sentence:0"
+      }
+     ]
+    },
+    "route": {
+     "requested": "hybrid",
+     "label": null,
+     "label_confidence": null,
+     "method": null,
+     "initial": "hybrid",
+     "final": "hybrid",
+     "fallbacks": [],
+     "reasons": [
+      "forced:hybrid"
+     ]
+    },
+    "retrieval": {
+     "hits": [
+      {
+       "rank": 1,
+       "title": "Early Abstractions",
+       "snippet": "Early Abstractions is a collection of seven short animated films created by Harry Everett Smith between 1939 and 1956. Each film is between two and six minutes long, and is named according to the chronological order in which it was made. The collection includes \"Numbers 1–5\", \"7\", and \"10\", while the missing \"Numbers 8\" and \"9\" are presumed to have been lost.",
+       "score": 0.03278688524590164,
+       "source": "hybrid",
+       "chunk_id": "8c427798f2e932b7:sentence:0"
+      },
+      {
+       "rank": 2,
+       "title": "Off His Rockers",
+       "snippet": "Off His Rockers is an animated short film produced by Walt Disney Feature Animation and released in 1992. It was released theatrically accompanying the film \"Honey, I Blew Up the Kid\". The film started as a side project of director Barry Cook, who, at the time, was working at Walt Disney Feature Animation Florida. Starting with a core of six people, the project ended up involving most of the Florida studio's staff of 73 (and some in California), all of whom \"donated\" their time to the project beyond their official duties.",
+       "score": 0.016129032258064516,
+       "source": "vector",
+       "chunk_id": "1390a7166b9f2881:sentence:0"
+      },
+      {
+       "rank": 3,
+       "title": "The Newcomer in The Cabbage",
+       "snippet": "The Newcomer in The Cabbage (Russian: Пришелец в капусте ) is a 1989 short Soviet Russian stop-motion animation film by Vladimir Danilevich. It is the first film of a tetralogy about the adventures of The Newcomer Vaniusha and his friends. It was followed by \"Vaniusha The Newcomer\", \"Vaniusha and The Space Pirate\" and \"Vaniusha and The Giant\".",
+       "score": 0.015384615384615385,
+       "source": "vector",
+       "chunk_id": "235d0353590d6554:sentence:0"
+      },
+      {
+       "rank": 4,
+       "title": "Academy Award for Best Live Action Short Film",
+       "snippet": "This name for the Academy Award for Live Action Short Film was introduced in 1974. For the three preceding years it was known as \"Short Subjects, Live Action Films\". The term \"Short Subjects, Live Action Subjects\" was used from 1957 until 1970. From 1936 until 1956 there were two separate awards, \"Best Short Subject, One-reel\" and \"Best Short Subject, Two-reel\". These categories referred to the running time of the short: a reel of film, in this context, being 1000 feet or less, or about 11 minutes.",
+       "score": 0.015873015873015872,
+       "source": "vector",
+       "chunk_id": "8d5c2faed1dbf87d:sentence:0"
+      },
+      {
+       "rank": 5,
+       "title": "Also Sprach Zarathustra (painting)",
+       "snippet": "Six paintings of the series were purchased by the Moscow Museum of Modern Art and by some important private collectors. The oil painting \"Also Sprach Zarathustra\" series was exhibited several times — including the exhibition at the Institute of Philosophy of the Russian Academy of Sciences in 1997 and at the First Moscow Biennale of contemporary art in 2005.",
+       "score": 0.014925373134328358,
+       "source": "vector",
+       "chunk_id": "372f0519d3d5f324:sentence:1"
+      },
+      {
+       "rank": 6,
+       "title": "Star Wars: The Clone Wars (2008 TV series)",
+       "snippet": "In 2007, \"Star Wars\" creator George Lucas stated \"there will be at least 100 episodes produced [about five seasons]\". Dave Filoni is the supervising director of the series. Genndy Tartakovsky, director of the first \"Clone Wars\" series, was not involved with the production, but character designer Kilian Plunkett referred to the character designs from the 2D series when designing the characters for the 3D series. There is also an online comic, depicting story-snippets between the single episodes.",
+       "score": 0.014705882352941176,
+       "source": "vector",
+       "chunk_id": "aea8520245b5fc6c:sentence:1"
+      },
+      {
+       "rank": 7,
+       "title": "Chicago film industry",
+       "snippet": "Early film companies such as Essanay Studios produced multiple silent films every week and rented viewing equipment to showcase the latest cinematography to the public. This rental culture gave birth to the popularity of Nickelodeons up until the Great Depression. However, due to the high demand for motion pictures during this time, a black market for films and equipment developed. The Motion Picture Patents Company, established in 1909 as a conglomerate of the major studios, sought to eliminate all illegal use of patented film equipment. As a result, independent ventures entered the film scen",
+       "score": 0.015151515151515152,
+       "source": "vector",
+       "chunk_id": "a6bf8a7f02688263:sentence:1"
+      },
+      {
+       "rank": 8,
+       "title": "Jolin Tsai filmography",
+       "snippet": "Taiwanese entertainer Jolin Tsai ( ) has been featured in two feature films, five short films, four television dramas, and one variety show. In 2001, she made her acting debut as a guest appearance in the television drama, \"Six Friends\", which was directed by Ma Kung-wei. Her next television dramas, \"Come to My Place\", directed by Doze Niu, and \"In Love\", directed by Ouyang Sheng and Chang Chih-chao, were released in 2002.",
+       "score": 0.016129032258064516,
+       "source": "graph",
+       "chunk_id": "e862bd61753c8bed:sentence:0"
+      }
+     ],
+     "graph": {
+      "nodes": [
+       {
+        "id": "e_2522beb9853e",
+        "name": "Early Abstractions",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_691fc19a3af5",
+        "name": "7",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_92d8a4305061",
+        "name": "10",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_17fb6950ed78",
+        "name": "Numbers 1–5",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_36ec3ef4432d",
+        "name": "Harry Everett Smith",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_73d2eb9ebf49",
+        "name": "Jolin Tsai",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_87952f92adab",
+        "name": "five short films",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_86eb518b0c1f",
+        "name": "Vladimir Petrovich Danilevich",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_74f654be3721",
+        "name": "animator",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_c89fb1daafa0",
+        "name": "Lego",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_d0151ab1227e",
+        "name": "Lego films",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_f334b15b6efd",
+        "name": "Taylor Swift",
+        "type": "",
+        "seed": false
+       },
+       {
+        "id": "e_187a7eceae8a",
+        "name": "five films",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_e5b5138299ca",
+        "name": "film",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_d9727c3da12d",
+        "name": "early 2008",
+        "type": "DATE",
+        "seed": true
+       },
+       {
+        "id": "e_5dfa5065d174",
+        "name": "early 1990s",
+        "type": "DATE",
+        "seed": true
+       },
+       {
+        "id": "e_ae4bf6dac1c9",
+        "name": "early 1950s",
+        "type": "DATE",
+        "seed": true
+       },
+       {
+        "id": "e_802167248447",
+        "name": "manga",
+        "type": "WORK",
+        "seed": true
+       },
+       {
+        "id": "e_97b88e2c404f",
+        "name": "Lions",
+        "type": "OTHER",
+        "seed": true
+       },
+       {
+        "id": "e_dcf6fba4a1b2",
+        "name": "Manly",
+        "type": "PLACE",
+        "seed": true
+       },
+       {
+        "id": "e_41e57411eba9",
+        "name": "ABC",
+        "type": "ORG",
+        "seed": true
+       },
+       {
+        "id": "e_7cbce00c63ca",
+        "name": "She",
+        "type": "PERSON",
+        "seed": true
+       },
+       {
+        "id": "e_8d95befeeff9",
+        "name": "short IMAX film",
+        "type": "WORK",
+        "seed": true
+       }
+      ],
+      "edges": [
+       {
+        "source": "e_2522beb9853e",
+        "target": "e_691fc19a3af5",
+        "predicate": "includes",
+        "chunk_id": "8c427798f2e932b7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2522beb9853e",
+        "target": "e_92d8a4305061",
+        "predicate": "includes",
+        "chunk_id": "8c427798f2e932b7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2522beb9853e",
+        "target": "e_17fb6950ed78",
+        "predicate": "includes",
+        "chunk_id": "8c427798f2e932b7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_2522beb9853e",
+        "target": "e_36ec3ef4432d",
+        "predicate": "created_by",
+        "chunk_id": "8c427798f2e932b7:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_73d2eb9ebf49",
+        "target": "e_87952f92adab",
+        "predicate": "has_featured_in",
+        "chunk_id": "e862bd61753c8bed:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_86eb518b0c1f",
+        "target": "e_74f654be3721",
+        "predicate": "worked_as",
+        "chunk_id": "37c6a1181d2d25c5:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_c89fb1daafa0",
+        "target": "e_d0151ab1227e",
+        "predicate": "includes",
+        "chunk_id": "094077055eb264df:sentence:0",
+        "confidence": 1.0
+       },
+       {
+        "source": "e_f334b15b6efd",
+        "target": "e_187a7eceae8a",
+        "predicate": "appeared_in",
+        "chunk_id": "fe4b5f14ae1cf2a5:sentence:0",
+        "confidence": 1.0
+       }
+      ]
+     },
+     "top_score": 0.9002069949857067,
+     "path_found": true
+    },
+    "trace": {
+     "spans": [
+      {
+       "name": "retrieve",
+       "ms": 213
+      },
+      {
+       "name": "link",
+       "ms": 255
+      },
+      {
+       "name": "retrieve",
+       "ms": 797
+      },
+      {
+       "name": "merge",
+       "ms": 398
+      },
+      {
+       "name": "generate",
+       "ms": 196
+      }
+     ],
+     "tokens_in": 1213,
+     "tokens_out": 66,
+     "cost": {
+      "classifier": 0.0,
+      "generation": 2.777e-05,
+      "total": 2.777e-05
+     },
+     "total_ms": 2472,
+     "throttle_wait_ms": 0,
+     "cached": true
+    },
+    "live": null
+   },
+   "metrics": {
+    "em": 0.0,
+    "f1": 0.0,
+    "recall_at_k": 1.0
+   },
+   "judgement": {
+    "faithfulness": 1.0,
+    "relevance": 0.25,
+    "completeness": 1.0,
+    "rationale": "The answer is fully supported by the context and completely answers the question, but only one of the eight provided context blocks is relevant.",
+    "cost_usd": 0.00025946,
+    "flagged": true,
+    "queued": false
+   }
+  }
+ }
+}
