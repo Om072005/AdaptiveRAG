@@ -40,3 +40,10 @@ def test_markdown_answer_line_and_trailing_period() -> None:
 def test_missing_answer_line_uses_first_line() -> None:
     short, _, cites = bind_citations("Ankara\nIt is the capital [2].", retrieved())
     assert short == "Ankara" and [c.n for c in cites] == [2]
+
+
+def test_full_width_brackets_count_as_markers() -> None:
+    # gpt-oss sometimes writes 【1】; they were missed, so correct answers looked uncited
+    short, text, cites = bind_citations("Answer: Ankara\nThe capital is Ankara【2】.", retrieved())
+    assert [c.n for c in cites] == [2] and "[2]" in text
+    assert invalid_markers("Ankara【9】", 2) == 1

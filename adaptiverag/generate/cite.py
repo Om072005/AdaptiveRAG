@@ -15,9 +15,13 @@ def marker_numbers(text: str) -> list[int]:
     return [int(n) for group in MARKER.findall(text) for n in group.split(",")]
 
 
+# full width brackets, as gpt-oss sometimes writes them, read as ASCII markers (failure log 5)
+FULL_WIDTH = str.maketrans({"\u3010": "[", "\u3011": "]", "\uff3b": "[", "\uff3d": "]"})
+
+
 def invalid_markers(raw: str, n_blocks: int) -> int:
     """How many markers point at a block that does not exist (stored as detail.citation_errors)."""
-    return sum(1 for n in marker_numbers(raw) if not 1 <= n <= n_blocks)
+    return sum(1 for n in marker_numbers(raw.translate(FULL_WIDTH)) if not 1 <= n <= n_blocks)
 
 
 def split_answer(raw: str) -> tuple[str, str]:
@@ -39,7 +43,7 @@ def clean_short(short: str) -> str:
 def bind_citations(raw: str, retrieved: Retrieved) -> tuple[str, str, list[Citation]]:
     """Parse the model output into (short, text, citations), dropping out of range markers."""
     hits: list[Hit] = sorted(retrieved.hits, key=lambda h: h.rank)
-    short_raw, explanation = split_answer(raw)
+    short_raw, explanation = split_answer(raw.translate(FULL_WIDTH))
     short = clean_short(short_raw)
     if short.lower().startswith(NOT_ENOUGH) or not hits:
         return NOT_ENOUGH, NOT_ENOUGH, []

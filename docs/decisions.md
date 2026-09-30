@@ -167,6 +167,20 @@ judge prompt; the rebuilt trace is saved with source `cli`, which eval metrics n
 result row. The dev and replay runs keep their commit `4e370b9`; their late verdicts were made at the D22 commit,
 and the test split runs at the D22 commit from the start.
 
+**D23 Answer confidence stays as it is, and full width citation markers count (2026-09-30).** Calibrated
+against the judge on the judged dev auto run (`20260930-1346-dev-auto-baseline`), answer confidence correlates
+with faithfulness at 0.04; the best reweighting (`w_citation` 0.25, `w_retrieval` 0.75) reaches only 0.11, and the
+suggested `answer.min_confidence` of 0.05 would stop flagging almost every answer. With a signal that weak, no
+change is applied: the weights stay 0.5 / 0.5 and the bar 0.55, and the weakness is failure log 5. One cause
+was found and fixed: gpt-oss sometimes writes citation markers with full width brackets (`【1】`), which the
+parser did not count, so correct, cited answers got citation coverage 0 and were flagged. `cite.py` now reads
+them as `[1]`. Pinned runs keep the confidence they were scored with; the fix applies to answers made from now on.
+
+**Manual check of the judge.** 20 answers of the test auto run (`20260930-1557-test-auto-baseline`), scored by
+the lead against the same rubric without seeing the judge's scores: mean absolute gap 0.075 for faithfulness,
+0.10 for relevance and 0.05 for completeness on the 0 to 1 scale; 95%, 90% and 95% of scores within one rubric
+step; the same flag decision on 80% of answers.
+
 ## Decided while building (D1 to D3)
 
 - **`aliases` primary key is `(surface_form, canonical_id)`**, not `surface_form` alone as the README draws it,
