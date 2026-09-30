@@ -198,3 +198,25 @@ test('the page requests nothing but its own files', async ({ page, baseURL }) =>
   await page.waitForLoadState('networkidle')
   expect(foreign).toEqual([])
 })
+
+test('the journey: a route up front, a close on every chapter, and a recap of what was read', async ({ page }) => {
+  await page.goto('/')
+  const route = page.locator('#route')
+  await expect(route.getByRole('heading', { name: 'Your route through this page' })).toBeVisible()
+  await expect(route.getByRole('listitem')).toHaveCount(8)
+  await expect(page.locator('[data-chapter-end]')).toHaveCount(8)
+
+  // before any reading the recap marks everything skipped
+  const recap = page.locator('#recap')
+  await expect(recap).toContainText('0 read')
+
+  // follow the first chapter's close to the next one, reading chapter one on the way
+  await page.locator('#idea').scrollIntoViewIfNeeded()
+  const end = page.locator('[data-chapter-end="idea"]')
+  await end.scrollIntoViewIfNeeded()
+  await end.getByRole('link', { name: /How it works/ }).click()
+  await expect(page).toHaveURL(/#how$/)
+  await expect(page.getByLabel('Journey progress')).toContainText('The idea: read')
+  await expect(recap).toContainText('1 read')
+  await expect(recap.getByRole('listitem').first()).toContainText('Read')
+})

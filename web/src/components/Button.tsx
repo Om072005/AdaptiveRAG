@@ -5,6 +5,8 @@ const BASE =
 const KIND = {
   primary: 'border-ink bg-ink text-canvas hover:shadow-md hover:text-canvas',
   secondary: 'border-ink bg-transparent text-ink hover:shadow-md hover:text-ink',
+  // on an ink block: paper colored outline and type
+  inverse: 'border-canvas bg-transparent text-canvas hover:bg-canvas hover:text-ink',
   ghost: 'border-transparent bg-transparent text-ink underline decoration-accent underline-offset-4 hover:text-accent-text',
 }
 

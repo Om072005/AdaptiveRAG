@@ -81,7 +81,14 @@
   color: var(--color-ink);
   overflow-wrap: anywhere;
   @media (width >= 48rem) {
-    font-size: 104px;
+    font-size: 84px;
+  }
+  /* the headline column is narrowest between 1024 and 1280 */
+  @media (width >= 64rem) {
+    font-size: 72px;
+  }
+  @media (width >= 80rem) {
+    font-size: 96px;
   }
 }
 @utility text-display {

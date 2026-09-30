@@ -1,24 +1,22 @@
 import type { ReactNode } from 'react'
+import { ChapterEnd } from '../journey/ChapterEnd'
+import { CHAPTERS, chapterNo } from '../journey/chapters'
 
-/** A page section set like a newspaper spread: a heavy rule with the section number and name, the
- * headline, and the lede in its own ruled column. */
-export function Section({ id, no, eyebrow, title, lede, tone = 'plain', children }: {
-  id: string
-  no?: number
-  eyebrow?: string
-  title: string
-  lede?: ReactNode
-  tone?: 'plain' | 'sunken'
-  children: ReactNode
-}) {
+/** A chapter of the page, set like a newspaper spread: a heavy rule with its number and reading time,
+ * the question it answers, the headline, the lede in its own ruled column, the content, and a close
+ * with what the reader now knows and the way to the next chapter. */
+export function Section({ id, title, lede, children }: { id: string; title: string; lede?: ReactNode; children: ReactNode }) {
+  const i = CHAPTERS.findIndex((c) => c.id === id)
+  const chapter = CHAPTERS[i]
   return (
-    <section id={id} aria-labelledby={`${id}-h`} data-tone={tone}>
-      <div className="page-wrap pt-10 pb-20 md:pt-12 md:pb-28">
+    <section id={id} aria-labelledby={`${id}-h`}>
+      <div className="page-wrap pt-10 pb-20 md:pt-12 md:pb-24">
         <div className="flex items-baseline justify-between gap-4 border-t-[3px] border-double border-ink pt-2.5">
-          <p className="text-eyebrow m-0">{eyebrow}</p>
-          {no !== undefined && <p className="text-eyebrow m-0">No. {String(no).padStart(2, '0')}</p>}
+          <p className="text-eyebrow m-0">{chapter ? `Chapter ${chapterNo(i)} · ${chapter.short}` : title}</p>
+          {chapter && <p className="text-eyebrow m-0">About {chapter.minutes} min</p>}
         </div>
-        <div className="mt-6 grid grid-cols-1 gap-6 md:mt-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-0">
+        {chapter && <p className="m-0 mt-6 font-sans text-[22px] leading-7 text-accent-text italic md:mt-8 md:text-[26px] md:leading-8">{chapter.question}</p>}
+        <div className="mt-2 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-0">
           <h2 id={`${id}-h`} className="text-display m-0 max-w-none lg:pr-10">
             {title}
           </h2>
@@ -29,6 +27,7 @@ export function Section({ id, no, eyebrow, title, lede, tone = 'plain', children
           )}
         </div>
         <div className="mt-12 md:mt-16">{children}</div>
+        {chapter && <ChapterEnd id={id} />}
       </div>
     </section>
   )

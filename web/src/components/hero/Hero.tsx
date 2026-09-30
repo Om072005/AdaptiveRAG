@@ -1,7 +1,8 @@
 import type { LoadState } from '../../data/useLoaded'
+import { TOTAL_MINUTES } from '../../journey/chapters'
 import type { Results } from '../../types'
 import { ButtonLink } from '../Button'
-import { ArrowRightIcon, GitHubIcon } from '../Icons'
+import { ArrowRightIcon } from '../Icons'
 import { HeroDemo } from './HeroDemo'
 import { HeroStats } from './HeroStats'
 
@@ -9,7 +10,7 @@ import { HeroStats } from './HeroStats'
  * block and the headline numbers. */
 export function Hero({ repoUrl, results }: { repoUrl: string; results: LoadState<Results> }) {
   return (
-    <section>
+    <section id="front" aria-label="Front page">
       <div className="page-wrap pt-8 pb-16 md:pt-10 md:pb-20">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,5fr)_minmax(0,4fr)] lg:gap-0">
           <div className="order-2 min-w-0 lg:order-1 lg:border-r lg:border-rule lg:pr-8">
@@ -20,14 +21,16 @@ export function Hero({ repoUrl, results }: { repoUrl: string; results: LoadState
               Everything on this page comes from recorded runs.
             </p>
             <div className="mt-8 flex flex-col gap-3">
-              <ButtonLink kind="primary" href="#follow">
-                See it answer a question
+              <ButtonLink kind="primary" href="#route">
+                Take the tour
                 <ArrowRightIcon size={15} />
               </ButtonLink>
-              <ButtonLink href={repoUrl}>
-                <GitHubIcon size={15} />
-                View the code on GitHub
+              <ButtonLink href="#follow">
+                Skip to the demo
               </ButtonLink>
+              <a href={repoUrl} className="self-start font-sans text-[18px]">
+                or read the code on GitHub
+              </a>
             </div>
           </div>
 
@@ -40,7 +43,7 @@ export function Hero({ repoUrl, results }: { repoUrl: string; results: LoadState
               Vector search, a knowledge graph, or both, chosen one question at a time.
             </p>
             <p className="m-0 mt-5 font-sans text-[16px] leading-6 text-muted">
-              <span className="font-headline text-ink">Tip!</span> The card replays three real questions.
+              <span className="font-headline text-ink">Tip!</span> The card replays three real questions. The tour takes about {TOTAL_MINUTES} minutes.
             </p>
           </div>
 
