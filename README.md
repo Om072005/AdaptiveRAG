@@ -133,13 +133,26 @@ flowchart LR
 
 > **Note:** the dotted lines are the provenance link — every graph edge stores the chunk ID it was extracted from, so a graph-derived answer can still cite source text. This is not optional; without it, graph answers have no auditable citation and the whole "RAG is auditable, unlike fine-tuning" argument collapses for half the system.
 
-### Chunking experiment plan
+### Chunking experiment
 
-| Strategy | Precision | Context retention | Retrieval score | Verdict |
-|---|---|---|---|---|
-| Fixed-size | High | Low | `[TBD]` | `[TBD]` |
-| Sentence-boundary | Medium | Medium | `[TBD]` | `[TBD]` |
-| Semantic (embedding delta) | Medium | High | `[TBD]` | `[TBD]` |
+Run `bench-chunking-20260930-0113-mini`: the 27 HotpotQA questions of the 300 document mini corpus, top 8 chunks by
+exact cosine search, verdicts from a paired bootstrap against the serving strategy. One question moves recall@k by
+0.037, so this sample can only rule out large differences.
+
+| Strategy | Chunks | Precision | Context retention | Recall@k | MRR | Verdict |
+|---|---|---|---|---|---|---|
+| Fixed size (64 words, overlap 16) | 635 | 0.131 | 0.899 | 0.963 | 0.957 | too close to call against sentence |
+| Sentence boundary (up to 96 words) | 445 | 0.105 | 0.951 | 0.963 | 0.957 | **serving** (keeps the most context) |
+| Semantic (split above the 90th percentile distance) | 532 | 0.115 | 0.895 | 0.944 | 0.981 | too close to call against sentence |
+
+### HNSW vs flat
+
+Run `bench-hnsw-20260930-0117-corpus-sentence`: the 4,277 served sentence chunk embeddings, queried with the 100 dev
+questions. Our from-scratch HNSW (M 16, ef_construction 200) reaches recall@10 0.990 at ef 32 and 0.996 at ef 64
+(p50 0.76 ms), against 1.000 for the exact flat index at 0.40 ms. At this size flat search is as fast as HNSW, which is
+the honest result: the index earns its keep past tens of thousands of vectors, not at four thousand. Serving uses
+pgvector's HNSW (library default), which returns the exact top 10 as served; its 74 ms p50 is mostly the round trip
+to Neon. Our first benchmark on random vectors reached only 0.339 at ef 64 (failure 1 below).
 
 ---
 
@@ -358,9 +371,14 @@ The interesting derived metric is **D3 — quality per unit cost**, not raw cost
 
 Tracked as they are actually encountered — this list is **not** hypothetical padding and stays short until real incidents fill it.
 
-| # | Symptom | Root cause | Fix | Status |
-|---|---|---|---|---|
-| — | *No incidents logged yet* | — | — | — |
+Copied from [`docs/failure-log.md`](docs/failure-log.md), where each row has the full detail.
+
+| # | Symptom | Root cause | Fix | Status | Run |
+|---|---|---|---|---|---|
+| 1 | HNSW recall@10 0.339 at ef 64 on random vectors | Random 768 dimension vectors have almost no neighbourhood structure | None in the index; measured on real embeddings instead | Closed: 0.996 at ef 64 on corpus embeddings | `20260929-1429-random`, `20260930-0117-corpus-sentence` |
+| 2 | After the switch to local embeddings no answer was ever flagged and vector never fell back | `vector.min_top_score` was set for another model's cosine scale | Re-tuned on dev | Closed as inert: no confident single hop question scores under 0.68 | `20260930-0041-dev-vector-smoke` |
+| 3 | Auto mode scored below forced vector and hybrid despite a router at macro F1 0.877 | The graph route answered multi hop questions far worse than hybrid (F1 0.168 vs 0.671) | Relational questions route to hybrid (D17) | Fixed in config | `20260930-0724-dev-auto-server` |
+| 4 | Entity resolution merged different things, e.g. two different dates, Cork City and Cork County Council | The embedding merge rule had precision 0.125 | Merge by name only (D18), graph rebuilt | Fixed: merge precision 0.56 to 0.91 | `graph-20260930-1457-gold` |
 
 Categories being watched for, based on the design:
 
@@ -457,7 +475,8 @@ Every model call is cached in Postgres, so a rerun costs nothing and reports the
 
 Two things are deliberately true of this README:
 
-1. **Nothing here claims a measurement that hasn't been taken.** Every number is `[TBD]` until it comes from a real run. The design rationale is real; the results section is empty on purpose.
+1. **Nothing here claims a measurement that hasn't been taken.** Every number names the run it came from, and a
+   number not measured yet says so. The design rationale is real; the results come from `docs/results/`.
 2. **Components not yet built are marked as not yet built.** The architecture diagrams describe intent. Where a part ends up using a library default rather than a custom implementation, that will be stated plainly rather than blurred — a precise "I used the default re-ranker and focused my effort on routing and the graph layer" is a stronger position than uniform vague confidence.
 
 This file is updated at the end of each build phase with real numbers, real decisions, and real failures.
