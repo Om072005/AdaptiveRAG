@@ -143,3 +143,26 @@ test('workflows show all four README workflows', async ({ page }) => {
     await expect(page.locator('#workflows').getByRole('heading', { name })).toBeVisible()
   }
 })
+
+test('a diagram node opens its detail and module path', async ({ page }) => {
+  await page.goto('/')
+  const node = page.getByRole('button', { name: 'Model selector: small or large' })
+  await node.scrollIntoViewIfNeeded()
+  await node.click()
+  await expect(node).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.getByText(/served rules send only very long contexts to the large model/)).toBeVisible()
+  await expect(page.getByText('adaptiverag/generate/select.py')).toBeVisible()
+})
+
+test('the page requests nothing but its own files', async ({ page, baseURL }) => {
+  const origin = new URL(baseURL ?? 'http://localhost').origin
+  const foreign: string[] = []
+  page.on('request', (r) => {
+    const url = new URL(r.url())
+    if (url.protocol !== 'data:' && url.origin !== origin) foreign.push(r.url())
+  })
+  await page.goto('/')
+  await page.mouse.wheel(0, 20000)
+  await page.waitForLoadState('networkidle')
+  expect(foreign).toEqual([])
+})
