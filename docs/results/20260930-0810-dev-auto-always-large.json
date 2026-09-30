@@ -1,0 +1,240 @@
+{
+  "run": {
+    "run_id": "20260930-0810-dev-auto-always-large",
+    "created_at": "2026-09-30T08:10:33.252398+00:00",
+    "split": "dev",
+    "mode": "auto",
+    "variant": "always-large",
+    "git_sha": "8bea8c70734ef17df9c77e6fb7c77cc11eb23dc7",
+    "git_dirty": true,
+    "config_hash": "02c646b8c411",
+    "n": 100
+  },
+  "aggregate": {
+    "n": 100,
+    "em": 0.59,
+    "f1": 0.6362380961,
+    "recall_at_k": 0.785,
+    "mrr": 0.8245000002,
+    "sp_precision": 0.09961205631,
+    "faithfulness": null,
+    "relevance": null,
+    "completeness": null,
+    "cost_per_query_usd": 0.0014849475,
+    "p50_ms": 7651.0,
+    "p95_ms": 10304.0,
+    "by_type": {
+      "single_hop": {
+        "n": 33,
+        "em": 0.9393939393939394,
+        "f1": 0.9515151515151515,
+        "recall_at_k": 0.9696969696969697,
+        "mrr": 0.9696969696969697,
+        "sp_precision": 0.038727248666666665,
+        "faithfulness": null,
+        "relevance": null,
+        "completeness": null
+      },
+      "multi_hop": {
+        "n": 38,
+        "em": 0.2894736842105263,
+        "f1": 0.36491228263157893,
+        "recall_at_k": 0.6052631578947368,
+        "mrr": 0.7697368421052632,
+        "sp_precision": 0.09884929168421053,
+        "faithfulness": null,
+        "relevance": null,
+        "completeness": null
+      },
+      "comparison": {
+        "n": 29,
+        "em": 0.5862068965517241,
+        "f1": 0.6330049265517241,
+        "recall_at_k": 0.8103448275862069,
+        "mrr": 0.7310344834482758,
+        "sp_precision": 0.16989425313793105,
+        "faithfulness": null,
+        "relevance": null,
+        "completeness": null
+      }
+    },
+    "confusion": {
+      "labels": [
+        "single_hop",
+        "multi_hop",
+        "comparison"
+      ],
+      "matrix": [
+        [
+          32,
+          1,
+          0
+        ],
+        [
+          11,
+          27,
+          0
+        ],
+        [
+          1,
+          0,
+          28
+        ]
+      ]
+    },
+    "misroutes": [
+      {
+        "question_id": "sh_8fd983e4b981c2d6_0",
+        "gold_type": "single_hop",
+        "predicted_type": "multi_hop",
+        "confidence": 0.92071605,
+        "route_taken": "graph",
+        "confident": true
+      },
+      {
+        "question_id": "hp_5a81ad9855429903bc27b9a3",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.84213036,
+        "route_taken": "hybrid",
+        "confident": true
+      },
+      {
+        "question_id": "hp_5a887293554299206df2b273",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.7910149,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5aba5e2555429955dce3edf1",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.75876874,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5ae180d855429901ffe4aecc",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.6746827,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5ae326d85542991a06ce9938",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.65936834,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5addda9b5542992200553b5b",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.64210737,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5a7e7c725542991319bc94be",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.6240969,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5ab5ee055542997d4ad1f259",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.5654402,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5a845e9055429933447460ec",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.5514396,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5ab23d8a55429970612095c9",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.5172583,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5a865bbf5542991e77181615",
+        "gold_type": "multi_hop",
+        "predicted_type": "single_hop",
+        "confidence": 0.514708,
+        "route_taken": "hybrid",
+        "confident": false
+      },
+      {
+        "question_id": "hp_5ac38ce255429939154137c2",
+        "gold_type": "comparison",
+        "predicted_type": "single_hop",
+        "confidence": 0.46507108,
+        "route_taken": "hybrid",
+        "confident": false
+      }
+    ]
+  },
+  "vs": "20260930-0754-dev-auto-always-small",
+  "diff": {
+    "overall": {
+      "em": -0.010000000000000009,
+      "f1": -0.0013333329999999366,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "sp_precision": 0.0,
+      "faithfulness": null,
+      "relevance": null,
+      "completeness": null,
+      "cost_per_query_usd": 0.0014597528,
+      "p50_ms": 4603.0,
+      "p95_ms": 6432.0
+    },
+    "by_type": {
+      "single_hop": {
+        "em": 0.09090909090909094,
+        "f1": 0.0808080806060606,
+        "recall_at_k": 0.0,
+        "mrr": 0.0,
+        "sp_precision": 0.0,
+        "faithfulness": null,
+        "relevance": null,
+        "completeness": null
+      },
+      "multi_hop": {
+        "em": -0.0789473684210526,
+        "f1": -0.06992481131578948,
+        "recall_at_k": 0.0,
+        "mrr": 0.0,
+        "sp_precision": 0.0,
+        "faithfulness": null,
+        "relevance": null,
+        "completeness": null
+      },
+      "comparison": {
+        "em": -0.034482758620689724,
+        "f1": -0.00492610793103454,
+        "recall_at_k": 0.0,
+        "mrr": 0.0,
+        "sp_precision": 0.0,
+        "faithfulness": null,
+        "relevance": null,
+        "completeness": null
+      }
+    }
+  }
+}
