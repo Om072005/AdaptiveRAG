@@ -2,7 +2,7 @@
 # Every change to a threshold cites the run id that justified it in the commit body.
 
 [serving]
-chunk_strategy = "sentence"   # M2 sets it from the P1 experiment
+chunk_strategy = "sentence"   # kept after bench-chunking-20260930-0113-mini: fixed and semantic too close to call (recall@k 0.963 / 0.944 vs 0.963), sentence keeps the most context (0.951)
 
 [classifier]                  # M3
 method = "logreg"            # best macro F1 at no cost, runs 20260930-0112-dev, 20260930-0250-dev
