@@ -148,6 +148,14 @@ empty because under D17 nearly every question is on hybrid. The live selector ru
 and the faithfulness floor decides the quality per cost table. Latency of the large model is not compared: on the
 lead's 8 GB GPU it runs partly on the CPU (p50 35 s), which says nothing about the model.
 
+**D21 The judge runs on our own GPU server (2026-09-30).** A few hours into D19's judged runs, every model on
+the free Gemini API answered 500 or 503 (Gemma 4 31B and 26B "Internal error", gemini-3.8-flash "high demand"),
+and judging stalled. Gemma 4 has open weights, so the judge moved to `gemma4:31b` on Ollama (Q4_K_M, about 20 GB)
+on a rented GPU server, next to the two generators. It is the same model family and size as D19, quantized; to keep
+every score from one judge, every judged run is made on the server, and the about 180 answers the API had scored
+belong to runs that are not pinned. The judge's cost stays the OpenRouter list price of the weights. The same
+server also answers the test split (D13), so the test runs' model latency is measured on that one machine.
+
 ## Decided while building (D1 to D3)
 
 - **`aliases` primary key is `(surface_form, canonical_id)`**, not `surface_form` alone as the README draws it,

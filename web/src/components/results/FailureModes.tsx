@@ -37,7 +37,7 @@ export function FailureModes({ failures }: { failures: Results['tables']['failur
         <p className="m-0 mt-6">
           Answers come from open models run through Ollama: gpt-oss 20B as the small model and Qwen 3.6 35B-A3B as
           the large one. Their cost is the public list price of the same weights, not what we paid. Every answer is
-          scored by Gemma 4 31B on Google's Gemini API, a different model family from both, and because a judge
+          scored by Gemma 4 31B (open weights, run on a rented GPU server), a different model family from both, and because a judge
           model is an imperfect proxy, a sample of its scores is checked by hand and the agreement is reported with
           the results. Latency comes from two machines: model calls first made on a rented server with two RTX
           5090 cards keep that time when a later run reuses them from the cache, and new calls and database round

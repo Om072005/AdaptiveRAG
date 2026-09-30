@@ -11,7 +11,7 @@ def test_all_three_files_load() -> None:
     specs = config.models()
     assert set(specs) == {"small", "large", "extract", "judge", "classify", "embed"}
     assert specs["large"].provider == "ollama"
-    assert specs["judge"].provider == "gemini"
+    assert specs["judge"].provider == "ollama"  # D21
     assert specs["embed"].dims == 768
     assert config.limits()["max_llm_calls_per_query"] == 4
     assert config.router_cfg()["serving"]["chunk_strategy"] in {"fixed", "sentence", "semantic"}
@@ -19,9 +19,14 @@ def test_all_three_files_load() -> None:
 
 
 def test_judge_is_a_different_family_from_the_generators() -> None:
+    # every model is served by Ollama since D21, so the family is read from the model name
     specs = config.models()
-    assert specs["judge"].provider != specs["small"].provider
-    assert specs["judge"].provider != specs["large"].provider
+
+    def family(model: str) -> str:
+        return model.split(":")[0].split("-")[0].rstrip("0123456789.")
+
+    judge = family(specs["judge"].model)
+    assert judge not in {family(specs[r].model) for r in ("small", "large", "classify", "extract")}
 
 
 def test_placeholder_anywhere_raises(tmp_path: Path) -> None:
