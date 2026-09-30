@@ -30,7 +30,7 @@ export function RouteStep({ run }: { run: RecordedRun }) {
         <ol className="m-0 pl-5 text-[15px] leading-6">
           {route.reasons.map((r) => (
             <li key={r} className="mb-3">
-              {reasonText(r)}
+              {reasonText(r, route.initial)}
             </li>
           ))}
           {route.fallbacks.map((f) => (

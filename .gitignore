@@ -17,6 +17,9 @@ htmlcov/
 # data we never commit
 data/raw/
 
+# rented server results archive (unpacked under G:/adaptiverag-work)
+bring_back*.tar.gz
+
 # web
 web/node_modules/
 web/dist/

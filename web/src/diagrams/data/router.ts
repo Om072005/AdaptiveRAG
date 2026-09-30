@@ -9,7 +9,7 @@ type RouteBlock = QueryResponse['route']
 export const ROUTER: DiagramData = {
   id: 'router',
   title: 'Router decision logic',
-  desc: 'From the incoming query, the router checks for relational or comparative structure, then whether the entities are in the graph, and routes to vector search or graph traversal. A weak result falls back to hybrid once. An unsure classification goes to hybrid directly. The answer is returned, and flagged for review when its confidence is low.',
+  desc: 'From the incoming query, the router checks for relational or comparative structure, then whether the entities are in the graph, and routes to vector search or graph traversal. A weak result falls back to hybrid once. An unsure classification goes to hybrid directly, and so does a relational one under the served policy, because hybrid beat graph traversal on the dev questions. The answer is returned, and flagged for review when its confidence is low.',
   nodes: [
     { id: 'q', lines: ['Incoming', 'query'], kind: 'step', detail: 'The question as it was asked. The classifier reads it first.', module: 'adaptiverag/router/route.py' },
     { id: 'relational', lines: ['Relational or', 'comparative', 'structure?'], kind: 'decision', detail: 'The classifier labels the question single hop, multi hop or comparison. Below classifier.min_confidence it counts as unsure.', module: 'adaptiverag/router/classify.py' },
@@ -18,7 +18,7 @@ export const ROUTER: DiagramData = {
     { id: 'graph', lines: ['Route: graph', 'traversal'], kind: 'step', detail: 'Breadth first search from the seed entities, graph.depth hops at most, every edge citing its chunk.', module: 'adaptiverag/stores/graph.py' },
     { id: 'topk', lines: ['Top k score', 'above', 'threshold?'], kind: 'decision', detail: 'The best cosine score must reach vector.min_top_score.', module: 'adaptiverag/router/policy.py' },
     { id: 'path', lines: ['Connected', 'path', 'returned?'], kind: 'decision', detail: 'A path joining two seeds, or a single seed path above graph.min_path_score.', module: 'adaptiverag/router/policy.py' },
-    { id: 'fallback', lines: ['Fallback:', 'escalate to', 'hybrid'], kind: 'step', detail: 'At most one fallback per question, and always to hybrid.', module: 'adaptiverag/router/route.py' },
+    { id: 'fallback', lines: ['Fallback:', 'escalate to', 'hybrid'], kind: 'step', detail: 'Unsure questions, and relational ones under the served policy (decision D17), go to hybrid here. A weak vector or graph result falls back here at most once, and always to hybrid.', module: 'adaptiverag/router/route.py' },
     { id: 'hybrid', lines: ['Hybrid: both', 'backends merge', 'and re-rank'], kind: 'step', detail: 'Vector and graph hits fused by reciprocal rank, then a diversity pass drops near duplicates.', module: 'adaptiverag/router/hybrid.py' },
     { id: 'answer', lines: ['Generate', 'answer'], kind: 'step', detail: 'The selected model writes a short answer that cites numbered context blocks.', module: 'adaptiverag/generate/answer.py' },
     { id: 'confident', lines: ['Answer', 'confidence above', 'threshold?'], kind: 'decision', detail: 'Citation coverage and retrieval strength, weighted. It is a different number from the classifier confidence.', module: 'adaptiverag/generate/confidence.py' },
@@ -29,7 +29,7 @@ export const ROUTER: DiagramData = {
     edge('q', 'relational'),
     edge('relational', 'vector', 'No'),
     edge('relational', 'entities', 'Yes'),
-    edge('relational', 'fallback', 'Unsure'),
+    edge('relational', 'fallback', 'Unsure, or relational'),
     edge('entities', 'vector', 'No'),
     edge('entities', 'graph', 'Yes', 'dashed'),
     edge('vector', 'topk'),
@@ -158,6 +158,7 @@ export function litPath(route: RouteBlock, flagged: boolean | null = null): Lit 
   } else if (has('ambiguous')) walk('q', 'relational', 'fallback')
   else if (has('no_relational_structure')) walk('q', 'relational', 'vector')
   else if (has('entities_not_in_graph')) walk('q', 'relational', 'entities', 'vector')
+  else if (has('relational') && route.initial === 'hybrid') walk('q', 'relational', 'fallback')
   else if (has('relational')) walk('q', 'relational', 'entities', 'graph')
   else nodes.add('q')
 

@@ -15,7 +15,8 @@ export const METHOD: Record<string, string> = {
 
 const ROUTE: Record<string, string> = { vector: 'vector search', graph: 'graph traversal', hybrid: 'hybrid' }
 
-export function reasonText(reason: string): string {
+/** initial is the route the reason led to; relational questions go hybrid since decision D17. */
+export function reasonText(reason: string, initial?: string): string {
   const [head, rest = ''] = reason.split(':', 2)
   switch (head) {
     case 'forced':
@@ -24,8 +25,13 @@ export function reasonText(reason: string): string {
       const [label, conf] = rest.split(' ')
       return `The classifier was unsure (${(LABEL[label] ?? label).toLowerCase()} at ${conf}), so the router used hybrid.`
     }
-    case 'relational':
-      return `The question is ${rest === 'comparison' ? 'a comparison' : 'multi hop'} and its entities are in the graph, so the router walked the graph.`
+    case 'relational': {
+      const kind = rest === 'comparison' ? 'a comparison' : 'multi hop'
+      if (initial === 'hybrid') {
+        return `The question is ${kind}, so the router used hybrid: graph paths and vector hits ranked together, which beat graph traversal alone on the dev questions.`
+      }
+      return `The question is ${kind} and its entities are in the graph, so the router walked the graph.`
+    }
     case 'no_relational_structure':
       return 'The question asks for one fact, with no relation or comparison, so vector search is enough.'
     case 'entities_not_in_graph':

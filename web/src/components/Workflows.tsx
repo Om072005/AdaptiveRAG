@@ -25,7 +25,7 @@ const BLOCKS: { title: string; text: string; steps: string[]; diagram?: ReactNod
     diagram: <RouterFlow />,
     steps: [
       'Relational or comparative structure? No: route to vector search.',
-      'Yes: are the entities in the graph? No: vector search; yes: graph traversal.',
+      'Yes: hybrid, graph paths and vector hits ranked together (decision D17). Graph traversal alone, used when the entities are in the graph, is one config line away.',
       'Vector top score below the threshold, or no connected graph path: fall back to hybrid.',
       'Generate the answer; if its confidence is below the threshold, return it and flag it for review.',
     ],

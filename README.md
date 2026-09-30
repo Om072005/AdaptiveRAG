@@ -205,6 +205,7 @@ flowchart TD
     N -->|Yes| H{"Entities resolvable<br/>in graph?"}
     H -->|No| S
     H -->|Yes| GRAPH["Route: graph traversal"]
+    N -.->|"Yes, served policy (D17)"| HY
 
     S --> SC{"Top-k score<br/>above threshold?"}
     SC -->|Yes| ANS["Generate answer"]
@@ -220,6 +221,10 @@ flowchart TD
     CONF -->|Yes| OUT["Return with citations"]
     CONF -->|No| FLAG["Return + flag for review"]
 ```
+
+**Served policy (decision D17):** relational questions go straight to hybrid (dotted edge). On the dev split graph
+traversal alone scored multi hop F1 0.168 against 0.671 for hybrid, so `[policy] relational_route = "hybrid"` in
+`config/router.toml`; setting it to `"graph"` restores the solid path above. Details in `docs/decisions.md` D17.
 
 **Open question (unresolved):** classifier confidence and *answer* confidence are different signals, and conflating them is a real trap. A confidently-classified query can still produce a badly-grounded answer. Both are logged separately.
 

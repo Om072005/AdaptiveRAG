@@ -5,6 +5,7 @@ from typing import Any
 from adaptiverag.types import Classification, Mode, Retrieved, Route, Seed
 
 RELATIONAL = ("multi_hop", "comparison")
+RELATIONAL_ROUTES = ("graph", "hybrid")
 
 
 def decide_initial(
@@ -33,9 +34,18 @@ def by_question(
         return "hybrid", [f"ambiguous:{c.label} {c.confidence:.2f}"]  # row 2
     if c.label not in RELATIONAL:
         return "vector", ["no_relational_structure"]  # row 3
-    if not any(s.score >= cfg["graph"]["min_seed_score"] for s in seeds):
-        return "vector", ["entities_not_in_graph"]  # row 4
-    return "graph", [f"relational:{c.label}"]  # row 5
+    route = relational_route(cfg)
+    if route == "graph" and not any(s.score >= cfg["graph"]["min_seed_score"] for s in seeds):
+        return "vector", ["entities_not_in_graph"]  # row 4, only the graph route needs seeds
+    return route, [f"relational:{c.label}"]  # row 5
+
+
+def relational_route(cfg: dict[str, Any]) -> Route:
+    """Row 5's route: graph by default; [policy] relational_route = "hybrid" per decision D17."""
+    route = cfg["policy"].get("relational_route", "graph")
+    if route not in RELATIONAL_ROUTES:
+        raise ValueError(f"policy.relational_route must be one of {RELATIONAL_ROUTES}: {route!r}")
+    return route
 
 
 def needs_fallback(route: Route, r: Retrieved, cfg: dict[str, Any]) -> str | None:

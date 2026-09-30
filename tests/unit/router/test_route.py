@@ -3,6 +3,7 @@ from typing import Any
 import numpy as np
 import pytest
 
+from adaptiverag.config import router_cfg
 from adaptiverag.router import route as route_mod
 from adaptiverag.router.route import route_and_retrieve
 from adaptiverag.telemetry.trace import Trace
@@ -106,7 +107,15 @@ def test_f1_weak_vector_falls_back_to_hybrid_once_reusing_the_vector_hits(
     assert trace.fields["fallbacks"] == ["vector_low_score->hybrid"]
 
 
+def relational_to(route: str, mp: pytest.MonkeyPatch) -> None:
+    """Pin [policy] relational_route, so the graph route rows are tested whatever D17 serves."""
+    cfg = router_cfg()
+    pinned = {**cfg, "policy": {**cfg["policy"], "relational_route": route}}
+    mp.setattr(route_mod, "router_cfg", lambda: pinned)
+
+
 def test_relational_with_seeds_walks_the_graph(monkeypatch: pytest.MonkeyPatch) -> None:
+    relational_to("graph", monkeypatch)
     b = Backends(label="multi_hop")
     d, r, _ = run(monkeypatch, b)
     assert (d.initial, d.final) == ("graph", "graph") and d.reasons == ["relational:multi_hop"]
@@ -115,6 +124,7 @@ def test_relational_with_seeds_walks_the_graph(monkeypatch: pytest.MonkeyPatch) 
 
 
 def test_f2_graph_without_a_path_falls_back_to_hybrid(monkeypatch: pytest.MonkeyPatch) -> None:
+    relational_to("graph", monkeypatch)
     b = Backends(label="comparison", path=False)
     d, r, _ = run(monkeypatch, b)
     assert (d.initial, d.final, d.fallbacks) == ("graph", "hybrid", ["graph_no_path->hybrid"])
@@ -123,8 +133,17 @@ def test_f2_graph_without_a_path_falls_back_to_hybrid(monkeypatch: pytest.Monkey
 
 
 def test_relational_without_seeds_goes_vector(monkeypatch: pytest.MonkeyPatch) -> None:
+    relational_to("graph", monkeypatch)
     d, _, _ = run(monkeypatch, Backends(label="multi_hop", seeds=[]))
     assert d.initial == "vector" and d.reasons == ["entities_not_in_graph"]
+
+
+def test_relational_route_hybrid_merges_both_backends(monkeypatch: pytest.MonkeyPatch) -> None:
+    relational_to("hybrid", monkeypatch)
+    b = Backends(label="comparison", seeds=[])
+    d, _, _ = run(monkeypatch, b)
+    assert (d.initial, d.final, d.fallbacks) == ("hybrid", "hybrid", [])
+    assert d.reasons == ["relational:comparison"] and b.calls.count("merge") == 1
 
 
 def test_an_unsure_classifier_goes_hybrid_and_hybrid_never_falls_back(

@@ -73,6 +73,30 @@ def test_row5_relational_with_seeds_goes_graph(label: QType) -> None:
     )
 
 
+HYBRID_CFG = {**CFG, "policy": {**CFG["policy"], "relational_route": "hybrid"}}
+
+
+@pytest.mark.parametrize("label", ["multi_hop", "comparison"])
+def test_row5_relational_route_hybrid_from_config(label: QType) -> None:
+    # D17: relational questions go hybrid; row 4 is skipped because hybrid needs no graph seeds
+    for seeds in ([], [seed(0.9)]):
+        assert decide_initial("auto", labelled(label), seeds, PLENTY, HYBRID_CFG) == (
+            "hybrid",
+            [f"relational:{label}"],
+        )
+
+
+def test_relational_route_hybrid_keeps_single_hop_on_vector() -> None:
+    route, _ = decide_initial("auto", labelled("single_hop"), [], PLENTY, HYBRID_CFG)
+    assert route == "vector"
+
+
+def test_unknown_relational_route_is_a_config_error() -> None:
+    bad = {**CFG, "policy": {**CFG["policy"], "relational_route": "vector"}}
+    with pytest.raises(ValueError, match="relational_route"):
+        decide_initial("auto", labelled("multi_hop"), [seed(0.9)], PLENTY, bad)
+
+
 def test_auto_without_a_classification_is_a_bug() -> None:
     with pytest.raises(ValueError):
         decide_initial("auto", None, [], PLENTY, CFG)

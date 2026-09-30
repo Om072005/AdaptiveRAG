@@ -16,6 +16,14 @@ def test_route_follows_the_decision_table() -> None:
     assert tune.route_for(q("comparison", 0.9, 0.9, False, (1, 1, 1)), 0.6, 0.55) == "hybrid"
 
 
+def test_relational_hybrid_sends_confident_relational_questions_to_hybrid() -> None:
+    multi = q("multi_hop", 0.9, 0.9, True, (0.0, 1.0, 0.5))
+    assert tune.route_for(multi, 0.6, 0.55, "hybrid") == "hybrid"
+    single = q("single_hop", 0.9, 0.9, True, (1, 1, 1))
+    assert tune.route_for(single, 0.6, 0.55, "hybrid") == "vector"
+    assert tune.simulate([multi], 0.6, 0.55, "hybrid")["routes"]["hybrid"] == 1
+
+
 def test_simulate_scores_each_question_with_its_route_f1() -> None:
     qs = [
         q("single_hop", 0.9, 0.9, True, (1.0, 0.0, 0.5)),

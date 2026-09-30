@@ -43,6 +43,8 @@ test('details from the reason string are kept', () => {
   assert.equal(reasonText('forced:graph'), 'This run asked for graph traversal, so the router did not choose.')
   assert.match(reasonText('ambiguous:multi_hop 0.52'), /multi hop at 0\.52/)
   assert.match(reasonText('relational:comparison'), /a comparison/)
+  assert.match(reasonText('relational:multi_hop', 'hybrid'), /used hybrid/)
+  assert.match(reasonText('relational:multi_hop', 'graph'), /walked the graph/)
   assert.equal(fallbackText('vector_low_score->hybrid'), reasonText('vector_low_score'))
 })
 

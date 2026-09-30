@@ -110,8 +110,10 @@ def test_force_size_overrides_the_selector() -> None:
     assert r.answer.size == "large" and r.answer.select_reason == "forced:large"
 
 
-def test_graph_route_asks_for_the_large_model() -> None:
-    assert pipeline.answer_query("What is the capital of Turkey?", "graph").answer.size == "large"
+def test_graph_route_stays_on_the_small_model_under_d17() -> None:
+    # D17 empties the selector's route and label rules; the reason still names the route
+    a = pipeline.answer_query("What is the capital of Turkey?", "graph").answer
+    assert a.size == "small" and a.select_reason.startswith("small:route graph")
 
 
 def test_empty_retrieval_says_not_enough_context_without_a_model_call(

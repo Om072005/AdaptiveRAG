@@ -13,6 +13,7 @@ from typing import Any
 import psycopg
 
 from adaptiverag.config import router_cfg
+from adaptiverag.router.policy import RELATIONAL_ROUTES, relational_route
 
 ROUTES = ("vector", "graph", "hybrid")
 MIN_CONFIDENCE_GRID = [round(0.30 + 0.05 * i, 2) for i in range(13)]  # 0.30 .. 0.90
@@ -29,17 +30,25 @@ class Question:
     cost: dict[str, float]
 
 
-def route_for(q: Question, min_confidence: float, min_top_score: float) -> str:
+def route_for(
+    q: Question, min_confidence: float, min_top_score: float, relational: str = "graph"
+) -> str:
     """The decision table (rows 2, 3, 5 and fallbacks F1, F2) for one question."""
+    if relational not in RELATIONAL_ROUTES:
+        raise ValueError(f"relational route must be one of {RELATIONAL_ROUTES}: {relational!r}")
     if q.confidence < min_confidence:
         return "hybrid"
     if q.label == "single_hop":
         return "vector" if q.top_score >= min_top_score else "hybrid"
+    if relational == "hybrid":
+        return "hybrid"
     return "graph" if q.path_found else "hybrid"
 
 
-def simulate(qs: list[Question], min_confidence: float, min_top_score: float) -> dict[str, Any]:
-    routes = [route_for(q, min_confidence, min_top_score) for q in qs]
+def simulate(
+    qs: list[Question], min_confidence: float, min_top_score: float, relational: str = "graph"
+) -> dict[str, Any]:
+    routes = [route_for(q, min_confidence, min_top_score, relational) for q in qs]
     return {
         "min_confidence": min_confidence,
         "min_top_score": min_top_score,
@@ -49,9 +58,11 @@ def simulate(qs: list[Question], min_confidence: float, min_top_score: float) ->
     }
 
 
-def grid(qs: list[Question]) -> list[dict[str, Any]]:
+def grid(qs: list[Question], relational: str = "graph") -> list[dict[str, Any]]:
     """Every threshold pair, best mean F1 first, cheaper first on a tie."""
-    results = [simulate(qs, c, t) for c in MIN_CONFIDENCE_GRID for t in MIN_TOP_SCORE_GRID]
+    results = [
+        simulate(qs, c, t, relational) for c in MIN_CONFIDENCE_GRID for t in MIN_TOP_SCORE_GRID
+    ]
     return sorted(results, key=lambda r: (-r["f1"], r["cost"]))
 
 
@@ -121,9 +132,13 @@ def main(argv: list[str] | None = None) -> None:
         qs = load_questions(c, runs)
     if not qs:
         raise SystemExit("no question is present in all four runs")
-    current = simulate(qs, cfg["classifier"]["min_confidence"], cfg["vector"]["min_top_score"])
-    ranked = grid(qs)
+    relational = relational_route(cfg)
+    current = simulate(
+        qs, cfg["classifier"]["min_confidence"], cfg["vector"]["min_top_score"], relational
+    )
+    ranked = grid(qs, relational)
     print("runs: " + ", ".join(f"{m} {r}" for m, r in runs.items()))
+    print(f"relational questions route to {relational} (config [policy] relational_route)")
     print(f"{len(qs)} questions; graph seeds are assumed found (not stored per question)")
     print("min_confidence  min_top_score  mean_f1  cost_per_query  vector/graph/hybrid")
     for r in [current, *ranked[:10]]:

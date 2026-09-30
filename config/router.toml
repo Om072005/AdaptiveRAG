@@ -6,7 +6,7 @@ chunk_strategy = "sentence"   # M2 sets it from the P1 experiment
 
 [classifier]                  # M3
 method = "logreg"            # best macro F1 at no cost, runs 20260930-0112-dev, 20260930-0250-dev
-min_confidence = 0.60
+min_confidence = 0.85         # eval.tune under D17 (relational -> hybrid): dev F1 0.824 -> 0.844, runs 20260930-0724-dev-auto-server, 20260930-0620/0634/0659
 learning_rate = 0.5           # logistic regression: full batch gradient descent from zero weights
 l2 = 0.001
 epochs = 400
@@ -14,7 +14,7 @@ llm_max_tokens = 2048        # few shot llm classifier: reasoning counts against
 
 [vector]                      # M2
 k = 8
-min_top_score = 0.55
+min_top_score = 0.55          # inert on local embeddings: every value 0.30-0.75 scores the same (failure log 2)
 
 [graph]                       # M3
 depth = 2
@@ -36,12 +36,13 @@ w_citation = 0.5
 w_retrieval = 0.5
 
 [select]                      # M1
-large_if_routes = ["graph", "hybrid"]
-large_if_labels = ["multi_hop", "comparison"]
+large_if_routes = []          # D17: was graph + hybrid; always-small matched the selector's F1 (0.638 vs 0.636)
+large_if_labels = []          # at 1/60 of the cost, runs 20260930-0738-dev-auto-selector, 20260930-0754-dev-auto-always-small
 large_if_context_tokens = 2500
 
 [policy]                      # M3
 low_budget_usd = 0.05
+relational_route = "hybrid"   # D17: graph scored multi hop F1 0.17 vs hybrid 0.67, runs 20260930-0634-dev-graph-server, 20260930-0659-dev-hybrid-server
 
 [judge]                       # M4
 flag_below = 0.6

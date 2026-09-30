@@ -5,7 +5,7 @@ import contextlib
 import psycopg
 import pytest
 
-from adaptiverag.config import settings
+from adaptiverag.config import router_cfg, settings
 from adaptiverag.eval import tune
 
 pytestmark = pytest.mark.network
@@ -57,6 +57,14 @@ def test_tune_reads_four_runs_and_prints_a_diff(
                     (f"r-{mode}", qid, tid, label, f1),
                 )
         monkeypatch.setattr("adaptiverag.stores.db.conn", lambda: contextlib.nullcontext(c))
+        # the data is built for the pre-D17 table: graph for relational questions, bar at 0.6
+        cfg = router_cfg()
+        pinned = {
+            **cfg,
+            "classifier": {**cfg["classifier"], "min_confidence": 0.6},
+            "policy": {**cfg["policy"], "relational_route": "graph"},
+        }
+        monkeypatch.setattr(tune, "router_cfg", lambda: pinned)
         tune.main(["--split", "dev"])
     out = capsys.readouterr().out
     assert "runs: auto r-auto, vector r-vector, graph r-graph, hybrid r-hybrid" in out

@@ -91,6 +91,25 @@ tables still compare routes and model sizes. Latency is measured on that one mac
 not on a hosted provider. What changes: the large model is now a different family from the small one, and the
 graph is re-extracted by the local model; every run before this decision is superseded.
 
+**D17 Relational questions route to hybrid, and the small model answers everything (2026-09-30).** The first
+full dev runs on the local models (rented 2x RTX 5090, commit `8bea8c7`, Neon main) showed the graph route
+losing to hybrid on the questions it was built for: multi hop F1 0.168 on graph against 0.671 on hybrid, and
+forced graph 0.512 overall against hybrid 0.844 and vector 0.776 (`20260930-0634-dev-graph-server`,
+`20260930-0659-dev-hybrid-server`, `20260930-0620-dev-vector-server`). Auto mode, which sent relational
+questions to graph, scored 0.568 (`20260930-0724-dev-auto-server`) with a router at macro F1 0.877, so the
+routes, not the classifier, were the loss. `[policy] relational_route = "hybrid"` now sends multi hop and
+comparison questions to hybrid, where the graph still contributes its paths through rank fusion; the graph
+route stays in the code, the forced graph runs and the decision table, and one config line restores it.
+Replayed offline with `eval.tune` (no live run yet), the new policy scores 0.824 at the old thresholds and 0.844 at
+`classifier.min_confidence = 0.85`, which keeps the 11 most confident single hop questions on the cheaper vector
+route. The selector's large model rules are emptied: under the pre-D17 routes (62 of 100 questions on hybrid, 37 on
+graph) always-small matched the selector and always-large
+(F1 0.638 against 0.636 and 0.636) at USD 0.000025 against 0.0015 per query and 40% of the p50 latency
+(`20260930-0754-dev-auto-always-small`, `20260930-0738-dev-auto-selector`,
+`20260930-0810-dev-auto-always-large`). The context length rule stays; no dev question reached it. Latency in
+runs after this decision comes from the server for model calls answered from the cache and from the lead's
+PC for new calls and database time; each trace records which calls were cached.
+
 ## Decided while building (D1 to D3)
 
 - **`aliases` primary key is `(surface_form, canonical_id)`**, not `surface_form` alone as the README draws it,

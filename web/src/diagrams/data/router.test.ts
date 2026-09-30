@@ -60,6 +60,12 @@ test('row 5 with a connected path: graph and straight to the answer', () => {
   assert.deepEqual(sorted(lit.edges), ['entities-graph', 'graph-path', 'path-answer', 'q-relational', 'relational-entities'])
 })
 
+test('row 5 under D17: a relational question goes to hybrid through the hybrid box', () => {
+  const lit = litPath(decision({ label: 'multi_hop', initial: 'hybrid', final: 'hybrid', reasons: ['relational:multi_hop'] }))
+  assert.deepEqual(sorted(lit.edges), ['fallback-hybrid', 'hybrid-answer', 'q-relational', 'relational-fallback'])
+  assert.ok(!lit.nodes.has('graph') && !lit.nodes.has('entities'))
+})
+
 test('row 6: a low budget lights vector without claiming the question had no structure', () => {
   const lit = litPath(decision({ label: 'multi_hop', reasons: ['relational:multi_hop', 'low_budget'] }))
   assert.ok(lit.nodes.has('vector') && lit.edges.has('vector-topk'))
