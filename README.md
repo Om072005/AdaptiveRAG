@@ -9,6 +9,7 @@
 
 - [What this is](#what-this-is)
 - [Why it exists](#why-it-exists)
+- [Results](#results)
 - [System architecture](#system-architecture)
 - [Ingestion pipeline](#ingestion-pipeline)
 - [Query lifecycle](#query-lifecycle)
@@ -40,6 +41,54 @@ Standard RAG — embed, retrieve top-k, stuff into prompt — fails quietly in t
 
 This project addresses both: a graph layer for relational/multi-hop questions, a router to pick between strategies, and instrumentation on every decision.
 
+
+## Results
+
+Every number below comes from a pinned run listed in [`docs/results/pinned.toml`](docs/results/pinned.toml); each
+run's report sits next to it in `docs/results/`. Corpus: 2,957 HotpotQA documents (4,277 sentence chunks). Models
+run locally through Ollama: `gpt-oss:20b` answers as the small model, `qwen3.6:35b-a3b` as the large one, and
+`gemma4:31b` judges (a different family). Costs are the public list price of the same weights.
+
+### Held out test split (50 questions, each mode run once)
+
+| Route | EM | F1 | Recall@8 | Faithfulness | Cost / query | p50 | p95 | Run |
+|---|---|---|---|---|---|---|---|---|
+| **auto (served)** | **0.720** | **0.811** | 0.970 | 0.935 | $0.00105 | 9.5 s | 14.9 s | `20260930-1557-test-auto-baseline` |
+| hybrid | 0.640 | 0.728 | 0.970 | 0.935 | $0.000027 | 2.8 s | 6.1 s | `20260930-1534-test-hybrid-baseline` |
+| vector | 0.640 | 0.725 | 0.980 | 0.955 | $0.000024 | 1.2 s | 1.7 s | `20260930-1453-test-vector-baseline` |
+| graph | 0.540 | 0.622 | 0.770 | 0.915 | $0.000021 | 2.1 s | 2.6 s | `20260930-1516-test-graph-baseline` |
+
+F1 by question type (single hop / multi hop / comparison): auto 0.874 / **0.744** / 0.831, hybrid 0.874 / 0.538 /
+0.831, vector 0.882 / 0.539 / 0.805, graph 0.874 / 0.329 / 0.744. The adaptive system wins on multi hop questions,
+and the gain comes from sending the relational questions through hybrid retrieval to the large model
+([D17](docs/decisions.md), [D20](docs/decisions.md)); graph traversal on its own is the weakest route. Latency was
+measured on a server with two RTX 5090s against Neon in Singapore; auto is slower and dearer because 34 of its 50
+questions go to the large model.
+
+### Choosing the model per question (dev split, 100 questions)
+
+| Variant | F1 | Faithfulness | Cost / query | Large model share | Run |
+|---|---|---|---|---|---|
+| always small | 0.821 | 0.945 | $0.000027 | 0% | `20260930-1346-dev-auto-always-small` |
+| **selector (served)** | **0.848** | 0.975 | $0.000831 | 56% | `20260930-1346-dev-auto-selector` |
+| always large | 0.859 | 0.990 | $0.001386 | 100% | `20260930-1248-dev-auto-always-large` |
+
+The selector keeps most of the large model's gain at 60% of its cost. Full economics (cost and latency per type and
+per route, quality per unit cost): [`econ-20260930-2158-dev`](docs/results/econ-20260930-2158-dev.md).
+
+### Router, graph and judge
+
+- **Classifier** (dev, `classifier-20260930-0250-dev`): macro F1 0.877 for logistic regression (served), 0.830 for
+  a few shot language model and 0.801 for hand written rules. On the test split the router reached macro F1 0.842,
+  sent 46 of 50 questions to hybrid and 4 to vector, and needed no fallback.
+- **Graph** (`graph-20260930-1457-gold`): 7,073 entities and 6,567 relations, every relation citing the chunk it was
+  read from; 9.3% of extracted triples rejected; entity merge precision 0.91 on 100 labelled decisions (0.56 before
+  [D18](docs/decisions.md) turned embedding merges off).
+- **Judge check** ([D23](docs/decisions.md)): 20 test answers scored by hand without seeing the judge. Scores within
+  one rubric step of the judge on 95% (faithfulness), 90% (relevance) and 95% (completeness) of answers; the same
+  flag decision on 80%.
+- **What did not work** is in [Known failure modes](#known-failure-modes): graph traversal loses on multi hop
+  questions, embedding based entity merges were wrong 7 times in 8, and answer confidence barely tracks the judge.
 
 ## System architecture
 
@@ -379,6 +428,8 @@ Copied from [`docs/failure-log.md`](docs/failure-log.md), where each row has the
 | 2 | After the switch to local embeddings no answer was ever flagged and vector never fell back | `vector.min_top_score` was set for another model's cosine scale | Re-tuned on dev | Closed as inert: no confident single hop question scores under 0.68 | `20260930-0041-dev-vector-smoke` |
 | 3 | Auto mode scored below forced vector and hybrid despite a router at macro F1 0.877 | The graph route answered multi hop questions far worse than hybrid (F1 0.168 vs 0.671) | Relational questions route to hybrid (D17) | Fixed in config | `20260930-0724-dev-auto-server` |
 | 4 | Entity resolution merged different things, e.g. two different dates, Cork City and Cork County Council | The embedding merge rule had precision 0.125 | Merge by name only (D18), graph rebuilt | Fixed: merge precision 0.56 to 0.91 | `graph-20260930-1457-gold` |
+| 5 | Answer confidence hardly tracks the judge (correlation 0.04 with faithfulness); correct answers were flagged | Citation markers written as `【1】` were not counted, and coverage and retrieval strength are weak signals | Full width markers count (D23); no reweighting was worth applying | Open | `20260930-1346-dev-auto-baseline`, `20260930-1557-test-auto-baseline` |
+| 6 | A correct numeric answer scores F1 0 ("25" against the gold "twenty-five") | Token F1 treats numerals and number words as different tokens | None: the metric stays HotpotQA's | Known limitation | `20260930-1557-test-auto-baseline` |
 
 Categories being watched for, based on the design:
 
