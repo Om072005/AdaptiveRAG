@@ -10,9 +10,9 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-label={`Switch to ${next} mode`}
       title={`Switch to ${next} mode`}
-      className="inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-rule bg-surface text-text transition-colors duration-150 hover:border-faint hover:text-ink"
+      className="inline-flex size-10 cursor-pointer items-center justify-center border border-ink bg-transparent text-ink transition-colors duration-150 hover:bg-ink hover:text-canvas"
     >
-      {theme === 'dark' ? <SunIcon size={18} /> : <MoonIcon size={18} />}
+      {theme === 'dark' ? <SunIcon size={17} /> : <MoonIcon size={17} />}
     </button>
   )
 }

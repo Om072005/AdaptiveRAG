@@ -35,7 +35,7 @@ function Segmented<K extends string>({ options, value, onPick, label }: { option
           type="button"
           aria-pressed={o.key === value}
           onClick={() => onPick(o.key)}
-          className="min-h-9 cursor-pointer rounded-full border border-rule bg-surface px-3.5 text-[13.5px] font-[560] text-muted transition-colors hover:text-ink aria-pressed:border-transparent aria-pressed:bg-ink aria-pressed:text-canvas"
+          className="min-h-9 cursor-pointer rounded-[2px] border border-rule bg-surface px-3.5 text-[13.5px] font-[560] text-muted transition-colors hover:text-ink aria-pressed:border-transparent aria-pressed:bg-ink aria-pressed:text-canvas"
         >
           {o.label}
         </button>
@@ -477,7 +477,7 @@ function GraphCard({ t }: { t: T }) {
       table={
         <dl className="m-0 grid grid-cols-2 gap-3 md:grid-cols-4">
           {tiles.map(([k, v, sub]) => (
-            <div key={k} className="rounded-[12px] border border-rule bg-sunken p-4">
+            <div key={k} className="rounded-[2px] border border-rule bg-sunken p-4">
               <dt className="text-caption font-[600]">{k}</dt>
               <dd className="m-0 mt-1">
                 <span className="block text-[28px] leading-9 font-[680] tracking-[-0.02em] text-ink">{v}</span>
@@ -502,7 +502,7 @@ export function ResultsView({ results }: { results: Results }) {
     <div>
       <dl className="m-0 mb-8 grid grid-cols-1 gap-3 md:grid-cols-4">
         {METRICS.map((m) => (
-          <div key={m.key} className="rounded-[12px] border border-dashed border-faint p-4">
+          <div key={m.key} className="rounded-[2px] border border-dashed border-faint p-4">
             <dt className="text-[13.5px] font-[620] text-ink">{m.label}</dt>
             <dd className="text-caption m-0 mt-1">{m.what}</dd>
           </div>

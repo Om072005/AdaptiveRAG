@@ -14,11 +14,11 @@ export function RetrieveStep({ run }: { run: RecordedRun }) {
         </div>
       )}
       <dl className="m-0 mb-6 flex flex-wrap gap-3">
-        <div className="rounded-[12px] border border-rule bg-sunken px-4 py-2.5">
+        <div className="rounded-[2px] border border-rule bg-sunken px-4 py-2.5">
           <dt className="text-caption">Top score</dt>
           <dd className="m-0 text-[15px] leading-6">{score(r.top_score)}</dd>
         </div>
-        <div className="rounded-[12px] border border-rule bg-sunken px-4 py-2.5">
+        <div className="rounded-[2px] border border-rule bg-sunken px-4 py-2.5">
           <dt className="text-caption">Connected graph path</dt>
           <dd className="m-0 text-[15px] leading-6">{r.path_found ? 'Found' : 'Not found'}</dd>
         </div>
@@ -29,7 +29,7 @@ export function RetrieveStep({ run }: { run: RecordedRun }) {
           <li key={`${h.rank}-${h.chunk_id}`} className="border-t border-rule py-3.5">
             <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
               <span className="text-[15px] leading-6 font-[560] text-ink">
-                <span className="mr-1.5 inline-flex size-5 items-center justify-center rounded-[5px] bg-sunken text-[12px] font-[650] text-muted">{h.rank}</span>
+                <span className="mr-1.5 inline-flex size-5 items-center justify-center rounded-[2px] bg-sunken text-[12px] font-[650] text-muted">{h.rank}</span>
                 {h.title}
               </span>
               <span className="text-caption flex items-center gap-4">

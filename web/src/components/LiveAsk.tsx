@@ -40,7 +40,7 @@ export function LiveAsk({ onAnswer }: Props) {
         maxLength={300}
         rows={2}
         required
-        className="mt-4 block w-full resize-y rounded-[10px] border border-rule bg-canvas p-3 text-[15px] leading-6 text-text"
+        className="mt-4 block w-full resize-y rounded-[2px] border border-rule bg-canvas p-3 text-[15px] leading-6 text-text"
       />
       <div className="mt-3 flex flex-wrap items-center gap-4">
         <label className="text-small flex items-center gap-2">
@@ -48,7 +48,7 @@ export function LiveAsk({ onAnswer }: Props) {
           <select
             value={mode}
             onChange={(e) => setMode(e.target.value as Mode)}
-            className="min-h-11 rounded-[10px] border border-rule bg-canvas px-2 text-[15px] text-text"
+            className="min-h-11 rounded-[2px] border border-rule bg-canvas px-2 text-[15px] text-text"
           >
             <option value="auto">Let the router choose</option>
             <option value="vector">Vector</option>

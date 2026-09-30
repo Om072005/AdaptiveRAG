@@ -11,7 +11,7 @@ export function StageRail({ current, onPick }: { current: number; onPick: (i: nu
               type="button"
               onClick={() => onPick(i)}
               aria-current={i === current ? 'step' : undefined}
-              className={`inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-full border px-3 py-1.5 text-[14px] leading-6 font-[560] whitespace-nowrap transition-colors aria-[current=step]:border-accent aria-[current=step]:bg-accent aria-[current=step]:text-accent-ink ${i < current ? 'border-rule bg-accent-soft text-accent-text' : 'border-rule bg-surface text-muted hover:text-ink'}`}
+              className={`inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-[2px] border px-3 py-1.5 text-[14px] leading-6 font-[560] whitespace-nowrap transition-colors aria-[current=step]:border-accent aria-[current=step]:bg-accent aria-[current=step]:text-accent-ink ${i < current ? 'border-rule bg-accent-soft text-accent-text' : 'border-rule bg-surface text-muted hover:text-ink'}`}
             >
               <span className="text-[12.5px] font-[700] tabular-nums">{i + 1}</span> {name}
             </button>

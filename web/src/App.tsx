@@ -18,7 +18,7 @@ import { useLoaded } from './data/useLoaded'
 
 const REPO_URL = 'https://github.com/Om072005/AdaptiveRAG'
 
-const Loading = () => <div className="card h-64 animate-pulse" aria-label="Loading" />
+const Loading = () => <div className="h-64 animate-pulse border border-rule" aria-label="Loading" />
 
 export default function App() {
   const replays = useLoaded(loadReplayIndex)
@@ -34,6 +34,7 @@ export default function App() {
         <Hero repoUrl={REPO_URL} results={results} />
         <Section
           id="idea"
+          no={1}
           eyebrow="The idea"
           title="No single search method fits every question."
           lede="Some questions are a quick lookup. Others need two facts joined together, or two things compared. AdaptiveRAG has three ways to find evidence and picks the right one each time."
@@ -43,6 +44,7 @@ export default function App() {
         </Section>
         <Section
           id="how"
+          no={2}
           eyebrow="How it works"
           title="From question to cited answer in five steps."
           lede="Each step is its own small, measured piece. Select any box in the diagram below to see what it does and where it lives in the code."
@@ -54,6 +56,7 @@ export default function App() {
         </Section>
         <Section
           id="follow"
+          no={3}
           eyebrow="Demo"
           title="Watch it answer real questions."
           lede="Each of these is a recorded run. Step through what the router decided, what it found, which model answered and what it cost. Some went wrong, and they are here on purpose."
@@ -66,6 +69,7 @@ export default function App() {
         </Section>
         <Section
           id="results"
+          no={4}
           eyebrow="Results"
           title="Measured, not claimed."
           lede="Every chart comes from a pinned run and names it. Hover for detail, or switch any chart to its table. Where a result was worse than expected, it stays."
@@ -77,6 +81,7 @@ export default function App() {
         </Section>
         <Section
           id="failures"
+          no={5}
           eyebrow="Lessons"
           title="What went wrong, and what we did about it."
           lede="Real incidents found in a run or in review, with the run that showed them."
@@ -86,6 +91,7 @@ export default function App() {
         </Section>
         <Section
           id="workflows"
+          no={6}
           eyebrow="Under the hood"
           title="How the pieces are built."
           lede="Four workflows, drawn from the same data as the code. Pick a step, or play the walkthrough to see each part light up in order."
@@ -94,6 +100,7 @@ export default function App() {
         </Section>
         <Section
           id="run"
+          no={7}
           eyebrow="Run it yourself"
           title="Everything runs on your own machine."
           lede="Open models through Ollama and a free Neon database. No API keys, no paid services."
@@ -101,7 +108,7 @@ export default function App() {
         >
           <RunIt />
         </Section>
-        <Section id="team" eyebrow="Team" title="Who built it.">
+        <Section id="team" no={8} eyebrow="Team" title="The team.">
           {site.status === 'loading' && <Loading />}
           {site.status === 'ok' && <Team site={site.data} />}
           {site.status === 'missing' && <p className="text-small m-0 text-muted">The team list is published with the final page.</p>}

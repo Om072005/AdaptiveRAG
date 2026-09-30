@@ -51,7 +51,7 @@ export function JudgeScores({ judgement, liveTraceId }: { judgement: Judgement |
   }
 
   return (
-    <section aria-label="Judge scores" className="mt-6 rounded-[14px] border border-rule p-5">
+    <section aria-label="Judge scores" className="mt-6 rounded-[2px] border border-rule p-5">
       <h4 className="text-caption m-0 mb-3 font-[600]">Judge, a different model family from the generator</h4>
       {shown && <Scores j={shown} />}
       {!shown && !liveTraceId && <p className="text-small m-0 text-muted">This answer was not judged.</p>}

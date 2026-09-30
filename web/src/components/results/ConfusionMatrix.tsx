@@ -29,7 +29,7 @@ export function ConfusionMatrix({ confusion }: { confusion: Results['tables']['c
               return (
                 <td
                   key={j}
-                  className={`relative h-14 w-20 rounded-[8px] text-center text-[16px] font-[650] tabular-nums md:w-24 ${share > 50 ? 'text-accent-ink' : 'text-ink'} ${i === j ? 'outline-2 outline-offset-1 outline-accent' : ''}`}
+                  className={`relative h-14 w-20 rounded-[2px] text-center text-[16px] font-[650] tabular-nums md:w-24 ${share > 50 ? 'text-accent-ink' : 'text-ink'} ${i === j ? 'outline-2 outline-offset-1 outline-accent' : ''}`}
                   style={{ background: `color-mix(in srgb, var(--accent) ${share}%, var(--surface))` }}
                 >
                   {count}

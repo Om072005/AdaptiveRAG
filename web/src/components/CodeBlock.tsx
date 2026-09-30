@@ -11,7 +11,7 @@ export function CodeBlock({ code }: { code: string }) {
     })
   }
   return (
-    <div className="mt-3 flex items-start gap-2 rounded-[12px] border border-code-rule bg-code-bg">
+    <div className="mt-3 flex items-start gap-2 rounded-[2px] border border-code-rule bg-code-bg">
       <pre tabIndex={0} className="m-0 min-w-0 flex-1 overflow-x-auto py-3.5 pl-4 font-mono text-[13px] leading-5 text-code-text md:text-[13.5px] md:leading-[22px]">
         <code>
           {code.split('\n').map((line, i) => (
@@ -25,7 +25,7 @@ export function CodeBlock({ code }: { code: string }) {
       <button
         type="button"
         onClick={copy}
-        className="mt-2 mr-2 inline-flex min-h-8 shrink-0 cursor-pointer items-center gap-1.5 rounded-[8px] border border-code-rule bg-transparent px-2.5 text-[12.5px] leading-5 text-code-text hover:border-line"
+        className="mt-2 mr-2 inline-flex min-h-8 shrink-0 cursor-pointer items-center gap-1.5 rounded-[2px] border border-code-rule bg-transparent px-2.5 text-[12.5px] leading-5 text-code-text hover:border-line"
       >
         {copied ? <CheckIcon size={14} /> : <CopyIcon size={14} />}
         {copied ? 'Copied' : 'Copy'}

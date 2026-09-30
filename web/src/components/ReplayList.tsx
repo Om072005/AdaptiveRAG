@@ -24,12 +24,12 @@ export function ReplayList({ items, current, onPick }: { items: ReplayItem[]; cu
                     type="button"
                     onClick={() => onPick(item.question_id)}
                     aria-current={item.question_id === current ? 'true' : undefined}
-                    className="block w-full cursor-pointer rounded-[12px] border border-transparent bg-transparent px-3.5 py-3 text-left text-[14.5px] leading-[22px] text-text transition-colors hover:border-rule hover:bg-surface aria-[current=true]:border-accent aria-[current=true]:bg-surface aria-[current=true]:text-ink aria-[current=true]:shadow-sm"
+                    className="block w-full cursor-pointer rounded-[2px] border border-transparent bg-transparent px-3.5 py-3 text-left text-[14.5px] leading-[22px] text-text transition-colors hover:border-rule hover:bg-surface aria-[current=true]:border-accent aria-[current=true]:bg-surface aria-[current=true]:text-ink aria-[current=true]:shadow-sm"
                   >
                     {item.question}
                     <span className="mt-1.5 flex items-center gap-2">
                       {g.title === 'Went wrong' && <span className="text-caption">{LABEL[item.type] ?? item.type}</span>}
-                      <span className={`rounded-full px-2 py-px text-[12px] leading-5 font-[600] ${TONE[item.outcome]}`}>{OUTCOME[item.outcome]}</span>
+                      <span className={`rounded-[2px] px-2 py-px text-[12px] leading-5 font-[600] ${TONE[item.outcome]}`}>{OUTCOME[item.outcome]}</span>
                     </span>
                   </button>
                 </li>

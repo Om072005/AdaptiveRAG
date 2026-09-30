@@ -11,7 +11,7 @@ export function RouteStep({ run }: { run: RecordedRun }) {
       <div className="min-w-0">
         <RouterFlow route={route} flagged={run.response.answer.flagged} framed={false} />
       </div>
-      <div className="min-w-0 rounded-[12px] border border-rule bg-sunken p-5 md:self-start">
+      <div className="min-w-0 rounded-[2px] border border-rule bg-sunken p-5 md:self-start">
         <dl className="m-0">
           <dt className="text-caption">Route taken</dt>
           <dd className="m-0 mb-5">

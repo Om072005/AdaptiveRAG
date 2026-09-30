@@ -6,7 +6,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
 
 const TOKENS = join('src', 'styles', 'tokens.css')
-const FONTS = ['Inter Variable', 'IBM Plex Mono']
+const FONTS = ['Paper Serif', 'Noto Serif Display Variable', 'IBM Plex Mono']
 const RULES = [
   [/→/, 'arrow glyph'],
   [/—|–/, 'em or en dash'],

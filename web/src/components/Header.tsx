@@ -32,28 +32,16 @@ function useCurrentSection(): string {
   return current
 }
 
-/** Whether the page has scrolled past the top, to give the bar its hairline. */
-function useScrolled(): boolean {
-  const [scrolled, setScrolled] = useState(false)
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-  return scrolled
-}
-
 function Anchors({ current, onPick, stacked = false }: { current: string; onPick?: () => void; stacked?: boolean }) {
   return (
-    <ul className={`m-0 flex list-none p-0 ${stacked ? 'flex-col gap-1' : 'items-center gap-1'}`}>
-      {SECTIONS.map(({ id, label }) => (
-        <li key={id}>
+    <ul className={`m-0 flex list-none p-0 ${stacked ? 'flex-col' : 'items-stretch justify-center'}`}>
+      {SECTIONS.map(({ id, label }, i) => (
+        <li key={id} className={stacked ? 'border-b border-rule' : i > 0 ? 'border-l border-rule' : ''}>
           <a
             href={`#${id}`}
             onClick={onPick}
             aria-current={current === id ? 'true' : undefined}
-            className={`block rounded-full px-3 py-1.5 text-[14.5px] leading-6 font-[500] text-muted no-underline transition-colors hover:bg-sunken hover:text-ink aria-[current=true]:bg-accent-soft aria-[current=true]:text-accent-text ${stacked ? 'py-3 text-[16px]' : ''}`}
+            className={`block font-mono text-[12px] leading-5 tracking-[0.08em] text-ink uppercase no-underline transition-colors hover:bg-ink hover:text-canvas aria-[current=true]:bg-ink aria-[current=true]:text-canvas ${stacked ? 'px-1 py-3.5' : 'px-5 py-2.5'}`}
           >
             {label}
           </a>
@@ -63,31 +51,29 @@ function Anchors({ current, onPick, stacked = false }: { current: string; onPick
   )
 }
 
+/** A newspaper masthead: the issue line, the name in the middle, then the section nav between rules. */
 export function Header({ repoUrl }: { repoUrl: string }) {
   const current = useCurrentSection()
-  const scrolled = useScrolled()
   const [open, setOpen] = useState(false)
   return (
-    <header
-      className={`sticky top-0 z-40 border-b bg-(--header-bg) backdrop-blur-md backdrop-saturate-150 transition-colors ${scrolled || open ? 'border-rule' : 'border-transparent'}`}
-    >
-      <div className="page-wrap flex h-16 items-center justify-between gap-6">
-        <Wordmark />
-        <nav aria-label="Sections" className="hidden min-[1000px]:block">
-          <Anchors current={current} />
-        </nav>
-        <div className="flex items-center gap-2">
+    <header className="sticky top-0 z-40 border-b border-ink bg-(--header-bg) backdrop-blur-sm">
+      <div className="page-wrap flex h-16 items-center justify-between gap-3 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-4">
+        <p className="m-0 hidden font-sans text-[17px] leading-6 text-ink md:block">Vol. 1 · Open source · HotpotQA</p>
+        <div className="col-start-1 justify-self-start md:col-start-2 md:justify-self-center">
+          <Wordmark />
+        </div>
+        <div className="col-start-3 flex items-center justify-self-end gap-2">
           <ThemeToggle />
           <a
             href={repoUrl}
-            className="hidden h-10 items-center gap-2 rounded-full border border-rule bg-surface px-4 text-[14.5px] font-[500] text-ink no-underline transition-colors hover:border-faint hover:text-ink sm:inline-flex"
+            className="hidden h-10 items-center gap-2 border border-ink px-3.5 font-mono text-[12px] tracking-[0.08em] text-ink uppercase no-underline transition-colors hover:bg-ink hover:text-canvas sm:inline-flex"
           >
-            <GitHubIcon size={17} />
+            <GitHubIcon size={16} />
             GitHub
           </a>
           <button
             type="button"
-            className="inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-rule bg-surface text-ink min-[1000px]:hidden"
+            className="inline-flex size-10 cursor-pointer items-center justify-center border border-ink bg-transparent text-ink min-[1000px]:hidden"
             aria-expanded={open}
             aria-controls="menu"
             aria-label="Menu"
@@ -97,11 +83,16 @@ export function Header({ repoUrl }: { repoUrl: string }) {
           </button>
         </div>
       </div>
+      <nav aria-label="Sections" className="hidden border-t border-rule min-[1000px]:block">
+        <div className="page-wrap">
+          <Anchors current={current} />
+        </div>
+      </nav>
       {open && (
-        <nav id="menu" aria-label="Sections" className="page-wrap pb-4 min-[1000px]:hidden">
+        <nav id="menu" aria-label="Sections" className="page-wrap border-t border-rule pb-4 min-[1000px]:hidden">
           <Anchors current={current} onPick={() => setOpen(false)} stacked />
-          <a href={repoUrl} className="mt-2 flex items-center gap-2 px-3 py-3 text-[16px] font-[500] text-ink no-underline sm:hidden">
-            <GitHubIcon size={17} />
+          <a href={repoUrl} className="mt-2 flex items-center gap-2 px-1 py-3 font-mono text-[12px] tracking-[0.08em] text-ink uppercase no-underline sm:hidden">
+            <GitHubIcon size={16} />
             GitHub
           </a>
         </nav>

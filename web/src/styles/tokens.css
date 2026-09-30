@@ -1,113 +1,133 @@
-/* The only place colors, font families and the type scale are defined. Every color is a role that
-   has a light and a dark value; components use the roles, never a raw color.
-   Chart series (vector, graph, hybrid) are the first three slots of the validated data-viz palette,
-   stepped separately for each mode; the router is drawn in ink so it never competes with them. */
+/* The only place colors, font families and the type scale are defined. Every color is a role with
+   a light and a dark value; components use the roles, never a raw color.
+   Colors are Anthropic's published swatches (ivory, oat, cloud, slate, clay). accent-text is clay
+   one step darker so small text on ivory passes AA. Chart series are the Anthropic swatches that pass
+   the data-viz colorblind checks on all pairs in both themes: sky (vector), accent orange (graph),
+   pencil (hybrid); the router is drawn in ink. */
+
+/* The body serif, enlarged so its condensed letters read like a text face at UI sizes. */
+@font-face {
+  font-family: 'Paper Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  size-adjust: 112%;
+  src: url('../../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Paper Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  size-adjust: 112%;
+  src: url('../../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2') format('woff2');
+}
+
 :root {
   color-scheme: light;
-  --canvas: #ffffff;
-  --sunken: #f6f6f9;
-  --surface: #ffffff;
-  --raised: #f2f2f7;
-  --ink: #0c0c14;
-  --text: #3a3a48;
-  --muted: #62627a;
-  --rule: #e4e4ec;
-  --line: #8e8ea3;
-  --faint: #cfcfdb;
-  --accent: #5b4bd6;
-  --accent-text: #4a3aa7;
-  --accent-ink: #ffffff;
-  --accent-soft: #efedff;
-  --vector: #2a78d6;
-  --graph: #eb6834;
-  --hybrid: #1baf7a;
-  --good: #0a7a36;
-  --good-soft: #e3f5e9;
-  --bad: #c0352f;
-  --bad-soft: #fdecea;
-  --warn: #8a5a00;
-  --warn-soft: #fff4d6;
-  --code-bg: #12121c;
-  --code-text: #e8e8f2;
-  --code-rule: #2a2a3a;
-  --code-prompt: #9d93ff;
-  --header-bg: color-mix(in srgb, #ffffff 82%, transparent);
-  --sh-sm: 0 1px 2px #0c0c140f, 0 1px 1px #0c0c140a;
-  --sh-md: 0 1px 2px #0c0c140d, 0 8px 24px -8px #0c0c1426;
-  --sh-lg: 0 2px 4px #0c0c140d, 0 24px 48px -16px #3a2fa033;
-  --glow: #5b4bd61f;
+  --canvas: #f0eee6; /* ivory medium: the paper */
+  --sunken: #e8e6dc; /* ivory dark */
+  --surface: #faf9f5; /* ivory light */
+  --raised: #e3dacc; /* oat */
+  --ink: #141413; /* slate dark */
+  --text: #3d3d3a; /* slate medium */
+  --muted: #5e5d59; /* slate light */
+  --rule: #14141340; /* slate, faded */
+  --line: #87867f; /* cloud dark */
+  --faint: #b0aea5; /* cloud medium */
+  --accent: #d97757; /* clay */
+  --accent-text: #a8502f;
+  --accent-ink: #141413;
+  --accent-soft: #ebdbbc; /* manilla */
+  --vector: #6a9bcc; /* sky */
+  --graph: #c6613f; /* accent */
+  --hybrid: #f0ac54; /* pencil */
+  --good: #4d5f38;
+  --good-soft: #ced6bf; /* matcha */
+  --bad: #8f2f2f;
+  --bad-soft: #ebcece; /* coral */
+  --warn: #6e4a14;
+  --warn-soft: #ebdbbc; /* manilla */
+  --code-bg: #141413;
+  --code-text: #faf9f5;
+  --code-rule: #3d3d3a;
+  --code-prompt: #d97757;
+  --header-bg: color-mix(in srgb, #f0eee6 90%, transparent);
+  --sh-sm: 0 0 0 transparent;
+  --sh-md: 4px 4px 0 #141413;
+  --sh-lg: 6px 6px 0 #141413;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
-    --canvas: #0b0b12;
-    --sunken: #0f0f18;
-    --surface: #13131d;
-    --raised: #1a1a26;
-    --ink: #f6f6fb;
-    --text: #c9c9d8;
-    --muted: #9696aa;
-    --rule: #262638;
-    --line: #6e6e88;
-    --faint: #36364c;
-    --accent: #8f84f5;
-    --accent-text: #b3abff;
-    --accent-ink: #0b0b12;
-    --accent-soft: #1f1c3d;
-    --vector: #3987e5;
-    --graph: #d95926;
-    --hybrid: #199e70;
-    --good: #4cc47a;
-    --good-soft: #10261a;
-    --bad: #f07a73;
-    --bad-soft: #2d1414;
-    --warn: #f0b64a;
-    --warn-soft: #2a2110;
-    --code-bg: #0e0e17;
-    --code-text: #e8e8f2;
-    --code-rule: #262638;
-    --header-bg: color-mix(in srgb, #0b0b12 78%, transparent);
-    --sh-sm: 0 1px 2px #00000066;
-    --sh-md: 0 1px 2px #00000066, 0 8px 24px -8px #00000099;
-    --sh-lg: 0 2px 4px #00000066, 0 24px 48px -16px #000000b3;
-    --glow: #8f84f526;
+    --canvas: #141413;
+    --sunken: #1c1c1a;
+    --surface: #1f1e1d;
+    --raised: #262624;
+    --ink: #faf9f5;
+    --text: #d1cfc5;
+    --muted: #b0aea5;
+    --rule: #faf9f53d;
+    --line: #87867f;
+    --faint: #5e5d59;
+    --accent: #d97757;
+    --accent-text: #e6906f;
+    --accent-ink: #141413;
+    --accent-soft: #3d2a20;
+    --vector: #6a9bcc;
+    --graph: #c6613f;
+    --hybrid: #f0ac54;
+    --good: #bcd1ca;
+    --good-soft: #26302a;
+    --bad: #ebcece;
+    --bad-soft: #3a2222;
+    --warn: #ebdbbc;
+    --warn-soft: #34291a;
+    --code-bg: #0c0c0b;
+    --code-text: #faf9f5;
+    --code-rule: #3d3d3a;
+    --code-prompt: #d97757;
+    --header-bg: color-mix(in srgb, #141413 90%, transparent);
+    --sh-sm: 0 0 0 transparent;
+    --sh-md: 4px 4px 0 #faf9f5;
+    --sh-lg: 6px 6px 0 #faf9f5;
   }
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --canvas: #0b0b12;
-  --sunken: #0f0f18;
-  --surface: #13131d;
-  --raised: #1a1a26;
-  --ink: #f6f6fb;
-  --text: #c9c9d8;
-  --muted: #9696aa;
-  --rule: #262638;
-  --line: #6e6e88;
-  --faint: #36364c;
-  --accent: #8f84f5;
-  --accent-text: #b3abff;
-  --accent-ink: #0b0b12;
-  --accent-soft: #1f1c3d;
-  --vector: #3987e5;
-  --graph: #d95926;
-  --hybrid: #199e70;
-  --good: #4cc47a;
-  --good-soft: #10261a;
-  --bad: #f07a73;
-  --bad-soft: #2d1414;
-  --warn: #f0b64a;
-  --warn-soft: #2a2110;
-  --code-bg: #0e0e17;
-  --code-text: #e8e8f2;
-  --code-rule: #262638;
-  --header-bg: color-mix(in srgb, #0b0b12 78%, transparent);
-  --sh-sm: 0 1px 2px #00000066;
-  --sh-md: 0 1px 2px #00000066, 0 8px 24px -8px #00000099;
-  --sh-lg: 0 2px 4px #00000066, 0 24px 48px -16px #000000b3;
-  --glow: #8f84f526;
+  --canvas: #141413;
+  --sunken: #1c1c1a;
+  --surface: #1f1e1d;
+  --raised: #262624;
+  --ink: #faf9f5;
+  --text: #d1cfc5;
+  --muted: #b0aea5;
+  --rule: #faf9f53d;
+  --line: #87867f;
+  --faint: #5e5d59;
+  --accent: #d97757;
+  --accent-text: #e6906f;
+  --accent-ink: #141413;
+  --accent-soft: #3d2a20;
+  --vector: #6a9bcc;
+  --graph: #c6613f;
+  --hybrid: #f0ac54;
+  --good: #bcd1ca;
+  --good-soft: #26302a;
+  --bad: #ebcece;
+  --bad-soft: #3a2222;
+  --warn: #ebdbbc;
+  --warn-soft: #34291a;
+  --code-bg: #0c0c0b;
+  --code-text: #faf9f5;
+  --code-rule: #3d3d3a;
+  --code-prompt: #d97757;
+  --header-bg: color-mix(in srgb, #141413 90%, transparent);
+  --sh-sm: 0 0 0 transparent;
+  --sh-md: 4px 4px 0 #faf9f5;
+  --sh-lg: 6px 6px 0 #faf9f5;
 }
 
 @theme inline {
@@ -147,10 +167,11 @@
 
 @theme {
   --font-*: initial;
-  --font-sans: 'Inter Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-sans: 'Paper Serif', Georgia, serif;
+  --font-display: 'Noto Serif Display Variable', Georgia, serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
 
-  --radius-control: 10px;
-  --radius-panel: 16px;
+  --radius-control: 2px;
+  --radius-panel: 2px;
   --ease-page: cubic-bezier(0.2, 0, 0, 1);
 }

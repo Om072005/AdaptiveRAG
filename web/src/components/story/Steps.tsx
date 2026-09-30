@@ -17,7 +17,7 @@ export function Steps() {
       {STEPS.map((s, i) => (
         <li key={s.title} className="card card-hover relative p-5">
           <div className="flex items-center gap-3">
-            <span className="inline-flex size-9 items-center justify-center rounded-full bg-accent-soft text-accent-text">{s.icon}</span>
+            <span className="inline-flex size-9 items-center justify-center rounded-[2px] bg-accent-soft text-accent-text">{s.icon}</span>
             <span className="text-caption font-[600]">Step {i + 1}</span>
           </div>
           <h3 className="text-title m-0 mt-4">{s.title}</h3>

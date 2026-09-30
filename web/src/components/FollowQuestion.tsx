@@ -28,17 +28,17 @@ export function FollowQuestion({ index }: { index: ReplayIndex }) {
     <>
       {liveEnabled && <LiveAsk onAnswer={setLive} />}
       <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:gap-8">
-        <div className="min-w-0 lg:sticky lg:top-24">
+        <div className="min-w-0 lg:sticky lg:top-32">
           <button
             type="button"
-            className="mb-3 inline-flex min-h-11 w-full cursor-pointer items-center justify-between rounded-[12px] border border-rule bg-surface px-4 text-[15px] font-[560] text-ink shadow-sm lg:hidden"
+            className="mb-3 inline-flex min-h-11 w-full cursor-pointer items-center justify-between rounded-[2px] border border-rule bg-surface px-4 text-[15px] font-[560] text-ink shadow-sm lg:hidden"
             aria-expanded={listOpen}
             onClick={() => setListOpen(!listOpen)}
           >
             Choose a question
             <ChevronDownIcon size={18} className={`transition-transform ${listOpen ? 'rotate-180' : ''}`} />
           </button>
-          <div className={`${listOpen ? 'block' : 'hidden lg:block'} rounded-[16px] border border-rule bg-sunken p-2 lg:max-h-[calc(100vh-128px)] lg:overflow-y-auto`}>
+          <div className={`${listOpen ? 'block' : 'hidden lg:block'} rounded-[2px] border border-rule bg-sunken p-2 lg:max-h-[calc(100vh-160px)] lg:overflow-y-auto`}>
             <ReplayList items={index.items} current={live ? '' : current} onPick={pick} />
           </div>
         </div>

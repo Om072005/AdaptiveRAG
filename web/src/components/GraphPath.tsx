@@ -123,7 +123,7 @@ export function GraphPath({ graph, hits }: { graph: Graph; hits: Hit[] }) {
         {wide.hidden > 0 && ` And ${wide.hidden} more entities, not drawn.`}
       </figcaption>
       {edge && (
-        <div className="mt-4 rounded-[12px] border border-rule bg-raised p-5" aria-live="polite">
+        <div className="mt-4 rounded-[2px] border border-rule bg-raised p-5" aria-live="polite">
           <p className="text-caption m-0">
             {edge.predicate}, confidence {edge.confidence.toFixed(2)}
           </p>

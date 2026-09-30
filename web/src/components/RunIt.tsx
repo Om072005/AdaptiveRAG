@@ -34,12 +34,12 @@ export function RunIt() {
   return (
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-14">
       <div>
-        <div className="card p-6 lg:sticky lg:top-24">
+        <div className="card p-6 lg:sticky lg:top-32">
           <h3 className="text-title m-0">What you need</h3>
           <ul className="m-0 mt-5 list-none space-y-4 p-0">
             {NEEDS.map((n) => (
               <li key={n.title} className="flex gap-3">
-                <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-accent-soft text-accent-text">{n.icon}</span>
+                <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-[2px] bg-accent-soft text-accent-text">{n.icon}</span>
                 <span>
                   <span className="block text-[14.5px] leading-6 font-[620] text-ink">{n.title}</span>
                   <span className="text-caption block">{n.text}</span>

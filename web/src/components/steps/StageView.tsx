@@ -22,7 +22,7 @@ export function StageView({ stage, run, replay }: { stage: number; run: Recorded
   return (
     <div>
       <p className="m-0 mb-5 flex items-center gap-2 text-[14.5px] leading-6 text-text">
-        <span className="rounded-full bg-accent-soft px-2 py-px text-[12px] font-[650] text-accent-text">{STAGES[stage]}</span>
+        <span className="bg-ink px-2 py-0.5 font-mono text-[11px] tracking-[0.08em] text-canvas uppercase">{STAGES[stage]}</span>
         {INTRO[STAGES[stage]]}
       </p>
       <Stage stage={stage} run={run} replay={replay} />

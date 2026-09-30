@@ -27,16 +27,12 @@ export function ReplayPanel({ replay, renderStage, renderRoutes }: Props) {
 
   return (
     <article aria-labelledby="qtitle" onKeyDown={onKey} className="card min-w-0 overflow-hidden p-0 shadow-md">
-      <div className="flex items-center justify-between gap-4 border-b border-rule bg-sunken px-5 py-3 md:px-8">
-        <div className="flex items-center gap-1.5" aria-hidden="true">
-          <span className="size-2.5 rounded-full bg-faint" />
-          <span className="size-2.5 rounded-full bg-faint" />
-          <span className="size-2.5 rounded-full bg-faint" />
-        </div>
-        <span className="text-caption">Use the arrow keys to move between steps</span>
+      <div className="flex items-center justify-between gap-4 border-b border-ink bg-sunken px-5 py-3 md:px-8">
+        <span className="text-label text-ink">The replay</span>
+        <span className="text-label hidden sm:inline">Arrow keys move between steps</span>
       </div>
       <div className="p-5 md:p-8">
-      <p className="text-caption m-0 mb-1.5 font-[600]">Question</p>
+      <p className="text-label m-0 mb-1.5">Question</p>
       <h3 id="qtitle" className="m-0 max-w-[40ch] text-[21px] leading-7 font-[650] tracking-[-0.015em] text-ink md:text-[25px] md:leading-8">
         {replay.question}
       </h3>

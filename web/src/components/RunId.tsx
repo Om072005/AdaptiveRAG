@@ -14,7 +14,7 @@ export function RunId({ id }: { id: string }) {
       type="button"
       onClick={copy}
       title="Copy run id"
-      className="relative cursor-pointer rounded-[6px] border-0 bg-transparent p-0 font-mono break-all text-[12.5px] leading-5 text-text underline decoration-faint decoration-dotted underline-offset-4 hover:text-ink"
+      className="relative cursor-pointer rounded-[2px] border-0 bg-transparent p-0 font-mono break-all text-[12.5px] leading-5 text-text underline decoration-faint decoration-dotted underline-offset-4 hover:text-ink"
     >
       {id}
       <span className="sr-only">{copied ? ' copied' : ' (copy)'}</span>

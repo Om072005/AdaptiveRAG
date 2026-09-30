@@ -27,7 +27,7 @@ export function ChartCard({ title, takeaway, legend, chart, table, split, runIds
           {takeaway && <p className="text-small m-0 mt-1.5 text-text">{takeaway}</p>}
         </div>
         {chart && table && (
-          <div role="group" aria-label="View" className="inline-flex shrink-0 rounded-full border border-rule bg-sunken p-0.5">
+          <div role="group" aria-label="View" className="inline-flex shrink-0 rounded-[2px] border border-rule bg-sunken p-0.5">
             {[
               [false, 'Chart', <ChartIcon key="c" size={15} />],
               [true, 'Table', <TableIcon key="t" size={15} />],
@@ -37,7 +37,7 @@ export function ChartCard({ title, takeaway, legend, chart, table, split, runIds
                 type="button"
                 aria-pressed={asTable === value}
                 onClick={() => setAsTable(value as boolean)}
-                className="inline-flex min-h-8 cursor-pointer items-center gap-1.5 rounded-full border-0 bg-transparent px-3 text-[13px] font-[560] text-muted aria-pressed:bg-surface aria-pressed:text-ink aria-pressed:shadow-sm"
+                className="inline-flex min-h-8 cursor-pointer items-center gap-1.5 rounded-[2px] border-0 bg-transparent px-3 text-[13px] font-[560] text-muted aria-pressed:bg-surface aria-pressed:text-ink aria-pressed:shadow-sm"
               >
                 {icon}
                 {label as string}
@@ -50,7 +50,7 @@ export function ChartCard({ title, takeaway, legend, chart, table, split, runIds
         <ul className="m-0 mt-4 flex list-none flex-wrap gap-x-4 gap-y-1.5 p-0" aria-label="Legend">
           {legend.map((l) => (
             <li key={l.label} className="inline-flex items-center gap-1.5 text-[13px] leading-5 text-text">
-              <span aria-hidden="true" className={`size-2.5 rounded-[3px] ${l.swatch}`} />
+              <span aria-hidden="true" className={`size-2.5 rounded-[2px] ${l.swatch}`} />
               {l.label}
             </li>
           ))}

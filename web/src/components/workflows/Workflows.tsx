@@ -69,7 +69,7 @@ export function Workflows() {
             tabIndex={f.key === key ? 0 : -1}
             onClick={() => setKey(f.key)}
             onKeyDown={(e) => onTabKey(e, i)}
-            className="inline-flex min-h-11 shrink-0 cursor-pointer items-center gap-2 rounded-full border border-rule bg-surface px-4 text-[14.5px] leading-6 font-[560] whitespace-nowrap text-muted transition-colors hover:text-ink aria-selected:border-transparent aria-selected:bg-ink aria-selected:text-canvas"
+            className="inline-flex min-h-11 shrink-0 cursor-pointer items-center gap-2 rounded-[2px] border border-rule bg-surface px-4 text-[14.5px] leading-6 font-[560] whitespace-nowrap text-muted transition-colors hover:text-ink aria-selected:border-transparent aria-selected:bg-ink aria-selected:text-canvas"
           >
             {ICON[f.key]}
             {f.title}
@@ -77,7 +77,7 @@ export function Workflows() {
         ))}
       </div>
 
-      <div id="wf-panel" role="tabpanel" tabIndex={0} aria-labelledby={`wf-tab-${key}`} className="mt-8 rounded-[16px]">
+      <div id="wf-panel" role="tabpanel" tabIndex={0} aria-labelledby={`wf-tab-${key}`} className="mt-8 rounded-[2px]">
         {/* keyed, so a new tab starts its walkthrough from the beginning */}
         <FlowPanel key={flow.key} flow={flow} />
       </div>
@@ -108,7 +108,7 @@ function FlowPanel({ flow }: { flow: Flow }) {
               type="button"
               onClick={() => pick(i)}
               aria-pressed={step === i}
-              className="group relative h-full w-full cursor-pointer overflow-hidden rounded-[12px] border border-rule bg-surface p-4 text-left transition-all duration-200 hover:border-faint aria-pressed:border-accent aria-pressed:bg-accent-soft"
+              className="group relative h-full w-full cursor-pointer overflow-hidden rounded-[2px] border border-rule bg-surface p-4 text-left transition-all duration-200 hover:border-faint aria-pressed:border-accent aria-pressed:bg-accent-soft"
             >
               <span className="flex items-center gap-2.5">
                 <span className="inline-flex size-6 items-center justify-center rounded-full bg-sunken text-[12px] font-[650] text-muted group-aria-pressed:bg-accent group-aria-pressed:text-accent-ink">

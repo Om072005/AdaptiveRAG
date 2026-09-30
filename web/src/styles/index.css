@@ -1,5 +1,6 @@
-@import '@fontsource-variable/inter/opsz.css';
+@import '@fontsource-variable/noto-serif-display/wdth.css';
 @import '@fontsource/ibm-plex-mono/latin-400.css';
+@import '@fontsource/ibm-plex-mono/latin-500.css';
 @import 'tailwindcss';
 @import './tokens.css';
 
@@ -7,38 +8,40 @@
   html {
     background: var(--color-canvas);
     scroll-behavior: smooth;
-    scroll-padding-top: 88px;
+    scroll-padding-top: 120px;
   }
   body {
     margin: 0;
-    background: var(--color-canvas);
+    /* paper grain, like newsprint: a fixed noise tile over the paper color */
+    background-color: var(--color-canvas);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.39 0 0 0 0 0.35 0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     color: var(--color-text);
-    font: 400 16px/26px var(--font-sans);
-    font-feature-settings: 'cv11', 'ss01';
+    font: 400 18px/27px var(--font-sans);
+    font-synthesis: none;
     -webkit-font-smoothing: antialiased;
     transition: background-color 200ms var(--ease-page), color 200ms var(--ease-page);
   }
   a {
-    color: var(--color-accent-text);
+    color: var(--color-ink);
     text-decoration: underline;
+    text-decoration-color: var(--color-accent);
     text-decoration-thickness: 1px;
     text-underline-offset: 4px;
   }
   a:hover {
-    color: var(--color-ink);
+    color: var(--color-accent-text);
   }
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
-    border-radius: 4px;
   }
   ::selection {
-    background: var(--color-accent-soft);
-    color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-canvas);
   }
   @media (width >= 48rem) {
     body {
-      font-size: 17px;
+      font-size: 19px;
       line-height: 28px;
     }
   }
@@ -56,64 +59,93 @@
   }
 }
 
+/* The headline face: the display serif at its narrowest, heavy and in capitals, set tight like a
+   newspaper masthead. */
+@utility font-headline {
+  font-family: var(--font-display);
+  font-stretch: 62.5%;
+  font-weight: 760;
+  text-transform: uppercase;
+  font-synthesis: none;
+}
+
 /* Type scale: mobile size first, desktop from 768px. */
 @utility text-statement {
-  font: 680 42px/46px var(--font-sans);
-  letter-spacing: -0.035em;
+  font-family: var(--font-display);
+  font-stretch: 62.5%;
+  font-weight: 780;
+  text-transform: uppercase;
+  font-size: 58px;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
   color: var(--color-ink);
   @media (width >= 48rem) {
-    font-size: 68px;
-    line-height: 72px;
+    font-size: 104px;
   }
 }
 @utility text-display {
-  font: 660 32px/38px var(--font-sans);
-  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+  font-stretch: 62.5%;
+  font-weight: 760;
+  text-transform: uppercase;
+  font-size: 46px;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
   color: var(--color-ink);
-  max-width: 26ch;
+  max-width: 20ch;
   @media (width >= 48rem) {
-    font-size: 46px;
-    line-height: 52px;
+    font-size: 80px;
   }
 }
 @utility text-title {
-  font: 620 19px/26px var(--font-sans);
-  letter-spacing: -0.012em;
+  font-family: var(--font-display);
+  font-stretch: 62.5%;
+  font-weight: 720;
+  text-transform: uppercase;
+  font-size: 25px;
+  line-height: 1;
+  letter-spacing: 0;
   color: var(--color-ink);
   @media (width >= 48rem) {
-    font-size: 21px;
-    line-height: 28px;
+    font-size: 29px;
   }
 }
 @utility text-lede {
-  font: 400 18px/29px var(--font-sans);
+  font: 400 22px/28px var(--font-sans);
   color: var(--color-text);
-  max-width: 62ch;
+  max-width: 44ch;
   @media (width >= 48rem) {
-    font-size: 20px;
-    line-height: 32px;
+    font-size: 27px;
+    line-height: 33px;
   }
 }
 @utility text-body {
-  font: 400 16px/26px var(--font-sans);
-  max-width: 68ch;
+  font: 400 18px/27px var(--font-sans);
+  max-width: 64ch;
   @media (width >= 48rem) {
-    font-size: 17px;
+    font-size: 19px;
     line-height: 28px;
   }
 }
 @utility text-small {
-  font: 400 15px/24px var(--font-sans);
+  font: 400 17px/24px var(--font-sans);
 }
 @utility text-caption {
-  font: 400 13px/20px var(--font-sans);
+  font: 400 15.5px/21px var(--font-sans);
   color: var(--color-muted);
 }
+/* typewriter labels: section numbers, field names, tags */
 @utility text-eyebrow {
-  font: 600 13px/20px var(--font-sans);
+  font: 500 12px/18px var(--font-mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-accent-text);
+  color: var(--color-ink);
+}
+@utility text-label {
+  font: 400 11.5px/16px var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
 }
 @utility text-code {
   font: 400 13px/20px var(--font-mono);
@@ -123,11 +155,11 @@
   }
 }
 
-/* Container and grid: 1200px max, 12 columns and 32px gutter, 8 on tablet, 4 with 16px on mobile. */
+/* Container and grid: 1320px max, 12 columns and 32px gutter, 8 on tablet, 4 with 16px on mobile. */
 @utility page-wrap {
-  max-width: 1200px;
+  max-width: 1320px;
   margin-inline: auto;
-  padding-inline: clamp(16px, 5vw, 48px);
+  padding-inline: clamp(16px, 3vw, 32px);
 }
 @utility page-grid {
   display: grid;
@@ -142,30 +174,43 @@
   }
 }
 
-/* A card: surface, hairline ring and a soft shadow. */
+/* A ruled box on the paper, like a boxed item in a newspaper column. */
 @utility card {
   background: var(--color-surface);
-  border: 1px solid var(--color-rule);
-  border-radius: var(--radius-panel);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-ink);
+  border-radius: 0;
 }
 @utility card-hover {
   transition:
-    transform 200ms var(--ease-page),
-    box-shadow 200ms var(--ease-page),
-    border-color 200ms var(--ease-page);
+    transform 180ms var(--ease-page),
+    box-shadow 180ms var(--ease-page);
   &:hover {
-    transform: translateY(-2px);
+    transform: translate(-2px, -2px);
     box-shadow: var(--shadow-md);
-    border-color: var(--color-faint);
   }
 }
-
-/* The soft brand glow behind the hero; one radial wash, never behind text blocks elsewhere. */
+/* an inverted block: paper colored type on ink, the page's loudest element */
+@utility ink-block {
+  background: var(--color-ink);
+  color: var(--color-canvas);
+}
+/* the drop cap that opens a lede */
+@utility drop-cap {
+  &::first-letter {
+    float: left;
+    margin: 6px 10px 0 0;
+    padding: 4px 8px 0;
+    font-family: var(--font-display);
+    font-stretch: 62.5%;
+    font-weight: 780;
+    font-size: 3.4em;
+    line-height: 0.82;
+    background: var(--color-ink);
+    color: var(--color-canvas);
+  }
+}
 @utility hero-glow {
-  background:
-    radial-gradient(60% 50% at 70% 20%, var(--glow), transparent 70%),
-    radial-gradient(40% 40% at 10% 0%, var(--glow), transparent 70%);
+  background: transparent;
 }
 
 /* Moving dashes along a lit path: a diagram edge being taken, or the hero's current lane. */
@@ -213,4 +258,12 @@
   transform-box: fill-box;
   transform-origin: center;
   animation: pulse-ring 1.8s var(--ease-page) infinite;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@utility marquee {
+  animation: marquee 40s linear infinite;
 }

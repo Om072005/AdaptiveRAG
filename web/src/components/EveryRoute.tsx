@@ -12,7 +12,7 @@ export function EveryRoute({ replay }: { replay: Replay }) {
   const best = Math.max(...runs.map((r) => r.run.metrics.f1))
   return (
     <div>
-      <p className="m-0 mb-5 inline-flex flex-wrap items-center gap-2 rounded-[10px] bg-sunken px-3 py-2 text-[14px] leading-5">
+      <p className="m-0 mb-5 inline-flex flex-wrap items-center gap-2 rounded-[2px] bg-sunken px-3 py-2 text-[14px] leading-5">
         <span className="text-muted">Gold answer:</span>
         <span className="font-[600] text-ink">{replay.gold_answer}</span>
       </p>
@@ -21,10 +21,10 @@ export function EveryRoute({ replay }: { replay: Replay }) {
           const r = run.response
           const isBest = run.metrics.f1 === best
           return (
-            <li key={mode} className={`rounded-[14px] border p-5 ${isBest ? 'border-accent bg-accent-soft' : 'border-rule bg-surface'}`}>
+            <li key={mode} className={`rounded-[2px] border p-5 ${isBest ? 'border-accent bg-accent-soft' : 'border-rule bg-surface'}`}>
               <div className="flex items-center justify-between gap-4">
                 <span className="text-[15px] leading-6 font-[620] text-ink">{MODE_NAME[mode]}</span>
-                {isBest && <span className="rounded-full bg-accent px-2.5 py-px text-[12px] leading-5 font-[650] text-accent-ink">Best</span>}
+                {isBest && <span className="rounded-[2px] bg-accent px-2.5 py-px text-[12px] leading-5 font-[650] text-accent-ink">Best</span>}
               </div>
               <div className="mt-2">
                 <RouteChip route={r.route.final} />

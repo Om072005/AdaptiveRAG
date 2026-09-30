@@ -11,7 +11,7 @@ function Rich({ text }: { text: string }) {
     <>
       {text.split(/(`[^`]+`)/).map((part, i) =>
         part.startsWith('`') && part.endsWith('`') ? (
-          <code key={i} className="rounded-[4px] bg-sunken px-1 py-0.5 font-mono text-[0.88em] text-ink">
+          <code key={i} className="rounded-[2px] bg-sunken px-1 py-0.5 font-mono text-[0.88em] text-ink">
             {part.slice(1, -1)}
           </code>
         ) : (
@@ -51,7 +51,7 @@ function FailureCard({ f }: { f: Failure }) {
     <li className="card flex flex-col p-5 md:p-6">
       <div className="flex items-center justify-between gap-3">
         <span className="text-caption font-[600]">Incident {f.n}</span>
-        <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[12.5px] leading-5 font-[600] ${s.tone}`}>
+        <span className={`inline-flex items-center gap-1 rounded-[2px] px-2.5 py-0.5 text-[12.5px] leading-5 font-[600] ${s.tone}`}>
           {s.icon}
           {s.word}
         </span>

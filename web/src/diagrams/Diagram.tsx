@@ -207,7 +207,7 @@ const STATUS_TONE: Record<string, string> = {
 
 function Detail({ node, side }: { node: DiagramNode | undefined; side: boolean }) {
   return (
-    <div className={`mt-5 rounded-[12px] border border-rule bg-raised p-5 ${side ? '@4xl:mt-0' : ''}`} aria-live="polite">
+    <div className={`mt-5 rounded-[2px] border border-rule bg-raised p-5 ${side ? '@4xl:mt-0' : ''}`} aria-live="polite">
       {node ? (
         <div key={node.id} className="fade-in">
           <p className="m-0 text-[15.5px] leading-6 font-[620] text-ink">{node.lines.join(' ')}</p>
@@ -215,7 +215,7 @@ function Detail({ node, side }: { node: DiagramNode | undefined; side: boolean }
           {node.module && <p className="text-code m-0 mt-3 break-all text-muted">{node.module}</p>}
           {node.status && (
             <p className="m-0 mt-3">
-              <span className={`inline-block rounded-full px-2.5 py-0.5 text-[12.5px] leading-5 font-[600] ${STATUS_TONE[node.status] ?? 'bg-sunken text-muted'}`}>
+              <span className={`inline-block rounded-[2px] px-2.5 py-0.5 text-[12.5px] leading-5 font-[600] ${STATUS_TONE[node.status] ?? 'bg-sunken text-muted'}`}>
                 {node.status}
               </span>
             </p>
@@ -235,7 +235,7 @@ function Legend({ data }: { data: DiagramData }) {
   return (
     <ul className="text-caption m-0 flex list-none flex-wrap gap-x-5 gap-y-2 p-0" aria-label="Legend">
       <li className={item}>
-        <span className="inline-block h-3.5 w-5 rounded-[4px] border border-line bg-surface" /> Step
+        <span className="inline-block h-3.5 w-5 rounded-[2px] border border-line bg-surface" /> Step
       </li>
       {kinds.has('decision') && (
         <li className={item}>

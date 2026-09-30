@@ -38,14 +38,14 @@ export function RouteCards() {
         {CARDS.map((c) => (
           <li key={c.route} className="card card-hover flex flex-col p-6">
             <div className="flex items-center justify-between">
-              <span className="inline-flex size-11 items-center justify-center rounded-[12px] border border-rule bg-sunken text-ink">{c.icon}</span>
+              <span className="inline-flex size-11 items-center justify-center rounded-[2px] border border-rule bg-sunken text-ink">{c.icon}</span>
               <span aria-hidden="true" className={`h-1.5 w-10 rounded-full ${BG[c.route]}`} />
             </div>
             <h3 className="text-title m-0 mt-5">{c.name}</h3>
             <p className="text-small m-0 mt-2">{c.what}</p>
             <p className="text-small m-0 mt-3 text-muted">{c.good}</p>
             <p className="m-0 mt-auto pt-5">
-              <span className="block rounded-[10px] bg-sunken px-3.5 py-2.5 text-[13.5px] leading-5 text-text">
+              <span className="block rounded-[2px] bg-sunken px-3.5 py-2.5 text-[13.5px] leading-5 text-text">
                 <span className="text-caption block">For example</span>
                 {c.example}
               </span>
@@ -54,7 +54,7 @@ export function RouteCards() {
         ))}
       </ul>
       <div className="card mt-5 flex flex-col gap-5 border-accent/30 bg-accent-soft p-6 md:flex-row md:items-center md:p-8">
-        <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-[12px] bg-accent text-accent-ink">
+        <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-[2px] bg-accent text-accent-ink">
           <RouteIcon size={24} />
         </span>
         <div>

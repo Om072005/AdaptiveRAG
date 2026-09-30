@@ -24,7 +24,7 @@ export function ModelStep({ run }: { run: RecordedRun }) {
           ],
         ]}
       />
-      <div className="mt-3 rounded-[12px] border border-rule p-4">
+      <div className="mt-3 rounded-[2px] border border-rule p-4">
         <p className="text-caption m-0">Why this model</p>
         <p className="m-0 mt-1 max-w-[64ch] text-[15px] leading-6 text-ink">{selectText(a.select_reason)}</p>
       </div>
