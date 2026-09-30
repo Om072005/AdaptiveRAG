@@ -62,3 +62,10 @@ def test_settings_prefers_real_env(monkeypatch: pytest.MonkeyPatch) -> None:
     s = config.settings()
     assert s.allow_test is True
     assert s.database_url == "postgres://from-env"
+
+
+def test_json_mode_defaults_on_and_a_role_can_turn_it_off() -> None:
+    data = config.read_toml("models.toml")
+    assert all(s.json_mode for r, s in config.parse_models(data).items() if r != "judge")
+    data["roles"]["judge"]["json_mode"] = False
+    assert config.parse_models(data)["judge"].json_mode is False

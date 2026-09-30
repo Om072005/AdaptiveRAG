@@ -47,6 +47,7 @@ class ModelSpec:
     document_prefix: str = ""  # embeddings: prepended to texts that are searched
     query_prefix: str = ""  # embeddings: prepended to questions
     load_url: str = ""  # local server: load the model first, so loading is wait, not latency
+    json_mode: bool = True  # False: the model rejects response_format, the caller parses text
 
 
 def parse_env(text: str) -> dict[str, str]:
@@ -129,6 +130,7 @@ def parse_models(data: dict[str, Any]) -> dict[Role, ModelSpec]:
             document_prefix=str(spec.get("document_prefix", "")),
             query_prefix=str(spec.get("query_prefix", "")),
             load_url=str(provider.get("load_url", "")),
+            json_mode=bool(spec.get("json_mode", True)),
         )
     return specs
 

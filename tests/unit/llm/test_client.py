@@ -151,3 +151,17 @@ def test_missing_usage_is_estimated_and_flagged(fake_provider: Install) -> None:
 def test_usage_present_is_not_estimated(fake_provider: Install) -> None:
     fake_provider(lambda r: httpx.Response(200, json=chat_body()))
     assert not llm.chat("small", [{"role": "user", "content": "q"}]).estimated
+
+
+def test_json_mode_is_skipped_for_a_model_without_it(
+    fake_provider: Install, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    # Gemma on the Gemini API answers JSON mode with a 500; models.toml says json_mode = false
+    import dataclasses
+
+    specs = dict(models())
+    specs["judge"] = dataclasses.replace(specs["judge"], json_mode=False)
+    monkeypatch.setattr(llm, "models", lambda: specs)
+    seen = fake_provider(lambda r: httpx.Response(200, json=chat_body("{}")))
+    llm.chat("judge", [{"role": "user", "content": "q"}], json_mode=True)
+    assert "response_format" not in json.loads(seen[0].content)

@@ -78,3 +78,11 @@ def test_second_bad_reply_is_a_failure_not_a_score(monkeypatch: pytest.MonkeyPat
     with pytest.raises(judge.JudgeFailed, match="faithfulness is not an integer"):
         judge.judge("q?", answer, retrieved, trace)
     assert len(calls) == 2 and trace.row()["eval_cost_usd"] == pytest.approx(0.002)
+
+
+def test_parse_scores_reads_json_after_a_thought_block_and_inside_a_fence() -> None:
+    # Gemma on the Gemini API has no JSON mode: it thinks first, then fences the object
+    raw = "<thought>faithful, but misses one fact</thought>\n```json\n" + GOOD + "\n```"
+    assert judge.parse_scores(raw) == judge.parse_scores(GOOD)
+    assert judge.parse_scores("```\n" + GOOD + "\n```") == judge.parse_scores(GOOD)
+    assert judge.parse_scores("<thought>no object here</thought>") == "not json"

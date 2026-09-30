@@ -232,7 +232,7 @@ def chat(
         "temperature": temperature,
         "max_tokens": max_tokens,
     }
-    if json_mode:
+    if json_mode and spec.json_mode:
         payload["response_format"] = {"type": "json_object"}
     if spec.reasoning_effort and role not in _no_reasoning_effort:
         payload["reasoning_effort"] = spec.reasoning_effort

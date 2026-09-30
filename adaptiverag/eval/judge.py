@@ -1,4 +1,5 @@
 import json
+import re
 from typing import Any
 
 from adaptiverag import llm
@@ -84,10 +85,21 @@ def build_messages(question: str, answer: Answer, retrieved: Retrieved) -> list[
     return [{"role": "user", "content": content}]
 
 
+THOUGHT = re.compile(r"<thought>.*?</thought>", re.DOTALL)
+FENCE = re.compile(r"```(?:json)?\s*(\{.*?\})\s*```", re.DOTALL)
+
+
+def json_payload(raw: str) -> str:
+    """The JSON part of a reply: without a leading thought block and outside a code fence."""
+    text = THOUGHT.sub("", raw).strip()
+    fenced = FENCE.search(text)
+    return fenced.group(1) if fenced else text
+
+
 def parse_scores(raw: str) -> dict[str, Any] | str:
     """Scores mapped from 1..5 to 0..1 plus the rationale, or why the reply is invalid."""
     try:
-        data = json.loads(raw)
+        data = json.loads(json_payload(raw))
     except ValueError:
         return "not json"
     if not isinstance(data, dict):
