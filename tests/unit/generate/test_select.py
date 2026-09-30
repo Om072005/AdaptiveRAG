@@ -51,8 +51,18 @@ def test_simple_question_stays_small() -> None:
 
 
 def test_empty_rule_lists_keep_graph_and_hybrid_small(monkeypatch: pytest.MonkeyPatch) -> None:
-    # D17: always-small matched the selector's F1 at 1/60 of the cost, so the lists are empty
+    # empty lists (D17's first setting) keep every route and label on the small model
     served = {"select": {**RULES["select"], "large_if_routes": [], "large_if_labels": []}}
     monkeypatch.setattr(select, "router_cfg", lambda: served)
     for final, label in (("graph", "multi_hop"), ("hybrid", "comparison")):
         assert choose_model(decision(final, label), retrieved(), 300)[0] == "small"
+
+
+def test_served_config_sends_relational_labels_to_large(monkeypatch: pytest.MonkeyPatch) -> None:
+    # D20: the served router.toml, not the RULES fixture
+    from adaptiverag import config
+
+    monkeypatch.setattr(select, "router_cfg", config.router_cfg)
+    assert choose_model(decision("hybrid", "multi_hop"), retrieved(), 300)[0] == "large"
+    assert choose_model(decision("hybrid", "comparison"), retrieved(), 300)[0] == "large"
+    assert choose_model(decision("hybrid", "single_hop"), retrieved(), 300)[0] == "small"

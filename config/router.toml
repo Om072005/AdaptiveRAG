@@ -36,8 +36,8 @@ w_citation = 0.5
 w_retrieval = 0.5
 
 [select]                      # M1
-large_if_routes = []          # D17: was graph + hybrid; always-small matched the selector's F1 (0.638 vs 0.636)
-large_if_labels = []          # at 1/60 of the cost, runs 20260930-0738-dev-auto-selector, 20260930-0754-dev-auto-always-small
+large_if_routes = []          # D17: every served route is hybrid or vector, so a route rule would send almost all to large
+large_if_labels = ["multi_hop", "comparison"]   # D20: F1 0.821 -> 0.848 (offline replay), 60% of always-large's cost; runs 20260930-1524, -1538
 large_if_context_tokens = 2500
 
 [policy]                      # M3

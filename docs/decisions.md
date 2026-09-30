@@ -102,8 +102,9 @@ comparison questions to hybrid, where the graph still contributes its paths thro
 route stays in the code, the forced graph runs and the decision table, and one config line restores it.
 Replayed offline with `eval.tune` (no live run yet), the new policy scores 0.824 at the old thresholds and 0.844 at
 `classifier.min_confidence = 0.85`, which keeps the 11 most confident single hop questions on the cheaper vector
-route. The selector's large model rules are emptied: under the pre-D17 routes (62 of 100 questions on hybrid, 37 on
-graph) always-small matched the selector and always-large
+route. The selector's large model rules are emptied (superseded in part by D20: under D17's own routes the large model
+is ahead): under the pre-D17 routes (62 of 100 questions on hybrid, 37 on graph) always-small matched the selector and
+always-large
 (F1 0.638 against 0.636 and 0.636) at USD 0.000025 against 0.0015 per query and 40% of the p50 latency
 (`20260930-0754-dev-auto-always-small`, `20260930-0738-dev-auto-selector`,
 `20260930-0810-dev-auto-always-large`). The context length rule stays; no dev question reached it. Latency in
@@ -133,6 +134,19 @@ OpenRouter list price of the same weights (0.08 / 0.30 USD per million tokens, c
 bills nothing. With the quota no longer binding, a judged run scores the whole dev split, so every results row
 takes F1 and faithfulness from one run (this replaces the 40 question subset of the eval protocol). Every judged
 run uses this one judge; mixing judges across runs would make faithfulness incomparable.
+
+**D20 The large model answers questions classified multi hop or comparison (2026-09-30).** D17 emptied the
+selector's rules because always-small had matched always-large, but that comparison ran under the pre-D17 routes.
+Under D17's routes the pinned runs disagree: always-small scores dev F1 0.821 and always-large 0.859
+(`20260930-1524-dev-auto-always-small`, `20260930-1538-dev-auto-always-large`), with the large model ahead on every
+type (single hop 0.952 to 0.982, multi hop 0.661 to 0.706, comparison 0.882 to 0.920). A paired bootstrap (2000
+resamples, seed 7) puts always-large at +0.038 F1, 95% interval 0.009 to 0.078. Replayed offline on the same two
+runs, sending only the questions the classifier labels multi hop or comparison to the large model scores 0.848
+(+0.027, interval 0.002 to 0.059) at USD 0.00083 per query, against 0.000027 for always-small and 0.00139 for
+always-large. `select.large_if_labels = ["multi_hop", "comparison"]` restores that rule; the route rule stays
+empty because under D17 nearly every question is on hybrid. The live selector run confirms or refutes the replay,
+and the faithfulness floor decides the quality per cost table. Latency of the large model is not compared: on the
+lead's 8 GB GPU it runs partly on the CPU (p50 35 s), which says nothing about the model.
 
 ## Decided while building (D1 to D3)
 

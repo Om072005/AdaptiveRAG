@@ -150,7 +150,7 @@ test('a diagram node opens its detail and module path', async ({ page }) => {
   await node.scrollIntoViewIfNeeded()
   await node.click()
   await expect(node).toHaveAttribute('aria-pressed', 'true')
-  await expect(page.getByText(/served rules send only very long contexts to the large model/)).toBeVisible()
+  await expect(page.getByText(/labels multi hop or comparison/)).toBeVisible()
   await expect(page.getByText('adaptiverag/generate/select.py')).toBeVisible()
 })
 
