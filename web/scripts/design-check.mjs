@@ -1,16 +1,13 @@
 // The mechanical rules of 02_DESIGN_SYSTEM.md section 10. Run from web/:
+// colors and fonts come from tokens.css only, so both themes stay complete; copy keeps its style.
 //   node scripts/design-check.mjs          source rules on src/ and index.html
 //   node scripts/design-check.mjs --data   refuse sample data in public/ unless VITE_ALLOW_SAMPLE=1
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
 
 const TOKENS = join('src', 'styles', 'tokens.css')
-const FONTS = ['Source Serif 4 Variable', 'IBM Plex Sans', 'IBM Plex Mono']
+const FONTS = ['Inter Variable', 'IBM Plex Mono']
 const RULES = [
-  [/gradient/i, 'gradient'],
-  [/box-shadow|drop-shadow|\bshadow-[a-z0-9[]/i, 'shadow'],
-  [/backdrop-filter|blur\(/i, 'blur'],
-  [/uppercase/i, 'all caps'],
   [/→/, 'arrow glyph'],
   [/—|–/, 'em or en dash'],
 ]

@@ -1,21 +1,33 @@
 import { selectText } from '../../copy/reasons'
 import type { RecordedRun } from '../../data/replay'
+import { Facts } from './Facts'
 
 export function ModelStep({ run }: { run: RecordedRun }) {
   const a = run.response.answer
   return (
-    <dl className="m-0">
-      <dt className="text-caption">Model</dt>
-      <dd className="m-0 mb-5 text-[15px] leading-6">
-        {a.size === 'large' ? 'Large' : 'Small'} <span className="font-mono text-[14px] text-muted">{a.model}</span>
-      </dd>
-      <dt className="text-caption">Why this model</dt>
-      <dd className="m-0 mb-5 max-w-[60ch] text-[15px] leading-6">{selectText(a.select_reason)}</dd>
-      <dt className="text-caption">Answer confidence</dt>
-      <dd className="m-0 text-[15px] leading-6">
-        {a.confidence.toFixed(2)}
-        {a.flagged && <span className="text-muted"> (below the threshold, flagged for review)</span>}
-      </dd>
-    </dl>
+    <div>
+      <Facts
+        cols={2}
+        items={[
+          [
+            'Model',
+            <>
+              {a.size === 'large' ? 'Large' : 'Small'} <span className="font-mono text-[13px] font-normal text-muted">{a.model}</span>
+            </>,
+          ],
+          [
+            'Answer confidence',
+            <>
+              {a.confidence.toFixed(2)}
+              {a.flagged && <span className="font-normal text-muted"> (below the threshold, flagged for review)</span>}
+            </>,
+          ],
+        ]}
+      />
+      <div className="mt-3 rounded-[12px] border border-rule p-4">
+        <p className="text-caption m-0">Why this model</p>
+        <p className="m-0 mt-1 max-w-[64ch] text-[15px] leading-6 text-ink">{selectText(a.select_reason)}</p>
+      </div>
+    </div>
   )
 }

@@ -26,11 +26,18 @@ export function ReplayPanel({ replay, renderStage, renderRoutes }: Props) {
   }
 
   return (
-    <article aria-labelledby="qtitle" onKeyDown={onKey} className="min-w-0 rounded-[10px] border border-rule p-6 md:p-10">
-      <h3
-        id="qtitle"
-        className="m-0 max-w-[32ch] font-serif text-[24px] leading-8 font-normal text-white md:text-[28px] md:leading-9"
-      >
+    <article aria-labelledby="qtitle" onKeyDown={onKey} className="card min-w-0 overflow-hidden p-0 shadow-md">
+      <div className="flex items-center justify-between gap-4 border-b border-rule bg-sunken px-5 py-3 md:px-8">
+        <div className="flex items-center gap-1.5" aria-hidden="true">
+          <span className="size-2.5 rounded-full bg-faint" />
+          <span className="size-2.5 rounded-full bg-faint" />
+          <span className="size-2.5 rounded-full bg-faint" />
+        </div>
+        <span className="text-caption">Use the arrow keys to move between steps</span>
+      </div>
+      <div className="p-5 md:p-8">
+      <p className="text-caption m-0 mb-1.5 font-[600]">Question</p>
+      <h3 id="qtitle" className="m-0 max-w-[40ch] text-[21px] leading-7 font-[650] tracking-[-0.015em] text-ink md:text-[25px] md:leading-8">
         {replay.question}
       </h3>
       {main && replay.question_id === LIVE_ID && (
@@ -47,20 +54,21 @@ export function ReplayPanel({ replay, renderStage, renderRoutes }: Props) {
       {tab === 'Step by step' && main && (
         <>
           <StageRail current={stage} onPick={go} />
-          <div className="mt-10" aria-live="polite">
+          <div key={stage} className="fade-in mt-8" aria-live="polite">
             {renderStage(stage, main.run, replay)}
           </div>
-          <div className="mt-10 flex justify-between border-t border-rule pt-6">
+          <div className="mt-8 flex justify-between gap-3 border-t border-rule pt-5">
             <Button onClick={() => go(stage - 1)} disabled={stage === 0}>
               Previous step
             </Button>
-            <Button onClick={() => go(stage + 1)} disabled={stage === STAGES.length - 1}>
+            <Button kind="primary" onClick={() => go(stage + 1)} disabled={stage === STAGES.length - 1}>
               Next step
             </Button>
           </div>
         </>
       )}
-      {tab === 'Every route' && <div className="mt-10">{renderRoutes(replay)}</div>}
+      {tab === 'Every route' && <div className="fade-in mt-8">{renderRoutes(replay)}</div>}
+      </div>
     </article>
   )
 }

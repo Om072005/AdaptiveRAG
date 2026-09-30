@@ -7,11 +7,11 @@ import { RouteChip } from '../RouteChip'
 export function RouteStep({ run }: { run: RecordedRun }) {
   const route = run.response.route
   return (
-    <div className="grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-[minmax(0,352px)_minmax(0,1fr)]">
+    <div className="grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-[minmax(0,352px)_minmax(0,1fr)]">
       <div className="min-w-0">
-        <RouterFlow route={route} flagged={run.response.answer.flagged} />
+        <RouterFlow route={route} flagged={run.response.answer.flagged} framed={false} />
       </div>
-      <div className="min-w-0 border-t border-rule pt-6 md:border-t-0 md:pt-0">
+      <div className="min-w-0 rounded-[12px] border border-rule bg-sunken p-5 md:self-start">
         <dl className="m-0">
           <dt className="text-caption">Route taken</dt>
           <dd className="m-0 mb-5">
@@ -26,7 +26,7 @@ export function RouteStep({ run }: { run: RecordedRun }) {
             </>
           )}
         </dl>
-        <p className="text-caption m-0 mb-2">Why</p>
+        <p className="text-caption m-0 mb-2 font-[600]">Why</p>
         <ol className="m-0 pl-5 text-[15px] leading-6">
           {route.reasons.map((r) => (
             <li key={r} className="mb-3">

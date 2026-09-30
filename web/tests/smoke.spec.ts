@@ -18,7 +18,7 @@ test('replay list, panel and every way to move between stages', async ({ page })
 
   await page.getByRole('button', { name: /Sample multi hop question/ }).click()
   await expect(page.locator('#qtitle')).toHaveText(/Sample multi hop question/)
-  await expect(page.getByText(/Recorded run/)).toContainText('20260101-0000-dev-vector-sample')
+  await expect(page.locator('article').getByText(/Recorded run/)).toContainText('20260101-0000-dev-vector-sample')
 
   await expect(current(page)).toHaveText('1 Classify')
   await page.getByRole('button', { name: 'Next step' }).click()
@@ -53,7 +53,7 @@ test('answer step: citation marker highlights its source, gold answer and scores
   const marker = page.getByRole('button', { name: 'Source 1' })
   await marker.click()
   await expect(marker).toHaveAttribute('aria-pressed', 'true')
-  await expect(page.getByRole('listitem').filter({ hasText: 'Sample snippet.' })).toHaveClass(/border-cream-100/)
+  await expect(page.getByRole('listitem').filter({ hasText: 'Sample snippet.' })).toHaveClass(/border-accent/)
   await expect(page.getByText('Gold answer')).toBeVisible()
   await expect(page.getByText('Token F1')).toBeVisible()
 })
@@ -137,11 +137,43 @@ test('run it yourself: copy buttons, and the team from site content', async ({ p
   await expect(team.getByRole('link', { name: 'Open an issue' })).toHaveAttribute('href', 'https://github.com/Om072005/AdaptiveRAG/issues')
 })
 
-test('workflows show all four README workflows', async ({ page }) => {
+test('workflows show all four README workflows, one tab at a time', async ({ page }) => {
   await page.goto('/')
+  const flows = page.locator('#workflows')
   for (const name of ['Ingestion', 'Router decision logic', 'Graph schema', 'Evaluation loop']) {
-    await expect(page.locator('#workflows').getByRole('heading', { name })).toBeVisible()
+    await flows.getByRole('tab', { name }).click()
+    await expect(flows.getByRole('tab', { name })).toHaveAttribute('aria-selected', 'true')
+    await expect(flows.getByRole('heading', { name })).toBeVisible()
   }
+})
+
+test('a workflow step lights its part of the diagram', async ({ page }) => {
+  await page.goto('/')
+  const flows = page.locator('#workflows')
+  const step = flows.getByRole('button', { name: /Check facts/ })
+  await step.click()
+  await expect(step).toHaveAttribute('aria-pressed', 'true')
+  await expect(flows.getByText('Step 4: Check facts')).toBeVisible()
+  await flows.getByRole('tab', { name: 'Evaluation loop' }).click()
+  await expect(flows.getByText('Pick a step or play the walkthrough. Select any box for detail.')).toBeVisible()
+})
+
+test('the theme toggle switches to dark and back, and is remembered', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' })
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Switch to dark mode' }).click()
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+  await page.reload()
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+  await page.getByRole('button', { name: 'Switch to light mode' }).click()
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
+})
+
+test('a results chart switches to its table', async ({ page }) => {
+  await page.goto('/')
+  const card = page.locator('#results figure').first()
+  await card.getByRole('button', { name: 'Table' }).click()
+  await expect(card.getByRole('columnheader', { name: 'Faithfulness' })).toBeVisible()
 })
 
 test('a diagram node opens its detail and module path', async ({ page }) => {

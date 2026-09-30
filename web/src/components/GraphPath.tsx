@@ -16,7 +16,7 @@ function Drawing({ placed, selected, onSelect, hits }: {
     <svg viewBox={`0 0 ${placed.width} ${placed.height}`} role="group" aria-label={title} className="block h-auto w-full">
       <defs>
         <marker id="gp-ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M1 1 L7 4 L1 7" fill="none" className="stroke-cream-300" strokeWidth="1" />
+          <path d="M1 1 L7 4 L1 7 z" className="fill-graph" />
         </marker>
       </defs>
       {placed.edges.map((e, i) => (
@@ -26,7 +26,7 @@ function Drawing({ placed, selected, onSelect, hits }: {
           y1={(e.y1 + e.y2) / 2}
           x2={e.chunkX}
           y2={e.chunkY}
-          className={selected === i ? 'stroke-white' : 'stroke-cream-600'}
+          className={selected === i ? 'stroke-accent' : 'stroke-faint'}
           strokeWidth="1"
           strokeDasharray="1 4"
         />
@@ -57,13 +57,13 @@ function Drawing({ placed, selected, onSelect, hits }: {
               y1={e.y1}
               x2={e.x2}
               y2={e.y2}
-              className={on ? 'stroke-white' : 'stroke-cream-300'}
-              strokeWidth={on ? 1.5 : 1}
+              className={on ? 'stroke-accent' : 'stroke-graph'}
+              strokeWidth={on ? 2 : 1.5}
               strokeDasharray="6 4"
               markerEnd="url(#gp-ah)"
             />
-            <rect x={mx - (e.predicate.length * 7 + 12) / 2} y={my - 11} width={e.predicate.length * 7 + 12} height="22" className="fill-black" />
-            <text x={mx} y={my + 4} textAnchor="middle" className={`font-sans text-[13px] ${on ? 'fill-white' : 'fill-muted'}`}>
+            <rect x={mx - (e.predicate.length * 7 + 12) / 2} y={my - 11} width={e.predicate.length * 7 + 12} height="22" rx="6" className="fill-surface stroke-rule" strokeWidth="1" />
+            <text x={mx} y={my + 4} textAnchor="middle" className={`font-sans text-[12.5px] ${on ? 'fill-ink font-[600]' : 'fill-muted'}`}>
               {e.predicate}
             </text>
           </g>
@@ -76,15 +76,15 @@ function Drawing({ placed, selected, onSelect, hits }: {
             y={n.y}
             width={NODE_W}
             height={NODE_H}
-            rx="2"
-            className={n.seed ? 'fill-cream-100 stroke-cream-100' : 'fill-black stroke-cream-300'}
+            rx="10"
+            className={n.seed ? 'fill-accent stroke-accent' : 'fill-surface stroke-line'}
             strokeWidth="1"
           />
           <text
             x={n.x + NODE_W / 2}
             y={n.y + 25}
             textAnchor="middle"
-            className={`font-sans text-[14px] ${n.seed ? 'fill-black' : 'fill-cream-300'}`}
+            className={`font-sans text-[13.5px] font-[560] ${n.seed ? 'fill-accent-ink' : 'fill-ink'}`}
           >
             {n.name.length > 22 ? `${n.name.slice(0, 21)}...` : n.name}
           </text>
@@ -92,7 +92,7 @@ function Drawing({ placed, selected, onSelect, hits }: {
       ))}
       {placed.chunks.map((c) => (
         <g key={c.id}>
-          <rect x={c.x} y={c.y} width={CHUNK_W} height="32" rx="2" className="fill-black stroke-cream-600" strokeWidth="1" />
+          <rect x={c.x} y={c.y} width={CHUNK_W} height="32" rx="6" className="fill-sunken stroke-faint" strokeWidth="1" />
           <text x={c.x + CHUNK_W / 2} y={c.y + 21} textAnchor="middle" className="fill-muted font-sans text-[13px]">
             chunk {c.n}
           </text>
@@ -123,14 +123,14 @@ export function GraphPath({ graph, hits }: { graph: Graph; hits: Hit[] }) {
         {wide.hidden > 0 && ` And ${wide.hidden} more entities, not drawn.`}
       </figcaption>
       {edge && (
-        <div className="mt-4 rounded-[6px] bg-raised p-5" aria-live="polite">
+        <div className="mt-4 rounded-[12px] border border-rule bg-raised p-5" aria-live="polite">
           <p className="text-caption m-0">
             {edge.predicate}, confidence {edge.confidence.toFixed(2)}
           </p>
           <p className="text-small m-0 mt-2">
             {source ? (
               <>
-                <span className="text-white">{source.title}.</span> {source.snippet}
+                <span className="font-[600] text-ink">{source.title}.</span> {source.snippet}
               </>
             ) : (
               `Chunk ${edge.chunk_id} is not among the retrieved hits.`

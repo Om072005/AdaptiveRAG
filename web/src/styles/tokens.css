@@ -1,22 +1,156 @@
-/* The only place colors, font families and the type scale are defined (02_DESIGN_SYSTEM.md 1 to 3). */
-@theme {
-  --color-*: initial;
-  --color-black: #000000;
-  --color-raised: #121210;
-  --color-white: #ffffff;
-  --color-text: #edeae3;
-  --color-cream-100: #f3ecdd;
-  --color-cream-300: #d8cdb6;
-  --color-cream-600: #7c7564;
-  --color-muted: #a59e90;
-  --color-rule: #2a2823;
+/* The only place colors, font families and the type scale are defined. Every color is a role that
+   has a light and a dark value; components use the roles, never a raw color.
+   Chart series (vector, graph, hybrid) are the first three slots of the validated data-viz palette,
+   stepped separately for each mode; the router is drawn in ink so it never competes with them. */
+:root {
+  color-scheme: light;
+  --canvas: #ffffff;
+  --sunken: #f6f6f9;
+  --surface: #ffffff;
+  --raised: #f2f2f7;
+  --ink: #0c0c14;
+  --text: #3a3a48;
+  --muted: #62627a;
+  --rule: #e4e4ec;
+  --line: #8e8ea3;
+  --faint: #cfcfdb;
+  --accent: #5b4bd6;
+  --accent-text: #4a3aa7;
+  --accent-ink: #ffffff;
+  --accent-soft: #efedff;
+  --vector: #2a78d6;
+  --graph: #eb6834;
+  --hybrid: #1baf7a;
+  --good: #0a7a36;
+  --good-soft: #e3f5e9;
+  --bad: #c0352f;
+  --bad-soft: #fdecea;
+  --warn: #8a5a00;
+  --warn-soft: #fff4d6;
+  --code-bg: #12121c;
+  --code-text: #e8e8f2;
+  --code-rule: #2a2a3a;
+  --code-prompt: #9d93ff;
+  --header-bg: color-mix(in srgb, #ffffff 82%, transparent);
+  --sh-sm: 0 1px 2px #0c0c140f, 0 1px 1px #0c0c140a;
+  --sh-md: 0 1px 2px #0c0c140d, 0 8px 24px -8px #0c0c1426;
+  --sh-lg: 0 2px 4px #0c0c140d, 0 24px 48px -16px #3a2fa033;
+  --glow: #5b4bd61f;
+}
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --canvas: #0b0b12;
+    --sunken: #0f0f18;
+    --surface: #13131d;
+    --raised: #1a1a26;
+    --ink: #f6f6fb;
+    --text: #c9c9d8;
+    --muted: #9696aa;
+    --rule: #262638;
+    --line: #6e6e88;
+    --faint: #36364c;
+    --accent: #8f84f5;
+    --accent-text: #b3abff;
+    --accent-ink: #0b0b12;
+    --accent-soft: #1f1c3d;
+    --vector: #3987e5;
+    --graph: #d95926;
+    --hybrid: #199e70;
+    --good: #4cc47a;
+    --good-soft: #10261a;
+    --bad: #f07a73;
+    --bad-soft: #2d1414;
+    --warn: #f0b64a;
+    --warn-soft: #2a2110;
+    --code-bg: #0e0e17;
+    --code-text: #e8e8f2;
+    --code-rule: #262638;
+    --header-bg: color-mix(in srgb, #0b0b12 78%, transparent);
+    --sh-sm: 0 1px 2px #00000066;
+    --sh-md: 0 1px 2px #00000066, 0 8px 24px -8px #00000099;
+    --sh-lg: 0 2px 4px #00000066, 0 24px 48px -16px #000000b3;
+    --glow: #8f84f526;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --canvas: #0b0b12;
+  --sunken: #0f0f18;
+  --surface: #13131d;
+  --raised: #1a1a26;
+  --ink: #f6f6fb;
+  --text: #c9c9d8;
+  --muted: #9696aa;
+  --rule: #262638;
+  --line: #6e6e88;
+  --faint: #36364c;
+  --accent: #8f84f5;
+  --accent-text: #b3abff;
+  --accent-ink: #0b0b12;
+  --accent-soft: #1f1c3d;
+  --vector: #3987e5;
+  --graph: #d95926;
+  --hybrid: #199e70;
+  --good: #4cc47a;
+  --good-soft: #10261a;
+  --bad: #f07a73;
+  --bad-soft: #2d1414;
+  --warn: #f0b64a;
+  --warn-soft: #2a2110;
+  --code-bg: #0e0e17;
+  --code-text: #e8e8f2;
+  --code-rule: #262638;
+  --header-bg: color-mix(in srgb, #0b0b12 78%, transparent);
+  --sh-sm: 0 1px 2px #00000066;
+  --sh-md: 0 1px 2px #00000066, 0 8px 24px -8px #00000099;
+  --sh-lg: 0 2px 4px #00000066, 0 24px 48px -16px #000000b3;
+  --glow: #8f84f526;
+}
+
+@theme inline {
+  --color-*: initial;
+  --color-canvas: var(--canvas);
+  --color-sunken: var(--sunken);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-ink: var(--ink);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-line: var(--line);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-vector: var(--vector);
+  --color-graph: var(--graph);
+  --color-hybrid: var(--hybrid);
+  --color-good: var(--good);
+  --color-good-soft: var(--good-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-code-bg: var(--code-bg);
+  --color-code-text: var(--code-text);
+  --color-code-rule: var(--code-rule);
+  --color-code-prompt: var(--code-prompt);
+
+  --shadow-sm: var(--sh-sm);
+  --shadow-md: var(--sh-md);
+  --shadow-lg: var(--sh-lg);
+}
+
+@theme {
   --font-*: initial;
-  --font-serif: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
-  --font-sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: 'Inter Variable', 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
 
-  --radius-control: 6px;
-  --radius-panel: 10px;
+  --radius-control: 10px;
+  --radius-panel: 16px;
   --ease-page: cubic-bezier(0.2, 0, 0, 1);
 }

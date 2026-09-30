@@ -6,6 +6,7 @@ import { useLoaded } from '../data/useLoaded'
 import type { Replay, ReplayIndex } from '../types'
 import { DataMissing } from './DataMissing'
 import { EveryRoute } from './EveryRoute'
+import { ChevronDownIcon } from './Icons'
 import { LiveAsk } from './LiveAsk'
 import { ReplayList } from './ReplayList'
 import { ReplayPanel } from './ReplayPanel'
@@ -26,22 +27,23 @@ export function FollowQuestion({ index }: { index: ReplayIndex }) {
   return (
     <>
       {liveEnabled && <LiveAsk onAnswer={setLive} />}
-      <div className="page-grid items-start">
-        <div className="col-span-4 min-w-0 md:col-span-8 lg:col-span-3 xl:col-span-4">
+      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:gap-8">
+        <div className="min-w-0 lg:sticky lg:top-24">
           <button
             type="button"
-            className="mb-4 min-h-11 cursor-pointer border-0 bg-transparent p-0 text-[15px] text-white underline underline-offset-4 md:hidden"
+            className="mb-3 inline-flex min-h-11 w-full cursor-pointer items-center justify-between rounded-[12px] border border-rule bg-surface px-4 text-[15px] font-[560] text-ink shadow-sm lg:hidden"
             aria-expanded={listOpen}
             onClick={() => setListOpen(!listOpen)}
           >
             Choose a question
+            <ChevronDownIcon size={18} className={`transition-transform ${listOpen ? 'rotate-180' : ''}`} />
           </button>
-          <div className={listOpen ? 'block' : 'hidden md:block'}>
+          <div className={`${listOpen ? 'block' : 'hidden lg:block'} rounded-[16px] border border-rule bg-sunken p-2 lg:max-h-[calc(100vh-128px)] lg:overflow-y-auto`}>
             <ReplayList items={index.items} current={live ? '' : current} onPick={pick} />
           </div>
         </div>
-        <div className="col-span-4 min-w-0 md:col-span-8 lg:col-span-9 xl:col-span-8">
-          {replay.status === 'loading' && <div className="h-px w-64 bg-rule" aria-label="Loading" />}
+        <div className="min-w-0">
+          {replay.status === 'loading' && <div className="card h-96 animate-pulse" aria-label="Loading" />}
           {replay.status === 'missing' && <DataMissing />}
           {replay.status === 'error' && <DataMissing error={replay.message} />}
           {replay.status === 'ok' && (

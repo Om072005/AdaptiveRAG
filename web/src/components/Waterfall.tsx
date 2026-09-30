@@ -27,17 +27,17 @@ export function Waterfall({ spans, totalMs }: { spans: Span[]; totalMs: number }
         aria-label={`Time per step, ${duration(totalMs)} in total`}
         className="hidden h-auto w-full md:block"
       >
-        <line x1={labelW} y1="0" x2={labelW} y2={rows.length * rowH + 8} className="stroke-cream-600" strokeWidth="1" />
+        <line x1={labelW} y1="0" x2={labelW} y2={rows.length * rowH + 8} className="stroke-line" strokeWidth="1" />
         {rows.map((r, i) => {
           const x = labelW + (r.start / scale) * barW
           const w = Math.max(1, (r.ms / scale) * barW)
           const y = i * rowH + 8
           return (
             <g key={`${r.name}-${i}`}>
-              <text x="0" y={y + 13} className="fill-cream-300 font-sans text-[14px]">
+              <text x="0" y={y + 13} className="fill-text font-sans text-[13.5px]">
                 {NAME[r.name] ?? r.name}
               </text>
-              <rect x={x} y={y + 2} width={w} height="14" className="fill-cream-300" />
+              <rect x={x} y={y + 2} width={w} height="14" rx="3" className="fill-accent" />
               <text x={x + w + 8} y={y + 13} className="fill-muted font-sans text-[13px]">
                 {duration(r.ms)}
               </text>
@@ -47,7 +47,7 @@ export function Waterfall({ spans, totalMs }: { spans: Span[]; totalMs: number }
       </svg>
       <ol className="m-0 list-none p-0 md:hidden">
         {rows.map((r, i) => (
-          <li key={`${r.name}-${i}`} className="flex justify-between border-b border-rule py-2 text-[15px] leading-6">
+          <li key={`${r.name}-${i}`} className="flex justify-between border-b border-rule py-2 text-[15px] leading-6 last:border-b-0">
             <span>{NAME[r.name] ?? r.name}</span>
             <span className="tabular-nums text-muted">{duration(r.ms)}</span>
           </li>

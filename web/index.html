@@ -3,9 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AdaptiveRAG: adaptive retrieval for question answering</title>
-    <link rel="icon" href="data:," />
-    <meta name="description" content="A question answering system that picks vector search, a knowledge graph or both for each question, answers with citations, and records the cost of every step." />
+    <title>AdaptiveRAG: every question gets the search it needs</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content="AdaptiveRAG reads each question, picks vector search, a knowledge graph or both, and answers with sources you can check. Open source, measured on HotpotQA." />
+    <script>
+      // the saved theme, applied before the first paint; without one the system setting decides
+      try {
+        var saved = localStorage.getItem('theme')
+        if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

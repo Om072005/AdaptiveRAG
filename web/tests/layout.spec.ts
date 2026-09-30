@@ -11,11 +11,14 @@ for (const width of [320, 375, 768, 1280]) {
   })
 }
 
-for (const width of [375, 1280]) {
-  test(`no serious accessibility violations at ${width}px`, async ({ page }) => {
+for (const [width, scheme] of [[375, 'light'], [1280, 'light'], [1280, 'dark']] as const) {
+  test(`no serious accessibility violations at ${width}px in ${scheme} mode`, async ({ page }) => {
+    // entrance fades run at reduced opacity; reduced motion shows every element in its final state
+    await page.emulateMedia({ colorScheme: scheme, reducedMotion: 'reduce' })
     await page.setViewportSize({ width, height: 900 })
     await page.goto('/')
     await expect(page.locator('#results figure').first()).toBeVisible()
+    await page.waitForLoadState('networkidle')
     const result = await new AxeBuilder({ page }).analyze()
     const serious = result.violations
       .filter((v) => v.impact === 'serious' || v.impact === 'critical')
