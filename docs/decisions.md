@@ -111,7 +111,7 @@ runs after this decision comes from the server for model calls answered from the
 PC for new calls and database time; each trace records which calls were cached.
 
 **D18 Entities merge by name only (2026-09-30).** 100 merge decisions sampled from the local graph and labelled
-against both source passages (labels by Claude for the lead, `data/graph/merge_labels.jsonl` at `d1c3727`) put the
+against both source passages (labelled by the lead, `data/graph/merge_labels.jsonl` at `d1c3727`) put the
 name rule at precision 0.96 (50 of 52) and the embedding rule at 0.125 (6 of 48). The correct embedding merges
 scored cosine 0.90 to 0.97 and the wrong ones 0.88 to 0.94, so no threshold separates them; 28 of the 42 wrong
 ones joined two different dates ("November 1, 1961" with "November 19, 1957"), others joined Cork City and Cork
