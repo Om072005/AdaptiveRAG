@@ -73,7 +73,9 @@ questions go to the large model.
 | **selector (served)** | **0.848** | 0.975 | $0.000831 | 56% | `20260930-1346-dev-auto-selector` |
 | always large | 0.859 | 0.990 | $0.001386 | 100% | `20260930-1248-dev-auto-always-large` |
 
-The selector keeps most of the large model's gain at 60% of its cost. Full economics (cost and latency per type and
+The selector keeps most of the large model's gain at 60% of its cost. The quality per unit cost table also holds
+the forced routes on dev with the small model: vector F1 0.776 (faithfulness 0.935, `20260930-1248-dev-vector-baseline`),
+hybrid 0.821 (0.945, `20260930-1248-dev-hybrid-baseline`) and graph 0.498 (0.943, `20260930-1248-dev-graph-baseline`). Full economics (cost and latency per type and
 per route, quality per unit cost): [`econ-20260930-2158-dev`](docs/results/econ-20260930-2158-dev.md).
 
 ### Router, graph and judge
