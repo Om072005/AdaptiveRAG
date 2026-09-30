@@ -5,6 +5,7 @@ import httpx
 import pytest
 
 from adaptiverag import llm
+from adaptiverag.config import models
 
 Install = Callable[[Callable[[httpx.Request], httpx.Response]], list[httpx.Request]]
 OK = {
@@ -107,11 +108,12 @@ def test_groq_tokens_per_day_message_is_daily() -> None:
     assert llm.daily_quota(httpx.Response(429, json=body)) == "per day limit"
 
 
-def test_judge_does_not_retry_a_busy_provider(fake_provider: Install) -> None:
+def test_judge_retries_a_busy_provider_as_often_as_its_config_says(fake_provider: Install) -> None:
+    # server_error_attempts = 1 once saved a 20 a day quota; D19's judge retries a busy provider
     seen = fake_provider(lambda r: httpx.Response(503, json={"error": {"message": "high demand"}}))
     with pytest.raises(llm.RateLimited, match="provider busy"):
         llm.chat("judge", [{"role": "user", "content": "q"}])
-    assert len(seen) == 1
+    assert len(seen) == models()["judge"].server_error_attempts
 
 
 def test_other_roles_still_retry_server_errors(fake_provider: Install) -> None:
@@ -212,11 +214,11 @@ def test_network_errors_every_time_raise_rate_limited_so_runs_resume(
     assert len(seen) == llm.MAX_ATTEMPTS
 
 
-def test_judge_does_not_retry_a_network_error_either(fake_provider: Install) -> None:
+def test_judge_retries_a_network_error_the_same_way(fake_provider: Install) -> None:
     def handler(r: httpx.Request) -> httpx.Response:
         raise httpx.ReadTimeout("read timed out", request=r)
 
     seen = fake_provider(handler)
     with pytest.raises(llm.RateLimited):
         llm.chat("judge", [{"role": "user", "content": "q"}])
-    assert len(seen) == 1
+    assert len(seen) == models()["judge"].server_error_attempts

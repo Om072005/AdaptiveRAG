@@ -43,11 +43,11 @@ reasoning_effort = "low"
 
 [roles.judge]
 provider = "gemini"
-model = "gemini-3.8-flash"        # a different family from every generator; introductory price through 2026-12-31
-price_in_per_m = 0.75
-price_out_per_m = 3.75
-reasoning_effort = "low"
-server_error_attempts = 1         # 20 calls a day on the free tier: a 503 retry would burn one
+model = "gemma-4-31b-it"          # D19: open weights on the Gemini API free tier, a different family from every generator
+price_in_per_m = 0.08             # OpenRouter list price of the same weights (checked 2026-09-30); the free tier bills 0
+price_out_per_m = 0.30
+json_mode = false                 # answers response_format with a 500; judge.parse_scores reads its fenced JSON
+server_error_attempts = 5         # the free tier answers an occasional 500 when busy
 
 [roles.embed]
 provider = "ollama"

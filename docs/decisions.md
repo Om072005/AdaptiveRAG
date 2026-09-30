@@ -121,6 +121,19 @@ relations; a fresh sample of 100 decisions labelled the same way scores 0.91 (gr
 the six correct embedding merges in the first sample (Paris and "Paris, France", two names of the NCTA) now stay
 two entities, which the alias lookup and the vector side of hybrid still reach.
 
+**D19 The judge is Gemma 4 31B on the Gemini API, and judged runs score all 100 dev questions (2026-09-30).**
+`gemini-3.8-flash` allows 20 calls a day per key, which would have taken weeks for the judged runs. Mistral Large 3
+was the preferred replacement, but the free Mistral tier serves only the Ministral models (Large answers 403,
+Medium and Small have a quota of 0 requests a minute) and card payment failed. `gemma-4-31b-it` runs on the same
+free Gemini key with a far larger quota; it is a different family from both generators (GPT-OSS and Qwen) and larger
+than the small model's active parameters. It rejects `response_format` (a 500), so the judge role sets
+`json_mode = false` and `judge.parse_scores` reads the JSON after its thought block and inside a code fence. A call
+takes about 40 seconds and returns an occasional 500, which stops a run for `--resume`. Cost numbers use the
+OpenRouter list price of the same weights (0.08 / 0.30 USD per million tokens, checked 2026-09-30); the free tier
+bills nothing. With the quota no longer binding, a judged run scores the whole dev split, so every results row
+takes F1 and faithfulness from one run (this replaces the 40 question subset of the eval protocol). Every judged
+run uses this one judge; mixing judges across runs would make faithfulness incomparable.
+
 ## Decided while building (D1 to D3)
 
 - **`aliases` primary key is `(surface_form, canonical_id)`**, not `surface_form` alone as the README draws it,

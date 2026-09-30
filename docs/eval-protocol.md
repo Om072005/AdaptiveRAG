@@ -72,12 +72,10 @@ question is stored as a judge failure, never as a score, and reports count failu
 A judged answer is flagged for review when any of the three scores is below `judge.flag_below` in
 `config/router.toml`; it then enters `review_queue` with status `open`.
 
-The judge's free quota is 20 calls a day per key, so judged runs score a fixed subset: the 40 dev questions in
-`data/gold/judge_subset.toml` (13 single hop, 15 multi hop, 12 comparison, drawn per type in proportion to the
-split with seed 7). Every judged variant scores the same 40, so judge metrics compare across variants; EM, F1,
-recall@k and MRR still come from runs over all 100 dev questions. A judged run is
-`eval.run --split dev --questions data/gold/judge_subset.toml --judge ...`; its answers are cache hits of the
-full run with the same config.
+Judged runs score the whole dev split (decision D19: the judge is Gemma 4 31B on the Gemini API, whose quota
+no longer forces a subset), so a results row takes EM, F1, recall@k and the judge scores from one run. A judged run
+is `eval.run --split dev --judge --pin ...`; its answers are cache hits of the unjudged run with the same models
+and prompts. `data/gold/judge_subset.toml` (40 questions) stays for a quick judged check when the quota is short.
 
 ## Stated limitation and mitigations
 
