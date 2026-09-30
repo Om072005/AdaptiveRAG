@@ -6,7 +6,6 @@
   "outputDirectory": "web/dist",
   "git": {
     "deploymentEnabled": {
-      "main": false,
       "om072005": false,
       "yash": false,
       "danish": false,
