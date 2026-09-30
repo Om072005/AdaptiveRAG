@@ -213,3 +213,20 @@ def test_graph_texts_are_the_names_and_relation_texts_once_each() -> None:
         "Tim Burton",
         "Tim Burton directed Ed Wood",
     ]
+
+
+def test_embedding_merges_can_be_turned_off_keeping_name_merges() -> None:
+    # D18: two different dates with near identical embeddings were the commonest wrong merge
+    triples = [
+        triple("Tom Virtue", "PERSON", "born_on", "November 19, 1957", "DATE", "docA"),
+        triple("Lauren-Marie Taylor", "PERSON", "born_on", "November 1, 1961", "DATE", "docB"),
+        triple("Tom Virtue", "PERSON", "acted_in", "Even Stevens", "WORK", "docA"),
+        triple("Nick Spano", "PERSON", "acted_in", "Even Stevens", "WORK", "docC"),
+    ]
+    same = np.ones(768, dtype=np.float32) / np.sqrt(768)
+    vecs = {("DATE", normalize_name(d)): same for d in ("November 19, 1957", "November 1, 1961")}
+    merged, _, _ = build_rows(triples, vecs, CFG)
+    assert len([e for e in merged if e["type"] == "DATE"]) == 1
+    kept, _, _ = build_rows(triples, vecs, CFG | {"embed_merge": False})
+    assert len([e for e in kept if e["type"] == "DATE"]) == 2
+    assert len(ids_named(kept, "Even Stevens")) == 1

@@ -140,7 +140,7 @@ def merge_reason(
     sim, cos = trigram_sim(a[1], b[1]), cosine(vecs, a[:2], b[:2])
     if sim >= cfg["name_sim"]:
         reason = f"name {sim:.2f}"
-    elif cos >= cfg["embed_sim"]:
+    elif cfg.get("embed_merge", True) and cos >= cfg["embed_sim"]:
         reason = f"embedding {cos:.2f}"
     else:
         return None

@@ -19,4 +19,5 @@ fuzzy_ratio = 0.9  # validation: an entity name matches the chunk text at this r
 [resolve]
 name_sim = 0.92
 embed_sim = 0.88
+embed_merge = false   # D18: 100 labelled merges, embedding rule precision 0.125 (6 of 48), name rule 0.96
 person_needs_shared_neighbor = true
