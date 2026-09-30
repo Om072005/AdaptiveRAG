@@ -3,6 +3,7 @@ import re
 from typing import Any
 
 from adaptiverag import llm
+from adaptiverag.config import router_cfg
 from adaptiverag.telemetry.trace import Trace
 from adaptiverag.types import Answer, Retrieved
 
@@ -117,7 +118,8 @@ def parse_scores(raw: str) -> dict[str, Any] | str:
 def judge(question: str, answer: Answer, retrieved: Retrieved, trace: Trace) -> dict[str, Any]:
     """{faithfulness, relevance, completeness in 0..1, rationale}. Raises JudgeFailed."""
     messages = build_messages(question, answer, retrieved)
-    first = llm.chat("judge", messages, json_mode=True, trace=trace, max_tokens=1024)
+    budget = int(router_cfg()["judge"].get("max_tokens", 1024))  # D22: room to reason first
+    first = llm.chat("judge", messages, json_mode=True, trace=trace, max_tokens=budget)
     got = parse_scores(first.text)
     calls = [first]
     if isinstance(got, str):
@@ -126,7 +128,7 @@ def judge(question: str, answer: Answer, retrieved: Retrieved, trace: Trace) -> 
             {"role": "assistant", "content": first.text},
             {"role": "user", "content": RETRY},
         ]
-        calls.append(llm.chat("judge", retry, json_mode=True, trace=trace, max_tokens=1024))
+        calls.append(llm.chat("judge", retry, json_mode=True, trace=trace, max_tokens=budget))
         got = parse_scores(calls[-1].text)
     cost = sum(c.cost_usd for c in calls)  # llm.chat already put each call on the trace ledger
     if isinstance(got, str):

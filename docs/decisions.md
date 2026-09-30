@@ -156,6 +156,17 @@ every score from one judge, every judged run is made on the server, and the abou
 belong to runs that are not pinned. The judge's cost stays the OpenRouter list price of the weights. The same
 server also answers the test split (D13), so the test runs' model latency is measured on that one machine.
 
+**D22 The judge gets 4,096 output tokens, and failed verdicts are judged again (2026-09-30).** Gemma 4 31B reasons
+before it writes its scores. With 1,024 output tokens, 6 to 9 of every 100 dev verdicts in the judged runs at
+`4e370b9` came back empty (41) or cut off inside the JSON (13), so those answers had no faithfulness score. The
+server session held the test split rather than run it with the same fault. `judge.max_tokens = 4096` in
+`config/router.toml` gives the judge room. The judge runs at temperature 0, so a call that finished inside 1,024
+tokens produces the same verdict with the larger budget; only the calls that ran out change. `eval.rejudge`
+rebuilds each unscored answer through the pipeline from the model cache (same answer, same context, so the same
+judge prompt; the rebuilt trace is saved with source `cli`, which eval metrics never count) and stores the verdict on the run's own trace and
+result row. The dev and replay runs keep their commit `4e370b9`; their late verdicts were made at the D22 commit,
+and the test split runs at the D22 commit from the start.
+
 ## Decided while building (D1 to D3)
 
 - **`aliases` primary key is `(surface_form, canonical_id)`**, not `surface_form` alone as the README draws it,

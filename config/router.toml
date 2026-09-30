@@ -46,3 +46,4 @@ relational_route = "hybrid"   # D17: graph scored multi hop F1 0.17 vs hybrid 0.
 
 [judge]                       # M4
 flag_below = 0.6
+max_tokens = 4096              # D22: Gemma 4 reasons before scoring; 1024 cut 6-9% of dev verdicts short
