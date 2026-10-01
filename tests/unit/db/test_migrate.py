@@ -50,3 +50,11 @@ def test_shared_connection_is_reused_and_recovers() -> None:
     second = db.shared()
     assert second is not first and second.execute("select 1").fetchone() == (1,)
     db.reset_shared()
+
+
+def test_without_trgm_drops_only_the_trigram_lines() -> None:
+    sql = (migrate.MIGRATIONS_DIR / "0001_init.sql").read_text(encoding="utf-8")
+    stripped = migrate.without_trgm(sql)
+    assert "trgm" not in stripped
+    assert sql.count("\n") - stripped.count("\n") == 2
+    assert "create extension if not exists vector;" in stripped

@@ -6,6 +6,8 @@ import json
 import logging
 import random
 import time
+from collections.abc import Callable, Iterator
+from contextlib import contextmanager
 from dataclasses import replace
 from typing import TYPE_CHECKING, Any, Literal
 
@@ -36,6 +38,11 @@ _client: httpx.Client | None = None
 _no_reasoning_effort: set[Role] = set()  # roles whose provider rejected reasoning_effort
 use_cache = True  # unit tests with a fake provider turn it off
 _loaded: str | None = None  # the model the local server last answered with
+_installed: dict[str, set[str]] = {}  # local server url -> model names it has, asked once
+
+# (kind, text) for each piece of a streamed answer: kind is "thinking" (the model's reasoning,
+# when the server returns it) or "answer"
+OnDelta = Callable[[str, str], None]
 
 
 class BudgetExceeded(Exception):
@@ -167,6 +174,67 @@ def load_local(spec: ModelSpec) -> int:
     return int((time.perf_counter() - started) * 1000)
 
 
+def _server_url(spec: ModelSpec) -> str:
+    """The local model server's root (http://host:port), from its load url."""
+    return spec.load_url.split("/api/", 1)[0]
+
+
+def installed(spec: ModelSpec) -> bool:
+    """Whether the local model server has this model pulled. Hosted models count as installed;
+    a local server that does not answer counts as having none."""
+    if not spec.load_url:
+        return True
+    root = _server_url(spec)
+    if root not in _installed:
+        try:
+            r = client().get(root + "/api/tags", timeout=5.0)
+            r.raise_for_status()
+            names = {m["name"] for m in r.json().get("models", [])}
+        except (httpx.HTTPError, ValueError):
+            return False  # not remembered, so a server started later is seen
+        _installed[root] = names | {n.removesuffix(":latest") for n in names}
+    return spec.model in _installed[root]
+
+
+def missing(spec: ModelSpec) -> bool:
+    """True only when the local server answered and does not have the model: a server that is
+    down is a failure for the call itself to report, not a reason to switch models."""
+    if installed(spec):
+        return False
+    return _server_url(spec) in _installed
+
+
+def processor(spec: ModelSpec) -> str | None:
+    """Where the local server holds the model right now, as `ollama ps` puts it: '100% GPU',
+    '42% GPU, 58% CPU' or '100% CPU'. None for a hosted model or one not loaded."""
+    if not spec.load_url:
+        return None
+    try:
+        r = client().get(_server_url(spec) + "/api/ps", timeout=5.0)
+        r.raise_for_status()
+        running = r.json().get("models", [])
+    except (httpx.HTTPError, ValueError):
+        return None
+    for m in running:
+        if m.get("name") in (spec.model, spec.model + ":latest") and m.get("size"):
+            gpu = round(100 * int(m.get("size_vram", 0)) / int(m["size"]))
+            if gpu >= 100:
+                return "100% GPU"
+            return "100% CPU" if gpu <= 0 else f"{gpu}% GPU, {100 - gpu}% CPU"
+    return None
+
+
+@contextmanager
+def fresh() -> Iterator[None]:
+    """Neither read nor write the cache inside the block: every result comes from the model."""
+    global use_cache
+    was, use_cache = use_cache, False
+    try:
+        yield
+    finally:
+        use_cache = was
+
+
 def _post(
     spec: ModelSpec, path: str, payload: dict[str, Any]
 ) -> tuple[dict[str, Any], int, int, int]:
@@ -215,6 +283,92 @@ def _post(
     raise RateLimited(f"{spec.model}: no attempts left")  # not reached
 
 
+class _NotStarted(Exception):
+    """A stream failed before any piece was passed on, so the plain request (with its retries)
+    can still answer in its place."""
+
+
+def replay(message: dict[str, Any], on_delta: OnDelta) -> None:
+    """Pass a whole answer on as streamed pieces: the reasoning, if any, then the text."""
+    if message.get("reasoning"):
+        on_delta("thinking", str(message["reasoning"]))
+    on_delta("answer", str(message.get("content") or ""))
+
+
+def _pass_on(delta: dict[str, Any], on_delta: OnDelta, parts: dict[str, list[str]]) -> None:
+    for kind, field in (("thinking", "reasoning"), ("answer", "content")):
+        if delta.get(field):
+            parts[kind].append(delta[field])
+            on_delta(kind, delta[field])
+
+
+def _stream(
+    spec: ModelSpec, payload: dict[str, Any], on_delta: OnDelta
+) -> tuple[dict[str, Any], int, int, int]:
+    """One streamed chat completion, passed on piece by piece. Returns the same (json, latency_ms,
+    retries, wait_ms) as _post, the json in the non streamed shape so the cache stores one form.
+    Pieces already shown cannot be taken back: a failure before the first piece raises _NotStarted,
+    after it the call fails, and a stream that never says it finished is never returned (so a cut
+    off answer is never cached)."""
+    url = spec.base_url.rstrip("/") + "/chat/completions"
+    wait_ms = load_local(spec)
+    key = _api_key(spec)
+    headers = {"Authorization": f"Bearer {key}"} if key else {}
+    body = {**payload, "stream": True, "stream_options": {"include_usage": True}}
+    parts: dict[str, list[str]] = {"thinking": [], "answer": []}
+    usage: dict[str, Any] | None = None
+    finished = False
+    started = time.perf_counter()
+    try:
+        with client().stream("POST", url, headers=headers, json=body) as r:
+            if r.status_code == 429 or r.status_code >= 500:
+                raise _NotStarted(f"status {r.status_code}")
+            if r.status_code >= 400:
+                raise ProviderError(f"{spec.model}: {r.status_code} {r.read().decode()[:300]}")
+            for line in r.iter_lines():
+                data = line.removeprefix("data:").strip()
+                if not line.startswith("data:") or not data:
+                    continue
+                if data == "[DONE]":
+                    finished = True
+                    continue
+                piece = json.loads(data)
+                if piece.get("error"):
+                    raise ProviderError(f"{spec.model}: stream error {str(piece['error'])[:300]}")
+                usage = piece.get("usage") or usage
+                for choice in piece.get("choices") or []:
+                    finished = finished or bool(choice.get("finish_reason"))
+                    _pass_on(choice.get("delta") or {}, on_delta, parts)
+    except httpx.TransportError as e:
+        if not parts["thinking"] and not parts["answer"]:
+            raise _NotStarted(repr(e)) from e
+        raise RateLimited(f"{spec.model}: network error mid answer ({e!r}), resume later") from e
+    if not finished:
+        raise RateLimited(f"{spec.model}: the answer stream ended early; nothing was cached")
+    latency_ms = int((time.perf_counter() - started) * 1000)
+    message: dict[str, Any] = {"role": "assistant", "content": "".join(parts["answer"])}
+    if parts["thinking"]:
+        message["reasoning"] = "".join(parts["thinking"])
+    out: dict[str, Any] = {"choices": [{"message": message}]}
+    if usage:
+        out["usage"] = usage
+    return out, latency_ms, 0, wait_ms
+
+
+def _stream_or_post(
+    spec: ModelSpec, payload: dict[str, Any], on_delta: OnDelta
+) -> tuple[dict[str, Any], int, int, int]:
+    """Stream; if the stream fails before its first piece, ask the plain way (which retries) and
+    pass the whole answer on."""
+    try:
+        return _stream(spec, payload, on_delta)
+    except _NotStarted as e:
+        log.warning("%s: stream not available (%s), asking without streaming", spec.model, e)
+        body, latency_ms, retries, wait_ms = _post(spec, "chat/completions", payload)
+        replay(body["choices"][0]["message"], on_delta)
+        return body, latency_ms, retries + 1, wait_ms
+
+
 def chat(
     role: Role,
     messages: list[dict[str, str]],
@@ -223,8 +377,12 @@ def chat(
     trace: "Trace | None" = None,
     temperature: float = 0.0,
     max_tokens: int = 512,
+    on_delta: OnDelta | None = None,
 ) -> LLMResult:
-    """One chat completion for a role from config/models.toml."""
+    """One chat completion for a role from config/models.toml.
+
+    With on_delta the answer streams: each piece of reasoning and answer text is passed on as it
+    arrives. A cached answer is passed on whole. The cache key is the same either way."""
     spec = models()[role]
     payload: dict[str, Any] = {
         "model": spec.model,
@@ -241,8 +399,11 @@ def chat(
     key = request_key(payload)
     hit = cache.get_many([key]).get(key) if use_cache else None
     if hit is not None:
+        message = hit["response"]["choices"][0]["message"]
+        if on_delta is not None:
+            replay(message, on_delta)
         result = LLMResult(
-            text=hit["response"]["choices"][0]["message"].get("content") or "",
+            text=message.get("content") or "",
             role=role,
             model=spec.model,
             tokens_in=hit["tokens_in"],
@@ -255,22 +416,29 @@ def chat(
             wait_ms=0,
         )
     else:
-        result = _chat_uncached(role, spec, payload)
+        result = _chat_uncached(role, spec, payload, on_delta)
     if trace is not None:
         trace.add_llm(result)
     return result
 
 
-def _chat_uncached(role: Role, spec: ModelSpec, payload: dict[str, Any]) -> LLMResult:
+def _chat_uncached(
+    role: Role, spec: ModelSpec, payload: dict[str, Any], on_delta: OnDelta | None = None
+) -> LLMResult:
+    def send() -> tuple[dict[str, Any], int, int, int]:
+        if on_delta is not None:
+            return _stream_or_post(spec, payload, on_delta)
+        return _post(spec, "chat/completions", payload)
+
     try:
-        body, latency_ms, retries, wait_ms = _post(spec, "chat/completions", payload)
+        body, latency_ms, retries, wait_ms = send()
     except ProviderError as e:
         if "reasoning_effort" not in payload or "reasoning" not in str(e).lower():
             raise
         log.warning("provider rejected reasoning_effort for role %s, dropping it: %s", role, e)
         _no_reasoning_effort.add(role)
         del payload["reasoning_effort"]
-        body, latency_ms, retries, wait_ms = _post(spec, "chat/completions", payload)
+        body, latency_ms, retries, wait_ms = send()
 
     usage = body.get("usage")
     text = body["choices"][0]["message"].get("content") or ""

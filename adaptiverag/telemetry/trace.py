@@ -1,9 +1,10 @@
 """Per query trace: spans, the LLM call ledger and the traces row."""
 
+import logging
 import subprocess
 import time
 import uuid
-from collections.abc import Collection, Iterator
+from collections.abc import Callable, Collection, Iterator
 from contextlib import contextmanager
 from typing import Any
 
@@ -36,10 +37,22 @@ SETTABLE = {
 }
 GENERATION_ROLES = {"small", "large"}
 
+# Receives each step of a query as it finishes, and each piece of the streamed answer: the CLI
+# prints them, the API streams them to the local page. Every event is a JSON ready dict.
+Listener = Callable[[dict[str, Any]], None]
+log = logging.getLogger(__name__)
+
+
+class ListenerStop(Exception):
+    """Raised by a listener to stop the query, for example when the page that asked has gone."""
+
 
 class Trace:
-    def __init__(self, question: str, mode: Mode, source: str) -> None:
+    def __init__(
+        self, question: str, mode: Mode, source: str, listener: Listener | None = None
+    ) -> None:
         self.trace_id = str(uuid.uuid4())
+        self.listener = listener
         self.question = question
         self.mode = mode
         self.source = source
@@ -57,6 +70,31 @@ class Trace:
             yield
         finally:
             self.spans.append({"name": name, "ms": int((time.perf_counter() - started) * 1000)})
+
+    def elapsed_ms(self) -> int:
+        return int((time.perf_counter() - self._started) * 1000)
+
+    def emit(self, step: str, **data: Any) -> None:
+        """Tell the listener, if any, that a step finished and what it found."""
+        self._tell({"type": "step", "step": step, "at_ms": self.elapsed_ms(), **data})
+
+    def delta(self, kind: str, text: str) -> None:
+        """Pass one streamed piece of the answer ('thinking' or 'answer') to the listener."""
+        self._tell({"type": "delta", "kind": kind, "text": text})
+
+    def _tell(self, event: dict[str, Any]) -> None:
+        """A listener that fails is logged and the query goes on; only ListenerStop stops it."""
+        if self.listener is None:
+            return
+        try:
+            self.listener(event)
+        except ListenerStop:
+            raise
+        except Exception:
+            log.exception("a step listener failed on %s; the query goes on", event.get("type"))
+
+    def last_call(self) -> LLMResult | None:
+        return self.calls[-1] if self.calls else None
 
     def check_budget(self) -> None:
         """Raise BudgetExceeded if one more call would pass the per query cap."""

@@ -89,3 +89,16 @@ def test_judge_sees_full_chunk_texts_and_graph_facts(world: dict[str, Any]) -> N
     assert retrieved.hits[0].text.startswith("full text of")
     assert retrieved.paths and retrieved.paths[0].edges[0].subject_name == "Istanbul"
     assert answer.text.startswith("Ankara")
+
+
+def test_a_missing_judge_model_says_how_to_get_it(
+    world: dict[str, Any], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from adaptiverag.config import models
+    from adaptiverag.eval.judge import JudgeFailed
+
+    monkeypatch.setattr(pipeline.llm, "missing", lambda spec: spec.role == "judge")
+    name = models()["judge"].model
+    with pytest.raises(JudgeFailed, match=f"ollama pull {name}"):
+        pipeline.judge_answer("t-1")
+    assert world["judge_calls"] == 0

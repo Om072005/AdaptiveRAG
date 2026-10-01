@@ -12,6 +12,7 @@ from psycopg.types.json import Jsonb
 from adaptiverag import llm
 from adaptiverag.config import router_cfg
 from adaptiverag.stores import db
+from adaptiverag.stores.trgm import trigrams, word_similarity
 from adaptiverag.telemetry.trace import Trace
 from adaptiverag.types import Chunk, Edge, GraphPath, Hit, Retrieved, Seed, Strategy
 
@@ -208,8 +209,17 @@ select c.chunk_id, c.doc_id, d.title, c.text
 from chunks c join documents d using (doc_id) where c.chunk_id = any(%s)
 """
 
+ALL_ALIASES = """
+select a.surface_form, a.canonical_id, e.canonical_name, e.type, a.confidence
+from aliases a join entities e using (canonical_id)
+"""
+
 # surface form, canonical id, name, type, alias confidence, word similarity
 AliasRow = tuple[str, str, str, str, float, float]
+# surface form, canonical id, name, type, alias confidence, trigram set of the surface form
+_Alias = tuple[str, str, str, str, float, frozenset[str]]
+_has_trgm: dict[str, bool] = {}  # by connection string
+_aliases: dict[str, list[_Alias]] = {}  # by connection string, for databases without pg_trgm
 # frontier ids -> (edge, cosine to the question) rows
 Fetch = Callable[[list[str]], list[tuple[Edge, float]]]
 
@@ -242,11 +252,51 @@ def nearest_seed(rows: list[tuple[str, str, str, float]], min_score: float) -> l
     ]
 
 
+def has_trgm(c: Connection[Any]) -> bool:
+    """Whether pg_trgm is installed on this database (asked once per connection string)."""
+    key = c.info.dsn
+    if key not in _has_trgm:
+        row = c.execute("select count(*) from pg_extension where extname = 'pg_trgm'").fetchone()
+        _has_trgm[key] = bool(row and row[0])
+    return _has_trgm[key]
+
+
+def forget_aliases() -> None:
+    """Drop the alias list read for the Python match, after the graph was rewritten."""
+    _aliases.clear()
+
+
+def match_aliases(rows: list[_Alias], question: str, min_score: float) -> list[AliasRow]:
+    """ALIAS_MATCH in Python: the same word similarity as pg_trgm (stores/trgm.py) and the same
+    bar. An alias sharing no trigram with the question scores 0 and is skipped unscored."""
+    q = question.lower()
+    in_question = set(trigrams(q))
+    out: list[AliasRow] = []
+    for surface, cid, name, type_, conf, grams in rows:
+        if grams.isdisjoint(in_question):
+            continue
+        sim = word_similarity(surface.lower(), q)
+        if sim >= min_score:
+            out.append((surface, cid, name, type_, conf, sim))
+    return out
+
+
+def alias_rows(c: Connection[Any], question: str, min_score: float) -> list[AliasRow]:
+    """Aliases found in the question: in SQL with pg_trgm, else in Python over every alias."""
+    if has_trgm(c):
+        return c.execute(ALIAS_MATCH, {"q": question, "min": min_score}).fetchall()
+    key = c.info.dsn
+    if not _aliases.get(key):  # an empty list is read again: the corpus may still be loading
+        _aliases[key] = [
+            (r[0], r[1], r[2], r[3], float(r[4]), frozenset(trigrams(r[0].lower())))
+            for r in c.execute(ALL_ALIASES).fetchall()
+        ]
+    return match_aliases(_aliases[key], question, min_score)
+
+
 def seeds_for(c: Connection[Any], question: str, qvec: np.ndarray, min_score: float) -> list[Seed]:
     """Alias matches first; the embedding fallback only when no alias matched."""
-    seeds = pick_seeds(
-        c.execute(ALIAS_MATCH, {"q": question, "min": min_score}).fetchall(), min_score
-    )
+    seeds = pick_seeds(alias_rows(c, question, min_score), min_score)
     if seeds:
         return seeds
     rows = c.execute(NEAREST_ENTITY, {"q": np.asarray(qvec, dtype=np.float32)}).fetchall()

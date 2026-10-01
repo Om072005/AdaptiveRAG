@@ -90,7 +90,7 @@ export default function App() {
         <Section
           id="run"
           title="Everything runs on your own machine."
-          lede="Open models through Ollama and a free Neon database. No API keys, no paid services."
+          lede="Open models through Ollama and a Postgres that ships with the code. No account, no API keys, and offline once the models are downloaded."
         >
           <RunIt />
         </Section>

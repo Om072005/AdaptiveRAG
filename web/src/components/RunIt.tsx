@@ -4,30 +4,33 @@ import { DatabaseIcon, LayersIcon, ShieldCheckIcon, TerminalIcon } from './Icons
 
 // The CLI of contract section 7, in the order a new machine needs it.
 const STEPS: { text: string; code: string }[] = [
-  { text: 'Clone the repository and install the Python side with uv.', code: 'git clone https://github.com/Om072005/AdaptiveRAG.git\ncd AdaptiveRAG\nuv sync' },
   {
-    text: 'Pull the local models with Ollama: the embedder, the small model, the large one and the judge.',
-    code: 'ollama pull nomic-embed-text\nollama pull gpt-oss:20b\nollama pull qwen3.6:35b-a3b\nollama pull gemma4:31b',
+    text: 'Clone the repository and install the Python side with uv. It brings its own Postgres with pgvector.',
+    code: 'git clone https://github.com/Om072005/AdaptiveRAG.git\ncd AdaptiveRAG\nuv sync',
   },
   {
-    text: 'Copy the environment file and fill in your own Neon branch (free tier). Every model runs locally, so no API key is needed.',
-    code: 'cp .env.example .env',
+    text: 'Pull the two models every question needs. The large model and the judge are optional: with the large one, multi hop and comparison questions use it as the recorded runs did.',
+    code: 'ollama pull nomic-embed-text\nollama pull gpt-oss:20b\nollama pull qwen3.6:35b-a3b   # optional\nollama pull gemma4:31b        # optional, the judge',
   },
-  { text: 'Create the tables on your database.', code: 'uv run python -m adaptiverag.stores.migrate' },
-  { text: 'Ingest the small corpus of 30 questions.', code: 'uv run python -m adaptiverag.ingest run --corpus mini' },
-  { text: 'Ask a question from the command line.', code: 'uv run python -m adaptiverag ask "Who was born first, Yanka Dyagileva or Alexander Bashlachev?"' },
+  {
+    text: 'Create the database on your disk and load the corpus: 2,957 documents with their graph, embedded by your own Ollama. About two minutes on a GPU, once.',
+    code: 'uv run python -m adaptiverag demo setup',
+  },
+  { text: 'Check the database, the models and the GPU, and warm the small model.', code: 'uv run python -m adaptiverag demo check' },
+  {
+    text: 'Ask a question. Every step prints the moment it ends, then the model reasons and answers in front of you.',
+    code: 'uv run python -m adaptiverag ask "Who died first, Bryce Courtenay or Juan Carlos Onetti?"',
+  },
+  { text: 'Open this page with a live question box that shows the same steps as they happen.', code: 'uv run python -m adaptiverag demo page' },
+  { text: 'Run three recorded questions live and see your scores next to the recorded ones.', code: 'uv run python -m adaptiverag demo eval' },
   { text: 'Run the checks: lint, types, unit tests and the page.', code: 'bash scripts/check.sh' },
-  {
-    text: 'Start the local API and this page with a live question box.',
-    code: 'uv run python -m adaptiverag serve\ncd web && VITE_LIVE_API_URL=http://localhost:8000 npm run dev',
-  },
 ]
 
 const NEEDS: { icon: ReactNode; title: string; text: string }[] = [
-  { icon: <TerminalIcon size={18} />, title: 'Python with uv', text: 'Installs the whole Python side in one command.' },
-  { icon: <LayersIcon size={18} />, title: 'Ollama', text: 'Runs the embedder, both answer models and the judge locally.' },
-  { icon: <DatabaseIcon size={18} />, title: 'A free Neon database', text: 'Postgres with pgvector holds chunks, graph and traces.' },
-  { icon: <ShieldCheckIcon size={18} />, title: 'No API keys', text: 'Every model runs on your machine. Nothing is sent out.' },
+  { icon: <TerminalIcon size={18} />, title: 'Python with uv', text: 'Installs the whole Python side, the database included, in one command.' },
+  { icon: <LayersIcon size={18} />, title: 'Ollama', text: 'Runs the embedder and the answer models on your machine.' },
+  { icon: <DatabaseIcon size={18} />, title: 'No account', text: 'Postgres with pgvector runs from a folder in the clone. Node 20 or newer for this page.' },
+  { icon: <ShieldCheckIcon size={18} />, title: 'No API keys', text: 'After the downloads it works offline. Nothing is sent out.' },
 ]
 
 export function RunIt() {

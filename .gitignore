@@ -26,3 +26,6 @@ web/dist/
 .vercel/
 playwright-report/
 test-results/
+
+# embedded demo database (python -m adaptiverag demo setup)
+.demo/

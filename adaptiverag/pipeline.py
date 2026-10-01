@@ -2,8 +2,10 @@
 
 from typing import Any
 
-from adaptiverag.config import router_cfg
+from adaptiverag import llm
+from adaptiverag.config import models, router_cfg
 from adaptiverag.eval import judge
+from adaptiverag.eval.judge import JudgeFailed
 from adaptiverag.eval.run import store_judgement
 from adaptiverag.generate.answer import synthesize
 from adaptiverag.llm import BudgetExceeded
@@ -11,7 +13,7 @@ from adaptiverag.router.route import route_and_retrieve
 from adaptiverag.serialize import response_from_trace, to_response
 from adaptiverag.stores.db import conn
 from adaptiverag.stores.traces import chunk_texts, queue_review, read_judgement
-from adaptiverag.telemetry.trace import Trace
+from adaptiverag.telemetry.trace import Listener, Trace
 from adaptiverag.types import (
     Answer,
     Citation,
@@ -26,10 +28,14 @@ from adaptiverag.types import (
 
 
 def answer_query(
-    question: str, mode: Mode = "auto", source: str = "cli", force_size: ModelSize | None = None
+    question: str,
+    mode: Mode = "auto",
+    source: str = "cli",
+    force_size: ModelSize | None = None,
+    listener: Listener | None = None,
 ) -> QueryResult:
-    """Route, retrieve, generate and save one trace."""
-    trace = Trace(question, mode, source)
+    """Route, retrieve, generate and save one trace. A listener hears every step as it ends."""
+    trace = Trace(question, mode, source, listener)
     try:
         decision, retrieved = route_and_retrieve(question, mode, trace)
         answer = synthesize(question, decision, retrieved, trace, force_size)
@@ -57,10 +63,41 @@ def answer_query(
         total_latency_ms=int(row["total_latency_ms"]),
         flagged=flagged,
     )
+    trace.emit(
+        "answer",
+        short=answer.short,
+        text=answer.text,
+        confidence=round(answer.confidence, 4),
+        flagged=flagged,
+        citations=[{"n": c.n, "title": c.title} for c in answer.citations],
+    )
     # every trace carries the full API response, so any stored run replays without a model call
     trace.note(**to_response(result, question, trace))
     trace.save()
+    emit_cost(trace, result)
     return result
+
+
+def emit_cost(trace: Trace, result: QueryResult) -> None:
+    """The last step: what the query cost, how long it took and each model call it made."""
+    trace.emit(
+        "cost",
+        trace_id=trace.trace_id,
+        total_cost_usd=result.total_cost_usd,
+        total_latency_ms=result.total_latency_ms,
+        calls=[
+            {
+                "role": c.role,
+                "model": c.model,
+                "tokens_in": c.tokens_in,
+                "tokens_out": c.tokens_out,
+                "cost_usd": c.cost_usd,
+                "ms": c.latency_ms,
+                "cached": c.cached,
+            }
+            for c in trace.calls
+        ],
+    )
 
 
 def answer_from_response(response: dict[str, Any]) -> tuple[Answer, Retrieved]:
@@ -118,6 +155,9 @@ def judge_answer(trace_id: str) -> dict[str, Any]:
     """Judge a stored answer once. A second call returns the stored judgement, no model call."""
     stored = read_judgement(trace_id)
     flag_below = float(router_cfg()["judge"]["flag_below"])
+    if stored is None and llm.missing(models()["judge"]):
+        name = models()["judge"].model
+        raise JudgeFailed(f"the judge model {name} is not installed: ollama pull {name}")
     if stored is None:
         response = response_from_trace(trace_id)  # KeyError if the trace does not exist
         answer, retrieved = answer_from_response(response)

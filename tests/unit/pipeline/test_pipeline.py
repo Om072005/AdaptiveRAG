@@ -136,3 +136,38 @@ def test_budget_stop_is_saved_then_raised(monkeypatch: pytest.MonkeyPatch) -> No
     with pytest.raises(llm.BudgetExceeded):
         pipeline.answer_query("q", "vector")
     assert saved[0]["detail"]["budget_exceeded"] is True
+
+
+def test_a_listener_hears_the_answer_and_the_cost(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(pipeline, "route_and_retrieve", fake_route)
+    monkeypatch.setattr(answer_mod.llm, "chat", fake_chat)
+    heard: list[dict[str, Any]] = []
+    r = pipeline.answer_query("What is the capital of Turkey?", "vector", listener=heard.append)
+    steps = [e["step"] for e in heard if e["type"] == "step"]
+    assert steps == ["model", "generated", "answer", "cost"]
+    model = next(e for e in heard if e.get("step") == "model")
+    assert model["size"] == "small" and model["reason"].startswith("small:")
+    cost = heard[-1]
+    assert cost["trace_id"] == r.trace_id and cost["total_cost_usd"] == r.total_cost_usd
+    assert [c["role"] for c in cost["calls"]] == ["small"]
+
+
+def test_without_the_large_model_the_small_one_answers_and_says_why(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from adaptiverag.config import models
+
+    monkeypatch.setattr(answer_mod.llm, "missing", lambda spec: spec.role == "large")
+    monkeypatch.setattr(
+        answer_mod, "choose_model", lambda d, r, t: ("large", "large:label multi_hop")
+    )
+    r = pipeline.answer_query("What is the capital of Turkey?", "vector")
+    assert r.answer.size == "small"
+    large = models()["large"].model
+    assert r.answer.select_reason == f"small:{large} not installed (large:label multi_hop)"
+
+
+def test_a_forced_size_is_never_switched(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(answer_mod.llm, "missing", lambda spec: spec.role == "large")
+    r = pipeline.answer_query("What is the capital of Turkey?", "vector", force_size="large")
+    assert r.answer.size == "large" and r.answer.select_reason == "forced:large"

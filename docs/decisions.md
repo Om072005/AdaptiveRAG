@@ -178,6 +178,20 @@ was found and fixed: gpt-oss sometimes writes citation markers with full width b
 parser did not count, so correct, cited answers got citation coverage 0 and were flagged. `cite.py` now reads
 them as `[1]`. Pinned runs keep the confidence they were scored with; the fix applies to answers made from now on.
 
+**D24 The showcase runs from a fresh clone, offline, with its steps live (2026-10-01).** A clone needed a Neon
+account, an ingest run and every model, and the local page only drew its step view once the answer was done.
+Now: with `DATABASE_URL` empty (or `embedded`) the stores use Postgres 16 with pgvector 0.6 from the `pgserver`
+package, kept in `.demo/` (`stores/embedded.py`). It has no `pg_trgm`, so migrations skip its two lines and alias
+matching runs in Python: `stores/trgm.py` ports pg_trgm's `word_similarity` and agreed with Postgres on all of
+1.5 million alias x question pairs once `²`-style digits were excluded from words, as Postgres does. The corpus
+ships as text (`data/demo/corpus.jsonl.gz`, 1.6 MB; vectors would be ~55 MB) and `demo setup` embeds it with the
+same local model: every chunk vector comes out identical to Neon main, entity and relation vectors agree to
+cosine 0.99997 (2 that did not ship in the file), and the 15 replay questions get the same vector hits and
+seeds. Each step of a query now goes to an optional listener on the trace; the CLI prints it and
+`POST /api/query/stream` streams it as JSON lines with the model's reasoning and answer (Ollama returns gpt-oss
+reasoning as `delta.reasoning`). A streamed and a plain call share one cache entry. Without the large model the
+small one answers and the selector reason says so; without the judge model, judging names the pull command.
+
 **Manual check of the judge.** 20 answers of the test auto run (`20260930-1557-test-auto-baseline`), scored by
 the lead against the same rubric without seeing the judge's scores: mean absolute gap 0.075 for faithfulness,
 0.10 for relevance and 0.05 for completeness on the 0 to 1 scale; 95%, 90% and 95% of scores within one rubric

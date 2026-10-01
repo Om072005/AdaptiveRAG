@@ -1,25 +1,46 @@
-import { type FormEvent, useState } from 'react'
-import { askLive } from '../data/live'
+import { type FormEvent, useEffect, useRef, useState } from 'react'
+import { askLiveStream } from '../data/live'
+import type { LiveDelta, LiveStep } from '../data/liveSteps'
 import { liveReplay } from '../data/replay'
 import type { Mode, Replay } from '../types'
 import { Button } from './Button'
+import { LiveSteps } from './LiveSteps'
 
 type Props = { onAnswer: (replay: Replay) => void }
 
-/** Local only: ask the running API a question; the answer opens in the replay panel. */
+/** Local only: ask the running API a question and watch it work, step by step; the finished
+ * answer opens in the replay panel. */
 export function LiveAsk({ onAnswer }: Props) {
   const [question, setQuestion] = useState('')
   const [mode, setMode] = useState<Mode>('auto')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
+  const [steps, setSteps] = useState<LiveStep[]>([])
+  const [thinking, setThinking] = useState('')
+  const [answer, setAnswer] = useState('')
+  const running = useRef<AbortController | null>(null)
+  useEffect(() => () => running.current?.abort(), []) // leaving the page stops the question
+
+  const hear = (e: LiveStep | LiveDelta) => {
+    if (e.type === 'step') setSteps((s) => [...s, e])
+    else if (e.kind === 'thinking') setThinking((t) => t + e.text)
+    else setAnswer((a) => a + e.text)
+  }
 
   const submit = async (e: FormEvent) => {
     e.preventDefault()
     setBusy(true)
     setError('')
+    setSteps([])
+    setThinking('')
+    setAnswer('')
+    running.current?.abort()
+    const controller = new AbortController()
+    running.current = controller
     try {
-      onAnswer(liveReplay(await askLive(question.trim(), mode), mode))
+      onAnswer(liveReplay(await askLiveStream(question.trim(), mode, hear, controller.signal), mode))
     } catch (err) {
+      if (controller.signal.aborted) return
       setError(err instanceof Error ? err.message : String(err))
     } finally {
       setBusy(false)
@@ -27,11 +48,12 @@ export function LiveAsk({ onAnswer }: Props) {
   }
 
   return (
+    <>
     <form onSubmit={submit} className="card mb-8 p-5 md:p-6">
       <label htmlFor="live-q" className="text-title block">
         Ask your own question
       </label>
-      <p className="text-caption m-0 mt-1">Answered live by the API running on this machine.</p>
+      <p className="text-caption m-0 mt-1">Answered live by the API running on this machine. Each step shows up the moment it ends.</p>
       <textarea
         id="live-q"
         value={question}
@@ -66,5 +88,7 @@ export function LiveAsk({ onAnswer }: Props) {
         </p>
       )}
     </form>
+    {(busy || steps.length > 0) && <LiveSteps steps={steps} thinking={thinking} answer={answer} busy={busy} />}
+    </>
   )
 }

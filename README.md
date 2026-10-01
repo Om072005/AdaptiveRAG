@@ -484,13 +484,14 @@ Dates are planning estimates, not commitments.
 │   ├── router/           # query classifiers (rules, logistic regression, few shot model), decision table, fallback, hybrid merge
 │   ├── generate/         # prompt with numbered context, citation binding, answer confidence, small or large model selector
 │   ├── eval/             # gold set, metrics, judge, eval runs, reports, tuning, review queue, spot checks, page exports
+│   ├── demo/             # the showcase from a fresh clone: corpus file, setup, check, live steps, mini eval, page
 │   ├── telemetry/        # per query trace and the cost and latency aggregates
 │   ├── llm.py            # the only module that calls a model: cache, list price, retries, per query call cap
 │   ├── pipeline.py       # question in, cited answer and saved trace out
 │   └── server.py         # local API for the page (query and judge)
 ├── bench/                # HNSW vs flat vs pgvector, chunking experiment, economics report
 ├── config/               # model ids and list prices, router thresholds, ingestion settings
-├── data/                 # corpus manifests, gold set, classifier training set, extraction batch plan
+├── data/                 # corpus manifests, gold set, classifier training set, extraction batch plan, demo/ corpus file
 ├── db/migrations/        # the schema, applied in order
 ├── docs/                 # decision log, evaluation protocol, failure log, results/ (every run we quote)
 ├── tests/                # unit and contract tests
@@ -500,6 +501,26 @@ Dates are planning estimates, not commitments.
 ---
 
 ## Getting started
+
+### Run it yourself, offline
+
+A fresh clone runs the whole system on your machine with no account and no API key: Postgres with pgvector comes
+with `uv sync` and lives in `.demo/`, the corpus ships as text and your Ollama embeds it once. Each question prints
+every step as it ends, then the model's reasoning and answer as they stream. [docs/demo.md](docs/demo.md) has the
+requirements, timings and the three part script (terminal, live page, mini eval).
+
+```bash
+git clone https://github.com/Om072005/AdaptiveRAG.git && cd AdaptiveRAG
+uv sync
+ollama pull nomic-embed-text && ollama pull gpt-oss:20b     # qwen3.6:35b-a3b and gemma4:31b are optional
+uv run python -m adaptiverag demo setup                     # embedded database + corpus, once
+uv run python -m adaptiverag demo check
+uv run python -m adaptiverag ask "Who died first, Bryce Courtenay or Juan Carlos Onetti?"
+uv run python -m adaptiverag demo page                      # the page with a live question box
+uv run python -m adaptiverag demo eval                      # three recorded questions, live
+```
+
+### Team setup
 
 Needs Python 3.12 with [uv](https://docs.astral.sh/uv/), Node 22, a free [Neon](https://neon.tech) Postgres database
 and [Ollama](https://ollama.com) for every model, the judge included (D21): `ollama pull nomic-embed-text`,

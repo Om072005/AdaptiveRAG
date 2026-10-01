@@ -1,4 +1,7 @@
-from adaptiverag.stores.graph import nearest_seed, pick_seeds
+import pytest
+
+from adaptiverag.stores.graph import match_aliases, nearest_seed, pick_seeds
+from adaptiverag.stores.trgm import trigrams
 
 
 def row(surface: str, cid: str, conf: float, sim: float, type_: str = "PERSON") -> tuple:  # type: ignore[type-arg]
@@ -38,3 +41,41 @@ def test_embedding_fallback_needs_the_same_bar() -> None:
     assert nearest_seed([("e_x", "X", "ORG", 0.7)], 0.45)[0].matched == "embedding"
     assert nearest_seed([("e_x", "X", "ORG", 0.3)], 0.45) == []
     assert nearest_seed([], 0.45) == []
+
+
+def alias(surface: str, cid: str, conf: float = 1.0) -> tuple:  # type: ignore[type-arg]
+    return (surface, cid, surface, "PERSON", conf, frozenset(trigrams(surface.lower())))
+
+
+def test_python_alias_match_keeps_what_pg_trgm_keeps() -> None:
+    rows = [alias("Tim Burton", "e_tb"), alias("Ed Wood", "e_ew"), alias("Batman", "e_b")]
+    found = match_aliases(rows, "Did Tim Burton direct Ed Wood?", 0.45)
+    assert [(r[1], r[5]) for r in found] == [("e_tb", 1.0), ("e_ew", 1.0)]
+
+
+def test_python_alias_match_applies_the_bar_inclusively() -> None:
+    # word_similarity('word', 'two words') is 0.8 in pg_trgm
+    assert match_aliases([alias("word", "e_w")], "two words", 0.8)[0][5] == 0.800000011920929
+    assert match_aliases([alias("word", "e_w")], "two words", 0.81) == []
+
+
+def test_an_empty_alias_table_is_read_again(monkeypatch: pytest.MonkeyPatch) -> None:
+    from adaptiverag.stores import graph
+
+    class Conn:
+        class info:  # noqa: N801 (psycopg's attribute name)
+            dsn = "test-dsn"
+
+        reads = 0
+
+        def execute(self, q: str, params: object = None) -> "Conn":
+            Conn.reads += 1
+            return self
+
+        def fetchall(self) -> list[tuple[object, ...]]:
+            return [] if Conn.reads == 1 else [("Dwell", "e_d", "Dwell", "WORK", 1.0)]
+
+    monkeypatch.setattr(graph, "_aliases", {})
+    monkeypatch.setattr(graph, "has_trgm", lambda c: False)
+    assert graph.alias_rows(Conn(), "When was Dwell launched?", 0.45) == []  # type: ignore[arg-type]
+    assert [r[1] for r in graph.alias_rows(Conn(), "When was Dwell launched?", 0.45)] == ["e_d"]  # type: ignore[arg-type]

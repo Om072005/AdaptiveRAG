@@ -1,6 +1,7 @@
-"""python -m adaptiverag ask "question" [--mode graph] | serve [--port 8000]"""
+"""python -m adaptiverag ask "question" [--mode graph] | serve [--port 8000] | demo ..."""
 
 import argparse
+import sys
 
 import uvicorn
 
@@ -13,20 +14,33 @@ def main(argv: list[str] | None = None) -> None:
     ask = sub.add_parser("ask", help="answer one question and print the trace id")
     ask.add_argument("question")
     ask.add_argument("--mode", choices=["auto", "vector", "graph", "hybrid"], default="auto")
+    ask.add_argument("--quiet", action="store_true", help="only the answer, not every step")
     serve = sub.add_parser("serve", help="run the local API for the local page")
     serve.add_argument("--port", type=int, default=8000)
+    demo = sub.add_parser("demo", help="the showcase from a fresh clone: setup, check, eval, page")
+    demo.add_argument("rest", nargs=argparse.REMAINDER)
     args = parser.parse_args(argv)
 
-    if args.command == "serve":
+    if args.command == "demo":
+        from adaptiverag.demo.cli import main as demo_main
+
+        demo_main(args.rest)
+    elif args.command == "serve":
         uvicorn.run("adaptiverag.server:app", host="127.0.0.1", port=args.port)
     else:
-        ask_and_print(args.question, args.mode)
+        ask_and_print(args.question, args.mode, live=not args.quiet)
 
 
-def ask_and_print(question: str, mode: Mode) -> None:
+def ask_and_print(question: str, mode: Mode, live: bool = True) -> None:
+    """Answer one question; live, every step prints as it ends and the answer streams in."""
+    from adaptiverag.demo.show import LivePrinter
     from adaptiverag.pipeline import answer_query
 
-    r = answer_query(question, mode, source="cli")
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    r = answer_query(question, mode, source="cli", listener=LivePrinter() if live else None)
+    if live:
+        return
     print(f"answer: {r.answer.short}\n\n{r.answer.text}\n")
     for c in r.answer.citations:
         print(f"  [{c.n}] {c.title}  ({c.chunk_id})")
