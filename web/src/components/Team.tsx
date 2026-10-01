@@ -13,8 +13,7 @@ export function Team({ site }: { site: SiteContent }) {
             className={`flex flex-col px-0 py-6 sm:px-6 ${i > 0 ? 'border-t border-rule sm:border-t-0' : ''} ${i % 2 === 1 ? 'sm:border-l sm:border-rule' : ''} ${i >= 2 ? 'sm:border-t sm:border-rule lg:border-t-0' : ''} ${i === 2 ? 'lg:border-l' : ''} ${i === 0 ? 'sm:pl-0' : ''}`}
           >
             <p className="text-label m-0">Member {i + 1}</p>
-            <p className="text-title m-0 mt-2 break-words">{m.name}</p>
-            <p className="text-small m-0 mt-2 mb-5 text-text">{m.role}</p>
+            <p className="text-title m-0 mt-2 mb-5 break-words">{m.name}</p>
             <ButtonLink href={m.github} className="mt-auto self-start">
               <GitHubIcon size={15} />
               GitHub profile
