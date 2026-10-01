@@ -43,3 +43,12 @@ test('link names the first five entities and counts the rest', () => {
   const seeds = Array.from({ length: 7 }, (_, i) => ({ name: `E${i}`, score: 1 - i / 10 }))
   assert.equal(describeStep(step('link', { seeds })).headline, 'E0 1.00, E1 0.90, E2 0.80, E3 0.70, E4 0.60, and 2 more')
 })
+
+test('entities that share a name show once with a count', () => {
+  const seeds = [
+    { name: 'Bryce Courtenay', score: 1 },
+    { name: 'Bryce Courtenay', score: 1 },
+    { name: 'Juan Carlos', score: 0.86 },
+  ]
+  assert.equal(describeStep(step('link', { seeds })).headline, 'Bryce Courtenay 1.00 (2 entities), Juan Carlos 0.86')
+})

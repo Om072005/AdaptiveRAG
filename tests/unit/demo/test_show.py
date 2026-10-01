@@ -35,3 +35,14 @@ def test_a_question_without_context_says_no_model_was_called() -> None:
     assert describe(step("model", size=None, model=None, reason="no_context")) == [
         "no chunks, so no model call: not enough context"
     ]
+
+
+def test_entities_that_share_a_name_show_once_with_a_count() -> None:
+    seeds = [
+        {"name": "Bryce Courtenay", "score": 1.0, "matched": "Bryce Courtenay", "type": "PERSON"},
+        {"name": "Bryce Courtenay", "score": 1.0, "matched": "Bryce Courtenay", "type": "PERSON"},
+        {"name": "Juan Carlos", "score": 0.86, "matched": "Juan Carlos", "type": "PERSON"},
+    ]
+    assert describe(step("link", seeds=seeds)) == [
+        "Bryce Courtenay 1.00 (2 entities), Juan Carlos 0.86"
+    ]

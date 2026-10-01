@@ -22,6 +22,21 @@ export function splitLines(buffer: string): { lines: string[]; rest: string } {
   return { lines: parts.filter((l) => l.trim() !== ''), rest }
 }
 
+/** Seeds by name, best first: entities sharing a name (kept apart on purpose, such as two people
+ * called the same) show once with their count. */
+function linkLine(seeds: Seed[]): string {
+  if (!seeds.length) return 'no entity found in the question'
+  const names = new Map<string, { score: number; n: number }>()
+  for (const s of seeds) {
+    const seen = names.get(s.name) ?? { score: 0, n: 0 }
+    names.set(s.name, { score: Math.max(seen.score, s.score), n: seen.n + 1 })
+  }
+  const all = [...names.entries()]
+  const shown = all.slice(0, SHOWN_SEEDS).map(([name, { score, n }]) => `${name} ${fixed(score)}${n > 1 ? ` (${n} entities)` : ''}`)
+  if (all.length > SHOWN_SEEDS) shown.push(`and ${all.length - SHOWN_SEEDS} more`)
+  return shown.join(', ')
+}
+
 function retrieve(e: LiveStep): { headline: string; details: string[] } {
   const hits = e.hits as Hit[]
   let headline = `${e.route}: ${hits.length} chunks, top score ${fixed(e.top_score)}`
@@ -47,12 +62,8 @@ export function describeStep(e: LiveStep): { headline: string; details: string[]
         details: [probs.map(([k, v]) => `${k} ${fixed(v)}`).join(', ')],
       }
     }
-    case 'link': {
-      const seeds = e.seeds as Seed[]
-      const shown = seeds.slice(0, SHOWN_SEEDS).map((s) => `${s.name} ${fixed(s.score)}`)
-      if (seeds.length > SHOWN_SEEDS) shown.push(`and ${seeds.length - SHOWN_SEEDS} more`)
-      return { headline: shown.length ? shown.join(', ') : 'no entity found in the question', details: [] }
-    }
+    case 'link':
+      return { headline: linkLine(e.seeds as Seed[]), details: [] }
     case 'route':
       return { headline: `${e.initial} (asked for ${e.requested})`, details: e.reasons as string[] }
     case 'retrieve':

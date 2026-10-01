@@ -38,11 +38,7 @@ def describe(e: dict[str, Any]) -> list[str]:
             probs,
         ]
     if step == "link":
-        seeds = [f"{s['name']} {s['score']:.2f}" for s in e["seeds"][:SHOWN_SEEDS]]
-        more = len(e["seeds"]) - SHOWN_SEEDS
-        if more > 0:
-            seeds.append(f"and {more} more")
-        return [", ".join(seeds) if seeds else "no entity found in the question"]
+        return [link_line(e["seeds"])]
     if step == "route":
         return [f"{e['initial']} (asked: {e['requested']})", *e["reasons"]]
     if step == "retrieve":
@@ -71,6 +67,24 @@ def describe(e: dict[str, Any]) -> list[str]:
             f"trace {e['trace_id']}",
         ]
     return [str({k: v for k, v in e.items() if k not in ("type", "step", "at_ms")})]
+
+
+def link_line(seeds: list[dict[str, Any]]) -> str:
+    """Seeds by name, best first: entities that share a name (kept apart on purpose, such as two
+    people called the same) show once with their count."""
+    if not seeds:
+        return "no entity found in the question"
+    names: dict[str, tuple[float, int]] = {}
+    for s in seeds:
+        best, n = names.get(s["name"], (0.0, 0))
+        names[s["name"]] = (max(best, s["score"]), n + 1)
+    shown = [
+        f"{name} {score:.2f}" + (f" ({n} entities)" if n > 1 else "")
+        for name, (score, n) in list(names.items())[:SHOWN_SEEDS]
+    ]
+    if len(names) > SHOWN_SEEDS:
+        shown.append(f"and {len(names) - SHOWN_SEEDS} more")
+    return ", ".join(shown)
 
 
 def retrieve_lines(e: dict[str, Any]) -> list[str]:
