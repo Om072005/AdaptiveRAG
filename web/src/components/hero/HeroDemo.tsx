@@ -90,7 +90,7 @@ export function HeroDemo() {
                 {on && <path d={d} fill="none" strokeWidth="2.5" strokeLinecap="round" className="flow-dash stroke-surface" />}
                 <circle cx="290" cy={l.y} r={on ? 7 : 5} className={`transition-all duration-300 ${on ? FILL[l.route] : 'fill-faint'}`} />
                 {on && <circle cx="290" cy={l.y} r="7" className={`pulse-dot ${FILL[l.route]}`} />}
-                <text x="306" y={l.y - 3} className={`font-display text-[17px] font-[760] uppercase [font-stretch:62.5%] ${on ? 'fill-ink' : 'fill-muted'}`}>
+                <text x="306" y={l.y - 3} className={`font-display text-[17px] font-[700] uppercase [font-stretch:75%] ${on ? 'fill-ink' : 'fill-muted'}`}>
                   {ROUTE_NAME[l.route]}
                 </text>
                 <text x="306" y={l.y + 13} className="fill-muted font-sans text-[14px] italic">

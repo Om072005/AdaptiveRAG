@@ -168,7 +168,8 @@
 @theme {
   --font-*: initial;
   --font-sans: 'Paper Serif', Georgia, serif;
-  --font-display: 'Noto Serif Display Variable', Georgia, serif;
+  /* Bahnschrift ships with Windows; Apple devices get their DIN, everything else a condensed sans. */
+  --font-display: 'Bahnschrift', 'DIN Condensed', 'DIN Alternate', 'Roboto Condensed', 'Arial Narrow', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
 
   --radius-control: 2px;
