@@ -9,8 +9,8 @@ const STOP: Record<Progress, string> = {
   finished: 'border-ink bg-ink text-canvas',
 }
 
-/** The route through the page before the reader sets off: every chapter as a stop on one line, the
- * question it answers, and how long it takes. Stops fill in as the reader goes. */
+/** The route through the page before the reader sets off: every chapter as a stop on one line and how
+ * long it takes. Stops fill in as the reader goes. */
 export function JourneyMap() {
   const { progress, current } = useJourney()
   return (
@@ -23,9 +23,7 @@ export function JourneyMap() {
               Your route through this page
             </h2>
             <p className="m-0 mt-3 max-w-[56ch] font-sans text-[20px] leading-[26px] text-text">
-              {CHAPTERS.length} short chapters, about {TOTAL_MINUTES} minutes. Each one answers a question you are
-              likely to have, in the order you will have it. Jump to any stop, and a recap at the end shows what you
-              covered.
+              {CHAPTERS.length} short chapters, about {TOTAL_MINUTES} minutes. Jump to any stop.
             </p>
           </div>
           <ButtonLink kind="primary" href={`#${CHAPTERS[0].id}`} className="shrink-0 self-start md:self-end">
@@ -55,7 +53,6 @@ export function JourneyMap() {
                   </span>
                   <span className="block md:mt-3">
                     <span className="block font-headline text-[22px] leading-none group-hover:text-accent-text">{c.short}</span>
-                    <span className="mt-1.5 block font-sans text-[16.5px] leading-[21px] text-text">{c.question}</span>
                     <span className="text-label mt-1.5 block">
                       {c.minutes} min{p === 'finished' ? ' · read' : p === 'started' ? ' · started' : ''}
                     </span>

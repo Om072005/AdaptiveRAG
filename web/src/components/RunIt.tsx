@@ -1,37 +1,56 @@
 import type { ReactNode } from 'react'
 import { CodeBlock } from './CodeBlock'
-import { DatabaseIcon, LayersIcon, ShieldCheckIcon, TerminalIcon } from './Icons'
+import { ChevronDownIcon, DatabaseIcon, LayersIcon, ShieldCheckIcon, TerminalIcon } from './Icons'
 
-// The CLI of contract section 7, in the order a new machine needs it.
+// The CLI of contract section 7, in the order a new machine needs it. The first five ask a question;
+// the rest are extras behind a reveal.
+const FIRST = 5
 const STEPS: { text: string; code: string }[] = [
   {
-    text: 'Clone the repository and install the Python side with uv. It brings its own Postgres with pgvector.',
+    text: 'Clone and install. Postgres with pgvector comes along.',
     code: 'git clone https://github.com/Om072005/AdaptiveRAG.git\ncd AdaptiveRAG\nuv sync',
   },
   {
-    text: 'Pull the two models every question needs. The large model and the judge are optional: with the large one, multi hop and comparison questions use it as the recorded runs did.',
+    text: 'Pull the models. The large model and the judge are optional.',
     code: 'ollama pull nomic-embed-text\nollama pull gpt-oss:20b\nollama pull qwen3.6:35b-a3b   # optional\nollama pull gemma4:31b        # optional, the judge',
   },
   {
-    text: 'Create the database on your disk and load the corpus: 2,957 documents with their graph, embedded by your own Ollama. About two minutes on a GPU, once.',
+    text: 'Load the corpus into a local database. About two minutes on a GPU, once.',
     code: 'uv run python -m adaptiverag demo setup',
   },
-  { text: 'Check the database, the models and the GPU, and warm the small model.', code: 'uv run python -m adaptiverag demo check' },
+  { text: 'Check the database, models and GPU.', code: 'uv run python -m adaptiverag demo check' },
   {
-    text: 'Ask a question. Every step prints the moment it ends, then the model reasons and answers in front of you.',
+    text: 'Ask a question and watch each step as it happens.',
     code: 'uv run python -m adaptiverag ask "Who died first, Bryce Courtenay or Juan Carlos Onetti?"',
   },
-  { text: 'Open this page with a live question box that shows the same steps as they happen.', code: 'uv run python -m adaptiverag demo page' },
-  { text: 'Run three recorded questions live and see your scores next to the recorded ones.', code: 'uv run python -m adaptiverag demo eval' },
-  { text: 'Run the checks: lint, types, unit tests and the page.', code: 'bash scripts/check.sh' },
+  { text: 'This page, with a live question box. Needs Node 20 or newer.', code: 'uv run python -m adaptiverag demo page' },
+  { text: 'Three recorded questions, scored live.', code: 'uv run python -m adaptiverag demo eval' },
+  { text: 'Lint, types and tests.', code: 'bash scripts/check.sh' },
 ]
 
 const NEEDS: { icon: ReactNode; title: string; text: string }[] = [
-  { icon: <TerminalIcon size={18} />, title: 'Python with uv', text: 'Installs the whole Python side, the database included, in one command.' },
-  { icon: <LayersIcon size={18} />, title: 'Ollama', text: 'Runs the embedder and the answer models on your machine.' },
-  { icon: <DatabaseIcon size={18} />, title: 'No account', text: 'Postgres with pgvector runs from a folder in the clone. Node 20 or newer for this page.' },
-  { icon: <ShieldCheckIcon size={18} />, title: 'No API keys', text: 'After the downloads it works offline. Nothing is sent out.' },
+  { icon: <TerminalIcon size={18} />, title: 'Python with uv', text: 'One command, database included.' },
+  { icon: <LayersIcon size={18} />, title: 'Ollama', text: 'Runs the models locally.' },
+  { icon: <DatabaseIcon size={18} />, title: 'No account', text: 'The database runs from the clone.' },
+  { icon: <ShieldCheckIcon size={18} />, title: 'No API keys', text: 'Offline after the downloads.' },
 ]
+
+function Steps({ steps, start }: { steps: typeof STEPS; start: number }) {
+  return (
+    <ol className="relative m-0 list-none p-0" start={start}>
+      <span aria-hidden="true" className="absolute top-4 bottom-4 left-[15px] w-px bg-rule" />
+      {steps.map((s, i) => (
+        <li key={s.code} className="relative mb-8 grid grid-cols-[32px_minmax(0,1fr)] gap-4 last:mb-0">
+          <span className="relative z-[1] inline-flex size-8 items-center justify-center rounded-full border border-rule bg-surface text-[13px] font-[650] text-ink">{start + i}</span>
+          <div className="min-w-0 pt-1">
+            <p className="text-body m-0 text-text">{s.text}</p>
+            <CodeBlock code={s.code} />
+          </div>
+        </li>
+      ))}
+    </ol>
+  )
+}
 
 export function RunIt() {
   return (
@@ -52,18 +71,18 @@ export function RunIt() {
           </ul>
         </div>
       </div>
-      <ol className="relative m-0 list-none p-0">
-        <span aria-hidden="true" className="absolute top-4 bottom-4 left-[15px] w-px bg-rule" />
-        {STEPS.map((s, i) => (
-          <li key={s.code} className="relative mb-8 grid grid-cols-[32px_minmax(0,1fr)] gap-4 last:mb-0">
-            <span className="relative z-[1] inline-flex size-8 items-center justify-center rounded-full border border-rule bg-surface text-[13px] font-[650] text-ink">{i + 1}</span>
-            <div className="min-w-0 pt-1">
-              <p className="text-body m-0 text-text">{s.text}</p>
-              <CodeBlock code={s.code} />
-            </div>
-          </li>
-        ))}
-      </ol>
+      <div className="min-w-0">
+        <Steps steps={STEPS.slice(0, FIRST)} start={1} />
+        <details className="group mt-8">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 border-y border-ink px-1 py-2 text-ink [&::-webkit-details-marker]:hidden">
+            <span className="text-label">{STEPS.length - FIRST} more: live page, mini eval, checks</span>
+            <ChevronDownIcon size={18} className="shrink-0 transition-transform group-open:rotate-180" />
+          </summary>
+          <div className="mt-6">
+            <Steps steps={STEPS.slice(FIRST)} start={FIRST + 1} />
+          </div>
+        </details>
+      </div>
     </div>
   )
 }

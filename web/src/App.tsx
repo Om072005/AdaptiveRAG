@@ -39,14 +39,14 @@ export default function App() {
         <Section
           id="idea"
           title="No single search method fits every question."
-          lede="Some questions are a quick lookup. Others need two facts joined together, or two things compared. AdaptiveRAG has three ways to find evidence and picks the right one each time."
+          lede="Some questions are a quick lookup, others join or compare facts. So there are three ways to search."
         >
           <RouteCards />
         </Section>
         <Section
           id="how"
           title="From question to cited answer in five steps."
-          lede="Each step is its own small, measured piece. Select any box in the diagram below to see what it does and where it lives in the code."
+          lede="Select any box in the diagram for detail."
         >
           <Steps />
           <div className="mt-8">
@@ -56,7 +56,7 @@ export default function App() {
         <Section
           id="follow"
           title="Watch it answer real questions."
-          lede="Each of these is a recorded run. Step through what the router decided, what it found, which model answered and what it cost. Some went wrong, and they are here on purpose."
+          lede="Recorded runs, step by step. Some went wrong, on purpose."
         >
           {replays.status === 'loading' && <Loading />}
           {replays.status === 'missing' && <DataMissing />}
@@ -66,7 +66,7 @@ export default function App() {
         <Section
           id="results"
           title="Measured, not claimed."
-          lede="Every chart comes from a pinned run and names it. Hover for detail, or switch any chart to its table. Where a result was worse than expected, it stays."
+          lede="Every chart names the run it came from. Hover for detail."
         >
           {results.status === 'loading' && <Loading />}
           {results.status === 'missing' && <DataMissing />}
@@ -76,21 +76,21 @@ export default function App() {
         <Section
           id="failures"
           title="What went wrong, and what we did about it."
-          lede="Real incidents found in a run or in review, with the run that showed them."
+          lede="Open a card for the cause and the fix."
         >
           <FailureModes failures={results.status === 'ok' ? results.data.tables.failures : null} />
         </Section>
         <Section
           id="workflows"
           title="How the pieces are built."
-          lede="Four workflows, drawn from the same data as the code. Pick a step, or play the walkthrough to see each part light up in order."
+          lede="Four workflows, drawn from the same data as the code."
         >
           <Workflows />
         </Section>
         <Section
           id="run"
           title="Everything runs on your own machine."
-          lede="Open models through Ollama and a Postgres that ships with the code. No account, no API keys, and offline once the models are downloaded."
+          lede="Open models, a bundled database, no API keys."
         >
           <RunIt />
         </Section>

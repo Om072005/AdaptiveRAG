@@ -2,13 +2,13 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { CHAPTERS, chapterNo, nextChapter, summarize, TOTAL_MINUTES } from './chapters.ts'
 
-test('chapters are unique and each answers a question with a takeaway', () => {
+test('chapters are unique and each has a short takeaway', () => {
   assert.equal(new Set(CHAPTERS.map((c) => c.id)).size, CHAPTERS.length)
   for (const c of CHAPTERS) {
-    assert.ok(c.question.endsWith('?'), c.id)
     assert.ok(c.takeaway.length > 20, c.id)
+    assert.ok(c.takeaway.length <= 100, `${c.id}: takeaway over one line`)
     const banned = new RegExp(`[${String.fromCharCode(0x2013, 0x2014, 0x2192)}]`)
-    assert.ok(!banned.test(c.question + c.takeaway), `${c.id}: dash or arrow glyph`)
+    assert.ok(!banned.test(c.takeaway), `${c.id}: dash or arrow glyph`)
   }
   assert.equal(TOTAL_MINUTES, CHAPTERS.reduce((s, c) => s + c.minutes, 0))
 })

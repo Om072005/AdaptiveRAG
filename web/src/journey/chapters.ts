@@ -1,10 +1,9 @@
-// The page as a journey: eight chapters, each answering one question a visitor has, in the order
-// they have them. Section ids are the page anchors.
+// The page as a journey: eight short chapters in the order a visitor wants them. Section ids are the
+// page anchors.
 
 export type Chapter = {
   id: string
   short: string // the name in the nav, the route map and the recap
-  question: string // what the reader wants to know when they arrive here
   takeaway: string // what they know when they leave it
   minutes: number // a rough reading time
 }
@@ -13,57 +12,49 @@ export const CHAPTERS: Chapter[] = [
   {
     id: 'idea',
     short: 'The idea',
-    question: 'Why not just use one search method?',
-    takeaway: 'Questions differ, so AdaptiveRAG has three ways to find evidence (vector, graph, hybrid) and picks one per question.',
+    takeaway: 'Three ways to search (vector, graph, hybrid), and a router that picks one per question.',
     minutes: 1,
   },
   {
     id: 'how',
     short: 'How it works',
-    question: 'What happens to a question?',
-    takeaway: 'Each question is classified, routed, searched, answered with numbered sources, then checked by a separate judge.',
-    minutes: 2,
+    takeaway: 'Classify, route, search, answer with sources, then a separate judge checks it.',
+    minutes: 1,
   },
   {
     id: 'follow',
     short: 'Watch it',
-    question: 'What does that look like on a real question?',
-    takeaway: 'You stepped through recorded questions, from the router’s choice to the cited answer and its cost, including ones that went wrong.',
-    minutes: 3,
+    takeaway: 'Recorded questions step by step, failures included.',
+    minutes: 2,
   },
   {
     id: 'results',
     short: 'The proof',
-    question: 'Does it actually work better?',
-    takeaway: 'On held out questions, letting the router choose beat every single method, and the charts show what that costs.',
-    minutes: 3,
+    takeaway: 'Letting the router choose beat every single method, at a measured cost.',
+    minutes: 2,
   },
   {
     id: 'failures',
     short: 'Lessons',
-    question: 'What went wrong along the way?',
-    takeaway: 'Real incidents, how each one was found, and what was fixed or is still open.',
-    minutes: 2,
+    takeaway: 'Real incidents: how each was found and what was fixed.',
+    minutes: 1,
   },
   {
     id: 'workflows',
     short: 'Under the hood',
-    question: 'How is each piece built?',
-    takeaway: 'How documents are ingested, how the router decides, how the graph is stored and how answers are judged.',
+    takeaway: 'Ingestion, routing, graph storage and judging, step by step.',
     minutes: 2,
   },
   {
     id: 'run',
     short: 'Try it',
-    question: 'Can I run it myself?',
-    takeaway: 'Eight commands run the whole system on your own machine with free, open tools and no API keys.',
+    takeaway: 'A few commands run it all on your machine, no API keys.',
     minutes: 1,
   },
   {
     id: 'team',
     short: 'The team',
-    question: 'Who made it?',
-    takeaway: 'Four people built it in thirteen days; issues go to the repository.',
+    takeaway: 'Four people, thirteen days.',
     minutes: 1,
   },
 ]

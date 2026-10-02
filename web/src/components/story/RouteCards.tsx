@@ -3,29 +3,26 @@ import { BG } from '../../copy/routes'
 import type { Route } from '../../types'
 import { MergeIcon, NetworkIcon, RouteIcon, SearchIcon } from '../Icons'
 
-const CARDS: { route: Route; icon: ReactNode; name: string; what: string; good: string; example: string }[] = [
+const CARDS: { route: Route; icon: ReactNode; name: string; what: string; example: string }[] = [
   {
     route: 'vector',
     icon: <SearchIcon size={22} />,
     name: 'Vector search',
-    what: 'Finds the passages whose meaning is closest to the question, like a very good search engine.',
-    good: 'Fast and cheap. Best when one passage holds the answer.',
+    what: 'Finds passages closest in meaning. Fast and cheap.',
     example: 'When was Dwell magazine launched?',
   },
   {
     route: 'graph',
     icon: <NetworkIcon size={22} />,
     name: 'Knowledge graph',
-    what: 'Follows links between people, places and works that were read out of the documents ahead of time.',
-    good: 'Built for questions that chain facts together, and every link keeps its source.',
+    what: 'Follows links between people, places and works. Chains facts together.',
     example: 'Nathan Bridger was a character played by which actor and amateur boxer?',
   },
   {
     route: 'hybrid',
     icon: <MergeIcon size={22} />,
     name: 'Hybrid',
-    what: 'Runs both, merges what they find and re-ranks it so the strongest evidence comes first.',
-    good: 'Most thorough, and the safe choice when a question is hard to read.',
+    what: 'Runs both and re-ranks. Most thorough.',
     example: 'Who was born first, Yanka Dyagileva or Alexander Bashlachev?',
   },
 ]
@@ -43,7 +40,6 @@ export function RouteCards() {
             </div>
             <h3 className="text-title m-0 mt-5">{c.name}</h3>
             <p className="text-small m-0 mt-2">{c.what}</p>
-            <p className="text-small m-0 mt-3 text-muted">{c.good}</p>
             <p className="m-0 mt-auto pt-5">
               <span className="block rounded-[2px] bg-sunken px-3.5 py-2.5 text-[13.5px] leading-5 text-text">
                 <span className="text-caption block">For example</span>
@@ -60,9 +56,8 @@ export function RouteCards() {
         <div>
           <h3 className="text-title m-0">The router picks one for every question.</h3>
           <p className="text-small m-0 mt-1.5 max-w-[72ch]">
-            A small classifier reads the question first. Simple lookups go to vector search; questions that connect
-            or compare facts go to hybrid. If the evidence comes back weak, it falls back to hybrid once, and it
-            spends the bigger model only where the question needs it.
+            Lookups go to vector search, questions that join or compare facts go to hybrid, and the big model is
+            used only where it is needed.
           </p>
         </div>
       </div>

@@ -2,11 +2,11 @@ import type { ReactNode } from 'react'
 import { BrainTagIcon, QuoteIcon, RouteIcon, SearchIcon, ShieldCheckIcon } from '../Icons'
 
 const STEPS: { icon: ReactNode; title: string; text: string }[] = [
-  { icon: <BrainTagIcon size={20} />, title: 'Understand', text: 'A classifier labels the question: a simple lookup, a chain of facts, or a comparison.' },
-  { icon: <RouteIcon size={20} />, title: 'Choose', text: 'The router picks the cheapest route that can answer it, within a per question budget.' },
-  { icon: <SearchIcon size={20} />, title: 'Search', text: 'Vector search, the knowledge graph or both bring back the evidence, ranked.' },
-  { icon: <QuoteIcon size={20} />, title: 'Answer', text: 'A small or large open model writes a short answer, citing a numbered source for every claim.' },
-  { icon: <ShieldCheckIcon size={20} />, title: 'Check', text: 'A judge from a different model family scores it. Low scores wait for a person to review.' },
+  { icon: <BrainTagIcon size={20} />, title: 'Understand', text: 'Label it: lookup, chain of facts, or comparison.' },
+  { icon: <RouteIcon size={20} />, title: 'Choose', text: 'Pick the cheapest route that can answer it.' },
+  { icon: <SearchIcon size={20} />, title: 'Search', text: 'Bring back ranked evidence.' },
+  { icon: <QuoteIcon size={20} />, title: 'Answer', text: 'A short answer, every claim cited.' },
+  { icon: <ShieldCheckIcon size={20} />, title: 'Check', text: 'A separate judge scores it. Low scores go to review.' },
 ]
 
 /** The pipeline in five plain steps, joined by a line on wide screens. */

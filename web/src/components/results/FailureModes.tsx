@@ -86,7 +86,14 @@ function FailureCard({ f }: { f: Failure }) {
   )
 }
 
-/** The failure log as cards, then the honest scope statement. */
+const SCOPE = [
+  'Every number comes from a pinned run, and worse than expected results stay.',
+  'Retrieval, routing, graph traversal, merging and the classifier are our own code.',
+  'Vector search is served by pgvector, embeddings by nomic-embed-text.',
+  'Open models answer; a different family (Gemma 4) judges, with a sample checked by hand.',
+]
+
+/** The failure log as cards, then the honest scope statement in short, with the full text a click away. */
 export function FailureModes({ failures }: { failures: Results['tables']['failures'] | null }) {
   return (
     <div>
@@ -104,26 +111,39 @@ export function FailureModes({ failures }: { failures: Results['tables']['failur
           <p className="text-eyebrow m-0">Honest scope</p>
           <h3 className="text-title m-0 mt-2">What is ours, and what is borrowed.</h3>
         </div>
-        <div className="text-small flex flex-col gap-4 text-text">
-          <p className="m-0">
-            Every number on this page comes from a run listed in the project's pinned results, and each figure names
-            that run. A result that came out worse than expected stays on the page.
-          </p>
-          <p className="m-0">
-            Where a part uses a library default instead of our own code, we say so: vector search is served by
-            pgvector's HNSW index (our own HNSW is measured against it above), and embeddings come from an open
-            model, nomic-embed-text, served by Ollama on one of our machines. Retrieval, routing, graph traversal,
-            merging and the classifier are our own code.
-          </p>
-          <p className="m-0">
-            Answers come from open models run through Ollama: gpt-oss 20B as the small model and Qwen 3.6 35B-A3B as
-            the large one. Their cost is the public list price of the same weights, not what we paid. Every answer is
-            scored by Gemma 4 31B (open weights, run on a rented GPU server), a different model family from both, and
-            because a judge model is an imperfect proxy, a sample of its scores is checked by hand and the agreement
-            is reported with the results. Latency comes from two machines: model calls first made on a rented server
-            with two RTX 5090 cards keep that time when a later run reuses them from the cache, and new calls and
-            database round trips are timed on one of our PCs.
-          </p>
+        <div>
+          <ul className="text-small m-0 flex list-disc flex-col gap-2 pl-5 text-text">
+            {SCOPE.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+          <details className="group mt-5 border-t border-rule pt-3">
+            <summary className="flex min-h-9 cursor-pointer list-none items-center justify-between text-[13.5px] font-[560] text-accent-text [&::-webkit-details-marker]:hidden">
+              The full detail
+              <ChevronDownIcon size={16} className="transition-transform group-open:rotate-180" />
+            </summary>
+            <div className="text-small mt-3 flex flex-col gap-4 text-text">
+              <p className="m-0">
+                Every number on this page comes from a run listed in the project's pinned results, and each figure names
+                that run. A result that came out worse than expected stays on the page.
+              </p>
+              <p className="m-0">
+                Where a part uses a library default instead of our own code, we say so: vector search is served by
+                pgvector's HNSW index (our own HNSW is measured against it above), and embeddings come from an open
+                model, nomic-embed-text, served by Ollama on one of our machines. Retrieval, routing, graph traversal,
+                merging and the classifier are our own code.
+              </p>
+              <p className="m-0">
+                Answers come from open models run through Ollama: gpt-oss 20B as the small model and Qwen 3.6 35B-A3B as
+                the large one. Their cost is the public list price of the same weights, not what we paid. Every answer is
+                scored by Gemma 4 31B (open weights, run on a rented GPU server), a different model family from both, and
+                because a judge model is an imperfect proxy, a sample of its scores is checked by hand and the agreement
+                is reported with the results. Latency comes from two machines: model calls first made on a rented server
+                with two RTX 5090 cards keep that time when a later run reuses them from the cache, and new calls and
+                database round trips are timed on one of our PCs.
+              </p>
+            </div>
+          </details>
         </div>
       </div>
     </div>

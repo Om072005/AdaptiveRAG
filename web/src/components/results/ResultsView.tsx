@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ChevronDownIcon } from '../Icons'
 import { duration, money, percent } from '../../copy/format'
 import { LABEL, METHOD } from '../../copy/reasons'
 import { BG, FILL, MODE_NAME, MODE_ORDER, STROKE } from '../../copy/routes'
@@ -52,7 +53,7 @@ function RoutesCard({ t, split }: { t: T; split?: string }) {
     <ChartCard
       wide
       title="Letting the router choose beats any single method"
-      takeaway={<>The same held out questions, answered four ways. {m.what}</>}
+      takeaway={<>Held out questions, answered four ways. {m.what}</>}
       legend={ROUTE_LEGEND}
       split={split}
       runIds={ids(t.routes)}
@@ -106,7 +107,7 @@ function CostCard({ t, split }: { t: T; split?: string }) {
   return (
     <ChartCard
       title="What that accuracy costs"
-      takeaway="The router spends more: hard questions go to the large model and to hybrid search, which is slower. Costs are list prices of the open models."
+      takeaway="Hard questions go to the large model and to hybrid, so the router costs more. List prices."
       split={split}
       runIds={ids(t.routes)}
       chart={
@@ -142,7 +143,7 @@ function ByTypeCard({ t, split }: { t: T; split?: string }) {
   return (
     <ChartCard
       title="The biggest gain is on multi step questions"
-      takeaway="Accuracy (F1) for each kind of question. Questions that chain two facts are where a single method struggles most."
+      takeaway="Accuracy (F1) by kind of question. Chained facts are where single methods struggle."
       legend={ROUTE_LEGEND}
       split={split}
       runIds={ids(t.by_type)}
@@ -229,11 +230,11 @@ function QualityCostCard({ results, split }: { results: Results; split?: string 
     <ChartCard
       wide
       title="Quality against cost"
-      takeaway="Up is more accurate, right is more expensive (a log scale: each step is ten times the cost). The served router sits between the cheap single methods and always using the large model."
+      takeaway="Up is more accurate, right costs more (log scale). The router sits between the cheap methods and the large model."
       legend={ROUTE_LEGEND}
       split={split}
       runIds={ids(t.quality_per_cost)}
-      note="Filled points meet the faithfulness floor; a hollow point would fall below it and is not a win at any cost. Runs with identical results share one point."
+      note="Hollow points fall below the faithfulness floor. Identical results share a point."
       chart={
         points.length > 0 && (
         <XYChart
@@ -330,7 +331,7 @@ function ClassifierCard({ t }: { t: T }) {
   return (
     <ChartCard
       title="Reading the question"
-      takeaway="Three ways to label a question as single hop, multi hop or comparison. A small trained model won, and runs in no measurable time."
+      takeaway="Three ways to label a question. A small trained model won, at no measurable time."
       runIds={ids(t.classifier)}
       chart={
         <BarList
@@ -372,7 +373,7 @@ function ConfusionCard({ t, split }: { t: T; split?: string }) {
   return (
     <ChartCard
       title="Where the classifier gets it wrong"
-      takeaway={`${right} of ${total} test questions labelled correctly. A multi hop question read as a comparison is the most common slip, and both go to hybrid anyway.`}
+      takeaway={`${right} of ${total} labelled correctly. The usual slip, multi hop read as comparison, goes to hybrid anyway.`}
       split={split}
       runIds={[t.confusion.run_id]}
       table={<ConfusionMatrix confusion={t.confusion} />}
@@ -399,13 +400,13 @@ function IndexCard({ t }: { t: T }) {
     <ChartCard
       wide
       title="Our own vector index, against the library"
-      takeaway="How many of the true 10 nearest passages the index finds (recall), as its search effort ef grows. Ours reaches 0.99 at ef 32, level with pgvector, the library index that serves real queries."
+      takeaway="Recall of the true 10 nearest passages as search effort grows. Ours reaches 0.99 at ef 32, level with pgvector."
       legend={[
         { label: series[0].name, swatch: 'bg-accent' },
         { label: series[1].name, swatch: 'bg-line' },
       ]}
       runIds={ids(t.hnsw)}
-      note="Exact search finds every neighbour by definition. Hover a point for its median search time; pgvector times include the database round trip."
+      note="Hover a point for its median time; pgvector includes the database round trip."
       chart={
         efs.length > 0 && (
         <XYChart
@@ -443,7 +444,7 @@ function ChunkingCard({ t }: { t: T }) {
   return (
     <ChartCard
       title="Cutting documents into chunks"
-      takeaway="Three ways to split text for search, measured on the small corpus. Sentence chunks serve real queries; the other two were too close to call."
+      takeaway="Three ways to split text. Sentence chunks are served; the others were too close to call."
       runIds={ids(t.chunking)}
       table={
         <DataTable
@@ -472,7 +473,7 @@ function GraphCard({ t }: { t: T }) {
     <ChartCard
       wide
       title="The knowledge graph"
-      takeaway="Built from the documents behind the gold questions, every fact checked against the text it came from."
+      takeaway="Every fact checked against the text it came from."
       runIds={[t.graph.run_id]}
       table={
         <dl className="m-0 grid grid-cols-2 gap-3 md:grid-cols-4">
@@ -491,6 +492,7 @@ function GraphCard({ t }: { t: T }) {
   )
 }
 
+/** The headline results up front; the measurements of each part behind one disclosure. */
 export function ResultsView({ results }: { results: Results }) {
   const t = results.tables
   const splitOf = (rows: { run_id: string }[]) => {
@@ -500,26 +502,29 @@ export function ResultsView({ results }: { results: Results }) {
 
   return (
     <div>
-      <dl className="m-0 mb-8 grid grid-cols-1 gap-3 md:grid-cols-4">
-        {METRICS.map((m) => (
-          <div key={m.key} className="rounded-[2px] border border-dashed border-faint p-4">
-            <dt className="text-[13.5px] font-[620] text-ink">{m.label}</dt>
-            <dd className="text-caption m-0 mt-1">{m.what}</dd>
-          </div>
-        ))}
-      </dl>
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         <RoutesCard t={t} split={splitOf(t.routes)} />
         <ByTypeCard t={t} split={splitOf(t.by_type)} />
         <CostCard t={t} split={splitOf(t.routes)} />
         <QualityCostCard results={results} split={splitOf(t.quality_per_cost)} />
-        <SelectorCard t={t} split={splitOf(t.selector)} />
-        <ClassifierCard t={t} />
-        <ConfusionCard t={t} split={splitOf([t.confusion])} />
-        <ChunkingCard t={t} />
-        <IndexCard t={t} />
-        <GraphCard t={t} />
       </div>
+      <details className="group mt-5">
+        <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 border-y border-ink px-1 py-3 text-ink md:px-4 [&::-webkit-details-marker]:hidden">
+          <span className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <span className="text-label">6 more charts</span>
+            <span className="font-sans text-[18px] leading-6">Model selector, classifier, vector index, chunking, knowledge graph</span>
+          </span>
+          <ChevronDownIcon size={20} className="shrink-0 transition-transform group-open:rotate-180" />
+        </summary>
+        <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2">
+          <SelectorCard t={t} split={splitOf(t.selector)} />
+          <ClassifierCard t={t} />
+          <ConfusionCard t={t} split={splitOf([t.confusion])} />
+          <ChunkingCard t={t} />
+          <IndexCard t={t} />
+          <GraphCard t={t} />
+        </div>
+      </details>
     </div>
   )
 }

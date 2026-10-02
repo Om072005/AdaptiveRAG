@@ -28,11 +28,7 @@ export function JourneyRecap({ repoUrl }: { repoUrl: string }) {
           What you just went through.
         </h2>
         <p className="m-0 mt-4 max-w-[60ch] font-sans text-[21px] leading-[27px] opacity-90">
-          {seen === 0
-            ? 'You jumped straight here. Here is the whole story in eight lines, and where to read each part.'
-            : seen === CHAPTERS.length
-              ? 'You covered every chapter. Here is the whole story in eight lines.'
-              : `You looked at ${seen} of ${CHAPTERS.length} chapters. Here is the whole story in eight lines, with the parts you skipped marked.`}
+          {seen === CHAPTERS.length ? 'The whole story in eight lines.' : 'The whole story in eight lines, skipped parts marked.'}
         </p>
 
         <ol className="m-0 mt-8 list-none border-t border-canvas/30 p-0">

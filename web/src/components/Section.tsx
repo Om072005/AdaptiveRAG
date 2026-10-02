@@ -3,8 +3,7 @@ import { ChapterEnd } from '../journey/ChapterEnd'
 import { CHAPTERS, chapterNo } from '../journey/chapters'
 
 /** A chapter of the page, set like a newspaper spread: a heavy rule with its number and reading time,
- * the question it answers, the headline, the lede in its own ruled column, the content, and a close
- * with what the reader now knows and the way to the next chapter. */
+ * the headline, a one line lede in its own ruled column, the content, and the way to the next chapter. */
 export function Section({ id, title, lede, children }: { id: string; title: string; lede?: ReactNode; children: ReactNode }) {
   const i = CHAPTERS.findIndex((c) => c.id === id)
   const chapter = CHAPTERS[i]
@@ -15,8 +14,7 @@ export function Section({ id, title, lede, children }: { id: string; title: stri
           <p className="text-eyebrow m-0">{chapter ? `Chapter ${chapterNo(i)} · ${chapter.short}` : title}</p>
           {chapter && <p className="text-eyebrow m-0">About {chapter.minutes} min</p>}
         </div>
-        {chapter && <p className="m-0 mt-6 font-sans text-[22px] leading-7 text-accent-text italic md:mt-8 md:text-[26px] md:leading-8">{chapter.question}</p>}
-        <div className="mt-2 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-0">
+        <div className="mt-6 grid md:mt-8 grid-cols-1 gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-0">
           <h2 id={`${id}-h`} className="text-display m-0 max-w-none lg:pr-10">
             {title}
           </h2>
