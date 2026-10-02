@@ -2,7 +2,7 @@ import type { LoadState } from '../../data/useLoaded'
 import { TOTAL_MINUTES } from '../../journey/chapters'
 import type { Results } from '../../types'
 import { ButtonLink } from '../Button'
-import { ArrowRightIcon } from '../Icons'
+import { ArrowRightIcon, DatabaseIcon } from '../Icons'
 import { HeroDemo } from './HeroDemo'
 import { HeroStats } from './HeroStats'
 
@@ -27,6 +27,10 @@ export function Hero({ repoUrl, results }: { repoUrl: string; results: LoadState
               </ButtonLink>
               <ButtonLink href="#follow">
                 Skip to the demo
+              </ButtonLink>
+              <ButtonLink href={`${repoUrl}/blob/main/docs/dataset.md`}>
+                <DatabaseIcon size={15} />
+                Dataset: HotpotQA dev
               </ButtonLink>
               <a href={repoUrl} className="self-start font-sans text-[18px]">
                 or read the code on GitHub

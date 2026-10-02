@@ -45,7 +45,7 @@ This project addresses both: a graph layer for relational/multi-hop questions, a
 ## Results
 
 Every number below comes from a pinned run listed in [`docs/results/pinned.toml`](docs/results/pinned.toml); each
-run's report sits next to it in `docs/results/`. Corpus: 2,957 HotpotQA documents (4,277 sentence chunks). Models
+run's report sits next to it in `docs/results/`. Corpus: 2,957 HotpotQA documents (4,277 sentence chunks), see [the dataset](docs/dataset.md). Models
 run locally through Ollama: `gpt-oss:20b` answers as the small model, `qwen3.6:35b-a3b` as the large one, and
 `gemma4:31b` judges (a different family). Costs are the public list price of the same weights.
 
@@ -493,7 +493,7 @@ Dates are planning estimates, not commitments.
 ├── config/               # model ids and list prices, router thresholds, ingestion settings
 ├── data/                 # corpus manifests, gold set, classifier training set, extraction batch plan, demo/ corpus file
 ├── db/migrations/        # the schema, applied in order
-├── docs/                 # decision log, evaluation protocol, failure log and lessons, results/ (every run we quote)
+├── docs/                 # decision log, evaluation protocol, dataset, failure log and lessons, results/ (every run we quote)
 ├── tests/                # unit and contract tests
 └── web/                  # the static page: architecture, workflows, replays of recorded runs, results
 ```
