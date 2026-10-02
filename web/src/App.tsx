@@ -3,7 +3,6 @@ import { FollowQuestion } from './components/FollowQuestion'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/hero/Hero'
-import { FailureModes } from './components/results/FailureModes'
 import { ResultsView } from './components/results/ResultsView'
 import { RunIt } from './components/RunIt'
 import { SampleBanner } from './components/SampleBanner'
@@ -72,13 +71,6 @@ export default function App() {
           {results.status === 'missing' && <DataMissing />}
           {results.status === 'error' && <DataMissing error={results.message} />}
           {results.status === 'ok' && <ResultsView results={results.data} />}
-        </Section>
-        <Section
-          id="failures"
-          title="What went wrong, and what we did about it."
-          lede="Open a card for the cause and the fix."
-        >
-          <FailureModes failures={results.status === 'ok' ? results.data.tables.failures : null} />
         </Section>
         <Section
           id="workflows"

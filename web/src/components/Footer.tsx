@@ -17,6 +17,9 @@ export function Footer({ repoUrl }: { repoUrl: string }) {
             <p className="m-0">Questions and passages from HotpotQA, CC BY-SA 4.0.</p>
             <p className="m-0">Every number on this page comes from runs listed in docs/results/pinned.toml.</p>
             <p className="m-0">
+              <a href={`${repoUrl}/blob/main/docs/lessons.md`}>What went wrong, and what we did about it</a>
+            </p>
+            <p className="m-0">
               <a href={repoUrl}>Repository</a> · {YEAR}
             </p>
           </div>

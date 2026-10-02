@@ -422,7 +422,7 @@ The interesting derived metric is **D3 — quality per unit cost**, not raw cost
 
 Tracked as they are actually encountered — this list is **not** hypothetical padding and stays short until real incidents fill it.
 
-Copied from [`docs/failure-log.md`](docs/failure-log.md), where each row has the full detail.
+Copied from [`docs/failure-log.md`](docs/failure-log.md), where each row has the full detail. For a readable version, one incident at a time, see [`docs/lessons.md`](docs/lessons.md).
 
 | # | Symptom | Root cause | Fix | Status | Run |
 |---|---|---|---|---|---|
@@ -493,7 +493,7 @@ Dates are planning estimates, not commitments.
 ├── config/               # model ids and list prices, router thresholds, ingestion settings
 ├── data/                 # corpus manifests, gold set, classifier training set, extraction batch plan, demo/ corpus file
 ├── db/migrations/        # the schema, applied in order
-├── docs/                 # decision log, evaluation protocol, failure log, results/ (every run we quote)
+├── docs/                 # decision log, evaluation protocol, failure log and lessons, results/ (every run we quote)
 ├── tests/                # unit and contract tests
 └── web/                  # the static page: architecture, workflows, replays of recorded runs, results
 ```

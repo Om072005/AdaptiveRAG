@@ -203,8 +203,8 @@ test('the journey: a route up front, a close on every chapter, and a recap of wh
   await page.goto('/')
   const route = page.locator('#route')
   await expect(route.getByRole('heading', { name: 'Your route through this page' })).toBeVisible()
-  await expect(route.getByRole('listitem')).toHaveCount(8)
-  await expect(page.locator('[data-chapter-end]')).toHaveCount(8)
+  await expect(route.getByRole('listitem')).toHaveCount(7)
+  await expect(page.locator('[data-chapter-end]')).toHaveCount(7)
 
   // before any reading the recap marks everything skipped
   const recap = page.locator('#recap')

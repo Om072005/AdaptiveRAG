@@ -1,4 +1,4 @@
-// The page as a journey: eight short chapters in the order a visitor wants them. Section ids are the
+// The page as a journey: short chapters in the order a visitor wants them. Section ids are the
 // page anchors.
 
 export type Chapter = {
@@ -32,12 +32,6 @@ export const CHAPTERS: Chapter[] = [
     short: 'The proof',
     takeaway: 'Letting the router choose beat every single method, at a measured cost.',
     minutes: 2,
-  },
-  {
-    id: 'failures',
-    short: 'Lessons',
-    takeaway: 'Real incidents: how each was found and what was fixed.',
-    minutes: 1,
   },
   {
     id: 'workflows',

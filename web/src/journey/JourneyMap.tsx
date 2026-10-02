@@ -32,7 +32,7 @@ export function JourneyMap() {
           </ButtonLink>
         </div>
 
-        <ol className="relative m-0 mt-8 grid list-none grid-cols-1 gap-0 p-0 md:mt-10 md:grid-cols-4 lg:grid-cols-8">
+        <ol className="relative m-0 mt-8 grid list-none grid-cols-1 gap-0 p-0 md:mt-10 md:grid-cols-4 lg:grid-cols-7">
           {/* the line the stops sit on: down the left on a phone, across on a wide screen */}
           <span aria-hidden="true" className="absolute top-4 bottom-4 left-[15px] w-px bg-ink md:hidden" />
           <span aria-hidden="true" className="absolute top-[15px] right-0 left-0 hidden h-px bg-ink lg:block" />
