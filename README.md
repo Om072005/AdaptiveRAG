@@ -1,7 +1,7 @@
 # Adaptive RAG + GraphRAG + Cost-Aware Agent Router 
 
-> ACTIVE DEVELOPMENT 
-> : This project is being built in phases. 
+> **v1.0, released 2026-09-30.** Every phase gate passed (tags `p0` to `p5`, `v1.0`). Page with recorded runs
+> and results: https://adaptiverag.vercel.app. Runs offline from a fresh clone: [docs/demo.md](docs/demo.md).
 
 ---
 
@@ -19,7 +19,7 @@
 - [Cost & latency accounting](#cost--latency-accounting)
 - [Design decisions & tradeoffs](#design-decisions--tradeoffs)
 - [Known failure modes](#known-failure-modes)
-- [Roadmap](#roadmap)
+- [Build phases](#build-phases)
 - [Repo layout](#repo-layout)
 - [Getting started](#getting-started)
 - [Honest scope statement](#honest-scope-statement)
@@ -47,7 +47,9 @@ This project addresses both: a graph layer for relational/multi-hop questions, a
 Every number below comes from a pinned run listed in [`docs/results/pinned.toml`](docs/results/pinned.toml); each
 run's report sits next to it in `docs/results/`. Corpus: 2,957 HotpotQA documents (4,277 sentence chunks), see [the dataset](docs/dataset.md). Models
 run locally through Ollama: `gpt-oss:20b` answers as the small model, `qwen3.6:35b-a3b` as the large one, and
-`gemma4:31b` judges (a different family). Costs are the public list price of the same weights.
+`gemma4:31b` judges (a different family). Costs are the public list price of the same weights applied to the
+measured tokens; the models ran on our own GPUs, so the costs compare routes and model sizes rather than record
+money spent.
 
 ### Held out test split (50 questions, each mode run once)
 
@@ -83,8 +85,9 @@ per route, quality per unit cost): [`econ-20260930-2158-dev`](docs/results/econ-
 - **Classifier** (dev, `classifier-20260930-0250-dev`): macro F1 0.877 for logistic regression (served), 0.830 for
   a few shot language model and 0.801 for hand written rules. On the test split the router reached macro F1 0.842,
   sent 46 of 50 questions to hybrid and 4 to vector, and needed no fallback.
-- **Graph** (`graph-20260930-1457-gold`): 7,073 entities and 6,567 relations, every relation citing the chunk it was
-  read from; 9.3% of extracted triples rejected; entity merge precision 0.91 on 100 labelled decisions (0.56 before
+- **Graph** (`graph-20260930-1457-gold`): built from the 1,419 sentence chunks of the documents behind the 150 gold
+  questions (distractors included), not from all 4,277; 7,073 entities and 6,567 relations, every relation citing
+  the chunk it was read from; 9.3% of extracted triples rejected; entity merge precision 0.91 on 100 labelled decisions (0.56 before
   [D18](docs/decisions.md) turned embedding merges off).
 - **Judge check** ([D23](docs/decisions.md)): 20 test answers scored by hand without seeing the judge. Scores within
   one rubric step of the judge on 95% (faithfulness), 90% (relevance) and 95% (completeness) of answers; the same
@@ -149,11 +152,20 @@ graph TB
     classDef done fill:#1b5e20,stroke:#4caf50,color:#fff
     classDef partial fill:#7d5700,stroke:#ffb300,color:#fff
     classDef todo fill:#5c1010,stroke:#e57373,color:#fff
-    class VS,VDB partial
-    class QC,CB,GR,HY,GDB,MS,EV,LQ,LOG todo
+    class QC,VS,GR,HY,VDB,GDB,LOG,MS,LLM,EV,LQ done
+    class CB partial
 ```
 
 **Legend:** 🟢 green = working · 🟡 amber = partial · 🔴 red = not built
+
+- **Cost/complexity budgeter is amber.** The decision table has its low budget row, but the only budget it would
+  read, the live mode's daily budget, was a stretch goal and was not built, so the row never fires. The cost guard
+  that does run is the cap of 4 model calls per query, checked before each call.
+- **Graph traversal is built and runs as a forced route**, but the served router sends relational questions to
+  hybrid instead (D17, see [Router decision logic](#router-decision-logic)).
+- **Hybrid merge + re-rank:** reciprocal rank fusion takes the union of both backends' hits, then maximal marginal
+  relevance picks the final 8 by cosine to the question with a redundancy penalty (λ 0.7). An LLM re-ranker exists
+  and is off.
 
 ---
 
@@ -248,13 +260,17 @@ sequenceDiagram
     R->>T: log(tokens_in, tokens_out, model, cost)
     R-->>U: answer + citations
 
-    R->>E: async eval
+    R->>E: judge on demand
     E->>E: faithfulness / relevance / completeness
     E->>T: log(scores)
     alt score below threshold
         E->>T: enqueue for review
     end
 ```
+
+As served (D17), multi hop and comparison questions take the ambiguous branch (both backends, merge and re-rank);
+the graph only branch runs when the graph route is forced. The judge is not called after every query: it scores
+answers in eval runs (`eval.run --judge`) and on request from the local page (`POST /api/judge`).
 
 ---
 
@@ -370,11 +386,13 @@ stateDiagram-v2
 
 | Metric | Definition | Judge |
 |---|---|---|
-| Faithfulness | Every claim in the answer is supported by retrieved context | Separate, stronger model than the generator |
-| Relevance | Retrieved chunks are actually about the question | Separate model |
-| Completeness | Answer covers all parts of a multi-part question | Separate model |
+| Faithfulness | Every claim in the answer is supported by retrieved context | Gemma 4 31B, a different family from both generators |
+| Relevance | Retrieved chunks are actually about the question | Same judge |
+| Completeness | Answer covers all parts of a multi-part question | Same judge |
 
-**Stated limitation:** LLM-as-judge is an imperfect proxy and partly circular. Mitigations in use: (1) the judge is a different and stronger model than the generator, (2) a manual spot-check sample is scored by hand each eval run, (3) scores are read *directionally* — did version N+1 improve on version N — not as absolute truth.
+**Stated limitation:** LLM-as-judge is an imperfect proxy and partly circular. Mitigations in use: (1) the judge is a different model family from the generators (Gemma judges GPT-OSS and Qwen answers) and never sees the gold answer, (2) 20 answers of the held out auto run were scored by hand without seeing the judge, with the agreement reported under [Results](#results), (3) scores are read *directionally* — did version N+1 improve on version N — not as absolute truth.
+
+Relevance reads low partly by construction (0.47 on the held out auto run): eight blocks are retrieved and a HotpotQA question has two supporting paragraphs, so several blocks are off topic even when retrieval found both.
 
 ---
 
@@ -414,7 +432,7 @@ The interesting derived metric is **D3 — quality per unit cost**, not raw cost
 | Index type | HNSW | Flat / brute force | Flat is exact but O(n) per query — fine at thousands of vectors, too slow past tens of thousands. HNSW trades a small recall loss for near-log-n search. |
 | Core logic | From scratch | LangChain / LlamaIndex | Frameworks abstract away exactly the failure modes this project exists to study. Framework use is reconsidered per-component *after* the mechanics are understood, not as a default. |
 | Multi-hop handling | Graph traversal | Larger k / query decomposition | Raising k dilutes context and still misses facts with no similarity to the query. Decomposition is a viable alternative and remains an open comparison. |
-| Judge model | Separate, stronger model | Same model as generator | Reduces (does not eliminate) self-preference bias in evaluation. |
+| Judge model | Different model family (Gemma 4 31B) | Same model as generator | Reduces (does not eliminate) self-preference bias in evaluation. |
 
 ---
 
@@ -443,34 +461,24 @@ Categories being watched for, based on the design:
 
 ---
 
-## Roadmap
+## Build phases
 
-```mermaid
-gantt
-    title Build phases
-    dateFormat YYYY-MM-DD
-    axisFormat %b %d
-    section Foundation
-    Baseline vector RAG        :active, p0a, 2026-08-01, 14d
-    Eval harness + gold set    :        p0b, after p0a, 10d
-    section Retrieval quality
-    Chunking experiments       :        p1a, after p0b, 10d
-    HNSW vs flat benchmark     :        p1b, after p1a, 5d
-    section Graph layer
-    Triple extraction          :        p2a, after p1b, 14d
-    Entity resolution          :        p2b, after p2a, 14d
-    Traversal + provenance     :        p2c, after p2b, 10d
-    section Routing
-    Query classifier           :        p3a, after p2c, 10d
-    Fallback + hybrid merge    :        p3b, after p3a, 7d
-    section Economics
-    Cost/latency tracking      :        p4a, after p3b, 7d
-    Cost-aware model selection :        p4b, after p4a, 10d
-    section Loop
-    Feedback queue + dashboard :        p5a, after p4b, 14d
-```
+Built from 2026-09-29 to 2026-09-30 by four people, each phase closed by a gate that checks the measurement
+exists, whatever it says (a gate can pass with a bad result, never with a missing one). Then the offline demo
+(2026-10-01) and the page rework (2026-10-02).
 
-Dates are planning estimates, not commitments.
+| Phase | What was built | Gate evidence | Tag |
+|---|---|---|---|
+| Foundation | Baseline vector RAG, eval harness, 150 checked gold questions | dev vector run with 100 results, every gold item verified | `p0` |
+| Retrieval quality | Three chunkers, our HNSW, flat index | chunking and HNSW benchmarks, serving strategy chosen by run id | `p1` |
+| Graph layer | Triple extraction, source validation, entity resolution, traversal with provenance | graph report with reject rate and merge precision on 100 labelled merges, forced graph run | `p2` |
+| Routing | Three classifiers, decision table, fallback, hybrid merge | classifier comparison, auto run with misroutes and fallback count | `p3` |
+| Economics | Cost and latency per query, small or large model selector | economics report, always-small / always-large / selector runs | `p4` |
+| Loop | Judge, review queue, manual scores, one tuning change | judged runs, 20 manual scores, judge agreement, D17 before and after | `p5` |
+| Release | Held out test split run once per variant, page with real data | pinned runs, replays, failure log | `v1.0` |
+
+Not built: the live public mode (per IP rate limit and daily budget, a stretch goal), a re-ranker benchmark,
+retraining the classifier on reviewed misroutes, and the comparison against query decomposition.
 
 ---
 
@@ -552,6 +560,10 @@ Two things are deliberately true of this README:
 
 1. **Nothing here claims a measurement that hasn't been taken.** Every number names the run it came from, and a
    number not measured yet says so. The design rationale is real; the results come from `docs/results/`.
-2. **Components not yet built are marked as not yet built.** The architecture diagrams describe intent. Where a part ends up using a library default rather than a custom implementation, that will be stated plainly rather than blurred — a precise "I used the default re-ranker and focused my effort on routing and the graph layer" is a stronger position than uniform vague confidence.
+2. **What is not built, not served or borrowed says so.** The architecture diagram marks what works, and its notes
+   say which part is partial and which route is built but not served. Where a part uses a library default, that is
+   stated plainly: serving search uses pgvector's HNSW, not ours, and the embeddings come from an open model
+   (`nomic-embed-text`). A precise "we used the library index and spent our effort on routing, the graph layer
+   and the measurements" is a stronger position than uniform vague confidence.
 
-This file is updated at the end of each build phase with real numbers, real decisions, and real failures.
+This file was updated at every phase gate through v1.0 with real numbers, real decisions, and real failures.
