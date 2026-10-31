@@ -199,7 +199,7 @@ test('the page requests nothing but its own files', async ({ page, baseURL }) =>
   expect(foreign).toEqual([])
 })
 
-test('the journey: a route up front, a close on every chapter, and a recap of what was read', async ({ page }) => {
+test('the journey: a route up front, an end mark on every chapter, and a recap of what was read', async ({ page }) => {
   await page.goto('/')
   const route = page.locator('#route')
   await expect(route.getByRole('heading', { name: 'Your route through this page' })).toBeVisible()
@@ -210,12 +210,12 @@ test('the journey: a route up front, a close on every chapter, and a recap of wh
   const recap = page.locator('#recap')
   await expect(recap).toContainText('0 read')
 
-  // follow the first chapter's close to the next one, reading chapter one on the way
+  // a chapter's close is only a mark now: nothing to click in the way of the next chapter
+  await expect(page.locator('[data-chapter-end]').getByRole('link')).toHaveCount(0)
+
+  // scrolling to the bottom of chapter one reads it
   await page.locator('#idea').scrollIntoViewIfNeeded()
-  const end = page.locator('[data-chapter-end="idea"]')
-  await end.scrollIntoViewIfNeeded()
-  await end.getByRole('link', { name: /How it works/ }).click()
-  await expect(page).toHaveURL(/#how$/)
+  await page.locator('[data-chapter-end="idea"]').scrollIntoViewIfNeeded()
   await expect(page.getByLabel('Journey progress')).toContainText('The idea: read')
   await expect(recap).toContainText('1 read')
   await expect(recap.getByRole('listitem').first()).toContainText('Read')

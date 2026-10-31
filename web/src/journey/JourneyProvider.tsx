@@ -5,7 +5,7 @@ import { JourneyContext } from './context'
 const RANK: Record<Progress, number> = { unseen: 0, started: 1, finished: 2 }
 
 /** Watches the page: a chapter is started when its section is in view, finished when the reader
- * reaches its closing line. Progress only moves forward for this visit. */
+ * reaches the end of it. Progress only moves forward for this visit. */
 export function JourneyProvider({ children }: { children: ReactNode }) {
   const [current, setCurrent] = useState('')
   const [progress, setProgress] = useState<Record<string, Progress>>({})

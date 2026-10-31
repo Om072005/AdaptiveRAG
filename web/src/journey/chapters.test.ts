@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { CHAPTERS, chapterNo, nextChapter, summarize, TOTAL_MINUTES } from './chapters.ts'
+import { CHAPTERS, chapterNo, summarize, TOTAL_MINUTES } from './chapters.ts'
 
 test('chapters are unique and each has a short takeaway', () => {
   assert.equal(new Set(CHAPTERS.map((c) => c.id)).size, CHAPTERS.length)
@@ -13,11 +13,7 @@ test('chapters are unique and each has a short takeaway', () => {
   assert.equal(TOTAL_MINUTES, CHAPTERS.reduce((s, c) => s + c.minutes, 0))
 })
 
-test('next chapter walks the list and stops at the end', () => {
-  assert.equal(nextChapter('idea')?.chapter.id, 'how')
-  assert.equal(nextChapter('idea')?.index, 1)
-  assert.equal(nextChapter(CHAPTERS[CHAPTERS.length - 1].id), null)
-  assert.equal(nextChapter('nope'), null)
+test('chapter numbers are two digits', () => {
   assert.equal(chapterNo(0), '01')
 })
 

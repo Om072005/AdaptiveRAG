@@ -59,12 +59,6 @@ export const TOTAL_MINUTES = CHAPTERS.reduce((sum, c) => sum + c.minutes, 0)
 
 export const chapterNo = (i: number) => String(i + 1).padStart(2, '0')
 
-/** The chapter after this one, or null at the end. */
-export function nextChapter(id: string): { chapter: Chapter; index: number } | null {
-  const i = CHAPTERS.findIndex((c) => c.id === id)
-  return i >= 0 && i < CHAPTERS.length - 1 ? { chapter: CHAPTERS[i + 1], index: i + 1 } : null
-}
-
 /** How much of the journey the reader has covered, for the recap. */
 export function summarize(progress: Record<string, Progress>): { finished: number; started: number; unseen: number } {
   const out = { finished: 0, started: 0, unseen: 0 }

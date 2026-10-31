@@ -14,7 +14,7 @@ const STOP: Record<Progress, string> = {
 export function JourneyMap() {
   const { progress, current } = useJourney()
   return (
-    <section id="route" aria-labelledby="route-h" className="page-wrap pb-16 md:pb-20">
+    <section id="route" aria-labelledby="route-h" className="page-wrap pb-6 md:pb-8">
       <div className="border-y-[3px] border-double border-ink py-6 md:py-8">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>

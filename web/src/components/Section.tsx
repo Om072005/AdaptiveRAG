@@ -1,15 +1,15 @@
 import type { ReactNode } from 'react'
-import { ChapterEnd } from '../journey/ChapterEnd'
 import { CHAPTERS, chapterNo } from '../journey/chapters'
 
 /** A chapter of the page, set like a newspaper spread: a heavy rule with its number and reading time,
- * the headline, a one line lede in its own ruled column, the content, and the way to the next chapter. */
+ * the headline, a one line lede in its own ruled column, then the content. The empty mark at the end
+ * tells the journey the reader got to the bottom of the chapter. */
 export function Section({ id, title, lede, children }: { id: string; title: string; lede?: ReactNode; children: ReactNode }) {
   const i = CHAPTERS.findIndex((c) => c.id === id)
   const chapter = CHAPTERS[i]
   return (
     <section id={id} aria-labelledby={`${id}-h`}>
-      <div className="page-wrap pt-10 pb-20 md:pt-12 md:pb-24">
+      <div className="page-wrap pt-8 pb-6 md:pt-10 md:pb-8">
         <div className="flex items-baseline justify-between gap-4 border-t-[3px] border-double border-ink pt-2.5">
           <p className="text-eyebrow m-0">{chapter ? `Chapter ${chapterNo(i)} · ${chapter.short}` : title}</p>
           {chapter && <p className="text-eyebrow m-0">About {chapter.minutes} min</p>}
@@ -25,7 +25,7 @@ export function Section({ id, title, lede, children }: { id: string; title: stri
           )}
         </div>
         <div className="mt-12 md:mt-16">{children}</div>
-        {chapter && <ChapterEnd id={id} />}
+        {chapter && <div data-chapter-end={id} aria-hidden="true" className="h-px" />}
       </div>
     </section>
   )
